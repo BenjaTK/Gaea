@@ -5,9 +5,9 @@
 
 [sub_resource type="Resource" id="Resource_x5fs7"]
 script = ExtResource("1_gsx1f")
-mode = 0
-removeSingleWalls = false
-expandRect = 1
+mode = 1
+removeSingleWalls = true
+expandRect = 20
 
 [resource]
 script = ExtResource("1_wbm6f")
@@ -21,5 +21,5 @@ Vector2(2, 2): 0.5,
 Vector2(3, 3): 0.2
 }
 modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([SubResource("Resource_x5fs7")])
-maxTiles = 150
+maxTiles = 200
 constrainWorldSize = false
