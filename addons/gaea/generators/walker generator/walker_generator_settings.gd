@@ -1,6 +1,6 @@
 @tool
-class_name WalkerGeneratorParameters extends GeneratorParameters
-## Parameters for [WalkerGenerator]
+class_name WalkerGeneratorSettings extends GeneratorSettings
+## Settings for [WalkerGenerator]
 
 
 enum FullnessCheck {

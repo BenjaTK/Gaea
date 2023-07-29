@@ -1,5 +1,5 @@
 @tool
-class_name CellularGeneratorParameters extends GeneratorParameters
+class_name CellularGeneratorSettings extends GeneratorSettings
 
 
 ## The generation's size in tiles.

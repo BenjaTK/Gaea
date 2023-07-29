@@ -1,6 +1,7 @@
 @tool
 @icon("walker_generator.svg")
 class_name WalkerGenerator extends GaeaGenerator
+## Generates a world using Walkers, which move in random direction and place tiles where they walk.
 
 
 class Walker:
@@ -10,15 +11,14 @@ class Walker:
 
 
 ## If [code]true[/code], allows for generating a preview of the generation
-## in the editor. Useful for checking parameters.
+## in the editor. Useful for debugging.
 @export var preview: bool = false :
 	set(value):
 		preview = value
 		if value == false:
-			remove()
+			erase()
 
-## [WalkerGeneratorParameters] that will affect the generation.
-@export var parameters: WalkerGeneratorParameters
+@export var settings: WalkerGeneratorSettings
 @export var startingTile := Vector2.ZERO
 
 var walkers : Array[Walker]
@@ -29,25 +29,25 @@ func generate() -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
-	if not parameters or not is_instance_valid(tileMap):
+	if not settings or not is_instance_valid(tileMap):
 		return
 
 	_setup()
 	_generate_floor()
 	_apply_modifiers()
-	_place_tiles()
+	_draw_tiles()
 
 	generation_finished.emit()
 
 
 func _setup() -> void:
-	remove()
+	erase()
 
 	_add_walker(startingTile)
 
 
-func remove() -> void:
-	super.remove()
+func erase() -> void:
+	super.erase()
 	walkedTiles.clear()
 	walkers.clear()
 
@@ -70,11 +70,11 @@ func _generate_floor() -> void:
 		for walker in walkers:
 			_move_walker(walker)
 
-		if parameters.fullnessCheck == parameters.FullnessCheck.TILE_AMOUNT:
-			if walkedTiles.size() >= parameters.maxTiles:
+		if settings.fullnessCheck == settings.FullnessCheck.TILE_AMOUNT:
+			if walkedTiles.size() >= settings.maxTiles:
 				break
-		elif parameters.fullnessCheck == parameters.FullnessCheck.PERCENTAGE:
-			if walkedTiles.size() / (parameters.worldSize.x * parameters.worldSize.y) >= parameters.fullnessPercentage:
+		elif settings.fullnessCheck == settings.FullnessCheck.PERCENTAGE:
+			if walkedTiles.size() / (settings.worldSize.x * settings.worldSize.y) >= settings.fullnessPercentage:
 				break
 
 		iterations += 1
@@ -87,34 +87,34 @@ func _generate_floor() -> void:
 
 
 func _move_walker(walker: Walker) -> void:
-	if randf() <= parameters.destroyWalkerChance && walkers.size() > 1:
+	if randf() <= settings.destroyWalkerChance && walkers.size() > 1:
 		walkers.erase(walker)
 		return
 
 	if not walkedTiles.has(walker.pos):
 		walkedTiles.append(walker.pos)
 
-	if randf() <= parameters.newDirChance:
+	if randf() <= settings.newDirChance:
 		var randomRotation = _get_random_rotation()
 		walker.dir = round(walker.dir.rotated(randomRotation))
 
-	if randf() <= parameters.newWalkerChance and walkers.size() < parameters.maxWalkers:
+	if randf() <= settings.newWalkerChance and walkers.size() < settings.maxWalkers:
 		_add_walker(walker.pos)
 
-	for bigRoom in parameters.roomChances:
-		if randf() <= parameters.roomChances[bigRoom]:
+	for bigRoom in settings.roomChances:
+		if randf() <= settings.roomChances[bigRoom]:
 			var room = _get_square_room(walker.pos, bigRoom)
 			for pos in room:
 				if not walkedTiles.has(pos):
 					walkedTiles.append(pos)
 
 	walker.pos += walker.dir
-	if parameters.constrainWorldSize:
+	if settings.constrainWorldSize:
 		walker.pos = _constrain_to_world_size(walker.pos)
 
 
 func _apply_modifiers() -> void:
-	for modifier in parameters.modifiers:
+	for modifier in settings.modifiers:
 		if not (modifier is Modifier):
 			continue
 
@@ -152,11 +152,11 @@ func _get_square_room(startingPos: Vector2, size: Vector2) -> Array:
 
 func _constrain_to_world_size(pos: Vector2) -> Vector2:
 	pos.x = clamp(pos.x,
-				(startingTile.x - parameters.worldSize.x / 2) + 1,
-				(startingTile.x + parameters.worldSize.x / 2) - 2)
+				(startingTile.x - settings.worldSize.x / 2) + 1,
+				(startingTile.x + settings.worldSize.x / 2) - 2)
 	pos.y = clamp(pos.y,
-				(startingTile.y - parameters.worldSize.y / 2) + 1,
-				(startingTile.y + parameters.worldSize.y / 2) - 2)
+				(startingTile.y - settings.worldSize.y / 2) + 1,
+				(startingTile.y + settings.worldSize.y / 2) - 2)
 	return pos
 
 ### Editor ###
@@ -167,7 +167,7 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 	warnings.append_array(super._get_configuration_warnings())
 
-	if not parameters:
-		warnings.append("Needs WalkerGeneratorParameters to work.")
+	if not settings:
+		warnings.append("Needs WalkerGeneratorSettings to work.")
 
 	return warnings

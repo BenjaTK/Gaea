@@ -84,7 +84,7 @@ func generate() -> void:
 	return
 
 
-func _place_tiles() -> void:
+func _draw_tiles() -> void:
 	for tile in grid:
 		match grid[tile]:
 			Tiles.FLOOR:
@@ -99,7 +99,7 @@ func _place_tiles() -> void:
 					tileMap.set_cells_terrain_connect(wallLayer, [tile], wallTerrainSet, wallTerrain)
 
 
-func remove() -> void:
+func erase() -> void:
 	tileMap.clear()
 	grid.clear()
 

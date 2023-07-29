@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cp6nihg6w2u2l"
-path="res://.godot/imported/generator_parameters.svg-1cb691345deabc26c245858f8109653e.ctex"
+path="res://.godot/imported/generator_settings.svg-37277f7f05d13b2b6d7552c11e110fb1.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gaea/generators/generator_parameters.svg"
-dest_files=["res://.godot/imported/generator_parameters.svg-1cb691345deabc26c245858f8109653e.ctex"]
+source_file="res://addons/gaea/generators/generator_settings.svg"
+dest_files=["res://.godot/imported/generator_settings.svg-37277f7f05d13b2b6d7552c11e110fb1.ctex"]
 
 [params]
 
