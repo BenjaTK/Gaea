@@ -1,7 +1,32 @@
-[gd_scene load_steps=5 format=3 uid="uid://co2ewyknt1m05"]
+[gd_scene load_steps=9 format=3 uid="uid://co2ewyknt1m05"]
 
 [ext_resource type="Script" path="res://addons/gaea/walker generator/walker_generator.gd" id="1_ii75x"]
 [ext_resource type="Texture2D" uid="uid://clw7caw7l8w5n" path="res://scenes/test scene/dungeon-tileset - Pixel_Poem.png" id="1_sdp6l"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/generate_walls_modifier.gd" id="2_ir8cj"]
+[ext_resource type="Script" path="res://addons/gaea/walker generator/walker_generator_parameters.gd" id="3_0emx7"]
+
+[sub_resource type="Resource" id="Resource_7dg5k"]
+script = ExtResource("2_ir8cj")
+mode = 1
+removeSingleWalls = true
+expandRect = 1
+
+[sub_resource type="Resource" id="Resource_1lc8d"]
+resource_name = "Parameters"
+script = ExtResource("3_0emx7")
+fullnessCheck = 1
+maxWalkers = 5
+newDirChance = 0.2
+newWalkerChance = 0.05
+destroyWalkerChance = 0.05
+roomChances = {
+Vector2(2, 2): 0.5,
+Vector2(3, 3): 0.5
+}
+modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([SubResource("Resource_7dg5k")])
+fullnessPercentage = 0.2
+constrainWorldSize = true
+worldSize = Vector2(100, 100)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_d4e5b"]
 texture = ExtResource("1_sdp6l")
@@ -346,6 +371,7 @@ sources/0 = SubResource("TileSetAtlasSource_d4e5b")
 
 [node name="WalkerGenerator" type="Node2D" parent="." node_paths=PackedStringArray("tileMap")]
 script = ExtResource("1_ii75x")
+parameters = SubResource("Resource_1lc8d")
 tileMap = NodePath("../TileMap")
 floorTileMode = 0
 floorLayer = 0
