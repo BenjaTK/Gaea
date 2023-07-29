@@ -1,0 +1,24 @@
+ea4bc82a6ad023ab7ee23ee620429895
+::res://::1690649014
+icon.svg::CompressedTexture2D::2935774650704649117::1690593438::1690593452::1::::<><>::
+walker_generator_test.tres::Resource/WalkerGeneratorParameters::3319936606571442627::1690649006::0::1::::<><>::res://addons/gaea/modifiers/smooth_modifier.gd<>res://addons/gaea/walker generator/walker_generator_parameters.gd
+::res://addons/::1690601501
+::res://addons/gaea/::1690646920
+generator.gd::GDScript::-1::1690646920::0::1::::GaeaGenerator<>Node2D<>::
+generator_parameters.gd::GDScript::-1::1690645568::0::1::::GeneratorParameters<>Resource<>::
+plugin.cfg::TextFile::-1::1690601499::0::1::::<><>::
+plugin.gd::GDScript::-1::1690640779::0::1::::<>EditorPlugin<>::
+::res://addons/gaea/editor/::1690645712
+generate_button.gd::GDScript::-1::1690643672::0::1::::GenerateButton<>EditorProperty<>::
+inspector_plugin.gd::GDScript::-1::1690645712::0::1::::<>EditorInspectorPlugin<>::
+reload.svg::CompressedTexture2D::7636415239406091336::1690643150::1690643150::1::::<><>::
+::res://addons/gaea/modifiers/::1690648989
+generate_walls_modifier.gd::GDScript::-1::1690646551::0::1::::GenerateWalls<>Modifier<>::
+modifier.gd::GDScript::-1::1690601105::0::1::::Modifier<>Resource<>::
+smooth_modifier.gd::GDScript::-1::1690648989::0::1::::Smooth<>Modifier<>::
+::res://addons/gaea/walker generator/::1690646410
+walker_generator.gd::GDScript::-1::1690646410::0::1::::WalkerGenerator<>GaeaGenerator<>::
+walker_generator_parameters.gd::GDScript::-1::1690645765::0::1::::WalkerGeneratorParameters<>GeneratorParameters<>::
+::res://scenes/::1690593597
+::res://scenes/test scene/::1690649006
+test_scene.tscn::PackedScene::5811506809740778176::1690649006::0::1::::<><>::res://addons/gaea/walker generator/walker_generator.gd<>uid://bh3d1rgohpb4x::::res://icon.svg<>uid://bnkg4uylqab4f::::res://walker_generator_test.tres
