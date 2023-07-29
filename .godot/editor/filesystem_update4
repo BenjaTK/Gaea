@@ -5,3 +5,4 @@ res://addons/gaea/modifiers/generate_walls_modifier.gd
 res://addons/gaea/generator.gd
 res://addons/gaea/walker generator/walker_generator.gd
 res://addons/gaea/walker generator/walker_generator_parameters.gd
+res://README.md
