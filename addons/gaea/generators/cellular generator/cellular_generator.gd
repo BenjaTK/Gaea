@@ -34,26 +34,26 @@ func _set_noise() -> void:
 	for x in range(settings.worldSize.x):
 		for y in range(settings.worldSize.y):
 			if randf() > settings.noiseDensity:
-				grid[Vector2(x, y)] = Tiles.FLOOR
+				grid[Vector2(x, y)] = defaultTileInfo
 			else:
-				grid[Vector2(x, y)] = Tiles.EMPTY
+				grid[Vector2(x, y)] = null
 
 
 func _smooth() -> void:
 	for i in settings.smoothIterations:
 		var tempGrid: Dictionary = grid.duplicate()
 		for tile in grid.keys():
-			var deadNeighborsCount := GaeaGenerator.get_neighbor_count_of_type(
-				grid, tile, GaeaGenerator.Tiles.EMPTY
+			var deadNeighborsCount := get_neighbor_count_of_type(
+				grid, tile, null
 			)
-			if grid[tile] == Tiles.FLOOR and deadNeighborsCount > settings.maxFloorEmptyNeighbors:
-				tempGrid[tile] = Tiles.EMPTY
-			elif grid[tile] == Tiles.EMPTY and deadNeighborsCount <= settings.minEmptyNeighbors:
-				tempGrid[tile] = Tiles.FLOOR
+			if grid[tile] == defaultTileInfo and deadNeighborsCount > settings.maxFloorEmptyNeighbors:
+				tempGrid[tile] = null
+			elif grid[tile] == null and deadNeighborsCount <= settings.minEmptyNeighbors:
+				tempGrid[tile] = defaultTileInfo
 		grid = tempGrid
 
 	for tile in grid.keys():
-		if grid[tile] == GaeaGenerator.Tiles.EMPTY:
+		if grid[tile] == null:
 			grid.erase(tile)
 
 
@@ -63,6 +63,9 @@ func _apply_modifiers() -> void:
 			continue
 
 		grid = modifier.apply(grid)
+
+
+### Editor ###
 
 
 func _get_configuration_warnings() -> PackedStringArray:

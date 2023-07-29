@@ -1,1 +1,1 @@
-WalkerGeneratorParameters
+TileInfo

@@ -19,10 +19,9 @@ class_name Smooth extends Modifier
 
 func apply(grid: Dictionary) -> Dictionary:
 	for i in iterations:
-		print(i)
 		for tile in grid.keys():
 			var emptyNeighborsCount := GaeaGenerator.get_neighbor_count_of_type(
-				grid, tile, GaeaGenerator.Tiles.EMPTY
+				grid, tile, null
 			)
 			if emptyNeighborsCount > maximumEmptyNeighbors:
 				grid.erase(tile)

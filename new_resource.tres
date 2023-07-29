@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="TileInfo" load_steps=2 format=3 uid="uid://efxs7a4ypvkq"]
+
+[ext_resource type="Script" path="res://addons/gaea/generators/tile_info.gd" id="1_jobmb"]
+
+[resource]
+script = ExtResource("1_jobmb")
+tileMode = 1
+layer = 0
+terrainSet = 0
+Terrain = null
