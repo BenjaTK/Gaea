@@ -1,6 +1,5 @@
 @tool
-class_name WalkerGeneratorParameters
-extends GeneratorParameters
+class_name WalkerGeneratorParameters extends GeneratorParameters
 ## Parameters for [WalkerGenerator]
 
 
@@ -8,6 +7,7 @@ enum FullnessCheck {
 	TILE_AMOUNT, ## Restricts the generation to a predetermined amount of floor tiles.
 	PERCENTAGE ## Restricts the generation to a percentage of the [param world size]. Automatically sets Constrain World Size to true if set to this mode.
 }
+
 ## The type of check to stop the generation.
 @export var fullnessCheck: FullnessCheck :
 	set(value):
@@ -15,20 +15,6 @@ enum FullnessCheck {
 		if fullnessCheck == FullnessCheck.PERCENTAGE:
 			constrainWorldSize = true
 		notify_property_list_changed()
-## Maximum amount of floor tiles.
-var maxTiles := 150
-## Maximum percentage of the [param worldSize] to be filled with floors.
-var fullnessPercentage := 0.2
-
-## Can't be [code]false[/code] if [param Fullness Check] is on [b]Percentage[/b] mode.
-var constrainWorldSize : bool = false :
-	set(value):
-		if fullnessCheck == FullnessCheck.PERCENTAGE and value == false:
-			return
-		constrainWorldSize = value
-		notify_property_list_changed()
-var worldSize := Vector2(100, 100)
-
 ## Modifiers can change stuff about your generation. They can be used to
 ## generate walls, smooth out terrain, etc.
 @export_group("Walkers")
@@ -56,15 +42,26 @@ var worldSize := Vector2(100, 100)
 @export var modifiers: Array[Modifier] # TODO: Replace with custom control for easier editing. Similar to Blender.
 @export_group("")
 
+## Maximum amount of floor tiles.
+var maxTiles := 150
+## Maximum percentage of the [param worldSize] to be filled with floors.
+var fullnessPercentage := 0.2
+## Can't be [code]false[/code] if [param Fullness Check] is on [b]Percentage[/b] mode.
+var constrainWorldSize : bool = false :
+	set(value):
+		if fullnessCheck == FullnessCheck.PERCENTAGE and value == false:
+			return
+		constrainWorldSize = value
+		notify_property_list_changed()
+var worldSize := Vector2(100, 100)
 
+
+func _init() -> void:
+	if resource_name == "":
+		resource_name = "Parameters"
 
 func _get_property_list() -> Array[Dictionary]:
-	var properties : Array[Dictionary]
-
-	properties.append_array(_get_basic_properties())
-
-#	properties.append_array(_get_advanced_properties())
-	return properties
+	return _get_basic_properties()
 
 
 func _get_basic_properties() -> Array[Dictionary]:

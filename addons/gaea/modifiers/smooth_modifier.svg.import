@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg2ev4whlh7d1"
-path="res://.godot/imported/reload.svg-90273870c4fbc4a55527d447192b5c30.ctex"
+uid="uid://bsuknbs2ayik2"
+path="res://.godot/imported/smooth_modifier.svg-65b324b8e2c77c49d62362d01ca46e84.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gaea/editor/reload.svg"
-dest_files=["res://.godot/imported/reload.svg-90273870c4fbc4a55527d447192b5c30.ctex"]
+source_file="res://addons/gaea/modifiers/smooth_modifier.svg"
+dest_files=["res://.godot/imported/smooth_modifier.svg-65b324b8e2c77c49d62362d01ca46e84.ctex"]
 
 [params]
 

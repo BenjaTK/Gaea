@@ -1,6 +1,6 @@
 @tool
-class_name Smooth
-extends Modifier
+@icon("smooth_modifier.svg")
+class_name Smooth extends Modifier
 ## Applies a smoothing algorithm to all tiles using Cellular Automata.
 
 
@@ -14,7 +14,7 @@ extends Modifier
 ## it deletes it. Decreasing this value will increase the smoothness.[br][br]
 ## [b]Note[/b]: Low values can lead to empty terrain, disconnected paths,
 ## or more problems.
-@export_range(1, 7) var maximumEmptyNeighbors := 5
+@export_range(1, 7) var maximumEmptyNeighbors := 4
 
 
 func apply(grid: Dictionary) -> Dictionary:

@@ -1,5 +1,4 @@
-class_name GenerateButton
-extends EditorProperty
+class_name GenerateButton extends EditorProperty
 
 
 var button := Button.new()

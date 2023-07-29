@@ -1,8 +1,4 @@
 res://scenes/test scene/test_scene.tscn
 res://walker_generator_test.tres
-res://addons/gaea/modifiers/smooth_modifier.gd
-res://addons/gaea/modifiers/generate_walls_modifier.gd
-res://addons/gaea/generator.gd
-res://addons/gaea/walker generator/walker_generator.gd
 res://addons/gaea/walker generator/walker_generator_parameters.gd
-res://README.md
+res://addons/gaea/modifiers/smooth_modifier.gd

@@ -2,17 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg2ev4whlh7d1"
-path="res://.godot/imported/reload.svg-90273870c4fbc4a55527d447192b5c30.ctex"
+uid="uid://bbxtju5o1jiln"
+path="res://.godot/imported/generate_walls_modifier.svg-5ec4ee687e439ee473251310bd47f4dd.ctex"
 metadata={
-"has_editor_variant": true,
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/gaea/editor/reload.svg"
-dest_files=["res://.godot/imported/reload.svg-90273870c4fbc4a55527d447192b5c30.ctex"]
+source_file="res://addons/gaea/modifiers/generate_walls_modifier.svg"
+dest_files=["res://.godot/imported/generate_walls_modifier.svg-5ec4ee687e439ee473251310bd47f4dd.ctex"]
 
 [params]
 
@@ -35,4 +34,4 @@ process/size_limit=0
 detect_3d/compress_to=1
 svg/scale=1.0
 editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=true
+editor/convert_colors_with_editor_theme=false

@@ -1,6 +1,5 @@
 @tool
-class_name GaeaGenerator
-extends Node2D
+class_name GaeaGenerator extends Node2D
 ## Base class for the Gaea addon's procedural generator.
 
 

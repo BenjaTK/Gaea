@@ -1,28 +1,32 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1690654293
+::res://::1690658690
 icon.svg::CompressedTexture2D::2935774650704649117::1690593438::1690593452::1::::<><>::
-README.md::TextFile::-1::1690653776::0::1::::<><>::
-walker_generator_test.tres::Resource/WalkerGeneratorParameters::3319936606571442627::1690651421::0::1::::<><>::res://addons/gaea/modifiers/generate_walls_modifier.gd<>res://addons/gaea/walker generator/walker_generator_parameters.gd
+README.md::TextFile::-1::1690655376::0::1::::<><>::
+walker_generator_test.tres::Resource/WalkerGeneratorParameters::3319936606571442627::1690658690::0::1::::<><>::res://addons/gaea/modifiers/generate_walls_modifier.gd<>res://addons/gaea/walker generator/walker_generator_parameters.gd
 ::res://addons/::1690601501
-::res://addons/gaea/::1690650394
-generator.gd::GDScript::-1::1690650394::0::1::::GaeaGenerator<>Node2D<>::
-generator_parameters.gd::GDScript::-1::1690645568::0::1::::GeneratorParameters<>Resource<>::
+::res://addons/gaea/::1690658579
+generator.gd::GDScript::-1::1690656606::0::1::::GaeaGenerator<>Node2D<>::
+generator_parameters.gd::GDScript::-1::1690658579::0::1::::GeneratorParameters<>Resource<>res://addons/gaea/generator_parameters.svg::
+generator_parameters.svg::CompressedTexture2D::5890473717961004425::1690657290::1690658545::1::::<><>::
 plugin.cfg::TextFile::-1::1690601499::0::1::::<><>::
-plugin.gd::GDScript::-1::1690640779::0::1::::<>EditorPlugin<>::
-::res://addons/gaea/editor/::1690645712
-generate_button.gd::GDScript::-1::1690643672::0::1::::GenerateButton<>EditorProperty<>::
+plugin.gd::GDScript::-1::1690656629::0::1::::<>EditorPlugin<>::
+::res://addons/gaea/editor/::1690658696
+generate_button.gd::GDScript::-1::1690656582::0::1::::GenerateButton<>EditorProperty<>::
 inspector_plugin.gd::GDScript::-1::1690645712::0::1::::<>EditorInspectorPlugin<>::
-reload.svg::CompressedTexture2D::7636415239406091336::1690643150::1690643150::1::::<><>::
-::res://addons/gaea/modifiers/::1690650079
-generate_walls_modifier.gd::GDScript::-1::1690650079::0::1::::GenerateWalls<>Modifier<>::
-modifier.gd::GDScript::-1::1690601105::0::1::::Modifier<>Resource<>::
-smooth_modifier.gd::GDScript::-1::1690650027::0::1::::Smooth<>Modifier<>::
-::res://addons/gaea/walker generator/::1690651407
-walker_generator.gd::GDScript::-1::1690651298::0::1::::WalkerGenerator<>GaeaGenerator<>::
-walker_generator_parameters.gd::GDScript::-1::1690651407::0::1::::WalkerGeneratorParameters<>GeneratorParameters<>::
+reload.svg::CompressedTexture2D::7636415239406091336::1690658729::1690658731::1::::<><>::
+::res://addons/gaea/modifiers/::1690658689
+generate_walls_modifier.gd::GDScript::-1::1690658181::0::1::::GenerateWalls<>Modifier<>res://addons/gaea/modifiers/generate_walls_modifier.svg::
+generate_walls_modifier.svg::CompressedTexture2D::2505261008164554571::1690658162::1690658166::1::::<><>::
+modifier.gd::GDScript::-1::1690656601::0::1::::Modifier<>Resource<>::
+smooth_modifier.gd::GDScript::-1::1690658497::0::1::::Smooth<>Modifier<>res://addons/gaea/modifiers/smooth_modifier.svg::
+smooth_modifier.svg::CompressedTexture2D::3691737891064846767::1690658484::1690658689::1::::<><>::
+::res://addons/gaea/walker generator/::1690658633
+walker_generator.gd::GDScript::-1::1690656559::0::1::::WalkerGenerator<>GaeaGenerator<>res://addons/gaea/walker generator/walker_generator.svg::
+walker_generator.svg::CompressedTexture2D::4794092832639402112::1690657290::1690657290::1::::<><>::
+walker_generator_parameters.gd::GDScript::-1::1690658633::0::1::::WalkerGeneratorParameters<>GeneratorParameters<>::
 ::res://docs/::1690652143
-::res://docs/assets/::1690652143
+::res://docs/assets/::1690654930
 ::res://scenes/::1690593597
-::res://scenes/test scene/::1690654293
+::res://scenes/test scene/::1690658705
 dungeon-tileset - Pixel_Poem.png::CompressedTexture2D::5592281508805863961::1690654483::1690654483::1::::<><>::
-test_scene.tscn::PackedScene::5811506809740778176::1690653850::0::1::::<><>::res://addons/gaea/walker generator/walker_generator.gd<>uid://dl18ca4wubq1x::::res://scenes/test scene/dungeon-tileset - Pixel_Poem.png<>uid://bnkg4uylqab4f::::res://walker_generator_test.tres
+test_scene.tscn::PackedScene::5811506809740778176::1690658705::0::1::::<><>::res://addons/gaea/walker generator/walker_generator.gd<>uid://clw7caw7l8w5n::::res://scenes/test scene/dungeon-tileset - Pixel_Poem.png<>uid://bnkg4uylqab4f::::res://walker_generator_test.tres

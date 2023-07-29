@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Procgen Addon"
+config/name="Gaea"
 config/tags=PackedStringArray("addon")
 run/main_scene="res://scenes/test scene/test_scene.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")

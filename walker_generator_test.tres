@@ -1,15 +1,15 @@
 [gd_resource type="Resource" script_class="WalkerGeneratorParameters" load_steps=4 format=3 uid="uid://bnkg4uylqab4f"]
 
-[ext_resource type="Script" path="res://addons/gaea/modifiers/generate_walls_modifier.gd" id="1_gsx1f"]
 [ext_resource type="Script" path="res://addons/gaea/walker generator/walker_generator_parameters.gd" id="1_wbm6f"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/smooth_modifier.gd" id="2_jttlt"]
 
-[sub_resource type="Resource" id="Resource_x5fs7"]
-script = ExtResource("1_gsx1f")
-mode = 1
-removeSingleWalls = true
-expandRect = 20
+[sub_resource type="Resource" id="Resource_nnpfv"]
+script = ExtResource("2_jttlt")
+iterations = 4
+maximumEmptyNeighbors = 4
 
 [resource]
+resource_name = "Parameters"
 script = ExtResource("1_wbm6f")
 fullnessCheck = 0
 maxWalkers = 5
@@ -18,8 +18,8 @@ newWalkerChance = 0.05
 destroyWalkerChance = 0.05
 roomChances = {
 Vector2(2, 2): 0.5,
-Vector2(3, 3): 0.2
+Vector2(3, 3): 0.5
 }
-modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([SubResource("Resource_x5fs7")])
+modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([SubResource("Resource_nnpfv")])
 maxTiles = 200
 constrainWorldSize = false

@@ -1,6 +1,6 @@
 @tool
-class_name GenerateWalls
-extends Modifier
+@icon("generate_walls_modifier.svg")
+class_name GenerateWalls extends Modifier
 ## Generates walls.
 
 

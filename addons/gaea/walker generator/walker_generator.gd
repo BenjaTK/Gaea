@@ -1,6 +1,6 @@
 @tool
-class_name WalkerGenerator
-extends GaeaGenerator
+@icon("walker_generator.svg")
+class_name WalkerGenerator extends GaeaGenerator
 
 
 class Walker:
