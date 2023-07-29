@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WalkerGeneratorParameters" load_steps=4 format=3 uid="uid://bnkg4uylqab4f"]
 
-[ext_resource type="Script" path="res://addons/gaea/walker generator/walker_generator_parameters.gd" id="1_wbm6f"]
+[ext_resource type="Script" path="res://addons/gaea/generators/walker generator/walker_generator_parameters.gd" id="1_wbm6f"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/smooth_modifier.gd" id="2_jttlt"]
 
 [sub_resource type="Resource" id="Resource_nnpfv"]

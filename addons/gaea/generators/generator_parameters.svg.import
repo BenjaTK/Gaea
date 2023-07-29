@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cakkaj4gcenw7"
-path="res://.godot/imported/walker_generator.svg-cd55b5b2e5a415a589c24f743f2b1477.ctex"
+uid="uid://cp6nihg6w2u2l"
+path="res://.godot/imported/generator_parameters.svg-1cb691345deabc26c245858f8109653e.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gaea/walker generator/walker_generator.svg"
-dest_files=["res://.godot/imported/walker_generator.svg-cd55b5b2e5a415a589c24f743f2b1477.ctex"]
+source_file="res://addons/gaea/generators/generator_parameters.svg"
+dest_files=["res://.godot/imported/generator_parameters.svg-1cb691345deabc26c245858f8109653e.ctex"]
 
 [params]
 

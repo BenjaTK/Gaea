@@ -10,6 +10,8 @@ enum TileMode {
 
 enum Tiles { WALL, FLOOR, EMPTY = -1 }
 
+signal generation_finished
+
 const NEIGHBORS := [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN,
 					Vector2(1, 1), Vector2(1, -1), Vector2(-1, -1), Vector2(-1, 1)]
 
@@ -130,6 +132,21 @@ static func get_neighbor_count_of_type(grid: Dictionary, pos: Vector2, type: Til
 			continue
 
 		if grid[pos + neighbor] == type:
+			count += 1
+
+	return count
+
+
+static func get_neighbor_count_of_types(grid: Dictionary, pos: Vector2, types: Array[Tiles]) -> int:
+	var count = 0
+
+	for neighbor in NEIGHBORS:
+		if not grid.has(pos + neighbor):
+			if types.has(Tiles.EMPTY):
+				count += 1
+			continue
+
+		if grid[pos + neighbor] in types:
 			count += 1
 
 	return count

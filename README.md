@@ -13,6 +13,12 @@ Inspired by [Nuclear Throne](https://store.steampowered.com/app/242680/Nuclear_T
 
 ![walker generator demo](docs/assets/walker-generator.gif)
 
+## ⬜ CellularGenerator
+
+Generates terrain using Cellular Automata by generating a noise grid then smoothing it out.
+
+![cellular generator demo](docs/assets/cellular-generator.gif)
+
 ## 🛠 Modifiers
 
 Like in Blender, you can add modifiers to your generations to smooth out terrain, add walls, and more.

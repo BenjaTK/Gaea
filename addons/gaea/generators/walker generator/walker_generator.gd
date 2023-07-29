@@ -8,8 +8,6 @@ class Walker:
 	var dir = Vector2.ZERO
 	var stepsSinceDirChange = 0
 
-signal generation_finished
-
 
 ## If [code]true[/code], allows for generating a preview of the generation
 ## in the editor. Useful for checking parameters.
@@ -119,9 +117,6 @@ func _apply_modifiers() -> void:
 	for modifier in parameters.modifiers:
 		if not (modifier is Modifier):
 			continue
-
-		if not is_instance_valid(modifier):
-			modifier = load(modifier.resource_path)
 
 		grid = modifier.apply(grid)
 

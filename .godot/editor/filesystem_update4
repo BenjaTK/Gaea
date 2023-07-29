@@ -1,5 +1,3 @@
 res://scenes/test scene/test_scene.tscn
-res://walker_generator_test.tres
-res://addons/gaea/walker generator/walker_generator_parameters.gd
-res://addons/gaea/modifiers/smooth_modifier.gd
-res://addons/gaea/plugin.cfg
+res://addons/gaea/generators/cellular generator/cellular_generator.gd
+res://README.md

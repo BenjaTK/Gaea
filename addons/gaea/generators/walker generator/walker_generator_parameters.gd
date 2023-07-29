@@ -53,12 +53,8 @@ var constrainWorldSize : bool = false :
 			return
 		constrainWorldSize = value
 		notify_property_list_changed()
-var worldSize := Vector2(100, 100)
+var worldSize := Vector2(30, 30)
 
-
-func _init() -> void:
-	if resource_name == "":
-		resource_name = "Parameters"
 
 func _get_property_list() -> Array[Dictionary]:
 	return _get_basic_properties()
