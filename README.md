@@ -14,6 +14,10 @@ Inspired by [Nuclear Throne](https://store.steampowered.com/app/242680/Nuclear_T
 
 Like in Blender, you can add modifiers to your generations to smooth out terrain, add walls, and more.
 
+## More to come...
+
+Island generators, dungeons with rooms, more modifiers. Soon™
+
 # 📦 Installation
 
 1. Download the project files
