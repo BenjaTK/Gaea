@@ -1,6 +1,9 @@
 # Gaea
 Procedural generation add-on for Godot 4.
 
+### Why Gaea?
+Gaea is the greek personification of the Earth. What does this have to do with procedural generation? Uhhh... Earth... Terrain? It just sounded cool.
+
 # 💡 Features
 
 ## 🚶‍♀️ WalkerGenerator
