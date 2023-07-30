@@ -13,6 +13,13 @@ signal generation_finished
 const NEIGHBORS := [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN,
 					Vector2(1, 1), Vector2(1, -1), Vector2(-1, -1), Vector2(-1, 1)]
 
+## If [code]true[/code], allows for generating a preview of the generation
+## in the editor. Useful for debugging.
+@export var preview: bool = false :
+	set(value):
+		preview = value
+		if value == false:
+			erase()
 @export var tileMap: TileMap
 ## Info for the tile that will be placed. Has information about
 ## it's position in the TileSet.

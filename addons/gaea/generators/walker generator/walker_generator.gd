@@ -9,15 +9,6 @@ class Walker:
 	var dir = Vector2.ZERO
 	var stepsSinceDirChange = 0
 
-
-## If [code]true[/code], allows for generating a preview of the generation
-## in the editor. Useful for debugging.
-@export var preview: bool = false :
-	set(value):
-		preview = value
-		if value == false:
-			erase()
-
 @export var settings: WalkerGeneratorSettings
 @export var startingTile := Vector2.ZERO
 

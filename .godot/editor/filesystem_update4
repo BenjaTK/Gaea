@@ -1,5 +1,3 @@
 res://scenes/test scene/test_scene.tscn
-res://addons/gaea/generators/cellular generator/cellular_generator.gd
-res://addons/gaea/generators/generator.gd
-res://addons/gaea/generators/walker generator/walker_generator.gd
-res://addons/gaea/modifiers/generate_borders_modifier.gd
+res://addons/gaea/generators/heightmap generator/heightmap_generator_2d.gd
+res://addons/gaea/generators/heightmap generator/heightmap_generator_2d_settings.gd

@@ -45,6 +45,7 @@ func _generate_border_walls(grid: Dictionary) -> void:
 				[Vector2(1, 1), Vector2(1, -1), Vector2(-1, -1), Vector2(-1, 1)]
 				)
 
+		# Get all empty neighbors and make it a border tile.
 		for neighbor in neighbors:
 			if not grid.has(tile + neighbor):
 				newGrid[tile + neighbor] = borderTileInfo
