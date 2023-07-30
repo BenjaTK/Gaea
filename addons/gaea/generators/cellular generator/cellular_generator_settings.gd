@@ -19,5 +19,3 @@ class_name CellularGeneratorSettings extends GeneratorSettings
 ## tiles than [param minEmptyNeighbors], it will become a floor.[br]
 ## Lower values means more empty tiles.
 @export_range(0, 8) var minEmptyNeighbors := 3
-@export_group("Modifiers")
-@export var modifiers: Array[Modifier] # TODO: Replace with custom control for easier editing. Similar to Blender.

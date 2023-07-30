@@ -1,1 +1,2 @@
+HeightmapGenerator2DSettings
 TileInfo

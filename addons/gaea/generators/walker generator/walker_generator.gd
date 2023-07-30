@@ -20,25 +20,25 @@ func generate() -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
-	if not settings or not is_instance_valid(tileMap):
+	if not settings or not is_instance_valid(tileMap) or not defaultTileInfo:
 		return
 
 	_setup()
 	_generate_floor()
-	_apply_modifiers()
+	_apply_modifiers(settings.modifiers)
 	_draw_tiles()
 
 	generation_finished.emit()
 
 
 func _setup() -> void:
-	erase()
+	erase(clearTilemapOnGeneration)
 
 	_add_walker(startingTile)
 
 
-func erase() -> void:
-	super.erase()
+func erase(clearTilemap := true) -> void:
+	super.erase(clearTilemap)
 	walkedTiles.clear()
 	walkers.clear()
 
@@ -102,14 +102,6 @@ func _move_walker(walker: Walker) -> void:
 	walker.pos += walker.dir
 	if settings.constrainWorldSize:
 		walker.pos = _constrain_to_world_size(walker.pos)
-
-
-func _apply_modifiers() -> void:
-	for modifier in settings.modifiers:
-		if not (modifier is Modifier):
-			continue
-
-		grid = modifier.apply(grid)
 
 
 ### Utilities ###

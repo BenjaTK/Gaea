@@ -23,6 +23,8 @@ const NEIGHBORS := [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN,
 ## If [code]false[/code] and a world was generated in the editor,
 ## it will be kept.
 @export var regenerateOnReady: bool = true
+## If [code]false[/code], the tilemap will not be cleared when generating.
+@export var clearTilemapOnGeneration: bool = true
 ## If [code]false[/code], the tile size will be set to the [TileSet]'s
 ## tile size.
 @export var overrideTileSize: bool = false :
@@ -69,9 +71,18 @@ func _draw_tiles() -> void:
 				)
 
 
-func erase() -> void:
-	tileMap.clear()
+func erase(clearTilemap := true) -> void:
+	if clearTilemap:
+		tileMap.clear()
 	grid.clear()
+
+
+func _apply_modifiers(modifiers: Array[Modifier]) -> void:
+	for modifier in modifiers:
+		if not (modifier is Modifier):
+			continue
+
+		grid = modifier.apply(grid)
 
 
 ### Utils ###

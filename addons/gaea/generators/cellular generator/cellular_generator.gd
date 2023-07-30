@@ -12,13 +12,13 @@ func generate() -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
-	if not settings or not is_instance_valid(tileMap):
+	if not settings or not is_instance_valid(tileMap) or not defaultTileInfo:
 		return
 
-	erase()
+	erase(clearTilemapOnGeneration)
 	_set_noise()
 	_smooth()
-	_apply_modifiers()
+	_apply_modifiers(settings.modifiers)
 	_draw_tiles()
 
 
@@ -47,14 +47,6 @@ func _smooth() -> void:
 	for tile in grid.keys():
 		if grid[tile] == null:
 			grid.erase(tile)
-
-
-func _apply_modifiers() -> void:
-	for modifier in settings.modifiers:
-		if not (modifier is Modifier):
-			continue
-
-		grid = modifier.apply(grid)
 
 
 ### Editor ###
