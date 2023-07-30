@@ -1,4 +1,5 @@
 @tool
+@icon("carver_modifier.svg")
 class_name Carver extends Modifier
 
 

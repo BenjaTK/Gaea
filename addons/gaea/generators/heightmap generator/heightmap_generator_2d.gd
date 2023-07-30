@@ -1,4 +1,5 @@
 @tool
+@icon("heightmap_generator_2d.svg")
 class_name HeightmapGenerator2D extends GaeaGenerator
 
 
