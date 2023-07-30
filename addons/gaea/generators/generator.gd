@@ -3,11 +3,6 @@ class_name GaeaGenerator extends Node2D
 ## Base class for the Gaea addon's procedural generator.
 
 
-enum TileMode {
-	SINGLE_CELL, ## Tile is just a single cell in the TileMap. Requires a [param source_id] and a [param atlas_coord]. Can optionally be an [param alternative_tile].
-	TERRAIN ## Tile is a terrain from a terrain set. Allows for autotiling. Requires a [param terrain_set] and a [param terrain]
-	}
-
 signal generation_finished
 
 const NEIGHBORS := [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN,
