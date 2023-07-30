@@ -19,9 +19,15 @@ Generates terrain using Cellular Automata by generating a noise grid then smooth
 
 ![cellular generator demo](docs/assets/cellular-generator.gif)
 
+## 🌱 HeightmapGenerator
+
+Generates terrain using a noise-based heightmap, similar to games like Terraria.
+
+![terraria-like terrain using 2 generators and a carver modifier](docs/assets/terraria-like-generation.png)
+
 ## 🛠 Modifiers
 
-Like in Blender, you can add modifiers to your generations to smooth out terrain, add walls, and more.
+Like in Blender, you can add modifiers to your generations to smooth out terrain, add walls, carve holes and more.
 
 ## More to come...
 
