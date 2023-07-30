@@ -5,7 +5,7 @@ class_name Carver extends Modifier
 
 const MAX_HEIGHT_RANDOM_MULTIPLIER := 10.0
 
-@export var noise: FastNoiseLite
+@export var noise: FastNoiseLite = FastNoiseLite.new()
 @export var randomNoiseSeed := true
 ## Any values in the noise texture that go above this threshold
 ## will be deleted from the map. (-1.0 is black, 1.0 is white)[br]

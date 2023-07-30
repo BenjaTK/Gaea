@@ -1,7 +1,11 @@
+Camera2D
+CellularGenerator
+Timer
+CollisionShape2D
+Sprite2D
+CharacterBody2D
 WalkerGenerator
 HeightmapGenerator2D
-CellularGenerator
 Control
 Button
-Camera2D
 TileMap

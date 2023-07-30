@@ -2,7 +2,7 @@ class_name HeightmapGenerator2DSettings extends GeneratorSettings
 
 
 ## The seed doesn't matter as it will get randomly generated.
-@export var noise: FastNoiseLite
+@export var noise: FastNoiseLite = FastNoiseLite.new()
 @export var randomNoiseSeed := true
 @export var worldLength := 128
 ## The medium height at which the heightmap will start displacing.

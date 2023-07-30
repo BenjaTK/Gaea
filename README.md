@@ -1,5 +1,6 @@
 # Gaea
-Procedural generation add-on for Godot 4.
+Procedural generation add-on for Godot 4.<br>
+**IMPORTANT:** Gaea is still in early development, and it's very inefficient. I would not recommend to use on a serious project atm. 
 
 ### Why Gaea?
 Gaea is the greek personification of the Earth. What does this have to do with procedural generation? Uhhh... Earth... Terrain? It just sounded cool.

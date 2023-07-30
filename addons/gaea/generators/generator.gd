@@ -118,8 +118,8 @@ static func get_neighbor_count_of_type(grid: Dictionary, pos: Vector2, type: Til
 	return count
 
 
-static func get_tiles_of_type(type: TileInfo, grid: Dictionary) -> Array[Vector2]:
-	var tiles: Array[Vector2] = []
+static func get_tiles_of_type(type: TileInfo, grid: Dictionary) -> Array[Vector2i]:
+	var tiles: Array[Vector2i] = []
 	for tile in grid:
 		if grid[tile] == type:
 			tiles.append(tile)
