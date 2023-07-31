@@ -1,0 +1,6 @@
+* [📦 Getting started](/)
+* [🧠 Generators](/generators/)
+  * [🚶 Walker](/generators/walker.md)
+  * [🦠 Cellular](/generators/cellular.md)
+  * [🗻 Heightmap](/generators/heightmap.md)
+* [🍻 Contribute](/contribute.md)
