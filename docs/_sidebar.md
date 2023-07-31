@@ -1,6 +1,8 @@
 * [📦 Getting started](/)
+* [✨ Gaea's structure](/structure.md)
 * [🧠 Generators](/generators/)
   * [🚶 Walker](/generators/walker.md)
   * [🦠 Cellular](/generators/cellular.md)
   * [🗻 Heightmap](/generators/heightmap.md)
+* [📝 Modifiers](/modifiers.md)
 * [🍻 Contribute](/contribute.md)

@@ -6,7 +6,7 @@ Gaea is an **add-on for Godot 4**, designed to empower your project with advance
 
 ### What's in a Name?
 
-Gaea, in Greek mythology, is the personification of Earth - a nod towards the terrain and world generation capabilities this addon brings to your game development toolkit. Plus, we think it sounds pretty cool.
+**Gaea**, in Greek mythology, is the personification of Earth - a nod towards the terrain and world generation capabilities this addon brings to your game development toolkit. Plus, we think it sounds pretty cool.
 
 # 💫 Key Features
 
