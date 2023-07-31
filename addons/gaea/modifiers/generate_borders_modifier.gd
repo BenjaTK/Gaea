@@ -21,17 +21,17 @@ enum Mode {
 var newGrid: Dictionary
 
 
-func apply(grid: Dictionary) -> Dictionary:
+func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 	newGrid = grid.duplicate()
 
 	match mode:
 		Mode.ADJACENT_ONLY, Mode.INCLUDE_DIAGONALS:
 			_generate_border_walls(grid)
 		Mode.FULL_RECT:
-			_generate_rect(grid)
+			_generate_rect()
 
 	if removeSingleWalls:
-		_remove_single_walls(grid)
+		_remove_single_walls(generator)
 
 	return newGrid.duplicate()
 
@@ -51,7 +51,7 @@ func _generate_border_walls(grid: Dictionary) -> void:
 				newGrid[tile + neighbor] = borderTileInfo
 
 
-func _remove_single_walls(grid: Dictionary) -> void:
+func _remove_single_walls(generator: GaeaGenerator) -> void:
 	for tile in newGrid.keys():
 		if not (newGrid[tile] == borderTileInfo):
 			continue
@@ -59,12 +59,11 @@ func _remove_single_walls(grid: Dictionary) -> void:
 		# If it doesn't have any neighbors of the same type,
 		# set back to its original value
 		if GaeaGenerator.get_neighbor_count_of_type(
-			newGrid, tile, borderTileInfo
-			) == 0:
-			newGrid[tile] = grid[tile]
+				newGrid, tile, borderTileInfo) == 0:
+			newGrid[tile] = generator.defaultTileInfo
 
 
-func _generate_rect(grid: Dictionary) -> void:
+func _generate_rect() -> void:
 	var rect
 	for tile in newGrid:
 		if not rect:

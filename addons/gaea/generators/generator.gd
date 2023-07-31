@@ -81,7 +81,7 @@ func _apply_modifiers(modifiers: Array[Modifier]) -> void:
 		if not (modifier is Modifier):
 			continue
 
-		grid = modifier.apply(grid)
+		grid = modifier.apply(grid, self)
 
 
 ### Utils ###

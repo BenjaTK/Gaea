@@ -17,7 +17,7 @@ class_name Smooth extends Modifier
 @export_range(1, 7) var maximumEmptyNeighbors := 4
 
 
-func apply(grid: Dictionary) -> Dictionary:
+func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 	for i in iterations:
 		for tile in grid.keys():
 			var emptyNeighborsCount := GaeaGenerator.get_neighbor_count_of_type(

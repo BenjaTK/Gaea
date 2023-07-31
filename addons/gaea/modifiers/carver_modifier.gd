@@ -19,13 +19,13 @@ const MAX_HEIGHT_RANDOM_MULTIPLIER := 10.0
 @export_range(0.0, 1.0) var maxHeightRandom := 1.0
 
 
-func apply(grid: Dictionary) -> Dictionary:
+func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 	if randomNoiseSeed:
 		noise.seed = randi()
 	for tile in grid.keys():
 		# Add random variation to the max height to make the transition more natural.
 		# Needs a better way of doing this though.
-		if tile.y < -maxHeight + floor(abs(noise.get_noise_1d(tile.x)) * MAX_HEIGHT_RANDOM_MULTIPLIER * maxHeightRandom):
+		if (tile.y < -maxHeight + floor(abs(noise.get_noise_1d(tile.x)) * MAX_HEIGHT_RANDOM_MULTIPLIER * maxHeightRandom)):
 			continue
 
 		if noise.get_noise_2d(tile.x, tile.y) > threshold:
