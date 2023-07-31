@@ -25,14 +25,8 @@ const NEIGHBORS := [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN,
 @export var regenerateOnReady: bool = true
 ## If [code]false[/code], the tilemap will not be cleared when generating.
 @export var clearTilemapOnGeneration: bool = true
-## If [code]false[/code], the tile size will be set to the [TileSet]'s
-## tile size.
-@export var overrideTileSize: bool = false :
-	set(value):
-		overrideTileSize = value
-		notify_property_list_changed()
 
-var tileSize: Vector2 = Vector2.ZERO
+var tileSize : Vector2
 
 var grid : Dictionary
 
@@ -41,15 +35,20 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
-	if not overrideTileSize:
-		tileSize = Vector2(tileMap.tile_set.tile_size)
+	tileSize = tileMap.tile_set.tile_size
 
 	if regenerateOnReady:
 		generate()
 
 
 func generate() -> void:
-	return
+	if not is_instance_valid(tileMap):
+		push_error("%s doesn't have a TileMap" % name)
+		return
+
+	if not defaultTileInfo:
+		push_error("%s doesn't have TileInfo" % name)
+		return
 
 
 func _draw_tiles() -> void:
@@ -129,17 +128,6 @@ static func get_tiles_of_type(type: TileInfo, grid: Dictionary) -> Array[Vector2
 
 ### Editor ###
 
-
-func _get_property_list() -> Array[Dictionary]:
-	var properties : Array[Dictionary]
-	if overrideTileSize:
-		properties.append({
-			"name": "tileSize",
-			"usage": PROPERTY_USAGE_DEFAULT,
-			"type": TYPE_VECTOR2I,
-		})
-
-	return properties
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings : PackedStringArray

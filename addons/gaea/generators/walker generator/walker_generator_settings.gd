@@ -38,6 +38,7 @@ enum FullnessCheck {
 	Vector2(2, 2): 0.5,
 	Vector2(3, 3): 0.1
 }
+@export_group("")
 
 ## Maximum amount of floor tiles.
 var maxTiles := 150

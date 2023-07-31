@@ -2,7 +2,7 @@
 extends EditorPlugin
 
 
-var inspectorPlugin = preload("res://addons/gaea/editor/inspector_plugin.gd")
+var inspectorPlugin = preload("./editor/inspector_plugin.gd")
 
 
 func _enter_tree() -> void:

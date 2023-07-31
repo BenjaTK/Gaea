@@ -13,7 +13,10 @@ func generate() -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
-	if not settings or not is_instance_valid(tileMap) or not defaultTileInfo:
+	super.generate()
+
+	if not settings:
+		push_error("%s doesn't have a settings resource" % name)
 		return
 
 	if settings.randomNoiseSeed:

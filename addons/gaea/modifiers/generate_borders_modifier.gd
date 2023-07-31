@@ -65,8 +65,10 @@ func _remove_single_walls(grid: Dictionary) -> void:
 
 
 func _generate_rect(grid: Dictionary) -> void:
-	var rect = Rect2()
+	var rect
 	for tile in newGrid:
+		if not rect:
+			rect = Rect2(tile, Vector2.ONE)
 		rect = rect.expand(tile)
 
 	rect = rect.grow(expandRect)
