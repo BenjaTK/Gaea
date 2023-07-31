@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbqfqthr1kxmi"
-path="res://.godot/imported/cellular_generator.svg-366cc2cb4414a224754982900ab863b7.ctex"
+path="res://.godot/imported/cellular_generator.svg-d282dcb4a66de54c27c1f95d4581e915.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gaea/generators/cellular generator/cellular_generator.svg"
-dest_files=["res://.godot/imported/cellular_generator.svg-366cc2cb4414a224754982900ab863b7.ctex"]
+source_file="res://addons/gaea/generators/cellular_generator/cellular_generator.svg"
+dest_files=["res://.godot/imported/cellular_generator.svg-d282dcb4a66de54c27c1f95d4581e915.ctex"]
 
 [params]
 

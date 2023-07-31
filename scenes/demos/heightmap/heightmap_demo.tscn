@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://cgtpv0u1s0qv2"]
 
-[ext_resource type="Script" path="res://addons/gaea/generators/heightmap generator/heightmap_generator_2d.gd" id="1_mu6fy"]
+[ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d.gd" id="1_7xrgd"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/carver_modifier.gd" id="2_sigkl"]
-[ext_resource type="Script" path="res://addons/gaea/generators/heightmap generator/heightmap_generator_2d_settings.gd" id="3_88gm1"]
+[ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d_settings.gd" id="3_axfok"]
 [ext_resource type="Script" path="res://addons/gaea/generators/tile_info.gd" id="4_eqvdq"]
 [ext_resource type="Texture2D" uid="uid://caoyt0ek7fmdq" path="res://scenes/demos/heightmap/pixel-platformer-tileset - Kenney.png" id="5_m3hdp"]
 
@@ -23,7 +23,7 @@ noise_type = 3
 seed = 585830562
 
 [sub_resource type="Resource" id="Resource_ke1ms"]
-script = ExtResource("3_88gm1")
+script = ExtResource("3_axfok")
 noise = SubResource("FastNoiseLite_baqq1")
 randomNoiseSeed = true
 worldLength = 128
@@ -181,7 +181,7 @@ sources/3 = SubResource("TileSetAtlasSource_68jc8")
 [node name="HeightmapDemo" type="Node2D"]
 
 [node name="HeightmapGenerator2D" type="Node2D" parent="." node_paths=PackedStringArray("tileMap")]
-script = ExtResource("1_mu6fy")
+script = ExtResource("1_7xrgd")
 settings = SubResource("Resource_ke1ms")
 preview = true
 tileMap = NodePath("../TileMap")

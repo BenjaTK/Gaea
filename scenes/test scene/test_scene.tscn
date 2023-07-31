@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://co2ewyknt1m05"]
 
-[ext_resource type="Script" path="res://addons/gaea/generators/walker generator/walker_generator.gd" id="4_pq8th"]
-[ext_resource type="Script" path="res://addons/gaea/generators/walker generator/walker_generator_settings.gd" id="5_hrcms"]
+[ext_resource type="Script" path="res://addons/gaea/generators/walker_generator/walker_generator.gd" id="1_vjv4q"]
+[ext_resource type="Script" path="res://addons/gaea/generators/walker_generator/walker_generator_settings.gd" id="2_hyudk"]
 
 [sub_resource type="TileSet" id="TileSet_qpuuo"]
 physics_layer_0/collision_layer = 1
@@ -11,7 +11,7 @@ terrain_set_0/terrain_0/color = Color(0.85098, 0.0392157, 0.054902, 1)
 
 [sub_resource type="Resource" id="Resource_cttay"]
 resource_name = "Settings"
-script = ExtResource("5_hrcms")
+script = ExtResource("2_hyudk")
 fullnessCheck = 0
 maxWalkers = 5
 newDirChance = 0.5
@@ -42,6 +42,6 @@ layer_1/tile_data = PackedInt32Array()
 position = Vector2(7823, -5791)
 
 [node name="WalkerGenerator" type="Node2D" parent="." node_paths=PackedStringArray("tileMap")]
-script = ExtResource("4_pq8th")
+script = ExtResource("1_vjv4q")
 settings = SubResource("Resource_cttay")
 tileMap = NodePath("../TileMap")
