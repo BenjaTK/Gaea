@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://co2ewyknt1m05"]
+[gd_scene load_steps=5 format=3 uid="uid://co2ewyknt1m05"]
 
-[ext_resource type="Script" path="res://addons/gaea/generators/tile_info.gd" id="5_iplep"]
-[ext_resource type="Script" path="res://addons/gaea/generators/cellular generator/cellular_generator.gd" id="7_4tl71"]
-[ext_resource type="Script" path="res://addons/gaea/generators/cellular generator/cellular_generator_settings.gd" id="8_3ido2"]
+[ext_resource type="Script" path="res://addons/gaea/generators/walker generator/walker_generator.gd" id="4_pq8th"]
+[ext_resource type="Script" path="res://addons/gaea/generators/walker generator/walker_generator_settings.gd" id="5_hrcms"]
 
 [sub_resource type="TileSet" id="TileSet_qpuuo"]
 physics_layer_0/collision_layer = 1
@@ -10,23 +9,21 @@ terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.85098, 0.0392157, 0.054902, 1)
 
-[sub_resource type="Resource" id="Resource_ifr88"]
+[sub_resource type="Resource" id="Resource_cttay"]
 resource_name = "Settings"
-script = ExtResource("8_3ido2")
-worldSize = Vector2i(1000, 1000)
-noiseDensity = 0.5
-smoothIterations = 6
-maxFloorEmptyNeighbors = 4
-minEmptyNeighbors = 3
+script = ExtResource("5_hrcms")
+fullnessCheck = 0
+maxWalkers = 5
+newDirChance = 0.5
+newWalkerChance = 0.05
+destroyWalkerChance = 0.05
+roomChances = {
+Vector2(2, 2): 0.5,
+Vector2(3, 3): 0.1
+}
+maxTiles = 150
+constrainWorldSize = false
 modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([])
-
-[sub_resource type="Resource" id="Resource_ocf0x"]
-script = ExtResource("5_iplep")
-type = 0
-layer = 0
-sourceId = 0
-atlasCoord = Vector2i(0, 0)
-alternativeTile = 0
 
 [node name="TestScene" type="Node2D"]
 
@@ -41,12 +38,10 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array()
 
-[node name="CellularGenerator" type="Node2D" parent="." node_paths=PackedStringArray("tileMap")]
-script = ExtResource("7_4tl71")
-settings = SubResource("Resource_ifr88")
-tileMap = NodePath("../TileMap")
-defaultTileInfo = SubResource("Resource_ocf0x")
-regenerateOnReady = false
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(7823, -5791)
+
+[node name="WalkerGenerator" type="Node2D" parent="." node_paths=PackedStringArray("tileMap")]
+script = ExtResource("4_pq8th")
+settings = SubResource("Resource_cttay")
+tileMap = NodePath("../TileMap")

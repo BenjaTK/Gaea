@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://clw7caw7l8w5n"
-path="res://.godot/imported/dungeon-tileset - Pixel_Poem.png-f816fabb4be301214c9106307c405e5a.ctex"
+path="res://.godot/imported/dungeon-tileset - Pixel_Poem.png-0d253906626af1fde8597005addaed6f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/test scene/dungeon-tileset - Pixel_Poem.png"
-dest_files=["res://.godot/imported/dungeon-tileset - Pixel_Poem.png-f816fabb4be301214c9106307c405e5a.ctex"]
+source_file="res://scenes/demos/walker/dungeon-tileset - Pixel_Poem.png"
+dest_files=["res://.godot/imported/dungeon-tileset - Pixel_Poem.png-0d253906626af1fde8597005addaed6f.ctex"]
 
 [params]
 
