@@ -1,2 +1,0 @@
-HeightmapGenerator2DSettings
-TileInfo
