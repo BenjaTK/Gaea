@@ -2,6 +2,8 @@
 
 **Modifiers** are similar to those in software like Blender. You add these to your GeneratorSettings, and they get applied after the generation is finished, giving you varied results and possibilities. 
 
+> **NOTE**: In Gaea, the modifiers' array order matters. Modifiers get applied in this order, so different sequences can give different results.
+
 There are a few modifiers in Gaea at the moment:
 
 ### Generate Borders
@@ -9,7 +11,7 @@ There are a few modifiers in Gaea at the moment:
 Generate border tiles around already placed tiles.
 
 ![generate borders showcase](assets/generate-borders-showcase.png)
-*Using GenerateBorders in FULL_RECT mode to generate autotiled walls around a WalkerGenerator's generation.*
+*Using Generate Borders in FULL_RECT mode to generate autotiled walls around a WalkerGenerator's generation.*
 
 ### Carver
 
@@ -19,7 +21,15 @@ Carves holes into the map using a noise texture.
 
 Smoothes the map using Cellular Automata.
 
+### Walls
 
+Adds tiles to those below already placed tiles that aren't the Generator's defaultTileInfo.
 
+![walls modifier showcase](assets/walls-modifier-showcase.png)
+
+In this example, the walls are added after both the floor and ceiling *(using Generate Borders)* are added, giving the dungeon a different perspective.<br>
+An example without the Walls modifier looks like this:
+
+![without walls modifier](assets/walls-modifier-showcase-before.png)
 
 _**TODO**: Better explanations._

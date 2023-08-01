@@ -57,7 +57,7 @@ func _get_property_list() -> Array[Dictionary]:
 					"type": TYPE_INT
 				},
 				{
-					"name": "Terrain",
+					"name": "terrain",
 					"usage": PROPERTY_USAGE_DEFAULT,
 					"type": TYPE_INT
 				},
