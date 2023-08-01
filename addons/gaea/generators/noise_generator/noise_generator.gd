@@ -30,8 +30,6 @@ func _set_grid() -> void:
 		for y in settings.worldSize.y:
 			var noise = settings.noise.get_noise_2d(x, y)
 			for threshold in settings.tiles:
-				if not (threshold is float) or not (settings.tiles[threshold] is TileInfo):
-					continue
 				if noise > threshold:
 					grid[Vector2(x, y)] = settings.tiles[threshold]
 					break
