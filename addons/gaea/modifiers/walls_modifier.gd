@@ -1,4 +1,5 @@
 @tool
+@icon("walls_modifier.svg")
 class_name Walls extends Modifier
 ## Adds [param tileInfo] below any tile that isn't the Generator's [param defaultTileInfo].
 ## Useful for tilesets whose walls are different tiles from the ceiling.
