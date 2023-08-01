@@ -1,6 +1,8 @@
 class_name HeightmapGenerator2DSettings extends GeneratorSettings
 
-
+## Info for the tile that will be placed. Has information about
+## it's position in the TileSet.
+@export var tile: TileInfo
 ## The seed doesn't matter as it will get randomly generated.
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 @export var randomNoiseSeed := true

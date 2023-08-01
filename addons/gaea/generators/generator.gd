@@ -16,9 +16,6 @@ const NEIGHBORS := [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN,
 		if value == false:
 			erase()
 @export var tileMap: TileMap
-## Info for the tile that will be placed. Has information about
-## it's position in the TileSet.
-@export var defaultTileInfo: TileInfo
 ## If [code]true[/code] regenerates on [code]_ready()[/code].
 ## If [code]false[/code] and a world was generated in the editor,
 ## it will be kept.
@@ -44,10 +41,6 @@ func _ready() -> void:
 func generate() -> void:
 	if not is_instance_valid(tileMap):
 		push_error("%s doesn't have a TileMap" % name)
-		return
-
-	if not defaultTileInfo:
-		push_error("%s doesn't have TileInfo" % name)
 		return
 
 
@@ -131,9 +124,6 @@ static func get_tiles_of_type(type: TileInfo, grid: Dictionary) -> Array[Vector2
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings : PackedStringArray
-
-	if not defaultTileInfo:
-		warnings.append("TileInfo is necessary to generate.")
 
 	if not is_instance_valid(tileMap):
 		warnings.append("TileMap is required to generate.")

@@ -29,7 +29,7 @@ func _set_noise() -> void:
 	for x in range(settings.worldSize.x):
 		for y in range(settings.worldSize.y):
 			if randf() > settings.noiseDensity:
-				grid[Vector2(x, y)] = defaultTileInfo
+				grid[Vector2(x, y)] = settings.tile
 			else:
 				grid[Vector2(x, y)] = null
 
@@ -41,10 +41,10 @@ func _smooth() -> void:
 			var deadNeighborsCount := get_neighbor_count_of_type(
 				grid, tile, null
 			)
-			if grid[tile] == defaultTileInfo and deadNeighborsCount > settings.maxFloorEmptyNeighbors:
+			if grid[tile] == settings.tile and deadNeighborsCount > settings.maxFloorEmptyNeighbors:
 				tempGrid[tile] = null
 			elif grid[tile] == null and deadNeighborsCount <= settings.minEmptyNeighbors:
-				tempGrid[tile] = defaultTileInfo
+				tempGrid[tile] = settings.tile
 		grid = tempGrid
 
 	for tile in grid.keys():
