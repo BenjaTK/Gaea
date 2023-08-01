@@ -19,7 +19,9 @@ class_name NoiseGeneratorSettings extends GeneratorSettings
 
 		var sorted: Dictionary
 		for key in sortedKeys:
-			sorted[key] = value[key]
+			var keyValue = value[key]
+			# Check if it's already a TileInfo, else make a new one.
+			sorted[key] = keyValue if keyValue is TileInfo else TileInfo.new()
 
 		tiles = sorted
 @export var noise: FastNoiseLite = FastNoiseLite.new()
