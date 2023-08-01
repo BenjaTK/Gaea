@@ -31,7 +31,7 @@ Adds tiles to those below already placed tiles that aren't the Generator's defau
 
 ![walls modifier showcase](assets/walls-modifier-showcase.png)
 
-In this example, the walls are added after both the floor and ceiling *(using Generate Borders)* are added, giving the dungeon a different perspective.<br>
+In this example, the walls are added after both the floor and ceiling *(using the Fill modifier)* are added, giving the dungeon a different perspective.<br>
 An example without the Walls modifier looks like this:
 
 ![without walls modifier](assets/walls-modifier-showcase-before.png)
