@@ -6,7 +6,7 @@ A **generator**, in the realm of procedural generation, is essentially an algori
 
 Each generator operates based on its unique algorithm, producing different kinds of results. Some might be designed to create natural-looking landscapes, while others might generate intricate dungeon layouts, cityscapes, or other structures.
 
-![an example of a cellular automata-based generator](../assets/cellular-generator.gif)
+![generators showcase](../assets/generators-showcase.png)
 
 The use of generators allows for significant **variability** and **replayability** in games. Since the content is created algorithmically, each playthrough can offer an unique experience, with different environments and scenarios generated each time. This leads to an increased sense of exploration and discovery for the player, as they navigate through unique, algorithmically generated worlds.
 
