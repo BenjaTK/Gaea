@@ -10,8 +10,12 @@ There are a few modifiers in Gaea at the moment:
 
 Generate border tiles around already placed tiles.
 
-![generate borders showcase](assets/generate-borders-showcase.png)
-*Using Generate Borders in FULL_RECT mode to generate autotiled walls around a WalkerGenerator's generation.*
+### Fill
+
+Fills the full rectangle of tiles
+
+![fill showcase](assets/fill-showcase.png)
+*Using Fill to generate autotiled walls around a WalkerGenerator's generation.*
 
 ### Carver
 
