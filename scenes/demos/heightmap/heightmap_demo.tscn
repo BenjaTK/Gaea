@@ -36,7 +36,7 @@ script = ExtResource("4_eqvdq")
 type = 1
 layer = 0
 terrainSet = 0
-Terrain = null
+terrain = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_68jc8"]
 texture = ExtResource("5_m3hdp")
