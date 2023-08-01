@@ -33,4 +33,4 @@ func _set_grid() -> void:
 		var height = floor(settings.noise.get_noise_1d(x) * settings.heightIntensity + settings.heightOffset)
 
 		for y in range(0, -height - 1, -1):
-			grid[Vector2(x, y)] = defaultTileInfo
+			grid[Vector2(x, y)] = settings.tile

@@ -12,9 +12,9 @@ class_name Walls extends Modifier
 func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 	var newGrid := grid.duplicate()
 	for tile in grid:
-		if grid[tile] == generator.defaultTileInfo:
+		if grid[tile] == generator.settings.tile:
 			var above = tile + Vector2.UP
-			if grid.has(above) and grid[above] != generator.defaultTileInfo:
+			if grid.has(above) and grid[above] != generator.settings.tile:
 				newGrid[tile] = tileInfo
 
 	return newGrid

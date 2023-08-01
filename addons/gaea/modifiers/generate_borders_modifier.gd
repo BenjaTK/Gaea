@@ -60,7 +60,7 @@ func _remove_single_walls(generator: GaeaGenerator) -> void:
 		# set back to its original value
 		if GaeaGenerator.get_neighbor_count_of_type(
 				newGrid, tile, borderTileInfo) == 0:
-			newGrid[tile] = generator.defaultTileInfo
+			newGrid[tile] = generator.settings.tile
 
 
 func _generate_rect() -> void:

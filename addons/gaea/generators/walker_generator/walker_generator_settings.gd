@@ -8,6 +8,9 @@ enum FullnessCheck {
 	PERCENTAGE ## Restricts the generation to a percentage of the [param world size]. Automatically sets Constrain World Size to true if set to this mode.
 }
 
+## Info for the tile that will be placed. Has information about
+## it's position in the TileSet.
+@export var tile: TileInfo
 ## The type of check to stop the generation.
 @export var fullnessCheck: FullnessCheck :
 	set(value):

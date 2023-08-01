@@ -74,7 +74,7 @@ func _generate_floor() -> void:
 		iterations += 1
 
 	for tile in walkedTiles:
-		grid[tile] = defaultTileInfo
+		grid[tile] = settings.tile
 
 	walkers.clear()
 	walkedTiles.clear()

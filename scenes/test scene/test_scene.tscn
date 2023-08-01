@@ -1,38 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://co2ewyknt1m05"]
+[gd_scene load_steps=3 format=3 uid="uid://co2ewyknt1m05"]
 
 [ext_resource type="Script" path="res://addons/gaea/generators/walker_generator/walker_generator.gd" id="1_vjv4q"]
-[ext_resource type="Script" path="res://addons/gaea/generators/walker_generator/walker_generator_settings.gd" id="2_hyudk"]
-[ext_resource type="Script" path="res://addons/gaea/generators/tile_info.gd" id="3_6turp"]
 
 [sub_resource type="TileSet" id="TileSet_qpuuo"]
 physics_layer_0/collision_layer = 1
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.85098, 0.0392157, 0.054902, 1)
-
-[sub_resource type="Resource" id="Resource_cttay"]
-resource_name = "Settings"
-script = ExtResource("2_hyudk")
-fullnessCheck = 0
-maxWalkers = 5
-newDirChance = 0.5
-newWalkerChance = 0.05
-destroyWalkerChance = 0.05
-roomChances = {
-Vector2(2, 2): 0.5,
-Vector2(3, 3): 0.1
-}
-maxTiles = 150
-constrainWorldSize = false
-modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([])
-
-[sub_resource type="Resource" id="Resource_l6jvg"]
-script = ExtResource("3_6turp")
-type = 0
-layer = 0
-sourceId = 0
-atlasCoord = Vector2i(0, 4)
-alternativeTile = 0
 
 [node name="TestScene" type="Node2D"]
 
@@ -53,7 +27,5 @@ position = Vector2(7823, -5791)
 
 [node name="WalkerGenerator" type="Node2D" parent="." node_paths=PackedStringArray("tileMap")]
 script = ExtResource("1_vjv4q")
-settings = SubResource("Resource_cttay")
 preview = true
 tileMap = NodePath("../TileMap")
-defaultTileInfo = SubResource("Resource_l6jvg")

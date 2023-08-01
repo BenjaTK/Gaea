@@ -1,7 +1,9 @@
 @tool
 class_name CellularGeneratorSettings extends GeneratorSettings
 
-
+## Info for the tile that will be placed. Has information about
+## it's position in the TileSet.
+@export var tile: TileInfo
 ## The generation's size in tiles.
 @export var worldSize: Vector2i = Vector2i(50, 50)
 ## The percentage of empty tiles the generator will start with.
