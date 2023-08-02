@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dnpju76kpc8ny"
-path="res://.godot/imported/island-tileset - Kenney.png-223a656e715380b9c9f7e441c5cbd350.ctex"
+path="res://.godot/imported/island-tileset - Kenney.png-5937ed3df4586c45879008df607d815f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/test scene/island-tileset - Kenney.png"
-dest_files=["res://.godot/imported/island-tileset - Kenney.png-223a656e715380b9c9f7e441c5cbd350.ctex"]
+source_file="res://scenes/demos/noise/island-tileset - Kenney.png"
+dest_files=["res://.godot/imported/island-tileset - Kenney.png-5937ed3df4586c45879008df607d815f.ctex"]
 
 [params]
 
