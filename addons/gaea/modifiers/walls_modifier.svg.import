@@ -2,16 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dnpju76kpc8ny"
-path="res://.godot/imported/island-tileset - Kenney.png-223a656e715380b9c9f7e441c5cbd350.ctex"
+uid="uid://bbxtju5o1jiln"
+path="res://.godot/imported/walls_modifier.svg-c623330160e62c1f43baa12738edd844.ctex"
 metadata={
+"has_editor_variant": true,
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://scenes/test scene/island-tileset - Kenney.png"
-dest_files=["res://.godot/imported/island-tileset - Kenney.png-223a656e715380b9c9f7e441c5cbd350.ctex"]
+source_file="res://addons/gaea/modifiers/walls_modifier.svg"
+dest_files=["res://.godot/imported/walls_modifier.svg-c623330160e62c1f43baa12738edd844.ctex"]
 
 [params]
 
@@ -32,3 +33,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=true
+editor/convert_colors_with_editor_theme=true

@@ -19,6 +19,12 @@ var newGrid: Dictionary
 
 
 func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
+	# Check if the generator has a "settings" variable and if those
+	# settings have a "tile" variable.
+	if not generator.get("settings") or not generator.settings.get("tile"):
+		push_warning("GenerateBorder modifier not compatible with %s" % generator.name)
+		return grid
+
 	newGrid = grid.duplicate()
 
 	_generate_border_walls(grid)

@@ -4,5 +4,6 @@
   * [🚶 Walker](/generators/walker.md)
   * [🦠 Cellular](/generators/cellular.md)
   * [🗻 Heightmap](/generators/heightmap.md)
+  * [🌍 Noise](/generators/noise.md)
 * [📝 Modifiers](/modifiers.md)
 * [🍻 Contribute](/contribute.md)
