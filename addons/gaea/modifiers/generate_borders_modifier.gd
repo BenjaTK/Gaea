@@ -7,16 +7,13 @@ class_name GenerateBorder extends Modifier
 enum Mode {
 	ADJACENT_ONLY, ## Only generates borders at the top, bottom, right and left of tiles.
 	INCLUDE_DIAGONALS, ## Also generates diagonally to tiles.
-	FULL_RECT ## Generates a rectangle filling the extents of the tiles.
 }
 
 @export var borderTileInfo: TileInfo
 @export var mode: Mode = Mode.ADJACENT_ONLY
 ## If [code]true[/code], removes border tiles that don't have any neighbors of the same type.
 @export var removeSingleWalls := false
-## If [param mode] is set to [code]Rect[/code], it expands the rect's borders by
-## this amount on both axis.
-@export var expandRect := 1
+
 
 var newGrid: Dictionary
 
@@ -30,11 +27,7 @@ func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 
 	newGrid = grid.duplicate()
 
-	match mode:
-		Mode.ADJACENT_ONLY, Mode.INCLUDE_DIAGONALS:
-			_generate_border_walls(grid)
-		Mode.FULL_RECT:
-			_generate_rect()
+	_generate_border_walls(grid)
 
 	if removeSingleWalls:
 		_remove_single_walls(generator)
@@ -69,17 +62,4 @@ func _remove_single_walls(generator: GaeaGenerator) -> void:
 			newGrid[tile] = generator.settings.tile
 
 
-func _generate_rect() -> void:
-	var rect
-	for tile in newGrid:
-		if not rect:
-			rect = Rect2(tile, Vector2.ONE)
-		rect = rect.expand(tile)
 
-	rect = rect.grow(expandRect)
-
-	for x in range(rect.position.x, rect.end.x + 1):
-		for y in range(rect.position.y, rect.end.y + 1):
-			if newGrid.has(Vector2(x, y)):
-				continue
-			newGrid[Vector2(x, y)] = borderTileInfo

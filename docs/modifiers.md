@@ -10,8 +10,12 @@ There are a few modifiers in Gaea at the moment:
 
 Generate border tiles around already placed tiles.
 
-![generate borders showcase](assets/generate-borders-showcase.png)
-*Using Generate Borders in FULL_RECT mode to generate autotiled walls around a WalkerGenerator's generation.*
+### Fill
+
+Fills the full rectangle of tiles
+
+![fill showcase](assets/fill-showcase.png)
+*Using Fill to generate autotiled walls around a WalkerGenerator's generation.*
 
 ### Carver
 
@@ -27,7 +31,7 @@ Adds tiles to those below already placed tiles that aren't the Generator's defau
 
 ![walls modifier showcase](assets/walls-modifier-showcase.png)
 
-In this example, the walls are added after both the floor and ceiling *(using Generate Borders)* are added, giving the dungeon a different perspective.<br>
+In this example, the walls are added after both the floor and ceiling *(using the Fill modifier)* are added, giving the dungeon a different perspective.<br>
 An example without the Walls modifier looks like this:
 
 ![without walls modifier](assets/walls-modifier-showcase-before.png)
