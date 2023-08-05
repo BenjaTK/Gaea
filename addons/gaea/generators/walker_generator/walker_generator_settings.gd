@@ -1,5 +1,6 @@
 @tool
-class_name WalkerGeneratorSettings extends GeneratorSettings
+class_name WalkerGeneratorSettings
+extends GeneratorSettings
 ## Settings for [WalkerGenerator]
 
 
@@ -12,11 +13,11 @@ enum FullnessCheck {
 ## it's position in the TileSet.
 @export var tile: TileInfo
 ## The type of check to stop the generation.
-@export var fullnessCheck: FullnessCheck :
+@export var fullness_check: FullnessCheck :
 	set(value):
-		fullnessCheck = value
-		if fullnessCheck == FullnessCheck.PERCENTAGE:
-			constrainWorldSize = true
+		fullness_check = value
+		if fullness_check == FullnessCheck.PERCENTAGE:
+			constrain_world_size = true
 		notify_property_list_changed()
 ## Modifiers can change stuff about your generation. They can be used to
 ## generate walls, smooth out terrain, etc.
@@ -24,55 +25,51 @@ enum FullnessCheck {
 ## The amount of walkers that can be active at the same time.[br]
 ## [b]Walkers[/b] move in random directions and place floor tiles where they walk.
 ## They are the foundation of this type of generation.
-@export var maxWalkers = 5
+@export var max_walkers = 5
 ## The chance for a walker to change direction. Lower chances mean
 ## tighter hallways.
-@export var newDirChance = 0.5
+@export var new_dir_chance = 0.5
 ## The chance for a walker to spawn a new walker.
-@export var newWalkerChance = 0.05
+@export var new_walker_chance = 0.05
 ## The chance for a walker to be destroyed (won't happen
 ## if there's only one walker in the scene)
-@export var destroyWalkerChance = 0.05
+@export var destroy_walker_chance = 0.05
 ## The chances for walkers to place tiles bigger than 1x1.[br]You can
 ## add new sizes or remove them if you don't want any. They can help
 ## build large open areas.[br]
 ## [b]Note:[/b] Chances are between [code]0-1[/code]
-@export var roomChances = {
+@export var room_chances = {
 	Vector2(2, 2): 0.5,
 	Vector2(3, 3): 0.1
 }
 @export_group("")
 
 ## Maximum amount of floor tiles.
-var maxTiles := 150
-## Maximum percentage of the [param worldSize] to be filled with floors.
-var fullnessPercentage := 0.2
+var max_tiles := 150
+## Maximum percentage of the [param world_size] to be filled with floors.
+var fullness_percentage := 0.2
 ## Can't be [code]false[/code] if [param Fullness Check] is on [b]Percentage[/b] mode.
-var constrainWorldSize : bool = false :
+var constrain_world_size : bool = false :
 	set(value):
-		if fullnessCheck == FullnessCheck.PERCENTAGE and value == false:
+		if fullness_check == FullnessCheck.PERCENTAGE and value == false:
 			return
-		constrainWorldSize = value
+		constrain_world_size = value
 		notify_property_list_changed()
-var worldSize := Vector2(30, 30)
+var world_size := Vector2(30, 30)
 
 
 func _get_property_list() -> Array[Dictionary]:
-	return _get_basic_properties()
-
-
-func _get_basic_properties() -> Array[Dictionary]:
 	var properties : Array[Dictionary]
-	match fullnessCheck:
+	match fullness_check:
 		FullnessCheck.TILE_AMOUNT:
 			properties.append({
-				"name": "maxTiles",
+				"name": "max_tiles",
 				"usage": PROPERTY_USAGE_DEFAULT,
 				"type": TYPE_INT,
 			})
 		FullnessCheck.PERCENTAGE:
 			properties.append({
-				"name": "fullnessPercentage",
+				"name": "fullness_percentage",
 				"usage": PROPERTY_USAGE_DEFAULT,
 				"type": TYPE_FLOAT,
 				"hint": PROPERTY_HINT_RANGE,
@@ -80,15 +77,15 @@ func _get_basic_properties() -> Array[Dictionary]:
 			})
 	properties.append(
 		{
-			"name": "constrainWorldSize",
+			"name": "constrain_world_size",
 			"usage": PROPERTY_USAGE_DEFAULT,
 			"type": TYPE_BOOL
 		}
 	)
 
-	if constrainWorldSize:
+	if constrain_world_size:
 		properties.append({
-			"name": "worldSize",
+			"name": "world_size",
 			"usage": PROPERTY_USAGE_DEFAULT,
 			"type": TYPE_VECTOR2I,
 		})

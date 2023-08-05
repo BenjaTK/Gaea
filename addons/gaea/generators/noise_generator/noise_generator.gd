@@ -1,5 +1,6 @@
 @tool
-class_name NoiseGenerator extends GaeaGenerator
+class_name NoiseGenerator
+extends GaeaGenerator
 ## Takes a Dictionary of thresholds and tiles to generate organic terrain with different tiles for different heights.
 
 
@@ -16,18 +17,18 @@ func generate() -> void:
 		push_error("%s doesn't have a settings resource" % name)
 		return
 
-	if settings.randomNoiseSeed:
+	if settings.random_noise_seed:
 		settings.noise.seed = randi()
 
-	erase(clearTilemapOnGeneration)
+	erase(clear_tilemap_on_generation)
 	_set_grid()
 	_apply_modifiers(settings.modifiers)
 	_draw_tiles()
 
 
 func _set_grid() -> void:
-	for x in settings.worldSize.x:
-		for y in settings.worldSize.y:
+	for x in settings.world_size.x:
+		for y in settings.world_size.y:
 			var noise = settings.noise.get_noise_2d(x, y)
 			for threshold in settings.tiles:
 				if noise > threshold:

@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ccp3yjiys1fh2"
-path="res://.godot/imported/carver_modifier.svg-d7e54190405d4a4cf4b8c9bde6c8224a.ctex"
+path="res://.godot/imported/carver.svg-66fdefee38ad6164e4581e3ad71d99ac.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gaea/modifiers/carver_modifier.svg"
-dest_files=["res://.godot/imported/carver_modifier.svg-d7e54190405d4a4cf4b8c9bde6c8224a.ctex"]
+source_file="res://addons/gaea/modifiers/carver.svg"
+dest_files=["res://.godot/imported/carver.svg-66fdefee38ad6164e4581e3ad71d99ac.ctex"]
 
 [params]
 
