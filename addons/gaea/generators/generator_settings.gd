@@ -1,5 +1,6 @@
 @icon("generator_settings.svg")
-class_name GeneratorSettings extends Resource
+class_name GeneratorSettings
+extends Resource
 
 
 @export var modifiers: Array[Modifier] # TODO: Replace with custom control for easier editing. Similar to Blender.

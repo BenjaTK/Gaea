@@ -1,6 +1,7 @@
 @tool
 @icon("heightmap_generator_2d.svg")
-class_name HeightmapGenerator2D extends GaeaGenerator
+class_name HeightmapGenerator2D
+extends GaeaGenerator
 ## Generates terrain using a heightmap from a noise texture.
 ##
 ## [b]Note:[/b] Needs optimization.
@@ -19,18 +20,18 @@ func generate() -> void:
 		push_error("%s doesn't have a settings resource" % name)
 		return
 
-	if settings.randomNoiseSeed:
+	if settings.random_noise_seed:
 		settings.noise.seed = randi()
 
-	erase(clearTilemapOnGeneration)
+	erase(clear_tilemap_on_generation)
 	_set_grid()
 	_apply_modifiers(settings.modifiers)
 	_draw_tiles()
 
 
 func _set_grid() -> void:
-	for x in settings.worldLength:
-		var height = floor(settings.noise.get_noise_1d(x) * settings.heightIntensity + settings.heightOffset)
+	for x in settings.world_length:
+		var height = floor(settings.noise.get_noise_1d(x) * settings.height_intensity + settings.height_offset)
 
 		for y in range(0, -height - 1, -1):
 			grid[Vector2(x, y)] = settings.tile

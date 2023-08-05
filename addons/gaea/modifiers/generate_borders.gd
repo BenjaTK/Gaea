@@ -1,6 +1,7 @@
 @tool
-@icon("generate_borders_modifier.svg")
-class_name GenerateBorder extends Modifier
+@icon("generate_borders.svg")
+class_name GenerateBorder
+extends Modifier
 ## Generates borders around the already placed tiles.
 
 
@@ -9,13 +10,12 @@ enum Mode {
 	INCLUDE_DIAGONALS, ## Also generates diagonally to tiles.
 }
 
-@export var borderTileInfo: TileInfo
+@export var border_tile_info: TileInfo
 @export var mode: Mode = Mode.ADJACENT_ONLY
 ## If [code]true[/code], removes border tiles that don't have any neighbors of the same type.
-@export var removeSingleWalls := false
+@export var remove_single_walls := false
 
-
-var newGrid: Dictionary
+var _new_grid: Dictionary
 
 
 func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
@@ -25,14 +25,14 @@ func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 		push_warning("GenerateBorder modifier not compatible with %s" % generator.name)
 		return grid
 
-	newGrid = grid.duplicate()
+	_new_grid = grid.duplicate()
 
 	_generate_border_walls(grid)
 
-	if removeSingleWalls:
+	if remove_single_walls:
 		_remove_single_walls(generator)
 
-	return newGrid.duplicate()
+	return _new_grid.duplicate()
 
 
 func _generate_border_walls(grid: Dictionary) -> void:
@@ -47,19 +47,19 @@ func _generate_border_walls(grid: Dictionary) -> void:
 		# Get all empty neighbors and make it a border tile.
 		for neighbor in neighbors:
 			if not grid.has(tile + neighbor):
-				newGrid[tile + neighbor] = borderTileInfo
+				_new_grid[tile + neighbor] = border_tile_info
 
 
 func _remove_single_walls(generator: GaeaGenerator) -> void:
-	for tile in newGrid.keys():
-		if not (newGrid[tile] == borderTileInfo):
+	for tile in _new_grid.keys():
+		if not (_new_grid[tile] == border_tile_info):
 			continue
 
 		# If it doesn't have any neighbors of the same type,
 		# set back to its original value
 		if GaeaGenerator.get_neighbor_count_of_type(
-				newGrid, tile, borderTileInfo) == 0:
-			newGrid[tile] = generator.settings.tile
+				_new_grid, tile, border_tile_info) == 0:
+			_new_grid[tile] = generator.settings.tile
 
 
 

@@ -1,13 +1,14 @@
 @tool
-@icon("walls_modifier.svg")
-class_name Walls extends Modifier
-## Adds [param tileInfo] below any tile that isn't the Generator's [param defaultTileInfo].
+@icon("walls.svg")
+class_name Walls
+extends Modifier
+## Adds [param wall_tile] below any tile that isn't the Generator's default tile.
 ## Useful for tilesets whose walls are different tiles from the ceiling.
 
 
 ## The tile to be placed. Will be placed below any tile
-## that isn't the Generator's [param defaultTileInfo].
-@export var tileInfo: TileInfo
+## that isn't the Generator's default tile.
+@export var wall_tile: TileInfo
 
 
 func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
@@ -22,6 +23,6 @@ func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 		if grid[tile] == generator.settings.tile:
 			var above = tile + Vector2.UP
 			if grid.has(above) and grid[above] != generator.settings.tile:
-				newGrid[tile] = tileInfo
+				newGrid[tile] = wall_tile
 
 	return newGrid

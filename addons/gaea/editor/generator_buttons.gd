@@ -1,4 +1,5 @@
-class_name GenerateButton extends EditorProperty
+class_name GeneratorButtons
+extends EditorProperty
 
 
 var button := Button.new()
@@ -8,13 +9,12 @@ func _init() -> void:
 	size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 
 	var container := HBoxContainer.new()
-
 	container.custom_minimum_size.x = 130
 	add_child(container)
 
-	var generateButton := _add_button(
+	var generate_button := _add_button(
 		container, "Generate", preload("./reload.svg"), _on_generate_pressed)
-	generateButton.custom_minimum_size.x = 110
+	generate_button.custom_minimum_size.x = 110
 
 	_add_button(container, "Clear", preload("./clear.svg"), _on_clear_pressed)
 

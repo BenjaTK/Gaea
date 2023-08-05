@@ -24,7 +24,6 @@ layer_1/tile_data = PackedInt32Array()
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(7823, -5791)
 
-[node name="WalkerGenerator" type="Node2D" parent="." node_paths=PackedStringArray("tileMap")]
+[node name="WalkerGenerator" type="Node2D" parent="."]
 script = ExtResource("1_vjv4q")
 preview = true
-tileMap = NodePath("../TileMap")

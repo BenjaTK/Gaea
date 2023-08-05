@@ -7,5 +7,5 @@ func _can_handle(object: Object) -> bool:
 
 func _parse_begin(object: Object) -> void:
 	if object is GaeaGenerator:
-		var generateButton := GenerateButton.new()
-		add_custom_control(generateButton)
+		var generator_buttons := GeneratorButtons.new()
+		add_custom_control(generator_buttons)
