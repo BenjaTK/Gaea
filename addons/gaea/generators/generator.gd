@@ -99,6 +99,7 @@ static func get_tiles_of_type(type: TileInfo, grid: Dictionary) -> Array[Vector2
 ### Steps ###
 
 func _draw_tiles() -> void:
+	var terrains: Dictionary
 	for tile in grid:
 		var tile_info = grid[tile]
 		if not (tile_info is TileInfo):
@@ -111,11 +112,16 @@ func _draw_tiles() -> void:
 					tile_info.atlas_coord, tile_info.alternative_tile
 				)
 			TileInfo.Type.TERRAIN:
-				tile_map.set_cells_terrain_connect(
-					tile_info.layer, [tile],
-					tile_info.terrain_set, tile_info.terrain
-				)
+				if not terrains.has(tile_info):
+					terrains[tile_info] = [tile]
+				else:
+					terrains[tile_info].append(tile)
 
+	for tile_info in terrains:
+		tile_map.set_cells_terrain_connect(
+			tile_info.layer, terrains[tile_info],
+			tile_info.terrain_set, tile_info.terrain
+		)
 
 func _apply_modifiers(modifiers: Array[Modifier]) -> void:
 	for modifier in modifiers:
