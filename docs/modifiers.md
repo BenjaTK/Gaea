@@ -12,7 +12,7 @@ Generate border tiles around already placed tiles.
 
 ### Fill
 
-Fills the full rectangle of tiles
+Fills the full rectangle of tiles.
 
 ![fill showcase](assets/fill-showcase.png)
 *Using Fill to generate autotiled walls around a WalkerGenerator's generation.*
@@ -27,7 +27,7 @@ Smoothes the map using Cellular Automata.
 
 ### Walls
 
-Adds tiles to those below already placed tiles that aren't the Generator's defaultTileInfo.
+Adds tiles to those below already placed tiles that aren't the Generator's default tile.
 
 ![walls modifier showcase](assets/walls-modifier-showcase.png)
 
@@ -35,5 +35,9 @@ In this example, the walls are added after both the floor and ceiling *(using th
 An example without the Walls modifier looks like this:
 
 ![without walls modifier](assets/walls-modifier-showcase-before.png)
+
+### Remove Disconnected
+
+Uses flood fill to remove all tiles that aren't connected to starting_tile.
 
 _**TODO**: Better explanations._
