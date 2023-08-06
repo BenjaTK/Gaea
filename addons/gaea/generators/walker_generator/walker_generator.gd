@@ -67,7 +67,7 @@ func _generate_floor() -> void:
 			if _walked_tiles.size() >= settings.max_tiles:
 				break
 		elif settings.fullness_check == settings.FullnessCheck.PERCENTAGE:
-			if _walked_tiles.size() / (settings.world_size.x * settings.world_size.y) >= settings.fullnessPercentage:
+			if _walked_tiles.size() / (settings.world_size.x * settings.world_size.y) >= settings.fullness_percentage:
 				break
 
 		iterations += 1
