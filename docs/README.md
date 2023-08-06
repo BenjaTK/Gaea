@@ -1,3 +1,5 @@
+![Gaea](logo.svg)
+
 # 🌍 Gaea
 
 [![](https://img.shields.io/badge/BenjaTK-Follow%20me!-%23FA5C5C?style=for-the-badge&logo=itchdotio&logoColor=white
