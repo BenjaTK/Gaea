@@ -98,6 +98,7 @@ static func get_tiles_of_type(type: TileInfo, grid: Dictionary) -> Array[Vector2
 
 ### Steps ###
 
+
 func _draw_tiles() -> void:
 	var terrains: Dictionary
 	for tile in grid:
@@ -122,6 +123,7 @@ func _draw_tiles() -> void:
 			tile_info.layer, terrains[tile_info],
 			tile_info.terrain_set, tile_info.terrain
 		)
+
 
 func _apply_modifiers(modifiers: Array[Modifier]) -> void:
 	for modifier in modifiers:

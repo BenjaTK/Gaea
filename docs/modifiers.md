@@ -36,8 +36,12 @@ An example without the Walls modifier looks like this:
 
 ![without walls modifier](assets/walls-modifier-showcase-before.png)
 
+### Noise Painter
+
+Replaces tiles in the map with another tile based on a noise texture and a threshold.
+
 ### Remove Disconnected
 
-Uses flood fill to remove all tiles that aren't connected to starting_tile.
+Uses flood fill to remove all tiles that aren't connected to `starting_tile`.
 
 _**TODO**: Better explanations._

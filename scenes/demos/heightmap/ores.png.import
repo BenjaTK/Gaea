@@ -2,17 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iors6wiv6esb"
-path="res://.godot/imported/walls.svg-82e0a16c1f7882576e195391b523ce5f.ctex"
+uid="uid://6gwie8e2kpg2"
+path="res://.godot/imported/ores.png-965ca0b56f12b26b33092e5330190ebe.ctex"
 metadata={
-"has_editor_variant": true,
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/gaea/modifiers/walls.svg"
-dest_files=["res://.godot/imported/walls.svg-82e0a16c1f7882576e195391b523ce5f.ctex"]
+source_file="res://scenes/demos/heightmap/ores.png"
+dest_files=["res://.godot/imported/ores.png-965ca0b56f12b26b33092e5330190ebe.ctex"]
 
 [params]
 
@@ -33,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=true
-editor/convert_colors_with_editor_theme=true
