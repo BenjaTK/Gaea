@@ -1,0 +1,137 @@
+[gd_resource type="Resource" script_class="HeightmapGenerator2DSettings" load_steps=22 format=3 uid="uid://db18nmw5jkbtc"]
+
+[ext_resource type="Script" path="res://addons/gaea/modifiers/heightmap_painter.gd" id="1_xfnry"]
+[ext_resource type="Script" path="res://addons/gaea/generators/tile_info.gd" id="2_6f082"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/carver.gd" id="3_51wbb"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/noise_painter.gd" id="4_cgpdt"]
+[ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d_settings.gd" id="5_haojk"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_pl5m1"]
+seed = -1007263643
+
+[sub_resource type="Resource" id="Resource_jm03i"]
+script = ExtResource("2_6f082")
+type = 0
+layer = 0
+source_id = 1
+atlas_coord = Vector2i(0, 0)
+alternative_tile = 0
+
+[sub_resource type="Resource" id="Resource_ud61g"]
+resource_name = "Stone"
+script = ExtResource("1_xfnry")
+noise = SubResource("FastNoiseLite_pl5m1")
+random_noise_seed = true
+tile = SubResource("Resource_jm03i")
+threshold = 0.6
+height_offset = 145
+height_intensity = 5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_macji"]
+seed = 701514640
+
+[sub_resource type="Resource" id="Resource_fvob8"]
+script = ExtResource("2_6f082")
+type = 0
+layer = 0
+source_id = 1
+atlas_coord = Vector2i(0, 1)
+alternative_tile = 0
+
+[sub_resource type="Resource" id="Resource_c7ke6"]
+resource_name = "Bedrock"
+script = ExtResource("1_xfnry")
+noise = SubResource("FastNoiseLite_macji")
+random_noise_seed = true
+tile = SubResource("Resource_fvob8")
+threshold = 0.6
+height_offset = 2
+height_intensity = 3
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uxcj3"]
+noise_type = 3
+seed = -498798840
+frequency = 0.012
+fractal_type = 2
+fractal_octaves = 3
+domain_warp_frequency = 0.57
+
+[sub_resource type="Resource" id="Resource_gma4i"]
+resource_name = "Caves"
+script = ExtResource("3_51wbb")
+noise = SubResource("FastNoiseLite_uxcj3")
+random_noise_seed = true
+threshold = 0.8
+max_height = 145
+max_height_random = 1.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n7hry"]
+seed = 1592526331
+frequency = 0.0617
+fractal_octaves = 2
+fractal_lacunarity = 2.95
+
+[sub_resource type="Resource" id="Resource_d1s74"]
+script = ExtResource("2_6f082")
+type = 0
+layer = 0
+source_id = 1
+atlas_coord = Vector2i(2, 0)
+alternative_tile = 0
+
+[sub_resource type="Resource" id="Resource_x7aqc"]
+resource_name = "Gold Ore"
+script = ExtResource("4_cgpdt")
+noise = SubResource("FastNoiseLite_n7hry")
+random_noise_seed = true
+tile = SubResource("Resource_d1s74")
+threshold = 0.65
+max = Vector2(inf, inf)
+min = Vector2(inf_neg, -120)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_77hcd"]
+seed = 1028908029
+frequency = 0.0511
+fractal_lacunarity = 0.565
+domain_warp_type = 2
+domain_warp_amplitude = 30.52
+
+[sub_resource type="Resource" id="Resource_efh25"]
+script = ExtResource("2_6f082")
+type = 0
+layer = 0
+source_id = 1
+atlas_coord = Vector2i(1, 0)
+alternative_tile = 0
+
+[sub_resource type="Resource" id="Resource_blv43"]
+resource_name = "Diamond Ore"
+script = ExtResource("4_cgpdt")
+noise = SubResource("FastNoiseLite_77hcd")
+random_noise_seed = true
+tile = SubResource("Resource_efh25")
+threshold = 0.6
+max = Vector2(inf, inf)
+min = Vector2(inf_neg, -100)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vcq1r"]
+noise_type = 3
+seed = 1472160431
+
+[sub_resource type="Resource" id="Resource_ja6xv"]
+script = ExtResource("2_6f082")
+type = 1
+layer = 0
+terrain_set = 0
+terrain = 0
+
+[resource]
+resource_name = "Terraria-like Settings"
+script = ExtResource("5_haojk")
+tile = SubResource("Resource_ja6xv")
+noise = SubResource("FastNoiseLite_vcq1r")
+random_noise_seed = true
+world_length = 128
+height_offset = 160
+height_intensity = 25
+modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([SubResource("Resource_ud61g"), SubResource("Resource_c7ke6"), SubResource("Resource_gma4i"), SubResource("Resource_x7aqc"), SubResource("Resource_blv43")])

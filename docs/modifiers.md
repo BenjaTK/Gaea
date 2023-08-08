@@ -10,7 +10,7 @@ There are a few modifiers in Gaea at the moment:
 
 Generate border tiles around already placed tiles.
 
-### Fill
+### Fill 
 
 Fills the full rectangle of tiles.
 
@@ -40,8 +40,13 @@ An example without the Walls modifier looks like this:
 
 Replaces tiles in the map with another tile based on a noise texture and a threshold.
 
+### Heightmap Painter
+
+Replaces tiles in the map with another tile based on a noise heightmap.
+
 ### Remove Disconnected
 
 Uses flood fill to remove all tiles that aren't connected to `starting_tile`.
+
 
 _**TODO**: Better explanations._
