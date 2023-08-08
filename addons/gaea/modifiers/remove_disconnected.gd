@@ -1,4 +1,5 @@
 @tool
+@icon("remove_disconnected.svg")
 class_name RemoveDisconnected
 extends Modifier
 ## Uses floodfill to remove areas that aren't connected to [param starting_tile]
