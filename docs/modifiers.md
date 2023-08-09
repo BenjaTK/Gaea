@@ -6,26 +6,26 @@
 
 There are a few modifiers in Gaea at the moment:
 
-### Generate Borders
+### <img src="assets/icons/generate_borders.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Generate Borders
 
 Generate border tiles around already placed tiles.
 
-### Fill 
+### <img src="assets/icons/fill.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Fill 
 
 Fills the full rectangle of tiles.
 
 ![fill showcase](assets/fill-showcase.png)
 *Using Fill to generate autotiled walls around a WalkerGenerator's generation.*
 
-### Carver
+### <img src="assets/icons/carver.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Carver
 
 Carves holes into the map using a noise texture.
 
-### Smooth
+### <img src="assets/icons/smooth.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Smooth
 
 Smoothes the map using Cellular Automata.
 
-### Walls
+### <img src="assets/icons/walls.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Walls
 
 Adds tiles to those below already placed tiles that aren't the Generator's default tile.
 
@@ -36,15 +36,15 @@ An example without the Walls modifier looks like this:
 
 ![without walls modifier](assets/walls-modifier-showcase-before.png)
 
-### Noise Painter
+### <img src="assets/icons/noise_painter.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Noise Painter
 
 Replaces tiles in the map with another tile based on a noise texture and a threshold.
 
-### Heightmap Painter
+### <img src="assets/icons/heightmap_painter.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Heightmap Painter
 
 Replaces tiles in the map with another tile based on a noise heightmap.
 
-### Remove Disconnected
+### <img src="assets/icons/remove_disconnected.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Remove Disconnected
 
 Uses flood fill to remove all tiles that aren't connected to `starting_tile`.
 
