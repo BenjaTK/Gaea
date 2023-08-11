@@ -2,6 +2,7 @@
 @icon("carver.svg")
 class_name Carver
 extends Modifier
+## Uses noise to remove certain tiles from the map.
 
 
 const MAX_HEIGHT_RANDOM_MULTIPLIER := 10.0
@@ -12,27 +13,28 @@ const MAX_HEIGHT_RANDOM_MULTIPLIER := 10.0
 ## will be deleted from the map. (-1.0 is black, 1.0 is white)[br]
 ## Lower values mean more empty areas.
 @export_range(-1.0, 1.0) var threshold := 0.15
-## Max height that the carving will take effect in.
-@export var max_height := 128
-## Adds some noise-based randomness to the max height to make transitions
-## more natural. This randomness only goes downwards, so [param max_height]
-## will still be the max height.
-@export_range(0.0, 1.0) var max_height_random := 1.0
+@export_group("Bounds")
+## Leave any or both axis as [code]inf[/code] to not have any limits.
+@export var max := Vector2(INF, INF)
+## Leave any or both axis as [code]-inf[/code] to not have any limits.
+@export var min := Vector2(-INF, -INF)
 
 
 func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
 	if random_noise_seed:
 		noise.seed = randi()
 
-	for tile in grid.keys():
-		# Add random variation to the max height to make the transition more natural.
-		# Needs a better way of doing this though.
-		if tile.y < -max_height + floor(
-				abs(noise.get_noise_1d(tile.x))
-				* MAX_HEIGHT_RANDOM_MULTIPLIER * max_height_random):
+	for tile_pos in grid.keys():
+
+		if _is_out_of_bounds(tile_pos):
 			continue
 
-		if noise.get_noise_2d(tile.x, tile.y) > threshold:
-			grid.erase(tile)
+		if noise.get_noise_2d(tile_pos.x, tile_pos.y) > threshold:
+			grid.erase(tile_pos)
 
 	return grid
+
+
+func _is_out_of_bounds(tile_pos: Vector2) -> bool:
+	return (tile_pos.x > max.x or tile_pos.y > max.y or
+			tile_pos.x < min.x or tile_pos.y < min.y)

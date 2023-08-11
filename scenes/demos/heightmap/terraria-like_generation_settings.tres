@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d_settings.gd" id="5_haojk"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_pl5m1"]
-seed = -1007263643
+seed = 202027513
 
 [sub_resource type="Resource" id="Resource_jm03i"]
 script = ExtResource("2_6f082")
@@ -23,12 +23,11 @@ script = ExtResource("1_xfnry")
 noise = SubResource("FastNoiseLite_pl5m1")
 random_noise_seed = true
 tile = SubResource("Resource_jm03i")
-threshold = 0.6
 height_offset = 145
 height_intensity = 5
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_macji"]
-seed = 701514640
+seed = -1577540346
 
 [sub_resource type="Resource" id="Resource_fvob8"]
 script = ExtResource("2_6f082")
@@ -44,13 +43,12 @@ script = ExtResource("1_xfnry")
 noise = SubResource("FastNoiseLite_macji")
 random_noise_seed = true
 tile = SubResource("Resource_fvob8")
-threshold = 0.6
-height_offset = 2
-height_intensity = 3
+height_offset = 0
+height_intensity = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_uxcj3"]
 noise_type = 3
-seed = -498798840
+seed = 1044083692
 frequency = 0.012
 fractal_type = 2
 fractal_octaves = 3
@@ -62,11 +60,11 @@ script = ExtResource("3_51wbb")
 noise = SubResource("FastNoiseLite_uxcj3")
 random_noise_seed = true
 threshold = 0.8
-max_height = 145
-max_height_random = 1.0
+max = Vector2(inf, -1)
+min = Vector2(inf_neg, inf_neg)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7hry"]
-seed = 1592526331
+seed = 1724806335
 frequency = 0.0617
 fractal_octaves = 2
 fractal_lacunarity = 2.95
@@ -86,11 +84,11 @@ noise = SubResource("FastNoiseLite_n7hry")
 random_noise_seed = true
 tile = SubResource("Resource_d1s74")
 threshold = 0.65
-max = Vector2(inf, inf)
+max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_77hcd"]
-seed = 1028908029
+seed = 1838051260
 frequency = 0.0511
 fractal_lacunarity = 0.565
 domain_warp_type = 2
@@ -110,13 +108,13 @@ script = ExtResource("4_cgpdt")
 noise = SubResource("FastNoiseLite_77hcd")
 random_noise_seed = true
 tile = SubResource("Resource_efh25")
-threshold = 0.6
-max = Vector2(inf, inf)
-min = Vector2(inf_neg, -100)
+threshold = 0.5
+max = Vector2(inf, -5)
+min = Vector2(inf_neg, -120)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vcq1r"]
 noise_type = 3
-seed = 1472160431
+seed = 1279216551
 
 [sub_resource type="Resource" id="Resource_ja6xv"]
 script = ExtResource("2_6f082")

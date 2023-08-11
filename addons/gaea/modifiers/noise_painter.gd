@@ -27,10 +27,12 @@ func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
 	for tile_pos in grid.keys():
 		if _is_out_of_bounds(tile_pos):
 			continue
+
 		if noise.get_noise_2dv(tile_pos) > threshold:
 			grid[tile_pos] = tile
 	return grid
 
 
 func _is_out_of_bounds(tile_pos: Vector2) -> bool:
-	return tile_pos.x > max.x or tile_pos.y > max.y or tile_pos.x < min.x or tile_pos.y < min.y
+	return (tile_pos.x > max.x or tile_pos.y > max.y or
+			tile_pos.x < min.x or tile_pos.y < min.y)
