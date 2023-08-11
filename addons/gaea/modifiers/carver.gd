@@ -5,8 +5,6 @@ extends Modifier
 ## Uses noise to remove certain tiles from the map.
 
 
-const MAX_HEIGHT_RANDOM_MULTIPLIER := 10.0
-
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 @export var random_noise_seed := true
 ## Any values in the noise texture that go above this threshold
