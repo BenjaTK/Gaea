@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://2olhiqrswect"]
 
 [ext_resource type="Script" path="res://addons/gaea/editor/update_button.gd" id="1_8ury3"]
-[ext_resource type="Script" path="res://addons/gaea/editor/download_update_panel.gd" id="2_3uee2"]
+[ext_resource type="PackedScene" path="res://addons/gaea/editor/download_update_panel.tscn" id="2_bw0il"]
 
 [node name="UpdateButton" type="Button"]
 visible = false
@@ -18,18 +18,7 @@ unresizable = true
 min_size = Vector2i(300, 310)
 ok_button_text = "Close"
 
-[node name="DownloadUpdatePanel" type="Control" parent="DownloadDialog"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -8.0
-offset_bottom = -49.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("2_3uee2")
+[node name="DownloadUpdatePanel" parent="DownloadDialog" instance=ExtResource("2_bw0il")]
 
 [node name="UpdateFailedDialog" type="AcceptDialog" parent="."]
 size = Vector2i(381, 100)
