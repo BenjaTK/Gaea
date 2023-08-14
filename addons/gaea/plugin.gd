@@ -2,8 +2,6 @@
 extends EditorPlugin
 
 
-const UpdateButton := preload("./editor/update_button.tscn")
-
 var _inspector_plugin = preload("./editor/inspector_plugin.gd")
 var _update_button = preload("./editor/update_button.tscn")
 
