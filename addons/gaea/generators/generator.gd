@@ -9,6 +9,8 @@ signal generation_finished
 const NEIGHBORS := [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN,
 					Vector2(1, 1), Vector2(1, -1), Vector2(-1, -1), Vector2(-1, 1)]
 
+const CHUNK_SIZE: int = 16
+
 ## If [code]true[/code], allows for generating a preview of the generation
 ## in the editor. Useful for debugging.
 @export var preview: bool = false :
@@ -44,10 +46,26 @@ func generate() -> void:
 		return
 
 
+func generate_chunk(chunk_position: Vector2i) -> void:
+	if not is_instance_valid(tile_map):
+		push_error("%s doesn't have a TileMap" % name)
+		return
+
+
 func erase(clear_tilemap := true) -> void:
 	if clear_tilemap:
 		tile_map.clear()
 	grid.clear()
+
+
+func erase_chunk(chunk_position: Vector2i, clear_tilemap := true) -> void:
+	for x in get_chunk_range(chunk_position.x):
+		for y in get_chunk_range(chunk_position.y):
+			grid.erase(Vector2(x, y))
+			
+			if not clear_tilemap: continue
+			for l in range(tile_map.get_layers_count()): 
+				tile_map.erase_cell(l, Vector2(x, y))
 
 
 ### Utils ###
@@ -96,6 +114,14 @@ static func get_tiles_of_type(type: TileInfo, grid: Dictionary) -> Array[Vector2
 	return tiles
 
 
+static func get_chunk_range(position: int) -> Array:
+	return range(
+		position * CHUNK_SIZE, 
+		(position + 1) * CHUNK_SIZE,
+		1
+	)
+
+
 ### Steps ###
 
 
@@ -105,7 +131,7 @@ func _draw_tiles() -> void:
 		var tile_info = grid[tile]
 		if not (tile_info is TileInfo):
 			continue
-
+	
 		match tile_info.type:
 			TileInfo.Type.SINGLE_CELL:
 				tile_map.set_cell(
@@ -117,7 +143,40 @@ func _draw_tiles() -> void:
 					terrains[tile_info] = [tile]
 				else:
 					terrains[tile_info].append(tile)
+	
+	for tile_info in terrains:
+		tile_map.set_cells_terrain_connect(
+			tile_info.layer, terrains[tile_info],
+			tile_info.terrain_set, tile_info.terrain
+		)
 
+
+func _draw_tiles_chunk(chunk_position: Vector2i) -> void:
+	var terrains: Dictionary
+	
+	for x in get_chunk_range(chunk_position.x):
+		for y in get_chunk_range(chunk_position.y):
+			var tile_position := Vector2(x, y)
+			if not grid.has(tile_position):
+				continue
+			
+			var tile = tile_position
+			var tile_info = grid[tile_position]
+			if not (tile_info is TileInfo):
+				continue
+			
+			match tile_info.type:
+				TileInfo.Type.SINGLE_CELL:
+					tile_map.set_cell(
+						tile_info.layer, tile, tile_info.source_id,
+						tile_info.atlas_coord, tile_info.alternative_tile
+					)
+				TileInfo.Type.TERRAIN:
+					if not terrains.has(tile_info):
+						terrains[tile_info] = [tile]
+					else:
+						terrains[tile_info].append(tile)
+	
 	for tile_info in terrains:
 		tile_map.set_cells_terrain_connect(
 			tile_info.layer, terrains[tile_info],
@@ -132,6 +191,13 @@ func _apply_modifiers(modifiers: Array[Modifier]) -> void:
 
 		grid = modifier.apply(grid, self)
 
+
+func _apply_modifiers_chunk(modifiers: Array[Modifier], chunk_position: Vector2i) -> void:
+	for modifier in modifiers:
+		if not (modifier is Modifier):
+			continue
+		
+		grid = modifier.apply_chunk(grid, self, chunk_position)
 
 ### Editor ###
 
