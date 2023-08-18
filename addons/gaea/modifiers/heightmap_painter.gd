@@ -26,3 +26,20 @@ func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 		if tile_pos.y >= -height:
 			grid[tile_pos] = tile
 	return grid
+
+
+func apply_chunk(grid: Dictionary, generator: GaeaGenerator, chunk_position: Vector2i) -> Dictionary:
+	if random_noise_seed:
+		noise.seed = randi()
+	
+	for x in GaeaGenerator.get_chunk_range(chunk_position.x):
+		for y in GaeaGenerator.get_chunk_range(chunk_position.y):
+			var tile_pos := Vector2(x, y)
+			if not grid.has(tile_pos):
+				continue
+			
+			var height = floor(noise.get_noise_1d(tile_pos.x) * height_intensity + height_offset)
+			if tile_pos.y >= -height:
+				grid[tile_pos] = tile
+	
+	return grid

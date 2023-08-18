@@ -33,6 +33,25 @@ func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
 	return grid
 
 
+func apply_chunk(grid: Dictionary, generator: GaeaGenerator, chunk_position: Vector2i) -> Dictionary:
+	if random_noise_seed:
+		noise.seed = randi()
+	
+	var size: int = GaeaGenerator.CHUNK_SIZE
+	var chunk_origin: Vector2i = size * chunk_position
+	
+	for x in GaeaGenerator.get_chunk_range(chunk_position.x):
+		for y in GaeaGenerator.get_chunk_range(chunk_position.y):
+			var tile_pos := Vector2(x, y)
+			if not grid.has(tile_pos):
+				continue
+			
+			if noise.get_noise_2dv(tile_pos) > threshold:
+				grid[tile_pos] = tile
+	
+	return grid
+
+
 func _is_out_of_bounds(tile_pos: Vector2) -> bool:
 	return (tile_pos.x > max.x or tile_pos.y > max.y or
 			tile_pos.x < min.x or tile_pos.y < min.y)
