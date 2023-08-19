@@ -48,16 +48,30 @@ func generate_chunk(chunk_position: Vector2i) -> void:
 
 
 func _set_grid() -> void:
-	for x in settings.world_length:
-		var height = floor(settings.noise.get_noise_1d(x) * settings.height_intensity + settings.height_offset)
-
-		for y in range(0, -height - 1, -1):
-			grid[Vector2(x, y)] = settings.tile
+	var max_height: int = 0
+	for x in range(settings.world_length):
+		max_height = maxi(
+			floor(settings.noise.get_noise_1d(x) * settings.height_intensity + settings.height_offset),
+			max_height
+		)
+	
+	var area := Rect2i(
+		# starting point
+		Vector2i(0, -max_height),
+		# size
+		Vector2i(settings.world_length, max_height)
+	)
+	
+	_set_grid_area(area)
 
 
 func _set_chunk_grid(chunk_position: Vector2i) -> void:
-	for x in get_chunk_range(chunk_position.x):
+	_set_grid_area(Rect2i(chunk_position * CHUNK_SIZE, Vector2i(CHUNK_SIZE, CHUNK_SIZE)))
+
+
+func _set_grid_area(area: Rect2i) -> void:
+	for x in range(area.position.x, area.end.x):
 		var height = floor(settings.noise.get_noise_1d(x) * settings.height_intensity + settings.height_offset)
-		for y in get_chunk_range(chunk_position.y):
+		for y in range(area.position.y, area.end.y):
 			if y > -height:
 				grid[Vector2(x, y)] = settings.tile

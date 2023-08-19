@@ -127,7 +127,7 @@ static func get_chunk_range(position: int) -> Array:
 
 func _draw_tiles() -> void:
 	var keys = grid.keys()
-	var rect: Rect2 = Rect2(keys.front(), keys.front())
+	var rect: Rect2 = Rect2(keys.front(), Vector2.ZERO)
 	for k in keys: rect = rect.expand(k)
 	
 	_draw_tiles_area(Rect2i(rect))
