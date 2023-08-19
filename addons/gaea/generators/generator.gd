@@ -126,36 +126,22 @@ static func get_chunk_range(position: int) -> Array:
 
 
 func _draw_tiles() -> void:
-	var terrains: Dictionary
-	for tile in grid:
-		var tile_info = grid[tile]
-		if not (tile_info is TileInfo):
-			continue
+	var keys = grid.keys()
+	var rect: Rect2 = Rect2(keys.front(), keys.front())
+	for k in keys: rect = rect.expand(k)
 	
-		match tile_info.type:
-			TileInfo.Type.SINGLE_CELL:
-				tile_map.set_cell(
-					tile_info.layer, tile, tile_info.source_id,
-					tile_info.atlas_coord, tile_info.alternative_tile
-				)
-			TileInfo.Type.TERRAIN:
-				if not terrains.has(tile_info):
-					terrains[tile_info] = [tile]
-				else:
-					terrains[tile_info].append(tile)
-	
-	for tile_info in terrains:
-		tile_map.set_cells_terrain_connect(
-			tile_info.layer, terrains[tile_info],
-			tile_info.terrain_set, tile_info.terrain
-		)
+	_draw_tiles_area(Rect2i(rect))
 
 
 func _draw_tiles_chunk(chunk_position: Vector2i) -> void:
+	_draw_tiles_area(Rect2i(chunk_position * CHUNK_SIZE, Vector2i(CHUNK_SIZE, CHUNK_SIZE)))
+
+
+func _draw_tiles_area(area: Rect2i) -> void:
 	var terrains: Dictionary
 	
-	for x in get_chunk_range(chunk_position.x):
-		for y in get_chunk_range(chunk_position.y):
+	for x in range(area.position.x, area.end.x + 1):
+		for y in range(area.position.y, area.end.y + 1):
 			var tile_position := Vector2(x, y)
 			if not grid.has(tile_position):
 				continue
