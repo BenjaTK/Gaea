@@ -21,27 +21,30 @@ extends Modifier
 
 
 func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
-	if random_noise_seed:
-		noise.seed = randi()
-
-	for tile_pos in grid.keys():
-		if _is_out_of_bounds(tile_pos):
-			continue
-
-		if noise.get_noise_2dv(tile_pos) > threshold:
-			grid[tile_pos] = tile
-	return grid
+	return _apply_area(
+		GaeaGenerator.get_area_from_grid(grid),
+		grid,
+		_generator
+	)
 
 
 func apply_chunk(grid: Dictionary, generator: GaeaGenerator, chunk_position: Vector2i) -> Dictionary:
+	return _apply_area(
+		Rect2i(
+			chunk_position * GaeaGenerator.CHUNK_SIZE,
+			Vector2i(GaeaGenerator.CHUNK_SIZE, GaeaGenerator.CHUNK_SIZE)
+		),
+		grid,
+		generator
+	)
+
+
+func _apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
 	if random_noise_seed:
 		noise.seed = randi()
 	
-	var size: int = GaeaGenerator.CHUNK_SIZE
-	var chunk_origin: Vector2i = size * chunk_position
-	
-	for x in GaeaGenerator.get_chunk_range(chunk_position.x):
-		for y in GaeaGenerator.get_chunk_range(chunk_position.y):
+	for x in range(area.position.x, area.end.x):
+		for y in range(area.position.y, area.end.y):
 			var tile_pos := Vector2(x, y)
 			if not grid.has(tile_pos):
 				continue
