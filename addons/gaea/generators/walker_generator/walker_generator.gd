@@ -80,7 +80,7 @@ func _generate_floor() -> void:
 
 
 func _move_walker(walker: Walker) -> void:
-	if randf() <= settings.destroy_walker_chance && _walkers.size() > 1:
+	if randf() <= settings.destroy_walker_chance and _walkers.size() > 1:
 		_walkers.erase(walker)
 		return
 
@@ -88,7 +88,7 @@ func _move_walker(walker: Walker) -> void:
 		_walked_tiles.append(walker.pos)
 
 	if randf() <= settings.new_dir_chance:
-		var randomRotation = _get_random_rotation()
+		var random_rotation = _get_random_rotation()
 		walker.dir = round(walker.dir.rotated(randomRotation))
 
 	if randf() <= settings.new_walker_chance and _walkers.size() < settings.max_walkers:
