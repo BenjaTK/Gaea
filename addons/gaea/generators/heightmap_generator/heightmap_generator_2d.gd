@@ -8,6 +8,7 @@ extends GaeaGenerator
 
 @export var settings: HeightmapGenerator2DSettings
 
+var _generated_chunks: Array[Vector2i] = []
 
 func generate() -> void:
 	if Engine.is_editor_hint() and not preview:
@@ -45,6 +46,12 @@ func generate_chunk(chunk_position: Vector2i) -> void:
 	_set_chunk_grid(chunk_position)
 	_apply_modifiers_chunk(settings.modifiers, chunk_position)
 	_draw_tiles_chunk(chunk_position)
+	
+	_generated_chunks.append(chunk_position)
+
+
+func has_chunk(chunk_position: Vector2i) -> bool:
+	return _generated_chunks.count(chunk_position) >= 1
 
 
 func _set_grid() -> void:
