@@ -1,7 +1,7 @@
 @tool
 @icon("heightmap_painter.svg")
 class_name HeightmapPainter
-extends Modifier
+extends ChunkAwareModifier
 ## Replaces tiles in the map with [param tile] based on a noise heightmap.
 
 
@@ -17,26 +17,7 @@ extends Modifier
 @export var height_intensity := 20
 
 
-func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
-	return _apply_area(
-		GaeaGenerator.get_area_from_grid(grid),
-		grid,
-		generator
-	)
-
-
-func apply_chunk(grid: Dictionary, generator: GaeaGenerator, chunk_position: Vector2i) -> Dictionary:
-	return _apply_area(
-		Rect2i(
-			chunk_position * GaeaGenerator.CHUNK_SIZE,
-			Vector2i(GaeaGenerator.CHUNK_SIZE, GaeaGenerator.CHUNK_SIZE)
-		),
-		grid,
-		generator
-	)
-
-
-func _apply_area(area: Rect2i, grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
+func _apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
 	if random_noise_seed:
 		noise.seed = randi()
 	

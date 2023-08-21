@@ -1,7 +1,7 @@
 @tool
 @icon("noise_painter.svg")
 class_name NoisePainter
-extends Modifier
+extends ChunkAwareModifier
 ## Replaces the tiles in the map with [param tile] based on a noise texture.
 ##
 ## Useful for placing ores or decorations.
@@ -18,25 +18,6 @@ extends Modifier
 @export var max := Vector2(INF, INF)
 ## Leave any or both axis as [code]-inf[/code] to not have any limits.
 @export var min := Vector2(-INF, -INF)
-
-
-func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
-	return _apply_area(
-		GaeaGenerator.get_area_from_grid(grid),
-		grid,
-		_generator
-	)
-
-
-func apply_chunk(grid: Dictionary, generator: GaeaGenerator, chunk_position: Vector2i) -> Dictionary:
-	return _apply_area(
-		Rect2i(
-			chunk_position * GaeaGenerator.CHUNK_SIZE,
-			Vector2i(GaeaGenerator.CHUNK_SIZE, GaeaGenerator.CHUNK_SIZE)
-		),
-		grid,
-		generator
-	)
 
 
 func _apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:

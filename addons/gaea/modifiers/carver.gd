@@ -1,7 +1,7 @@
 @tool
 @icon("carver.svg")
 class_name Carver
-extends Modifier
+extends ChunkAwareModifier
 ## Uses noise to remove certain tiles from the map.
 
 
@@ -18,26 +18,7 @@ extends Modifier
 @export var min := Vector2(-INF, -INF)
 
 
-func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
-	return apply_area(
-		GaeaGenerator.get_area_from_grid(grid),
-		grid,
-		_generator
-	)
-
-
-func apply_chunk(grid: Dictionary, _generator: GaeaGenerator, chunk_position: Vector2i) -> Dictionary:
-	return apply_area(
-		Rect2i(
-			chunk_position * GaeaGenerator.CHUNK_SIZE,
-			Vector2i(GaeaGenerator.CHUNK_SIZE, GaeaGenerator.CHUNK_SIZE)
-		),
-		grid,
-		_generator
-	)
-
-
-func apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
+func _apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
 	if random_noise_seed:
 		noise.seed = randi()
 	
