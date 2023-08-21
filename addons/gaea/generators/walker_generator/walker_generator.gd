@@ -89,7 +89,7 @@ func _move_walker(walker: Walker) -> void:
 
 	if randf() <= settings.new_dir_chance:
 		var random_rotation = _get_random_rotation()
-		walker.dir = round(walker.dir.rotated(randomRotation))
+		walker.dir = round(walker.dir.rotated(random_rotation))
 
 	if randf() <= settings.new_walker_chance and _walkers.size() < settings.max_walkers:
 		_add_walker(walker.pos)
