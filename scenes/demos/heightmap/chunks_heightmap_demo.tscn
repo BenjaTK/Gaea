@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://cxty0pak7x2o2"]
+[gd_scene load_steps=32 format=3 uid="uid://cxty0pak7x2o2"]
 
 [ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d.gd" id="1_lqewx"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/heightmap_painter.gd" id="2_u0711"]
@@ -8,7 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://6gwie8e2kpg2" path="res://scenes/demos/heightmap/ores.png" id="4_rk2l5"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/noise_painter.gd" id="5_m0ru2"]
 [ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d_settings.gd" id="6_q4c7b"]
+[ext_resource type="Script" path="res://scenes/demos/heightmap/test_actor.gd" id="10_76aeg"]
 [ext_resource type="Script" path="res://addons/gaea/chunk_loader.gd" id="10_vlq7b"]
+[ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="11_go0dd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_pl5m1"]
 seed = 202027513
@@ -365,11 +367,20 @@ offset_right = 2304.0
 offset_bottom = 18.0
 color = Color(0.172549, 0.188235, 0.243137, 1)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1241, -1788)
-zoom = Vector2(0.1, 0.1)
-
-[node name="ChunkLoader" type="Node2D" parent="." node_paths=PackedStringArray("generator")]
+[node name="ChunkLoader" type="Node2D" parent="." node_paths=PackedStringArray("generator", "actor")]
 script = ExtResource("10_vlq7b")
 generator = NodePath("../HeightmapGenerator2D")
+actor = NodePath("../TestActor")
+loading_radius = Vector2i(4, 4)
 update_rate = 2
+
+[node name="TestActor" type="Node2D" parent="."]
+position = Vector2(4, 4)
+script = ExtResource("10_76aeg")
+speed = 600.0
+
+[node name="Sprite2D" type="Sprite2D" parent="TestActor"]
+texture = ExtResource("11_go0dd")
+
+[node name="Camera2D" type="Camera2D" parent="TestActor"]
+zoom = Vector2(0.1, 0.1)
