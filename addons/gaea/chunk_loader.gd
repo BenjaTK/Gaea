@@ -39,6 +39,7 @@ func _process(delta: float) -> void:
 # checks if chunk loading is neccessary and executes if true
 func _try_loading() -> void:
 	var actor_position: Vector2i = _get_actors_position()
+	
 	if actor_position == _last_position:
 		return
 	
@@ -53,10 +54,10 @@ func _update_loading(actor_position: Vector2i) -> void:
 		return
 	
 	var required_chunks: Array[Vector2i] = _get_required_chunks(actor_position)
-	print("loading ", required_chunks)
+	
 	for required in required_chunks:
-		if generator.has_chunk(required): return
-		generator.generate_chunk(required)
+		if not generator.has_chunk(required):
+			generator.generate_chunk(required)
 
 
 func _get_actors_position() -> Vector2i:
@@ -64,12 +65,14 @@ func _get_actors_position() -> Vector2i:
 	var actor_position := Vector2.ZERO
 	if actor != null: actor_position = actor.global_position
 	
+	var tile_position: Vector2i = generator.tile_map.local_to_map(actor_position)
+	
 	var chunk_position := Vector2i(
-		floori(actor_position.x / GaeaGenerator.CHUNK_SIZE),
-		floori(actor_position.y / GaeaGenerator.CHUNK_SIZE)
+		floori(tile_position.x / GaeaGenerator.CHUNK_SIZE),
+		floori(tile_position.y / GaeaGenerator.CHUNK_SIZE)
 	)
 	
-	return actor_position
+	return chunk_position
 
 
 func _get_required_chunks(actor_position: Vector2i) -> Array[Vector2i]:

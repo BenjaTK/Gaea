@@ -51,7 +51,7 @@ func generate_chunk(chunk_position: Vector2i) -> void:
 
 
 func has_chunk(chunk_position: Vector2i) -> bool:
-	return _generated_chunks.count(chunk_position) >= 1
+	return _generated_chunks.has(chunk_position)
 
 
 func _set_grid() -> void:
