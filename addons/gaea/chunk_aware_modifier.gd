@@ -4,6 +4,14 @@ extends Modifier
 
 
 func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
+	# check for necessary properties
+	if "random_noise_seed" in self and "noise" in self:
+		# check if random noise is enabled
+		if self.get("random_noise_seed"):
+			# generate random noise
+			var noise = self.get("noise") as FastNoiseLite
+			noise.seed = randi()
+	
 	return _apply_area(
 		GaeaGenerator.get_area_from_grid(grid),
 		grid,
@@ -11,14 +19,23 @@ func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
 	)
 
 
-func apply_chunk(grid: Dictionary, _generator: GaeaGenerator, chunk_position: Vector2i) -> Dictionary:
+func apply_chunk(grid: Dictionary, generator: GaeaGenerator, chunk_position: Vector2i) -> Dictionary:
+	# check for necessary properties
+	if "random_noise_seed" in self and "noise" in self and "settings" in generator:
+		# check if random noise is enabled
+		if self.get("random_noise_seed"):
+			# apply generators noise to modifiers noise
+			var noise := self.get("noise") as FastNoiseLite
+			var generator_settings := generator.get("settings") as HeightmapGenerator2DSettings
+			noise.seed = generator_settings.noise.seed
+	
 	return _apply_area(
 		Rect2i(
 			chunk_position * GaeaGenerator.CHUNK_SIZE,
 			Vector2i(GaeaGenerator.CHUNK_SIZE, GaeaGenerator.CHUNK_SIZE)
 		),
 		grid,
-		_generator
+		generator
 	)
 
 

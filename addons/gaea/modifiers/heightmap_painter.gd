@@ -18,9 +18,6 @@ extends ChunkAwareModifier
 
 
 func _apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
-	if random_noise_seed:
-		noise.seed = randi()
-	
 	for x in range(area.position.x, area.end.x):
 		for y in range(area.position.y, area.end.y):
 			var tile_pos := Vector2(x, y)
