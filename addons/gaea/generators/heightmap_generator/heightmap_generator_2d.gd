@@ -10,6 +10,14 @@ extends GaeaGenerator
 
 var _generated_chunks: Array[Vector2i] = []
 
+
+func _ready() -> void:
+	if settings.random_noise_seed:
+		settings.noise.seed = randi()
+	
+	super()
+
+
 func generate() -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
@@ -38,9 +46,6 @@ func generate_chunk(chunk_position: Vector2i) -> void:
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
 		return
-
-	if settings.random_noise_seed:
-		settings.noise.seed = randi()
 	
 	erase_chunk(chunk_position)
 	_set_chunk_grid(chunk_position)

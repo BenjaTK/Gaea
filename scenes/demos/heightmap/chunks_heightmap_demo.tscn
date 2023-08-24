@@ -27,10 +27,11 @@ alternative_tile = 0
 resource_name = "Stone"
 script = ExtResource("2_u0711")
 noise = SubResource("FastNoiseLite_pl5m1")
-random_noise_seed = false
+random_noise_seed = true
 tile = SubResource("Resource_jm03i")
 height_offset = 145
 height_intensity = 5
+modifier_seed = 425245245
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_macji"]
 seed = -1577540346
@@ -47,10 +48,11 @@ alternative_tile = 0
 resource_name = "Bedrock"
 script = ExtResource("2_u0711")
 noise = SubResource("FastNoiseLite_macji")
-random_noise_seed = false
+random_noise_seed = true
 tile = SubResource("Resource_fvob8")
 height_offset = 0
 height_intensity = 0
+modifier_seed = 653636
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_uxcj3"]
 noise_type = 3
@@ -64,10 +66,11 @@ domain_warp_frequency = 0.57
 resource_name = "Caves"
 script = ExtResource("4_i15f0")
 noise = SubResource("FastNoiseLite_uxcj3")
-random_noise_seed = false
+random_noise_seed = true
 threshold = 0.8
 max = Vector2(inf, -1)
 min = Vector2(inf_neg, inf_neg)
+modifier_seed = -248572545
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7hry"]
 seed = 1724806335
@@ -87,11 +90,12 @@ alternative_tile = 0
 resource_name = "Gold Ore"
 script = ExtResource("5_m0ru2")
 noise = SubResource("FastNoiseLite_n7hry")
-random_noise_seed = false
+random_noise_seed = true
 tile = SubResource("Resource_d1s74")
 threshold = 0.65
 max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
+modifier_seed = 425742524
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_77hcd"]
 seed = 1838051260
@@ -112,11 +116,12 @@ alternative_tile = 0
 resource_name = "Diamond Ore"
 script = ExtResource("5_m0ru2")
 noise = SubResource("FastNoiseLite_77hcd")
-random_noise_seed = false
+random_noise_seed = true
 tile = SubResource("Resource_efh25")
 threshold = 0.5
 max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
+modifier_seed = -75202745
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
@@ -134,7 +139,7 @@ resource_name = "Terraria-like Settings"
 script = ExtResource("6_q4c7b")
 tile = SubResource("Resource_hitrj")
 noise = SubResource("FastNoiseLite_mwtbk")
-random_noise_seed = false
+random_noise_seed = true
 world_length = 128
 height_offset = 160
 height_intensity = 25
