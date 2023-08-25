@@ -4,7 +4,7 @@ extends Node2D
 
 
 ## The generator that loads the chunks.
-@export var generator: HeightmapGenerator2D
+@export var generator: ChunkAwareGenerator
 ## Chunks will be loaded arround this Node. 
 ## If set to null chunks will be loaded around (0, 0)
 @export var actor: Node2D

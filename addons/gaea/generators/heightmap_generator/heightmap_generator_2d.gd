@@ -1,14 +1,12 @@
 @tool
 @icon("heightmap_generator_2d.svg")
 class_name HeightmapGenerator2D
-extends GaeaGenerator
+extends ChunkAwareGenerator
 ## Generates terrain using a heightmap from a noise texture.
 ##
 ## [b]Note:[/b] Needs optimization.
 
 @export var settings: HeightmapGenerator2DSettings
-
-var _generated_chunks: Array[Vector2i] = []
 
 
 func _ready() -> void:
@@ -40,7 +38,7 @@ func generate() -> void:
 func generate_chunk(chunk_position: Vector2i) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
-
+	
 	super.generate()
 
 	if not settings:
@@ -53,10 +51,6 @@ func generate_chunk(chunk_position: Vector2i) -> void:
 	_draw_tiles_chunk(chunk_position)
 	
 	_generated_chunks.append(chunk_position)
-
-
-func has_chunk(chunk_position: Vector2i) -> bool:
-	return _generated_chunks.has(chunk_position)
 
 
 func _set_grid() -> void:

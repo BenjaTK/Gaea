@@ -46,26 +46,10 @@ func generate() -> void:
 		return
 
 
-func generate_chunk(chunk_position: Vector2i) -> void:
-	if not is_instance_valid(tile_map):
-		push_error("%s doesn't have a TileMap" % name)
-		return
-
-
 func erase(clear_tilemap := true) -> void:
 	if clear_tilemap:
 		tile_map.clear()
 	grid.clear()
-
-
-func erase_chunk(chunk_position: Vector2i, clear_tilemap := true) -> void:
-	for x in get_chunk_range(chunk_position.x):
-		for y in get_chunk_range(chunk_position.y):
-			grid.erase(Vector2(x, y))
-			
-			if not clear_tilemap: continue
-			for l in range(tile_map.get_layers_count()): 
-				tile_map.erase_cell(l, Vector2(x, y))
 
 
 ### Utils ###
@@ -114,14 +98,6 @@ static func get_tiles_of_type(type: TileInfo, grid: Dictionary) -> Array[Vector2
 	return tiles
 
 
-static func get_chunk_range(position: int) -> Array:
-	return range(
-		position * CHUNK_SIZE, 
-		(position + 1) * CHUNK_SIZE,
-		1
-	)
-
-
 static func get_area_from_grid(grid: Dictionary) -> Rect2i:
 	var keys = grid.keys()
 	var rect: Rect2 = Rect2(keys.front(), Vector2.ZERO)
@@ -134,10 +110,6 @@ static func get_area_from_grid(grid: Dictionary) -> Rect2i:
 
 func _draw_tiles() -> void:
 	_draw_tiles_area(get_area_from_grid(grid))
-
-
-func _draw_tiles_chunk(chunk_position: Vector2i) -> void:
-	_draw_tiles_area(Rect2i(chunk_position * CHUNK_SIZE, Vector2i(CHUNK_SIZE, CHUNK_SIZE)))
 
 
 func _draw_tiles_area(area: Rect2i) -> void:
@@ -181,15 +153,7 @@ func _apply_modifiers(modifiers: Array[Modifier]) -> void:
 		grid = modifier.apply(grid, self)
 
 
-func _apply_modifiers_chunk(modifiers: Array[Modifier], chunk_position: Vector2i) -> void:
-	for modifier in modifiers:
-		if not (modifier is Modifier):
-			continue
-		
-		grid = modifier.apply_chunk(grid, self, chunk_position)
-
 ### Editor ###
-
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings : PackedStringArray
