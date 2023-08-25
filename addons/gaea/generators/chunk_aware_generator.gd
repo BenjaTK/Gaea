@@ -3,7 +3,7 @@ class_name ChunkAwareGenerator
 extends GaeaGenerator
 
 
-var _generated_chunks: Array[Vector2i] = []
+var generated_chunks: Array[Vector2i] = []
 
 
 func generate_chunk(chunk_position: Vector2i) -> void:
@@ -35,10 +35,15 @@ func _draw_tiles_chunk(chunk_position: Vector2i) -> void:
 	_draw_tiles_area(Rect2i(chunk_position * CHUNK_SIZE, Vector2i(CHUNK_SIZE, CHUNK_SIZE)))
 
 
+func unload_chunk(chunk_position: Vector2i) -> void:
+	erase_chunk(chunk_position)
+	generated_chunks.erase(chunk_position)
+
+
 ### Utils ###
 
 func has_chunk(chunk_position: Vector2i) -> bool:
-	return _generated_chunks.has(chunk_position)
+	return generated_chunks.has(chunk_position)
 
 
 static func get_chunk_range(position: int) -> Array:

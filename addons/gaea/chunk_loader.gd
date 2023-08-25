@@ -16,6 +16,8 @@ extends Node2D
 ## Executes the loading process on ready [br]
 ## [b]Warning:[/b] No chunks might load if set to false.
 @export var load_on_ready: bool = true
+## If set to true, the Chunk Loader unloads chunks left behind
+@export var unload_chunks: bool = true
 
 var _update_status: int = 0
 var _last_position: Vector2i
@@ -55,9 +57,17 @@ func _update_loading(actor_position: Vector2i) -> void:
 	
 	var required_chunks: Array[Vector2i] = _get_required_chunks(actor_position)
 	
-	for required in required_chunks:
-		if not generator.has_chunk(required):
-			generator.generate_chunk(required)
+	# remove old chunks
+	if unload_chunks:
+		var loaded_chunks: Array[Vector2i] = generator.generated_chunks
+		for i in range(loaded_chunks.size() - 1, -1, -1):
+			var loaded: Vector2i = loaded_chunks[i]
+			if not (loaded in required_chunks):
+				generator.unload_chunk(loaded)
+		
+		for required in required_chunks:
+			if not generator.has_chunk(required):
+				generator.generate_chunk(required)
 
 
 func _get_actors_position() -> Vector2i:

@@ -48,7 +48,7 @@ func generate_chunk(chunk_position: Vector2i) -> void:
 	_apply_modifiers_chunk(settings.modifiers, chunk_position)
 	_draw_tiles_chunk(chunk_position)
 	
-	_generated_chunks.append(chunk_position)
+	generated_chunks.append(chunk_position)
 
 
 func _set_grid() -> void:
