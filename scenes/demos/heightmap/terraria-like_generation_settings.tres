@@ -119,7 +119,7 @@ modifier_seed = 3102050830
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vcq1r"]
 noise_type = 3
-seed = 1650299306
+seed = -1583826564
 
 [sub_resource type="Resource" id="Resource_ja6xv"]
 script = ExtResource("2_6f082")
@@ -134,7 +134,9 @@ script = ExtResource("5_haojk")
 tile = SubResource("Resource_ja6xv")
 noise = SubResource("FastNoiseLite_vcq1r")
 random_noise_seed = true
+infinite = false
 world_length = 128
 height_offset = 160
 height_intensity = 25
+min_height = 0
 modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([SubResource("Resource_ud61g"), SubResource("Resource_c7ke6"), SubResource("Resource_gma4i"), SubResource("Resource_x7aqc"), SubResource("Resource_blv43")])

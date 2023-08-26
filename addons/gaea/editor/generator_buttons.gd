@@ -1,4 +1,3 @@
-class_name GeneratorButtons
 extends EditorProperty
 
 
