@@ -21,15 +21,15 @@ extends ChunkAwareModifier
 
 
 func _apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
-	for x in range(area.position.x, area.end.x):
-		for y in range(area.position.y, area.end.y):
+	for x in range(area.position.x, area.end.x + 1):
+		for y in range(area.position.y, area.end.y + 1):
 			var tile_pos := Vector2(x, y)
 			if not grid.has(tile_pos) or _is_out_of_bounds(tile_pos):
 				continue
-			
+
 			if noise.get_noise_2dv(tile_pos) > threshold:
 				grid[tile_pos] = tile
-	
+
 	return grid
 
 

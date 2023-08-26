@@ -20,7 +20,7 @@ func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
 			# generate random noise
 			var noise = self.get("noise") as FastNoiseLite
 			noise.seed = randi()
-	
+
 	return _apply_area(
 		GaeaGenerator.get_area_from_grid(grid),
 		grid,
@@ -37,7 +37,7 @@ func apply_chunk(grid: Dictionary, generator: ChunkAwareGenerator, chunk_positio
 			var noise := self.get("noise") as FastNoiseLite
 			var generator_settings := generator.get("settings") as HeightmapGenerator2DSettings
 			noise.seed = modifier_seed + generator_settings.noise.seed
-	
+
 	return _apply_area(
 		Rect2i(
 			chunk_position * generator.chunk_size,
@@ -49,5 +49,5 @@ func apply_chunk(grid: Dictionary, generator: ChunkAwareGenerator, chunk_positio
 
 
 func _apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
-	push_warning("%s doesn't have a `_apply_area` implementation" % resource_name)
+	push_warning("%s doesn't have an `_apply_area` implementation" % resource_name)
 	return {}

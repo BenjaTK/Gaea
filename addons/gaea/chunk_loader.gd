@@ -5,7 +5,7 @@ extends Node2D
 
 ## The generator that loads the chunks.
 @export var generator: ChunkAwareGenerator
-## Chunks will be loaded arround this Node. 
+## Chunks will be loaded arround this Node.
 ## If set to null chunks will be loaded around (0, 0)
 @export var actor: Node2D
 ## The distance around the actor which will be loaded.
@@ -41,10 +41,10 @@ func _process(delta: float) -> void:
 # checks if chunk loading is neccessary and executes if true
 func _try_loading() -> void:
 	var actor_position: Vector2i = _get_actors_position()
-	
+
 	if actor_position == _last_position:
 		return
-	
+
 	_last_position = actor_position
 	_update_loading(actor_position)
 
@@ -54,9 +54,9 @@ func _update_loading(actor_position: Vector2i) -> void:
 	if generator == null:
 		push_error("Chunk loading failed because generator property not set!")
 		return
-	
+
 	var required_chunks: Array[Vector2i] = _get_required_chunks(actor_position)
-	
+
 	# remove old chunks
 	if unload_chunks:
 		var loaded_chunks: Array[Vector2i] = generator.generated_chunks
@@ -64,7 +64,7 @@ func _update_loading(actor_position: Vector2i) -> void:
 			var loaded: Vector2i = loaded_chunks[i]
 			if not (loaded in required_chunks):
 				generator.unload_chunk(loaded)
-	
+
 	# load new chunks
 	for required in required_chunks:
 		if not generator.has_chunk(required):
@@ -75,20 +75,20 @@ func _get_actors_position() -> Vector2i:
 	# getting actors positions
 	var actor_position := Vector2.ZERO
 	if actor != null: actor_position = actor.global_position
-	
+
 	var tile_position: Vector2i = generator.tile_map.local_to_map(actor_position)
-	
+
 	var chunk_position := Vector2i(
 		floori(tile_position.x / generator.chunk_size),
 		floori(tile_position.y / generator.chunk_size)
 	)
-	
+
 	return chunk_position
 
 
 func _get_required_chunks(actor_position: Vector2i) -> Array[Vector2i]:
 	var chunks: Array[Vector2i] = []
-	
+
 	var x_range = range(
 		actor_position.x - abs(loading_radius).x,
 		actor_position.x + abs(loading_radius).x + 1
@@ -97,11 +97,11 @@ func _get_required_chunks(actor_position: Vector2i) -> Array[Vector2i]:
 		actor_position.y - abs(loading_radius).y,
 		actor_position.y + abs(loading_radius).y + 1
 	)
-	
+
 	for x in x_range:
 		for y in y_range:
 			chunks.append(Vector2i(x, y))
-	
+
 	return chunks
 
 

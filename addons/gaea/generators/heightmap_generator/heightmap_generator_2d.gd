@@ -12,7 +12,7 @@ extends ChunkAwareGenerator
 func _ready() -> void:
 	if settings.random_noise_seed:
 		settings.noise.seed = randi()
-	
+
 	super()
 
 
@@ -38,18 +38,18 @@ func generate() -> void:
 func generate_chunk(chunk_position: Vector2i) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
-	
+
 	super.generate()
 
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
 		return
-	
+
 	erase_chunk(chunk_position)
 	_set_chunk_grid(chunk_position)
 	_apply_modifiers_chunk(settings.modifiers, chunk_position)
 	_draw_tiles_chunk(chunk_position)
-	
+
 	generated_chunks.append(chunk_position)
 
 
@@ -60,14 +60,14 @@ func _set_grid() -> void:
 			floor(settings.noise.get_noise_1d(x) * settings.height_intensity + settings.height_offset),
 			max_height
 		)
-	
+
 	var area := Rect2i(
 		# starting point
 		Vector2i(0, -max_height),
 		# size
-		Vector2i(settings.world_length, max_height)
+		Vector2i(settings.world_length, max_height - settings.min_height)
 	)
-	
+
 	_set_grid_area(area)
 
 
@@ -79,5 +79,5 @@ func _set_grid_area(area: Rect2i) -> void:
 	for x in range(area.position.x, area.end.x):
 		var height = floor(settings.noise.get_noise_1d(x) * settings.height_intensity + settings.height_offset)
 		for y in range(area.position.y, area.end.y):
-			if y > -height:
+			if y > -height and y <= -settings.min_height:
 				grid[Vector2(x, y)] = settings.tile

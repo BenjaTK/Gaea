@@ -112,18 +112,18 @@ func _draw_tiles() -> void:
 
 func _draw_tiles_area(area: Rect2i) -> void:
 	var terrains: Dictionary
-	
+
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			var tile_position := Vector2(x, y)
 			if not grid.has(tile_position):
 				continue
-			
+
 			var tile = tile_position
 			var tile_info = grid[tile_position]
 			if not (tile_info is TileInfo):
 				continue
-			
+
 			match tile_info.type:
 				TileInfo.Type.SINGLE_CELL:
 					tile_map.set_cell(
@@ -135,7 +135,7 @@ func _draw_tiles_area(area: Rect2i) -> void:
 						terrains[tile_info] = [tile]
 					else:
 						terrains[tile_info].append(tile)
-	
+
 	for tile_info in terrains:
 		tile_map.set_cells_terrain_connect(
 			tile_info.layer, terrains[tile_info],

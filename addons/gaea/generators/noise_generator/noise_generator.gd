@@ -10,7 +10,7 @@ extends ChunkAwareGenerator
 func _ready() -> void:
 	if settings.random_noise_seed:
 		settings.noise.seed = randi()
-	
+
 	super._ready()
 
 
@@ -36,18 +36,18 @@ func generate() -> void:
 func generate_chunk(chunk_position: Vector2i) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
-	
+
 	super.generate()
-	
+
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
 		return
-	
+
 	erase_chunk(chunk_position)
 	_set_grid_chunk(chunk_position)
 	_apply_modifiers_chunk(settings.modifiers, chunk_position)
 	_draw_tiles_chunk(chunk_position)
-	
+
 	generated_chunks.append(chunk_position)
 
 

@@ -25,6 +25,7 @@ random_noise_seed = true
 tile = SubResource("Resource_jm03i")
 height_offset = 145
 height_intensity = 5
+modifier_seed = 968297547
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_macji"]
 seed = -1577540346
@@ -45,6 +46,7 @@ random_noise_seed = true
 tile = SubResource("Resource_fvob8")
 height_offset = 0
 height_intensity = 0
+modifier_seed = 1640849317
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_uxcj3"]
 noise_type = 3
@@ -62,6 +64,7 @@ random_noise_seed = true
 threshold = 0.8
 max = Vector2(inf, -1)
 min = Vector2(inf_neg, inf_neg)
+modifier_seed = 3476587540
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7hry"]
 seed = 1724806335
@@ -86,6 +89,7 @@ tile = SubResource("Resource_d1s74")
 threshold = 0.65
 max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
+modifier_seed = 1850350583
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_77hcd"]
 seed = 1838051260
@@ -111,10 +115,11 @@ tile = SubResource("Resource_efh25")
 threshold = 0.5
 max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
+modifier_seed = 3102050830
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vcq1r"]
 noise_type = 3
-seed = 1279216551
+seed = 1650299306
 
 [sub_resource type="Resource" id="Resource_ja6xv"]
 script = ExtResource("2_6f082")
