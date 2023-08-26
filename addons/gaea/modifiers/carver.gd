@@ -22,7 +22,7 @@ func _apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> D
 	for x in range(area.position.x, area.end.x):
 		for y in range(area.position.y, area.end.y):
 			var tile_pos := Vector2(x, y)
-			if not grid.has(tile_pos):
+			if not grid.has(tile_pos) or _is_out_of_bounds(tile_pos):
 				continue
 			
 			if noise.get_noise_2d(tile_pos.x, tile_pos.y) > threshold:
