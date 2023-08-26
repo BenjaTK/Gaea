@@ -2,8 +2,17 @@
 class_name ChunkAwareGenerator
 extends GaeaGenerator
 
+## The size of the Chunks. [br]
+## [b]Warning: Cannot be set to 0[/b]
+@export var chunk_size: int = 16
 
 var generated_chunks: Array[Vector2i] = []
+
+func _ready() -> void:
+	if chunk_size == 0:
+		push_error("Chunk Size can not be 0!")
+	
+	super._ready()
 
 
 func generate_chunk(chunk_position: Vector2i) -> void:
@@ -32,7 +41,7 @@ func _apply_modifiers_chunk(modifiers: Array[Modifier], chunk_position: Vector2i
 
 
 func _draw_tiles_chunk(chunk_position: Vector2i) -> void:
-	_draw_tiles_area(Rect2i(chunk_position * CHUNK_SIZE, Vector2i(CHUNK_SIZE, CHUNK_SIZE)))
+	_draw_tiles_area(Rect2i(chunk_position * chunk_size, Vector2i(chunk_size, chunk_size)))
 
 
 func unload_chunk(chunk_position: Vector2i) -> void:
@@ -46,9 +55,9 @@ func has_chunk(chunk_position: Vector2i) -> bool:
 	return generated_chunks.has(chunk_position)
 
 
-static func get_chunk_range(position: int) -> Array:
+func get_chunk_range(position: int) -> Array:
 	return range(
-		position * CHUNK_SIZE, 
-		(position + 1) * CHUNK_SIZE,
+		position * chunk_size, 
+		(position + 1) * chunk_size,
 		1
 	)

@@ -28,7 +28,7 @@ func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
 	)
 
 
-func apply_chunk(grid: Dictionary, generator: GaeaGenerator, chunk_position: Vector2i) -> Dictionary:
+func apply_chunk(grid: Dictionary, generator: ChunkAwareGenerator, chunk_position: Vector2i) -> Dictionary:
 	# check for necessary properties
 	if "random_noise_seed" in self and "noise" in self and "settings" in generator:
 		# check if random noise is enabled
@@ -40,8 +40,8 @@ func apply_chunk(grid: Dictionary, generator: GaeaGenerator, chunk_position: Vec
 	
 	return _apply_area(
 		Rect2i(
-			chunk_position * GaeaGenerator.CHUNK_SIZE,
-			Vector2i(GaeaGenerator.CHUNK_SIZE, GaeaGenerator.CHUNK_SIZE)
+			chunk_position * generator.chunk_size,
+			Vector2i(generator.chunk_size, generator.chunk_size)
 		),
 		grid,
 		generator

@@ -79,8 +79,8 @@ func _get_actors_position() -> Vector2i:
 	var tile_position: Vector2i = generator.tile_map.local_to_map(actor_position)
 	
 	var chunk_position := Vector2i(
-		floori(tile_position.x / GaeaGenerator.CHUNK_SIZE),
-		floori(tile_position.y / GaeaGenerator.CHUNK_SIZE)
+		floori(tile_position.x / generator.chunk_size),
+		floori(tile_position.y / generator.chunk_size)
 	)
 	
 	return chunk_position
