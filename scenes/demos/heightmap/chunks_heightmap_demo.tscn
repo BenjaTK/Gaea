@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="11_go0dd"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_pl5m1"]
-seed = 1842174653
+seed = -505089441
 
 [sub_resource type="Resource" id="Resource_jm03i"]
 script = ExtResource("3_uk0dw")
@@ -34,7 +34,7 @@ height_intensity = 5
 modifier_seed = 425245245
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_macji"]
-seed = -1752739554
+seed = 1262607472
 
 [sub_resource type="Resource" id="Resource_fvob8"]
 script = ExtResource("3_uk0dw")
@@ -56,7 +56,7 @@ modifier_seed = 653636
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_uxcj3"]
 noise_type = 3
-seed = 1434484616
+seed = 1434621441
 frequency = 0.012
 fractal_type = 2
 fractal_octaves = 3
@@ -73,7 +73,7 @@ min = Vector2(inf_neg, inf_neg)
 modifier_seed = -248572545
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7hry"]
-seed = 97401441
+seed = 1521415242
 frequency = 0.0617
 fractal_octaves = 2
 fractal_lacunarity = 2.95
@@ -98,7 +98,7 @@ min = Vector2(inf_neg, -120)
 modifier_seed = 425742524
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_77hcd"]
-seed = 2072940540
+seed = -82293698
 frequency = 0.0511
 fractal_lacunarity = 0.565
 domain_warp_type = 2
@@ -125,7 +125,7 @@ modifier_seed = -75202745
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
-seed = 495164078
+seed = -1819592592
 
 [sub_resource type="Resource" id="Resource_hitrj"]
 script = ExtResource("3_uk0dw")
@@ -354,7 +354,7 @@ sources/0 = SubResource("TileSetAtlasSource_68jc8")
 script = ExtResource("1_lqewx")
 settings = SubResource("Resource_6hs11")
 tile_map = NodePath("../TileMap")
-generate_on_ready = null
+generate_on_ready = false
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_3y7im")
