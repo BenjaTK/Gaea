@@ -96,28 +96,46 @@ static func get_tiles_of_type(type: TileInfo, grid: Dictionary) -> Array[Vector2
 	return tiles
 
 
+static func get_area_from_grid(grid: Dictionary) -> Rect2i:
+	var keys = grid.keys()
+	var rect: Rect2 = Rect2(keys.front(), Vector2.ZERO)
+	for k in keys: rect = rect.expand(k)
+	return rect
+
+
 ### Steps ###
 
 
 func _draw_tiles() -> void:
+	_draw_tiles_area(get_area_from_grid(grid))
+
+
+func _draw_tiles_area(area: Rect2i) -> void:
 	var terrains: Dictionary
-	for tile in grid:
-		var tile_info = grid[tile]
-		if not (tile_info is TileInfo):
-			continue
-
-		match tile_info.type:
-			TileInfo.Type.SINGLE_CELL:
-				tile_map.set_cell(
-					tile_info.layer, tile, tile_info.source_id,
-					tile_info.atlas_coord, tile_info.alternative_tile
-				)
-			TileInfo.Type.TERRAIN:
-				if not terrains.has(tile_info):
-					terrains[tile_info] = [tile]
-				else:
-					terrains[tile_info].append(tile)
-
+	
+	for x in range(area.position.x, area.end.x + 1):
+		for y in range(area.position.y, area.end.y + 1):
+			var tile_position := Vector2(x, y)
+			if not grid.has(tile_position):
+				continue
+			
+			var tile = tile_position
+			var tile_info = grid[tile_position]
+			if not (tile_info is TileInfo):
+				continue
+			
+			match tile_info.type:
+				TileInfo.Type.SINGLE_CELL:
+					tile_map.set_cell(
+						tile_info.layer, tile, tile_info.source_id,
+						tile_info.atlas_coord, tile_info.alternative_tile
+					)
+				TileInfo.Type.TERRAIN:
+					if not terrains.has(tile_info):
+						terrains[tile_info] = [tile]
+					else:
+						terrains[tile_info].append(tile)
+	
 	for tile_info in terrains:
 		tile_map.set_cells_terrain_connect(
 			tile_info.layer, terrains[tile_info],
@@ -134,7 +152,6 @@ func _apply_modifiers(modifiers: Array[Modifier]) -> void:
 
 
 ### Editor ###
-
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings : PackedStringArray
