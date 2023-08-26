@@ -354,7 +354,7 @@ sources/0 = SubResource("TileSetAtlasSource_68jc8")
 script = ExtResource("1_lqewx")
 settings = SubResource("Resource_6hs11")
 tile_map = NodePath("../TileMap")
-regenerate_on_ready = false
+generate_on_ready = null
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_3y7im")

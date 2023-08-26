@@ -11,7 +11,7 @@ var generated_chunks: Array[Vector2i] = []
 func _ready() -> void:
 	if chunk_size == 0:
 		push_error("Chunk Size can not be 0!")
-	
+
 	super._ready()
 
 
@@ -25,9 +25,9 @@ func erase_chunk(chunk_position: Vector2i, clear_tilemap := true) -> void:
 	for x in get_chunk_range(chunk_position.x):
 		for y in get_chunk_range(chunk_position.y):
 			grid.erase(Vector2(x, y))
-			
+
 			if not clear_tilemap: continue
-			for l in range(tile_map.get_layers_count()): 
+			for l in range(tile_map.get_layers_count()):
 				tile_map.erase_cell(l, Vector2(x, y))
 
 
@@ -36,7 +36,7 @@ func _apply_modifiers_chunk(modifiers: Array[Modifier], chunk_position: Vector2i
 		if not (modifier is ChunkAwareModifier):
 			push_error("%s is not a Chunk compatible modifier!" % modifier.resource_name)
 			continue
-		
+
 		grid = modifier.apply_chunk(grid, self, chunk_position)
 
 
@@ -57,7 +57,7 @@ func has_chunk(chunk_position: Vector2i) -> bool:
 
 func get_chunk_range(position: int) -> Array:
 	return range(
-		position * chunk_size, 
+		position * chunk_size,
 		(position + 1) * chunk_size,
 		1
 	)
