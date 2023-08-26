@@ -1,4 +1,5 @@
 @tool
+@icon("chunk_loader.svg")
 class_name ChunkLoader
 extends Node2D
 

@@ -1,4 +1,5 @@
 @tool
+@icon("tile_info.svg")
 class_name TileInfo
 extends Resource
 ## Resource used to tell the generators which tile from the [TileMap] to place.

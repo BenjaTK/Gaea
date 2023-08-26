@@ -1,4 +1,5 @@
 @tool
+@icon("generator.svg")
 class_name GaeaGenerator
 extends Node2D
 ## Base class for the Gaea addon's procedural generator.
