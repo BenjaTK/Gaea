@@ -12,10 +12,11 @@
 [ext_resource type="Script" path="res://addons/gaea/chunk_loader.gd" id="10_vlq7b"]
 [ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="11_go0dd"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_pl5m1"]
-seed = -505089441
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_2fgpv"]
+noise_type = 3
+seed = -1470460601
 
-[sub_resource type="Resource" id="Resource_jm03i"]
+[sub_resource type="Resource" id="Resource_6kmi4"]
 script = ExtResource("3_uk0dw")
 type = 0
 layer = 0
@@ -23,20 +24,22 @@ source_id = 1
 atlas_coord = Vector2i(0, 0)
 alternative_tile = 0
 
-[sub_resource type="Resource" id="Resource_ud61g"]
+[sub_resource type="Resource" id="Resource_pu43q"]
 resource_name = "Stone"
 script = ExtResource("2_u0711")
-noise = SubResource("FastNoiseLite_pl5m1")
+use_generator_noise = true
+noise = SubResource("FastNoiseLite_2fgpv")
 random_noise_seed = true
-tile = SubResource("Resource_jm03i")
-height_offset = 145
-height_intensity = 5
-modifier_seed = 425245245
+tile = SubResource("Resource_6kmi4")
+height_offset = 155
+height_intensity = 25
+modifier_seed = 968297547
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_macji"]
-seed = 1262607472
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rgba1"]
+noise_type = 3
+seed = -1470460601
 
-[sub_resource type="Resource" id="Resource_fvob8"]
+[sub_resource type="Resource" id="Resource_f1fl3"]
 script = ExtResource("3_uk0dw")
 type = 0
 layer = 0
@@ -44,41 +47,42 @@ source_id = 1
 atlas_coord = Vector2i(0, 1)
 alternative_tile = 0
 
-[sub_resource type="Resource" id="Resource_c7ke6"]
+[sub_resource type="Resource" id="Resource_855mm"]
 resource_name = "Bedrock"
 script = ExtResource("2_u0711")
-noise = SubResource("FastNoiseLite_macji")
+use_generator_noise = true
+noise = SubResource("FastNoiseLite_rgba1")
 random_noise_seed = true
-tile = SubResource("Resource_fvob8")
-height_offset = -5
-height_intensity = 2
-modifier_seed = 653636
+tile = SubResource("Resource_f1fl3")
+height_offset = 0
+height_intensity = 20
+modifier_seed = 1640849317
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_uxcj3"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
 noise_type = 3
-seed = 1434621441
+seed = -1896712365
 frequency = 0.012
 fractal_type = 2
 fractal_octaves = 3
 domain_warp_frequency = 0.57
 
-[sub_resource type="Resource" id="Resource_gma4i"]
+[sub_resource type="Resource" id="Resource_q887n"]
 resource_name = "Caves"
 script = ExtResource("4_i15f0")
-noise = SubResource("FastNoiseLite_uxcj3")
+noise = SubResource("FastNoiseLite_1mckf")
 random_noise_seed = true
 threshold = 0.8
 max = Vector2(inf, -1)
 min = Vector2(inf_neg, inf_neg)
-modifier_seed = -248572545
+modifier_seed = 3476587540
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_n7hry"]
-seed = 1521415242
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
+seed = -213067767
 frequency = 0.0617
 fractal_octaves = 2
 fractal_lacunarity = 2.95
 
-[sub_resource type="Resource" id="Resource_d1s74"]
+[sub_resource type="Resource" id="Resource_bthqc"]
 script = ExtResource("3_uk0dw")
 type = 0
 layer = 0
@@ -86,25 +90,25 @@ source_id = 1
 atlas_coord = Vector2i(2, 0)
 alternative_tile = 0
 
-[sub_resource type="Resource" id="Resource_x7aqc"]
+[sub_resource type="Resource" id="Resource_2w3lo"]
 resource_name = "Gold Ore"
 script = ExtResource("5_m0ru2")
-noise = SubResource("FastNoiseLite_n7hry")
+noise = SubResource("FastNoiseLite_kyspj")
 random_noise_seed = true
-tile = SubResource("Resource_d1s74")
+tile = SubResource("Resource_bthqc")
 threshold = 0.65
 max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
-modifier_seed = 425742524
+modifier_seed = 1850350583
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_77hcd"]
-seed = -82293698
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
+seed = -464654987
 frequency = 0.0511
 fractal_lacunarity = 0.565
 domain_warp_type = 2
 domain_warp_amplitude = 30.52
 
-[sub_resource type="Resource" id="Resource_efh25"]
+[sub_resource type="Resource" id="Resource_qw5ur"]
 script = ExtResource("3_uk0dw")
 type = 0
 layer = 0
@@ -112,20 +116,20 @@ source_id = 1
 atlas_coord = Vector2i(1, 0)
 alternative_tile = 0
 
-[sub_resource type="Resource" id="Resource_blv43"]
+[sub_resource type="Resource" id="Resource_08u4d"]
 resource_name = "Diamond Ore"
 script = ExtResource("5_m0ru2")
-noise = SubResource("FastNoiseLite_77hcd")
+noise = SubResource("FastNoiseLite_vkmxs")
 random_noise_seed = true
-tile = SubResource("Resource_efh25")
+tile = SubResource("Resource_qw5ur")
 threshold = 0.5
 max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
-modifier_seed = -75202745
+modifier_seed = 3102050830
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
-seed = -1819592592
+seed = 1255189816
 
 [sub_resource type="Resource" id="Resource_hitrj"]
 script = ExtResource("3_uk0dw")
@@ -145,7 +149,7 @@ world_length = 128
 height_offset = 160
 height_intensity = 25
 min_height = -32
-modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([SubResource("Resource_ud61g"), SubResource("Resource_c7ke6"), SubResource("Resource_gma4i"), SubResource("Resource_x7aqc"), SubResource("Resource_blv43")])
+modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([SubResource("Resource_pu43q"), SubResource("Resource_855mm"), SubResource("Resource_q887n"), SubResource("Resource_2w3lo"), SubResource("Resource_08u4d")])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_68jc8"]
 texture = ExtResource("3_wjapt")

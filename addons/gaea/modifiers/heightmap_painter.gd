@@ -5,6 +5,10 @@ extends ChunkAwareModifier
 ## Replaces tiles in the map with [param tile] based on a noise heightmap.
 
 
+## Overrides [param noise] in favor of using the generator's noise (if it has one).[br]
+## Useful for use with the [HeightmapGenerator2D], as it will make sure it follows
+## the same terrain shape (especially if [param height_intensity] is the same as the generator's).
+@export var use_generator_noise: bool = true
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 @export var random_noise_seed := true
 @export var tile: TileInfo
