@@ -1,4 +1,5 @@
 @tool
+@icon("noise_generator.svg")
 class_name NoiseGenerator
 extends ChunkAwareGenerator
 ## Takes a Dictionary of thresholds and tiles to generate organic terrain with different tiles for different heights.

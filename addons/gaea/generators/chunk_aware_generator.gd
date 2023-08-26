@@ -1,4 +1,5 @@
 @tool
+@icon("chunk_aware_generator.svg")
 class_name ChunkAwareGenerator
 extends GaeaGenerator
 
