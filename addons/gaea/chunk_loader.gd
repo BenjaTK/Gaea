@@ -64,10 +64,11 @@ func _update_loading(actor_position: Vector2i) -> void:
 			var loaded: Vector2i = loaded_chunks[i]
 			if not (loaded in required_chunks):
 				generator.unload_chunk(loaded)
-		
-		for required in required_chunks:
-			if not generator.has_chunk(required):
-				generator.generate_chunk(required)
+	
+	# load new chunks
+	for required in required_chunks:
+		if not generator.has_chunk(required):
+			generator.generate_chunk(required)
 
 
 func _get_actors_position() -> Vector2i:
