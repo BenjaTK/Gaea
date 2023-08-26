@@ -27,4 +27,6 @@ extends GeneratorSettings
 		tiles = sorted
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 @export var random_noise_seed := true
+## Infinite worlds only work with a [ChunkLoader].
+@export var infinite: bool = false
 @export var world_size: Vector2i = Vector2i(256, 256)

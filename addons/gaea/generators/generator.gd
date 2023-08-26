@@ -20,7 +20,7 @@ const NEIGHBORS := [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN,
 ## If [code]true[/code] regenerates on [code]_ready()[/code].
 ## If [code]false[/code] and a world was generated in the editor,
 ## it will be kept.
-@export var regenerate_on_ready: bool = true
+@export var generate_on_ready: bool = true
 ## If [code]false[/code], the tilemap will not be cleared when generating.
 @export var clear_tilemap_on_generation: bool = true
 
@@ -34,7 +34,7 @@ func _ready() -> void:
 
 	tile_size = tile_map.tile_set.tile_size
 
-	if regenerate_on_ready:
+	if generate_on_ready:
 		generate()
 
 

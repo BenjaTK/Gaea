@@ -24,6 +24,7 @@ var _last_position: Vector2i
 
 
 func _ready() -> void:
+	generator.erase()
 	if load_on_ready:
 		_update_loading(_get_actors_position())
 

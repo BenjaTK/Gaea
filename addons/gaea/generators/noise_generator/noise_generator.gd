@@ -64,7 +64,13 @@ func _set_grid_chunk(chunk_position: Vector2i) -> void:
 
 func _set_grid_area(rect: Rect2i) -> void:
 	for x in range(rect.position.x, rect.end.x):
+		if x < 0 or x > settings.world_size.x:
+			continue
+
 		for y in range(rect.position.y, rect.end.y):
+			if y < 0 or y > settings.world_size.x:
+				continue
+
 			var noise = settings.noise.get_noise_2d(x, y)
 			for threshold in settings.tiles:
 				if noise > threshold:

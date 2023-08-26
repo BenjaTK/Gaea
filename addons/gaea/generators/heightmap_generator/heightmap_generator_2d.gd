@@ -77,6 +77,10 @@ func _set_chunk_grid(chunk_position: Vector2i) -> void:
 
 func _set_grid_area(area: Rect2i) -> void:
 	for x in range(area.position.x, area.end.x):
+		if not settings.infinite:
+			if x < 0 or x > settings.world_length:
+				continue
+
 		var height = floor(settings.noise.get_noise_1d(x) * settings.height_intensity + settings.height_offset)
 		for y in range(area.position.y, area.end.y):
 			if y > -height and y <= -settings.min_height:

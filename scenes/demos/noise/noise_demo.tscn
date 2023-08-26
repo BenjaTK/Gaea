@@ -44,6 +44,7 @@ tiles = {
 }
 noise = SubResource("FastNoiseLite_nescg")
 random_noise_seed = true
+infinite = null
 world_size = Vector2i(256, 256)
 modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([])
 

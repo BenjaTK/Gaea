@@ -6,6 +6,8 @@ extends GeneratorSettings
 @export var tile: TileInfo
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 @export var random_noise_seed := true
+## Infinite worlds only work with a [ChunkLoader].
+@export var infinite := false
 @export var world_length := 128
 ## The medium height at which the heightmap will start displacing from y=0.
 ## The heightmap displaces this height by a random number
