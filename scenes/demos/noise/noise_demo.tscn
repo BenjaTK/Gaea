@@ -7,7 +7,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_nescg"]
 noise_type = 0
-seed = -1196234293
+seed = -1341867442
 domain_warp_amplitude = 8.0
 
 [sub_resource type="Resource" id="Resource_eh1og"]
@@ -44,7 +44,7 @@ tiles = {
 }
 noise = SubResource("FastNoiseLite_nescg")
 random_noise_seed = true
-infinite = null
+infinite = false
 world_size = Vector2i(256, 256)
 modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([])
 
@@ -59,7 +59,7 @@ texture = ExtResource("4_56vnf")
 [sub_resource type="TileSet" id="TileSet_vnorq"]
 sources/0 = SubResource("TileSetAtlasSource_hgvtn")
 
-[node name="NoiseDemo" type="Node2D"]
+[node name="NoiseDemo2" type="Node2D"]
 
 [node name="NoiseGenerator" type="Node2D" parent="." node_paths=PackedStringArray("tile_map")]
 script = ExtResource("1_3nrdm")

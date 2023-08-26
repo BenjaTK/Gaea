@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d_settings.gd" id="5_haojk"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_pl5m1"]
-seed = 202027513
+seed = -848913474
 
 [sub_resource type="Resource" id="Resource_jm03i"]
 script = ExtResource("2_6f082")
@@ -28,7 +28,7 @@ height_intensity = 5
 modifier_seed = 968297547
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_macji"]
-seed = -1577540346
+seed = -1697030305
 
 [sub_resource type="Resource" id="Resource_fvob8"]
 script = ExtResource("2_6f082")
@@ -50,7 +50,7 @@ modifier_seed = 1640849317
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_uxcj3"]
 noise_type = 3
-seed = 1044083692
+seed = 1993358187
 frequency = 0.012
 fractal_type = 2
 fractal_octaves = 3
@@ -67,7 +67,7 @@ min = Vector2(inf_neg, inf_neg)
 modifier_seed = 3476587540
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7hry"]
-seed = 1724806335
+seed = -226779061
 frequency = 0.0617
 fractal_octaves = 2
 fractal_lacunarity = 2.95
@@ -92,7 +92,7 @@ min = Vector2(inf_neg, -120)
 modifier_seed = 1850350583
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_77hcd"]
-seed = 1838051260
+seed = 525389561
 frequency = 0.0511
 fractal_lacunarity = 0.565
 domain_warp_type = 2
@@ -119,7 +119,7 @@ modifier_seed = 3102050830
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vcq1r"]
 noise_type = 3
-seed = -1583826564
+seed = 701791346
 
 [sub_resource type="Resource" id="Resource_ja6xv"]
 script = ExtResource("2_6f082")
