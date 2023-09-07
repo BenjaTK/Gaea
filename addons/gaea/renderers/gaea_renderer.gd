@@ -34,7 +34,6 @@ func _disconnect_signals() -> void:
 
 
 func _draw_chunk(chunk_position: Vector2i) -> void:
-	print(chunk_position)
 	_draw_area(Rect2i(
 			chunk_position * generator.chunk_size,
 			Vector2i(generator.chunk_size, generator.chunk_size))
