@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/gaea/generators/cellular_generator/cellular_generator_settings.gd" id="2_sm72r"]
 [ext_resource type="Script" path="res://addons/gaea/generators/tile_info.gd" id="3_jrjai"]
 [ext_resource type="Texture2D" uid="uid://dnpju76kpc8ny" path="res://scenes/demos/noise/island-tileset - Kenney.png" id="4_5ttjg"]
-[ext_resource type="Script" path="res://scenes/demos/heightmap/tilemap_gaea_renderer.gd" id="5_rdlao"]
+[ext_resource type="Script" path="res://addons/gaea/renderers/tilemap_gaea_renderer.gd" id="5_16wl6"]
 
 [sub_resource type="Resource" id="Resource_6khhn"]
 script = ExtResource("3_jrjai")
@@ -61,6 +61,6 @@ layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array()
 
 [node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
-script = ExtResource("5_rdlao")
+script = ExtResource("5_16wl6")
 tile_map = NodePath("../TileMap")
 generator = NodePath("../CellularGenerator")

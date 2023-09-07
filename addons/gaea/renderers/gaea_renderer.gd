@@ -1,4 +1,5 @@
 @tool
+@icon("gaea_renderer.svg")
 class_name GaeaRenderer
 extends Node
 ## Base class for Gaea's generator renderers.

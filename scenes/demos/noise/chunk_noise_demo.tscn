@@ -7,11 +7,11 @@
 [ext_resource type="Script" path="res://scenes/demos/heightmap/test_actor.gd" id="5_k0qhv"]
 [ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="6_b7mcw"]
 [ext_resource type="Script" path="res://addons/gaea/chunk_loader.gd" id="7_t1mfs"]
-[ext_resource type="Script" path="res://scenes/demos/heightmap/tilemap_gaea_renderer.gd" id="8_o405v"]
+[ext_resource type="Script" path="res://addons/gaea/renderers/tilemap_gaea_renderer.gd" id="8_hs8v0"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1a0nh"]
 noise_type = 0
-seed = -575719548
+seed = -567548356
 domain_warp_amplitude = 8.0
 
 [sub_resource type="Resource" id="Resource_eh1og"]
@@ -93,6 +93,6 @@ renderer = NodePath("../TilemapGaeaRenderer")
 actor = NodePath("../TestActor")
 
 [node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
-script = ExtResource("8_o405v")
+script = ExtResource("8_hs8v0")
 tile_map = NodePath("../TileMap")
 generator = NodePath("../NoiseGenerator")

@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d.gd" id="1_7xrgd"]
 [ext_resource type="Resource" uid="uid://db18nmw5jkbtc" path="res://scenes/demos/heightmap/terraria-like_generation_settings.tres" id="2_hhq5r"]
-[ext_resource type="Script" path="res://scenes/demos/heightmap/tilemap_gaea_renderer.gd" id="5_kriah"]
 [ext_resource type="Texture2D" uid="uid://caoyt0ek7fmdq" path="res://scenes/demos/heightmap/pixel-platformer-tileset - Kenney.png" id="5_m3hdp"]
+[ext_resource type="Script" path="res://addons/gaea/renderers/tilemap_gaea_renderer.gd" id="5_u1niu"]
 [ext_resource type="Texture2D" uid="uid://6gwie8e2kpg2" path="res://scenes/demos/heightmap/ores.png" id="6_hdws1"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_68jc8"]
@@ -236,6 +236,6 @@ color = Color(0.172549, 0.188235, 0.243137, 1)
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="GaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
-script = ExtResource("5_kriah")
+script = ExtResource("5_u1niu")
 tile_map = NodePath("../TileMap")
 generator = NodePath("../HeightmapGenerator2D")

@@ -10,12 +10,12 @@
 [ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d_settings.gd" id="6_q4c7b"]
 [ext_resource type="Script" path="res://scenes/demos/heightmap/test_actor.gd" id="10_76aeg"]
 [ext_resource type="Script" path="res://addons/gaea/chunk_loader.gd" id="10_vlq7b"]
+[ext_resource type="Script" path="res://addons/gaea/renderers/tilemap_gaea_renderer.gd" id="10_xq0oe"]
 [ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="11_go0dd"]
-[ext_resource type="Script" path="res://scenes/demos/heightmap/tilemap_gaea_renderer.gd" id="12_4tim6"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
-seed = 1910496078
+seed = 2146811418
 
 [sub_resource type="Resource" id="Resource_6kmi4"]
 script = ExtResource("3_uk0dw")
@@ -381,7 +381,7 @@ loading_radius = Vector2i(4, 4)
 update_rate = 2
 
 [node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
-script = ExtResource("12_4tim6")
+script = ExtResource("10_xq0oe")
 tile_map = NodePath("../TileMap")
 generator = NodePath("../HeightmapGenerator2D")
 
