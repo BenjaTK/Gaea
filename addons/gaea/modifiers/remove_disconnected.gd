@@ -3,6 +3,7 @@
 class_name RemoveDisconnected
 extends Modifier
 ## Uses floodfill to remove areas that aren't connected to [param starting_tile]
+## @tutorial(Remove Disconnected Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-noise-painter
 
 
 @export var starting_tile := Vector2.ZERO

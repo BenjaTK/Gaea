@@ -3,6 +3,7 @@
 class_name GenerateBorder
 extends Modifier
 ## Generates borders around the already placed tiles.
+##@tutorial(Generate Border Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-generate-borders
 
 
 enum Mode {

@@ -3,6 +3,7 @@
 class_name HeightmapPainter
 extends ChunkAwareModifier
 ## Replaces tiles in the map with [param tile] based on a noise heightmap.
+## @tutorial(Heightmap Painter Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-heightmap-painter
 
 
 ## Overrides [param noise] in favor of using the generator's noise (if it has one).[br]

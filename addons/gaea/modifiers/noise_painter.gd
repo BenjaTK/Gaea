@@ -5,6 +5,7 @@ extends ChunkAwareModifier
 ## Replaces the tiles in the map with [param tile] based on a noise texture.
 ##
 ## Useful for placing ores or decorations.
+## @tutorial(Noise Painter Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-noise-painter
 
 
 @export var noise: FastNoiseLite = FastNoiseLite.new()

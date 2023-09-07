@@ -3,8 +3,8 @@
 class_name HeightmapGenerator2D
 extends ChunkAwareGenerator
 ## Generates terrain using a heightmap from a noise texture.
-##
-## [b]Note:[/b] Needs optimization.
+## @tutorial(Generators): https://benjatk.github.io/Gaea/#/generators/
+## @tutorial(HeightmapGenerator): https://benjatk.github.io/Gaea/#/generators/heightmap
 
 @export var settings: HeightmapGenerator2DSettings
 
