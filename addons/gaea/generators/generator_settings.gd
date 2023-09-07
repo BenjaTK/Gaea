@@ -1,6 +1,7 @@
 @icon("generator_settings.svg")
 class_name GeneratorSettings
 extends Resource
+## @tutorial(Gaea's Structure): https://benjatk.github.io/Gaea/#/structure
 
 
 @export var modifiers: Array[Modifier] # TODO: Replace with custom control for easier editing. Similar to Blender.

@@ -3,6 +3,7 @@
 class_name Smooth
 extends Modifier
 ## Applies a smoothing algorithm to all tiles using Cellular Automata.
+## @tutorial(Smooth Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-smooth
 
 
 ## The amount of iterations the smoothing algorithm will do. Higher values lead to
