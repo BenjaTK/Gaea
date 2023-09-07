@@ -20,8 +20,6 @@ func generate() -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
-	super.generate()
-
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
 		return
@@ -29,17 +27,16 @@ func generate() -> void:
 	if settings.random_noise_seed:
 		settings.noise.seed = randi()
 
-	erase(clear_tilemap_on_generation)
+	erase()
 	_set_grid()
 	_apply_modifiers(settings.modifiers)
-	_draw_tiles()
+
+	grid_updated.emit()
 
 
 func generate_chunk(chunk_position: Vector2i) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
-
-	super.generate()
 
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
@@ -48,9 +45,10 @@ func generate_chunk(chunk_position: Vector2i) -> void:
 	erase_chunk(chunk_position)
 	_set_chunk_grid(chunk_position)
 	_apply_modifiers_chunk(settings.modifiers, chunk_position)
-	_draw_tiles_chunk(chunk_position)
 
 	generated_chunks.append(chunk_position)
+
+	chunk_updated.emit(chunk_position)
 
 
 func _set_grid() -> void:

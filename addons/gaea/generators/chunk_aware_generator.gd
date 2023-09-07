@@ -3,11 +3,16 @@
 class_name ChunkAwareGenerator
 extends GaeaGenerator
 
+
+signal chunk_updated(chunk_position: Vector2i)
+
+
 ## The size of the Chunks. [br]
 ## [b]Warning: Cannot be set to 0[/b]
 @export var chunk_size: int = 16
 
 var generated_chunks: Array[Vector2i] = []
+
 
 func _ready() -> void:
 	if chunk_size == 0:
@@ -17,19 +22,15 @@ func _ready() -> void:
 
 
 func generate_chunk(chunk_position: Vector2i) -> void:
-	if not is_instance_valid(tile_map):
-		push_error("%s doesn't have a TileMap" % name)
-		return
+	pass
 
 
-func erase_chunk(chunk_position: Vector2i, clear_tilemap := true) -> void:
+func erase_chunk(chunk_position: Vector2i) -> void:
 	for x in get_chunk_range(chunk_position.x):
 		for y in get_chunk_range(chunk_position.y):
 			grid.erase(Vector2(x, y))
 
-			if not clear_tilemap: continue
-			for l in range(tile_map.get_layers_count()):
-				tile_map.erase_cell(l, Vector2(x, y))
+	chunk_updated.emit(chunk_position)
 
 
 func _apply_modifiers_chunk(modifiers: Array[Modifier], chunk_position: Vector2i) -> void:
@@ -39,10 +40,6 @@ func _apply_modifiers_chunk(modifiers: Array[Modifier], chunk_position: Vector2i
 			continue
 
 		grid = modifier.apply_chunk(grid, self, chunk_position)
-
-
-func _draw_tiles_chunk(chunk_position: Vector2i) -> void:
-	_draw_tiles_area(Rect2i(chunk_position * chunk_size, Vector2i(chunk_size, chunk_size)))
 
 
 func unload_chunk(chunk_position: Vector2i) -> void:

@@ -6,6 +6,8 @@ extends Node2D
 
 ## The generator that loads the chunks.
 @export var generator: ChunkAwareGenerator
+## Optional [GaeaRenderer].
+@export var renderer: GaeaRenderer
 ## Chunks will be loaded arround this Node.
 ## If set to null chunks will be loaded around (0, 0)
 @export var actor: Node2D
@@ -26,7 +28,9 @@ var _last_position: Vector2i
 
 func _ready() -> void:
 	generator.erase()
-	if load_on_ready:
+	if load_on_ready and not Engine.is_editor_hint():
+		if is_instance_valid(renderer) and not renderer.is_node_ready():
+			await renderer.ready
 		_update_loading(_get_actors_position())
 
 
@@ -75,10 +79,10 @@ func _update_loading(actor_position: Vector2i) -> void:
 
 func _get_actors_position() -> Vector2i:
 	# getting actors positions
-	var actor_position := Vector2.ZERO
-	if actor != null: actor_position = actor.global_position
+	var actor_position := Vector2i.ZERO
+	if actor != null: actor_position = actor.global_position.floor()
 
-	var tile_position: Vector2i = generator.tile_map.local_to_map(actor_position)
+	var tile_position: Vector2i = actor_position / generator.tile_size
 
 	var chunk_position := Vector2i(
 		floori(tile_position.x / generator.chunk_size),

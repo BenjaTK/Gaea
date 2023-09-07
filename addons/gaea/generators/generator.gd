@@ -5,7 +5,12 @@ extends Node2D
 ## Base class for the Gaea addon's procedural generator.
 
 
+signal grid_updated
 signal generation_finished
+
+
+@export var tile_size: Vector2i = Vector2i(16, 16)
+
 
 const NEIGHBORS := [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN,
 					Vector2(1, 1), Vector2(1, -1), Vector2(-1, -1), Vector2(-1, 1)]
@@ -17,15 +22,11 @@ const NEIGHBORS := [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN,
 		preview = value
 		if value == false:
 			erase()
-@export var tile_map: TileMap
 ## If [code]true[/code] regenerates on [code]_ready()[/code].
 ## If [code]false[/code] and a world was generated in the editor,
 ## it will be kept.
 @export var generate_on_ready: bool = true
-## If [code]false[/code], the tilemap will not be cleared when generating.
-@export var clear_tilemap_on_generation: bool = true
 
-var tile_size : Vector2
 var grid : Dictionary
 
 
@@ -33,22 +34,17 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
-	tile_size = tile_map.tile_set.tile_size
-
 	if generate_on_ready:
 		generate()
 
 
 func generate() -> void:
-	if not is_instance_valid(tile_map):
-		push_error("%s doesn't have a TileMap" % name)
-		return
+	pass
 
 
-func erase(clear_tilemap := true) -> void:
-	if clear_tilemap:
-		tile_map.clear()
+func erase() -> void:
 	grid.clear()
+	grid_updated.emit()
 
 
 ### Utils ###
@@ -56,10 +52,6 @@ func erase(clear_tilemap := true) -> void:
 
 func get_tile(pos: Vector2) -> TileInfo:
 	return grid[pos]
-
-
-func map_to_world(tile: Vector2) -> Vector2:
-	return tile * tile_size + tile_size / 2
 
 
 static func are_all_neighbors_of_type(grid: Dictionary, pos: Vector2, type: TileInfo) -> bool:
@@ -99,49 +91,14 @@ static func get_tiles_of_type(type: TileInfo, grid: Dictionary) -> Array[Vector2
 
 static func get_area_from_grid(grid: Dictionary) -> Rect2i:
 	var keys = grid.keys()
-	var rect: Rect2 = Rect2(keys.front(), Vector2.ZERO)
+	if keys.is_empty():
+		return Rect2i()
+	var rect: Rect2i = Rect2i(keys.front(), Vector2.ZERO)
 	for k in keys: rect = rect.expand(k)
 	return rect
 
 
-### Steps ###
-
-
-func _draw_tiles() -> void:
-	_draw_tiles_area(get_area_from_grid(grid))
-
-
-func _draw_tiles_area(area: Rect2i) -> void:
-	var terrains: Dictionary
-
-	for x in range(area.position.x, area.end.x + 1):
-		for y in range(area.position.y, area.end.y + 1):
-			var tile_position := Vector2(x, y)
-			if not grid.has(tile_position):
-				continue
-
-			var tile = tile_position
-			var tile_info = grid[tile_position]
-			if not (tile_info is TileInfo):
-				continue
-
-			match tile_info.type:
-				TileInfo.Type.SINGLE_CELL:
-					tile_map.set_cell(
-						tile_info.layer, tile, tile_info.source_id,
-						tile_info.atlas_coord, tile_info.alternative_tile
-					)
-				TileInfo.Type.TERRAIN:
-					if not terrains.has(tile_info):
-						terrains[tile_info] = [tile]
-					else:
-						terrains[tile_info].append(tile)
-
-	for tile_info in terrains:
-		tile_map.set_cells_terrain_connect(
-			tile_info.layer, terrains[tile_info],
-			tile_info.terrain_set, tile_info.terrain
-		)
+### Modifiers ###
 
 
 func _apply_modifiers(modifiers: Array[Modifier]) -> void:
@@ -150,14 +107,3 @@ func _apply_modifiers(modifiers: Array[Modifier]) -> void:
 			continue
 
 		grid = modifier.apply(grid, self)
-
-
-### Editor ###
-
-func _get_configuration_warnings() -> PackedStringArray:
-	var warnings : PackedStringArray
-
-	if not is_instance_valid(tile_map):
-		warnings.append("TileMap is required to generate.")
-
-	return warnings

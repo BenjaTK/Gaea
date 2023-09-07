@@ -1,29 +1,3 @@
-[gd_scene load_steps=3 format=3 uid="uid://co2ewyknt1m05"]
-
-[ext_resource type="Script" path="res://addons/gaea/generators/walker_generator/walker_generator.gd" id="1_vjv4q"]
-
-[sub_resource type="TileSet" id="TileSet_qpuuo"]
-physics_layer_0/collision_layer = 1
-terrain_set_0/mode = 0
-terrain_set_0/terrain_0/name = "Terrain 0"
-terrain_set_0/terrain_0/color = Color(0.85098, 0.0392157, 0.054902, 1)
+[gd_scene format=3 uid="uid://co2ewyknt1m05"]
 
 [node name="TestScene" type="Node2D"]
-
-[node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource("TileSet_qpuuo")
-format = 2
-layer_1/name = ""
-layer_1/enabled = true
-layer_1/modulate = Color(1, 1, 1, 1)
-layer_1/y_sort_enabled = false
-layer_1/y_sort_origin = 0
-layer_1/z_index = -1
-layer_1/tile_data = PackedInt32Array()
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(7823, -5791)
-
-[node name="WalkerGenerator" type="Node2D" parent="."]
-script = ExtResource("1_vjv4q")
-preview = true

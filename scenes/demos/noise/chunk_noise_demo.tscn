@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dxl15xs77jde3"]
+[gd_scene load_steps=16 format=3 uid="uid://dxl15xs77jde3"]
 
 [ext_resource type="Script" path="res://addons/gaea/generators/noise_generator/noise_generator.gd" id="1_rbw1k"]
 [ext_resource type="Script" path="res://addons/gaea/generators/noise_generator/noise_generator_settings.gd" id="2_a5ohv"]
@@ -7,10 +7,11 @@
 [ext_resource type="Script" path="res://scenes/demos/heightmap/test_actor.gd" id="5_k0qhv"]
 [ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="6_b7mcw"]
 [ext_resource type="Script" path="res://addons/gaea/chunk_loader.gd" id="7_t1mfs"]
+[ext_resource type="Script" path="res://scenes/demos/heightmap/tilemap_gaea_renderer.gd" id="8_o405v"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1a0nh"]
 noise_type = 0
-seed = 923701088
+seed = -575719548
 domain_warp_amplitude = 8.0
 
 [sub_resource type="Resource" id="Resource_eh1og"]
@@ -64,10 +65,10 @@ sources/0 = SubResource("TileSetAtlasSource_hgvtn")
 
 [node name="NoiseDemo" type="Node2D"]
 
-[node name="NoiseGenerator" type="Node2D" parent="." node_paths=PackedStringArray("tile_map")]
+[node name="NoiseGenerator" type="Node2D" parent="."]
 script = ExtResource("1_rbw1k")
 settings = SubResource("Resource_hj1ni")
-tile_map = NodePath("../TileMap")
+preview = true
 generate_on_ready = false
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -85,7 +86,13 @@ texture = ExtResource("6_b7mcw")
 [node name="Camera2D" type="Camera2D" parent="TestActor"]
 zoom = Vector2(0.1, 0.1)
 
-[node name="ChunkLoader" type="Node2D" parent="." node_paths=PackedStringArray("generator", "actor")]
+[node name="ChunkLoader" type="Node2D" parent="." node_paths=PackedStringArray("generator", "renderer", "actor")]
 script = ExtResource("7_t1mfs")
 generator = NodePath("../NoiseGenerator")
+renderer = NodePath("../TilemapGaeaRenderer")
 actor = NodePath("../TestActor")
+
+[node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
+script = ExtResource("8_o405v")
+tile_map = NodePath("../TileMap")
+generator = NodePath("../NoiseGenerator")
