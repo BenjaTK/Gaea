@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://ccjjdx2d13wkk"]
+[gd_scene load_steps=13 format=3 uid="uid://ccjjdx2d13wkk"]
 
 [ext_resource type="Script" path="res://addons/gaea/generators/walker_generator/walker_generator.gd" id="2_07wvo"]
 [ext_resource type="Texture2D" uid="uid://c2jh1be7rtwkw" path="res://scenes/demos/walker/tiny-dungeon-floor - Kenney.png" id="3_34j6g"]
