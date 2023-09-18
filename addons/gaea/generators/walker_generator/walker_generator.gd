@@ -23,8 +23,6 @@ func generate() -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
-	super.generate()
-
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
 		return
@@ -32,19 +30,18 @@ func generate() -> void:
 	_setup()
 	_generate_floor()
 	_apply_modifiers(settings.modifiers)
-	_draw_tiles()
 
-	generation_finished.emit()
+	grid_updated.emit()
 
 
-func erase(clear_tilemap := true) -> void:
-	super.erase(clear_tilemap)
+func erase() -> void:
+	super.erase()
 	_walked_tiles.clear()
 	_walkers.clear()
 
 
 func _setup() -> void:
-	erase(clear_tilemap_on_generation)
+	erase()
 	_add_walker(starting_tile)
 
 
@@ -152,8 +149,6 @@ func _constrain_to_world_size(pos: Vector2) -> Vector2:
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings : PackedStringArray
-
-	warnings.append_array(super._get_configuration_warnings())
 
 	if not settings:
 		warnings.append("Needs WalkerGeneratorSettings to work.")

@@ -15,17 +15,16 @@ func generate() -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
-	super.generate()
-
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
 		return
 
-	erase(clear_tilemap_on_generation)
+	erase()
 	_set_noise()
 	_smooth()
 	_apply_modifiers(settings.modifiers)
-	_draw_tiles()
+
+	grid_updated.emit()
 
 
 func _set_noise() -> void:
@@ -60,8 +59,6 @@ func _smooth() -> void:
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings : PackedStringArray
-
-	warnings.append_array(super._get_configuration_warnings())
 
 	if not settings:
 		warnings.append("Needs CellularGeneratorSettings to work.")

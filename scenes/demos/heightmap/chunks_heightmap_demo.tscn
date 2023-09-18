@@ -1,8 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://cxty0pak7x2o2"]
+[gd_scene load_steps=31 format=3 uid="uid://cxty0pak7x2o2"]
 
 [ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d.gd" id="1_lqewx"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/heightmap_painter.gd" id="2_u0711"]
-[ext_resource type="Script" path="res://addons/gaea/generators/tile_info.gd" id="3_uk0dw"]
+[ext_resource type="Script" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="3_tr3dk"]
 [ext_resource type="Texture2D" uid="uid://caoyt0ek7fmdq" path="res://scenes/demos/heightmap/pixel-platformer-tileset - Kenney.png" id="3_wjapt"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/carver.gd" id="4_i15f0"]
 [ext_resource type="Texture2D" uid="uid://6gwie8e2kpg2" path="res://scenes/demos/heightmap/ores.png" id="4_rk2l5"]
@@ -10,14 +10,15 @@
 [ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d_settings.gd" id="6_q4c7b"]
 [ext_resource type="Script" path="res://scenes/demos/heightmap/test_actor.gd" id="10_76aeg"]
 [ext_resource type="Script" path="res://addons/gaea/chunk_loader.gd" id="10_vlq7b"]
+[ext_resource type="Script" path="res://addons/gaea/renderers/tilemap_gaea_renderer.gd" id="10_xq0oe"]
 [ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="11_go0dd"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_2fgpv"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
-seed = -1470460601
+seed = 1448208793
 
 [sub_resource type="Resource" id="Resource_6kmi4"]
-script = ExtResource("3_uk0dw")
+script = ExtResource("3_tr3dk")
 type = 0
 layer = 0
 source_id = 1
@@ -28,19 +29,15 @@ alternative_tile = 0
 resource_name = "Stone"
 script = ExtResource("2_u0711")
 use_generator_noise = true
-noise = SubResource("FastNoiseLite_2fgpv")
+noise = SubResource("FastNoiseLite_mwtbk")
 random_noise_seed = true
 tile = SubResource("Resource_6kmi4")
 height_offset = 155
 height_intensity = 25
 modifier_seed = 968297547
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rgba1"]
-noise_type = 3
-seed = -1470460601
-
 [sub_resource type="Resource" id="Resource_f1fl3"]
-script = ExtResource("3_uk0dw")
+script = ExtResource("3_tr3dk")
 type = 0
 layer = 0
 source_id = 1
@@ -51,7 +48,7 @@ alternative_tile = 0
 resource_name = "Bedrock"
 script = ExtResource("2_u0711")
 use_generator_noise = true
-noise = SubResource("FastNoiseLite_rgba1")
+noise = SubResource("FastNoiseLite_mwtbk")
 random_noise_seed = true
 tile = SubResource("Resource_f1fl3")
 height_offset = 0
@@ -60,7 +57,7 @@ modifier_seed = 1640849317
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
 noise_type = 3
-seed = -1896712365
+seed = -1969112133
 frequency = 0.012
 fractal_type = 2
 fractal_octaves = 3
@@ -77,13 +74,13 @@ min = Vector2(inf_neg, inf_neg)
 modifier_seed = 3476587540
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
-seed = -213067767
+seed = 699618206
 frequency = 0.0617
 fractal_octaves = 2
 fractal_lacunarity = 2.95
 
 [sub_resource type="Resource" id="Resource_bthqc"]
-script = ExtResource("3_uk0dw")
+script = ExtResource("3_tr3dk")
 type = 0
 layer = 0
 source_id = 1
@@ -102,14 +99,14 @@ min = Vector2(inf_neg, -120)
 modifier_seed = 1850350583
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
-seed = -464654987
+seed = 1951318453
 frequency = 0.0511
 fractal_lacunarity = 0.565
 domain_warp_type = 2
 domain_warp_amplitude = 30.52
 
 [sub_resource type="Resource" id="Resource_qw5ur"]
-script = ExtResource("3_uk0dw")
+script = ExtResource("3_tr3dk")
 type = 0
 layer = 0
 source_id = 1
@@ -127,12 +124,8 @@ max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
 modifier_seed = 3102050830
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
-noise_type = 3
-seed = 1255189816
-
 [sub_resource type="Resource" id="Resource_hitrj"]
-script = ExtResource("3_uk0dw")
+script = ExtResource("3_tr3dk")
 type = 1
 layer = 0
 terrain_set = 0
@@ -354,10 +347,10 @@ sources/0 = SubResource("TileSetAtlasSource_68jc8")
 
 [node name="HeightmapDemo" type="Node2D"]
 
-[node name="HeightmapGenerator2D" type="Node2D" parent="." node_paths=PackedStringArray("tile_map")]
+[node name="HeightmapGenerator2D" type="Node2D" parent="."]
 script = ExtResource("1_lqewx")
 settings = SubResource("Resource_6hs11")
-tile_map = NodePath("../TileMap")
+preview = true
 generate_on_ready = false
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -379,12 +372,18 @@ offset_right = 2304.0
 offset_bottom = 18.0
 color = Color(0.172549, 0.188235, 0.243137, 1)
 
-[node name="ChunkLoader" type="Node2D" parent="." node_paths=PackedStringArray("generator", "actor")]
+[node name="ChunkLoader" type="Node2D" parent="." node_paths=PackedStringArray("generator", "renderer", "actor")]
 script = ExtResource("10_vlq7b")
 generator = NodePath("../HeightmapGenerator2D")
+renderer = NodePath("../TilemapGaeaRenderer")
 actor = NodePath("../TestActor")
 loading_radius = Vector2i(4, 4)
 update_rate = 2
+
+[node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
+script = ExtResource("10_xq0oe")
+tile_map = NodePath("../TileMap")
+generator = NodePath("../HeightmapGenerator2D")
 
 [node name="TestActor" type="Node2D" parent="."]
 position = Vector2(4, 4)

@@ -1,9 +1,7 @@
 @tool
-@icon("tile_info.svg")
-class_name TileInfo
-extends Resource
-## Resource used to tell the generators which tile from the [TileMap] to place.
-## @tutorial(Gaea's Structure): https://benjatk.github.io/Gaea/#/structure
+class_name TilemapTileInfo
+extends TileInfo
+## Resource used to tell the generators which tile from a [TileMap] to place.
 
 
 enum Type {

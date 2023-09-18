@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://bi74vr8ebieuj"]
+[gd_scene load_steps=9 format=3 uid="uid://bi74vr8ebieuj"]
 
 [ext_resource type="Script" path="res://addons/gaea/generators/walker_generator/walker_generator.gd" id="1_o8rs6"]
+[ext_resource type="Script" path="res://addons/gaea/renderers/tilemap_gaea_renderer.gd" id="4_pid7u"]
 [ext_resource type="Texture2D" uid="uid://dhxcyro4op2xp" path="res://scenes/demos/walker/tiny-dungeon - Kenney.png" id="6_sr118"]
 [ext_resource type="Texture2D" uid="uid://c2jh1be7rtwkw" path="res://scenes/demos/walker/tiny-dungeon-floor - Kenney.png" id="7_8mk6g"]
 
@@ -1032,11 +1033,13 @@ sources/3 = SubResource("TileSetAtlasSource_x2mok")
 
 [node name="GettingStartedTutorial" type="Node2D"]
 
-[node name="WalkerGenerator" type="Node2D" parent="." node_paths=PackedStringArray("tile_map")]
+[node name="WalkerGenerator" type="Node2D" parent="."]
 script = ExtResource("1_o8rs6")
 preview = true
-tile_map = NodePath("../TileMap")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_vnxuo")
 format = 2
+
+[node name="TilemapGaeaRenderer" type="Node" parent="."]
+script = ExtResource("4_pid7u")

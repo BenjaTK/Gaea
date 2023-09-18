@@ -26,6 +26,12 @@ Our collection of generators, including Cellular, Heightmap, and Walker, allow f
 ## Modifiers
 Further fine-tune your procedurally generated worlds with our set of modifiers. Add layers of complexity and fine-tune the details to create environments that truly come alive.
 
+## Renderers
+`GaeaRenderers` are nodes that take the generator's data to **render** the generation. They can be used for drawing in a TileMap, a GridMap, a mesh, a texture, or whatever you can code.
+
+## Chunk loading
+Gaea comes with a `ChunkLoader` node that can generate an area around an `actor`, allowing both for infinite worlds and to optimize big worlds. 
+
 # 🔧 Installation Steps
 
 1. **Download the project files.**

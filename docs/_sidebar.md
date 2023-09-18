@@ -1,5 +1,5 @@
-* [📦 What's Gaea?](/)
-* [✨ Gaea's structure](/structure.md)
+* [📦 Getting started](/)
+* [✨ Gaea's resources](/resources.md)
 * [💡 Tutorials](/tutorials/)
   * [⭐ Getting started](/tutorials/getting_started.md)
 * [🧠 Generators](/generators/)
