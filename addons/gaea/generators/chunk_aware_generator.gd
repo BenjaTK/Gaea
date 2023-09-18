@@ -1,7 +1,7 @@
 @tool
 @icon("chunk_aware_generator.svg")
-class_name ChunkAwareGenerator
-extends GaeaGenerator
+class_name ChunkAwareGenerator2D
+extends GaeaGenerator2D
 
 
 signal chunk_updated(chunk_position: Vector2i)
@@ -35,7 +35,7 @@ func erase_chunk(chunk_position: Vector2i) -> void:
 
 func _apply_modifiers_chunk(modifiers: Array[Modifier], chunk_position: Vector2i) -> void:
 	for modifier in modifiers:
-		if not (modifier is ChunkAwareModifier):
+		if not (modifier is ChunkAwareModifier2D):
 			push_error("%s is not a Chunk compatible modifier!" % modifier.resource_name)
 			continue
 

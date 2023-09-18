@@ -1,7 +1,7 @@
 @tool
 @icon("carver.svg")
 class_name Carver
-extends ChunkAwareModifier
+extends ChunkAwareModifier2D
 ## Uses noise to remove certain tiles from the map.
 ##@tutorial(Carver Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-carver
 

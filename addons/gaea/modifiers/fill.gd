@@ -1,7 +1,7 @@
 @tool
 @icon("fill.svg")
 class_name Fill
-extends Modifier
+extends Modifier2D
 ## Fills the full rectangle of tiles.
 ##@tutorial(Fill Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-fill
 

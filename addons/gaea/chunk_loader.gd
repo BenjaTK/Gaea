@@ -5,7 +5,7 @@ extends Node2D
 
 
 ## The generator that loads the chunks.
-@export var generator: ChunkAwareGenerator
+@export var generator: ChunkAwareGenerator2D
 ## [b]Optional[/b]. In this case it is used to prevent
 ## generating chunks before the [GaeaRenderer] is ready, which
 ## prevents empty areas.

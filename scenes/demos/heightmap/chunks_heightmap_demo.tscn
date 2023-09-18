@@ -15,7 +15,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
-seed = 1448208793
+seed = -1688728356
 
 [sub_resource type="Resource" id="Resource_6kmi4"]
 script = ExtResource("3_tr3dk")
@@ -24,6 +24,7 @@ layer = 0
 source_id = 1
 atlas_coord = Vector2i(0, 0)
 alternative_tile = 0
+id = ""
 
 [sub_resource type="Resource" id="Resource_pu43q"]
 resource_name = "Stone"
@@ -35,6 +36,8 @@ tile = SubResource("Resource_6kmi4")
 height_offset = 155
 height_intensity = 25
 modifier_seed = 968297547
+filter_type = 0
+filter_ids = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_f1fl3"]
 script = ExtResource("3_tr3dk")
@@ -43,6 +46,7 @@ layer = 0
 source_id = 1
 atlas_coord = Vector2i(0, 1)
 alternative_tile = 0
+id = ""
 
 [sub_resource type="Resource" id="Resource_855mm"]
 resource_name = "Bedrock"
@@ -54,6 +58,8 @@ tile = SubResource("Resource_f1fl3")
 height_offset = 0
 height_intensity = 20
 modifier_seed = 1640849317
+filter_type = 0
+filter_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
 noise_type = 3
@@ -72,6 +78,8 @@ threshold = 0.8
 max = Vector2(inf, -1)
 min = Vector2(inf_neg, inf_neg)
 modifier_seed = 3476587540
+filter_type = 0
+filter_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
 seed = 699618206
@@ -86,6 +94,7 @@ layer = 0
 source_id = 1
 atlas_coord = Vector2i(2, 0)
 alternative_tile = 0
+id = ""
 
 [sub_resource type="Resource" id="Resource_2w3lo"]
 resource_name = "Gold Ore"
@@ -97,6 +106,8 @@ threshold = 0.65
 max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
 modifier_seed = 1850350583
+filter_type = 0
+filter_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
 seed = 1951318453
@@ -112,6 +123,7 @@ layer = 0
 source_id = 1
 atlas_coord = Vector2i(1, 0)
 alternative_tile = 0
+id = ""
 
 [sub_resource type="Resource" id="Resource_08u4d"]
 resource_name = "Diamond Ore"
@@ -123,6 +135,8 @@ threshold = 0.5
 max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
 modifier_seed = 3102050830
+filter_type = 0
+filter_ids = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_hitrj"]
 script = ExtResource("3_tr3dk")
@@ -130,6 +144,7 @@ type = 1
 layer = 0
 terrain_set = 0
 terrain = 0
+id = ""
 
 [sub_resource type="Resource" id="Resource_6hs11"]
 resource_name = "Terraria-like Settings"

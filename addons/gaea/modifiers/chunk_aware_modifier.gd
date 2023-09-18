@@ -1,10 +1,10 @@
 @tool
-class_name ChunkAwareModifier
-extends Modifier
+class_name ChunkAwareModifier2D
+extends Modifier2D
 ##@tutorial(Modifiers): https://benjatk.github.io/Gaea/#/modifiers
 
 
-## [ChunkAwareModifier]s use this value to offset the noise seed to make this modifier unique.
+## [ChunkAwareModifier2D]s use this value to offset the noise seed to make this modifier unique.
 ## Random value by default.
 @export var modifier_seed: int = 134178497321
 
@@ -27,13 +27,13 @@ func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 				noise.seed = randi()
 
 	return _apply_area(
-		GaeaGenerator.get_area_from_grid(grid),
+		generator.get_area_from_grid(grid),
 		grid,
 		generator
 	)
 
 
-func apply_chunk(grid: Dictionary, generator: ChunkAwareGenerator, chunk_position: Vector2i) -> Dictionary:
+func apply_chunk(grid: Dictionary, generator: ChunkAwareGenerator2D, chunk_position: Vector2i) -> Dictionary:
 	if "noise" in self:
 		if (self.get("use_generator_noise") == true and
 				generator.settings.get("noise") != null):

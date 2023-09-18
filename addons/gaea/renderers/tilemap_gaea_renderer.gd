@@ -1,6 +1,6 @@
 @tool
 class_name TilemapGaeaRenderer
-extends GaeaRenderer
+extends GaeaRenderer2D
 ## Uses the [param tile_map] to draw the generator's [param grid].
 ##
 ## Takes [TilemapTileInfo] to determine which tile to place

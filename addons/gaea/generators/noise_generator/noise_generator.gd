@@ -1,7 +1,7 @@
 @tool
 @icon("noise_generator.svg")
 class_name NoiseGenerator
-extends ChunkAwareGenerator
+extends ChunkAwareGenerator2D
 ## Takes a Dictionary of thresholds and tiles to generate organic terrain with different tiles for different heights.
 ## @tutorial(Generators): https://benjatk.github.io/Gaea/#/generators/
 ## @tutorial(NoiseGenerator): https://benjatk.github.io/Gaea/#/generators/noise

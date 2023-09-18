@@ -1,7 +1,7 @@
 @tool
 @icon("generate_borders.svg")
 class_name GenerateBorder
-extends Modifier
+extends Modifier2D
 ## Generates borders around the already placed tiles.
 ##@tutorial(Generate Border Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-generate-borders
 

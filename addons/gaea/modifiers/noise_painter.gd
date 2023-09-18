@@ -1,7 +1,7 @@
 @tool
 @icon("noise_painter.svg")
 class_name NoisePainter
-extends ChunkAwareModifier
+extends ChunkAwareModifier2D
 ## Replaces the tiles in the map with [param tile] based on a noise texture.
 ##
 ## Useful for placing ores or decorations.

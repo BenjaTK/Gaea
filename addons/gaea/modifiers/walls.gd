@@ -1,7 +1,7 @@
 @tool
 @icon("walls.svg")
 class_name Walls
-extends Modifier
+extends Modifier2D
 ## Adds [param wall_tile] below any tile that isn't the Generator's default tile.
 ## Useful for tilesets whose walls are different tiles from the ceiling.
 ## @tutorial(Walls Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-walls

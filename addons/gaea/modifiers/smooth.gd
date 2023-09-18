@@ -1,7 +1,7 @@
 @tool
 @icon("smooth.svg")
 class_name Smooth
-extends Modifier
+extends Modifier2D
 ## Applies a smoothing algorithm to all tiles using Cellular Automata.
 ## @tutorial(Smooth Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-smooth
 
@@ -19,13 +19,13 @@ extends Modifier
 @export_range(1, 7) var maximum_empty_neighbors := 4
 
 
-func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
+func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 	for i in iterations:
 		for tile_pos in grid.keys():
 			if not _passes_filter(grid[tile_pos]):
 				continue
 
-			var empty_neighbors_count := GaeaGenerator.get_neighbor_count_of_type(
+			var empty_neighbors_count: int = generator.get_neighbor_count_of_type(
 				grid, tile_pos, null
 			)
 			if empty_neighbors_count > maximum_empty_neighbors:

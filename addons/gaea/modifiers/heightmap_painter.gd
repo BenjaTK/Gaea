@@ -1,7 +1,7 @@
 @tool
 @icon("heightmap_painter.svg")
 class_name HeightmapPainter
-extends ChunkAwareModifier
+extends ChunkAwareModifier2D
 ## Replaces tiles in the map with [param tile] based on a noise heightmap.
 ## @tutorial(Heightmap Painter Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-heightmap-painter
 

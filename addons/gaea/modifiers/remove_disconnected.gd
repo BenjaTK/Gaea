@@ -1,7 +1,7 @@
 @tool
 @icon("remove_disconnected.svg")
 class_name RemoveDisconnected
-extends Modifier
+extends Modifier2D
 ## Uses floodfill to remove areas that aren't connected to [param starting_tile]
 ## @tutorial(Remove Disconnected Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-noise-painter
 
