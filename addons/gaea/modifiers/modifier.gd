@@ -24,6 +24,9 @@ func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 ## Returns true if the [param tile_info] can be modified according
 ## to the filters.
 func _passes_filter(tile_info: TileInfo) -> bool:
+	if tile_info == null:
+		return false
+
 	match filter_type:
 		FilterType.BLACKLIST:
 			return not filter_ids.has(tile_info.id)
