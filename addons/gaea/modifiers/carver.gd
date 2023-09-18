@@ -26,6 +26,9 @@ func _apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> D
 			if not grid.has(tile_pos) or _is_out_of_bounds(tile_pos):
 				continue
 
+			if not _passes_filter(grid[tile_pos]):
+				continue
+
 			if noise.get_noise_2d(tile_pos.x, tile_pos.y) > threshold:
 				grid.erase(tile_pos)
 

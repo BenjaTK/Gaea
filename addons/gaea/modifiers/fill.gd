@@ -32,7 +32,9 @@ func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
 
 	for x in range(rect.position.x, rect.end.x + 1):
 		for y in range(rect.position.y, rect.end.y + 1):
-			if grid.has(Vector2(x, y)):
+			var tile_pos: Vector2 = Vector2(x, y)
+			if grid.has(tile_pos):
 				continue
-			grid[Vector2(x, y)] = tile
+
+			grid[tile_pos] = tile
 	return grid

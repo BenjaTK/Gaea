@@ -8,7 +8,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vcq1r"]
 noise_type = 3
-seed = -1715983639
+seed = -613678795
 
 [sub_resource type="Resource" id="Resource_6kmi4"]
 script = ExtResource("2_6f082")
@@ -17,6 +17,7 @@ layer = 0
 source_id = 1
 atlas_coord = Vector2i(0, 0)
 alternative_tile = 0
+id = ""
 
 [sub_resource type="Resource" id="Resource_pu43q"]
 resource_name = "Stone"
@@ -28,14 +29,17 @@ tile = SubResource("Resource_6kmi4")
 height_offset = 155
 height_intensity = 25
 modifier_seed = 968297547
+filter_type = 0
+filter_ids = Array[String]([])
 
-[sub_resource type="Resource" id="Resource_f1fl3"]
+[sub_resource type="Resource" id="Resource_cymvq"]
 script = ExtResource("2_6f082")
 type = 0
 layer = 0
 source_id = 1
 atlas_coord = Vector2i(0, 1)
 alternative_tile = 0
+id = "bedrock"
 
 [sub_resource type="Resource" id="Resource_855mm"]
 resource_name = "Bedrock"
@@ -43,14 +47,16 @@ script = ExtResource("1_yunni")
 use_generator_noise = true
 noise = SubResource("FastNoiseLite_vcq1r")
 random_noise_seed = true
-tile = SubResource("Resource_f1fl3")
-height_offset = 0
+tile = SubResource("Resource_cymvq")
+height_offset = 20
 height_intensity = 20
 modifier_seed = 1640849317
+filter_type = 0
+filter_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
 noise_type = 3
-seed = -1831607005
+seed = -1517749305
 frequency = 0.012
 fractal_type = 2
 fractal_octaves = 3
@@ -65,9 +71,11 @@ threshold = 0.8
 max = Vector2(inf, -1)
 min = Vector2(inf_neg, inf_neg)
 modifier_seed = 3476587540
+filter_type = 0
+filter_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
-seed = -982552609
+seed = -91301326
 frequency = 0.0617
 fractal_octaves = 2
 fractal_lacunarity = 2.95
@@ -79,6 +87,7 @@ layer = 0
 source_id = 1
 atlas_coord = Vector2i(2, 0)
 alternative_tile = 0
+id = ""
 
 [sub_resource type="Resource" id="Resource_2w3lo"]
 resource_name = "Gold Ore"
@@ -90,9 +99,11 @@ threshold = 0.65
 max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
 modifier_seed = 1850350583
+filter_type = 1
+filter_ids = Array[String](["bedrock"])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
-seed = -702754485
+seed = -1263045400
 frequency = 0.0511
 fractal_lacunarity = 0.565
 domain_warp_type = 2
@@ -105,6 +116,7 @@ layer = 0
 source_id = 1
 atlas_coord = Vector2i(1, 0)
 alternative_tile = 0
+id = ""
 
 [sub_resource type="Resource" id="Resource_08u4d"]
 resource_name = "Diamond Ore"
@@ -116,6 +128,8 @@ threshold = 0.5
 max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
 modifier_seed = 3102050830
+filter_type = 1
+filter_ids = Array[String](["bedrock"])
 
 [sub_resource type="Resource" id="Resource_ja6xv"]
 script = ExtResource("2_6f082")
@@ -123,6 +137,7 @@ type = 1
 layer = 0
 terrain_set = 0
 terrain = 0
+id = ""
 
 [resource]
 resource_name = "Terraria-like Settings"

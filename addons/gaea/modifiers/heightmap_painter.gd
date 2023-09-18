@@ -30,8 +30,12 @@ func _apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> D
 			if not grid.has(tile_pos):
 				continue
 
+
 			var height = floor(noise.get_noise_1d(tile_pos.x) * height_intensity + height_offset)
 			if tile_pos.y >= -height:
+				if not _passes_filter(grid[tile_pos]):
+					continue
+
 				grid[tile_pos] = tile
 
 	return grid
