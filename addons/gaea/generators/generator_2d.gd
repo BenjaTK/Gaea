@@ -1,5 +1,4 @@
 @tool
-@icon("generator.svg")
 class_name GaeaGenerator2D
 extends GaeaGenerator
 

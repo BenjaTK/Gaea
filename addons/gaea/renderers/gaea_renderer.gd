@@ -22,7 +22,8 @@ extends Node
 
 
 func _ready() -> void:
-	_connect_signals()
+	if is_instance_valid(generator):
+		_connect_signals()
 
 
 ## Draws the whole grid.

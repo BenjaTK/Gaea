@@ -9,6 +9,7 @@ extends GaeaRenderer3D
 
 
 func _draw_area(area: AABB) -> void:
+	print("yay")
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			for z in range(area.position.z, area.end.z + 1):
