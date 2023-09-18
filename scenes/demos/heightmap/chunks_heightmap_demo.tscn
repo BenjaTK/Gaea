@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d.gd" id="1_lqewx"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/heightmap_painter.gd" id="2_u0711"]
-[ext_resource type="Script" path="res://addons/gaea/generators/tilemap_tile_info.gd" id="3_tr3dk"]
+[ext_resource type="Script" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="3_tr3dk"]
 [ext_resource type="Texture2D" uid="uid://caoyt0ek7fmdq" path="res://scenes/demos/heightmap/pixel-platformer-tileset - Kenney.png" id="3_wjapt"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/carver.gd" id="4_i15f0"]
 [ext_resource type="Texture2D" uid="uid://6gwie8e2kpg2" path="res://scenes/demos/heightmap/ores.png" id="4_rk2l5"]
@@ -15,7 +15,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
-seed = -1819181962
+seed = 1448208793
 
 [sub_resource type="Resource" id="Resource_6kmi4"]
 script = ExtResource("3_tr3dk")
