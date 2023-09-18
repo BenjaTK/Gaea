@@ -8,7 +8,9 @@ extends Node2D
 signal grid_updated
 signal generation_finished
 
-
+## Used to transform a world position into a map position,
+## mainly used by the [ChunkLoader]. May also be used by
+## a [GaeaRenderer]. Otherwise doesn't affect generation.
 @export var tile_size: Vector2i = Vector2i(16, 16)
 
 
