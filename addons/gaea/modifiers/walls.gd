@@ -20,10 +20,13 @@ func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 		return grid
 
 	var newGrid := grid.duplicate()
-	for tile in grid:
-		if grid[tile] == generator.settings.tile:
-			var above = tile + Vector2.UP
+	for tile_pos in grid:
+		if not _passes_filter(grid[tile_pos]):
+				continue
+
+		if grid[tile_pos] == generator.settings.tile:
+			var above = tile_pos + Vector2.UP
 			if grid.has(above) and grid[above] != generator.settings.tile:
-				newGrid[tile] = wall_tile
+				newGrid[tile_pos] = wall_tile
 
 	return newGrid

@@ -4,3 +4,6 @@ extends Resource
 ## Generic class to be extended to pass in data to the
 ## [GaeaGenerator] in each cell. Each [GaeaGenerator] creates
 ## a grid of [TileInfo]s.
+
+## [b]Optional[/b]. Used by modifiers for filtering.
+@export var id: String = ""

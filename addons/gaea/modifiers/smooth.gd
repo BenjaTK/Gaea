@@ -21,10 +21,13 @@ extends Modifier
 
 func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
 	for i in iterations:
-		for tile in grid.keys():
+		for tile_pos in grid.keys():
+			if not _passes_filter(grid[tile_pos]):
+				continue
+
 			var empty_neighbors_count := GaeaGenerator.get_neighbor_count_of_type(
-				grid, tile, null
+				grid, tile_pos, null
 			)
 			if empty_neighbors_count > maximum_empty_neighbors:
-				grid.erase(tile)
+				grid.erase(tile_pos)
 	return grid
