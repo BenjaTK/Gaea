@@ -5,8 +5,8 @@ extends Resource
 
 enum FilterType {
 	NONE, ## Won't apply any filtering.
-	BLACKLIST, ## The modifier won't affect the [TileInfo]s that have the same id as any id from [param filter_tiles].
-	WHITELIST ## The modifier will ONLY affect the [TileInfo]s that have the same id as any id from [param filter_tiles].
+	BLACKLIST, ## The modifier won't affect the [TileInfo]s whose [param id] can be found in [param filter_ids].
+	WHITELIST ## The modifier will ONLY affect the [TileInfo]s whose [param id] can be found in [param filter_ids].
 }
 
 @export_group("Filters", "filter_")
