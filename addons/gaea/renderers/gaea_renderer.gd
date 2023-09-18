@@ -13,7 +13,7 @@ extends Node
 
 		_disconnect_signals()
 
-		if not is_instance_valid(generator):
+		if is_instance_valid(generator):
 			if not generator.is_node_ready() and not is_node_ready():
 				return
 
