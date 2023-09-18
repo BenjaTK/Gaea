@@ -3,6 +3,7 @@
 class_name GaeaGenerator
 extends Node2D
 ## Base class for the Gaea addon's procedural generator.
+## @tutorial(Generators): https://benjatk.github.io/Gaea/#/generators/
 
 
 signal grid_updated

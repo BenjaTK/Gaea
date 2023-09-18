@@ -1,6 +1,7 @@
 @tool
 class_name ChunkAwareModifier
 extends Modifier
+##@tutorial(Modifiers): https://benjatk.github.io/Gaea/#/modifiers
 
 
 ## [ChunkAwareModifier]s use this value to offset the noise seed to make this modifier unique.

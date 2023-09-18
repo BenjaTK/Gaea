@@ -3,6 +3,9 @@
 class_name WalkerGenerator
 extends GaeaGenerator
 ## Generates a world using Walkers, which move in random direction and place tiles where they walk.
+## @tutorial(Generators): https://benjatk.github.io/Gaea/#/generators/
+## @tutorial(WalkerGenerator): https://benjatk.github.io/Gaea/#/generators/walker
+## @tutorial(Gaea's Getting Started tutorial): https://benjatk.github.io/Gaea/#/tutorials/getting_started
 
 
 class Walker:

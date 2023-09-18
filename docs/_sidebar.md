@@ -1,5 +1,7 @@
 * [📦 Getting started](/)
 * [✨ Gaea's resources](/resources.md)
+* [💡 Tutorials](/tutorials/)
+  * [⭐ Getting started](/tutorials/getting_started.md)
 * [🧠 Generators](/generators/)
   * [🚶 Walker](/generators/walker.md)
   * [🦠 Cellular](/generators/cellular.md)

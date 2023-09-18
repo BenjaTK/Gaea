@@ -4,6 +4,7 @@ class_name Walls
 extends Modifier
 ## Adds [param wall_tile] below any tile that isn't the Generator's default tile.
 ## Useful for tilesets whose walls are different tiles from the ceiling.
+## @tutorial(Walls Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-walls
 
 
 ## The tile to be placed. Will be placed below any tile

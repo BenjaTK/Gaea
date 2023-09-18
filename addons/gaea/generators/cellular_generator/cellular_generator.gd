@@ -4,6 +4,8 @@ class_name CellularGenerator
 extends GaeaGenerator
 ## Generates a random noise grid, then uses cellular automata to smooth it out.
 ## Useful for islands-like terrain.
+## @tutorial(Generators): https://benjatk.github.io/Gaea/#/generators/
+## @tutorial(CellularGenerator): https://benjatk.github.io/Gaea/#/generators/cellular
 
 
 @export var settings: CellularGeneratorSettings

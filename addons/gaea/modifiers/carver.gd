@@ -3,6 +3,7 @@
 class_name Carver
 extends ChunkAwareModifier
 ## Uses noise to remove certain tiles from the map.
+##@tutorial(Carver Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-carver
 
 
 @export var noise: FastNoiseLite = FastNoiseLite.new()

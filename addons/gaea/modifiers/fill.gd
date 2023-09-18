@@ -3,6 +3,7 @@
 class_name Fill
 extends Modifier
 ## Fills the full rectangle of tiles.
+##@tutorial(Fill Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-fill
 
 
 ## A [TileInfo] containing information about the filling tile.
