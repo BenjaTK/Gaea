@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HeightmapGenerator2DSettings" load_steps=21 format=3 uid="uid://db18nmw5jkbtc"]
+[gd_resource type="Resource" script_class="HeightmapGenerator2DSettings" load_steps=20 format=3 uid="uid://db18nmw5jkbtc"]
 
 [ext_resource type="Script" path="res://addons/gaea/modifiers/heightmap_painter.gd" id="1_yunni"]
 [ext_resource type="Script" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="2_6f082"]
@@ -6,9 +6,9 @@
 [ext_resource type="Script" path="res://addons/gaea/modifiers/noise_painter.gd" id="4_8iedx"]
 [ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d_settings.gd" id="5_haojk"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vcq1r"]
 noise_type = 3
-seed = 1448208793
+seed = -1715983639
 
 [sub_resource type="Resource" id="Resource_6kmi4"]
 script = ExtResource("2_6f082")
@@ -22,7 +22,7 @@ alternative_tile = 0
 resource_name = "Stone"
 script = ExtResource("1_yunni")
 use_generator_noise = true
-noise = SubResource("FastNoiseLite_mwtbk")
+noise = SubResource("FastNoiseLite_vcq1r")
 random_noise_seed = true
 tile = SubResource("Resource_6kmi4")
 height_offset = 155
@@ -41,7 +41,7 @@ alternative_tile = 0
 resource_name = "Bedrock"
 script = ExtResource("1_yunni")
 use_generator_noise = true
-noise = SubResource("FastNoiseLite_mwtbk")
+noise = SubResource("FastNoiseLite_vcq1r")
 random_noise_seed = true
 tile = SubResource("Resource_f1fl3")
 height_offset = 0
@@ -50,7 +50,7 @@ modifier_seed = 1640849317
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
 noise_type = 3
-seed = -1969112133
+seed = -1831607005
 frequency = 0.012
 fractal_type = 2
 fractal_octaves = 3
@@ -67,7 +67,7 @@ min = Vector2(inf_neg, inf_neg)
 modifier_seed = 3476587540
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
-seed = 699618206
+seed = -982552609
 frequency = 0.0617
 fractal_octaves = 2
 fractal_lacunarity = 2.95
@@ -92,7 +92,7 @@ min = Vector2(inf_neg, -120)
 modifier_seed = 1850350583
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
-seed = 1951318453
+seed = -702754485
 frequency = 0.0511
 fractal_lacunarity = 0.565
 domain_warp_type = 2
@@ -116,10 +116,6 @@ threshold = 0.5
 max = Vector2(inf, -5)
 min = Vector2(inf_neg, -120)
 modifier_seed = 3102050830
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vcq1r"]
-noise_type = 3
-seed = -1362065240
 
 [sub_resource type="Resource" id="Resource_ja6xv"]
 script = ExtResource("2_6f082")
