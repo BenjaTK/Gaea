@@ -1,6 +1,10 @@
 @tool
 class_name TilemapGaeaRenderer
 extends GaeaRenderer
+## Uses the [param tile_map] to draw the generator's [param grid].
+##
+## Takes [TilemapTileInfo] to determine which tile to place
+## in every cell.
 
 
 @export var tile_map: TileMap :
@@ -10,12 +14,6 @@ extends GaeaRenderer
 @export var clear_tile_map_on_draw: bool = true
 ## Erases the cell when an empty tile is found. Recommended: true.
 @export var erase_empty_tiles: bool = true
-
-
-func _draw() -> void:
-	if clear_tile_map_on_draw:
-		tile_map.clear()
-	super._draw()
 
 
 func _draw_area(area: Rect2i) -> void:
@@ -55,6 +53,12 @@ func _draw_area(area: Rect2i) -> void:
 			tile_info.layer, terrains[tile_info],
 			tile_info.terrain_set, tile_info.terrain
 		)
+
+
+func _draw() -> void:
+	if clear_tile_map_on_draw:
+		tile_map.clear()
+	super._draw()
 
 
 func _get_configuration_warnings() -> PackedStringArray:
