@@ -33,16 +33,16 @@ func _draw_area(area: Rect2i) -> void:
 
 			var tile = tile_position
 			var tile_info = generator.grid[tile_position]
-			if not (tile_info is TileInfo):
+			if not (tile_info is TilemapTileInfo):
 				continue
 
 			match tile_info.type:
-				TileInfo.Type.SINGLE_CELL:
+				TilemapTileInfo.Type.SINGLE_CELL:
 					tile_map.set_cell(
 						tile_info.layer, tile, tile_info.source_id,
 						tile_info.atlas_coord, tile_info.alternative_tile
 					)
-				TileInfo.Type.TERRAIN:
+				TilemapTileInfo.Type.TERRAIN:
 					if not terrains.has(tile_info):
 						terrains[tile_info] = [tile]
 					else:

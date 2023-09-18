@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" path="res://addons/gaea/generators/cellular_generator/cellular_generator.gd" id="1_4dobc"]
 [ext_resource type="Script" path="res://addons/gaea/generators/cellular_generator/cellular_generator_settings.gd" id="2_sm72r"]
-[ext_resource type="Script" path="res://addons/gaea/generators/tile_info.gd" id="3_jrjai"]
+[ext_resource type="Script" path="res://addons/gaea/generators/tilemap_tile_info.gd" id="3_bpgiv"]
 [ext_resource type="Texture2D" uid="uid://dnpju76kpc8ny" path="res://scenes/demos/noise/island-tileset - Kenney.png" id="4_5ttjg"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/tilemap_gaea_renderer.gd" id="5_16wl6"]
 
 [sub_resource type="Resource" id="Resource_6khhn"]
-script = ExtResource("3_jrjai")
+script = ExtResource("3_bpgiv")
 type = 0
 layer = 0
 source_id = 0

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://addons/gaea/generators/noise_generator/noise_generator.gd" id="1_3nrdm"]
 [ext_resource type="Script" path="res://addons/gaea/generators/noise_generator/noise_generator_settings.gd" id="2_bfb8p"]
-[ext_resource type="Script" path="res://addons/gaea/generators/tile_info.gd" id="3_gf1wh"]
+[ext_resource type="Script" path="res://addons/gaea/generators/tilemap_tile_info.gd" id="3_0va4u"]
 [ext_resource type="Texture2D" uid="uid://dnpju76kpc8ny" path="res://scenes/demos/noise/island-tileset - Kenney.png" id="4_56vnf"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/tilemap_gaea_renderer.gd" id="5_5oyvs"]
 
@@ -12,7 +12,7 @@ seed = -1433049146
 domain_warp_amplitude = 8.0
 
 [sub_resource type="Resource" id="Resource_eh1og"]
-script = ExtResource("3_gf1wh")
+script = ExtResource("3_0va4u")
 type = 0
 layer = 0
 source_id = 0
@@ -20,7 +20,7 @@ atlas_coord = Vector2i(0, 0)
 alternative_tile = 1
 
 [sub_resource type="Resource" id="Resource_5gby7"]
-script = ExtResource("3_gf1wh")
+script = ExtResource("3_0va4u")
 type = 0
 layer = 0
 source_id = 0
@@ -28,7 +28,7 @@ atlas_coord = Vector2i(0, 0)
 alternative_tile = 0
 
 [sub_resource type="Resource" id="Resource_yamag"]
-script = ExtResource("3_gf1wh")
+script = ExtResource("3_0va4u")
 type = 0
 layer = 0
 source_id = 0

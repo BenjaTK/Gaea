@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="HeightmapGenerator2DSettings" load_steps=20 format=3 uid="uid://db18nmw5jkbtc"]
 
 [ext_resource type="Script" path="res://addons/gaea/modifiers/heightmap_painter.gd" id="1_xfnry"]
-[ext_resource type="Script" path="res://addons/gaea/generators/tile_info.gd" id="2_6f082"]
+[ext_resource type="Script" path="res://addons/gaea/generators/tilemap_tile_info.gd" id="2_6f082"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/carver.gd" id="3_51wbb"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/noise_painter.gd" id="4_cgpdt"]
 [ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d_settings.gd" id="5_haojk"]

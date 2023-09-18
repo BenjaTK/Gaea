@@ -2,15 +2,15 @@
 
 [ext_resource type="Script" path="res://addons/gaea/generators/walker_generator/walker_generator.gd" id="2_07wvo"]
 [ext_resource type="Texture2D" uid="uid://c2jh1be7rtwkw" path="res://scenes/demos/walker/tiny-dungeon-floor - Kenney.png" id="3_34j6g"]
+[ext_resource type="Script" path="res://addons/gaea/generators/tilemap_tile_info.gd" id="3_ets3q"]
 [ext_resource type="Texture2D" uid="uid://dhxcyro4op2xp" path="res://scenes/demos/walker/tiny-dungeon - Kenney.png" id="3_i7k48"]
-[ext_resource type="Script" path="res://addons/gaea/generators/tile_info.gd" id="5_0svpu"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/fill.gd" id="5_wn6v3"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/walls.gd" id="7_nop0g"]
 [ext_resource type="Script" path="res://addons/gaea/generators/walker_generator/walker_generator_settings.gd" id="7_w8xxs"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/tilemap_gaea_renderer.gd" id="8_1sick"]
 
 [sub_resource type="Resource" id="Resource_6o5pe"]
-script = ExtResource("5_0svpu")
+script = ExtResource("3_ets3q")
 type = 1
 layer = 0
 terrain_set = 0
@@ -25,7 +25,7 @@ expand_right = 1
 expand_bottom = 1
 
 [sub_resource type="Resource" id="Resource_vbeab"]
-script = ExtResource("5_0svpu")
+script = ExtResource("3_ets3q")
 type = 1
 layer = 0
 terrain_set = 0
@@ -36,7 +36,7 @@ script = ExtResource("7_nop0g")
 wall_tile = SubResource("Resource_vbeab")
 
 [sub_resource type="Resource" id="Resource_u3p7a"]
-script = ExtResource("5_0svpu")
+script = ExtResource("3_ets3q")
 type = 1
 layer = 0
 terrain_set = 0
