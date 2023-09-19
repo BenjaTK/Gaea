@@ -32,28 +32,28 @@ func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 	)
 
 
-#func apply_chunk(grid: Dictionary, generator: ChunkAwareGenerator3D, chunk_position: Vector2i) -> Dictionary:
-#	if "noise" in self:
-#		if (self.get("use_generator_noise") == true and
-#				generator.settings.get("noise") != null):
-#			self.set("noise", generator.settings.noise)
-#		# check for necessary properties
-#		elif "random_noise_seed" in self and "noise" in self and "settings" in generator:
-#			# check if random noise is enabled
-#			if self.get("random_noise_seed"):
-#				# apply generators noise to modifiers noisexxx
-#				var noise := self.get("noise") as FastNoiseLite
-#				var generator_settings := generator.get("settings") as HeightmapGenerator2DSettings
-#				noise.seed = modifier_seed + generator_settings.noise.seed
-#
-#	return _apply_area(
-#		Rect2i(
-#			chunk_position * generator.chunk_size,
-#			Vector2i(generator.chunk_size, generator.chunk_size)
-#		),
-#		grid,
-#		generator
-#	)
+func apply_chunk(grid: Dictionary, generator: ChunkAwareGenerator3D, chunk_position: Vector3i) -> Dictionary:
+	if "noise" in self:
+		if (self.get("use_generator_noise") == true and
+				generator.settings.get("noise") != null):
+			self.set("noise", generator.settings.noise)
+		# check for necessary properties
+		elif "random_noise_seed" in self and "noise" in self and "settings" in generator:
+			# check if random noise is enabled
+			if self.get("random_noise_seed"):
+				# apply generators noise to modifiers noisexxx
+				var noise := self.get("noise") as FastNoiseLite
+				var generator_settings := generator.get("settings") as HeightmapGenerator3DSettings
+				noise.seed = modifier_seed + generator_settings.noise.seed
+
+	return _apply_area(
+		AABB(
+			chunk_position * generator.chunk_size,
+			Vector3i(generator.chunk_size, generator.chunk_size, generator.chunk_size)
+		),
+		grid,
+		generator
+	)
 
 
 func _apply_area(area: AABB, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:

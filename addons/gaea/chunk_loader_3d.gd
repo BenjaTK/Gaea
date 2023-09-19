@@ -1,21 +1,21 @@
 @tool
 @icon("chunk_loader.svg")
-class_name ChunkLoader
-extends Node2D
+class_name ChunkLoader3D
+extends Node3D
 
 
 ## The generator that loads the chunks.
-@export var generator: ChunkAwareGenerator2D
+@export var generator: ChunkAwareGenerator3D
 ## [b]Optional[/b]. In this case it is used to prevent
 ## generating chunks before the [GaeaRenderer] is ready, which
 ## prevents empty areas.
-@export var renderer: GaeaRenderer
+@export var renderer: GaeaRenderer3D
 ## Chunks will be loaded arround this Node.
 ## If set to null chunks will be loaded around (0, 0)
-@export var actor: Node2D
+@export var actor: Node3D
 ## The distance around the actor which will be loaded.
 ## The actual loading area will be this value in all 4 directions.
-@export var loading_radius: Vector2i = Vector2i(2, 2)
+@export var loading_radius: Vector3i = Vector3i(2, 2, 2)
 ## Amount of frames the loader waits before it checks if new chunks need to be loaded.
 @export_range(0, 10) var update_rate: int = 0
 ## Executes the loading process on ready [br]
@@ -25,7 +25,7 @@ extends Node2D
 @export var unload_chunks: bool = true
 
 var _update_status: int = 0
-var _last_position: Vector2i
+var _last_position: Vector3i
 
 
 func _ready() -> void:
@@ -48,7 +48,8 @@ func _process(delta: float) -> void:
 
 # checks if chunk loading is neccessary and executes if true
 func _try_loading() -> void:
-	var actor_position: Vector2i = _get_actors_position()
+	var actor_position: Vector3i = _get_actors_position()
+	prints(actor_position, _last_position)
 
 	if actor_position == _last_position:
 		return
@@ -58,18 +59,18 @@ func _try_loading() -> void:
 
 
 # loads needed chunks around the given position
-func _update_loading(actor_position: Vector2i) -> void:
+func _update_loading(actor_position: Vector3i) -> void:
 	if generator == null:
 		push_error("Chunk loading failed because generator property not set!")
 		return
 
-	var required_chunks: Array[Vector2i] = _get_required_chunks(actor_position)
+	var required_chunks: Array[Vector3i] = _get_required_chunks(actor_position)
 
 	# remove old chunks
 	if unload_chunks:
-		var loaded_chunks: Array[Vector2i] = generator.generated_chunks
+		var loaded_chunks: Array[Vector3i] = generator.generated_chunks
 		for i in range(loaded_chunks.size() - 1, -1, -1):
-			var loaded: Vector2i = loaded_chunks[i]
+			var loaded: Vector3i = loaded_chunks[i]
 			if not (loaded in required_chunks):
 				generator.unload_chunk(loaded)
 
@@ -79,23 +80,24 @@ func _update_loading(actor_position: Vector2i) -> void:
 			generator.generate_chunk(required)
 
 
-func _get_actors_position() -> Vector2i:
+func _get_actors_position() -> Vector3i:
 	# getting actors positions
-	var actor_position := Vector2i.ZERO
+	var actor_position := Vector3i.ZERO
 	if actor != null: actor_position = actor.global_position.floor()
 
-	var tile_position: Vector2i = actor_position / generator.tile_size
+	var tile_position: Vector3i = actor_position / generator.tile_size
 
-	var chunk_position := Vector2i(
+	var chunk_position := Vector3i(
 		floori(tile_position.x / generator.chunk_size),
-		floori(tile_position.y / generator.chunk_size)
+		floori(tile_position.y / generator.chunk_size),
+		floori(tile_position.z / generator.chunk_size)
 	)
 
 	return chunk_position
 
 
-func _get_required_chunks(actor_position: Vector2i) -> Array[Vector2i]:
-	var chunks: Array[Vector2i] = []
+func _get_required_chunks(actor_position: Vector3i) -> Array[Vector3i]:
+	var chunks: Array[Vector3i] = []
 
 	var x_range = range(
 		actor_position.x - abs(loading_radius).x,
@@ -105,10 +107,15 @@ func _get_required_chunks(actor_position: Vector2i) -> Array[Vector2i]:
 		actor_position.y - abs(loading_radius).y,
 		actor_position.y + abs(loading_radius).y + 1
 	)
+	var z_range = range(
+		actor_position.z - abs(loading_radius).z,
+		actor_position.z + abs(loading_radius).z + 1
+	)
 
 	for x in x_range:
 		for y in y_range:
-			chunks.append(Vector2i(x, y))
+			for z in z_range:
+				chunks.append(Vector3i(x, y, z))
 
 	return chunks
 
