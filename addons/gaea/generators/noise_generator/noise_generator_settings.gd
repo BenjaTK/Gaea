@@ -1,6 +1,6 @@
 @tool
 class_name NoiseGeneratorSettings
-extends GeneratorSettings
+extends GeneratorSettings2D
 
 
 ## Dictionary of [param thresholds] (keys) that go from [code]-1.0[/code] to [code]1.0[/code], and [TileInfo] (values).[br]

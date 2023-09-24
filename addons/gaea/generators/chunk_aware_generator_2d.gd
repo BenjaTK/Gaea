@@ -33,7 +33,7 @@ func erase_chunk(chunk_position: Vector2i) -> void:
 	chunk_updated.emit(chunk_position)
 
 
-func _apply_modifiers_chunk(modifiers: Array[Modifier], chunk_position: Vector2i) -> void:
+func _apply_modifiers_chunk(modifiers, chunk_position: Vector2i) -> void:
 	for modifier in modifiers:
 		if not (modifier is ChunkAwareModifier2D):
 			push_error("%s is not a Chunk compatible modifier!" % modifier.resource_name)

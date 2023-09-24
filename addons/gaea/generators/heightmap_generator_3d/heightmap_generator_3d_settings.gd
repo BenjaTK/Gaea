@@ -1,5 +1,5 @@
 class_name HeightmapGenerator3DSettings
-extends GeneratorSettings
+extends GeneratorSettings3D
 
 ## Info for the tile that will be placed. Has information about
 ## it's position in the TileSet.

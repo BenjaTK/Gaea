@@ -45,7 +45,7 @@ func erase() -> void:
 ### Modifiers ###
 
 
-func _apply_modifiers(modifiers: Array[Modifier]) -> void:
+func _apply_modifiers(modifiers) -> void:
 	for modifier in modifiers:
 		if not (modifier is Modifier):
 			continue

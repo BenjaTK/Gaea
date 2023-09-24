@@ -214,10 +214,9 @@ script = ExtResource("1_7xrgd")
 settings = ExtResource("2_hhq5r")
 preview = true
 
-[node name="GaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
+[node name="GaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map")]
 script = ExtResource("5_u1niu")
 tile_map = NodePath("../TileMap")
-generator = NodePath("../HeightmapGenerator2D")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_3y7im")

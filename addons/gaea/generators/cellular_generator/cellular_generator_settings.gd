@@ -1,6 +1,6 @@
 @tool
 class_name CellularGeneratorSettings
-extends GeneratorSettings
+extends GeneratorSettings2D
 
 ## [TileInfo] for the tile that will be placed. Has information about
 ## it's position in the TileSet.

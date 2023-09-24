@@ -1,6 +1,6 @@
 @tool
 class_name WalkerGeneratorSettings
-extends GeneratorSettings
+extends GeneratorSettings2D
 ## Settings for [WalkerGenerator]
 
 
