@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b8v10j7odcypp"
-path="res://.godot/imported/noise_painter.svg-96075148f66f2f08ed38499ed61359ae.ctex"
+uid="uid://corlsm516ldfv"
+path="res://.godot/imported/remove_disconnected.svg-5a4c2074b34d5bce5ab7cbab07f6735f.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gaea/modifiers/noise_painter.svg"
-dest_files=["res://.godot/imported/noise_painter.svg-96075148f66f2f08ed38499ed61359ae.ctex"]
+source_file="res://addons/gaea/modifiers/2D/remove_disconnected.svg"
+dest_files=["res://.godot/imported/remove_disconnected.svg-5a4c2074b34d5bce5ab7cbab07f6735f.ctex"]
 
 [params]
 

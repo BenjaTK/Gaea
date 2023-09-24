@@ -1,4 +1,4 @@
-@icon("generator_settings.svg")
+@icon("../generator_settings.svg")
 class_name GeneratorSettings3D
 extends Resource
 ## @tutorial(Gaea's Structure): https://benjatk.github.io/Gaea/#/structure

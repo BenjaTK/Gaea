@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://corlsm516ldfv"
-path="res://.godot/imported/remove_disconnected.svg-b8c8fc419265ef645dac72db3de1782c.ctex"
+uid="uid://7upd5olshig5"
+path="res://.godot/imported/smooth.svg-bc0be19d41774bbbe163759b4cd97f92.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gaea/modifiers/remove_disconnected.svg"
-dest_files=["res://.godot/imported/remove_disconnected.svg-b8c8fc419265ef645dac72db3de1782c.ctex"]
+source_file="res://addons/gaea/modifiers/2D/smooth.svg"
+dest_files=["res://.godot/imported/smooth.svg-bc0be19d41774bbbe163759b4cd97f92.ctex"]
 
 [params]
 

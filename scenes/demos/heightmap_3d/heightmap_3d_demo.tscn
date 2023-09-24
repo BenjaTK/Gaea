@@ -1,10 +1,10 @@
 [gd_scene load_steps=30 format=3 uid="uid://dcn44kotave0d"]
 
-[ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator_3d/heightmap_generator_3d.gd" id="1_mbah0"]
 [ext_resource type="Script" path="res://scenes/demos/heightmap_3d/heightmap_3d_demo.gd" id="1_nvte4"]
-[ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator_3d/heightmap_generator_3d_settings.gd" id="2_2mk7q"]
+[ext_resource type="Script" path="res://addons/gaea/generators/3D/heightmap_generator_3d/heightmap_generator_3d.gd" id="2_fgwco"]
+[ext_resource type="Script" path="res://addons/gaea/generators/3D/heightmap_generator_3d/heightmap_generator_3d_settings.gd" id="3_d8yvu"]
 [ext_resource type="Script" path="res://addons/gaea/tile_info/gridmap_tile_info.gd" id="3_w4ec0"]
-[ext_resource type="Script" path="res://addons/gaea/renderers/gridmap_gaea_renderer.gd" id="4_ikheu"]
+[ext_resource type="Script" path="res://addons/gaea/renderers/3D/gridmap_gaea_renderer.gd" id="5_6jooj"]
 [ext_resource type="Texture2D" uid="uid://dn5fnbvvbowrl" path="res://scenes/demos/heightmap_3d/grass_top.png" id="6_r4fc5"]
 [ext_resource type="Texture2D" uid="uid://cwq2r4c7t6gsv" path="res://scenes/demos/heightmap_3d/stone.png" id="7_aol1v"]
 [ext_resource type="Texture2D" uid="uid://d2q1tt51g1gqq" path="res://scenes/demos/heightmap_3d/dirt.png" id="8_6347s"]
@@ -27,7 +27,7 @@ glow_enabled = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_g0ov0"]
 noise_type = 3
-seed = -2016247260
+seed = 494725387
 
 [sub_resource type="Resource" id="Resource_ttsfp"]
 script = ExtResource("3_w4ec0")
@@ -35,7 +35,7 @@ index = 0
 id = ""
 
 [sub_resource type="Resource" id="Resource_lyesv"]
-script = ExtResource("2_2mk7q")
+script = ExtResource("3_d8yvu")
 tile = SubResource("Resource_ttsfp")
 noise = SubResource("FastNoiseLite_g0ov0")
 random_noise_seed = true
@@ -44,7 +44,7 @@ world_size = Vector2(64, 64)
 height_offset = 96
 height_intensity = 20
 min_height = 0
-modifiers = Array[Resource("res://addons/gaea/modifiers/modifier_3d.gd")]([])
+modifiers = Array[Resource("res://addons/gaea/modifiers/3D/modifier_3d.gd")]([])
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o13k8"]
 albedo_texture = ExtResource("6_r4fc5")
@@ -113,12 +113,12 @@ transform = Transform3D(-0.997185, -0.0481953, 0.057437, 0, 0.766044, 0.642788, 
 shadow_enabled = true
 
 [node name="HeightmapGenerator3D" type="Node" parent="."]
-script = ExtResource("1_mbah0")
+script = ExtResource("2_fgwco")
 settings = SubResource("Resource_lyesv")
 preview = true
 
 [node name="GridmapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("grid_map", "generator")]
-script = ExtResource("4_ikheu")
+script = ExtResource("5_6jooj")
 grid_map = NodePath("../GridMap")
 generator = NodePath("../HeightmapGenerator3D")
 

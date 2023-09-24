@@ -1,5 +1,5 @@
 @tool
-@icon("heightmap_painter.svg")
+@icon("../2D/heightmap_painter.svg")
 class_name HeightmapPainter3D
 extends ChunkAwareModifier3D
 ## Replaces tiles in the map with [param tile] based on a noise heightmap.

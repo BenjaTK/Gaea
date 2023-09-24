@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cpr55vjlgktnu"
-path="res://.godot/imported/heightmap_painter.svg-685fb9a529f4b41cf3fdbd99488425b3.ctex"
+path="res://.godot/imported/heightmap_painter.svg-c49b4eef3addbe0d997c9abedd4adf11.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gaea/modifiers/heightmap_painter.svg"
-dest_files=["res://.godot/imported/heightmap_painter.svg-685fb9a529f4b41cf3fdbd99488425b3.ctex"]
+source_file="res://addons/gaea/modifiers/2D/heightmap_painter.svg"
+dest_files=["res://.godot/imported/heightmap_painter.svg-c49b4eef3addbe0d997c9abedd4adf11.ctex"]
 
 [params]
 

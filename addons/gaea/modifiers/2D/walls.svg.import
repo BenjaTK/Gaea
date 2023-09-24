@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ccp3yjiys1fh2"
-path="res://.godot/imported/carver.svg-66fdefee38ad6164e4581e3ad71d99ac.ctex"
+uid="uid://iors6wiv6esb"
+path="res://.godot/imported/walls.svg-86970fceca85bd10230f503648219e3e.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gaea/modifiers/carver.svg"
-dest_files=["res://.godot/imported/carver.svg-66fdefee38ad6164e4581e3ad71d99ac.ctex"]
+source_file="res://addons/gaea/modifiers/2D/walls.svg"
+dest_files=["res://.godot/imported/walls.svg-86970fceca85bd10230f503648219e3e.ctex"]
 
 [params]
 

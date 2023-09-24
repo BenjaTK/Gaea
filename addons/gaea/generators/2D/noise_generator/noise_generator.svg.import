@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7upd5olshig5"
-path="res://.godot/imported/smooth.svg-aa9008b20913c477aa5034ce7d7061b9.ctex"
+uid="uid://rdxfassni0oh"
+path="res://.godot/imported/noise_generator.svg-d19bae0f59db5b3bf008ec5cad0b9565.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gaea/modifiers/smooth.svg"
-dest_files=["res://.godot/imported/smooth.svg-aa9008b20913c477aa5034ce7d7061b9.ctex"]
+source_file="res://addons/gaea/generators/2D/noise_generator/noise_generator.svg"
+dest_files=["res://.godot/imported/noise_generator.svg-d19bae0f59db5b3bf008ec5cad0b9565.ctex"]
 
 [params]
 

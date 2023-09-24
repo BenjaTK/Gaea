@@ -1,163 +1,13 @@
-[gd_scene load_steps=31 format=3 uid="uid://cxty0pak7x2o2"]
+[gd_scene load_steps=12 format=3 uid="uid://cxty0pak7x2o2"]
 
-[ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d.gd" id="1_lqewx"]
-[ext_resource type="Script" path="res://addons/gaea/modifiers/heightmap_painter.gd" id="2_u0711"]
-[ext_resource type="Script" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="3_tr3dk"]
+[ext_resource type="Script" path="res://addons/gaea/generators/2D/heightmap_generator/heightmap_generator_2d.gd" id="1_lqewx"]
+[ext_resource type="Resource" uid="uid://db18nmw5jkbtc" path="res://scenes/demos/heightmap/terraria-like_generation_settings.tres" id="2_py0je"]
 [ext_resource type="Texture2D" uid="uid://caoyt0ek7fmdq" path="res://scenes/demos/heightmap/pixel-platformer-tileset - Kenney.png" id="3_wjapt"]
-[ext_resource type="Script" path="res://addons/gaea/modifiers/carver.gd" id="4_i15f0"]
 [ext_resource type="Texture2D" uid="uid://6gwie8e2kpg2" path="res://scenes/demos/heightmap/ores.png" id="4_rk2l5"]
-[ext_resource type="Script" path="res://addons/gaea/modifiers/noise_painter.gd" id="5_m0ru2"]
-[ext_resource type="Script" path="res://addons/gaea/generators/heightmap_generator/heightmap_generator_2d_settings.gd" id="6_q4c7b"]
+[ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="10_5yyno"]
 [ext_resource type="Script" path="res://scenes/demos/heightmap/test_actor.gd" id="10_76aeg"]
-[ext_resource type="Script" path="res://addons/gaea/chunk_loader.gd" id="10_vlq7b"]
-[ext_resource type="Script" path="res://addons/gaea/renderers/tilemap_gaea_renderer.gd" id="10_xq0oe"]
+[ext_resource type="Script" path="res://addons/gaea/chunk_loader_2d.gd" id="10_vlq7b"]
 [ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="11_go0dd"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
-noise_type = 3
-seed = -1688728356
-
-[sub_resource type="Resource" id="Resource_6kmi4"]
-script = ExtResource("3_tr3dk")
-type = 0
-layer = 0
-source_id = 1
-atlas_coord = Vector2i(0, 0)
-alternative_tile = 0
-id = ""
-
-[sub_resource type="Resource" id="Resource_pu43q"]
-resource_name = "Stone"
-script = ExtResource("2_u0711")
-use_generator_noise = true
-noise = SubResource("FastNoiseLite_mwtbk")
-random_noise_seed = true
-tile = SubResource("Resource_6kmi4")
-height_offset = 155
-height_intensity = 25
-modifier_seed = 968297547
-filter_type = 0
-filter_ids = Array[String]([])
-
-[sub_resource type="Resource" id="Resource_f1fl3"]
-script = ExtResource("3_tr3dk")
-type = 0
-layer = 0
-source_id = 1
-atlas_coord = Vector2i(0, 1)
-alternative_tile = 0
-id = ""
-
-[sub_resource type="Resource" id="Resource_855mm"]
-resource_name = "Bedrock"
-script = ExtResource("2_u0711")
-use_generator_noise = true
-noise = SubResource("FastNoiseLite_mwtbk")
-random_noise_seed = true
-tile = SubResource("Resource_f1fl3")
-height_offset = 0
-height_intensity = 20
-modifier_seed = 1640849317
-filter_type = 0
-filter_ids = Array[String]([])
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
-noise_type = 3
-seed = -1969112133
-frequency = 0.012
-fractal_type = 2
-fractal_octaves = 3
-domain_warp_frequency = 0.57
-
-[sub_resource type="Resource" id="Resource_q887n"]
-resource_name = "Caves"
-script = ExtResource("4_i15f0")
-noise = SubResource("FastNoiseLite_1mckf")
-random_noise_seed = true
-threshold = 0.8
-max = Vector2(inf, -1)
-min = Vector2(inf_neg, inf_neg)
-modifier_seed = 3476587540
-filter_type = 0
-filter_ids = Array[String]([])
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
-seed = 699618206
-frequency = 0.0617
-fractal_octaves = 2
-fractal_lacunarity = 2.95
-
-[sub_resource type="Resource" id="Resource_bthqc"]
-script = ExtResource("3_tr3dk")
-type = 0
-layer = 0
-source_id = 1
-atlas_coord = Vector2i(2, 0)
-alternative_tile = 0
-id = ""
-
-[sub_resource type="Resource" id="Resource_2w3lo"]
-resource_name = "Gold Ore"
-script = ExtResource("5_m0ru2")
-noise = SubResource("FastNoiseLite_kyspj")
-random_noise_seed = true
-tile = SubResource("Resource_bthqc")
-threshold = 0.65
-max = Vector2(inf, -5)
-min = Vector2(inf_neg, -120)
-modifier_seed = 1850350583
-filter_type = 0
-filter_ids = Array[String]([])
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
-seed = 1951318453
-frequency = 0.0511
-fractal_lacunarity = 0.565
-domain_warp_type = 2
-domain_warp_amplitude = 30.52
-
-[sub_resource type="Resource" id="Resource_qw5ur"]
-script = ExtResource("3_tr3dk")
-type = 0
-layer = 0
-source_id = 1
-atlas_coord = Vector2i(1, 0)
-alternative_tile = 0
-id = ""
-
-[sub_resource type="Resource" id="Resource_08u4d"]
-resource_name = "Diamond Ore"
-script = ExtResource("5_m0ru2")
-noise = SubResource("FastNoiseLite_vkmxs")
-random_noise_seed = true
-tile = SubResource("Resource_qw5ur")
-threshold = 0.5
-max = Vector2(inf, -5)
-min = Vector2(inf_neg, -120)
-modifier_seed = 3102050830
-filter_type = 0
-filter_ids = Array[String]([])
-
-[sub_resource type="Resource" id="Resource_hitrj"]
-script = ExtResource("3_tr3dk")
-type = 1
-layer = 0
-terrain_set = 0
-terrain = 0
-id = ""
-
-[sub_resource type="Resource" id="Resource_6hs11"]
-resource_name = "Terraria-like Settings"
-script = ExtResource("6_q4c7b")
-tile = SubResource("Resource_hitrj")
-noise = SubResource("FastNoiseLite_mwtbk")
-random_noise_seed = true
-infinite = true
-world_length = 128
-height_offset = 160
-height_intensity = 25
-min_height = -32
-modifiers = Array[Resource("res://addons/gaea/modifiers/modifier.gd")]([SubResource("Resource_pu43q"), SubResource("Resource_855mm"), SubResource("Resource_q887n"), SubResource("Resource_2w3lo"), SubResource("Resource_08u4d")])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_68jc8"]
 texture = ExtResource("3_wjapt")
@@ -364,7 +214,7 @@ sources/0 = SubResource("TileSetAtlasSource_68jc8")
 
 [node name="HeightmapGenerator2D" type="Node2D" parent="."]
 script = ExtResource("1_lqewx")
-settings = SubResource("Resource_6hs11")
+settings = ExtResource("2_py0je")
 preview = true
 generate_on_ready = false
 
@@ -396,7 +246,7 @@ loading_radius = Vector2i(4, 4)
 update_rate = 2
 
 [node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
-script = ExtResource("10_xq0oe")
+script = ExtResource("10_5yyno")
 tile_map = NodePath("../TileMap")
 generator = NodePath("../HeightmapGenerator2D")
 
