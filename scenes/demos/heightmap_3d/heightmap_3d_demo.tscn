@@ -131,9 +131,7 @@ script = ExtResource("11_ui5m1")
 generator = NodePath("../HeightmapGenerator3D")
 renderer = NodePath("../GridmapGaeaRenderer")
 actor = NodePath("../Actor")
-multithreading = true
-use_processor_count = true
-custom_thread_amount = 5
+update_rate = 10
 
 [node name="Actor" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 112, 22)

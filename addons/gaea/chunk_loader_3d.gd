@@ -16,15 +16,15 @@ extends Node3D
 ## The distance around the actor which will be loaded.
 ## The actual loading area will be this value in all 4 directions.
 @export var loading_radius: Vector3i = Vector3i(2, 2, 2)
-## Amount of frames the loader waits before it checks if new chunks need to be loaded.
-@export_range(0, 10) var update_rate: int = 0
+## Amount of miliseconds the loader waits before it checks if new chunks need to be loaded.
+@export_range(0, 1, 1, "or_greater", "suffix:ms") var update_rate: int = 0
 ## Executes the loading process on ready [br]
 ## [b]Warning:[/b] No chunks might load if set to false.
 @export var load_on_ready: bool = true
 ## If set to true, the Chunk Loader unloads chunks left behind
 @export var unload_chunks: bool = true
 
-var _update_status: int = 0
+var _last_run: int = 0
 var _last_position: Vector3i
 var required_chunks: Array[Vector3i]
 
@@ -42,11 +42,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 
-	_update_status -= 1
-	if _update_status <= 0:
+	var current_time = Time.get_ticks_msec()
+	if current_time - _last_run > update_rate:
 		# todo make check loading
 		_try_loading()
-		_update_status = update_rate
+		_last_run = current_time
 
 
 # checks if chunk loading is neccessary and executes if true
