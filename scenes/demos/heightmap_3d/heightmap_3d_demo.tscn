@@ -27,7 +27,7 @@ glow_enabled = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_g0ov0"]
 noise_type = 3
-seed = 494725387
+seed = -1082985939
 
 [sub_resource type="Resource" id="Resource_ttsfp"]
 script = ExtResource("3_w4ec0")
@@ -132,6 +132,8 @@ generator = NodePath("../HeightmapGenerator3D")
 renderer = NodePath("../GridmapGaeaRenderer")
 actor = NodePath("../Actor")
 multithreading = true
+use_processor_count = true
+custom_thread_amount = 5
 
 [node name="Actor" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 112, 22)
