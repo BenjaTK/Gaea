@@ -1,6 +1,7 @@
 @tool
 class_name MeshGaeaRenderer
 extends GaeaRenderer3D
+## [b]Note: This class is experimental[/b]
 
 
 @export var mesh_instance: MeshInstance3D
