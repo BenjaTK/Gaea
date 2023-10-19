@@ -17,7 +17,8 @@ extends Node2D
 ## The actual loading area will be this value in all 4 directions.
 @export var loading_radius: Vector2i = Vector2i(2, 2)
 ## Amount of miliseconds the loader waits before it checks if new chunks need to be loaded.
-@export_range(0, 1, 1, "or_greater", "suffix:ms") var update_rate: int = 0
+@export_range(0, 1, 1, "or_greater", "suffix:ms")
+var update_rate: int = 0
 ## Executes the loading process on ready [br]
 ## [b]Warning:[/b] No chunks might load if set to false.
 @export var load_on_ready: bool = true

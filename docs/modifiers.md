@@ -17,7 +17,8 @@ Fills the full rectangle of tiles.
 ![fill showcase](assets/fill-showcase.png)
 *Using Fill to generate autotiled walls around a WalkerGenerator's generation.*
 
-### <img src="assets/icons/carver.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Carver
+### <img src="assets/icons/carver.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Carver <sup>2D/3D</sup>
+
 
 Carves holes into the map using a noise texture.
 
@@ -36,11 +37,11 @@ An example without the Walls modifier looks like this:
 
 ![without walls modifier](assets/walls-modifier-showcase-before.png)
 
-### <img src="assets/icons/noise_painter.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Noise Painter
+### <img src="assets/icons/noise_painter.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Noise Painter <sup>2D/3D</sup>
 
 Replaces tiles in the map with another tile based on a noise texture and a threshold.
 
-### <img src="assets/icons/heightmap_painter.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Heightmap Painter
+### <img src="assets/icons/heightmap_painter.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Heightmap Painter <sup>2D/3D</sup>
 
 Replaces tiles in the map with another tile based on a noise heightmap.
 

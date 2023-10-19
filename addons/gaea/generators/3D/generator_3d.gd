@@ -5,7 +5,8 @@ extends GaeaGenerator
 
 ## Used to transform a world position into a map position,
 ## mainly used by the [ChunkLoader]. May also be used by
-## a [GaeaRenderer]. Otherwise doesn't affect generation.
+## a [GaeaRenderer]. Otherwise doesn't affect generation.[br]
+## [b]In meters.
 @export var tile_size: Vector3i = Vector3i(1, 1, 1)
 
 
