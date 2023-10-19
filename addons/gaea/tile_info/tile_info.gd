@@ -1,3 +1,4 @@
+@tool
 @icon("tile_info.svg")
 class_name TileInfo
 extends Resource
@@ -6,4 +7,7 @@ extends Resource
 ## a grid of [TileInfo]s.
 
 ## [b]Optional[/b]. Used by modifiers for filtering.
-@export var id: String = ""
+@export var id: String = "" :
+	set(value):
+		id = value
+		resource_name = id.to_pascal_case()
