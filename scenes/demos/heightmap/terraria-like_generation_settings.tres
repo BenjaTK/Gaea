@@ -8,7 +8,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
-seed = -1649110873
+seed = -484909089
 
 [sub_resource type="Resource" id="Resource_6kmi4"]
 script = ExtResource("2_6f082")
