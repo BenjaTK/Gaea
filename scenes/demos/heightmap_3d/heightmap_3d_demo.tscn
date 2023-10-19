@@ -1,6 +1,5 @@
-[gd_scene load_steps=30 format=3 uid="uid://dcn44kotave0d"]
+[gd_scene load_steps=29 format=3 uid="uid://dcn44kotave0d"]
 
-[ext_resource type="Script" path="res://scenes/demos/heightmap_3d/heightmap_3d_demo.gd" id="1_nvte4"]
 [ext_resource type="Script" path="res://addons/gaea/generators/3D/heightmap_generator_3d/heightmap_generator_3d.gd" id="2_fgwco"]
 [ext_resource type="Script" path="res://addons/gaea/generators/3D/heightmap_generator_3d/heightmap_generator_3d_settings.gd" id="3_d8yvu"]
 [ext_resource type="Script" path="res://addons/gaea/tile_info/gridmap_tile_info.gd" id="3_w4ec0"]
@@ -103,7 +102,6 @@ item/3/navigation_layers = 1
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2vxul"]
 
 [node name="Heightmap3DDemo" type="Node3D"]
-script = ExtResource("1_nvte4")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_8u2mr")

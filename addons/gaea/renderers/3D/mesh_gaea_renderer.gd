@@ -1,4 +1,5 @@
 @tool
+class_name MeshGaeaRenderer
 extends GaeaRenderer3D
 
 
