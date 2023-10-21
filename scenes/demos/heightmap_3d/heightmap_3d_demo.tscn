@@ -1,0 +1,212 @@
+[gd_scene load_steps=37 format=3 uid="uid://dcn44kotave0d"]
+
+[ext_resource type="Script" path="res://addons/gaea/generators/3D/heightmap_generator_3d/heightmap_generator_3d.gd" id="2_fgwco"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/3D/heightmap_painter_3d.gd" id="2_mv8xs"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/3D/carver_3d.gd" id="2_t8akv"]
+[ext_resource type="Script" path="res://addons/gaea/generators/3D/heightmap_generator_3d/heightmap_generator_3d_settings.gd" id="3_d8yvu"]
+[ext_resource type="Script" path="res://addons/gaea/tile_info/gridmap_tile_info.gd" id="3_w4ec0"]
+[ext_resource type="Script" path="res://addons/gaea/renderers/3D/gridmap_gaea_renderer.gd" id="5_6jooj"]
+[ext_resource type="Texture2D" uid="uid://dn5fnbvvbowrl" path="res://scenes/demos/heightmap_3d/grass_top.png" id="6_r4fc5"]
+[ext_resource type="Texture2D" uid="uid://cwq2r4c7t6gsv" path="res://scenes/demos/heightmap_3d/stone.png" id="7_aol1v"]
+[ext_resource type="Texture2D" uid="uid://d2q1tt51g1gqq" path="res://scenes/demos/heightmap_3d/dirt.png" id="8_6347s"]
+[ext_resource type="Texture2D" uid="uid://x8sdkn1d27pp" path="res://scenes/demos/heightmap_3d/greystone.png" id="9_pq2v8"]
+[ext_resource type="Script" path="res://addons/gaea/chunk_loader_3d.gd" id="11_ui5m1"]
+[ext_resource type="Script" path="res://scenes/demos/heightmap_3d/actor.gd" id="12_qacbp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jumc8"]
+sky_top_color = Color(0.435294, 0.482353, 0.67451, 1)
+sky_horizon_color = Color(0.513726, 0.541176, 0.670588, 1)
+ground_bottom_color = Color(0.423529, 0.494118, 0.54902, 1)
+ground_horizon_color = Color(0.494118, 0.545098, 0.670588, 1)
+sun_angle_max = 108.66
+
+[sub_resource type="Sky" id="Sky_tk216"]
+sky_material = SubResource("ProceduralSkyMaterial_jumc8")
+
+[sub_resource type="Environment" id="Environment_8u2mr"]
+background_mode = 2
+sky = SubResource("Sky_tk216")
+ambient_light_source = 3
+tonemap_mode = 2
+glow_enabled = true
+adjustment_enabled = true
+adjustment_contrast = 1.2
+adjustment_saturation = 1.1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g0ov0"]
+noise_type = 3
+seed = 1090652888
+
+[sub_resource type="Resource" id="Resource_cidha"]
+script = ExtResource("3_w4ec0")
+index = 2
+id = "dirt"
+
+[sub_resource type="Resource" id="Resource_7ejcr"]
+script = ExtResource("2_mv8xs")
+use_generator_noise = true
+noise = SubResource("FastNoiseLite_g0ov0")
+random_noise_seed = true
+tile = SubResource("Resource_cidha")
+height_offset = 94
+height_intensity = 19
+modifier_seed = 3421062700
+filter_type = 0
+filter_ids = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_fxnuj"]
+script = ExtResource("3_w4ec0")
+index = 1
+id = "stone"
+
+[sub_resource type="Resource" id="Resource_51q2p"]
+resource_name = "Stone"
+script = ExtResource("2_mv8xs")
+use_generator_noise = true
+noise = SubResource("FastNoiseLite_g0ov0")
+random_noise_seed = true
+tile = SubResource("Resource_fxnuj")
+height_offset = 89
+height_intensity = 18
+modifier_seed = 3421062700
+filter_type = 0
+filter_ids = Array[String]([])
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_87g0h"]
+noise_type = 3
+seed = -454777736
+frequency = 0.0521
+metadata/_preview_in_3d_space_ = true
+
+[sub_resource type="Resource" id="Resource_m5cy5"]
+resource_name = "Caves"
+script = ExtResource("2_t8akv")
+noise = SubResource("FastNoiseLite_87g0h")
+random_noise_seed = true
+threshold = 0.15
+max = Vector3(inf, inf, inf)
+min = Vector3(inf_neg, inf_neg, inf_neg)
+modifier_seed = 958410610
+filter_type = 0
+filter_ids = Array[String]([])
+
+[sub_resource type="Resource" id="Resource_ttsfp"]
+script = ExtResource("3_w4ec0")
+index = 0
+id = ""
+
+[sub_resource type="Resource" id="Resource_lyesv"]
+script = ExtResource("3_d8yvu")
+tile = SubResource("Resource_ttsfp")
+noise = SubResource("FastNoiseLite_g0ov0")
+random_noise_seed = true
+infinite = true
+world_size = Vector2(64, 64)
+height_offset = 96
+height_intensity = 20
+min_height = -20
+modifiers = Array[Resource("res://addons/gaea/modifiers/3D/modifier_3d.gd")]([SubResource("Resource_7ejcr"), SubResource("Resource_51q2p"), SubResource("Resource_m5cy5")])
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o13k8"]
+albedo_texture = ExtResource("6_r4fc5")
+
+[sub_resource type="BoxMesh" id="BoxMesh_njruc"]
+material = SubResource("StandardMaterial3D_o13k8")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_22ikv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6k0j8"]
+albedo_texture = ExtResource("7_aol1v")
+
+[sub_resource type="BoxMesh" id="BoxMesh_7lb8a"]
+material = SubResource("StandardMaterial3D_6k0j8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vrt1s"]
+albedo_texture = ExtResource("8_6347s")
+
+[sub_resource type="BoxMesh" id="BoxMesh_5qcl4"]
+material = SubResource("StandardMaterial3D_vrt1s")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2nfw2"]
+albedo_texture = ExtResource("9_pq2v8")
+
+[sub_resource type="BoxMesh" id="BoxMesh_vnl7n"]
+material = SubResource("StandardMaterial3D_2nfw2")
+
+[sub_resource type="MeshLibrary" id="MeshLibrary_eq63i"]
+item/0/name = "grass"
+item/0/mesh = SubResource("BoxMesh_njruc")
+item/0/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/shapes = [SubResource("BoxShape3D_22ikv"), Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)]
+item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/0/navigation_layers = 1
+item/1/name = "stone"
+item/1/mesh = SubResource("BoxMesh_7lb8a")
+item/1/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/shapes = []
+item/1/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/1/navigation_layers = 1
+item/2/name = "dirt"
+item/2/mesh = SubResource("BoxMesh_5qcl4")
+item/2/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/shapes = []
+item/2/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/2/navigation_layers = 1
+item/3/name = "greystone"
+item/3/mesh = SubResource("BoxMesh_vnl7n")
+item/3/mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/shapes = []
+item/3/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+item/3/navigation_layers = 1
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3wb0y"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2vxul"]
+
+[node name="Heightmap3DDemo" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_8u2mr")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.997185, -0.0481953, 0.057437, 0.0365528, 0.356364, 0.933632, -0.0654652, 0.933103, -0.353599, 0, 0, 0)
+shadow_enabled = true
+
+[node name="HeightmapGenerator3D" type="Node" parent="."]
+script = ExtResource("2_fgwco")
+settings = SubResource("Resource_lyesv")
+preview = true
+
+[node name="GridmapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("grid_map", "generator")]
+script = ExtResource("5_6jooj")
+grid_map = NodePath("../GridMap")
+generator = NodePath("../HeightmapGenerator3D")
+
+[node name="GridMap" type="GridMap" parent="."]
+mesh_library = SubResource("MeshLibrary_eq63i")
+cell_size = Vector3(1, 1, 1)
+
+[node name="ChunkLoader3D" type="Node3D" parent="." node_paths=PackedStringArray("generator", "renderer", "actor")]
+script = ExtResource("11_ui5m1")
+generator = NodePath("../HeightmapGenerator3D")
+renderer = NodePath("../GridmapGaeaRenderer")
+actor = NodePath("../Actor")
+loading_radius = Vector3i(2, 1, 2)
+update_rate = 10
+
+[node name="Actor" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 112, 22)
+script = ExtResource("12_qacbp")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Actor"]
+mesh = SubResource("CapsuleMesh_3wb0y")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Actor"]
+shape = SubResource("CapsuleShape3D_2vxul")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Actor"]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+spring_length = 15.0
+
+[node name="Camera3D" type="Camera3D" parent="Actor/SpringArm3D"]
