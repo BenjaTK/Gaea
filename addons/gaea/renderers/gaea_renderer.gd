@@ -28,7 +28,7 @@ func _ready() -> void:
 
 ## Draws the whole grid.
 func _draw() -> void:
-	pass
+	push_warning("_draw at %s not overriden" % get_path())
 
 
 func _connect_signals() -> void:

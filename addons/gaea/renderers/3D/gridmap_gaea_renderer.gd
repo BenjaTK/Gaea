@@ -14,6 +14,7 @@ func _draw_area(area: AABB) -> void:
 			for z in range(area.position.z, area.end.z + 1):
 				var tile_position := Vector3(x, y, z)
 				if not generator.grid.has(tile_position):
+					grid_map.set_cell_item(tile_position, -1)
 					continue
 
 				if only_draw_visible_cells and not GaeaGenerator3D.has_empty_neighbor(generator.grid, tile_position):

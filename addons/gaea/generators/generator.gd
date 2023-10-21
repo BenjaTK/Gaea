@@ -34,7 +34,7 @@ func _ready() -> void:
 
 
 func generate() -> void:
-	pass
+	push_warning("generate method at %s not overriden" % get_path())
 
 
 func erase() -> void:

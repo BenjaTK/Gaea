@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 func generate_chunk(chunk_position: Vector3i) -> void:
-	pass
+	push_warning("generate_chunk method not overriden at %s" % get_path())
 
 
 func erase_chunk(chunk_position: Vector3i) -> void:

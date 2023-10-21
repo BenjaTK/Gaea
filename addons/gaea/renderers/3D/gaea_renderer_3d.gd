@@ -5,7 +5,7 @@ extends GaeaRenderer
 ## Draws the [param area]. Override this function
 ## to make custom [GaeaRenderer]s.
 func _draw_area(area: AABB) -> void:
-	pass
+	push_warning("_draw_area at %s not overriden" % get_path())
 
 ## Draws the chunk at [param chunk_position].
 func _draw_chunk(chunk_position: Vector3i) -> void:

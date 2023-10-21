@@ -43,6 +43,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 
+	if generator.settings.get("infinite") == false:
+		push_warning("Generator's settings at %s has infinite disabled, can't generate chunks." % generator.get_path())
+		return
+
 	var current_time = Time.get_ticks_msec()
 	if current_time - _last_run > update_rate:
 		# todo make check loading
@@ -90,14 +94,14 @@ func _update_loading(actor_position: Vector3i) -> void:
 func _get_actors_position() -> Vector3i:
 	# getting actors positions
 	var actor_position := Vector3i.ZERO
-	if actor != null: actor_position = actor.global_position.floor()
+	if actor != null: actor_position = actor.global_position.round()
 
 	var tile_position: Vector3i = actor_position / generator.tile_size
 
 	var chunk_position := Vector3i(
-		floori(tile_position.x / generator.chunk_size),
-		floori(tile_position.y / generator.chunk_size),
-		floori(tile_position.z / generator.chunk_size)
+		roundi(tile_position.x / generator.chunk_size),
+		roundi(tile_position.y / generator.chunk_size),
+		roundi(tile_position.z / generator.chunk_size)
 	)
 
 	return chunk_position
@@ -123,12 +127,6 @@ func _get_required_chunks(actor_position: Vector3i) -> Array[Vector3i]:
 		for y in y_range:
 			for z in z_range:
 				chunks.append(Vector3i(x, y, z))
-
-	# Sort based on distance to player.
-	chunks.sort_custom(
-		func(a, b) -> bool:
-			return abs(actor_position - a) < abs(actor_position - b)
-			)
 	return chunks
 
 
