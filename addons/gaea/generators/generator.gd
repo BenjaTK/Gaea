@@ -29,7 +29,7 @@ func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
 
-	## Wait for a process frame, so the Renderer can connect the signals.
+	# Wait for a process frame, so the Renderer can connect the signals.
 	await get_tree().process_frame
 
 	if generate_on_ready:
