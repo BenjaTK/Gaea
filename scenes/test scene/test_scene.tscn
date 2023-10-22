@@ -1,3 +1,158 @@
-[gd_scene format=3 uid="uid://co2ewyknt1m05"]
+[gd_scene load_steps=24 format=3 uid="uid://co2ewyknt1m05"]
+
+[ext_resource type="Script" path="res://addons/gaea/generators/2D/wave_function_generator/wave_function_generator_2d.gd" id="1_s0e1y"]
+[ext_resource type="Script" path="res://addons/gaea/generators/2D/wave_function_generator/wave_function_2d_entry.gd" id="2_ltwx5"]
+[ext_resource type="Script" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="3_7x24t"]
+[ext_resource type="Script" path="res://addons/gaea/generators/2D/wave_function_generator/wave_function_generator_2d_settings.gd" id="4_36lxy"]
+[ext_resource type="Texture2D" uid="uid://1ocq1a8wg43k" path="res://scenes/test scene/tiles_packed.png" id="4_qdj43"]
+[ext_resource type="Texture2D" uid="uid://bg3fptwte4i0u" path="res://scenes/test scene/grid.png" id="5_grc5g"]
+[ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="6_535tg"]
+[ext_resource type="Texture2D" uid="uid://dhxcyro4op2xp" path="res://scenes/demos/walker/tiny-dungeon - Kenney.png" id="6_hoa5f"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mload"]
+texture = ExtResource("5_grc5g")
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_no33a"]
+texture = ExtResource("6_hoa5f")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+1:2/0 = 0
+0:2/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+10:4/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y2kmk"]
+texture = ExtResource("4_qdj43")
+0:4/0 = 0
+0:5/0 = 0
+2:4/0 = 0
+8:4/0 = 0
+6:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_o2s0i"]
+sources/0 = SubResource("TileSetAtlasSource_mload")
+sources/1 = SubResource("TileSetAtlasSource_no33a")
+sources/2 = SubResource("TileSetAtlasSource_y2kmk")
+
+[sub_resource type="Resource" id="Resource_1u8uu"]
+resource_name = "Forest"
+script = ExtResource("3_7x24t")
+type = 0
+layer = 0
+source_id = 2
+atlas_coord = Vector2i(0, 5)
+alternative_tile = 0
+id = "forest"
+
+[sub_resource type="Resource" id="Resource_xwpye"]
+script = ExtResource("2_ltwx5")
+tile_info = SubResource("Resource_1u8uu")
+weight = 2.0
+neighbors_up = Array[StringName]([&"forest", &"tree"])
+neighbors_down = Array[StringName]([&"forest", &"tree"])
+neighbors_left = Array[StringName]([&"forest", &"tree"])
+neighbors_right = Array[StringName]([&"forest", &"tree"])
+
+[sub_resource type="Resource" id="Resource_27uvi"]
+resource_name = "Tree"
+script = ExtResource("3_7x24t")
+type = 0
+layer = 0
+source_id = 2
+atlas_coord = Vector2i(0, 4)
+alternative_tile = 0
+id = "tree"
+
+[sub_resource type="Resource" id="Resource_d7bi8"]
+script = ExtResource("2_ltwx5")
+tile_info = SubResource("Resource_27uvi")
+weight = 1.0
+neighbors_up = Array[StringName]([&"forest", &"tree", &"grass"])
+neighbors_down = Array[StringName]([&"forest", &"tree", &"grass"])
+neighbors_left = Array[StringName]([&"forest", &"tree", &"grass"])
+neighbors_right = Array[StringName]([&"forest", &"tree", &"grass"])
+
+[sub_resource type="Resource" id="Resource_lmsbr"]
+resource_name = "Grass"
+script = ExtResource("3_7x24t")
+type = 0
+layer = 0
+source_id = 2
+atlas_coord = Vector2i(2, 4)
+alternative_tile = 0
+id = "grass"
+
+[sub_resource type="Resource" id="Resource_mw68j"]
+script = ExtResource("2_ltwx5")
+tile_info = SubResource("Resource_lmsbr")
+weight = 5.0
+neighbors_up = Array[StringName]([&"grass", &"sand"])
+neighbors_down = Array[StringName]([&"grass", &"sand"])
+neighbors_left = Array[StringName]([&"grass", &"sand"])
+neighbors_right = Array[StringName]([&"grass", &"sand"])
+
+[sub_resource type="Resource" id="Resource_3m4mi"]
+resource_name = "Sand"
+script = ExtResource("3_7x24t")
+type = 0
+layer = 0
+source_id = 2
+atlas_coord = Vector2i(8, 4)
+alternative_tile = 0
+id = "sand"
+
+[sub_resource type="Resource" id="Resource_ba4k6"]
+script = ExtResource("2_ltwx5")
+tile_info = SubResource("Resource_3m4mi")
+weight = 0.5
+neighbors_up = Array[StringName]([&"water", &"sand"])
+neighbors_down = Array[StringName]([&"water", &"sand"])
+neighbors_left = Array[StringName]([&"water", &"sand"])
+neighbors_right = Array[StringName]([&"water", &"sand"])
+
+[sub_resource type="Resource" id="Resource_wi0k6"]
+resource_name = "Water"
+script = ExtResource("3_7x24t")
+type = 0
+layer = 0
+source_id = 2
+atlas_coord = Vector2i(6, 3)
+alternative_tile = 0
+id = "water"
+
+[sub_resource type="Resource" id="Resource_b0yrl"]
+script = ExtResource("2_ltwx5")
+tile_info = SubResource("Resource_wi0k6")
+weight = 0.05
+neighbors_up = Array[StringName]([&"water"])
+neighbors_down = Array[StringName]([&"water"])
+neighbors_left = Array[StringName]([&"water"])
+neighbors_right = Array[StringName]([&"water"])
+
+[sub_resource type="Resource" id="Resource_8u0ge"]
+script = ExtResource("4_36lxy")
+world_size = Vector2i(32, 32)
+entries = Array[ExtResource("2_ltwx5")]([SubResource("Resource_xwpye"), SubResource("Resource_d7bi8"), SubResource("Resource_mw68j"), SubResource("Resource_ba4k6"), SubResource("Resource_b0yrl")])
+modifiers = Array[Resource("res://addons/gaea/modifiers/2D/modifier_2d.gd")]([])
 
 [node name="TestScene" type="Node2D"]
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_o2s0i")
+format = 2
+
+[node name="WaveFunctionGenerator2D" type="Node" parent="."]
+script = ExtResource("1_s0e1y")
+settings = SubResource("Resource_8u0ge")
+preview = true
+
+[node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
+script = ExtResource("6_535tg")
+tile_map = NodePath("../TileMap")
+generator = NodePath("../WaveFunctionGenerator2D")
