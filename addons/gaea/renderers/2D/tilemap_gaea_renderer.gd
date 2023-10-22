@@ -33,6 +33,7 @@ func _draw_area(area: Rect2i) -> void:
 
 			var tile = tile_position
 			var tile_info = generator.grid[tile_position]
+
 			if not (tile_info is TilemapTileInfo):
 				continue
 
