@@ -6,7 +6,7 @@ extends GeneratorSettings2D
 ## it's position in the TileSet.
 @export var tile: TileInfo
 ## The generation's size in tiles.
-@export var world_size: Vector2i = Vector2i(50, 50)
+@export var world_size: Vector2i = Vector2i(64, 64)
 ## The percentage of empty tiles the generator will start with.
 ## High values can lead to empty maps.
 @export_range(0.0, 1.0) var noise_density := 0.5
