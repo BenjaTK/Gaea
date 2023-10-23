@@ -35,13 +35,13 @@ extends GeneratorSettings2D
 		if is_instance_valid(falloff_map):
 			falloff_map.size = world_size
 @export_group("Falloff", "falloff_")
-## Enables the usage of a [FallofMap], which makes tiles
+## Enables the usage of a [FalloffMap], which makes tiles
 ## farther away from the center be lower in the heightmap,
-## forming islands.
+## forming islands. Doesn't work if [param infinite] is [code]true[/code].
 @export var falloff_enabled: bool = false
-## Enables the usage of a [FallofMap], which makes tiles
+## Enables the usage of a [FalloffMap], which makes tiles
 ## farther away from the center be lower in the heightmap,
-## forming islands.
+## forming islands. Doesn't work if [param infinite] is [code]true[/code].
 @export var falloff_map: FalloffMap :
 	set(value):
 		falloff_map = value
