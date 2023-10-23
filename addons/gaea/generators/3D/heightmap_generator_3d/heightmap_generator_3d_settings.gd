@@ -19,3 +19,16 @@ extends GeneratorSettings3D
 @export var height_intensity := 20
 ## Negative values means the HeightmapGenerator will go below y=0.
 @export var min_height := 0
+@export_group("Falloff", "falloff_")
+## Enables the usage of a [FalloffMap], which makes tiles
+## farther away from the center be lower in the heightmap,
+## forming islands. Doesn't work if [param infinite] is [code]true[/code].
+@export var falloff_enabled: bool = false
+## A [FalloffMap], which makes tiles
+## farther away from the center be lower in the heightmap,
+## forming islands. Doesn't work if [param infinite] is [code]true[/code].
+@export var falloff_map: FalloffMap :
+	set(value):
+		falloff_map = value
+		if falloff_map != null:
+			falloff_map.size = world_size

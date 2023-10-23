@@ -75,6 +75,9 @@ func _set_grid_area(rect: Rect2i) -> void:
 					continue
 
 			var noise = settings.noise.get_noise_2d(x, y)
+			if settings.falloff_enabled and settings.falloff_map and not settings.infinite:
+				noise = ((noise + 1) * settings.falloff_map.get_value(Vector2(x, y))) - 1.0
+
 			for threshold in settings.tiles:
 				if noise > threshold:
 					grid[Vector2(x, y)] = settings.tiles[threshold]

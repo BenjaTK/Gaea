@@ -85,6 +85,9 @@ func _set_grid_area(area: AABB) -> void:
 					continue
 
 			var height = floor(settings.noise.get_noise_2d(x, z) * settings.height_intensity + settings.height_offset)
+			if settings.falloff_enabled and settings.falloff_map and not settings.infinite:
+				height = ((height + 1) * settings.falloff_map.get_value(Vector2(x, z))) - 1.0
+
 			for y in range(area.position.y, area.end.y):
 				if y <= height and y >= settings.min_height:
 					grid[Vector3(x, y, z)] = settings.tile
