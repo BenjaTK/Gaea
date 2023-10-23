@@ -29,4 +29,21 @@ extends GeneratorSettings2D
 @export var random_noise_seed := true
 ## Infinite worlds only work with a [ChunkLoader].
 @export var infinite: bool = false
-@export var world_size: Vector2i = Vector2i(256, 256)
+@export var world_size: Vector2i = Vector2i(256, 256) :
+	set(value):
+		world_size = value
+		if is_instance_valid(falloff_map):
+			falloff_map.size = world_size
+@export_group("Falloff", "falloff_")
+## Enables the usage of a [FallofMap], which makes tiles
+## farther away from the center be lower in the heightmap,
+## forming islands.
+@export var falloff_enabled: bool = false
+## Enables the usage of a [FallofMap], which makes tiles
+## farther away from the center be lower in the heightmap,
+## forming islands.
+@export var falloff_map: FalloffMap :
+	set(value):
+		falloff_map = value
+		if falloff_map != null:
+			falloff_map.size = world_size
