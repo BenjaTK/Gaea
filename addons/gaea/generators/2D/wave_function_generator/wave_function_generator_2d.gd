@@ -20,8 +20,14 @@ const ADJACENT_NEIGHBORS: Dictionary = {
 var _wave_function: Dictionary
 
 
-func generate() -> void:
-	erase()
+func generate(starting_grid: Dictionary = {}) -> void:
+	if Engine.is_editor_hint() and not preview:
+		return
+
+	if starting_grid.is_empty():
+		erase()
+	else:
+		grid = starting_grid
 
 	for x in settings.world_size.x:
 		for y in settings.world_size.y:
@@ -42,8 +48,13 @@ func generate() -> void:
 
 	_apply_modifiers(settings.modifiers)
 
-	grid_updated.emit()
 	_wave_function.clear()
+
+	if is_instance_valid(next_pass):
+		next_pass.generate(grid)
+		return
+
+	grid_updated.emit()
 
 
 func _collapse(coords: Vector2) -> void:

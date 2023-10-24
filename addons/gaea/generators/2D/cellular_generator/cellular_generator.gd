@@ -11,7 +11,7 @@ extends GaeaGenerator2D
 @export var settings: CellularGeneratorSettings
 
 
-func generate() -> void:
+func generate(starting_grid: Dictionary = {}) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
@@ -19,12 +19,21 @@ func generate() -> void:
 		push_error("%s doesn't have a settings resource" % name)
 		return
 
-	erase()
+	if starting_grid.is_empty():
+		erase()
+	else:
+		grid = starting_grid
+
 	_set_noise()
 	_smooth()
 	_apply_modifiers(settings.modifiers)
 
+	if is_instance_valid(next_pass):
+		next_pass.generate(grid)
+		return
+
 	grid_updated.emit()
+
 
 
 func _set_noise() -> void:

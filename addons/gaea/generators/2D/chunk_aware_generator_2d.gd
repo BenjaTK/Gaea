@@ -21,7 +21,7 @@ func _ready() -> void:
 	super._ready()
 
 
-func generate_chunk(chunk_position: Vector2i) -> void:
+func generate_chunk(chunk_position: Vector2i, starting_grid: Dictionary = {}) -> void:
 	push_warning("generate_chunk method not overriden at %s" % get_path())
 
 
@@ -31,6 +31,7 @@ func erase_chunk(chunk_position: Vector2i) -> void:
 			grid.erase(Vector2(x, y))
 
 	chunk_updated.emit(chunk_position)
+
 
 
 func _apply_modifiers_chunk(modifiers, chunk_position: Vector2i) -> void:
@@ -45,6 +46,10 @@ func _apply_modifiers_chunk(modifiers, chunk_position: Vector2i) -> void:
 func unload_chunk(chunk_position: Vector2i) -> void:
 	erase_chunk(chunk_position)
 	generated_chunks.erase(chunk_position)
+
+	if is_instance_valid(next_pass) and next_pass is ChunkAwareGenerator2D:
+		next_pass.unload_chunk(chunk_position)
+		return
 
 
 ### Utils ###
