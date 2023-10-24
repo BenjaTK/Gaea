@@ -42,8 +42,8 @@ func generate() -> void:
 
 	_apply_modifiers(settings.modifiers)
 	var time_elapsed : float = Time.get_unix_time_from_system() - time_now
-	if Engine.is_editor_hint():
-		print("Generating took %s seconds" % time_elapsed)
+	if OS.is_debug_build():
+		print_debug("Generating took %s seconds" % time_elapsed)
 	grid_updated.emit()
 	_wave_function.clear()
 
