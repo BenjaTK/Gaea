@@ -15,7 +15,7 @@ func _ready() -> void:
 	super()
 
 
-func generate() -> void:
+func generate(starting_grid: Dictionary = {}) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
@@ -26,14 +26,22 @@ func generate() -> void:
 	if settings.random_noise_seed:
 		settings.noise.seed = randi()
 
-	erase()
+	if starting_grid.is_empty():
+		erase()
+	else:
+		grid = starting_grid
+
 	_set_grid()
 	_apply_modifiers(settings.modifiers)
+
+	if is_instance_valid(next_pass):
+		next_pass.generate(grid)
+		return
 
 	grid_updated.emit()
 
 
-func generate_chunk(chunk_position: Vector3i) -> void:
+func generate_chunk(chunk_position: Vector3i, starting_grid: Dictionary = {}) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
@@ -41,11 +49,22 @@ func generate_chunk(chunk_position: Vector3i) -> void:
 		push_error("%s doesn't have a settings resource" % name)
 		return
 
-	erase_chunk(chunk_position)
+	if starting_grid.is_empty():
+		erase_chunk(chunk_position)
+	else:
+		grid = starting_grid
+
 	_set_chunk_grid(chunk_position)
 	_apply_modifiers_chunk(settings.modifiers, chunk_position)
 
 	generated_chunks.append(chunk_position)
+
+	if is_instance_valid(next_pass):
+		if not next_pass is ChunkAwareGenerator3D:
+			push_error("next_pass generator is not a ChunkAwareGenerator3D")
+		else:
+			next_pass.generate_chunk(chunk_position, grid)
+			return
 
 	chunk_updated.emit(chunk_position)
 
