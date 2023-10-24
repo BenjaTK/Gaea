@@ -6,7 +6,9 @@ extends Node
 ##
 ## Takes a generator's grid and draws/renders it.
 
-
+## The generator to be rendered.[br]
+## [b]Note:[/b] If you're chaining generators together using [param next_pass],
+## this has to be set to the last generator in the chain.
 @export var generator: GaeaGenerator :
 	set(value):
 		generator = value
