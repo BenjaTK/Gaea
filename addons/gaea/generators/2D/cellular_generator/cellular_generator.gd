@@ -24,7 +24,8 @@ func generate() -> void:
 	_smooth()
 	_apply_modifiers(settings.modifiers)
 	var time_elapsed : float = Time.get_unix_time_from_system() - time_now
-	print("Generating took %s seconds" % time_elapsed)
+	if Engine.is_editor_hint():
+		print("Generating took %s seconds" % time_elapsed)
 	grid_updated.emit()
 
 
