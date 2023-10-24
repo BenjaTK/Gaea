@@ -20,6 +20,7 @@ func _ready() -> void:
 func generate() -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
+	var time_now : float = Time.get_unix_time_from_system()
 
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
@@ -31,7 +32,8 @@ func generate() -> void:
 	erase()
 	_set_grid()
 	_apply_modifiers(settings.modifiers)
-
+	var time_elapsed : float = Time.get_unix_time_from_system() - time_now
+	print("Generating took %s seconds" % time_elapsed)
 	grid_updated.emit()
 
 

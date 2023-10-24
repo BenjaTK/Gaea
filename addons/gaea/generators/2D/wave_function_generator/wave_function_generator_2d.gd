@@ -22,7 +22,7 @@ var _wave_function: Dictionary
 
 func generate() -> void:
 	erase()
-
+	var time_now : float = Time.get_unix_time_from_system()
 	for x in settings.world_size.x:
 		for y in settings.world_size.y:
 			_wave_function[Vector2(x, y)] = settings.entries.duplicate(true)
@@ -41,7 +41,8 @@ func generate() -> void:
 		grid[cell] = _wave_function[cell][0].tile_info
 
 	_apply_modifiers(settings.modifiers)
-
+	var time_elapsed : float = Time.get_unix_time_from_system() - time_now
+	print("Generating took %s seconds" % time_elapsed)
 	grid_updated.emit()
 	_wave_function.clear()
 

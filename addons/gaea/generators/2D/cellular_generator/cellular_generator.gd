@@ -18,12 +18,13 @@ func generate() -> void:
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
 		return
-
+	var time_now : float = Time.get_unix_time_from_system()
 	erase()
 	_set_noise()
 	_smooth()
 	_apply_modifiers(settings.modifiers)
-
+	var time_elapsed : float = Time.get_unix_time_from_system() - time_now
+	print("Generating took %s seconds" % time_elapsed)
 	grid_updated.emit()
 
 
