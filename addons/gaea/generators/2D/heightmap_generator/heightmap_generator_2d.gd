@@ -16,7 +16,7 @@ func _ready() -> void:
 	super()
 
 
-func generate() -> void:
+func generate(starting_grid: Dictionary = {}) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 	var time_now :int = Time.get_ticks_msec()
@@ -26,18 +26,25 @@ func generate() -> void:
 		return
 
 	if settings.random_noise_seed:
-		settings.noise.seed = randi()		
-	erase()
+		settings.noise.seed = randi()
+
+	if starting_grid.is_empty():
+		erase()
+	else:
+		grid = starting_grid
 	_set_grid()
 	_apply_modifiers(settings.modifiers)
-			
+
+	if is_instance_valid(next_pass):
+		next_pass.generate(grid)
+		return
 	var time_elapsed :int = Time.get_ticks_msec() - time_now
-	if OS.is_debug_build():
-		print_debug("Generating took %s seconds" % (float(time_elapsed) / 100))
+  if OS.is_debug_build():
+	  print_debug("Generating took %s seconds" % (float(time_elapsed) / 100))
 	grid_updated.emit()
 
 
-func generate_chunk(chunk_position: Vector2i) -> void:
+func generate_chunk(chunk_position: Vector2i, starting_grid: Dictionary = {}) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
@@ -45,11 +52,22 @@ func generate_chunk(chunk_position: Vector2i) -> void:
 		push_error("%s doesn't have a settings resource" % name)
 		return
 
-	erase_chunk(chunk_position)
+	if starting_grid.is_empty():
+		erase_chunk(chunk_position)
+	else:
+		grid = starting_grid
+
 	_set_chunk_grid(chunk_position)
 	_apply_modifiers_chunk(settings.modifiers, chunk_position)
 
 	generated_chunks.append(chunk_position)
+
+	if is_instance_valid(next_pass):
+		if not next_pass is ChunkAwareGenerator2D:
+			push_error("next_pass generator is not a ChunkAwareGenerator2D")
+		else:
+			next_pass.generate_chunk(chunk_position, grid)
+			return
 
 	chunk_updated.emit(chunk_position)
 

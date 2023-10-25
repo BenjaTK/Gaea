@@ -20,9 +20,15 @@ const ADJACENT_NEIGHBORS: Dictionary = {
 var _wave_function: Dictionary
 
 
-func generate() -> void:
-	erase()
+func generate(starting_grid: Dictionary = {}) -> void:
+	if Engine.is_editor_hint() and not preview:
+		return
 	var time_now :int = Time.get_ticks_msec()
+	if starting_grid.is_empty():
+		erase()
+	else:
+		grid = starting_grid
+
 	for x in settings.world_size.x:
 		for y in settings.world_size.y:
 			_wave_function[Vector2(x, y)] = settings.entries.duplicate(true)
@@ -41,11 +47,16 @@ func generate() -> void:
 		grid[cell] = _wave_function[cell][0].tile_info
 
 	_apply_modifiers(settings.modifiers)
+
+	_wave_function.clear()
+
+	if is_instance_valid(next_pass):
+		next_pass.generate(grid)
+		return
 	var time_elapsed :int = Time.get_ticks_msec() - time_now
 	if OS.is_debug_build():
 		print_debug("Generating took %s seconds" % (float(time_elapsed) / 100))
 	grid_updated.emit()
-	_wave_function.clear()
 
 
 func _collapse(coords: Vector2) -> void:

@@ -21,7 +21,7 @@ func _ready() -> void:
 	super._ready()
 
 
-func generate_chunk(chunk_position: Vector3i) -> void:
+func generate_chunk(chunk_position: Vector3i, starting_grid: Dictionary = {}) -> void:
 	push_warning("generate_chunk method not overriden at %s" % get_path())
 
 

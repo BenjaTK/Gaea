@@ -36,7 +36,7 @@ func _ready() -> void:
 		generate()
 
 
-func generate() -> void:
+func generate(starting_grid: Dictionary = {}) -> void:
 	push_warning("generate method at %s not overriden" % get_path())
 
 

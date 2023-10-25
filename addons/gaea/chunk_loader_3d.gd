@@ -4,7 +4,9 @@ class_name ChunkLoader3D
 extends Node3D
 
 
-## The generator that loads the chunks.
+## The generator that loads the chunks.[br]
+## [b]Note:[/b] If you're chaining generators together using [param next_pass],
+## this has to be set to the first generator in the chain.
 @export var generator: ChunkAwareGenerator3D
 ## [b]Optional[/b]. In this case it is used to prevent
 ## generating chunks before the [GaeaRenderer] is ready, which

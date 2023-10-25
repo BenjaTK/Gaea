@@ -11,22 +11,33 @@ extends GaeaGenerator2D
 @export var settings: CellularGeneratorSettings
 
 
-func generate() -> void:
+func generate(starting_grid: Dictionary = {}) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
 		return
+
 	var time_now :int = Time.get_ticks_msec()
-	erase()
+
+	if starting_grid.is_empty():
+		erase()
+	else:
+		grid = starting_grid
+
 	_set_noise()
 	_smooth()
 	_apply_modifiers(settings.modifiers)
+
+	if is_instance_valid(next_pass):
+		next_pass.generate(grid)
+		return
 	var time_elapsed :int = Time.get_ticks_msec() - time_now
 	if OS.is_debug_build():
 		print("Generating took %s seconds" % (float(time_elapsed) / 100))
 	grid_updated.emit()
+
 
 
 func _set_noise() -> void:
