@@ -20,10 +20,6 @@ func get_area() -> Rect2i:
 
 ### Helper Functions ###
 
-## Returns [code]true[/code] if the grid has a cell at [param pos].
-func has_cell(pos: Vector2i) -> bool:
-	return _grid.has(pos)
-
 
 ## Returns the amount of non-existing and null cells (including corners) around [param pos].
 func get_amount_of_empty_neighbors(pos: Vector2i) -> int:

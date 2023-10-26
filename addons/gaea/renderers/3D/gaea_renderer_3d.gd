@@ -16,7 +16,7 @@ func _draw_chunk(chunk_position: Vector3i) -> void:
 
 ## Draws the whole grid.
 func _draw() -> void:
-	_draw_area(generator.get_area_from_grid(generator.grid))
+	_draw_area(generator.grid.get_area())
 
 
 func _connect_signals() -> void:

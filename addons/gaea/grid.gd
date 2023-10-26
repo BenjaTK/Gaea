@@ -31,6 +31,11 @@ func get_values() -> Array[Variant]:
 	return _grid.values()
 
 
+## Returns [code]true[/code] if the grid has a cell at [param pos].
+func has_cell(pos) -> bool:
+	return _grid.has(pos)
+
+
 func erase(pos) -> void:
 	_grid.erase(pos)
 

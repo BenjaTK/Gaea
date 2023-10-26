@@ -12,7 +12,7 @@ func _init() -> void:
 	modifier_seed = randi()
 
 
-func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
+func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
 	if "noise" in self:
 		if (self.get("use_generator_noise") == true and
 				generator.settings.get("noise") != null):
@@ -25,14 +25,14 @@ func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
 				var noise = self.get("noise") as FastNoiseLite
 				noise.seed = randi()
 
-	return _apply_area(
-		generator.get_area_from_grid(grid),
+	_apply_area(
+		grid.get_area(),
 		grid,
 		generator
 	)
 
 
-func apply_chunk(grid: Dictionary, generator: ChunkAwareGenerator3D, chunk_position: Vector3i) -> Dictionary:
+func apply_chunk(grid: GaeaGrid, generator: ChunkAwareGenerator3D, chunk_position: Vector3i) -> void:
 	if "noise" in self:
 		if (self.get("use_generator_noise") == true and
 				generator.settings.get("noise") != null):
@@ -46,7 +46,7 @@ func apply_chunk(grid: Dictionary, generator: ChunkAwareGenerator3D, chunk_posit
 				var generator_settings := generator.get("settings") as HeightmapGenerator3DSettings
 				noise.seed = modifier_seed + generator_settings.noise.seed
 
-	return _apply_area(
+	_apply_area(
 		AABB(
 			chunk_position * generator.chunk_size,
 			Vector3i(generator.chunk_size, generator.chunk_size, generator.chunk_size)
@@ -56,6 +56,5 @@ func apply_chunk(grid: Dictionary, generator: ChunkAwareGenerator3D, chunk_posit
 	)
 
 
-func _apply_area(area: AABB, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
+func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 	push_warning("%s doesn't have an `_apply_area` implementation" % resource_name)
-	return {}
