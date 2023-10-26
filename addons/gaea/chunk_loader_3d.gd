@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint(): return
 
 	if generator.settings.get("infinite") == false:
-		push_warning("Generator's settings at %s has infinite disabled, can't generate chunks." % generator.get_path())
+		push_warning("Generator's settings at %s has infinite disabled, can't generate chunks." % generator.name)
 		return
 
 	var current_time = Time.get_ticks_msec()

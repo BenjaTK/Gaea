@@ -22,6 +22,7 @@ var _walked_tiles : Array[Vector2]
 func generate(starting_grid: Dictionary = {}) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
+	var time_now :int = Time.get_ticks_msec()
 
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
@@ -36,10 +37,13 @@ func generate(starting_grid: Dictionary = {}) -> void:
 	_generate_floor()
 	_apply_modifiers(settings.modifiers)
 
+
 	if is_instance_valid(next_pass):
 		next_pass.generate(grid)
 		return
-
+	var time_elapsed :int = Time.get_ticks_msec() - time_now
+	if OS.is_debug_build():
+		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100 ])
 	grid_updated.emit()
 
 
