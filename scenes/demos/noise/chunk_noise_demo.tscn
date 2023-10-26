@@ -11,7 +11,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1a0nh"]
 noise_type = 0
-seed = -1708882439
+seed = 1908382793
 domain_warp_amplitude = 8.0
 
 [sub_resource type="Resource" id="Resource_eh1og"]
@@ -73,6 +73,7 @@ sources/0 = SubResource("TileSetAtlasSource_hgvtn")
 script = ExtResource("1_rbw1k")
 settings = SubResource("Resource_hj1ni")
 preview = true
+generate_on_ready = false
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_vnorq")
