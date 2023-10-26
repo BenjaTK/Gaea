@@ -6,12 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://dnpju76kpc8ny" path="res://scenes/demos/noise/island-tileset - Kenney.png" id="4_fjhu6"]
 [ext_resource type="Script" path="res://scenes/demos/heightmap/test_actor.gd" id="5_k0qhv"]
 [ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="6_b7mcw"]
-[ext_resource type="Script" path="res://addons/gaea/chunk_loader_2d.gd" id="7_t1mfs"]
+[ext_resource type="Script" path="res://addons/gaea/others/chunk_loader_2d.gd" id="7_c51wy"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="8_hs8v0"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1a0nh"]
 noise_type = 0
-seed = 1968821983
+seed = -2011160532
 domain_warp_amplitude = 8.0
 
 [sub_resource type="Resource" id="Resource_eh1og"]
@@ -53,6 +53,7 @@ noise = SubResource("FastNoiseLite_1a0nh")
 random_noise_seed = true
 infinite = true
 world_size = Vector2i(256, 256)
+falloff_enabled = false
 modifiers = Array[Resource("res://addons/gaea/modifiers/2D/modifier_2d.gd")]([])
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgvtn"]
@@ -90,7 +91,7 @@ texture = ExtResource("6_b7mcw")
 zoom = Vector2(0.1, 0.1)
 
 [node name="ChunkLoader" type="Node2D" parent="." node_paths=PackedStringArray("generator", "renderer", "actor")]
-script = ExtResource("7_t1mfs")
+script = ExtResource("7_c51wy")
 generator = NodePath("../NoiseGenerator")
 renderer = NodePath("../TilemapGaeaRenderer")
 actor = NodePath("../TestActor")
