@@ -23,19 +23,16 @@ extends ChunkAwareModifier2D
 @export var height_intensity := 20
 
 
-func _apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
+func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
-			var tile_pos := Vector2(x, y)
-			if not grid.has(tile_pos):
+			var cell := Vector2i(x, y)
+			if not grid.has_cell(cell):
 				continue
 
-
-			var height = floor(noise.get_noise_1d(tile_pos.x) * height_intensity + height_offset)
-			if tile_pos.y >= -height:
-				if not _passes_filter(grid[tile_pos]):
+			var height = floor(noise.get_noise_1d(cell.x) * height_intensity + height_offset)
+			if cell.y >= -height:
+				if not _passes_filter(grid.get_value(cell)):
 					continue
 
-				grid[tile_pos] = tile
-
-	return grid
+				grid.set_value(cell, tile)

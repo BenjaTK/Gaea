@@ -36,7 +36,7 @@ func _apply_area(area: AABB, grid: Dictionary, _generator: GaeaGenerator) -> Dic
 				if noise_mode == NoiseMode.NOISE_3D: #3D
 					noise_pos.y = y
 
-				if not grid.has(tile_pos) or _is_out_of_bounds(tile_pos):
+				if not grid.has_cell(tile_pos) or _is_out_of_bounds(tile_pos):
 					continue
 
 				if noise.get_noise_3dv(noise_pos) > threshold:

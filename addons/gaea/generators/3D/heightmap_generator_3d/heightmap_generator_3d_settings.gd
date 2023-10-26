@@ -9,7 +9,7 @@ extends GeneratorSettings3D
 ## Infinite worlds only work with a [ChunkLoader3D].
 @export var infinite := false
 ## The size in the x and z axis.
-@export var world_size := Vector2(16, 16)
+@export var world_size := Vector2i(16, 16)
 ## The medium height at which the heightmap will start displacing from y=0.
 ## The heightmap displaces this height by a random number
 ## between -[param height_intensity] and [param height_intensity].

@@ -39,8 +39,8 @@ enum FullnessCheck {
 ## build large open areas.[br]
 ## [b]Note:[/b] Chances are between [code]0-1[/code]
 @export var room_chances = {
-	Vector2(2, 2): 0.5,
-	Vector2(3, 3): 0.1
+	Vector2i(2, 2): 0.5,
+	Vector2i(3, 3): 0.1
 }
 @export_group("")
 
@@ -55,7 +55,7 @@ var constrain_world_size : bool = false :
 			return
 		constrain_world_size = value
 		notify_property_list_changed()
-var world_size := Vector2(30, 30)
+var world_size := Vector2i(30, 30)
 
 
 func _get_property_list() -> Array[Dictionary]:

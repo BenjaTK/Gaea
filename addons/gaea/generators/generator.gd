@@ -53,4 +53,4 @@ func _apply_modifiers(modifiers) -> void:
 		if not (modifier is Modifier):
 			continue
 
-		grid = modifier.apply(grid, self)
+		modifier.apply(grid, self)

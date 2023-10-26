@@ -12,21 +12,22 @@ extends Modifier2D
 @export var wall_tile: TileInfo
 
 
-func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
+func apply(grid: GaeaGrid, generator: GaeaGenerator):
 	# Check if the generator has a "settings" variable and if those
 	# settings have a "tile" variable.
 	if not generator.get("settings") or not generator.settings.get("tile"):
 		push_warning("Walls modifier not compatible with %s" % generator.name)
 		return grid
 
-	var newGrid := grid.duplicate()
-	for tile_pos in grid:
-		if not _passes_filter(grid[tile_pos]):
+	var _temp_grid: GaeaGrid = grid.clone()
+	for cell in grid.get_cells():
+		if not _passes_filter(grid.get_value(cell)):
 				continue
 
-		if grid[tile_pos] == generator.settings.tile:
-			var above = tile_pos + Vector2.UP
-			if grid.has(above) and grid[above] != generator.settings.tile:
-				newGrid[tile_pos] = wall_tile
+		if grid.get_value(cell) == generator.settings.tile:
+			var above: Vector2i = cell + Vector2i.UP
+			if grid.has_cell(above) and grid.get_value(above) != generator.settings.tile:
+				_temp_grid.set_value(cell, wall_tile)
 
-	return newGrid
+	generator.grid = _temp_grid.clone()
+	_temp_grid.unreference()

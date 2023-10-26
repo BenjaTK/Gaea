@@ -7,19 +7,32 @@ extends Resource
 var _grid: Dictionary
 
 
-## Returns the value at [param pos].
-## If there's no value at that position, returns [code]null[/code].
-func get_value(pos: Vector2i) -> Variant:
-	return _grid.get(pos)
-
-
 ## Sets the value at [param pos] to [param value].
-func set_value(pos: Vector2i, value: Variant) -> void:
+func set_value(pos, value: Variant) -> void:
 	_grid[pos] = value
 
 
-func get_cells() -> Array[Vector2]:
-	return _grid.keys() as Array[Vector2]
+## Returns the value at [param pos].
+## If there's no value at that position, returns [code]null[/code].
+func get_value(pos) -> Variant:
+	return _grid.get(pos)
+
+
+### Getters ###
+
+
+## Returns an [Array] of all cells in the grid.
+func get_cells() -> Array:
+	return _grid.keys()
+
+
+## Returns an [Array] of all values in the grid.
+func get_values() -> Array[Variant]:
+	return _grid.values()
+
+
+func erase(pos) -> void:
+	_grid.erase(pos)
 
 
 ## Clears the grid, removing all cells.
@@ -27,28 +40,17 @@ func clear() -> void:
 	_grid.clear()
 
 
-### Helper Functions ###
+## Erases all cells of value [code]null[/code].
+func erase_invalid() -> void:
+	for cell in get_cells():
+		if get_value(cell) == null:
+			erase(cell)
 
 
-## Returns a [Rect2i] with the full extent of the grid.
-static func get_rect_from_grid(grid: GaeaGrid) -> Rect2i:
-	var cells = grid.get_cells()
-	if cells.is_empty():
-		return Rect2i()
+## Use this instead of `duplicate()` as it is broken on custom resources.
+func clone() -> GaeaGrid:
+	var instance = get_script().new()
 
-	var rect: Rect2i = Rect2i(cells.front(), Vector2.ZERO)
-	for cell in cells:
-		rect = rect.expand(cell)
-	return rect
+	instance._grid = _grid.duplicate()
 
-
-## Returns an [AABB] with the full extent of the grid.
-static func get_aabb_from_grid(grid: GaeaGrid) -> AABB:
-	var cells = grid.get_cells()
-	if cells.is_empty():
-		return AABB()
-
-	var aabb: AABB = AABB(cells.front(), Vector3.ZERO)
-	for cell in cells:
-		aabb = aabb.expand(cell)
-	return aabb
+	return instance

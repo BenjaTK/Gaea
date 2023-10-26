@@ -17,7 +17,7 @@ func _ready() -> void:
 	super._ready()
 
 
-func generate(starting_grid: Dictionary = {}) -> void:
+func generate(starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 	var time_now :int = Time.get_ticks_msec()
@@ -30,7 +30,7 @@ func generate(starting_grid: Dictionary = {}) -> void:
 		settings.noise.seed = randi()
 
 
-	if starting_grid.is_empty():
+	if starting_grid == null:
 		erase()
 	else:
 		grid = starting_grid
@@ -41,13 +41,15 @@ func generate(starting_grid: Dictionary = {}) -> void:
 	if is_instance_valid(next_pass):
 		next_pass.generate(grid)
 		return
+
 	var time_elapsed :int = Time.get_ticks_msec() - time_now
 	if OS.is_debug_build():
 		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100 ])
+
 	grid_updated.emit()
 
 
-func generate_chunk(chunk_position: Vector2i, starting_grid: Dictionary = {}) -> void:
+func generate_chunk(chunk_position: Vector2i, starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
@@ -55,7 +57,7 @@ func generate_chunk(chunk_position: Vector2i, starting_grid: Dictionary = {}) ->
 		push_error("%s doesn't have a settings resource" % name)
 		return
 
-	if starting_grid.is_empty():
+	if starting_grid == null:
 		erase_chunk(chunk_position)
 	else:
 		grid = starting_grid
@@ -99,9 +101,9 @@ func _set_grid_area(rect: Rect2i) -> void:
 
 			var noise = settings.noise.get_noise_2d(x, y)
 			if settings.falloff_enabled and settings.falloff_map and not settings.infinite:
-				noise = ((noise + 1) * settings.falloff_map.get_value(Vector2(x, y))) - 1.0
+				noise = ((noise + 1) * settings.falloff_map.get_value(Vector2i(x, y))) - 1.0
 
 			for threshold in settings.tiles:
 				if noise > threshold:
-					grid[Vector2(x, y)] = settings.tiles[threshold]
+					grid.set_value(Vector2i(x, y), settings.tiles[threshold])
 					break

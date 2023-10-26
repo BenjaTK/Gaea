@@ -23,6 +23,11 @@ const NEIGHBORS := [Vector3.RIGHT, Vector3.LEFT, Vector3.UP, Vector3.DOWN,
 ### Utils ###
 
 
+func _ready() -> void:
+	grid = GaeaGrid3D.new()
+	super()
+
+
 func get_tile(pos: Vector3) -> TileInfo:
 	return grid[pos]
 
