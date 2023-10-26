@@ -61,10 +61,4 @@ static func get_tiles_of_type(type: TileInfo, grid: Dictionary) -> Array[Vector2
 	return tiles
 
 
-static func get_area_from_grid(grid: Dictionary) -> Rect2i:
-	var keys = grid.keys()
-	if keys.is_empty():
-		return Rect2i()
-	var rect: Rect2i = Rect2i(keys.front(), Vector2.ZERO)
-	for k in keys: rect = rect.expand(k)
-	return rect
+
