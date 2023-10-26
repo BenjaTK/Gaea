@@ -36,7 +36,7 @@ func generate(starting_grid: Dictionary = {}) -> void:
 
 	var time_elapsed :int = Time.get_ticks_msec() - time_now
 	if OS.is_debug_build():
-		print("%s: Generating took %s seconds" % [get_path(), float(time_elapsed) / 100 ])
+		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100 ])
 	grid_updated.emit()
 
 

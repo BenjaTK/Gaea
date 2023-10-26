@@ -30,7 +30,7 @@ func _ready() -> void:
 
 ## Draws the whole grid.
 func _draw() -> void:
-	push_warning("_draw at %s not overriden" % get_path())
+	push_warning("_draw at %s not overriden" % name)
 
 
 func _connect_signals() -> void:
