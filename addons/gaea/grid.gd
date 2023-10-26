@@ -36,6 +36,7 @@ func has_cell(pos) -> bool:
 	return _grid.has(pos)
 
 
+## Removes the cell at [param pos] from the grid.
 func erase(pos) -> void:
 	_grid.erase(pos)
 

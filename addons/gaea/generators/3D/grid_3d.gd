@@ -25,6 +25,7 @@ func get_area() -> AABB:
 	return aabb
 
 
+## Returns [code]true[/code] if the cell at [param pos] has a non-existing neighbor. Doesn't include diagonals.
 func has_empty_neighbor(pos: Vector3i) -> bool:
 	for neighbor in NEIGHBORS:
 		if not has_cell(pos + neighbor):
