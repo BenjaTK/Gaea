@@ -64,9 +64,7 @@ func _smooth() -> void:
 
 		grid = _temp_grid
 
-	for cell in grid.get_cells():
-		if grid.get_value(cell) == null:
-			grid.erase(cell)
+	grid.erase_invalid()
 
 
 ### Editor ###

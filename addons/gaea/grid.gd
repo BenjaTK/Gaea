@@ -7,6 +7,9 @@ extends Resource
 var _grid: Dictionary
 
 
+### Values ###
+
+
 ## Sets the value at [param pos] to [param value].
 func set_value(pos, value: Variant) -> void:
 	_grid[pos] = value
@@ -18,7 +21,20 @@ func get_value(pos) -> Variant:
 	return _grid.get(pos)
 
 
-### Getters ###
+## Returns an [Array] of all values in the grid.
+func get_values() -> Array[Variant]:
+	return _grid.values()
+
+
+## Sets the grid [Dictionary] to [param grid].
+func set_grid(grid: Dictionary) -> void:
+	_grid = grid
+
+
+### Cells ###
+
+func get_area() -> Variant:
+	return null
 
 
 ## Returns an [Array] of all cells in the grid.
@@ -26,14 +42,12 @@ func get_cells() -> Array:
 	return _grid.keys()
 
 
-## Returns an [Array] of all values in the grid.
-func get_values() -> Array[Variant]:
-	return _grid.values()
-
-
 ## Returns [code]true[/code] if the grid has a cell at [param pos].
 func has_cell(pos) -> bool:
 	return _grid.has(pos)
+
+
+### Erasers ###
 
 
 ## Removes the cell at [param pos] from the grid.
@@ -53,10 +67,13 @@ func erase_invalid() -> void:
 			erase(cell)
 
 
+### Utilities ###
+
+
 ## Use this instead of `duplicate()` as it is broken on custom resources.
 func clone() -> GaeaGrid:
 	var instance = get_script().new()
 
-	instance._grid = _grid.duplicate()
+	instance.set_grid(_grid.duplicate(true))
 
 	return instance

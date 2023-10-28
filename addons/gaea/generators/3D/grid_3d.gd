@@ -7,10 +7,23 @@ const NEIGHBORS := [Vector3i.RIGHT, Vector3i.LEFT, Vector3i.UP, Vector3i.DOWN,
 
 
 
+## Sets the value at [param pos] to [param value].
+func set_value(pos: Vector3i, value: Variant) -> void:
+	_grid[pos] = value
+
+
 ## Returns the value at [param pos].
 ## If there's no value at that position, returns [code]null[/code].
 func get_value(pos: Vector3i) -> Variant:
 	return _grid.get(pos)
+
+
+### Getters ###
+
+
+## Returns an [Array] of all cells in the grid.
+func get_cells() -> Array[Vector3i]:
+	return _grid.keys()
 
 
 ## Returns an [AABB] of the full extent of the grid.
