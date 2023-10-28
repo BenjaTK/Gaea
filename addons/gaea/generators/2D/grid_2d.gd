@@ -6,6 +6,17 @@ const SURROUNDING := [Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN,
 						Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, -1), Vector2i(-1, 1)]
 
 
+## Sets the value at [param pos] to [param value].
+func set_value(pos: Vector2i, value: Variant) -> void:
+	_grid[pos] = value
+
+
+## Returns the value at [param pos].
+## If there's no value at that position, returns [code]null[/code].
+func get_value(pos: Vector2i) -> Variant:
+	return _grid.get(pos)
+
+
 ## Returns a [Rect2i] of the full extent of the grid.
 func get_area() -> Rect2i:
 	var cells = self.get_cells()
@@ -18,7 +29,14 @@ func get_area() -> Rect2i:
 	return rect
 
 
-### Helper Functions ###
+## Returns [code]true[/code] if the grid has a cell at [param pos].
+func has_cell(pos: Vector2i) -> bool:
+	return _grid.has(pos)
+
+
+## Removes the cell at [param pos] from the grid.
+func erase(pos: Vector2i) -> void:
+	_grid.erase(pos)
 
 
 ## Returns the amount of non-existing and null cells (including corners) around [param pos].

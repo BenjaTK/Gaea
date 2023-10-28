@@ -18,14 +18,6 @@ func get_value(pos: Vector3i) -> Variant:
 	return _grid.get(pos)
 
 
-### Getters ###
-
-
-## Returns an [Array] of all cells in the grid.
-func get_cells() -> Array[Vector3i]:
-	return _grid.keys()
-
-
 ## Returns an [AABB] of the full extent of the grid.
 func get_area() -> AABB:
 	var cells = self.get_cells()
@@ -36,6 +28,16 @@ func get_area() -> AABB:
 	for cell in cells:
 		aabb = aabb.expand(cell)
 	return aabb
+
+
+## Returns [code]true[/code] if the grid has a cell at [param pos].
+func has_cell(pos: Vector3i) -> bool:
+	return _grid.has(pos)
+
+
+## Removes the cell at [param pos] from the grid.
+func erase(pos: Vector3i) -> void:
+	_grid.erase(pos)
 
 
 ## Returns [code]true[/code] if the cell at [param pos] has a non-existing neighbor. Doesn't include diagonals.

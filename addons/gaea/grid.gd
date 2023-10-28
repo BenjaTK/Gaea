@@ -31,6 +31,11 @@ func set_grid(grid: Dictionary) -> void:
 	_grid = grid
 
 
+## Returns the grid [Dictionary].
+func get_grid() -> Dictionary:
+	return _grid
+
+
 ### Cells ###
 
 func get_area() -> Variant:
@@ -47,8 +52,7 @@ func has_cell(pos) -> bool:
 	return _grid.has(pos)
 
 
-### Erasers ###
-
+### Erasing ###
 
 ## Removes the cell at [param pos] from the grid.
 func erase(pos) -> void:
@@ -68,7 +72,6 @@ func erase_invalid() -> void:
 
 
 ### Utilities ###
-
 
 ## Use this instead of `duplicate()` as it is broken on custom resources.
 func clone() -> GaeaGrid:
