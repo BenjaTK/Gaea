@@ -83,7 +83,7 @@ func _generate_floor() -> void:
 		iterations += 1
 
 	for tile in _walked_tiles:
-		grid.set_value(Vector2i(tile), settings.tile)
+		grid.set_value(tile, settings.tile)
 
 	_walkers.clear()
 	_walked_tiles.clear()

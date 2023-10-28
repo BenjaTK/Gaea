@@ -105,5 +105,5 @@ func _set_grid_area(rect: Rect2i) -> void:
 
 			for threshold in settings.tiles:
 				if noise > threshold:
-					grid.set_value(Vector2i(x, y), settings.tiles[threshold])
+					grid.set_valuexy(x, y, settings.tiles[threshold])
 					break

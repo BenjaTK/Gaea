@@ -46,9 +46,9 @@ func _set_noise() -> void:
 	for x in range(settings.world_size.x):
 		for y in range(settings.world_size.y):
 			if randf() > settings.noise_density:
-				grid.set_value(Vector2i(x, y), settings.tile)
+				grid.set_valuexy(x, y, settings.tile)
 			else:
-				grid.set_value(Vector2i(x, y), null)
+				grid.set_valuexy(x, y, null)
 
 
 func _smooth() -> void:

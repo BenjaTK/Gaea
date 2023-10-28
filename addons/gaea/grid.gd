@@ -10,12 +10,12 @@ var _grid: Dictionary
 ### Values ###
 
 
-## Sets the value at [param pos] to [param value].
+## Sets the value at the given position to [param value].
 func set_value(pos, value: Variant) -> void:
 	_grid[pos] = value
 
 
-## Returns the value at [param pos].
+## Returns the value at the given position.
 ## If there's no value at that position, returns [code]null[/code].
 func get_value(pos) -> Variant:
 	return _grid.get(pos)
@@ -47,14 +47,14 @@ func get_cells() -> Array:
 	return _grid.keys()
 
 
-## Returns [code]true[/code] if the grid has a cell at [param pos].
+## Returns [code]true[/code] if the grid has a cell at the given position.
 func has_cell(pos) -> bool:
 	return _grid.has(pos)
 
 
 ### Erasing ###
 
-## Removes the cell at [param pos] from the grid.
+## Removes the cell at the given position from the grid.
 func erase(pos) -> void:
 	_grid.erase(pos)
 

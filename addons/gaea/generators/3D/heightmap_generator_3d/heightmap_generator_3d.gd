@@ -114,4 +114,4 @@ func _set_grid_area(area: AABB) -> void:
 
 			for y in range(area.position.y, area.end.y):
 				if y <= height and y >= settings.min_height:
-					grid.set_value(Vector3i(x, y, z), settings.tile)
+					grid.set_valuexyz(x, y, z, settings.tile)
