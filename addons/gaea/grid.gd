@@ -38,9 +38,6 @@ func get_grid() -> Dictionary:
 
 ### Cells ###
 
-func get_area() -> Variant:
-	return null
-
 
 ## Returns an [Array] of all cells in the grid.
 func get_cells() -> Array:
