@@ -12,7 +12,7 @@ extends GaeaGenerator2D
 
 
 func generate(starting_grid: GaeaGrid = null) -> void:
-	if Engine.is_editor_hint() and not preview:
+	if Engine.is_editor_hint() and not editor_preview:
 		return
 
 	if not settings:

@@ -21,7 +21,7 @@ var _wave_function: Dictionary
 
 
 func generate(starting_grid: GaeaGrid = null) -> void:
-	if Engine.is_editor_hint() and not preview:
+	if Engine.is_editor_hint() and not editor_preview:
 		return
 
 	var time_now :int = Time.get_ticks_msec()
