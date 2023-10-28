@@ -8,7 +8,7 @@ const SURROUNDING := [Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN,
 
 ## Sets the value at the given position to [param value].
 func set_value(pos: Vector2i, value: Variant) -> void:
-	_grid[pos] = value
+	super(pos, value)
 
 
 ## Sets the value at the given position to [param value].
@@ -19,7 +19,7 @@ func set_valuexy(x: int, y: int, value: Variant) -> void:
 ## Returns the value at the given position.
 ## If there's no value at that position, returns [code]null[/code].
 func get_value(pos: Vector2i) -> Variant:
-	return _grid.get(pos)
+	return super(pos)
 
 
 ## Returns the value at the given position.
@@ -42,7 +42,7 @@ func get_area() -> Rect2i:
 
 ## Returns [code]true[/code] if the grid has a cell at the given position.
 func has_cell(pos: Vector2i) -> bool:
-	return _grid.has(pos)
+	return super(pos)
 
 
 ## Returns [code]true[/code] if the grid has a cell at the given position.
@@ -52,7 +52,7 @@ func has_cellxy(x: int, y: int) -> bool:
 
 ## Removes the cell at the given position from the grid.
 func erase(pos: Vector2i) -> void:
-	_grid.erase(pos)
+	super(pos)
 
 
 ## Removes the cell at the given position from the grid.
