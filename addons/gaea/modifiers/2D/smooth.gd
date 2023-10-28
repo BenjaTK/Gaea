@@ -19,15 +19,13 @@ extends Modifier2D
 @export_range(1, 7) var maximum_empty_neighbors := 4
 
 
-func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
+func apply(grid: GaeaGrid, generator: GaeaGenerator):
 	for i in iterations:
-		for tile_pos in grid.keys():
-			if not _passes_filter(grid[tile_pos]):
+		for cell in grid.get_cells():
+			if not _passes_filter(grid[cell]):
 				continue
 
-			var empty_neighbors_count: int = generator.get_neighbor_count_of_type(
-				grid, tile_pos, null
-			)
+			var empty_neighbors_count: int = grid.get_amount_of_empty_neighbors(cell)
+
 			if empty_neighbors_count > maximum_empty_neighbors:
-				grid.erase(tile_pos)
-	return grid
+				grid.erase(cell)

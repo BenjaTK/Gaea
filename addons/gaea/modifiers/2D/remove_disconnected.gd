@@ -2,56 +2,61 @@
 @icon("remove_disconnected.svg")
 class_name RemoveDisconnected
 extends Modifier2D
-## Uses floodfill to remove areas that aren't connected to [param starting_tile]
+## Uses floodfill to remove areas that aren't connected to [param starting_cell]
 ## @tutorial(Remove Disconnected Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-noise-painter
 
 
-@export var starting_tile := Vector2.ZERO
+@export var starting_cell := Vector2i.ZERO
 
 
-func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
-	var start_tile = starting_tile
-	if not grid.has(start_tile):
-		var closest_tile = _find_closest_tile(start_tile, grid)
-		push_warning("RemoveDisconnected at %s found no tile at starting tile %s, got closest one %s instead." % [generator.name, starting_tile, closest_tile])
-		start_tile = closest_tile
+func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
+	var start_cell = starting_cell
+	if not grid.has_cell(start_cell):
+		var closest_cell = _find_closest_cell(start_cell, grid)
+		if closest_cell == Vector2i(NAN, NAN):
+			push_error("RemoveDisconnected at %s failed, found no start cell." % generator.name)
+			return
+		push_warning("RemoveDisconnected at %s found no cell at starting cell %s, got closest one %s instead." % [generator.name, starting_cell, closest_cell])
+		start_cell = closest_cell
 
-	var new_grid : Dictionary
 
-	var queue : Array[Vector2]
-	queue.append(start_tile)
+	var _temp_grid : GaeaGrid
+
+	var queue : Array[Vector2i]
+	queue.append(start_cell)
 
 	while not queue.is_empty():
-		var tile = queue.pop_front()
-		if not grid.has(tile) or new_grid.has(tile):
+		var cell = queue.pop_front() as Vector2i
+		if not grid.has_cell(cell) or _temp_grid.has_cell(cell):
 			continue
 
-		new_grid[tile] = grid[tile]
-		queue.append(tile + Vector2.RIGHT)
-		queue.append(tile + Vector2.UP)
-		queue.append(tile + Vector2.DOWN)
-		queue.append(tile + Vector2.LEFT)
+		_temp_grid.set_value(cell, grid.get_value(cell))
+		queue.append(cell + Vector2i.RIGHT)
+		queue.append(cell + Vector2i.UP)
+		queue.append(cell + Vector2i.DOWN)
+		queue.append(cell + Vector2i.LEFT)
 
-	return new_grid
+	generator.grid = _temp_grid.clone()
+	_temp_grid.unreference()
 
 
-func _find_closest_tile(to: Vector2, grid: Dictionary) -> Vector2:
-	var queue : Array[Vector2]
+func _find_closest_cell(to: Vector2i, grid: GaeaGrid) -> Vector2i:
+	var queue : Array[Vector2i]
 	queue.append(to)
-	var checked_tiles : Array[Vector2]
+	var checked_cells : Array[Vector2i]
 
 	while not queue.is_empty():
-		var tile = queue.pop_front()
-		if checked_tiles.has(tile):
+		var cell = queue.pop_front()
+		if checked_cells.has(cell):
 			continue
 
-		if grid.has(tile):
-			return tile
+		if grid.has_cell(cell):
+			return cell
 
-		checked_tiles.append(tile)
-		queue.append(tile + Vector2.RIGHT)
-		queue.append(tile + Vector2.UP)
-		queue.append(tile + Vector2.DOWN)
-		queue.append(tile + Vector2.LEFT)
+		checked_cells.append(cell)
+		queue.append(cell + Vector2i.RIGHT)
+		queue.append(cell + Vector2i.UP)
+		queue.append(cell + Vector2i.DOWN)
+		queue.append(cell + Vector2i.LEFT)
 
-	return Vector2.INF
+	return Vector2i(NAN, NAN)

@@ -27,27 +27,25 @@ enum NoiseMode {
 @export var min := Vector3(-INF, -INF, -INF)
 
 
-func _apply_area(area: AABB, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
+func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			for z in range(area.position.z, area.end.z + 1):
-				var tile_pos := Vector3(x, y, z)
+				var cell := Vector3i(x, y, z)
 				var noise_pos := Vector3(x, 0, z)
 				if noise_mode == NoiseMode.NOISE_3D: #3D
 					noise_pos.y = y
 
-				if not grid.has(tile_pos) or _is_out_of_bounds(tile_pos):
+				if not grid.has_cell(cell) or _is_out_of_bounds(cell):
 					continue
 
 				if noise.get_noise_3dv(noise_pos) > threshold:
-					if not _passes_filter(grid[tile_pos]):
+					if not _passes_filter(grid.get_cell(cell)):
 						continue
 
-					grid[tile_pos] = tile
-
-	return grid
+					grid.set_cell(cell, tile)
 
 
-func _is_out_of_bounds(tile_pos: Vector3) -> bool:
-	return (tile_pos.x > max.x or tile_pos.y > max.y or tile_pos.z > max.z or
-			tile_pos.x < min.x or tile_pos.y < min.y or tile_pos.z < min.z)
+func _is_out_of_bounds(cell: Vector3i) -> bool:
+	return (cell.x > max.x or cell.y > max.y or cell.z > max.z or
+			cell.x < min.x or cell.y < min.y or cell.z < min.z)

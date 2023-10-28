@@ -22,7 +22,7 @@ signal generation_finished
 ## it will be kept.
 @export var generate_on_ready: bool = true
 
-var grid : Dictionary
+var grid : GaeaGrid
 
 
 func _ready() -> void:
@@ -36,7 +36,7 @@ func _ready() -> void:
 		generate()
 
 
-func generate(starting_grid: Dictionary = {}) -> void:
+func generate(starting_grid: GaeaGrid = null) -> void:
 	push_warning("generate method at %s not overriden" % name)
 
 
@@ -53,4 +53,4 @@ func _apply_modifiers(modifiers) -> void:
 		if not (modifier is Modifier):
 			continue
 
-		grid = modifier.apply(grid, self)
+		modifier.apply(grid, self)

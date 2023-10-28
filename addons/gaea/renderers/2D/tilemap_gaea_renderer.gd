@@ -21,18 +21,18 @@ func _draw_area(area: Rect2i) -> void:
 
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
-			var tile_position := Vector2(x, y)
-			if not generator.grid.has(tile_position):
+			var tile_position := Vector2i(x, y)
+			if not generator.grid.has_cell(tile_position):
 				if not erase_empty_tiles:
 					continue
 
 				for l in range(tile_map.get_layers_count()):
-					tile_map.erase_cell(l, Vector2(x, y))
+					tile_map.erase_cell(l, Vector2i(x, y))
 
 				continue
 
 			var tile = tile_position
-			var tile_info = generator.grid[tile_position]
+			var tile_info = generator.grid.get_value(tile_position)
 
 			if not (tile_info is TilemapTileInfo):
 				continue

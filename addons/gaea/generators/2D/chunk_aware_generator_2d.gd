@@ -21,26 +21,26 @@ func _ready() -> void:
 	super._ready()
 
 
-func generate_chunk(chunk_position: Vector2i, starting_grid: Dictionary = {}) -> void:
+func generate_chunk(chunk_position: Vector2i, starting_grid: GaeaGrid = null) -> void:
 	push_warning("generate_chunk method not overriden at %s" % name)
 
 
 func erase_chunk(chunk_position: Vector2i) -> void:
 	for x in get_chunk_range(chunk_position.x):
 		for y in get_chunk_range(chunk_position.y):
-			grid.erase(Vector2(x, y))
+			grid.erase(Vector2i(x, y))
 
 	chunk_updated.emit(chunk_position)
 
 
 
-func _apply_modifiers_chunk(modifiers, chunk_position: Vector2i) -> void:
+func _apply_modifiers_chunk(modifiers: Array[Modifier2D], chunk_position: Vector2i) -> void:
 	for modifier in modifiers:
 		if not (modifier is ChunkAwareModifier2D):
 			push_error("%s is not a Chunk compatible modifier!" % modifier.resource_name)
 			continue
 
-		grid = modifier.apply_chunk(grid, self, chunk_position)
+		modifier.apply_chunk(grid, self, chunk_position)
 
 
 func unload_chunk(chunk_position: Vector2i) -> void:

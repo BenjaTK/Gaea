@@ -17,8 +17,8 @@ enum FilterType {
 @export var filter_ids: Array[String] = []
 
 
-func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
-	return grid
+func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
+	pass
 
 
 ## Returns true if the [param tile_info] can be modified according

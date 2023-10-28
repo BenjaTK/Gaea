@@ -21,7 +21,7 @@ func _ready() -> void:
 	super._ready()
 
 
-func generate_chunk(chunk_position: Vector3i, starting_grid: Dictionary = {}) -> void:
+func generate_chunk(chunk_position: Vector3i, starting_grid: GaeaGrid = null) -> void:
 	push_warning("generate_chunk method not overriden at %s" % name)
 
 
@@ -29,7 +29,7 @@ func erase_chunk(chunk_position: Vector3i) -> void:
 	for x in get_chunk_range(chunk_position.x):
 		for y in get_chunk_range(chunk_position.y):
 			for z in get_chunk_range(chunk_position.z):
-				grid.erase(Vector3(x, y, z))
+				grid.erase(Vector3i(x, y, z))
 
 	chunk_updated.emit(chunk_position)
 

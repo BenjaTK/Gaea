@@ -19,23 +19,21 @@ extends ChunkAwareModifier3D
 @export var min := Vector3(-INF, -INF, -INF)
 
 
-func _apply_area(area: AABB, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
+func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			for z in range(area.position.x, area.end.z + 1):
-				var tile_pos := Vector3(x, y, z)
-				if not grid.has(tile_pos) or _is_out_of_bounds(tile_pos):
+				var cell := Vector3i(x, y, z)
+				if not grid.has_cell(cell) or _is_out_of_bounds(cell):
 					continue
 
-				if not _passes_filter(grid[tile_pos]):
+				if not _passes_filter(grid.get_value(cell)):
 					continue
 
-				if noise.get_noise_3dv(tile_pos) > threshold:
-					grid.erase(tile_pos)
-
-	return grid
+				if noise.get_noise_3dv(cell) > threshold:
+					grid.erase(cell)
 
 
-func _is_out_of_bounds(tile_pos: Vector3) -> bool:
-	return (tile_pos.x > max.x or tile_pos.y > max.y or tile_pos.z > max.z or
-			tile_pos.x < min.x or tile_pos.y < min.y or tile_pos.z < min.z)
+func _is_out_of_bounds(cell: Vector3i) -> bool:
+	return (cell.x > max.x or cell.y > max.y or cell.z > max.z or
+			cell.x < min.x or cell.y < min.y or cell.z < min.z)

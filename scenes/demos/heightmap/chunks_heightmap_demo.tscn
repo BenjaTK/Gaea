@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://6gwie8e2kpg2" path="res://scenes/demos/heightmap/ores.png" id="4_rk2l5"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="10_5yyno"]
 [ext_resource type="Script" path="res://scenes/demos/heightmap/test_actor.gd" id="10_76aeg"]
-[ext_resource type="Script" path="res://addons/gaea/chunk_loader_2d.gd" id="10_vlq7b"]
+[ext_resource type="Script" path="res://addons/gaea/others/chunk_loader_2d.gd" id="10_vlq7b"]
 [ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="11_go0dd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_68jc8"]

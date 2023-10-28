@@ -19,12 +19,12 @@ extends Modifier2D
 @export var expand_bottom := 1
 
 
-func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
-	var rect: Rect2
-	for tile in grid:
+func apply(grid: GaeaGrid, _generator: GaeaGenerator) -> void:
+	var rect: Rect2i
+	for cell in grid.get_cells():
 		if not rect:
-			rect = Rect2(tile, Vector2.ONE)
-		rect = rect.expand(tile)
+			rect = Rect2i(cell, Vector2i.ONE)
+		rect = rect.expand(cell)
 
 	rect = rect.grow_individual(
 			expand_left, expand_top, expand_right, expand_bottom
@@ -32,9 +32,8 @@ func apply(grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
 
 	for x in range(rect.position.x, rect.end.x + 1):
 		for y in range(rect.position.y, rect.end.y + 1):
-			var tile_pos: Vector2 = Vector2(x, y)
-			if grid.has(tile_pos):
+			var cell: Vector2i = Vector2i(x, y)
+			if grid.has_cell(cell):
 				continue
 
-			grid[tile_pos] = tile
-	return grid
+			grid.set_value(cell, tile)

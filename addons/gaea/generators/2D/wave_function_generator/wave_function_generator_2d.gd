@@ -7,10 +7,10 @@ extends GaeaGenerator2D
 
 
 const ADJACENT_NEIGHBORS: Dictionary = {
-	"right": Vector2.RIGHT,
-	"left": Vector2.LEFT,
-	"up": Vector2.UP,
-	"down":Vector2.DOWN
+	"right": Vector2i.RIGHT,
+	"left": Vector2i.LEFT,
+	"up": Vector2i.UP,
+	"down":Vector2i.DOWN
 	}
 
 @export var settings: WaveFunctionGenerator2DSettings
@@ -20,18 +20,20 @@ const ADJACENT_NEIGHBORS: Dictionary = {
 var _wave_function: Dictionary
 
 
-func generate(starting_grid: Dictionary = {}) -> void:
+func generate(starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
+
 	var time_now :int = Time.get_ticks_msec()
-	if starting_grid.is_empty():
+
+	if starting_grid == null:
 		erase()
 	else:
 		grid = starting_grid
 
 	for x in settings.world_size.x:
 		for y in settings.world_size.y:
-			_wave_function[Vector2(x, y)] = settings.entries.duplicate(true)
+			_wave_function[Vector2i(x, y)] = settings.entries.duplicate(true)
 
 	var _iterations = 0
 	while not _is_collapsed() and _iterations < max_iterations:
@@ -44,7 +46,7 @@ func generate(starting_grid: Dictionary = {}) -> void:
 		push_error("Generation reached max iterations.")
 
 	for cell in _wave_function:
-		grid[cell] = _wave_function[cell][0].tile_info
+		grid.set_value(cell, _wave_function[cell][0].tile_info)
 
 	_apply_modifiers(settings.modifiers)
 
@@ -53,13 +55,15 @@ func generate(starting_grid: Dictionary = {}) -> void:
 	if is_instance_valid(next_pass):
 		next_pass.generate(grid)
 		return
+
 	var time_elapsed :int = Time.get_ticks_msec() - time_now
 	if OS.is_debug_build():
 		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100 ])
+
 	grid_updated.emit()
 
 
-func _collapse(coords: Vector2) -> void:
+func _collapse(coords: Vector2i) -> void:
 	var entries: Array = _wave_function[coords].duplicate()
 	if entries.is_empty():
 		return
@@ -87,7 +91,7 @@ func _is_collapsed() -> bool:
 	return true
 
 
-func _propagate(coords: Vector2) -> void:
+func _propagate(coords: Vector2i) -> void:
 	var stack = [coords]
 
 	while stack.size() > 0:
@@ -95,7 +99,7 @@ func _propagate(coords: Vector2) -> void:
 		var entries: Array = _wave_function[coords]
 
 		for dir in ADJACENT_NEIGHBORS.values():
-			var other_coords: Vector2 = current_coords + dir
+			var other_coords: Vector2i = current_coords + dir
 			if not _wave_function.has(other_coords):
 				continue
 
@@ -112,7 +116,7 @@ func _propagate(coords: Vector2) -> void:
 						stack.append(other_coords)
 
 
-func _get_possible_neighbors(coords: Vector2, direction: Vector2) -> Array[WaveFunction2DEntry]:
+func _get_possible_neighbors(coords: Vector2i, direction: Vector2i) -> Array[WaveFunction2DEntry]:
 	var possible_neighbors: Array[WaveFunction2DEntry]
 	var dir_key := ADJACENT_NEIGHBORS.find_key(direction)
 	for entry in _wave_function[coords]:
@@ -123,9 +127,9 @@ func _get_possible_neighbors(coords: Vector2, direction: Vector2) -> Array[WaveF
 	return possible_neighbors
 
 
-func _get_lowest_entropy_coords() -> Vector2:
+func _get_lowest_entropy_coords() -> Vector2i:
 	var lowest_entropy: float = -1.0
-	var lowest_entropy_coords: Vector2 = Vector2.ZERO
+	var lowest_entropy_coords: Vector2i = Vector2i.ZERO
 	for coords in _wave_function:
 		if _wave_function[coords].size() == 1:
 			continue

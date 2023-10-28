@@ -40,20 +40,20 @@ func _generate() -> void:
 			var value: float = maxf(absf(i), absf(j))
 
 			if value < falloff_start:
-				map[Vector2(x, y)] = 1.0
+				map[Vector2i(x, y)] = 1.0
 			elif value > falloff_end:
-				map[Vector2(x, y)] = 0.0
+				map[Vector2i(x, y)] = 0.0
 			else:
-				map[Vector2(x, y)] = smoothstep(1.0, 0.0, inverse_lerp(falloff_start, falloff_end, value))
+				map[Vector2i(x, y)] = smoothstep(1.0, 0.0, inverse_lerp(falloff_start, falloff_end, value))
 
 			var img_color: Color = Color.WHITE
-			img_color.v = map[Vector2(x, y)]
+			img_color.v = map[Vector2i(x, y)]
 			image.set_pixel(x, y, img_color)
 
 	texture = ImageTexture.create_from_image(image)
 
 
-func get_value(position: Vector2) -> float:
+func get_value(position: Vector2i) -> float:
 	if map.has(position):
 		return map[position]
 	else:

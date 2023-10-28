@@ -16,7 +16,7 @@ func _ready() -> void:
 	super()
 
 
-func generate(starting_grid: Dictionary = {}) -> void:
+func generate(starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 	var time_now :int = Time.get_ticks_msec()
@@ -28,7 +28,7 @@ func generate(starting_grid: Dictionary = {}) -> void:
 	if settings.random_noise_seed:
 		settings.noise.seed = randi()
 
-	if starting_grid.is_empty():
+	if starting_grid == null:
 		erase()
 	else:
 		grid = starting_grid
@@ -36,15 +36,17 @@ func generate(starting_grid: Dictionary = {}) -> void:
 	_apply_modifiers(settings.modifiers)
 
 	if is_instance_valid(next_pass):
-		next_pass.generate()
+		next_pass.generate(grid)
 		return
+
 	var time_elapsed :int = Time.get_ticks_msec() - time_now
 	if OS.is_debug_build():
 		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100 ])
+
 	grid_updated.emit()
 
 
-func generate_chunk(chunk_position: Vector2i, starting_grid: Dictionary = {}) -> void:
+func generate_chunk(chunk_position: Vector2i, starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
@@ -52,7 +54,7 @@ func generate_chunk(chunk_position: Vector2i, starting_grid: Dictionary = {}) ->
 		push_error("%s doesn't have a settings resource" % name)
 		return
 
-	if starting_grid.is_empty():
+	if starting_grid == null:
 		erase_chunk(chunk_position)
 	else:
 		grid = starting_grid
@@ -103,4 +105,4 @@ func _set_grid_area(area: Rect2i) -> void:
 		var height = floor(settings.noise.get_noise_1d(x) * settings.height_intensity + settings.height_offset)
 		for y in range(area.position.y, area.end.y):
 			if y > -height and y <= -settings.min_height:
-				grid[Vector2(x, y)] = settings.tile
+				grid.set_valuexy(x, y, settings.tile)

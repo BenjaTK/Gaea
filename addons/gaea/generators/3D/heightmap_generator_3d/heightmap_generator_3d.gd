@@ -15,10 +15,12 @@ func _ready() -> void:
 	super()
 
 
-func generate(starting_grid: Dictionary = {}) -> void:
+func generate(starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
+
 	var time_now:int = Time.get_ticks_msec()
+
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
 		return
@@ -26,7 +28,7 @@ func generate(starting_grid: Dictionary = {}) -> void:
 	if settings.random_noise_seed:
 		settings.noise.seed = randi()
 
-	if starting_grid.is_empty():
+	if starting_grid == null:
 		erase()
 	else:
 		grid = starting_grid
@@ -34,13 +36,17 @@ func generate(starting_grid: Dictionary = {}) -> void:
 	_set_grid()
 	_apply_modifiers(settings.modifiers)
 
+	if is_instance_valid(next_pass):
+		next_pass.generate(grid)
+
 	var time_elapsed :int = Time.get_ticks_msec() - time_now
 	if OS.is_debug_build():
 		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100 ])
+
 	grid_updated.emit()
 
 
-func generate_chunk(chunk_position: Vector3i, starting_grid: Dictionary = {}) -> void:
+func generate_chunk(chunk_position: Vector3i, starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not preview:
 		return
 
@@ -48,7 +54,7 @@ func generate_chunk(chunk_position: Vector3i, starting_grid: Dictionary = {}) ->
 		push_error("%s doesn't have a settings resource" % name)
 		return
 
-	if starting_grid.is_empty():
+	if starting_grid == null:
 		erase_chunk(chunk_position)
 	else:
 		grid = starting_grid
@@ -104,8 +110,8 @@ func _set_grid_area(area: AABB) -> void:
 
 			var height = floor(settings.noise.get_noise_2d(x, z) * settings.height_intensity + settings.height_offset)
 			if settings.falloff_enabled and settings.falloff_map and not settings.infinite:
-				height = ((height + 1) * settings.falloff_map.get_value(Vector2(x, z))) - 1.0
+				height = ((height + 1) * settings.falloff_map.get_value(Vector2i(x, z))) - 1.0
 
 			for y in range(area.position.y, area.end.y):
 				if y <= height and y >= settings.min_height:
-					grid[Vector3(x, y, z)] = settings.tile
+					grid.set_valuexyz(x, y, z, settings.tile)

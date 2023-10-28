@@ -19,22 +19,20 @@ extends ChunkAwareModifier2D
 @export var min := Vector2(-INF, -INF)
 
 
-func _apply_area(area: Rect2i, grid: Dictionary, _generator: GaeaGenerator) -> Dictionary:
+func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
-			var tile_pos := Vector2(x, y)
-			if not grid.has(tile_pos) or _is_out_of_bounds(tile_pos):
+			var cell := Vector2i(x, y)
+			if not grid.has_cell(cell) or _is_out_of_bounds(cell):
 				continue
 
-			if not _passes_filter(grid[tile_pos]):
+			if not _passes_filter(grid.get_value(cell)):
 				continue
 
-			if noise.get_noise_2d(tile_pos.x, tile_pos.y) > threshold:
-				grid.erase(tile_pos)
-
-	return grid
+			if noise.get_noise_2d(cell.x, cell.y) > threshold:
+				grid.erase(cell)
 
 
-func _is_out_of_bounds(tile_pos: Vector2) -> bool:
-	return (tile_pos.x > max.x or tile_pos.y > max.y or
-			tile_pos.x < min.x or tile_pos.y < min.y)
+func _is_out_of_bounds(cell: Vector2i) -> bool:
+	return (cell.x > max.x or cell.y > max.y or
+			cell.x < min.x or cell.y < min.y)

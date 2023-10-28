@@ -16,51 +16,35 @@ enum Mode {
 ## If [code]true[/code], removes border tiles that don't have any neighbors of the same type.
 @export var remove_single_walls := false
 
-var _new_grid: Dictionary
+var _temp_grid: GaeaGrid
 
 
-func apply(grid: Dictionary, generator: GaeaGenerator) -> Dictionary:
+func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
 	# Check if the generator has a "settings" variable and if those
 	# settings have a "tile" variable.
 	if not generator.get("settings") or not generator.settings.get("tile"):
 		push_warning("GenerateBorder modifier not compatible with %s" % generator.name)
-		return grid
+		return
 
-	_new_grid = grid.duplicate()
+	_temp_grid = grid.clone()
 
 	_generate_border_walls(grid)
 
-	if remove_single_walls:
-		_remove_single_walls(generator)
-
-	return _new_grid.duplicate()
+	generator.grid = _temp_grid.clone()
+	_temp_grid.unreference()
 
 
-func _generate_border_walls(grid: Dictionary) -> void:
-	for tile in grid:
-		var neighbors = [Vector2.RIGHT, Vector2.LEFT, Vector2.UP, Vector2.DOWN]
+func _generate_border_walls(grid: GaeaGrid) -> void:
+	for cell in grid.get_cells():
+		var neighbors = GaeaGrid2D.SURROUNDING.duplicate()
 
-		if mode == Mode.INCLUDE_DIAGONALS:
-			neighbors.append_array(
-				[Vector2(1, 1), Vector2(1, -1), Vector2(-1, -1), Vector2(-1, 1)]
-				)
+		if mode != Mode.INCLUDE_DIAGONALS:
+			for i in [Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, -1), Vector2i(-1, 1)]:
+				neighbors.erase(i)
 
 		# Get all empty neighbors and make it a border tile.
 		for neighbor in neighbors:
-			if not grid.has(tile + neighbor):
-				_new_grid[tile + neighbor] = border_tile_info
-
-
-func _remove_single_walls(generator: GaeaGenerator) -> void:
-	for tile in _new_grid.keys():
-		if not (_new_grid[tile] == border_tile_info):
-			continue
-
-		# If it doesn't have any neighbors of the same type,
-		# set back to its original value
-		if GaeaGenerator.get_neighbor_count_of_type(
-				_new_grid, tile, border_tile_info) == 0:
-			_new_grid[tile] = generator.settings.tile
-
+			if not grid.has_cell(cell + neighbor):
+				_temp_grid.set_value(cell + neighbor, border_tile_info)
 
 

@@ -8,7 +8,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
-seed = -1733823386
+seed = -1774537082
 
 [sub_resource type="Resource" id="Resource_6kmi4"]
 script = ExtResource("2_6f082")
@@ -56,7 +56,7 @@ filter_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
 noise_type = 3
-seed = -1969112133
+seed = -1454244224
 frequency = 0.012
 fractal_type = 2
 fractal_octaves = 3
@@ -75,7 +75,7 @@ filter_type = 0
 filter_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
-seed = 699618206
+seed = -1291355587
 frequency = 0.0617
 fractal_octaves = 2
 fractal_lacunarity = 2.95
@@ -103,7 +103,7 @@ filter_type = 0
 filter_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
-seed = 1951318453
+seed = -1164015029
 frequency = 0.0511
 fractal_lacunarity = 0.565
 domain_warp_type = 2
