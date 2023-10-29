@@ -19,7 +19,6 @@ Fills the full rectangle of tiles.
 
 ### <img src="assets/icons/carver.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Carver <sup>2D/3D</sup>
 
-
 Carves holes into the map using a noise texture.
 
 ### <img src="assets/icons/smooth.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Smooth
@@ -48,6 +47,3 @@ Replaces tiles in the map with another tile based on a noise heightmap.
 ### <img src="assets/icons/remove_disconnected.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Remove Disconnected
 
 Uses flood fill to remove all tiles that aren't connected to `starting_tile`.
-
-
-_**TODO**: Better explanations._

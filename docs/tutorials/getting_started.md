@@ -6,7 +6,7 @@
 
 With Gaea's power, you can procedurally generate different worlds so you can add variety to your game, while also saving time on level design. Whether you're making a **roguelike** or a **sandbox**, Gaea has what you need!
 
-In this tutorial, you'll learn how to make basic generation of a dungeon. 
+In this tutorial, you'll learn how to make basic generation of a dungeon akin to those found in the game Nuclear Throne.
 
 ## Generating the floor
 
