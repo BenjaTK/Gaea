@@ -12,6 +12,10 @@ var _grid: Dictionary
 
 ## Sets the value at the given position to [param value].
 func set_value(pos, value: Variant) -> void:
+	if value is RandomTileInfo:
+		set_value(pos, value.get_random())
+		return
+
 	_grid[pos] = value
 
 
