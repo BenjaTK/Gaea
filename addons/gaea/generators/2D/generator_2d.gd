@@ -18,3 +18,8 @@ extends GaeaGenerator
 func _ready() -> void:
 	grid = GaeaGrid2D.new()
 	super()
+
+
+## Returns the [GaeaGrid2D] resource handling this generator's grid.
+func get_grid() -> GaeaGrid2D:
+	return grid
