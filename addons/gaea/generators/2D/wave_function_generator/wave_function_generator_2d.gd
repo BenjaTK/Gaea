@@ -1,3 +1,4 @@
+@icon("wave_function_generator.svg")
 @tool
 class_name WaveFunctionGenerator2D
 extends GaeaGenerator2D
