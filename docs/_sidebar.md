@@ -7,5 +7,6 @@
   * [🦠 Cellular](/generators/cellular.md)
   * [🗻 Heightmap](/generators/heightmap.md)
   * [🌍 Noise](/generators/noise.md)
+  * [🌊 Wave Function](/generators/wave_function.md)
 * [📝 Modifiers](/modifiers.md)
 * [🍻 Contribute](/contribute.md)
