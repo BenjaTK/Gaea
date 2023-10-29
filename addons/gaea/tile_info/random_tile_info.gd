@@ -1,6 +1,7 @@
 @tool
 class_name RandomTileInfo
 extends TileInfo
+## When used in a grid, sets its cell's value to a random tile from [param tiles].
 
 
 const WEIGHT_PREFIX = "weight_"
@@ -10,6 +11,8 @@ const WEIGHT_PREFIX = "weight_"
 		tiles = value
 		_update_weights()
 		notify_property_list_changed()
+## If [code]true[/code], tiles will have weights attached to them.
+## Tiles with higher weights are more likely to get chosen.
 @export var use_weights: bool = true :
 	set(value):
 		use_weights = value
@@ -20,8 +23,7 @@ const WEIGHT_PREFIX = "weight_"
 var _weights: Dictionary
 
 
-
-## Returns a random [TileInfo] from [param tiles]
+## Returns a random [TileInfo] from [param tiles].
 func get_random() -> TileInfo:
 	if tiles.is_empty():
 		return null
