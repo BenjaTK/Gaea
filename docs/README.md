@@ -32,6 +32,9 @@ Further fine-tune your procedurally generated worlds with our set of modifiers. 
 ## Chunk loading
 Gaea comes with a `ChunkLoader` node that can generate an area around an `actor`, allowing both for infinite worlds and to optimize big worlds. 
 
+# Videos
+[![10+2 AWESOME ADDONS for GODOT 4 by MrElipteach](docs/assets/mrelipteach-thumbnail.jpg)](https://youtu.be/-FQNPCB7e3s?t=144&si=myv2OsGoLa7jiUfi "10+2 AWESOME ADDONS for GODOT 4 by MrElipteach")
+
 # 🔧 Installation Steps
 
 1. **Download the project files.**
