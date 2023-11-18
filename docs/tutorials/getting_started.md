@@ -29,8 +29,8 @@ First, let's set up the generator's settings. Go to the generator's inspector, a
 Every generator has its own `GeneratorSettings` resource, which is where all the **parameters** for the generation will be stored in. This allows for having different generations without having to even change scenes, just replacing the `settings` resource will do!
 
 ### Setting up the generation
-Add a new `TileInfo` resource to the settings' `tile` property. This will tell the generator which tile to place by default.\
-Set its type to `Terrain` and the `terrain` property to `3`.
+Add a new `TilemapTileInfo` resource to the settings' `tile` property. This will tell the generator which tile to place by default.\
+Set its type to `Terrain` and the `terrain` property to `3`, if you're using the tutorial scene. If you aren't, set it to the tile in the Tileset you want the generator to place.
 
 Now, press **Generate**!\
 See what happened? The floor of the dungeon was generated! It should look something like this:\
