@@ -7,5 +7,5 @@ func _can_handle(object: Object) -> bool:
 
 func _parse_begin(object: Object) -> void:
 	if object is GaeaGenerator:
-		var generator_buttons := preload("res://addons/gaea/editor/generator_buttons.gd").new()
+		var generator_buttons := preload("./generator_buttons.gd").new()
 		add_custom_control(generator_buttons)

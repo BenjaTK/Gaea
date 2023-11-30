@@ -20,7 +20,7 @@ var _walked_tiles : Array[Vector2]
 
 
 func generate(starting_grid: GaeaGrid = null) -> void:
-	if Engine.is_editor_hint() and not editor_preview: 
+	if Engine.is_editor_hint() and not editor_preview:
 		push_warning("%s: Editor Preview is not enabled so nothing happened!" % name)
 		return
 	var time_now :int = Time.get_ticks_msec()

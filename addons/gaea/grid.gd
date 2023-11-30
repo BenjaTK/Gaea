@@ -74,6 +74,11 @@ func erase_invalid() -> void:
 
 ### Utilities ###
 
+
+func get_area() -> Variant:
+	return null
+
+
 ## Use this instead of `duplicate()` as it is broken on custom resources.
 func clone() -> GaeaGrid:
 	var instance = get_script().new()

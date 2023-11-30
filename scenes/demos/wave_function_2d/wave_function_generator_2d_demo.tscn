@@ -363,9 +363,8 @@ layer_0/tile_data = PackedInt32Array(917504, 0, 4, 983040, 0, 5, 786433, 0, 4, 8
 [node name="WaveFunctionGenerator2D" type="Node" parent="."]
 script = ExtResource("2_2r7sf")
 settings = SubResource("Resource_pdk0e")
-preview = true
 
 [node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
 script = ExtResource("7_u0tdg")
-tile_map = NodePath("../32x32TileMap")
-generator = NodePath("../WaveFunctionGenerator2D")
+tile_map = NodePath("")
+generator = NodePath("")
