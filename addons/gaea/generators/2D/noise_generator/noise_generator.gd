@@ -30,7 +30,6 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 	if settings.random_noise_seed:
 		settings.noise.seed = randi()
 
-
 	if starting_grid == null:
 		erase()
 	else:
