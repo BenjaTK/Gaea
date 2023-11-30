@@ -41,8 +41,9 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 
 
 func erase() -> void:
-	grid.clear()
-	grid_updated.emit()
+	if grid != null:
+		grid.clear()
+		grid_updated.emit()
 
 
 ### Modifiers ###
