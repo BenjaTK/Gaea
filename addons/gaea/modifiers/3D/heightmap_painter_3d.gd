@@ -31,7 +31,6 @@ func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 				if not grid.has_cell(cell):
 					continue
 
-
 				var height = floor(noise.get_noise_2d(x, z) * height_intensity + height_offset)
 				if y <= height:
 					if not _passes_filter(grid.get_value(cell)):

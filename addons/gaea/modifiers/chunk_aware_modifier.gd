@@ -49,7 +49,7 @@ func apply_chunk(grid: GaeaGrid, generator: ChunkAwareGenerator2D, chunk_positio
 	_apply_area(
 		Rect2i(
 			chunk_position * generator.chunk_size,
-			Vector2i(generator.chunk_size, generator.chunk_size)
+			generator.chunk_size
 		),
 		grid,
 		generator

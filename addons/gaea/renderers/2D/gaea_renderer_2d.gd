@@ -12,7 +12,7 @@ func _draw_area(area: Rect2i) -> void:
 func _draw_chunk(chunk_position: Vector2i) -> void:
 	_draw_area(Rect2i(
 			chunk_position * generator.chunk_size,
-			Vector2i(generator.chunk_size, generator.chunk_size))
+			generator.chunk_size)
 		)
 
 ## Draws the whole grid.

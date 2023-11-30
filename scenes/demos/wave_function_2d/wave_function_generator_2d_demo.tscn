@@ -364,7 +364,5 @@ layer_0/tile_data = PackedInt32Array(917504, 0, 4, 983040, 0, 5, 786433, 0, 4, 8
 script = ExtResource("2_2r7sf")
 settings = SubResource("Resource_pdk0e")
 
-[node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
+[node name="TilemapGaeaRenderer" type="Node" parent="."]
 script = ExtResource("7_u0tdg")
-tile_map = NodePath("")
-generator = NodePath("")

@@ -95,7 +95,7 @@ func _set_grid() -> void:
 
 
 func _set_chunk_grid(chunk_position: Vector2i) -> void:
-	_set_grid_area(Rect2i(chunk_position * chunk_size, Vector2i(chunk_size, chunk_size)))
+	_set_grid_area(Rect2i(chunk_position * chunk_size, chunk_size))
 
 
 func _set_grid_area(area: Rect2i) -> void:
