@@ -16,7 +16,7 @@ func _ready() -> void:
 
 
 func generate(starting_grid: GaeaGrid = null) -> void:
-	if Engine.is_editor_hint() and not editor_preview: 
+	if Engine.is_editor_hint() and not editor_preview:
 		push_warning("%s: Editor Preview is not enabled so nothing happened!" % name)
 		return
 
@@ -48,7 +48,7 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 
 
 func generate_chunk(chunk_position: Vector3i, starting_grid: GaeaGrid = null) -> void:
-	if Engine.is_editor_hint() and not editor_preview: 
+	if Engine.is_editor_hint() and not editor_preview:
 		push_warning("%s: Editor Preview is not enabled so nothing happened!" % name)
 		return
 
