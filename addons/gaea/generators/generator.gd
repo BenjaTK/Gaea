@@ -22,7 +22,7 @@ signal generation_finished
 ## it will be kept.
 @export var generate_on_ready: bool = true
 
-var grid : GaeaGrid
+var grid : GaeaGrid : get = get_grid
 
 
 func _ready() -> void:
@@ -45,6 +45,9 @@ func erase() -> void:
 		grid.clear()
 		grid_updated.emit()
 
+
+func get_grid() -> GaeaGrid:
+	return grid
 
 ### Modifiers ###
 
