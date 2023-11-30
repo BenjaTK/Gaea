@@ -96,7 +96,7 @@ func _set_grid() -> void:
 
 
 func _set_chunk_grid(chunk_position: Vector3i) -> void:
-	_set_grid_area(AABB(chunk_position * chunk_size, Vector3i(chunk_size, chunk_size, chunk_size)))
+	_set_grid_area(AABB(chunk_position * chunk_size, chunk_size))
 
 
 func _set_grid_area(area: AABB) -> void:

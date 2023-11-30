@@ -39,6 +39,7 @@ func _ready() -> void:
 		if is_instance_valid(renderer) and not renderer.is_node_ready():
 			await renderer.ready
 
+		await get_tree().process_frame
 		_update_loading(_get_actors_position())
 
 
@@ -101,9 +102,9 @@ func _get_actors_position() -> Vector3i:
 	var tile_position: Vector3i = actor_position / generator.tile_size
 
 	var chunk_position := Vector3i(
-		roundi(tile_position.x / generator.chunk_size),
-		roundi(tile_position.y / generator.chunk_size),
-		roundi(tile_position.z / generator.chunk_size)
+		roundi(tile_position.x / generator.chunk_size.x),
+		roundi(tile_position.y / generator.chunk_size.y),
+		roundi(tile_position.z / generator.chunk_size.z)
 	)
 
 	return chunk_position
