@@ -102,9 +102,9 @@ func _get_actors_position() -> Vector3i:
 	var tile_position: Vector3i = actor_position / generator.tile_size
 
 	var chunk_position := Vector3i(
-		roundi(tile_position.x / generator.chunk_size.x),
-		roundi(tile_position.y / generator.chunk_size.y),
-		roundi(tile_position.z / generator.chunk_size.z)
+		roundi(float(tile_position.x) / generator.chunk_size.x),
+		roundi(float(tile_position.y) / generator.chunk_size.y),
+		roundi(float(tile_position.z) / generator.chunk_size.z)
 	)
 
 	return chunk_position
