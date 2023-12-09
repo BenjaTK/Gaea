@@ -31,27 +31,28 @@ func _draw_area(area: Rect2i) -> void:
 
 				continue
 
-			var tile = tile_position
-			var tile_info = generator.grid.get_value(tile_position)
+			for l in generator.grid.get_layers(tile_position):
+				var tile = tile_position
+				var tile_info = generator.grid.get_value(tile_position)
 
-			if not (tile_info is TilemapTileInfo):
-				continue
+				if not (tile_info is TilemapTileInfo):
+					continue
 
-			match tile_info.type:
-				TilemapTileInfo.Type.SINGLE_CELL:
-					tile_map.set_cell(
-						tile_info.layer, tile, tile_info.source_id,
-						tile_info.atlas_coord, tile_info.alternative_tile
-					)
-				TilemapTileInfo.Type.TERRAIN:
-					if not terrains.has(tile_info):
-						terrains[tile_info] = [tile]
-					else:
-						terrains[tile_info].append(tile)
+				match tile_info.type:
+					TilemapTileInfo.Type.SINGLE_CELL:
+						tile_map.set_cell(
+							tile_info.tilemap_layer, tile, tile_info.source_id,
+							tile_info.atlas_coord, tile_info.alternative_tile
+						)
+					TilemapTileInfo.Type.TERRAIN:
+						if not terrains.has(tile_info):
+							terrains[tile_info] = [tile]
+						else:
+							terrains[tile_info].append(tile)
 
 	for tile_info in terrains:
 		tile_map.set_cells_terrain_connect(
-			tile_info.layer, terrains[tile_info],
+			tile_info.tilemap_layer, terrains[tile_info],
 			tile_info.terrain_set, tile_info.terrain
 		)
 
