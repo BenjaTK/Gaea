@@ -4,33 +4,50 @@ extends Resource
 ## of the Gaea plugin.
 
 
+## Holds the layers as subdictionaries containing values for each position.
 var _grid: Dictionary
 
 
 ### Values ###
 
-
 ## Sets the value at the given position to [param value].
-func set_value(pos, value: Variant) -> void:
+## [br]
+## If [param layer] is negative, it is ignored,
+## and if [param value] is a [TileInfo], it takes its [param layer].
+## Otherwise, layer is set to [code]0[/code].
+func set_value(pos, value: Variant, layer: int = -1) -> void:
 	if value is RandomTileInfo:
-		set_value(pos, value.get_random())
+		set_value(pos, value.get_random(), layer)
 		return
 
-	_grid[pos] = value
+	if layer < 0:
+		if value is TileInfo:
+			layer = value.layer
+		else:
+			layer = 0
+
+	if not has_layer(layer):
+		add_layer(layer)
+
+	_grid[layer][pos] = value
+	if get_value(pos, layer) is Dictionary:
+		_grid[pos][layer] = value
+	else:
+		_grid[pos] = {layer: value}
 
 
 ## Returns the value at the given position.
 ## If there's no value at that position, returns [code]null[/code].
-func get_value(pos) -> Variant:
-	return _grid.get(pos)
+func get_value(pos, layer: int) -> Variant:
+	return _grid[layer].get(pos)
 
 
 ## Returns an [Array] of all values in the grid.
-func get_values() -> Array[Variant]:
-	return _grid.values()
+func get_values(layer: int) -> Array[Variant]:
+	return _grid[layer].values()
 
 
-## Sets the grid [Dictionary] to [param grid].
+## Sets the grid [Array] to [param grid].
 func set_grid(grid: Dictionary) -> void:
 	_grid = grid
 
@@ -44,8 +61,8 @@ func get_grid() -> Dictionary:
 
 
 ## Returns an [Array] of all cells in the grid.
-func get_cells() -> Array:
-	return _grid.keys()
+func get_cells(layer: int) -> Array:
+	return _grid[layer].keys()
 
 
 ## Returns [code]true[/code] if the grid has a cell at the given position.
@@ -67,12 +84,31 @@ func clear() -> void:
 
 ## Erases all cells of value [code]null[/code].
 func erase_invalid() -> void:
-	for cell in get_cells():
-		if get_value(cell) == null:
-			erase(cell)
+	for layer: int in range(get_layer_count()):
+		for cell in get_cells(layer):
+			if get_value(cell, layer) == null:
+				erase(cell)
 
 
 ### Utilities ###
+
+
+### Layers ###
+
+
+func has_layer(idx: int) -> bool:
+	return _grid.has(idx)
+
+
+func get_layer_count() -> int:
+	return _grid.size()
+
+
+func add_layer(idx: int) -> void:
+	if _grid.has(idx):
+		return
+
+	_grid[idx] = {}
 
 
 func get_area() -> Variant:

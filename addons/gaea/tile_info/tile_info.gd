@@ -11,3 +11,4 @@ extends Resource
 	set(value):
 		id = value
 		resource_name = id.to_pascal_case()
+@export var layer: int = 0
