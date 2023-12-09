@@ -30,10 +30,6 @@ func set_value(pos, value: Variant, layer: int = -1) -> void:
 		add_layer(layer)
 
 	_grid[layer][pos] = value
-	if get_value(pos, layer) is Dictionary:
-		_grid[pos][layer] = value
-	else:
-		_grid[pos] = {layer: value}
 
 
 ## Returns the value at the given position.
@@ -66,15 +62,16 @@ func get_cells(layer: int) -> Array:
 
 
 ## Returns [code]true[/code] if the grid has a cell at the given position.
-func has_cell(pos) -> bool:
-	return _grid.has(pos)
+func has_cell(pos, layer: int) -> bool:
+	return _grid[layer].has(pos)
 
 
 ### Erasing ###
 
 ## Removes the cell at the given position from the grid.
-func erase(pos) -> void:
-	_grid.erase(pos)
+func erase(pos, layer: int) -> void:
+	if has_cell(pos, layer):
+		_grid[layer].erase(pos)
 
 
 ## Clears the grid, removing all cells.
@@ -87,7 +84,7 @@ func erase_invalid() -> void:
 	for layer: int in range(get_layer_count()):
 		for cell in get_cells(layer):
 			if get_value(cell, layer) == null:
-				erase(cell)
+				erase(cell, layer)
 
 
 ### Utilities ###
