@@ -30,34 +30,40 @@ func get_valuexy(x: int, y: int, layer: int) -> Variant:
 
 ## Returns a [Rect2i] of the full extent of the grid.
 func get_area() -> Rect2i:
-	var cells = self.get_cells()
-	if cells.is_empty():
-		return Rect2i()
+	var rect: Rect2i
+	for layer in range(get_layer_count()):
+		var cells = get_cells(layer)
+		if cells.is_empty():
+			continue
 
-	var rect: Rect2i = Rect2i(cells.front(), Vector2i.ZERO)
-	for cell in cells:
-		rect = rect.expand(cell)
+		if rect == Rect2i():
+			rect = Rect2i(cells.front(), Vector2i.ZERO)
+
+		for cell in cells:
+			rect = rect.expand(cell)
 	return rect
 
 
 ## Returns [code]true[/code] if the grid has a cell at the given position.
-func has_cell(pos: Vector2i) -> bool:
-	return super(pos)
+func has_cell(pos: Vector2i, layer: int) -> bool:
+	if not has_layer(layer):
+		return false
+	return super(pos, layer)
 
 
 ## Returns [code]true[/code] if the grid has a cell at the given position.
-func has_cellxy(x: int, y: int) -> bool:
-	return has_cell(Vector2i(x, y))
+func has_cellxy(x: int, y: int, layer: int) -> bool:
+	return has_cell(Vector2i(x, y), layer)
 
 
 ## Removes the cell at the given position from the grid.
-func erase(pos: Vector2i) -> void:
-	super(pos)
+func erase(pos: Vector2i, layer: int) -> void:
+	super(pos, layer)
 
 
 ## Removes the cell at the given position from the grid.
-func erasexy(x: int, y: int) -> void:
-	erase(Vector2i(x, y))
+func erasexy(x: int, y: int, layer: int) -> void:
+	erase(Vector2i(x, y), layer)
 
 
 ## Returns the amount of non-existing and null cells (including corners) around the given position.
@@ -73,11 +79,11 @@ func get_amount_of_empty_neighbors(pos: Vector2i, layer: int) -> int:
 
 ## Returns an array with the positions of all cells surrounding the given position, including corners.[br]
 ## If [param ignore_empty] is [code]true[/code], all non-existing cells will not be counted. Cells of value [code]null[/code] will still be counted.
-func get_surrounding_cells(pos: Vector2i, ignore_empty: bool = false) -> Array[Vector2i]:
+func get_surrounding_cells(pos: Vector2i, layer: int, ignore_empty: bool = false) -> Array[Vector2i]:
 	var surrounding: Array[Vector2i]
 
 	for n in SURROUNDING:
-		if ignore_empty and not has_cell(pos + n):
+		if ignore_empty and not has_cell(pos + n, layer):
 			continue
 		surrounding.append(pos + n)
 
