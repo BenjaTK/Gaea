@@ -7,25 +7,25 @@ const SURROUNDING := [Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN,
 
 
 ## Sets the value at the given position to [param value].
-func set_value(pos: Vector2i, value: Variant) -> void:
-	super(pos, value)
+func set_value(pos: Vector2i, value: Variant, layer: int = -1) -> void:
+	super(pos, value, layer)
 
 
 ## Sets the value at the given position to [param value].
-func set_valuexy(x: int, y: int, value: Variant) -> void:
-	set_value(Vector2i(x, y), value)
+func set_valuexy(x: int, y: int, value: Variant, layer: int = -1) -> void:
+	set_value(Vector2i(x, y), value, layer)
 
 
 ## Returns the value at the given position.
 ## If there's no value at that position, returns [code]null[/code].
-func get_value(pos: Vector2i) -> Variant:
-	return super(pos)
+func get_value(pos: Vector2i, layer: int) -> Variant:
+	return super(pos, layer)
 
 
 ## Returns the value at the given position.
 ## If there's no value at that position, returns [code]null[/code].
-func get_valuexy(x: int, y: int) -> Variant:
-	return get_value(Vector2i(x, y))
+func get_valuexy(x: int, y: int, layer: int) -> Variant:
+	return get_value(Vector2i(x, y), layer)
 
 
 ## Returns a [Rect2i] of the full extent of the grid.
@@ -61,11 +61,11 @@ func erasexy(x: int, y: int) -> void:
 
 
 ## Returns the amount of non-existing and null cells (including corners) around the given position.
-func get_amount_of_empty_neighbors(pos: Vector2i) -> int:
+func get_amount_of_empty_neighbors(pos: Vector2i, layer: int) -> int:
 	var count: int = 0
 
 	for n in SURROUNDING:
-		if get_value(pos + n) == null:
+		if get_value(pos + n, layer) == null:
 			count += 1
 
 	return count

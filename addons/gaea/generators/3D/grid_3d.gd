@@ -8,25 +8,25 @@ const NEIGHBORS := [Vector3i.RIGHT, Vector3i.LEFT, Vector3i.UP, Vector3i.DOWN,
 
 
 ## Sets the value at the given position to [param value].
-func set_value(pos: Vector3i, value: Variant) -> void:
-	super(pos, value)
+func set_value(pos: Vector3i, value: Variant, layer: int = -1) -> void:
+	super(pos, value, layer)
 
 
 ## Sets the value at the given position to [param value].
-func set_valuexyz(x: int, y: int, z: int, value: Variant) -> void:
-	set_value(Vector3i(x, y, z), value)
+func set_valuexyz(x: int, y: int, z: int, value: Variant, layer: int) -> void:
+	set_value(Vector3i(x, y, z), value, layer)
 
 
 ## Returns the value at the given position.
 ## If there's no value at that position, returns [code]null[/code].
-func get_value(pos: Vector3i) -> Variant:
-	return super(pos)
+func get_value(pos: Vector3i, layer: int) -> Variant:
+	return super(pos, layer)
 
 
 ## Returns the value at the given position.
 ## If there's no value at that position, returns [code]null[/code].
-func get_valuexyz(x: int, y: int, z: int) -> Variant:
-	return get_value(Vector3i(x, y, z))
+func get_valuexyz(x: int, y: int, z: int, layer: int) -> Variant:
+	return get_value(Vector3i(x, y, z), layer)
 
 
 ## Returns an [AABB] of the full extent of the grid.
