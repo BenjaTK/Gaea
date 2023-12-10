@@ -22,7 +22,7 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator):
 	var _temp_grid: GaeaGrid = grid.clone()
 	for layer in affected_layers:
 		for cell in grid.get_cells(layer):
-			if not _passes_filter(grid.get_value(cell, layer)):
+			if not _passes_filter(grid, cell):
 					continue
 
 			if grid.get_value(cell, layer) == generator.settings.tile:

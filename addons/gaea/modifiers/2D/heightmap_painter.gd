@@ -33,12 +33,13 @@ func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> voi
 
 			var height = floor(noise.get_noise_1d(cell.x) * height_intensity + height_offset)
 			if cell.y >= -height:
-				if not _passes_filter(grid.get_value(cell, tile.layer)):
+				if not _passes_filter(grid, cell):
 					continue
 
 				grid.set_value(cell, tile)
 
 
 func _validate_property(property: Dictionary) -> void:
+	super(property)
 	if property.name == "affected_layers":
 		property.usage = PROPERTY_USAGE_NONE

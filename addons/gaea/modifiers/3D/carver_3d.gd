@@ -27,7 +27,7 @@ func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 					if not grid.has_cell(cell, layer) or _is_out_of_bounds(cell):
 						continue
 
-					if not _passes_filter(grid.get_value(cell, layer)):
+					if not _passes_filter(grid, cell):
 						continue
 
 					if noise.get_noise_3dv(cell) > threshold:

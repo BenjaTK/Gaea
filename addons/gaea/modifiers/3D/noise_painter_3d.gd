@@ -41,7 +41,7 @@ func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 					continue
 
 				if noise.get_noise_3dv(noise_pos) > threshold:
-					if not _passes_filter(grid.get_cell(cell)):
+					if not _passes_filter(grid, cell):
 						continue
 
 					grid.set_cell(cell, tile)
@@ -53,5 +53,6 @@ func _is_out_of_bounds(cell: Vector3i) -> bool:
 
 
 func _validate_property(property: Dictionary) -> void:
+	super(property)
 	if property.name == "affected_layers":
 		property.usage = PROPERTY_USAGE_NONE
