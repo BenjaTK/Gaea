@@ -21,18 +21,20 @@ extends ChunkAwareModifier2D
 ## The heightmap displaces [param height_offset] by a random number
 ## from -[param height_intensity] to [param height_intensity].
 @export var height_intensity := 20
+@export var affected_layers: Array[int] = [0]
 
 
 func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			var cell := Vector2i(x, y)
-			if not grid.has_cell(cell):
-				continue
-
-			var height = floor(noise.get_noise_1d(cell.x) * height_intensity + height_offset)
-			if cell.y >= -height:
-				if not _passes_filter(grid.get_value(cell)):
+			for layer in affected_layers:
+				if not grid.has_cell(cell, layer):
 					continue
 
-				grid.set_value(cell, tile)
+				var height = floor(noise.get_noise_1d(cell.x) * height_intensity + height_offset)
+				if cell.y >= -height:
+					if not _passes_filter(grid.get_value(cell, layer)):
+						continue
+
+					grid.set_value(cell, tile)
