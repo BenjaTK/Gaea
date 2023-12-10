@@ -12,11 +12,11 @@ extends ChunkAwareModifier2D
 ## will be deleted from the map. (-1.0 is black, 1.0 is white)[br]
 ## Lower values mean more empty areas.
 @export_range(-1.0, 1.0) var threshold := 0.15
+@export var affected_layers: Array[int] = [0]
 @export_group("Bounds", "bounds_")
 @export var bounds_enabled: bool = false
 @export var bounds_max := Vector2(0, 0)
 @export var bounds_min := Vector2(-0, -0)
-@export var affected_layers: Array[int] = [0]
 
 
 func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
