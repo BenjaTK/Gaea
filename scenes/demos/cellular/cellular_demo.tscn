@@ -9,11 +9,12 @@
 [sub_resource type="Resource" id="Resource_6khhn"]
 script = ExtResource("3_k8d1f")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(0, 0)
 alternative_tile = 0
 id = ""
+layer = 0
 
 [sub_resource type="Resource" id="Resource_7pq16"]
 resource_name = "Settings"

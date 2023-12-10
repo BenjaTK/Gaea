@@ -11,10 +11,11 @@
 [sub_resource type="Resource" id="Resource_6o5pe"]
 script = ExtResource("3_iwilg")
 type = 1
-layer = 0
+tilemap_layer = 0
 terrain_set = 0
 terrain = 1
 id = ""
+layer = 0
 
 [sub_resource type="Resource" id="Resource_gxgbe"]
 script = ExtResource("2_8wc1k")
@@ -23,30 +24,34 @@ expand_left = 1
 expand_top = 1
 expand_right = 1
 expand_bottom = 1
+affected_layers = Array[int]([0])
 filter_type = 0
 filter_ids = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_vbeab"]
 script = ExtResource("3_iwilg")
 type = 1
-layer = 0
+tilemap_layer = 0
 terrain_set = 0
 terrain = 2
 id = ""
+layer = 0
 
 [sub_resource type="Resource" id="Resource_4s7hn"]
 script = ExtResource("4_o7uq6")
 wall_tile = SubResource("Resource_vbeab")
+affected_layers = Array[int]([0])
 filter_type = 0
 filter_ids = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_u3p7a"]
 script = ExtResource("3_iwilg")
 type = 1
-layer = 0
+tilemap_layer = 0
 terrain_set = 0
 terrain = 3
 id = ""
+layer = 0
 
 [sub_resource type="Resource" id="Resource_xngca"]
 resource_name = "Settings"
@@ -70,7 +75,6 @@ modifiers = Array[Resource("res://addons/gaea/modifiers/2D/modifier_2d.gd")]([Su
 [node name="WalkerGenerator" type="Node2D" parent="."]
 script = ExtResource("2_07wvo")
 settings = SubResource("Resource_xngca")
-preview = true
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource("6_cu6vq")

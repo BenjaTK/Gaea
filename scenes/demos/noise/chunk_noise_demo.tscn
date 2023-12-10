@@ -11,35 +11,38 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1a0nh"]
 noise_type = 0
-seed = 558813672
+seed = -376220448
 domain_warp_amplitude = 8.0
 
 [sub_resource type="Resource" id="Resource_eh1og"]
 script = ExtResource("3_js5hs")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(0, 0)
 alternative_tile = 1
 id = ""
+layer = 0
 
 [sub_resource type="Resource" id="Resource_5gby7"]
 script = ExtResource("3_js5hs")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(0, 0)
 alternative_tile = 0
 id = ""
+layer = 0
 
 [sub_resource type="Resource" id="Resource_yamag"]
 script = ExtResource("3_js5hs")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(1, 0)
 alternative_tile = 0
 id = ""
+layer = 0
 
 [sub_resource type="Resource" id="Resource_hj1ni"]
 resource_name = "Settings"
