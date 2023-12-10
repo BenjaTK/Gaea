@@ -7,7 +7,6 @@ extends Modifier2D
 
 
 @export var starting_cell := Vector2i.ZERO
-@export var affected_layers: Array[int] = [0]
 
 
 func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:

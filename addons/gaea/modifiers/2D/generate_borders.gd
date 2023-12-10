@@ -15,7 +15,6 @@ enum Mode {
 @export var mode: Mode = Mode.ADJACENT_ONLY
 ## If [code]true[/code], removes border tiles that don't have any neighbors of the same type.
 @export var remove_single_walls := false
-@export var affected_layers: Array[int] = [0]
 
 var _temp_grid: GaeaGrid
 

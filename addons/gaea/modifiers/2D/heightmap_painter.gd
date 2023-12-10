@@ -21,7 +21,6 @@ extends ChunkAwareModifier2D
 ## The heightmap displaces [param height_offset] by a random number
 ## from -[param height_intensity] to [param height_intensity].
 @export var height_intensity := 20
-@export var affected_layers: Array[int] = [0]
 
 
 func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> void:

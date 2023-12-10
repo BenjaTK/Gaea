@@ -9,6 +9,8 @@ enum FilterType {
 	WHITELIST ## The modifier will ONLY affect the [TileInfo]s whose [param id] can be found in [param filter_ids].
 }
 
+@export_group("")
+@export var affected_layers: Array[int] = [0]
 @export_group("Filters", "filter_")
 ## [i]Note: Some modifiers don't support filtering.[/i]
 @export var filter_type: FilterType = FilterType.NONE

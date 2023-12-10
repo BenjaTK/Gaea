@@ -14,7 +14,6 @@ extends ChunkAwareModifier2D
 ## Any values in the noise texture that go above this threshold
 ## will be replaced with [param tile]. (-1.0 is black, 1.0 is white)
 @export_range(-1.0, 1.0) var threshold: float = 0.6
-@export var affected_layers: Array[int] = [0]
 @export_group("Bounds", "bounds_")
 @export var bounds_enabled: bool = false
 @export var bounds_max := Vector2(0, 0)

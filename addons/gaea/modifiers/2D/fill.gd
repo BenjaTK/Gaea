@@ -8,7 +8,6 @@ extends Modifier2D
 
 ## A [TileInfo] containing information about the filling tile.
 @export var tile: TileInfo
-@export var affected_layers: Array[int] = [0]
 @export_group("Expand", "expand_")
 ## Expand the left side of the filled rectangle by this amount.
 @export var expand_left := 1
