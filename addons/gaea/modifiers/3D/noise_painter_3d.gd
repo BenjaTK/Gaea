@@ -36,7 +36,7 @@ func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 				if noise_mode == NoiseMode.NOISE_3D: #3D
 					noise_pos.y = y
 
-				if not grid.has_cell(cell) or _is_out_of_bounds(cell):
+				if not grid.has_cell(cell, tile.layer) or _is_out_of_bounds(cell):
 					continue
 
 				if noise.get_noise_3dv(noise_pos) > threshold:
@@ -49,3 +49,8 @@ func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 func _is_out_of_bounds(cell: Vector3i) -> bool:
 	return (cell.x > max.x or cell.y > max.y or cell.z > max.z or
 			cell.x < min.x or cell.y < min.y or cell.z < min.z)
+
+
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "affected_layers":
+		property.usage = PROPERTY_USAGE_NONE
