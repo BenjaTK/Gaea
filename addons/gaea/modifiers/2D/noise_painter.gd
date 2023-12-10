@@ -24,16 +24,15 @@ func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> voi
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			var cell := Vector2i(x, y)
-			for layer in affected_layers:
-				if not grid.has_cell(cell, layer) or _is_out_of_bounds(cell):
+			if not grid.has_cell(cell, tile.layer) or _is_out_of_bounds(cell):
+				continue
+
+
+			if noise.get_noise_2dv(cell) > threshold:
+				if not _passes_filter(grid.get_value(cell, tile.layer)):
 					continue
 
-
-				if noise.get_noise_2dv(cell) > threshold:
-					if not _passes_filter(grid.get_value(cell, layer)):
-						continue
-
-					grid.set_value(cell, tile)
+				grid.set_value(cell, tile)
 
 
 func _is_out_of_bounds(cell: Vector2i) -> bool:
@@ -42,3 +41,8 @@ func _is_out_of_bounds(cell: Vector2i) -> bool:
 
 	return (cell.x > bounds_max.x or cell.y > bounds_max.y or
 			cell.x < bounds_min.x or cell.y < bounds_min.y)
+
+
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "affected_layers":
+		property.usage = PROPERTY_USAGE_NONE

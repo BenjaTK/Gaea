@@ -27,13 +27,17 @@ func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> voi
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			var cell := Vector2i(x, y)
-			for layer in affected_layers:
-				if not grid.has_cell(cell, layer):
+			if not grid.has_cell(cell, tile.layer):
+				continue
+
+			var height = floor(noise.get_noise_1d(cell.x) * height_intensity + height_offset)
+			if cell.y >= -height:
+				if not _passes_filter(grid.get_value(cell, tile.layer)):
 					continue
 
-				var height = floor(noise.get_noise_1d(cell.x) * height_intensity + height_offset)
-				if cell.y >= -height:
-					if not _passes_filter(grid.get_value(cell, layer)):
-						continue
+				grid.set_value(cell, tile)
 
-					grid.set_value(cell, tile)
+
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "affected_layers":
+		property.usage = PROPERTY_USAGE_NONE
