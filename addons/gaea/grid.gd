@@ -35,6 +35,8 @@ func set_value(pos, value: Variant, layer: int = -1) -> void:
 ## Returns the value at the given position.
 ## If there's no value at that position, returns [code]null[/code].
 func get_value(pos, layer: int) -> Variant:
+	if not has_layer(layer):
+		return null
 	return _grid[layer].get(pos)
 
 

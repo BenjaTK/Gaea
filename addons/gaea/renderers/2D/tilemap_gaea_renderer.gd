@@ -32,7 +32,7 @@ func _draw_area(area: Rect2i) -> void:
 					tile_map.erase_cell(l, Vector2i(x, y))
 				continue
 
-			for layer in generator.grid.get_layer_count():
+			for layer in range(generator.grid.get_layer_count()):
 				var tile = tile_position
 				var tile_info = generator.grid.get_value(tile_position, layer)
 

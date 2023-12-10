@@ -10,6 +10,7 @@ extends ChunkAwareModifier3D
 ## Useful for use with the [HeightmapGenerator2D], as it will make sure it follows
 ## the same terrain shape (especially if [param height_intensity] is the same as the generator's).
 @export var use_generator_noise: bool = true
+@export var ignore_empty_cells: bool = true
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 @export var random_noise_seed := true
 @export var tile: TileInfo
@@ -28,7 +29,7 @@ func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 		for z in range(area.position.z, area.end.z + 1):
 			for y in range(area.position.y, area.end.y + 1):
 				var cell := Vector3i(x, y, z)
-				if not grid.has_cell(cell, tile.layer):
+				if not grid.has_cell(cell, tile.layer) and ignore_empty_cells:
 					continue
 
 				var height = floor(noise.get_noise_2d(x, z) * height_intensity + height_offset)

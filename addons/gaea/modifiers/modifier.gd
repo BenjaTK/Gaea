@@ -27,7 +27,7 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
 ## to the filters.
 func _passes_filter(tile_info: TileInfo) -> bool:
 	if tile_info == null:
-		return false
+		return true
 
 	match filter_type:
 		FilterType.BLACKLIST:

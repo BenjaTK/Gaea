@@ -9,6 +9,7 @@ extends ChunkAwareModifier2D
 
 
 @export var noise: FastNoiseLite = FastNoiseLite.new()
+@export var ignore_empty_cells: bool = true
 @export var random_noise_seed := true
 @export var tile: TileInfo
 ## Any values in the noise texture that go above this threshold
@@ -24,9 +25,8 @@ func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> voi
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			var cell := Vector2i(x, y)
-			if not grid.has_cell(cell, tile.layer) or _is_out_of_bounds(cell):
+			if not grid.has_cell(cell, tile.layer) and ignore_empty_cells or _is_out_of_bounds(cell):
 				continue
-
 
 			if noise.get_noise_2dv(cell) > threshold:
 				if not _passes_filter(grid.get_value(cell, tile.layer)):
