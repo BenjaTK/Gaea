@@ -26,4 +26,6 @@ func _ready() -> void:
 
 ## Returns the [GaeaGrid3D] resource handling this generator's grid.
 func get_grid() -> GaeaGrid3D:
+	if not is_instance_valid(grid):
+		grid = GaeaGrid3D.new()
 	return grid
