@@ -20,14 +20,15 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator):
 		return grid
 
 	var _temp_grid: GaeaGrid = grid.clone()
-	for cell in grid.get_cells():
-		if not _passes_filter(grid.get_value(cell)):
-				continue
+	for layer in affected_layers:
+		for cell in grid.get_cells(layer):
+			if not _passes_filter(grid.get_value(cell, layer)):
+					continue
 
-		if grid.get_value(cell) == generator.settings.tile:
-			var above: Vector2i = cell + Vector2i.UP
-			if grid.has_cell(above) and grid.get_value(above) != generator.settings.tile:
-				_temp_grid.set_value(cell, wall_tile)
+			if grid.get_value(cell, layer) == generator.settings.tile:
+				var above: Vector2i = cell + Vector2i.UP
+				if grid.has_cell(above, layer) and grid.get_value(above, layer) != generator.settings.tile:
+					_temp_grid.set_value(cell, wall_tile)
 
 	generator.grid = _temp_grid.clone()
 	_temp_grid.unreference()
