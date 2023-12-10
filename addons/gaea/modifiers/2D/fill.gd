@@ -21,19 +21,20 @@ extends Modifier2D
 
 func apply(grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 	var rect: Rect2i
-	for cell in grid.get_cells():
-		if not rect:
-			rect = Rect2i(cell, Vector2i.ONE)
-		rect = rect.expand(cell)
+	for layer in range(grid.get_layer_count()):
+		for cell in grid.get_cells(layer):
+			if not rect:
+				rect = Rect2i(cell, Vector2i.ONE)
+			rect = rect.expand(cell)
 
-	rect = rect.grow_individual(
-			expand_left, expand_top, expand_right, expand_bottom
-			)
+		rect = rect.grow_individual(
+				expand_left, expand_top, expand_right, expand_bottom
+				)
 
-	for x in range(rect.position.x, rect.end.x + 1):
-		for y in range(rect.position.y, rect.end.y + 1):
-			var cell: Vector2i = Vector2i(x, y)
-			if grid.has_cell(cell):
-				continue
+		for x in range(rect.position.x, rect.end.x + 1):
+			for y in range(rect.position.y, rect.end.y + 1):
+				var cell: Vector2i = Vector2i(x, y)
+				if grid.has_cell(cell, layer):
+					continue
 
-			grid.set_value(cell, tile)
+				grid.set_value(cell, tile)
