@@ -35,16 +35,17 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
 
 
 func _generate_border_walls(grid: GaeaGrid) -> void:
-	for cell in grid.get_cells():
-		var neighbors = GaeaGrid2D.SURROUNDING.duplicate()
+	for layer in affected_layers:
+		for cell in grid.get_cells(layer):
+			var neighbors = GaeaGrid2D.SURROUNDING.duplicate()
 
-		if mode != Mode.INCLUDE_DIAGONALS:
-			for i in [Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, -1), Vector2i(-1, 1)]:
-				neighbors.erase(i)
+			if mode != Mode.INCLUDE_DIAGONALS:
+				for i in [Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, -1), Vector2i(-1, 1)]:
+					neighbors.erase(i)
 
-		# Get all empty neighbors and make it a border tile.
-		for neighbor in neighbors:
-			if not grid.has_cell(cell + neighbor):
-				_temp_grid.set_value(cell + neighbor, border_tile_info)
+			# Get all empty neighbors and make it a border tile.
+			for neighbor in neighbors:
+				if not grid.has_cell(cell + neighbor, layer):
+					_temp_grid.set_value(cell + neighbor, border_tile_info)
 
 

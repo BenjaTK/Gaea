@@ -28,7 +28,8 @@ func generate_chunk(chunk_position: Vector2i, starting_grid: GaeaGrid = null) ->
 func erase_chunk(chunk_position: Vector2i) -> void:
 	for x in get_chunk_axis_range(chunk_position.x, chunk_size.x):
 		for y in get_chunk_axis_range(chunk_position.y, chunk_size.y):
-			grid.erase(Vector2i(x, y))
+			for layer in grid.get_layer_count():
+				grid.erase(Vector2i(x, y), layer)
 
 	chunk_updated.emit(chunk_position)
 

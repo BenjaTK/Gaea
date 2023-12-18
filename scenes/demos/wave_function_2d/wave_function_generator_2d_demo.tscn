@@ -35,11 +35,12 @@ sources/0 = SubResource("TileSetAtlasSource_wtd7l")
 resource_name = "Center"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(1, 6)
 alternative_tile = 0
 id = "center"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_qmm3h"]
 resource_name = "CenterEntry"
@@ -55,11 +56,12 @@ neighbors_right = Array[StringName]([&"center", &"center_stone", &"right", &"bot
 resource_name = "CenterStone"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(1, 5)
 alternative_tile = 0
 id = "center_stone"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_nd0qf"]
 resource_name = "CenterStoneEntry"
@@ -75,11 +77,12 @@ neighbors_right = Array[StringName]([&"center", &"center_stone", &"right", &"bot
 resource_name = "Top"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(1, 4)
 alternative_tile = 0
 id = "top"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_g4jqw"]
 resource_name = "TopEntry"
@@ -95,11 +98,12 @@ neighbors_right = Array[StringName]([&"top", &"top_right", &"bottom_left"])
 resource_name = "TopLeft"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(0, 4)
 alternative_tile = 0
 id = "top_left"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_pnfvs"]
 resource_name = "TopLeftEntry"
@@ -115,11 +119,12 @@ neighbors_right = Array[StringName]([&"top", &"top_right", &"bottom_left"])
 resource_name = "TopRight"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(2, 4)
 alternative_tile = 0
 id = "top_right"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_k26uh"]
 resource_name = "TopRightEntry"
@@ -135,11 +140,12 @@ neighbors_right = Array[StringName]([&"barrel", &"barrel_broken", &"torch", &"ai
 resource_name = "Left"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(0, 5)
 alternative_tile = 0
 id = "left"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_vc4sf"]
 resource_name = "LeftEntry"
@@ -155,11 +161,12 @@ neighbors_right = Array[StringName]([&"center", &"center_stone", &"right", &"bot
 resource_name = "Right"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(2, 5)
 alternative_tile = 0
 id = "right"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_30b6o"]
 resource_name = "RightEntry"
@@ -175,11 +182,12 @@ neighbors_right = Array[StringName]([&"barrel", &"barrel_broken", &"torch", &"ai
 resource_name = "BottomLeft"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(0, 6)
 alternative_tile = 0
 id = "bottom_left"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_rpm7e"]
 resource_name = "BottomLeftEntry"
@@ -195,11 +203,12 @@ neighbors_right = Array[StringName]([&"center", &"center_stone", &"right", &"bot
 resource_name = "BottomRight"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(2, 6)
 alternative_tile = 0
 id = "bottom_right"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_77ijs"]
 resource_name = "BottomRightEntry"
@@ -215,6 +224,7 @@ neighbors_right = Array[StringName]([&"top", &"top_right"])
 resource_name = "Air"
 script = ExtResource("5_s8aln")
 id = "air"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_ka2b1"]
 resource_name = "AirEntry"
@@ -230,11 +240,12 @@ neighbors_right = Array[StringName]([&"barrel", &"barrel_broken", &"torch", &"ai
 resource_name = "Barrel"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(6, 5)
 alternative_tile = 0
 id = "barrel"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_rxwbw"]
 resource_name = "BarrelEntry"
@@ -250,11 +261,12 @@ neighbors_right = Array[StringName]([&"barrel", &"barrel_broken", &"torch", &"ai
 resource_name = "BarrelBroken"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(6, 6)
 alternative_tile = 0
 id = "barrel_broken"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_hr0ji"]
 resource_name = "BarrelBrokenEntry"
@@ -270,11 +282,12 @@ neighbors_right = Array[StringName]([&"barrel", &"barrel_broken", &"torch", &"ai
 resource_name = "Torch"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(7, 4)
 alternative_tile = 0
 id = "torch"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_scebv"]
 resource_name = "TorchEntry"
@@ -290,11 +303,12 @@ neighbors_right = Array[StringName]([&"barrel", &"barrel_broken", &"air", &"pill
 resource_name = "PillarBottom"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(5, 6)
 alternative_tile = 0
 id = "pillar_bottom"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_vyw48"]
 resource_name = "PillarBottomEntry"
@@ -310,11 +324,12 @@ neighbors_right = Array[StringName]([&"barrel", &"barrel_broken", &"torch", &"ai
 resource_name = "PillarMiddle"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(5, 5)
 alternative_tile = 0
 id = "pillar_middle"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_ay1ng"]
 resource_name = "PillarMiddleEntry"
@@ -330,11 +345,12 @@ neighbors_right = Array[StringName]([&"barrel", &"barrel_broken", &"torch", &"ai
 resource_name = "PillarTop"
 script = ExtResource("4_u5xbv")
 type = 0
-layer = 0
+tilemap_layer = 0
 source_id = 0
 atlas_coord = Vector2i(5, 4)
 alternative_tile = 0
 id = "pillar_top"
+layer = 0
 
 [sub_resource type="Resource" id="Resource_m5vru"]
 resource_name = "PillarTopEntry"

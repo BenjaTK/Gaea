@@ -14,6 +14,7 @@ enum NoiseMode {
 	}
 
 @export var noise: FastNoiseLite = FastNoiseLite.new()
+@export var ignore_empty_cells: bool = true
 @export var noise_mode: NoiseMode = NoiseMode.NOISE_2D
 @export var random_noise_seed := true
 @export var tile: TileInfo
@@ -36,11 +37,11 @@ func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 				if noise_mode == NoiseMode.NOISE_3D: #3D
 					noise_pos.y = y
 
-				if not grid.has_cell(cell) or _is_out_of_bounds(cell):
+				if not grid.has_cell(cell, tile.layer) and ignore_empty_cells or _is_out_of_bounds(cell):
 					continue
 
 				if noise.get_noise_3dv(noise_pos) > threshold:
-					if not _passes_filter(grid.get_cell(cell)):
+					if not _passes_filter(grid, cell):
 						continue
 
 					grid.set_cell(cell, tile)
@@ -49,3 +50,9 @@ func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 func _is_out_of_bounds(cell: Vector3i) -> bool:
 	return (cell.x > max.x or cell.y > max.y or cell.z > max.z or
 			cell.x < min.x or cell.y < min.y or cell.z < min.z)
+
+
+func _validate_property(property: Dictionary) -> void:
+	super(property)
+	if property.name == "affected_layers":
+		property.usage = PROPERTY_USAGE_NONE
