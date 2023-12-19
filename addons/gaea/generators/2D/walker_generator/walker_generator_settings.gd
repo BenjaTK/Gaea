@@ -54,8 +54,6 @@ enum FullnessCheck {
 	Vector2i(2, 2): 0.5,
 	Vector2i(3, 3): 0.1
 }
-@export_group("")
-
 
 
 func _validate_property(property: Dictionary) -> void:
