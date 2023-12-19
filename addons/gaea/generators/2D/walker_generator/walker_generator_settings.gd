@@ -19,6 +19,18 @@ enum FullnessCheck {
 		if fullness_check == FullnessCheck.PERCENTAGE:
 			constrain_world_size = true
 		notify_property_list_changed()
+## Maximum amount of floor tiles.
+@export var max_tiles := 150
+## Maximum percentage of the [param world_size] to be filled with floors.
+@export var fullness_percentage := 0.2
+## Can't be [code]false[/code] if [param Fullness Check] is on [b]Percentage[/b] mode.
+@export var constrain_world_size : bool = false :
+	set(value):
+		if fullness_check == FullnessCheck.PERCENTAGE and value == false:
+			return
+		constrain_world_size = value
+		notify_property_list_changed()
+@export var world_size := Vector2i(30, 30)
 ## Modifiers can change stuff about your generation. They can be used to
 ## generate walls, smooth out terrain, etc.
 @export_group("Walkers")
@@ -44,49 +56,13 @@ enum FullnessCheck {
 }
 @export_group("")
 
-## Maximum amount of floor tiles.
-var max_tiles := 150
-## Maximum percentage of the [param world_size] to be filled with floors.
-var fullness_percentage := 0.2
-## Can't be [code]false[/code] if [param Fullness Check] is on [b]Percentage[/b] mode.
-var constrain_world_size : bool = false :
-	set(value):
-		if fullness_check == FullnessCheck.PERCENTAGE and value == false:
-			return
-		constrain_world_size = value
-		notify_property_list_changed()
-var world_size := Vector2i(30, 30)
 
 
-func _get_property_list() -> Array[Dictionary]:
-	var properties : Array[Dictionary]
+func _validate_property(property: Dictionary) -> void:
 	match fullness_check:
 		FullnessCheck.TILE_AMOUNT:
-			properties.append({
-				"name": "max_tiles",
-				"usage": PROPERTY_USAGE_DEFAULT,
-				"type": TYPE_INT,
-			})
+			if property.name == "fullness_percentage": property.usage = PROPERTY_USAGE_NONE
 		FullnessCheck.PERCENTAGE:
-			properties.append({
-				"name": "fullness_percentage",
-				"usage": PROPERTY_USAGE_DEFAULT,
-				"type": TYPE_FLOAT,
-				"hint": PROPERTY_HINT_RANGE,
-				"hint_string": "0.0, 1.0"
-			})
-	properties.append(
-		{
-			"name": "constrain_world_size",
-			"usage": PROPERTY_USAGE_DEFAULT,
-			"type": TYPE_BOOL
-		}
-	)
-
-	if constrain_world_size:
-		properties.append({
-			"name": "world_size",
-			"usage": PROPERTY_USAGE_DEFAULT,
-			"type": TYPE_VECTOR2I,
-		})
-	return properties
+			if property.name == "max_tiles": property.usage = PROPERTY_USAGE_NONE
+	if not constrain_world_size and property.name == "world_size":
+		property.usage = PROPERTY_USAGE_NONE
