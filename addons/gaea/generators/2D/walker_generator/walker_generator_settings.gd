@@ -59,8 +59,10 @@ enum FullnessCheck {
 func _validate_property(property: Dictionary) -> void:
 	match fullness_check:
 		FullnessCheck.TILE_AMOUNT:
-			if property.name == "fullness_percentage": property.usage = PROPERTY_USAGE_NONE
+			if property.name == "fullness_percentage":
+				property.usage = PROPERTY_USAGE_NONE
 		FullnessCheck.PERCENTAGE:
-			if property.name == "max_tiles": property.usage = PROPERTY_USAGE_NONE
+			if property.name == "max_tiles":
+				property.usage = PROPERTY_USAGE_NONE
 	if not constrain_world_size and property.name == "world_size":
 		property.usage = PROPERTY_USAGE_NONE
