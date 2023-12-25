@@ -6,7 +6,6 @@ extends ChunkAwareGenerator2D
 ## @tutorial(Generators): https://benjatk.github.io/Gaea/#/generators/
 ## @tutorial(NoiseGenerator): https://benjatk.github.io/Gaea/#/generators/noise
 
-
 @export var settings: NoiseGeneratorSettings
 
 
@@ -21,7 +20,7 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not editor_preview:
 		push_warning("%s: Editor Preview is not enabled so nothing happened!" % name)
 		return
-	var time_now :int = Time.get_ticks_msec()
+	var time_now: int = Time.get_ticks_msec()
 
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
@@ -29,7 +28,6 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 
 	if settings.random_noise_seed:
 		settings.noise.seed = randi()
-
 
 	if starting_grid == null:
 		erase()
@@ -43,9 +41,9 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 		next_pass.generate(grid)
 		return
 
-	var time_elapsed :int = Time.get_ticks_msec() - time_now
+	var time_elapsed: int = Time.get_ticks_msec() - time_now
 	if OS.is_debug_build():
-		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100 ])
+		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100])
 
 	grid_updated.emit()
 
@@ -83,10 +81,7 @@ func _set_grid() -> void:
 
 
 func _set_grid_chunk(chunk_position: Vector2i) -> void:
-	_set_grid_area(Rect2i(
-		chunk_position * chunk_size,
-		Vector2i(chunk_size, chunk_size)
-	))
+	_set_grid_area(Rect2i(chunk_position * chunk_size, Vector2i(chunk_size, chunk_size)))
 
 
 func _set_grid_area(rect: Rect2i) -> void:
@@ -104,7 +99,7 @@ func _set_grid_area(rect: Rect2i) -> void:
 			if settings.falloff_enabled and settings.falloff_map and not settings.infinite:
 				noise = ((noise + 1) * settings.falloff_map.get_value(Vector2i(x, y))) - 1.0
 
-			for threshold in settings.tiles:
-				if noise > threshold:
-					grid.set_valuexy(x, y, settings.tiles[threshold])
+			for tile_data in settings.tiles:
+				if noise > tile_data.threshold:
+					grid.set_valuexy(x, y, tile_data.tile)
 					break
