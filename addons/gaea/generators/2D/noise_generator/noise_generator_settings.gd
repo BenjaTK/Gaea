@@ -4,24 +4,19 @@ extends GeneratorSettings2D
 
 ## An array of [param NoiseGeneratorData] with thresholds that go from [code]-1.0[/code] to [code]1.0[/code], and [param tile] (as [param TileInfo]).[br]
 
-@export var tiles: Array[NoiseGeneratorData]
-# sorry for the commented code, the user can sort the array as they wish,
-# also its way easier to play with the thresholds in the editor
-# set(value):
-# 	for key in value.keys():
-# 		if not (key is float) or abs(key) > 1.0:
-# 			value.erase(key)
+@export var tiles: Array[NoiseGeneratorData]:
+## I have realized that the order matters a lot so I
+## restored the sorting
+	set(value):
+		## If the last element of the array is not a [param NoiseGeneratorData],
+		## then create a new one.
+		var last_element = value[-1]
+		value[-1] = last_element if last_element is NoiseGeneratorData else NoiseGeneratorData.new()
 
-# 	var sorted_keys := value.keys()
-# 	sorted_keys.sort_custom(func sort_descending(a, b): return a > b)
+		value.sort_custom(func sort_descending(a, b): return a.threshold > b.threshold)
 
-# 	var sorted: Dictionary
-# 	for key in sorted_keys:
-# 		var key_value = value[key]
-# 		# Check if it's already a TileInfo, else make a new one.
-# 		sorted[key] = key_value if key_value is TileInfo else TileInfo.new()
+		tiles = value
 
-# 	tiles = sorted
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 @export var random_noise_seed := true
 ## Infinite worlds only work with a [ChunkLoader].

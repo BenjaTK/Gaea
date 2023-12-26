@@ -12,7 +12,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1a0nh"]
 noise_type = 0
-seed = -1183734620
+seed = 472988942
 domain_warp_amplitude = 8.0
 
 [sub_resource type="Resource" id="Resource_f2rpe"]
