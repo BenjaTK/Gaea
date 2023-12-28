@@ -20,6 +20,11 @@ func set_value(pos, value: Variant, layer: int = -1) -> void:
 		set_value(pos, value.get_random(), layer)
 		return
 
+	if value is TileInfoPattern2D and self is GaeaGrid2D or value is TileInfoPattern3D and self is GaeaGrid3D:
+		for data in value.pattern:
+			set_value(pos + data.offset, data.tile)
+		return
+
 	if layer < 0:
 		if value is TileInfo:
 			layer = value.layer
