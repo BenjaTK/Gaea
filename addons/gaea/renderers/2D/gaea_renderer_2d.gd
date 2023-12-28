@@ -2,9 +2,10 @@ class_name GaeaRenderer2D
 extends GaeaRenderer
 
 
-signal area_drawn
-signal chunk_drawn
-signal grid_drawn
+## Emitted when anything is rendered, be it a chunk or the full grid.
+signal area_rendered(area: Rect2i)
+## Emitted when a chunk is rendered.
+signal chunk_rendered(chunk_position: Vector2i)
 
 ## Draws the [param area]. Override this function
 ## to make custom [GaeaRenderer]s.
@@ -18,10 +19,13 @@ func _draw_chunk(chunk_position: Vector2i) -> void:
 			chunk_position * generator.chunk_size,
 			generator.chunk_size)
 		)
+	chunk_rendered.emit()
+
 
 ## Draws the whole grid.
 func _draw() -> void:
 	_draw_area(generator.grid.get_area())
+	grid_rendered.emit()
 
 
 func _connect_signals() -> void:
