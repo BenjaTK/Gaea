@@ -100,7 +100,6 @@ func _set_grid_area(rect: Rect2i) -> void:
 				noise = ((noise + 1) * settings.falloff_map.get_value(Vector2i(x, y))) - 1.0
 
 			for tile_data in settings.tiles:
-				## Check if the noise is within the threshold
-				if noise >= tile_data.min and noise <= tile_data.max:
+				if noise >= tile_data.threshold_min and noise <= tile_data.threshold_max:
 					grid.set_valuexy(x, y, tile_data.tile)
 					break

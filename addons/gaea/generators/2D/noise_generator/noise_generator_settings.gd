@@ -9,7 +9,8 @@ extends GeneratorSettings2D
 	set(value):
 		## If the last element of the array is not a [param NoiseGeneratorData],
 		## then create a new one.
-		value[-1] = value[-1] if value[-1] is NoiseGeneratorData else NoiseGeneratorData.new()
+		if value.size() > 0:
+			value[-1] = value[-1] if value[-1] is NoiseGeneratorData else NoiseGeneratorData.new()
 
 		tiles = value
 
