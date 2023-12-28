@@ -10,28 +10,20 @@ extends ChunkAwareGenerator2D
 @export var settings: NoiseGeneratorSettings
 
 
-func _ready() -> void:
-	if settings.random_noise_seed:
-		settings.noise.seed = randi()
-
-	super._ready()
-
-
 func generate(starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not editor_preview:
 		push_warning("%s: Editor Preview is not enabled so nothing happened!" % name)
 		return
 
-	generation_started.emit()
-
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
 		return
 
+	generation_started.emit()
+
 	var time_now :int = Time.get_ticks_msec()
 
-	if settings.random_noise_seed:
-		settings.noise.seed = randi()
+	settings.noise.seed = seed
 
 	if starting_grid == null:
 		erase()

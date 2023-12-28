@@ -5,7 +5,6 @@ extends GeneratorSettings3D
 ## it's position in the TileSet.
 @export var tile: TileInfo
 @export var noise: FastNoiseLite = FastNoiseLite.new()
-@export var random_noise_seed := true
 ## Infinite worlds only work with a [ChunkLoader3D].
 @export var infinite := false
 ## The size in the x and z axis.

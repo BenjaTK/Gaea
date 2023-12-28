@@ -10,7 +10,6 @@ extends ChunkAwareModifier2D
 
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 @export var ignore_empty_cells: bool = true
-@export var random_noise_seed := true
 @export var tile: TileInfo
 ## Any values in the noise texture that go above this threshold
 ## will be replaced with [param tile]. (-1.0 is black, 1.0 is white)
