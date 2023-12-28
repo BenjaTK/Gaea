@@ -2,21 +2,14 @@
 class_name NoiseGeneratorSettings
 extends GeneratorSettings2D
 
-## Dictionary of [param thresholds] (keys) that go from [code]-1.0[/code] to [code]1.0[/code], and [TileInfo] (values).[br]
-## The algorithm loops through all thresholds and, if the noise value
-## at the coordinate is higher than it, it places the configured tile.[br]
-## [br]
-## [b]Note:[/b] The dictionary will be automatically sorted in descending
-## order and won't accept any keys that aren't [code]floats[/code].
+## Array of [NoiseGeneratorData]´s that contain the thresholds, titles and tiles.
+## If a new element is empty, it fills it with a new [NoiseGeneratorData].
 @export var tiles: Array[NoiseGeneratorData]:
-## I have realized that the order matters a lot so I
-## restored the sorting
+## Removed the sorting since now we have max and min thresholds
 	set(value):
 		## If the last element of the array is not a [param NoiseGeneratorData],
 		## then create a new one.
-		var last_element = value[-1]
-		value[-1] = last_element if last_element is NoiseGeneratorData else NoiseGeneratorData.new()
-		value.sort_custom(func sort_descending(a, b): return a.threshold > b.threshold)
+		value[-1] = value[-1] if value[-1] is NoiseGeneratorData else NoiseGeneratorData.new()
 
 		tiles = value
 
