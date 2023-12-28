@@ -2,6 +2,10 @@ class_name GaeaRenderer2D
 extends GaeaRenderer
 
 
+signal area_drawn
+signal chunk_drawn
+signal grid_drawn
+
 ## Draws the [param area]. Override this function
 ## to make custom [GaeaRenderer]s.
 func _draw_area(area: Rect2i) -> void:
