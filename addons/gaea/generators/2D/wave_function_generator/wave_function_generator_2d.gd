@@ -26,6 +26,12 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 		push_warning("%s: Editor Preview is not enabled so nothing happened!" % name)
 		return
 
+	if not settings:
+		push_error("%s doesn't have a settings resource" % name)
+		return
+
+	generation_started.emit()
+
 	var time_now :int = Time.get_ticks_msec()
 
 	if starting_grid == null:
@@ -63,6 +69,7 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100 ])
 
 	grid_updated.emit()
+	generation_finished.emit()
 
 
 func _collapse(coords: Vector2i) -> void:

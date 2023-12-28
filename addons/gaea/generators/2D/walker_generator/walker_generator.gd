@@ -23,11 +23,14 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not editor_preview:
 		push_warning("%s: Editor Preview is not enabled so nothing happened!" % name)
 		return
-	var time_now :int = Time.get_ticks_msec()
 
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
 		return
+
+	generation_started.emit()
+
+	var time_now :int = Time.get_ticks_msec()
 
 	if starting_grid == null:
 		erase()
@@ -48,6 +51,7 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100 ])
 
 	grid_updated.emit()
+	generation_finished.emit()
 
 
 func erase() -> void:

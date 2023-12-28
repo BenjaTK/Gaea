@@ -4,7 +4,12 @@ class_name ChunkAwareGenerator2D
 extends GaeaGenerator2D
 
 
+## Emitted when any update to a chunk is made. Either erasing it or generating it.
 signal chunk_updated(chunk_position: Vector2i)
+## Emitted when a chunk is finished generated. [signal chunk_updated] is also called.
+signal chunk_generation_finished(chunk_position: Vector2i)
+## Emitted when a chunk is erased. [signal chunk_updated] is also called.
+signal chunk_erased(chunk_position: Vector2i)
 
 
 ## The size of the Chunks. [br]
@@ -32,7 +37,7 @@ func erase_chunk(chunk_position: Vector2i) -> void:
 				grid.erase(Vector2i(x, y), layer)
 
 	chunk_updated.emit(chunk_position)
-
+	chunk_erased.emit(chunk_position)
 
 
 func _apply_modifiers_chunk(modifiers: Array[Modifier2D], chunk_position: Vector2i) -> void:
