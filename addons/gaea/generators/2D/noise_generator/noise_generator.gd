@@ -81,7 +81,7 @@ func _set_grid() -> void:
 
 
 func _set_grid_chunk(chunk_position: Vector2i) -> void:
-	_set_grid_area(Rect2i(chunk_position * chunk_size, Vector2i(chunk_size, chunk_size)))
+	_set_grid_area(Rect2i(chunk_position * chunk_size, chunk_size))
 
 
 func _set_grid_area(rect: Rect2i) -> void:
@@ -99,7 +99,7 @@ func _set_grid_area(rect: Rect2i) -> void:
 			if settings.falloff_enabled and settings.falloff_map and not settings.infinite:
 				noise = ((noise + 1) * settings.falloff_map.get_value(Vector2i(x, y))) - 1.0
 
-			for tile_data in settings.tiles:
-				if noise > tile_data.threshold:
-					grid.set_valuexy(x, y, tile_data.tile)
+			for threshold in settings.tiles:
+				if noise > threshold:
+					grid.set_valuexy(x, y, settings.tiles[threshold])
 					break

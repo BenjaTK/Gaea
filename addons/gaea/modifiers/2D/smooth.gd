@@ -21,11 +21,12 @@ extends Modifier2D
 
 func apply(grid: GaeaGrid, generator: GaeaGenerator):
 	for i in iterations:
-		for cell in grid.get_cells():
-			if not _passes_filter(grid[cell]):
-				continue
+		for layer in affected_layers:
+			for cell in grid.get_cells(layer):
+				if not _passes_filter(grid, cell):
+					continue
 
-			var empty_neighbors_count: int = grid.get_amount_of_empty_neighbors(cell)
+				var empty_neighbors_count: int = grid.get_amount_of_empty_neighbors(cell, layer)
 
-			if empty_neighbors_count > maximum_empty_neighbors:
-				grid.erase(cell)
+				if empty_neighbors_count > maximum_empty_neighbors:
+					grid.erase(cell, layer)

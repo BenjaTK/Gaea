@@ -22,36 +22,38 @@ func _draw_area(area: Rect2i) -> void:
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			var tile_position := Vector2i(x, y)
-			if not generator.grid.has_cell(tile_position):
-				if not erase_empty_tiles:
-					continue
+			var has_cell_in_position: bool = false
+			for layer in range(generator.grid.get_layer_count()):
+				if generator.grid.has_cell(tile_position, layer):
+					has_cell_in_position = true
 
+			if erase_empty_tiles and not has_cell_in_position:
 				for l in range(tile_map.get_layers_count()):
 					tile_map.erase_cell(l, Vector2i(x, y))
-
 				continue
 
-			var tile = tile_position
-			var tile_info = generator.grid.get_value(tile_position)
+			for layer in range(generator.grid.get_layer_count()):
+				var tile = tile_position
+				var tile_info = generator.grid.get_value(tile_position, layer)
 
-			if not (tile_info is TilemapTileInfo):
-				continue
+				if not (tile_info is TilemapTileInfo):
+					continue
 
-			match tile_info.type:
-				TilemapTileInfo.Type.SINGLE_CELL:
-					tile_map.set_cell(
-						tile_info.layer, tile, tile_info.source_id,
-						tile_info.atlas_coord, tile_info.alternative_tile
-					)
-				TilemapTileInfo.Type.TERRAIN:
-					if not terrains.has(tile_info):
-						terrains[tile_info] = [tile]
-					else:
-						terrains[tile_info].append(tile)
+				match tile_info.type:
+					TilemapTileInfo.Type.SINGLE_CELL:
+						tile_map.set_cell(
+							tile_info.tilemap_layer, tile, tile_info.source_id,
+							tile_info.atlas_coord, tile_info.alternative_tile
+						)
+					TilemapTileInfo.Type.TERRAIN:
+						if not terrains.has(tile_info):
+							terrains[tile_info] = [tile]
+						else:
+							terrains[tile_info].append(tile)
 
 	for tile_info in terrains:
 		tile_map.set_cells_terrain_connect(
-			tile_info.layer, terrains[tile_info],
+			tile_info.tilemap_layer, terrains[tile_info],
 			tile_info.terrain_set, tile_info.terrain
 		)
 

@@ -8,10 +8,6 @@ extends Node2D
 ## [b]Note:[/b] If you're chaining generators together using [param next_pass],
 ## this has to be set to the first generator in the chain.
 @export var generator: ChunkAwareGenerator2D
-## [b]Optional[/b]. In this case it is used to prevent
-## generating chunks before the [GaeaRenderer] is ready, which
-## prevents empty areas.
-@export var renderer: GaeaRenderer2D
 ## Chunks will be loaded arround this Node.
 ## If set to null chunks will be loaded around (0, 0)
 @export var actor: Node2D
@@ -32,15 +28,19 @@ var _last_position: Vector2i
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint() or not is_instance_valid(generator):
+		return
+
+	await get_tree().process_frame
+
 	generator.erase()
-	if load_on_ready and not Engine.is_editor_hint():
-		if is_instance_valid(renderer) and not renderer.is_node_ready():
-			await renderer.ready
+	if load_on_ready:
 		_update_loading(_get_actors_position())
 
 
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint(): return
+	if Engine.is_editor_hint() or not is_instance_valid(generator):
+		return
 
 	if generator.settings.get("infinite") == false:
 		push_warning("Generator's settings at %s has infinite disabled, can't generate chunks." % generator.name)
@@ -94,8 +94,8 @@ func _get_actors_position() -> Vector2i:
 	var tile_position: Vector2i = actor_position / generator.tile_size
 
 	var chunk_position := Vector2i(
-		floori(tile_position.x / generator.chunk_size),
-		floori(tile_position.y / generator.chunk_size)
+		floori(float(tile_position.x) / generator.chunk_size.x),
+		floori(float(tile_position.y) / generator.chunk_size.y)
 	)
 
 	return chunk_position

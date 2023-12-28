@@ -7,6 +7,7 @@ extends Button
 const RELEASES_URL := "https://api.github.com/repos/BenjaTK/Gaea/releases"
 const LOCAL_CONFIG_PATH := "res://addons/gaea/plugin.cfg"
 
+
 var editor_plugin: EditorPlugin
 
 @onready var http_request: HTTPRequest = $HTTPRequest
@@ -30,6 +31,9 @@ func _on_http_request_request_completed(result: int, response_code: int, headers
 		return
 
 	var current_version := _get_version()
+	if current_version == null:
+		push_error("Couldn't find the current Gaea version.")
+		return
 
 	var response = JSON.parse_string(body.get_string_from_utf8())
 	if not (response is Array):
@@ -53,6 +57,7 @@ func _on_pressed() -> void:
 func _on_download_update_panel_updated(new_version) -> void:
 	download_dialog.hide()
 
+
 	editor_plugin.get_editor_interface().get_resource_filesystem().scan()
 
 	print_rich("\n[b]Updated Gaea to v%s\n" % new_version)
@@ -67,6 +72,7 @@ func _on_download_update_panel_failed() -> void:
 
 func _get_version() -> String:
 	var config: ConfigFile = ConfigFile.new()
+
 	config.load(LOCAL_CONFIG_PATH)
 	return config.get_value("plugin", "version")
 

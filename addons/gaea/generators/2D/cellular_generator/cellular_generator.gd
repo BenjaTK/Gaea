@@ -56,11 +56,11 @@ func _smooth() -> void:
 	for i in settings.smooth_iterations:
 		var _temp_grid: GaeaGrid = grid.clone()
 
-		for cell in grid.get_cells():
-			var dead_neighbors_count: int = grid.get_amount_of_empty_neighbors(cell)
-			if grid.get_value(cell) != null and dead_neighbors_count > settings.max_floor_empty_neighbors:
+		for cell in grid.get_cells(settings.tile.layer):
+			var dead_neighbors_count: int = grid.get_amount_of_empty_neighbors(cell, settings.tile.layer)
+			if grid.get_value(cell, settings.tile.layer) != null and dead_neighbors_count > settings.max_floor_empty_neighbors:
 				_temp_grid.set_value(cell, null)
-			elif grid.get_value(cell) == null and dead_neighbors_count <= settings.min_empty_neighbors:
+			elif grid.get_value(cell, settings.tile.layer) == null and dead_neighbors_count <= settings.min_empty_neighbors:
 				_temp_grid.set_value(cell, settings.tile)
 
 		grid = _temp_grid

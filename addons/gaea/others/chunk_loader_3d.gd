@@ -8,10 +8,6 @@ extends Node3D
 ## [b]Note:[/b] If you're chaining generators together using [param next_pass],
 ## this has to be set to the first generator in the chain.
 @export var generator: ChunkAwareGenerator3D
-## [b]Optional[/b]. In this case it is used to prevent
-## generating chunks before the [GaeaRenderer] is ready, which
-## prevents empty areas.
-@export var renderer: GaeaRenderer3D
 ## Chunks will be loaded arround this Node.
 ## If set to null chunks will be loaded around (0, 0, 0)
 @export var actor: Node3D
@@ -33,17 +29,19 @@ var required_chunks: Array[Vector3i]
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint() or not is_instance_valid(generator):
+		return
+
+	await get_tree().process_frame
+
 	generator.erase()
-
-	if load_on_ready and not Engine.is_editor_hint():
-		if is_instance_valid(renderer) and not renderer.is_node_ready():
-			await renderer.ready
-
+	if load_on_ready:
 		_update_loading(_get_actors_position())
 
 
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint(): return
+	if Engine.is_editor_hint() or not is_instance_valid(generator):
+		return
 
 	if generator.settings.get("infinite") == false:
 		push_warning("Generator's settings at %s has infinite disabled, can't generate chunks." % generator.name)
@@ -69,9 +67,6 @@ func _try_loading() -> void:
 
 # loads needed chunks around the given position
 func _update_loading(actor_position: Vector3i) -> void:
-	if is_instance_valid(renderer) and not renderer.is_node_ready():
-		await renderer.ready
-
 	if generator == null:
 		push_error("Chunk loading failed because generator property not set!")
 		return
@@ -101,9 +96,9 @@ func _get_actors_position() -> Vector3i:
 	var tile_position: Vector3i = actor_position / generator.tile_size
 
 	var chunk_position := Vector3i(
-		roundi(tile_position.x / generator.chunk_size),
-		roundi(tile_position.y / generator.chunk_size),
-		roundi(tile_position.z / generator.chunk_size)
+		roundi(float(tile_position.x) / generator.chunk_size.x),
+		roundi(float(tile_position.y) / generator.chunk_size.y),
+		roundi(float(tile_position.z) / generator.chunk_size.z)
 	)
 
 	return chunk_position

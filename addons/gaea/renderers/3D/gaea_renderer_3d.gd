@@ -11,7 +11,7 @@ func _draw_area(area: AABB) -> void:
 func _draw_chunk(chunk_position: Vector3i) -> void:
 	_draw_area(AABB(
 			chunk_position * generator.chunk_size,
-			Vector3i(generator.chunk_size, generator.chunk_size, generator.chunk_size))
+			generator.chunk_size)
 		)
 
 ## Draws the whole grid.
