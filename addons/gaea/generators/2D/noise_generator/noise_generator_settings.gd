@@ -8,22 +8,19 @@ extends GeneratorSettings2D
 ## [br]
 ## [b]Note:[/b] The dictionary will be automatically sorted in descending
 ## order and won't accept any keys that aren't [code]floats[/code].
-@export var tiles: Dictionary:
+@export var tiles: Array[NoiseGeneratorData]:
+## I have realized that the order matters a lot so I
+## restored the sorting
 	set(value):
-		for key in value.keys():
-			if not (key is float) or abs(key) > 1.0:
-				value.erase(key)
+		## If the last element of the array is not a [param NoiseGeneratorData],
+		## then create a new one.
+		var last_element = value[-1]
+		value[-1] = last_element if last_element is NoiseGeneratorData else NoiseGeneratorData.new()
+		value.sort_custom(func sort_descending(a, b): return a.threshold > b.threshold)
 
-		var sorted_keys := value.keys()
-		sorted_keys.sort_custom(func sort_descending(a, b): return a > b)
+		tiles = value
 
-		var sorted: Dictionary
-		for key in sorted_keys:
-			var key_value = value[key]
-			# Check if it's already a TileInfo, else make a new one.
-			sorted[key] = key_value if key_value is TileInfo else TileInfo.new()
-
-		tiles = sorted
+		
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 @export var random_noise_seed := true
 ## Infinite worlds only work with a [ChunkLoader].
