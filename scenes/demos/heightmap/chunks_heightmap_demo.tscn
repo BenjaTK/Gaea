@@ -215,17 +215,11 @@ sources/0 = SubResource("TileSetAtlasSource_68jc8")
 [node name="HeightmapGenerator2D" type="Node2D" parent="."]
 script = ExtResource("1_lqewx")
 settings = ExtResource("2_py0je")
-preview = true
 generate_on_ready = false
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_3y7im")
 format = 2
-layer_1/name = ""
-layer_1/enabled = true
-layer_1/modulate = Color(1, 1, 1, 1)
-layer_1/y_sort_enabled = false
-layer_1/y_sort_origin = 0
 layer_1/z_index = -1
 layer_1/tile_data = PackedInt32Array()
 

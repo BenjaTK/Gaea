@@ -57,6 +57,8 @@ func _draw_area(area: Rect2i) -> void:
 			tile_info.terrain_set, tile_info.terrain
 		)
 
+	area_rendered.emit()
+
 
 func _draw() -> void:
 	if clear_tile_map_on_draw:

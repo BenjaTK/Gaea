@@ -6,7 +6,11 @@ extends Node
 ## @tutorial(Generators): https://benjatk.github.io/Gaea/#/generators/
 
 
+## Emitted when any changes to the [param grid] are made.
 signal grid_updated
+## Emitted when [method generate] successfully starts.
+signal generation_started
+## Emitted when [method generate] successfully finished.
 signal generation_finished
 
 
