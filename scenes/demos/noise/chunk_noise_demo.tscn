@@ -8,59 +8,6 @@
 [ext_resource type="Script" path="res://addons/gaea/others/chunk_loader_2d.gd" id="7_c51wy"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="8_hs8v0"]
 
-<<<<<<< HEAD
-=======
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_1a0nh"]
-noise_type = 0
-seed = -376220448
-domain_warp_amplitude = 8.0
-
-[sub_resource type="Resource" id="Resource_eh1og"]
-script = ExtResource("3_js5hs")
-type = 0
-tilemap_layer = 0
-source_id = 0
-atlas_coord = Vector2i(0, 0)
-alternative_tile = 1
-id = ""
-layer = 0
-
-[sub_resource type="Resource" id="Resource_5gby7"]
-script = ExtResource("3_js5hs")
-type = 0
-tilemap_layer = 0
-source_id = 0
-atlas_coord = Vector2i(0, 0)
-alternative_tile = 0
-id = ""
-layer = 0
-
-[sub_resource type="Resource" id="Resource_yamag"]
-script = ExtResource("3_js5hs")
-type = 0
-tilemap_layer = 0
-source_id = 0
-atlas_coord = Vector2i(1, 0)
-alternative_tile = 0
-id = ""
-layer = 0
-
-[sub_resource type="Resource" id="Resource_hj1ni"]
-resource_name = "Settings"
-script = ExtResource("2_a5ohv")
-tiles = {
--0.1: SubResource("Resource_yamag"),
-0.0: SubResource("Resource_5gby7"),
-0.4: SubResource("Resource_eh1og")
-}
-noise = SubResource("FastNoiseLite_1a0nh")
-random_noise_seed = true
-infinite = true
-world_size = Vector2i(256, 256)
-falloff_enabled = false
-modifiers = Array[Resource("res://addons/gaea/modifiers/2D/modifier_2d.gd")]([])
-
->>>>>>> main
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgvtn"]
 texture = ExtResource("4_fjhu6")
 0:0/next_alternative_id = 2
@@ -76,13 +23,8 @@ sources/0 = SubResource("TileSetAtlasSource_hgvtn")
 
 [node name="NoiseGenerator" type="Node2D" parent="."]
 script = ExtResource("1_rbw1k")
-<<<<<<< HEAD
 settings = ExtResource("2_g36g8")
 editor_preview = true
-=======
-settings = SubResource("Resource_hj1ni")
-chunk_size = Vector2i(32, 1)
->>>>>>> main
 generate_on_ready = false
 
 [node name="TileMap" type="TileMap" parent="."]

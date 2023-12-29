@@ -26,11 +26,8 @@ func _draw_area(area: AABB) -> void:
 						continue
 
 					grid_map.set_cell_item(cell, tile_info.index)
-<<<<<<< HEAD
-=======
 
 	area_rendered.emit()
->>>>>>> main
 
 
 func _draw() -> void:

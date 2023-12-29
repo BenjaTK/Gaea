@@ -20,12 +20,8 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not editor_preview:
 		push_warning("%s: Editor Preview is not enabled so nothing happened!" % name)
 		return
-<<<<<<< HEAD
-	var time_now: int = Time.get_ticks_msec()
-=======
 
 	generation_started.emit()
->>>>>>> main
 
 	if not settings:
 		push_error("%s doesn't have a settings resource" % name)
@@ -90,14 +86,10 @@ func _set_grid() -> void:
 
 
 func _set_grid_chunk(chunk_position: Vector2i) -> void:
-<<<<<<< HEAD
-	_set_grid_area(Rect2i(chunk_position * chunk_size, chunk_size))
-=======
 	_set_grid_area(Rect2i(
 		chunk_position * chunk_size,
 		chunk_size
 	))
->>>>>>> main
 
 
 func _set_grid_area(rect: Rect2i) -> void:
