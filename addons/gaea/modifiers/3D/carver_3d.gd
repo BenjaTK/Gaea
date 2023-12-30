@@ -7,7 +7,6 @@ extends ChunkAwareModifier3D
 
 
 @export var noise: FastNoiseLite = FastNoiseLite.new()
-@export var random_noise_seed := true
 ## Any values in the noise texture that go above this threshold
 ## will be deleted from the map. (-1.0 is black, 1.0 is white)[br]
 ## Lower values mean more empty areas.
