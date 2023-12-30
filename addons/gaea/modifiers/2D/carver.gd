@@ -6,11 +6,19 @@ extends ChunkAwareModifier2D
 ##@tutorial(Carver Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-carver
 
 
-@export var noise: FastNoiseLite = FastNoiseLite.new()
+@export var noise: FastNoiseLite = FastNoiseLite.new() :
+	set(value):
+		noise = value
+		if is_instance_valid(noise):
+			noise.changed.connect(emit_changed)
+		emit_changed()
 ## Any values in the noise texture that go above this threshold
 ## will be deleted from the map. (-1.0 is black, 1.0 is white)[br]
 ## Lower values mean more empty areas.
-@export_range(-1.0, 1.0) var threshold := 0.15
+@export_range(-1.0, 1.0) var threshold := 0.15 :
+	set(value):
+		threshold = value
+		emit_changed()
 @export_group("Bounds", "bounds_")
 @export var bounds_enabled: bool = false
 @export var bounds_max := Vector2(0, 0)

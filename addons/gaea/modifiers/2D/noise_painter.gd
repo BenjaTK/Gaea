@@ -8,12 +8,20 @@ extends ChunkAwareModifier2D
 ## @tutorial(Noise Painter Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-noise-painter
 
 
-@export var noise: FastNoiseLite = FastNoiseLite.new()
+@export var noise: FastNoiseLite = FastNoiseLite.new() :
+	set(value):
+		noise = value
+		if is_instance_valid(noise):
+			noise.changed.connect(emit_changed)
+		emit_changed()
 @export var ignore_empty_cells: bool = true
 @export var tile: TileInfo
 ## Any values in the noise texture that go above this threshold
 ## will be replaced with [param tile]. (-1.0 is black, 1.0 is white)
-@export_range(-1.0, 1.0) var threshold: float = 0.6
+@export_range(-1.0, 1.0) var threshold: float = 0.6 :
+	set(value):
+		threshold = value
+		emit_changed()
 @export_group("Bounds", "bounds_")
 @export var bounds_enabled: bool = false
 @export var bounds_max := Vector2(0, 0)
