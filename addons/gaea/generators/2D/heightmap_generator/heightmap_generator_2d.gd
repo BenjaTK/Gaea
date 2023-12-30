@@ -9,13 +9,6 @@ extends ChunkAwareGenerator2D
 @export var settings: HeightmapGenerator2DSettings
 
 
-func _ready() -> void:
-	if settings.random_noise_seed:
-		settings.noise.seed = randi()
-
-	super()
-
-
 func generate(starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not editor_preview:
 		push_warning("%s: Editor Preview is not enabled so nothing happened!" % name)
@@ -29,8 +22,7 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 
 	generation_started.emit()
 
-	if settings.random_noise_seed:
-		settings.noise.seed = randi()
+	settings.noise.seed = seed
 
 	if starting_grid == null:
 		erase()
