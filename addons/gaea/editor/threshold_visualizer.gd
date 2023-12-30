@@ -14,16 +14,30 @@ func _ready() -> void:
 
 
 func update() -> void:
-	var noise = object.get("noise") as FastNoiseLite
+	var noise: FastNoiseLite = null
+	if object is Modifier:
+		noise = object.get("noise") as FastNoiseLite
+	elif object is NoiseGeneratorData:
+		noise = object.settings.get("noise")
+
 	if not is_instance_valid(noise):
 		texture = null
 		return
 
-	var image = noise.get_seamless_image(128, 128)
+	var image: Image = noise.get_seamless_image(128, 128)
 	for x in image.get_size().x:
 		for y in image.get_size().y:
-			if noise.get_noise_2d(x, y) > object.get("threshold"):
+			var value: float = noise.get_noise_2d(x, y)
+			if _is_in_threshold(value):
 				image.set_pixel(x, y, Color.WHITE)
 			else:
 				image.set_pixel(x, y, Color.BLACK)
 	texture = ImageTexture.create_from_image(image)
+
+
+func _is_in_threshold(value: float) -> bool:
+	if object.get("threshold"):
+		return value > object.get("threshold")
+	elif object.get("max") and object.get("min"):
+		return value > object.get("min") and value < object.get("max")
+	return false
