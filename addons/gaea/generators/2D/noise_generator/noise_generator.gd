@@ -6,7 +6,6 @@ extends ChunkAwareGenerator2D
 ## @tutorial(Generators): https://benjatk.github.io/Gaea/#/generators/
 ## @tutorial(NoiseGenerator): https://benjatk.github.io/Gaea/#/generators/noise
 
-
 @export var settings: NoiseGeneratorSettings
 
 
@@ -37,9 +36,9 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 		next_pass.generate(grid)
 		return
 
-	var time_elapsed :int = Time.get_ticks_msec() - time_now
+	var time_elapsed: int = Time.get_ticks_msec() - time_now
 	if OS.is_debug_build():
-		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100 ])
+		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100])
 
 	grid_updated.emit()
 	generation_finished.emit()
@@ -100,7 +99,8 @@ func _set_grid_area(rect: Rect2i) -> void:
 			if settings.falloff_enabled and settings.falloff_map and not settings.infinite:
 				noise = ((noise + 1) * settings.falloff_map.get_value(Vector2i(x, y))) - 1.0
 
-			for threshold in settings.tiles:
-				if noise > threshold:
-					grid.set_valuexy(x, y, settings.tiles[threshold])
+			for tile_data in settings.tiles:
+				## Check if the noise is within the threshold
+				if noise >= tile_data.min and noise <= tile_data.max:
+					grid.set_valuexy(x, y, tile_data.tile)
 					break
