@@ -13,8 +13,8 @@ extends GeneratorSettings2D
 			value[-1] = value[-1] if value[-1] is NoiseGeneratorData else NoiseGeneratorData.new()
 
 		tiles = value
-
-		
+		for tile_data in tiles:
+			tile_data.settings = self
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 ## Infinite worlds only work with a [ChunkLoader].
 @export var infinite: bool = false
