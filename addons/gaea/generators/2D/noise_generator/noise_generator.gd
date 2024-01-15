@@ -38,7 +38,7 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 
 	var time_elapsed: int = Time.get_ticks_msec() - time_now
 	if OS.is_debug_build():
-		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 100])
+		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 1000])
 
 	grid_updated.emit()
 	generation_finished.emit()
