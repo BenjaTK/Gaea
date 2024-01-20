@@ -31,4 +31,5 @@ extends Resource
 
 var settings: NoiseGeneratorSettings :
 	set(value):
+		settings = value
 		settings.noise.changed.connect(emit_changed)
