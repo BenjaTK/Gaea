@@ -51,7 +51,7 @@ func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 					if not _passes_filter(grid, cell):
 						continue
 
-					grid.set_cell(cell, tile)
+					grid.set_value(cell, tile)
 
 
 func _is_out_of_bounds(cell: Vector3i) -> bool:
