@@ -23,8 +23,6 @@ var update_rate: int = 0
 ## If set to true, the Chunk Loader unloads chunks left behind
 @export var unload_chunks: bool = true
 
-var _generation_times: PackedFloat32Array
-
 var _last_run: int = 0
 var _last_position: Vector3i
 var required_chunks: PackedVector3Array
@@ -64,16 +62,8 @@ func _try_loading() -> void:
 		return
 
 	var _start_time = Time.get_ticks_msec()
-	prints("Start:", )
 	_last_position = actor_position
 	_update_loading(_get_actors_position())
-	_generation_times.append(Time.get_ticks_msec() - _start_time)
-	var average: float = 0.0
-	var total: float = 0.0
-	for i in _generation_times:
-		total += i
-	average = total / _generation_times.size()
-	prints("Average:", average, "msec")
 
 
 # loads needed chunks around the given position
