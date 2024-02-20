@@ -4,13 +4,13 @@ extends Modifier2D
 ##@tutorial(Modifiers): https://benjatk.github.io/Gaea/#/modifiers
 
 
-## [ChunkAwareModifier2D]s use this value to offset the seed to make this modifier unique.
+## [ChunkAwareModifier2D]s use this value to offset the generator's seed to make this modifier unique.
 ## Random value by default.
-@export var modifier_seed: int = 134178497321
+@export var salt: int = 134178497321
 
 
 func _init() -> void:
-	modifier_seed = randi()
+	salt = randi()
 
 
 func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
@@ -20,7 +20,7 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
 			self.set("noise", generator.settings.noise)
 		else:
 			var noise := self.get("noise") as FastNoiseLite
-			noise.seed = modifier_seed + generator.seed
+			noise.seed = salt + generator.seed
 
 	_apply_area(
 		generator.grid.get_area(),
@@ -36,7 +36,7 @@ func apply_chunk(grid: GaeaGrid, generator: ChunkAwareGenerator2D, chunk_positio
 			self.set("noise", generator.settings.noise)
 		else:
 			var noise := self.get("noise") as FastNoiseLite
-			noise.seed = modifier_seed + generator.seed
+			noise.seed = salt + generator.seed
 
 	_apply_area(
 		Rect2i(
