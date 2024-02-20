@@ -6,10 +6,6 @@
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/noise_painter.gd" id="4_xyqnb"]
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/heightmap_generator/heightmap_generator_2d_settings.gd" id="5_haojk"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
-noise_type = 3
-seed = 421256392
-
 [sub_resource type="Resource" id="Resource_6kmi4"]
 script = ExtResource("2_6f082")
 type = 0
@@ -24,14 +20,14 @@ layer = 0
 resource_name = "Stone"
 script = ExtResource("1_qj0ns")
 use_generator_noise = true
-noise = SubResource("FastNoiseLite_mwtbk")
-random_noise_seed = true
+ignore_empty_cells = true
 tile = SubResource("Resource_6kmi4")
 height_offset = 155
 height_intensity = 25
 modifier_seed = 968297547
 filter_type = 0
-filter_ids = Array[String]([])
+filter_check_for_in_layers = Array[int]([])
+filter_check_for_ids = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_f1fl3"]
 script = ExtResource("2_6f082")
@@ -47,14 +43,14 @@ layer = 0
 resource_name = "Bedrock"
 script = ExtResource("1_qj0ns")
 use_generator_noise = true
-noise = SubResource("FastNoiseLite_mwtbk")
-random_noise_seed = true
+ignore_empty_cells = true
 tile = SubResource("Resource_f1fl3")
 height_offset = 0
 height_intensity = 20
 modifier_seed = 1640849317
 filter_type = 0
-filter_ids = Array[String]([])
+filter_check_for_in_layers = Array[int]([])
+filter_check_for_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
 noise_type = 3
@@ -68,7 +64,6 @@ domain_warp_frequency = 0.57
 resource_name = "Caves"
 script = ExtResource("3_w1n11")
 noise = SubResource("FastNoiseLite_1mckf")
-random_noise_seed = true
 threshold = 0.8
 bounds_enabled = false
 bounds_max = Vector2(0, 0)
@@ -76,7 +71,8 @@ bounds_min = Vector2(0, 0)
 modifier_seed = 3476587540
 affected_layers = Array[int]([0])
 filter_type = 0
-filter_ids = Array[String]([])
+filter_check_for_in_layers = Array[int]([])
+filter_check_for_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
 seed = -1291355587
@@ -98,7 +94,7 @@ layer = 0
 resource_name = "Gold Ore"
 script = ExtResource("4_xyqnb")
 noise = SubResource("FastNoiseLite_kyspj")
-random_noise_seed = true
+ignore_empty_cells = true
 tile = SubResource("Resource_bthqc")
 threshold = 0.65
 bounds_enabled = false
@@ -106,7 +102,8 @@ bounds_max = Vector2(0, 0)
 bounds_min = Vector2(0, 0)
 modifier_seed = 1850350583
 filter_type = 0
-filter_ids = Array[String]([])
+filter_check_for_in_layers = Array[int]([])
+filter_check_for_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
 seed = -1164015029
@@ -129,7 +126,7 @@ layer = 0
 resource_name = "Diamond Ore"
 script = ExtResource("4_xyqnb")
 noise = SubResource("FastNoiseLite_vkmxs")
-random_noise_seed = true
+ignore_empty_cells = true
 tile = SubResource("Resource_qw5ur")
 threshold = 0.5
 bounds_enabled = false
@@ -137,7 +134,12 @@ bounds_max = Vector2(0, 0)
 bounds_min = Vector2(0, 0)
 modifier_seed = 3102050830
 filter_type = 0
-filter_ids = Array[String]([])
+filter_check_for_in_layers = Array[int]([])
+filter_check_for_ids = Array[String]([])
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
+noise_type = 3
+seed = 421256392
 
 [sub_resource type="Resource" id="Resource_hitrj"]
 script = ExtResource("2_6f082")
@@ -153,7 +155,6 @@ resource_name = "Terraria-like Settings"
 script = ExtResource("5_haojk")
 tile = SubResource("Resource_hitrj")
 noise = SubResource("FastNoiseLite_mwtbk")
-random_noise_seed = true
 infinite = true
 world_length = 128
 height_offset = 160
