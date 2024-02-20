@@ -2,6 +2,7 @@
 @icon("chunk_loader.svg")
 class_name ChunkLoader3D
 extends Node3D
+## @experimental
 
 
 ## The generator that loads the chunks.[br]
