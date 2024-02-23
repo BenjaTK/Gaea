@@ -70,13 +70,13 @@ func _update_loading(actor_position: Vector2i) -> void:
 		push_error("Chunk loading failed because generator property not set!")
 		return
 
-	var required_chunks: Array[Vector2i] = _get_required_chunks(actor_position)
+	var required_chunks: PackedVector2Array = _get_required_chunks(actor_position)
 
 	# remove old chunks
 	if unload_chunks:
-		var loaded_chunks: Array[Vector2i] = generator.generated_chunks
+		var loaded_chunks: PackedVector2Array = generator.generated_chunks
 		for i in range(loaded_chunks.size() - 1, -1, -1):
-			var loaded: Vector2i = loaded_chunks[i]
+			var loaded: Vector2 = loaded_chunks[i]
 			if not (loaded in required_chunks):
 				generator.unload_chunk(loaded)
 
@@ -101,8 +101,8 @@ func _get_actors_position() -> Vector2i:
 	return chunk_position
 
 
-func _get_required_chunks(actor_position: Vector2i) -> Array[Vector2i]:
-	var chunks: Array[Vector2i] = []
+func _get_required_chunks(actor_position: Vector2i) -> PackedVector2Array:
+	var chunks: PackedVector2Array = []
 
 	var x_range = range(
 		actor_position.x - abs(loading_radius).x,

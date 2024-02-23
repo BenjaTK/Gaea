@@ -26,7 +26,7 @@ var update_rate: int = 0
 
 var _last_run: int = 0
 var _last_position: Vector3i
-var required_chunks: Array[Vector3i]
+var required_chunks: PackedVector3Array
 
 
 func _ready() -> void:
@@ -62,6 +62,7 @@ func _try_loading() -> void:
 	if actor_position == _last_position and required_chunks.is_empty():
 		return
 
+	var _start_time = Time.get_ticks_msec()
 	_last_position = actor_position
 	_update_loading(_get_actors_position())
 
@@ -76,9 +77,9 @@ func _update_loading(actor_position: Vector3i) -> void:
 
 	# remove old chunks
 	if unload_chunks:
-		var loaded_chunks: Array[Vector3i] = generator.generated_chunks
+		var loaded_chunks: PackedVector3Array = PackedVector3Array(generator.generated_chunks)
 		for i in range(loaded_chunks.size() - 1, -1, -1):
-			var loaded: Vector3i = loaded_chunks[i]
+			var loaded: Vector3 = loaded_chunks[i]
 			if not (loaded in required_chunks):
 				generator.unload_chunk(loaded)
 
@@ -105,8 +106,8 @@ func _get_actors_position() -> Vector3i:
 	return chunk_position
 
 
-func _get_required_chunks(actor_position: Vector3i) -> Array[Vector3i]:
-	var chunks: Array[Vector3i] = []
+func _get_required_chunks(actor_position: Vector3) -> PackedVector3Array:
+	var chunks: PackedVector3Array = []
 
 	var x_range = range(
 		actor_position.x - abs(loading_radius).x,
@@ -124,7 +125,7 @@ func _get_required_chunks(actor_position: Vector3i) -> Array[Vector3i]:
 	for x in x_range:
 		for y in y_range:
 			for z in z_range:
-				chunks.append(Vector3i(x, y, z))
+				chunks.append(Vector3(x, y, z))
 	return chunks
 
 

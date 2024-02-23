@@ -16,7 +16,7 @@ class Walker:
 @export var starting_tile := Vector2.ZERO
 
 var _walkers : Array[Walker]
-var _walked_tiles : Array[Vector2]
+var _walked_tiles : PackedVector2Array
 
 
 func generate(starting_grid: GaeaGrid = null) -> void:
@@ -139,8 +139,8 @@ func _get_random_rotation() -> float:
 		_: return deg_to_rad(180)
 
 
-func _get_square_room(starting_pos: Vector2, size: Vector2) -> Array:
-	var tiles : Array[Vector2] = []
+func _get_square_room(starting_pos: Vector2, size: Vector2) -> PackedVector2Array:
+	var tiles : PackedVector2Array = []
 	var x_offset = floor(size.x / 2)
 	var y_offset = floor(size.y / 2)
 	for x in size.x:
