@@ -9,6 +9,7 @@
 
 
 Gaea is an **add-on for Godot 4.2***, designed to empower your project with advanced **procedural generation** capabilities.
+
 *For 4.0-4.1, use v0.6.2 or lower.
 
 > **NOTE:** Gaea is currently in early development, and may not yet be optimized for larger, more complex projects. Stay tuned for ongoing improvements and enhancements!
