@@ -16,7 +16,7 @@ signal generation_finished
 
 ## If [code]true[/code], allows for generating a preview of the generation
 ## in the editor. Useful for debugging.
-@export var editor_preview: bool = false :
+@export var editor_preview: bool = true :
 	set(value):
 		editor_preview = value
 		if value == false:

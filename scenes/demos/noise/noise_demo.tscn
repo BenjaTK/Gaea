@@ -22,7 +22,6 @@ sources/0 = SubResource("TileSetAtlasSource_hgvtn")
 [node name="NoiseGenerator" type="Node2D" parent="."]
 script = ExtResource("1_3nrdm")
 settings = ExtResource("2_faytw")
-editor_preview = true
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_vnorq")
