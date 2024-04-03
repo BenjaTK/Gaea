@@ -766,7 +766,6 @@ sources/3 = SubResource("TileSetAtlasSource_x2mok")
 [node name="WalkerGenerator" type="Node2D" parent="."]
 script = ExtResource("2_07wvo")
 settings = SubResource("Resource_xngca")
-editor_preview = true
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_1ktjg")

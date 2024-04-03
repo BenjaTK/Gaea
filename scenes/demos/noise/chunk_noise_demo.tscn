@@ -74,7 +74,6 @@ resource_name = "Settings"
 script = ExtResource("2_a5ohv")
 tiles = Array[ExtResource("3_d3pu5")]([SubResource("Resource_dxu56"), SubResource("Resource_cuyb3"), SubResource("Resource_vej5k")])
 noise = SubResource("FastNoiseLite_1a0nh")
-random_noise_seed = true
 infinite = true
 world_size = Vector2i(500, 500)
 falloff_enabled = false
@@ -96,7 +95,6 @@ sources/0 = SubResource("TileSetAtlasSource_hgvtn")
 [node name="NoiseGenerator" type="Node2D" parent="."]
 script = ExtResource("1_rbw1k")
 settings = SubResource("Resource_hj1ni")
-editor_preview = true
 generate_on_ready = false
 
 [node name="TileMap" type="TileMap" parent="."]
