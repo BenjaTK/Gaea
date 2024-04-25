@@ -2,6 +2,7 @@
 * [✨ Gaea's resources](/resources.md)
 * [💡 Tutorials](/tutorials/)
   * [⭐ Getting started](/tutorials/getting_started.md)
+  * [🗺 Chunk Generation](/tutorials/chunk_generation.md)
 * [🧠 Generators](/generators/)
   * [🚶 Walker](/generators/walker.md)
   * [🦠 Cellular](/generators/cellular.md)
