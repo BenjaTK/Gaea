@@ -1,6 +1,6 @@
 # How to enable Chunk Generation
 
-> It is suggested you follow the [Getting Started]() tutorial **_BEFORE_** following this tutorial!
+> It is suggested you follow the [Getting Started](getting_started.md) tutorial **_BEFORE_** following this tutorial!
 
 **SO**! You have a great big world to explore, but it takes forever to load ... This is where **Chunk Generation** comes in!
 
