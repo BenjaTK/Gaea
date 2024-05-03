@@ -77,7 +77,7 @@ func get_seed() -> int:
 
 func _apply_modifiers(modifiers) -> void:
 	for modifier in modifiers:
-		if not (modifier is Modifier):
+		if not (modifier is Modifier) or modifier.enabled == false:
 			continue
 
 		modifier.apply(grid, self)
