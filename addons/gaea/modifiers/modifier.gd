@@ -11,6 +11,7 @@ enum FilterType {
 }
 
 @export_group("")
+@export var enabled: bool = true
 @export var affected_layers: Array[int] = [0]
 @export_group("Filters", "filter_")
 ## [i]Note: Some modifiers don't support filtering.[/i]
