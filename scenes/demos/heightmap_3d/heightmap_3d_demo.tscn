@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cwq2r4c7t6gsv" path="res://scenes/demos/heightmap_3d/stone.png" id="7_aol1v"]
 [ext_resource type="Texture2D" uid="uid://d2q1tt51g1gqq" path="res://scenes/demos/heightmap_3d/dirt.png" id="8_6347s"]
 [ext_resource type="Texture2D" uid="uid://x8sdkn1d27pp" path="res://scenes/demos/heightmap_3d/greystone.png" id="9_pq2v8"]
-[ext_resource type="Script" path="res://addons/gaea/others/chunk_loader_3d.gd" id="11_ui5m1"]
+[ext_resource type="Script" path="res://addons/gaea/others/threaded_chunk_loader_3d.gd" id="11_0gov2"]
 [ext_resource type="Script" path="res://scenes/demos/heightmap_3d/actor.gd" id="12_qacbp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jumc8"]
@@ -195,7 +195,7 @@ data = {
 }
 
 [node name="ChunkLoader3D" type="Node3D" parent="." node_paths=PackedStringArray("generator", "actor")]
-script = ExtResource("11_ui5m1")
+script = ExtResource("11_0gov2")
 generator = NodePath("../HeightmapGenerator3D")
 actor = NodePath("../Actor")
 loading_radius = Vector3i(2, 1, 2)
