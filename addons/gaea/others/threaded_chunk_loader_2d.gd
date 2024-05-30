@@ -11,12 +11,11 @@ func _process(_delta):
 		if WorkerThreadPool.is_task_completed(task):
 			WorkerThreadPool.wait_for_task_completion(task)
 			task = -1
+	super(_delta)
 
 func _update_loading(actor_position: Vector2i) -> void:
 	var job:Callable = func ():
 		super._update_loading(actor_position)
-	
-	print("Update Threaded Loading")
 	
 	if task > -1:
 		queued = job

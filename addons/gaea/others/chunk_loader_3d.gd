@@ -41,6 +41,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	
 	if Engine.is_editor_hint() or not is_instance_valid(generator):
 		return
 
@@ -69,6 +70,7 @@ func _try_loading() -> void:
 
 # loads needed chunks around the given position
 func _update_loading(actor_position: Vector3i) -> void:
+	
 	if generator == null:
 		push_error("Chunk loading failed because generator property not set!")
 		return

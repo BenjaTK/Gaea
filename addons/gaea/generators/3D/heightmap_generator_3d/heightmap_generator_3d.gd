@@ -69,8 +69,8 @@ func generate_chunk(chunk_position: Vector3i, starting_grid: GaeaGrid = null) ->
 			next_pass.generate_chunk(chunk_position, grid)
 			return
 
-	(func(): chunk_updated.emit(chunk_position)).call_deferred()
-	(func(): chunk_generation_finished.emit(chunk_position)).call_deferred()
+	(func(): chunk_updated.emit(chunk_position)).call_deferred() # deferred for threadability
+	(func(): chunk_generation_finished.emit(chunk_position)).call_deferred() # deferred for threadability
 
 
 func _set_grid() -> void:
