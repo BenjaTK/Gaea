@@ -1,0 +1,24 @@
+@tool
+class_name ThreadedChunkLoader2D
+extends ChunkLoader2D
+## @experimental
+
+var queued:Callable
+var task:int = -1
+
+func _process(_delta):
+	if task > -1:
+		if WorkerThreadPool.is_task_completed(task):
+			WorkerThreadPool.wait_for_task_completion(task)
+			task = -1
+
+func _update_loading(actor_position: Vector2i) -> void:
+	var job:Callable = func ():
+		super._update_loading(actor_position)
+	
+	print("Update Threaded Loading")
+	
+	if task > -1:
+		queued = job
+	else:
+		task = WorkerThreadPool.add_task(job, false, "Load/Unload Chunks")

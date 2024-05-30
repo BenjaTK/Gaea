@@ -4,9 +4,9 @@
 [ext_resource type="Resource" uid="uid://db18nmw5jkbtc" path="res://scenes/demos/heightmap/terraria-like_generation_settings.tres" id="2_py0je"]
 [ext_resource type="Texture2D" uid="uid://caoyt0ek7fmdq" path="res://scenes/demos/heightmap/pixel-platformer-tileset - Kenney.png" id="3_wjapt"]
 [ext_resource type="Texture2D" uid="uid://6gwie8e2kpg2" path="res://scenes/demos/heightmap/ores.png" id="4_rk2l5"]
+[ext_resource type="Script" path="res://addons/gaea/others/threaded_chunk_loader_2d.gd" id="5_4wj8l"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="10_5yyno"]
 [ext_resource type="Script" path="res://scenes/demos/heightmap/test_actor.gd" id="10_76aeg"]
-[ext_resource type="Script" path="res://addons/gaea/others/chunk_loader_2d.gd" id="10_vlq7b"]
 [ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="11_go0dd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_68jc8"]
@@ -231,10 +231,9 @@ offset_right = 2304.0
 offset_bottom = 18.0
 color = Color(0.172549, 0.188235, 0.243137, 1)
 
-[node name="ChunkLoader" type="Node2D" parent="." node_paths=PackedStringArray("generator", "renderer", "actor")]
-script = ExtResource("10_vlq7b")
+[node name="ChunkLoader" type="Node2D" parent="." node_paths=PackedStringArray("generator", "actor")]
+script = ExtResource("5_4wj8l")
 generator = NodePath("../HeightmapGenerator2D")
-renderer = NodePath("../TilemapGaeaRenderer")
 actor = NodePath("../TestActor")
 loading_radius = Vector2i(4, 4)
 update_rate = 2
