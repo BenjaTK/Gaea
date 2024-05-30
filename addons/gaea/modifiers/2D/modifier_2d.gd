@@ -1,0 +1,2 @@
+class_name Modifier2D
+extends Modifier

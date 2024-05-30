@@ -13,7 +13,7 @@ config_version=5
 config/name="Gaea"
 config/tags=PackedStringArray("addon")
 run/main_scene="res://scenes/test scene/test_scene.tscn"
-config/features=PackedStringArray("4.1", "Forward Plus")
+config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
@@ -23,6 +23,10 @@ window/size/viewport_height=360
 window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+
+[dotnet]
+
+project/assembly_name="Gaea"
 
 [editor_plugins]
 
