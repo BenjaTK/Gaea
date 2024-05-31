@@ -25,9 +25,9 @@ func _draw_area(area: AABB) -> void:
 					if not (tile_info is GridmapTileInfo):
 						continue
 
-					grid_map.set_cell_item(cell, tile_info.index)
+					grid_map.set_cell_item.call_deferred(cell, tile_info.index)
 
-	area_rendered.emit()
+	(func(): area_rendered.emit()).call_deferred()
 
 
 func _draw() -> void:
