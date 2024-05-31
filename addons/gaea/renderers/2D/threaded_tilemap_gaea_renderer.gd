@@ -4,15 +4,16 @@ extends TilemapGaeaRenderer
 ## @experimental
 
 @export var threaded:bool = true
+@export var max_running:int = 1
 
-var queued:Array[Callable]
-var task:int = -1
+var queued:Array[Callable] = []
+var tasks:PackedInt32Array = []
 
 func _process(_delta):
-	if task > -1:
-		if WorkerThreadPool.is_task_completed(task):
-			WorkerThreadPool.wait_for_task_completion(task)
-			task = -1
+	for t in range(tasks.size()-1, -1, -1):
+		if WorkerThreadPool.is_task_completed(tasks[t]):
+			WorkerThreadPool.wait_for_task_completion(tasks[t])
+			tasks.remove_at(t)
 			if not queued.is_empty():
 				run_job(queued.pop_front())
 	#super(_delta) # not needed for TilemapGaeaRenderer
@@ -24,11 +25,11 @@ func _draw_area(area: Rect2i) -> void:
 		var job:Callable = func ():
 			super._draw_area(area)
 		
-		if task > -1:
+		if tasks.size() >= max_running:
 			queued.push_back(job)
 		else:
 			run_job(job)
 
 func run_job(job:Callable):
 	if job:
-		task = WorkerThreadPool.add_task(job, false, "Draw Area")
+		tasks.append(WorkerThreadPool.add_task(job, false, "Draw Area"))
