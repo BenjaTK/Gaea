@@ -15,7 +15,7 @@ func _draw_area(area: AABB) -> void:
 				for layer in range(generator.grid.get_layer_count()):
 					var cell := Vector3i(x, y, z)
 					if not generator.grid.has_cell(cell, layer):
-						grid_map.set_cell_item(cell, -1)
+						grid_map.set_cell_item.call_deferred(cell, -1)
 						continue
 
 					if only_draw_visible_cells and not generator.grid.has_empty_neighbor(cell, layer):

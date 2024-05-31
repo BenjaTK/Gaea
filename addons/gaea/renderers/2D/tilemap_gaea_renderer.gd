@@ -29,7 +29,7 @@ func _draw_area(area: Rect2i) -> void:
 
 			if erase_empty_tiles and not has_cell_in_position:
 				for l in range(tile_map.get_layers_count()):
-					tile_map.erase_cell(l, Vector2i(x, y))
+					tile_map.erase_cell.call_deferred(l, Vector2i(x, y))
 				continue
 
 			for layer in range(generator.grid.get_layer_count()):
@@ -41,7 +41,7 @@ func _draw_area(area: Rect2i) -> void:
 
 				match tile_info.type:
 					TilemapTileInfo.Type.SINGLE_CELL:
-						tile_map.set_cell(
+						tile_map.set_cell.call_deferred(
 							tile_info.tilemap_layer, tile, tile_info.source_id,
 							tile_info.atlas_coord, tile_info.alternative_tile
 						)
@@ -52,7 +52,7 @@ func _draw_area(area: Rect2i) -> void:
 							terrains[tile_info].append(tile)
 
 	for tile_info in terrains:
-		tile_map.set_cells_terrain_connect(
+		tile_map.set_cells_terrain_connect.call_deferred(
 			tile_info.tilemap_layer, terrains[tile_info],
 			tile_info.terrain_set, tile_info.terrain
 		)
