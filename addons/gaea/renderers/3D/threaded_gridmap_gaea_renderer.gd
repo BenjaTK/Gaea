@@ -25,7 +25,7 @@ func _draw_area(area: AABB) -> void:
 		var job:Callable = func ():
 			super._draw_area(area)
 		
-		if tasks.size() >= max_running:
+		if max_running >= 0 and tasks.size() >= max_running:
 			queued.push_back(job)
 		else:
 			run_job(job)

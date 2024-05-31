@@ -240,6 +240,7 @@ update_rate = 2
 
 [node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
 script = ExtResource("6_gb7up")
+max_running = -1
 tile_map = NodePath("../TileMap")
 generator = NodePath("../HeightmapGenerator2D")
 

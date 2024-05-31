@@ -187,6 +187,7 @@ generate_on_ready = false
 
 [node name="GridmapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("grid_map", "generator")]
 script = ExtResource("6_dlrwi")
+max_running = -1
 grid_map = NodePath("../GridMap")
 generator = NodePath("../HeightmapGenerator3D")
 
