@@ -1,5 +1,5 @@
 @tool
-class_name ThreadWrapperQueue
+class_name ThreadedQueueNode
 extends Node
 ## @experimental
 
