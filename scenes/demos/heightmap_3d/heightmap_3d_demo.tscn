@@ -47,6 +47,7 @@ tile = SubResource("Resource_cidha")
 height_offset = 94
 height_intensity = 19
 salt = 3271195367
+enabled = true
 filter_type = 0
 filter_check_for_in_layers = Array[int]([])
 filter_check_for_ids = Array[String]([])
@@ -66,6 +67,7 @@ tile = SubResource("Resource_fxnuj")
 height_offset = 89
 height_intensity = 18
 salt = 3854112586
+enabled = true
 filter_type = 0
 filter_check_for_in_layers = Array[int]([])
 filter_check_for_ids = Array[String]([])
@@ -85,6 +87,7 @@ bounds_enabled = false
 bounds_max = Vector3(0, 0, 0)
 bounds_min = Vector3(0, 0, 0)
 salt = 4265284190
+enabled = true
 affected_layers = Array[int]([0])
 filter_type = 0
 filter_check_for_in_layers = Array[int]([])
@@ -198,12 +201,12 @@ data = {
 script = ExtResource("11_0gov2")
 generator = NodePath("../HeightmapGenerator3D")
 actor = NodePath("../Actor")
-loading_radius = Vector3i(2, 1, 2)
 update_rate = 10
 
 [node name="Actor" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33, 112, 22)
 script = ExtResource("12_qacbp")
+gravity_on = false
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Actor"]
 mesh = SubResource("CapsuleMesh_3wb0y")
@@ -217,3 +220,10 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 spring_length = 15.0
 
 [node name="Camera3D" type="Camera3D" parent="Actor/SpringArm3D"]
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="Actor" method="toggle_gravity" binds= [true]]
