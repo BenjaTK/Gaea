@@ -14,8 +14,9 @@ func _process(_delta):
 		if WorkerThreadPool.is_task_completed(tasks[t]):
 			WorkerThreadPool.wait_for_task_completion(tasks[t])
 			tasks.remove_at(t)
-			if not queued.is_empty():
-				run_job(queued.pop_front())
+	if threaded:
+		while max_running >= 0 and tasks.size() < max_running and not queued.is_empty():
+			run_job(queued.pop_front())
 	#super(_delta) # not needed for TilemapGaeaRenderer
 
 func _draw_area(area: Rect2i) -> void:
