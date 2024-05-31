@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://caoyt0ek7fmdq" path="res://scenes/demos/heightmap/pixel-platformer-tileset - Kenney.png" id="3_wjapt"]
 [ext_resource type="Texture2D" uid="uid://6gwie8e2kpg2" path="res://scenes/demos/heightmap/ores.png" id="4_rk2l5"]
 [ext_resource type="Script" path="res://addons/gaea/others/threaded_chunk_loader_2d.gd" id="5_4wj8l"]
-[ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="10_5yyno"]
+[ext_resource type="Script" path="res://addons/gaea/renderers/2D/threaded_tilemap_gaea_renderer.gd" id="6_gb7up"]
 [ext_resource type="Script" path="res://scenes/demos/heightmap/test_actor.gd" id="10_76aeg"]
 [ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="11_go0dd"]
 
@@ -239,7 +239,7 @@ loading_radius = Vector2i(4, 4)
 update_rate = 2
 
 [node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
-script = ExtResource("10_5yyno")
+script = ExtResource("6_gb7up")
 tile_map = NodePath("../TileMap")
 generator = NodePath("../HeightmapGenerator2D")
 
