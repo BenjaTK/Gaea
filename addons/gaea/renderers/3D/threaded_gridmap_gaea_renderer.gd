@@ -5,16 +5,13 @@ extends GridmapGaeaRenderer
 
 @export var threaded:bool = true
 
-var queued:Array[Callable]
-var task:int = -1
+var tasks:PackedInt32Array = []
 
 func _process(_delta):
-	if task > -1:
-		if WorkerThreadPool.is_task_completed(task):
-			WorkerThreadPool.wait_for_task_completion(task)
-			task = -1
-			if not queued.is_empty():
-				run_job(queued.pop_front())
+	for t in range(tasks.size()-1, 0, -1):
+		if WorkerThreadPool.is_task_completed(tasks[t]):
+			WorkerThreadPool.wait_for_task_completion(tasks[t])
+			tasks.remove_at(t)
 	#super(_delta) # not needed for TilemapGaeaRenderer
 
 func _draw_area(area: AABB) -> void:
@@ -23,12 +20,8 @@ func _draw_area(area: AABB) -> void:
 	else:
 		var job:Callable = func ():
 			super._draw_area(area)
-		
-		if task > -1:
-			queued.push_back(job)
-		else:
-			run_job(job)
+		run_job(job)
 
 func run_job(job:Callable):
 	if job:
-		task = WorkerThreadPool.add_task(job, false, "Draw Area")
+		tasks.append(WorkerThreadPool.add_task(job, false, "Draw Area"))
