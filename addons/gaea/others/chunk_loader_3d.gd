@@ -23,6 +23,12 @@ var update_rate: int = 0
 @export var load_on_ready: bool = true
 ## If set to true, the Chunk Loader unloads chunks left behind
 @export var unload_chunks: bool = true
+## If set to false, the Chunk Loader will disable process and physics process.
+@export var enabled: bool = true :
+	set(value):
+		enabled = value
+		set_process(value)
+		set_physics_process(value)
 
 var _last_run: int = 0
 var _last_position: Vector3i
@@ -31,6 +37,10 @@ var required_chunks: PackedVector3Array
 
 func _ready() -> void:
 	if Engine.is_editor_hint() or not is_instance_valid(generator):
+		return
+	
+	enabled = enabled
+	if not enabled:
 		return
 
 	if generator.settings.get("infinite") == false:
