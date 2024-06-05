@@ -44,10 +44,6 @@ func _process(delta: float) -> void:
 	if Engine.is_editor_hint() or not is_instance_valid(generator):
 		return
 
-	if generator.settings.get("infinite") == false:
-		push_warning("Generator's settings at %s has infinite disabled, can't generate chunks." % generator.name)
-		return
-
 	var current_time = Time.get_ticks_msec()
 	if current_time - _last_run > update_rate:
 		# todo make check loading
