@@ -53,5 +53,6 @@ func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> voi
 
 
 func _validate_property(property: Dictionary) -> void:
+	super(property)
 	if property.name == "noise" and self.get("use_generator_noise") == true:
 		property.usage = PROPERTY_USAGE_NONE
