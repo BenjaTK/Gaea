@@ -33,6 +33,10 @@ func _ready() -> void:
 	if Engine.is_editor_hint() or not is_instance_valid(generator):
 		return
 
+	if generator.settings.get("infinite") == false:
+		push_warning("Generator's settings at %s has infinite disabled, can't generate chunks." % generator.name)
+		return
+	
 	await get_tree().process_frame
 
 	generator.erase()
