@@ -24,6 +24,8 @@ var update_rate: int = 0
 @export var load_on_ready: bool = true
 ## If set to true, the Chunk Loader unloads chunks left behind
 @export var unload_chunks: bool = true
+## If set to true, will prioritize chunks closer to the [param actor].
+@export var load_closest_chunks_first: bool = true
 
 var _last_run: int = 0
 var _last_position: Vector2i
@@ -100,7 +102,7 @@ func _get_actors_position() -> Vector2i:
 
 
 func _get_required_chunks(actor_position: Vector2i) -> PackedVector2Array:
-	var chunks: PackedVector2Array = []
+	var chunks: Array[Vector2] = []
 
 	var x_range = range(
 		actor_position.x - abs(loading_radius).x,
@@ -113,9 +115,11 @@ func _get_required_chunks(actor_position: Vector2i) -> PackedVector2Array:
 
 	for x in x_range:
 		for y in y_range:
-			chunks.append(Vector2i(x, y))
+			chunks.append(Vector2(x, y))
 
-	return chunks
+	if load_closest_chunks_first:
+		chunks.sort_custom(func(chunk1: Vector2, chunk2: Vector2): return chunk1.distance_squared_to(actor_position) < chunk2.distance_squared_to(actor_position))
+	return PackedVector2Array(chunks)
 
 
 func _get_configuration_warnings() -> PackedStringArray:
