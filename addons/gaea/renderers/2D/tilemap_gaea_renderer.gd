@@ -16,6 +16,13 @@ extends GaeaRenderer2D
 @export var erase_empty_tiles: bool = true
 
 
+func _ready() -> void:
+	super()
+	if tile_map.tile_set.tile_size != generator.tile_size:
+		push_warning("TileMap's tile size doesn't match with generator's tile size, can cause generation issues. The generator's tile size has been set to the TileMap's tile size.")
+		generator.tile_size = tile_map.tile_set.tile_size
+
+
 func _draw_area(area: Rect2i) -> void:
 	var terrains: Dictionary
 
