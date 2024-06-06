@@ -231,16 +231,15 @@ offset_right = 2304.0
 offset_bottom = 18.0
 color = Color(0.172549, 0.188235, 0.243137, 1)
 
-[node name="ChunkLoader" type="Node2D" parent="." node_paths=PackedStringArray("generator", "actor")]
+[node name="ThreadedChunkLoader2D" type="Node2D" parent="." node_paths=PackedStringArray("generator", "actor")]
 script = ExtResource("5_4wj8l")
 generator = NodePath("../HeightmapGenerator2D")
 actor = NodePath("../TestActor")
 loading_radius = Vector2i(4, 4)
 update_rate = 2
 
-[node name="TilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
+[node name="ThreadedTilemapGaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map", "generator")]
 script = ExtResource("6_gb7up")
-max_running = -1
 tile_map = NodePath("../TileMap")
 generator = NodePath("../HeightmapGenerator2D")
 
