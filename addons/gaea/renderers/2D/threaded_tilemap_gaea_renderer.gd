@@ -1,10 +1,16 @@
 @tool
 class_name ThreadedTilemapGaeaRenderer
 extends TilemapGaeaRenderer
+## Wrapper for TilemapGaeaRenderer that runs multiple _draw_area calls
+##  in parallel using the WorkerThreadPool.
 ## @experimental
 
+## Whether or not to pass calls through to the default TilemapGaeaRenderer,
+##  instead of threading them.
 @export var threaded:bool = true
-@export var max_running:int = 1
+## Decides the maximum number of WorkerThreadPool tasks that can be created
+##  before queueing new tasks. A negative value (-1) means there is no limit.
+@export_range(-1, 1000, 1, "exp", "or_greater") var task_limit:int = -1
 
 var queued:Array[Callable] = []
 var tasks:PackedInt32Array = []
@@ -15,22 +21,22 @@ func _process(_delta):
 			WorkerThreadPool.wait_for_task_completion(tasks[t])
 			tasks.remove_at(t)
 	if threaded:
-		while max_running >= 0 and tasks.size() < max_running and not queued.is_empty():
-			run_job(queued.pop_front())
+		while task_limit >= 0 and tasks.size() < task_limit and not queued.is_empty():
+			run_task(queued.pop_front())
 	#super(_delta) # not needed for TilemapGaeaRenderer
 
 func _draw_area(area: Rect2i) -> void:
 	if not threaded:
 		super(area)
 	else:
-		var job:Callable = func ():
+		var new_task:Callable = func ():
 			super._draw_area(area)
 		
-		if max_running >= 0 and tasks.size() >= max_running:
-			queued.push_back(job)
+		if task_limit >= 0 and tasks.size() >= task_limit:
+			queued.push_back(new_task)
 		else:
-			run_job(job)
+			run_task(new_task)
 
-func run_job(job:Callable):
-	if job:
-		tasks.append(WorkerThreadPool.add_task(job, false, "Draw Area"))
+func run_task(task:Callable):
+	if task:
+		tasks.append(WorkerThreadPool.add_task(task, false, "Draw Area"))
