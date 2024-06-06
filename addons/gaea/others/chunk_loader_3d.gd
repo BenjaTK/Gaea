@@ -23,6 +23,8 @@ var update_rate: int = 0
 @export var load_on_ready: bool = true
 ## If set to true, the Chunk Loader unloads chunks left behind
 @export var unload_chunks: bool = true
+## If set to true, will prioritize chunks closer to the [param actor].
+@export var load_closest_chunks_first: bool = true
 
 var _last_run: int = 0
 var _last_position: Vector3i
@@ -41,7 +43,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	
+
 	if Engine.is_editor_hint() or not is_instance_valid(generator):
 		return
 
@@ -66,7 +68,7 @@ func _try_loading() -> void:
 
 # loads needed chunks around the given position
 func _update_loading(actor_position: Vector3i) -> void:
-	
+
 	if generator == null:
 		push_error("Chunk loading failed because generator property not set!")
 		return
@@ -105,7 +107,7 @@ func _get_actors_position() -> Vector3i:
 
 
 func _get_required_chunks(actor_position: Vector3) -> PackedVector3Array:
-	var chunks: PackedVector3Array = []
+	var chunks: Array[Vector3] = []
 
 	var x_range = range(
 		actor_position.x - abs(loading_radius).x,
@@ -124,7 +126,10 @@ func _get_required_chunks(actor_position: Vector3) -> PackedVector3Array:
 		for y in y_range:
 			for z in z_range:
 				chunks.append(Vector3(x, y, z))
-	return chunks
+
+	if load_closest_chunks_first:
+		chunks.sort_custom(func(chunk1: Vector3, chunk2: Vector3): return actor_position.distance_squared_to(chunk1) < actor_position.distance_squared_to(chunk2))
+	return PackedVector3Array(chunks)
 
 
 func _get_configuration_warnings() -> PackedStringArray:
