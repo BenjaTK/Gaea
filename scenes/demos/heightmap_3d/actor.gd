@@ -4,9 +4,16 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
+@export var gravity_on:bool = true :
+	set(value):
+		gravity_on = value
+		toggle_gravity(value)
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func toggle_gravity(on:bool=true):
+	gravity = 0 if not on else ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

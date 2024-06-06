@@ -36,8 +36,8 @@ func erase_chunk(chunk_position: Vector2i) -> void:
 			for layer in grid.get_layer_count():
 				grid.erase(Vector2i(x, y), layer)
 
-	chunk_updated.emit(chunk_position)
-	chunk_erased.emit(chunk_position)
+	(func(): chunk_updated.emit(chunk_position)).call_deferred() # deferred for threadability
+	(func(): chunk_erased.emit(chunk_position)).call_deferred() # deferred for threadability
 
 
 func _apply_modifiers_chunk(modifiers: Array[Modifier2D], chunk_position: Vector2i) -> void:
