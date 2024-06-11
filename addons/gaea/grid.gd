@@ -42,6 +42,9 @@ func get_value(pos, layer: int) -> Variant:
 
 ## Returns an [Array] of all values in the grid.
 func get_values(layer: int) -> Array[Variant]:
+	if not has_layer(layer):
+		push_error("Index layer = %s is out of bounds (get_layer_count() = %s)" % [layer, get_layer_count()])
+		return []
 	return _grid[layer].values()
 
 
@@ -58,13 +61,20 @@ func get_grid() -> Dictionary:
 ### Cells ###
 
 
+
+
 ## Returns an [Array] of all cells in the grid.
 func get_cells(layer: int) -> Array:
+	if not has_layer(layer):
+		push_error("Index layer = %s is out of bounds (get_layer_count() = %s)" % [layer, get_layer_count()])
+		return []
 	return _grid[layer].keys()
 
 
 ## Returns [code]true[/code] if the grid has a cell at the given position.
 func has_cell(pos, layer: int) -> bool:
+	if not has_layer(layer):
+		return false
 	return _grid[layer].has(pos)
 
 
