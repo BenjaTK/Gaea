@@ -10,7 +10,7 @@ func _ready() -> void:
 	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 	focus_mode = Control.FOCUS_NONE
 	custom_minimum_size = get_combined_minimum_size()
-	tooltip_text = "White is where the tiles will be placed, black is where they won't."
+	tooltip_text = "White is where the generator/modifier will affect the tiles, black is where it won't."
 
 
 func update() -> void:
@@ -39,5 +39,5 @@ func _is_in_threshold(value: float) -> bool:
 	if object.get("threshold"):
 		return value > object.get("threshold")
 	elif object.get("max") and object.get("min"):
-		return value > object.get("min") and value < object.get("max")
+		return value >= object.get("min") and value <= object.get("max")
 	return false

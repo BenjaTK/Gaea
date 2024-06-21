@@ -5,7 +5,6 @@ extends GeneratorSettings2D
 ## Array of [NoiseGeneratorData]´s that contain the thresholds, titles and tiles.
 ## If a new element is empty, it fills it with a new [NoiseGeneratorData].
 @export var tiles: Array[NoiseGeneratorData]:
-## Removed the sorting since now we have max and min thresholds
 	set(value):
 		## If the last element of the array is not a [param NoiseGeneratorData],
 		## then create a new one.
