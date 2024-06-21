@@ -14,6 +14,8 @@ In this quick tutorial, you'll learn how to enable chunk generation to make it s
 
 Gaea comes pre-packaged with multiple different generators, but for this example, we'll be using the `NoiseGenerator` node, the `TilemapGaeaRenderer` node, the Godot built-in `TileMap` node, and a `CharacterBody2D` node, which will represent our Player!
 
+> Only certain generators work with chunk loading. These are the `ChunkAwareGenerator`s, such as the noise or heightmap generators. `ChunkAwareGenerator` is an abstract class that you can extend to make your own generators, but shouldn't be used on its own.
+
 ![Nodes needed for the Tutorial](../assets/tutorials/chunk_generation/chunk-generation-nodes.png)
 
 ### Setup
@@ -32,10 +34,10 @@ Once this node has been added to the tree, you need to assign the `Generator` an
 
 After this has been done ... **_VOILÀ!_** You now have Chunk Generation enabled for your 2D world! Once this is done, you can play around with the settings of the ChunkLoader to tune it to your liking!
 
+### It's running really slowly...
+
+Don't worry! Go to [Lightning Fast Generation](tutorials/optimization.md) for a quick tutorial on how to improve speeds.
+
 ## 3D Chunk Generation
 
-> ⚠ **!! This feature is currently experimental !!** ⚠
-> 
-> A tutorial for this feature will not be written until the feature has been marked as stable
-
-### _Tutorial Coming Soon_
+Chunk loading in 3D works the same as in 2D. Nodes mentioned above have their own 3D variant, such as `ChunkLoader3D`. Tips for optimization can also be found in [Lightning Fast Generation](tutorials/optimization.md). In 3D, these are especially important as it requires more power.
