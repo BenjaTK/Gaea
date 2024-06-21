@@ -25,3 +25,7 @@ func get_grid() -> GaeaGrid2D:
 	if not is_instance_valid(grid):
 		grid = GaeaGrid2D.new()
 	return grid
+
+
+func local_to_map(pos: Vector2) -> Vector2i:
+	return (pos / Vector2(tile_size)).floor()
