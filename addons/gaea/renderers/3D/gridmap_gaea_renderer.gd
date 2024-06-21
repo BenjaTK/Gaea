@@ -8,6 +8,13 @@ extends GaeaRenderer3D
 @export var only_draw_visible_cells: bool = true
 
 
+func _ready() -> void:
+	super()
+	if grid_map.cell_size * grid_map.scale != generator.tile_size:
+		push_warning("GridMap's cell size doesn't match with generator's tile size, can cause generation issues. The generator's tile size has been set to the GridMap's cell size.")
+		generator.tile_size = grid_map.cell_size * grid_map.scale
+
+
 func _draw_area(area: AABB) -> void:
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):

@@ -70,3 +70,11 @@ func get_chunk_axis_range(position: int, axis_size: int) -> Array:
 		(position + 1) * axis_size,
 		1
 	)
+
+
+## Returns the coordinates of the chunk containing the cell at the given [param map_position].
+func map_to_chunk(map_position: Vector2i) -> Vector2i:
+	return Vector2i(
+		floori(float(map_position.x) / chunk_size.x),
+		floori(float(map_position.y) / chunk_size.y)
+	)

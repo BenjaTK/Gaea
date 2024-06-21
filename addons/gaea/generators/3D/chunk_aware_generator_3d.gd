@@ -61,9 +61,19 @@ func has_chunk(chunk_position: Vector3i) -> bool:
 	return generated_chunks.has(chunk_position)
 
 
+## Returns the range (see [method range]) of the axis of [param axis_size] of the chunk at [param position] in that axis.
 func get_chunk_axis_range(position: int, axis_size: int) -> Array:
 	return range(
 		position * axis_size,
 		(position + 1) * axis_size,
 		1
+	)
+
+
+## Returns the coordinates of the chunk containing the cell at the given [param map_position].
+func map_to_chunk(map_position: Vector3i) -> Vector3i:
+	return Vector3i(
+		floori(float(map_position.x) / chunk_size.x),
+		floori(float(map_position.y) / chunk_size.y),
+		floori(float(map_position.z) / chunk_size.z)
 	)

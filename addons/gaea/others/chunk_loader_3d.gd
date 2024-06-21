@@ -93,15 +93,10 @@ func _update_loading(actor_position: Vector3i) -> void:
 func _get_actors_position() -> Vector3i:
 	# getting actors positions
 	var actor_position := Vector3i.ZERO
-	if actor != null: actor_position = actor.global_position.round()
+	if actor != null: actor_position = actor.global_position
 
-	var tile_position: Vector3i = actor_position / generator.tile_size
-
-	var chunk_position := Vector3i(
-		roundi(float(tile_position.x) / generator.chunk_size.x),
-		roundi(float(tile_position.y) / generator.chunk_size.y),
-		roundi(float(tile_position.z) / generator.chunk_size.z)
-	)
+	var map_position := generator.global_to_map(actor_position)
+	var chunk_position := generator.map_to_chunk(map_position)
 
 	return chunk_position
 
