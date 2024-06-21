@@ -31,5 +31,11 @@ func get_grid() -> GaeaGrid3D:
 	return grid
 
 
-func local_to_map(pos: Vector3) -> Vector3i:
-	return (pos / tile_size).floor()
+## Returns the map coordinates of the cell containing the given [param global_position].
+func global_to_map(global_position: Vector3) -> Vector3i:
+	return (global_position / tile_size).floor()
+
+
+## Returns the global position of the cell at the given [param map_position].
+func map_to_global(map_position: Vector3i) -> Vector3:
+	return Vector3(map_position) * tile_size
