@@ -43,8 +43,11 @@ func erase_chunk(chunk_position: Vector3i) -> void:
 
 func _apply_modifiers_chunk(modifiers, chunk_position: Vector3i) -> void:
 	for modifier in modifiers:
-		if not (modifier is ChunkAwareModifier3D):
+		if not modifier is ChunkAwareModifier3D:
 			push_error("%s is not a Chunk compatible modifier!" % modifier.resource_name)
+			continue
+
+		if not modifier.enabled:
 			continue
 
 		modifier.apply_chunk(grid, self, chunk_position)
