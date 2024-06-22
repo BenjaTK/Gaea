@@ -6,14 +6,14 @@ extends ChunkLoader2D
 @export var threaded: bool = true
 
 var queued: Callable
-var task: int = -1
+var _task: int = -1
 
 
 func _process(_delta):
-	if task > -1:
-		if WorkerThreadPool.is_task_completed(task):
-			WorkerThreadPool.wait_for_task_completion(task)
-			task = -1
+	if _task > -1:
+		if WorkerThreadPool.is_task_completed(_task):
+			WorkerThreadPool.wait_for_task_completion(_task)
+			_task = -1
 			run_job(queued)
 	super(_delta)
 
@@ -22,15 +22,15 @@ func _update_loading(actor_position: Vector2i) -> void:
 	if not threaded:
 		super(actor_position)
 	else:
-		var job:Callable = func ():
+		var _job:Callable = func ():
 			super._update_loading(actor_position)
 
-		if task > -1:
-			queued = job
+		if _task > -1:
+			queued = _job
 		else:
-			run_job(job)
+			run_job(_job)
 
 
-func run_job(job:Callable):
-	if job:
-		task = WorkerThreadPool.add_task(job, false, "Load/Unload Chunks")
+func run_job(_job:Callable):
+	if _job:
+		_task = WorkerThreadPool.add_task(_job, false, "Load/Unload Chunks")

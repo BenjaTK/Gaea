@@ -52,7 +52,7 @@ filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
 noise_type = 3
-seed = -1454244224
+seed = -319710493
 frequency = 0.012
 fractal_type = 2
 fractal_octaves = 3
@@ -68,12 +68,12 @@ bounds_enabled = false
 bounds_max = Vector2(0, 0)
 bounds_min = Vector2(0, 0)
 salt = 2468053697
-enabled = false
+enabled = true
 affected_layers = Array[int]([0])
 filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
-seed = -1291355587
+seed = -879214990
 frequency = 0.0617
 fractal_octaves = 2
 fractal_lacunarity = 2.95
@@ -104,7 +104,7 @@ enabled = true
 filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
-seed = -1164015029
+seed = -885391533
 frequency = 0.0511
 fractal_lacunarity = 0.565
 domain_warp_type = 2
@@ -137,7 +137,7 @@ filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
-seed = 421256392
+seed = 1507203106
 
 [sub_resource type="Resource" id="Resource_hitrj"]
 script = ExtResource("2_6f082")
@@ -153,7 +153,7 @@ resource_name = "Terraria-like Settings"
 script = ExtResource("5_haojk")
 tile = SubResource("Resource_hitrj")
 noise = SubResource("FastNoiseLite_mwtbk")
-infinite = true
+infinite = false
 world_length = 128
 height_offset = 160
 height_intensity = 25
