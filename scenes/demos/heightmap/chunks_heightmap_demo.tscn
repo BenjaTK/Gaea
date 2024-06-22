@@ -215,6 +215,7 @@ sources/0 = SubResource("TileSetAtlasSource_68jc8")
 [node name="HeightmapGenerator2D" type="Node2D" parent="."]
 script = ExtResource("1_lqewx")
 settings = ExtResource("2_py0je")
+tile_size = Vector2i(18, 18)
 generate_on_ready = false
 
 [node name="TileMap" type="TileMap" parent="."]
