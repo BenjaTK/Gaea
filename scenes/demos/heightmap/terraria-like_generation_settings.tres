@@ -25,9 +25,8 @@ tile = SubResource("Resource_6kmi4")
 height_offset = 155
 height_intensity = 25
 salt = 2626174611
+enabled = true
 filter_type = 0
-filter_check_for_in_layers = Array[int]([])
-filter_check_for_ids = Array[String]([])
 
 [sub_resource type="Resource" id="Resource_f1fl3"]
 script = ExtResource("2_6f082")
@@ -48,9 +47,8 @@ tile = SubResource("Resource_f1fl3")
 height_offset = 0
 height_intensity = 20
 salt = 1281643215
+enabled = true
 filter_type = 0
-filter_check_for_in_layers = Array[int]([])
-filter_check_for_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
 noise_type = 3
@@ -64,15 +62,15 @@ domain_warp_frequency = 0.57
 resource_name = "Caves"
 script = ExtResource("3_w1n11")
 noise = SubResource("FastNoiseLite_1mckf")
-threshold = 0.8
+min = 0.8
+max = 1.0
 bounds_enabled = false
 bounds_max = Vector2(0, 0)
 bounds_min = Vector2(0, 0)
 salt = 2468053697
+enabled = true
 affected_layers = Array[int]([0])
 filter_type = 0
-filter_check_for_in_layers = Array[int]([])
-filter_check_for_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
 seed = -1291355587
@@ -96,14 +94,14 @@ script = ExtResource("4_xyqnb")
 noise = SubResource("FastNoiseLite_kyspj")
 ignore_empty_cells = true
 tile = SubResource("Resource_bthqc")
-threshold = 0.65
+min = 0.64
+max = 1.0
 bounds_enabled = false
 bounds_max = Vector2(0, 0)
 bounds_min = Vector2(0, 0)
 salt = 1908549200
+enabled = true
 filter_type = 0
-filter_check_for_in_layers = Array[int]([])
-filter_check_for_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
 seed = -1164015029
@@ -128,14 +126,14 @@ script = ExtResource("4_xyqnb")
 noise = SubResource("FastNoiseLite_vkmxs")
 ignore_empty_cells = true
 tile = SubResource("Resource_qw5ur")
-threshold = 0.5
+min = 0.5
+max = 1.0
 bounds_enabled = false
 bounds_max = Vector2(0, 0)
 bounds_min = Vector2(0, 0)
 salt = 1902372657
+enabled = true
 filter_type = 0
-filter_check_for_in_layers = Array[int]([])
-filter_check_for_ids = Array[String]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
