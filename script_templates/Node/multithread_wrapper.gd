@@ -5,7 +5,7 @@ extends Node
 @export var threaded: bool = true
 @export var max_running: int = 1
 
-var queued: Array[Callable] = []
+var _queued: Array[Callable] = []
 var _tasks: PackedInt32Array = []
 
 
@@ -15,8 +15,8 @@ func _process(_delta):
 			WorkerThreadPool.wait_for_task_completion(_tasks[t])
 			_tasks.remove_at(t)
 	if threaded:
-		while max_running >= 0 and _tasks.size() < max_running and not queued.is_empty():
-			run_job(queued.pop_front())
+		while max_running >= 0 and _tasks.size() < max_running and not _queued.is_empty():
+			run_job(_queued.pop_front())
 	#super(_delta) # not needed for TilemapGaeaRenderer
 
 
@@ -28,7 +28,7 @@ func _some_method(some_value) -> void:
 			super._some_method(area)
 
 		if max_running >= 0 and _tasks.size() >= max_running:
-			queued.push_back(_job)
+			_queued.push_back(_job)
 		else:
 			run_job(_job)
 

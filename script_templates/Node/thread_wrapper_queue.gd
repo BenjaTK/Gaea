@@ -4,7 +4,7 @@ extends Node
 
 @export var threaded: bool = true
 
-var queued: Array[Callable]
+var _queued: Array[Callable]
 var _task: int = -1
 
 func _process(_delta):
@@ -12,8 +12,8 @@ func _process(_delta):
 		if WorkerThreadPool.is_task_completed(_task):
 			WorkerThreadPool.wait_for_task_completion(_task)
 			_task = -1
-			if not queued.is_empty():
-				run_job(queued.pop_front())
+			if not _queued.is_empty():
+				run_job(_queued.pop_front())
 	#super(_delta) # not needed for TilemapGaeaRenderer
 
 
@@ -25,7 +25,7 @@ func _some_method(some_value) -> void:
 			super._some_method(some_value)
 
 		if _task > -1:
-			queued.push_back(_job)
+			_queued.push_back(_job)
 		else:
 			run_job(_job)
 

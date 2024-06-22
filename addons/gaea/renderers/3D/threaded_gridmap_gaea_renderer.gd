@@ -12,7 +12,7 @@ extends GridmapGaeaRenderer
 ##  before queueing new tasks. A negative value (-1) means there is no limit.
 @export var task_limit: int = -1
 
-var queued: Array[Callable] = []
+var _queued: Array[Callable] = []
 var _tasks: PackedInt32Array = []
 
 
@@ -22,8 +22,8 @@ func _process(_delta):
 			WorkerThreadPool.wait_for_task_completion(_tasks[t])
 			_tasks.remove_at(t)
 	if threaded:
-		while task_limit >= 0 and _tasks.size() < task_limit and not queued.is_empty():
-			run_task(queued.pop_front())
+		while task_limit >= 0 and _tasks.size() < task_limit and not _queued.is_empty():
+			run_task(_queued.pop_front())
 
 
 func _draw_area(area: AABB) -> void:
@@ -34,7 +34,7 @@ func _draw_area(area: AABB) -> void:
 			super._draw_area(area)
 
 		if task_limit >= 0 and _tasks.size() >= task_limit:
-			queued.push_back(_new_task)
+			_queued.push_back(_new_task)
 		else:
 			run_task(_new_task)
 

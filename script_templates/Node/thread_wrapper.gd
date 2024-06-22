@@ -4,7 +4,7 @@ extends Node
 
 @export var threaded: bool = true
 
-var queued: Callable
+var _queued: Callable
 var _task: int = -1
 
 
@@ -13,7 +13,7 @@ func _process(_delta):
 		if WorkerThreadPool.is_task_completed(_task):
 			WorkerThreadPool.wait_for_task_completion(_task)
 			_task = -1
-			run_job(queued)
+			run_job(_queued)
 	super(_delta)
 
 
@@ -25,7 +25,7 @@ func _some_method(some_value) -> void:
 			super._some_method(some_value)
 
 		if _task > -1:
-			queued = _job
+			_queued = _job
 		else:
 			run_job(_job)
 
