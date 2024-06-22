@@ -1,5 +1,4 @@
 @tool
-class_name ThreadedQueueNode
 extends Node
 ## @experimental
 
@@ -23,7 +22,7 @@ func _some_method(some_value) -> void:
 	else:
 		var job:Callable = func ():
 			super._some_method(some_value)
-		
+
 		if task > -1:
 			queued.push_back(job)
 		else:
