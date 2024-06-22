@@ -68,7 +68,7 @@ bounds_enabled = false
 bounds_max = Vector2(0, 0)
 bounds_min = Vector2(0, 0)
 salt = 2468053697
-enabled = true
+enabled = false
 affected_layers = Array[int]([0])
 filter_type = 0
 

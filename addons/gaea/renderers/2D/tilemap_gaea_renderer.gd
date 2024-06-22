@@ -19,7 +19,8 @@ extends GaeaRenderer2D
 func _ready() -> void:
 	super()
 	if Vector2i(Vector2(tile_map.tile_set.tile_size) * tile_map.scale) != generator.tile_size:
-		push_warning("TileMap's tile size doesn't match with generator's tile size, can cause generation issues. The generator's tile size has been set to the TileMap's tile size.")
+		push_warning("TileMap's tile size doesn't match with generator's tile size, can cause generation issues.
+					The generator's tile size has been set to the TileMap's tile size.")
 		generator.tile_size = Vector2(tile_map.tile_set.tile_size) * tile_map.scale
 
 

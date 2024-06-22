@@ -3,14 +3,12 @@
 class_name ChunkAwareGenerator2D
 extends GaeaGenerator2D
 
-
 ## Emitted when any update to a chunk is made. Either erasing it or generating it.
 signal chunk_updated(chunk_position: Vector2i)
 ## Emitted when a chunk is finished generated. [signal chunk_updated] is also called.
 signal chunk_generation_finished(chunk_position: Vector2i)
 ## Emitted when a chunk is erased. [signal chunk_updated] is also called.
 signal chunk_erased(chunk_position: Vector2i)
-
 
 ## The size of the Chunks. [br]
 ## [b]Warning: Cannot be set to 0[/b]
@@ -36,8 +34,8 @@ func erase_chunk(chunk_position: Vector2i) -> void:
 			for layer in grid.get_layer_count():
 				grid.erase(Vector2i(x, y), layer)
 
-	(func(): chunk_updated.emit(chunk_position)).call_deferred() # deferred for threadability
-	(func(): chunk_erased.emit(chunk_position)).call_deferred() # deferred for threadability
+	(func(): chunk_updated.emit(chunk_position)).call_deferred()  # deferred for threadability
+	(func(): chunk_erased.emit(chunk_position)).call_deferred()  # deferred for threadability
 
 
 func _apply_modifiers_chunk(modifiers: Array[Modifier2D], chunk_position: Vector2i) -> void:
@@ -60,21 +58,15 @@ func unload_chunk(chunk_position: Vector2i) -> void:
 
 ### Utils ###
 
+
 func has_chunk(chunk_position: Vector2i) -> bool:
 	return generated_chunks.has(chunk_position)
 
 
 func get_chunk_axis_range(position: int, axis_size: int) -> Array:
-	return range(
-		position * axis_size,
-		(position + 1) * axis_size,
-		1
-	)
+	return range(position * axis_size, (position + 1) * axis_size, 1)
 
 
 ## Returns the coordinates of the chunk containing the cell at the given [param map_position].
 func map_to_chunk(map_position: Vector2i) -> Vector2i:
-	return Vector2i(
-		floori(float(map_position.x) / chunk_size.x),
-		floori(float(map_position.y) / chunk_size.y)
-	)
+	return Vector2i(floori(float(map_position.x) / chunk_size.x), floori(float(map_position.y) / chunk_size.y))

@@ -20,7 +20,7 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 
 	generation_started.emit()
 
-	var time_now :int = Time.get_ticks_msec()
+	var _time_now: int = Time.get_ticks_msec()
 
 	settings.noise.seed = seed
 
@@ -36,9 +36,9 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 		next_pass.generate(grid)
 		return
 
-	var time_elapsed: int = Time.get_ticks_msec() - time_now
+	var _time_elapsed: int = Time.get_ticks_msec() - _time_now
 	if OS.is_debug_build():
-		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 1000])
+		print("%s: Generating took %s seconds" % [name, float(_time_elapsed) / 1000])
 
 	grid_updated.emit()
 	generation_finished.emit()
@@ -69,8 +69,8 @@ func generate_chunk(chunk_position: Vector2i, starting_grid: GaeaGrid = null) ->
 			next_pass.generate_chunk(chunk_position, grid)
 			return
 
-	(func (): chunk_updated.emit(chunk_position)).call_deferred() # Deferred for thread-safety.
-	(func (): chunk_generation_finished.emit(chunk_position)).call_deferred() # Deferred for thread-safety.
+	(func(): chunk_updated.emit(chunk_position)).call_deferred()  # Deferred for thread-safety.
+	(func(): chunk_generation_finished.emit(chunk_position)).call_deferred()  # Deferred for thread-safety.
 
 
 func _set_grid() -> void:
@@ -78,10 +78,7 @@ func _set_grid() -> void:
 
 
 func _set_grid_chunk(chunk_position: Vector2i) -> void:
-	_set_grid_area(Rect2i(
-		chunk_position * chunk_size,
-		chunk_size
-	))
+	_set_grid_area(Rect2i(chunk_position * chunk_size, chunk_size))
 
 
 func _set_grid_area(rect: Rect2i) -> void:

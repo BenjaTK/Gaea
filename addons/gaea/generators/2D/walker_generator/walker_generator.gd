@@ -12,11 +12,12 @@ class Walker:
 	var pos = Vector2.ZERO
 	var dir = Vector2.ZERO
 
+
 @export var settings: WalkerGeneratorSettings
 @export var starting_tile := Vector2.ZERO
 
-var _walkers : Array[Walker]
-var _walked_tiles : PackedVector2Array
+var _walkers: Array[Walker]
+var _walked_tiles: PackedVector2Array
 
 
 func generate(starting_grid: GaeaGrid = null) -> void:
@@ -30,7 +31,7 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 
 	generation_started.emit()
 
-	var time_now :int = Time.get_ticks_msec()
+	var _time_now: int = Time.get_ticks_msec()
 
 	if starting_grid == null:
 		erase()
@@ -41,14 +42,13 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 	_generate_floor()
 	_apply_modifiers(settings.modifiers)
 
-
 	if is_instance_valid(next_pass):
 		next_pass.generate(grid)
 		return
 
-	var time_elapsed :int = Time.get_ticks_msec() - time_now
+	var _time_elapsed: int = Time.get_ticks_msec() - _time_now
 	if OS.is_debug_build():
-		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 1000 ])
+		print("%s: Generating took %s seconds" % [name, float(_time_elapsed) / 1000])
 
 	grid_updated.emit()
 	generation_finished.emit()
@@ -82,7 +82,8 @@ func _generate_floor() -> void:
 			if _walked_tiles.size() >= settings.max_tiles:
 				break
 		elif settings.fullness_check == settings.FullnessCheck.PERCENTAGE:
-			if float(_walked_tiles.size()) / (settings.world_size.x * settings.world_size.y) >= settings.fullness_percentage:
+			var _world_size_max: int = settings.world_size.x * settings.world_size.y
+			if float(_walked_tiles.size()) / _world_size_max >= settings.fullness_percentage:
 				break
 
 		iterations += 1
@@ -126,21 +127,28 @@ func _move_walker(walker: Walker) -> void:
 
 func _random_dir() -> Vector2:
 	match randi_range(0, 3):
-		0: return Vector2.RIGHT
-		1: return Vector2.LEFT
-		2: return Vector2.UP
-		_: return Vector2.DOWN
+		0:
+			return Vector2.RIGHT
+		1:
+			return Vector2.LEFT
+		2:
+			return Vector2.UP
+		_:
+			return Vector2.DOWN
 
 
 func _get_random_rotation() -> float:
 	match randi_range(0, 2):
-		0: return deg_to_rad(90)
-		1: return deg_to_rad(-90)
-		_: return deg_to_rad(180)
+		0:
+			return deg_to_rad(90)
+		1:
+			return deg_to_rad(-90)
+		_:
+			return deg_to_rad(180)
 
 
 func _get_square_room(starting_pos: Vector2, size: Vector2) -> PackedVector2Array:
-	var tiles : PackedVector2Array = []
+	var tiles: PackedVector2Array = []
 	var x_offset = floor(size.x / 2)
 	var y_offset = floor(size.y / 2)
 	for x in size.x:
@@ -151,19 +159,20 @@ func _get_square_room(starting_pos: Vector2, size: Vector2) -> PackedVector2Arra
 
 
 func _constrain_to_world_size(pos: Vector2) -> Vector2:
-	pos.x = clamp(pos.x,
-				(starting_tile.x - settings.world_size.x / 2) + 1,
-				(starting_tile.x + settings.world_size.x / 2) - 2)
-	pos.y = clamp(pos.y,
-				(starting_tile.y - settings.world_size.y / 2) + 1,
-				(starting_tile.y + settings.world_size.y / 2) - 2)
+	pos.x = clamp(
+		pos.x, (starting_tile.x - settings.world_size.x / 2) + 1, (starting_tile.x + settings.world_size.x / 2) - 2
+	)
+	pos.y = clamp(
+		pos.y, (starting_tile.y - settings.world_size.y / 2) + 1, (starting_tile.y + settings.world_size.y / 2) - 2
+	)
 	return pos
+
 
 ### Editor ###
 
 
 func _get_configuration_warnings() -> PackedStringArray:
-	var warnings : PackedStringArray
+	var warnings: PackedStringArray
 
 	if not settings:
 		warnings.append("Needs WalkerGeneratorSettings to work.")

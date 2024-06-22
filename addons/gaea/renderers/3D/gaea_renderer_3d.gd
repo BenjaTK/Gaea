@@ -1,7 +1,6 @@
 class_name GaeaRenderer3D
 extends GaeaRenderer
 
-
 ## Emitted when anything is rendered, be it a chunk or the full grid.
 signal area_rendered(area: AABB)
 ## Emitted when a chunk is rendered.
@@ -16,11 +15,9 @@ func _draw_area(area: AABB) -> void:
 
 ## Draws the chunk at [param chunk_position].
 func _draw_chunk(chunk_position: Vector3i) -> void:
-	_draw_area(AABB(
-			chunk_position * generator.chunk_size,
-			generator.chunk_size)
-		)
+	_draw_area(AABB(chunk_position * generator.chunk_size, generator.chunk_size))
 	chunk_rendered.emit(chunk_position)
+
 
 ## Draws the whole grid.
 func _draw() -> void:

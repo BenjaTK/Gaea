@@ -2,11 +2,11 @@
 extends Node
 ## @experimental
 
-@export var threaded:bool = true
-@export var max_running:int = 1
+@export var threaded: bool = true
+@export var max_running: int = 1
 
-var queued:Array[Callable] = []
-var tasks:PackedInt32Array = []
+var queued: Array[Callable] = []
+var tasks: PackedInt32Array = []
 
 
 func _process(_delta):

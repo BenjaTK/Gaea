@@ -5,7 +5,6 @@ extends Modifier2D
 ## Applies a smoothing algorithm to all tiles using Cellular Automata.
 ## @tutorial(Smooth Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-smooth
 
-
 ## The amount of iterations the smoothing algorithm will do. Higher values lead to
 ## smoother terrain.[br][br]
 ## [b]Note[/b]: High values can lead to empty terrain, disconnected paths,

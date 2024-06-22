@@ -7,13 +7,13 @@ extends GridmapGaeaRenderer
 
 ## Whether or not to pass calls through to the default GridmapGaeaRenderer,
 ##  instead of threading them.
-@export var threaded:bool = true
+@export var threaded: bool = true
 ## Decides the maximum number of WorkerThreadPool tasks that can be created
 ##  before queueing new tasks. A negative value (-1) means there is no limit.
-@export var task_limit:int = -1
+@export var task_limit: int = -1
 
-var queued:Array[Callable] = []
-var tasks:PackedInt32Array = []
+var queued: Array[Callable] = []
+var tasks: PackedInt32Array = []
 
 
 func _process(_delta):

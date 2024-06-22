@@ -7,7 +7,6 @@ extends GaeaGenerator2D
 ## @tutorial(Generators): https://benjatk.github.io/Gaea/#/generators/
 ## @tutorial(CellularGenerator): https://benjatk.github.io/Gaea/#/generators/cellular
 
-
 @export var settings: CellularGeneratorSettings
 
 
@@ -21,7 +20,7 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 		return
 
 	generation_started.emit()
-	var time_now :int = Time.get_ticks_msec()
+	var _time_now: int = Time.get_ticks_msec()
 
 	if starting_grid == null:
 		erase()
@@ -36,9 +35,9 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 		next_pass.generate(grid)
 		return
 
-	var time_elapsed :int = Time.get_ticks_msec() - time_now
+	var _time_elapsed: int = Time.get_ticks_msec() - _time_now
 	if OS.is_debug_build():
-		print("%s: Generating took %s seconds" % [name,  (float(time_elapsed) / 1000)])
+		print("%s: Generating took %s seconds" % [name, float(_time_elapsed) / 1000])
 
 	grid_updated.emit()
 	generation_finished.emit()
@@ -59,9 +58,15 @@ func _smooth() -> void:
 
 		for cell in grid.get_cells(settings.tile.layer):
 			var dead_neighbors_count: int = grid.get_amount_of_empty_neighbors(cell, settings.tile.layer)
-			if grid.get_value(cell, settings.tile.layer) != null and dead_neighbors_count > settings.max_floor_empty_neighbors:
+			if (
+				grid.get_value(cell, settings.tile.layer) != null
+				and dead_neighbors_count > settings.max_floor_empty_neighbors
+			):
 				_temp_grid.set_value(cell, null)
-			elif grid.get_value(cell, settings.tile.layer) == null and dead_neighbors_count <= settings.min_empty_neighbors:
+			elif (
+				grid.get_value(cell, settings.tile.layer) == null
+				and dead_neighbors_count <= settings.min_empty_neighbors
+			):
 				_temp_grid.set_value(cell, settings.tile)
 
 		grid = _temp_grid
@@ -73,7 +78,7 @@ func _smooth() -> void:
 
 
 func _get_configuration_warnings() -> PackedStringArray:
-	var warnings : PackedStringArray
+	var warnings: PackedStringArray
 
 	if not settings:
 		warnings.append("Needs CellularGeneratorSettings to work.")

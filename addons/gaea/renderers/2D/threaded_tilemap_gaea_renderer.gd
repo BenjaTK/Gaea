@@ -7,13 +7,13 @@ extends TilemapGaeaRenderer
 
 ## Whether or not to pass calls through to the default TilemapGaeaRenderer,
 ##  instead of threading them.
-@export var threaded:bool = true
+@export var threaded: bool = true
 ## Decides the maximum number of WorkerThreadPool tasks that can be created
 ##  before queueing new tasks. A negative value (-1) means there is no limit.
-@export_range(-1, 1000, 1, "exp", "or_greater") var task_limit:int = -1
+@export_range(-1, 1000, 1, "exp", "or_greater") var task_limit: int = -1
 
-var queued:Array[Callable] = []
-var tasks:PackedInt32Array = []
+var queued: Array[Callable] = []
+var tasks: PackedInt32Array = []
 
 
 func _process(_delta):

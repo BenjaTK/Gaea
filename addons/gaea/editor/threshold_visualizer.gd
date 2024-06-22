@@ -1,6 +1,5 @@
 extends TextureRect
 
-
 var object: Object
 
 

@@ -3,10 +3,10 @@ class_name ThreadedChunkLoader2D
 extends ChunkLoader2D
 ## @experimental
 
-@export var threaded:bool = true
+@export var threaded: bool = true
 
-var queued:Callable
-var task:int = -1
+var queued: Callable
+var task: int = -1
 
 
 func _process(_delta):

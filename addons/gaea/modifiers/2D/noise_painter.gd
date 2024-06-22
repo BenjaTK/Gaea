@@ -7,8 +7,7 @@ extends ChunkAwareModifier2D
 ## Useful for placing ores or decorations.
 ## @tutorial(Noise Painter Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-noise-painter
 
-
-@export var noise: FastNoiseLite = FastNoiseLite.new() :
+@export var noise: FastNoiseLite = FastNoiseLite.new():
 	set(value):
 		noise = value
 		if is_instance_valid(noise):
@@ -19,7 +18,7 @@ extends ChunkAwareModifier2D
 @export_group("Threshold")
 ## The minimum threshold. Any values in the noise that are between [param min] and [param max] (inclusive)
 ## will be replaced with [param tile]. (-1.0 is black, 1.0 is white)
-@export_range(-1.0, 1.0) var min: float = -1.0 :
+@export_range(-1.0, 1.0) var min: float = -1.0:
 	set(value):
 		min = value
 		if min > max:
@@ -27,7 +26,7 @@ extends ChunkAwareModifier2D
 		emit_changed()
 ## The maximum threshold. Any values in the noise that are between [param min] and [param max] (inclusive)
 ## will be replaced with [param tile]. (-1.0 is black, 1.0 is white)
-@export_range(-1.0, 1.0) var max: float = 1.0 :
+@export_range(-1.0, 1.0) var max: float = 1.0:
 	set(value):
 		max = value
 		if max < min:
@@ -58,8 +57,7 @@ func _is_out_of_bounds(cell: Vector2i) -> bool:
 	if not bounds_enabled:
 		return false
 
-	return (cell.x > bounds_max.x or cell.y > bounds_max.y or
-			cell.x < bounds_min.x or cell.y < bounds_min.y)
+	return cell.x > bounds_max.x or cell.y > bounds_max.y or cell.x < bounds_min.x or cell.y < bounds_min.y
 
 
 func _validate_property(property: Dictionary) -> void:

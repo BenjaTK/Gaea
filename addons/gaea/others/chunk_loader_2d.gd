@@ -5,7 +5,6 @@ extends Node2D
 ## Used to handle chunk loading and unloading in conjunction with a Noise Generator
 ##@tutorial(Chunk Generation): https://benjatk.github.io/Gaea/#/tutorials/chunk_generation
 
-
 ## The generator that loads the chunks.[br]
 ## [b]Note:[/b] If you're chaining generators together using [param next_pass],
 ## this has to be set to the first generator in the chain.
@@ -17,8 +16,7 @@ extends Node2D
 ## The actual loading area will be this value in all 4 directions.
 @export var loading_radius: Vector2i = Vector2i(2, 2)
 ## Amount of miliseconds the loader waits before it checks if new chunks need to be loaded.
-@export_range(0, 1, 1, "or_greater", "suffix:ms")
-var update_rate: int = 0
+@export_range(0, 1, 1, "or_greater", "suffix:ms") var update_rate: int = 0
 ## Executes the loading process on ready [br]
 ## [b]Warning:[/b] No chunks might load if set to false.
 @export var load_on_ready: bool = true
@@ -89,7 +87,8 @@ func _update_loading(actor_position: Vector2i) -> void:
 func _get_actors_position() -> Vector2i:
 	# getting actors positions
 	var actor_position := Vector2.ZERO
-	if actor != null: actor_position = actor.global_position
+	if actor != null:
+		actor_position = actor.global_position
 
 	var map_position := generator.global_to_map(actor_position)
 	var chunk_position := generator.map_to_chunk(map_position)
@@ -100,26 +99,24 @@ func _get_actors_position() -> Vector2i:
 func _get_required_chunks(actor_position: Vector2i) -> PackedVector2Array:
 	var chunks: Array[Vector2] = []
 
-	var x_range = range(
-		actor_position.x - abs(loading_radius).x,
-		actor_position.x + abs(loading_radius).x + 1
-	)
-	var y_range = range(
-		actor_position.y - abs(loading_radius).y,
-		actor_position.y + abs(loading_radius).y + 1
-	)
+	var x_range = range(actor_position.x - abs(loading_radius).x, actor_position.x + abs(loading_radius).x + 1)
+	var y_range = range(actor_position.y - abs(loading_radius).y, actor_position.y + abs(loading_radius).y + 1)
 
 	for x in x_range:
 		for y in y_range:
 			chunks.append(Vector2(x, y))
 
 	if load_closest_chunks_first:
-		chunks.sort_custom(func(chunk1: Vector2, chunk2: Vector2): return chunk1.distance_squared_to(actor_position) < chunk2.distance_squared_to(actor_position))
+		chunks.sort_custom(
+			func(chunk1: Vector2, chunk2: Vector2): return (
+				chunk1.distance_squared_to(actor_position) < chunk2.distance_squared_to(actor_position)
+			)
+		)
 	return PackedVector2Array(chunks)
 
 
 func _get_configuration_warnings() -> PackedStringArray:
-	var warnings : PackedStringArray
+	var warnings: PackedStringArray
 
 	if not is_instance_valid(generator):
 		warnings.append("Generator is required!")

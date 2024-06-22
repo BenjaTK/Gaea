@@ -5,7 +5,6 @@ extends Node
 ## Base class for the Gaea addon's procedural generator.
 ## @tutorial(Generators): https://benjatk.github.io/Gaea/#/generators/
 
-
 ## Emitted when any changes to the [param grid] are made.
 signal grid_updated
 ## Emitted when [method generate] successfully starts.
@@ -13,10 +12,9 @@ signal generation_started
 ## Emitted when [method generate] successfully finished.
 signal generation_finished
 
-
 ## If [code]true[/code], allows for generating a preview of the generation
 ## in the editor. Useful for debugging.
-@export var editor_preview: bool = true :
+@export var editor_preview: bool = true:
 	set(value):
 		editor_preview = value
 		if value == false:
@@ -25,14 +23,16 @@ signal generation_finished
 ## If [code]false[/code] and a world was generated in the editor,
 ## it will be kept.
 @export var generate_on_ready: bool = true
-@export var random_seed: bool = true :
+@export var random_seed: bool = true:
 	set(value):
 		random_seed = value
 		notify_property_list_changed()
-@export var seed: int = 0 : set = set_seed, get = get_seed
+@export var seed: int = 0:
+	set = set_seed,
+	get = get_seed
 
-
-var grid : GaeaGrid : get = get_grid
+var grid: GaeaGrid:
+	get = get_grid
 
 
 func _ready() -> void:
@@ -74,6 +74,7 @@ func get_seed() -> int:
 
 
 ### Modifiers ###
+
 
 func _apply_modifiers(modifiers) -> void:
 	for modifier in modifiers:

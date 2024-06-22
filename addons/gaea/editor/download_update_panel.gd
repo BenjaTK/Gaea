@@ -1,8 +1,7 @@
 @tool
 extends Control
 
-
-signal failed()
+signal failed
 signal updated(new_version: String)
 
 const TEMP_FILE_PATH = "user://temp.zip"
@@ -11,7 +10,6 @@ const TEMP_FILE_PATH = "user://temp.zip"
 @onready var label: Label = $MarginContainer/VBoxContainer/Label
 @onready var download_button: Button = %DownloadButton
 @onready var release_notes_button: LinkButton = %ReleaseNotesButton
-
 
 var next_version_release: Dictionary:
 	set(value):

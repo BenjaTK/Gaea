@@ -2,7 +2,6 @@
 class_name GaeaGenerator3D
 extends GaeaGenerator
 
-
 ## Used to transform a world position into a map position,
 ## mainly used by the [ChunkLoader]. May also be used by
 ## a [GaeaRenderer]. Otherwise doesn't affect generation.[br]
@@ -14,9 +13,6 @@ extends GaeaGenerator
 ## If you're using a [ChunkLoader3D], set its [param generator] to the first one.[br][br]
 ## [b]Note:[/b] Using modifiers instead of multiple generators is recommended. Only chain generators if necessary.
 @export var next_pass: GaeaGenerator3D
-
-
-### Utils ###
 
 
 func _ready() -> void:

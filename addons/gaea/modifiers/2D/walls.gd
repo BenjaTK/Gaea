@@ -6,7 +6,6 @@ extends Modifier2D
 ## Useful for tilesets whose walls are different tiles from the ceiling.
 ## @tutorial(Walls Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-walls
 
-
 ## The tile to be placed. Will be placed below any tile
 ## that isn't the Generator's default tile.
 @export var wall_tile: TileInfo
@@ -23,7 +22,7 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator):
 	for layer in affected_layers:
 		for cell in grid.get_cells(layer):
 			if not _passes_filter(grid, cell):
-					continue
+				continue
 
 			if grid.get_value(cell, layer) == generator.settings.tile:
 				var above: Vector2i = cell + Vector2i.UP

@@ -4,7 +4,6 @@ class_name ChunkLoader3D
 extends Node3D
 ## @experimental
 
-
 ## The generator that loads the chunks.[br]
 ## [b]Note:[/b] If you're chaining generators together using [param next_pass],
 ## this has to be set to the first generator in the chain.
@@ -16,8 +15,7 @@ extends Node3D
 ## The actual loading area will be this value in all directions.
 @export var loading_radius: Vector3i = Vector3i(2, 2, 2)
 ## Amount of miliseconds the loader waits before it checks if new chunks need to be loaded.
-@export_range(0, 1, 1, "or_greater", "suffix:ms")
-var update_rate: int = 0
+@export_range(0, 1, 1, "or_greater", "suffix:ms") var update_rate: int = 0
 ## Executes the loading process on ready [br]
 ## [b]Warning:[/b] No chunks might load if set to false.
 @export var load_on_ready: bool = true
@@ -43,7 +41,6 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-
 	if Engine.is_editor_hint() or not is_instance_valid(generator):
 		return
 
@@ -68,7 +65,6 @@ func _try_loading() -> void:
 
 # loads needed chunks around the given position
 func _update_loading(actor_position: Vector3i) -> void:
-
 	if generator == null:
 		push_error("Chunk loading failed because generator property not set!")
 		return
@@ -83,7 +79,6 @@ func _update_loading(actor_position: Vector3i) -> void:
 			if not (loaded in required_chunks):
 				generator.unload_chunk(loaded)
 
-
 	# load new chunks
 	for required in required_chunks:
 		if not generator.has_chunk(required):
@@ -93,7 +88,8 @@ func _update_loading(actor_position: Vector3i) -> void:
 func _get_actors_position() -> Vector3i:
 	# getting actors positions
 	var actor_position := Vector3i.ZERO
-	if actor != null: actor_position = actor.global_position
+	if actor != null:
+		actor_position = actor.global_position
 
 	var map_position := generator.global_to_map(actor_position)
 	var chunk_position := generator.map_to_chunk(map_position)
@@ -104,18 +100,9 @@ func _get_actors_position() -> Vector3i:
 func _get_required_chunks(actor_position: Vector3) -> PackedVector3Array:
 	var chunks: Array[Vector3] = []
 
-	var x_range = range(
-		actor_position.x - abs(loading_radius).x,
-		actor_position.x + abs(loading_radius).x + 1
-	)
-	var y_range = range(
-		actor_position.y - abs(loading_radius).y,
-		actor_position.y + abs(loading_radius).y + 1
-	)
-	var z_range = range(
-		actor_position.z - abs(loading_radius).z,
-		actor_position.z + abs(loading_radius).z + 1
-	)
+	var x_range = range(actor_position.x - abs(loading_radius).x, actor_position.x + abs(loading_radius).x + 1)
+	var y_range = range(actor_position.y - abs(loading_radius).y, actor_position.y + abs(loading_radius).y + 1)
+	var z_range = range(actor_position.z - abs(loading_radius).z, actor_position.z + abs(loading_radius).z + 1)
 
 	for x in x_range:
 		for y in y_range:
@@ -123,12 +110,16 @@ func _get_required_chunks(actor_position: Vector3) -> PackedVector3Array:
 				chunks.append(Vector3(x, y, z))
 
 	if load_closest_chunks_first:
-		chunks.sort_custom(func(chunk1: Vector3, chunk2: Vector3): return actor_position.distance_squared_to(chunk1) < actor_position.distance_squared_to(chunk2))
+		chunks.sort_custom(
+			func(chunk1: Vector3, chunk2: Vector3): return (
+				actor_position.distance_squared_to(chunk1) < actor_position.distance_squared_to(chunk2)
+			)
+		)
 	return PackedVector3Array(chunks)
 
 
 func _get_configuration_warnings() -> PackedStringArray:
-	var warnings : PackedStringArray
+	var warnings: PackedStringArray
 
 	if not is_instance_valid(generator):
 		warnings.append("Generator is required!")

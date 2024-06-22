@@ -3,17 +3,13 @@ class_name WalkerGeneratorSettings
 extends GeneratorSettings2D
 ## Settings for [WalkerGenerator]
 
-
-enum FullnessCheck {
-	TILE_AMOUNT, ## Restricts the generation to a predetermined amount of floor tiles.
-	PERCENTAGE ## Restricts the generation to a percentage of the [param world size]. Automatically sets Constrain World Size to true if set to this mode.
-}
+enum FullnessCheck { TILE_AMOUNT, PERCENTAGE }  ## Restricts the generation to a predetermined amount of floor tiles.  ## Restricts the generation to a percentage of the [param world size]. Automatically sets Constrain World Size to true if set to this mode.
 
 ## Info for the tile that will be placed. Has information about
 ## it's position in the TileSet.
 @export var tile: TileInfo
 ## The type of check to stop the generation.
-@export var fullness_check: FullnessCheck :
+@export var fullness_check: FullnessCheck:
 	set(value):
 		fullness_check = value
 		if fullness_check == FullnessCheck.PERCENTAGE:
@@ -24,7 +20,7 @@ enum FullnessCheck {
 ## Maximum percentage of the [param world_size] to be filled with floors.
 @export var fullness_percentage := 0.2
 ## Can't be [code]false[/code] if [param Fullness Check] is on [b]Percentage[/b] mode.
-@export var constrain_world_size : bool = false :
+@export var constrain_world_size: bool = false:
 	set(value):
 		if fullness_check == FullnessCheck.PERCENTAGE and value == false:
 			return
@@ -50,10 +46,7 @@ enum FullnessCheck {
 ## add new sizes or remove them if you don't want any. They can help
 ## build large open areas.[br]
 ## [b]Note:[/b] Chances are between [code]0-1[/code]
-@export var room_chances = {
-	Vector2i(2, 2): 0.5,
-	Vector2i(3, 3): 0.1
-}
+@export var room_chances = {Vector2i(2, 2): 0.5, Vector2i(3, 3): 0.1}
 
 
 func _validate_property(property: Dictionary) -> void:

@@ -3,22 +3,20 @@ class_name RandomTileInfo
 extends TileInfo
 ## When used in a grid, sets its cell's value to a random tile from [param tiles].
 
-
 const WEIGHT_PREFIX = "weight_"
 
-@export var tiles: Array[TileInfo] :
+@export var tiles: Array[TileInfo]:
 	set(value):
 		tiles = value
 		_update_weights()
 		notify_property_list_changed()
 ## If [code]true[/code], tiles will have weights attached to them.
 ## Tiles with higher weights are more likely to get chosen.
-@export var use_weights: bool = true :
+@export var use_weights: bool = true:
 	set(value):
 		use_weights = value
 		notify_property_list_changed()
 @export_group("Weights", "weight_")
-
 
 var _weights: Dictionary
 
@@ -62,13 +60,15 @@ func _get_property_list() -> Array[Dictionary]:
 
 	if use_weights:
 		for idx in _weights.size():
-			property_list.append({
-				"name": WEIGHT_PREFIX + str(idx),
-				"type": TYPE_FLOAT,
-				"usage": PROPERTY_USAGE_STORAGE | PROPERTY_USAGE_EDITOR,
-				"hint": PROPERTY_HINT_RANGE,
-				"hint_string": "0.01,100"
-			})
+			property_list.append(
+				{
+					"name": WEIGHT_PREFIX + str(idx),
+					"type": TYPE_FLOAT,
+					"usage": PROPERTY_USAGE_STORAGE | PROPERTY_USAGE_EDITOR,
+					"hint": PROPERTY_HINT_RANGE,
+					"hint_string": "0.01,100"
+				}
+			)
 
 	return property_list
 

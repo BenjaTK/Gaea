@@ -3,12 +3,11 @@ extends Resource
 ## The grid which all [GaeaGenerator]s fill, and the base
 ## of the Gaea plugin.
 
-
 ## Holds the layers as subdictionaries containing values for each position.
 var _grid: Dictionary
 
-
 ### Values ###
+
 
 ## Sets the value at the given position to [param value].
 ## [br]
@@ -61,8 +60,6 @@ func get_grid() -> Dictionary:
 ### Cells ###
 
 
-
-
 ## Returns an [Array] of all cells in the grid.
 func get_cells(layer: int) -> Array:
 	if not has_layer(layer):
@@ -79,6 +76,7 @@ func has_cell(pos, layer: int) -> bool:
 
 
 ### Erasing ###
+
 
 ## Removes the cell at the given position from the grid.
 func erase(pos, layer: int) -> void:
@@ -100,7 +98,6 @@ func erase_invalid() -> void:
 
 
 ### Utilities ###
-
 
 ### Layers ###
 

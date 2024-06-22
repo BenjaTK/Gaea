@@ -5,10 +5,9 @@ extends Modifier2D
 ## Generates borders around the already placed tiles.
 ##@tutorial(Generate Border Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-generate-borders
 
-
 enum Mode {
-	ADJACENT_ONLY, ## Only generates borders at the top, bottom, right and left of tiles.
-	INCLUDE_DIAGONALS, ## Also generates diagonally to tiles.
+	ADJACENT_ONLY,  ## Only generates borders at the top, bottom, right and left of tiles.
+	INCLUDE_DIAGONALS,  ## Also generates diagonally to tiles.
 }
 
 @export var border_tile_info: TileInfo
@@ -47,5 +46,3 @@ func _generate_border_walls(grid: GaeaGrid) -> void:
 			for neighbor in neighbors:
 				if not grid.has_cell(cell + neighbor, layer):
 					_temp_grid.set_value(cell + neighbor, border_tile_info)
-
-

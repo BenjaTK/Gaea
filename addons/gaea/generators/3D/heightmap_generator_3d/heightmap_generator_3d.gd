@@ -8,7 +8,6 @@ extends ChunkAwareGenerator3D
 @export var settings: HeightmapGenerator3DSettings
 
 
-
 func generate(starting_grid: GaeaGrid = null) -> void:
 	if Engine.is_editor_hint() and not editor_preview:
 		push_warning("%s: Editor Preview is not enabled so nothing happened!" % name)
@@ -20,7 +19,7 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 
 	generation_started.emit()
 
-	var time_now:int = Time.get_ticks_msec()
+	var _time_now: int = Time.get_ticks_msec()
 
 	settings.noise.seed = seed
 
@@ -35,9 +34,9 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 	if is_instance_valid(next_pass):
 		next_pass.generate(grid)
 
-	var time_elapsed :int = Time.get_ticks_msec() - time_now
+	var _time_elapsed: int = Time.get_ticks_msec() - _time_now
 	if OS.is_debug_build():
-		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 1000 ])
+		print("%s: Generating took %s seconds" % [name, float(_time_elapsed) / 1000])
 
 	grid_updated.emit()
 	generation_finished.emit()
@@ -69,8 +68,8 @@ func generate_chunk(chunk_position: Vector3i, starting_grid: GaeaGrid = null) ->
 			next_pass.generate_chunk(chunk_position, grid)
 			return
 
-	(func(): chunk_updated.emit(chunk_position)).call_deferred() # deferred for threadability
-	(func(): chunk_generation_finished.emit(chunk_position)).call_deferred() # deferred for threadability
+	(func(): chunk_updated.emit(chunk_position)).call_deferred()  # deferred for threadability
+	(func(): chunk_generation_finished.emit(chunk_position)).call_deferred()  # deferred for threadability
 
 
 func _set_grid() -> void:

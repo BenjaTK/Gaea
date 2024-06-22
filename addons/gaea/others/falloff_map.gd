@@ -4,22 +4,21 @@ extends Resource
 ## Creates a heightmap that gets lower as it gets away from the center.
 # https://youtu.be/COmtTyLCd6I
 
-
 ## Just a visualization. Doesn't affect the result.
 @export var texture: Texture2D
 ## Sets where the fallof starts, making it more or less smooth.
-@export_range(0.0, 1.0, 0.01) var falloff_start: float = 0.5 :
+@export_range(0.0, 1.0, 0.01) var falloff_start: float = 0.5:
 	set(value):
 		falloff_start = value
 		_generate()
 ## Restricts where the falloff ends, changing the size and the smoothness of the area.
-@export_range(0.0, 1.0, 0.01) var falloff_end: float = 1.0 :
+@export_range(0.0, 1.0, 0.01) var falloff_end: float = 1.0:
 	set(value):
 		falloff_end = value
 		_generate()
 
 var map: Dictionary
-var size: Vector2i = Vector2i(256, 256) :
+var size: Vector2i = Vector2i(256, 256):
 	set(value):
 		size = value
 		_generate()

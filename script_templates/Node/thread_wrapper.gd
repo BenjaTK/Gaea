@@ -2,10 +2,11 @@
 extends Node
 ## @experimental
 
-@export var threaded:bool = true
+@export var threaded: bool = true
 
-var queued:Callable
-var task:int = -1
+var queued: Callable
+var task: int = -1
+
 
 func _process(_delta):
 	if task > -1:
@@ -14,6 +15,7 @@ func _process(_delta):
 			task = -1
 			run_job(queued)
 	super(_delta)
+
 
 func _some_method(some_value) -> void:
 	if not threaded:
@@ -26,6 +28,7 @@ func _some_method(some_value) -> void:
 			queued = job
 		else:
 			run_job(job)
+
 
 func run_job(job:Callable):
 	if job:
