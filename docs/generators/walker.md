@@ -4,6 +4,6 @@ The **Walker Generator** utilizes the principle of random walks to create intric
 
 ![walker generator demo](../assets/walker-generator.gif)
 
-## How to use it
+## Tutorials
 
-todo
+- [Getting Started](../tutorials/getting_started.md)
