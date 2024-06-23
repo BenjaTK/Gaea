@@ -5,8 +5,7 @@ extends ChunkAwareModifier2D
 ## Uses noise to remove certain tiles from the map.
 ##@tutorial(Carver Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-carver
 
-
-@export var noise: FastNoiseLite = FastNoiseLite.new() :
+@export var noise: FastNoiseLite = FastNoiseLite.new():
 	set(value):
 		noise = value
 		if is_instance_valid(noise):
@@ -15,7 +14,7 @@ extends ChunkAwareModifier2D
 @export_group("Threshold")
 ## The minimum threshold. Any values in the noise that are between [param min] and [param max] (inclusive)
 ## will be deleted. (-1.0 is black, 1.0 is white)
-@export_range(-1.0, 1.0) var min: float = -1.0 :
+@export_range(-1.0, 1.0) var min: float = -1.0:
 	set(value):
 		min = value
 		if min > max:
@@ -23,7 +22,7 @@ extends ChunkAwareModifier2D
 		emit_changed()
 ## The maximum threshold. Any values in the noise that are between [param min] and [param max] (inclusive)
 ## will be deleted. (-1.0 is black, 1.0 is white)
-@export_range(-1.0, 1.0) var max: float = 1.0 :
+@export_range(-1.0, 1.0) var max: float = 1.0:
 	set(value):
 		max = value
 		if max < min:
@@ -54,5 +53,4 @@ func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> voi
 func _is_out_of_bounds(cell: Vector2i) -> bool:
 	if not bounds_enabled:
 		return false
-	return (cell.x > bounds_max.x or cell.y > bounds_max.y or
-			cell.x < bounds_min.x or cell.y < bounds_min.y)
+	return cell.x > bounds_max.x or cell.y > bounds_max.y or cell.x < bounds_min.x or cell.y < bounds_min.y

@@ -1,9 +1,13 @@
 class_name GaeaGrid2D
 extends GaeaGrid
 
+const SURROUNDING := [
+	Vector2i.RIGHT, Vector2i.LEFT,
+	Vector2i.UP, Vector2i.DOWN,
+	Vector2i(1, 1), Vector2i(1, -1),
+	Vector2i(-1, -1), Vector2i(-1, 1)
+]
 
-const SURROUNDING := [Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN,
-						Vector2i(1, 1), Vector2i(1, -1), Vector2i(-1, -1), Vector2i(-1, 1)]
 
 
 ## Sets the value at the given position to [param value].

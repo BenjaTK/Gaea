@@ -10,14 +10,27 @@ func _parse_begin(object: Object) -> void:
 		var generator_buttons := preload("./generator_buttons.gd").new()
 		add_custom_control(generator_buttons)
 
-	if (object is Modifier and object.get("noise") and (object.get("threshold") or (object.get("min") and object.get("max")))) or\
-		(object is NoiseGeneratorData and object.settings):
-		var texture_rect := preload("./threshold_visualizer.gd").new()
-		texture_rect.object = object
+	if object is Modifier:
+		if not object.get("noise"):
+			return
 
-		add_custom_control(texture_rect)
+		if not object.get("threshold"):
+			return
 
-		texture_rect.update()
-		if object.get("noise"):
-			object.get("noise").changed.connect(texture_rect.update)
-		object.changed.connect(texture_rect.update)
+		if not object.get("min") and object.get("max"):
+			return
+	elif object is NoiseGeneratorData:
+		if not object.settings:
+			return
+	else:
+		return
+
+	var texture_rect := preload("./threshold_visualizer.gd").new()
+	texture_rect.object = object
+
+	add_custom_control(texture_rect)
+
+	texture_rect.update()
+	if object.get("noise"):
+		object.get("noise").changed.connect(texture_rect.update)
+	object.changed.connect(texture_rect.update)

@@ -3,7 +3,6 @@ extends Resource
 ## Describes a [TileInfo] and which tiles can neighbor it.
 ## @experimental
 
-
 ## The [TileInfo] to be placed when this entry is chosen. Make sure
 ## to set its [param id] so other entries can detect it.
 @export var tile_info: TileInfo

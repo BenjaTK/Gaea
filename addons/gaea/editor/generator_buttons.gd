@@ -1,6 +1,5 @@
 extends EditorProperty
 
-
 var button := Button.new()
 
 
@@ -11,8 +10,7 @@ func _init() -> void:
 	container.custom_minimum_size.x = 130
 	add_child(container)
 
-	var generate_button := _add_button(
-		container, "Generate", preload("./reload.svg"), _on_generate_pressed)
+	var generate_button := _add_button(container, "Generate", preload("./reload.svg"), _on_generate_pressed)
 	generate_button.custom_minimum_size.x = 110
 
 	_add_button(container, "Clear", preload("./clear.svg"), _on_clear_pressed)
@@ -42,4 +40,3 @@ func _on_clear_pressed() -> void:
 	var object = get_edited_object()
 	if object.has_method("erase"):
 		object.call("erase")
-

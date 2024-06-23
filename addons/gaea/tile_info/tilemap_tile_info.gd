@@ -3,14 +3,9 @@ class_name TilemapTileInfo
 extends TileInfo
 ## Resource used to tell the generators which tile from a [TileMap] to place.
 
+enum Type { SINGLE_CELL, TERRAIN }  ## Tile is just a single cell in the TileMap. Requires a [param source_id] and a [param atlas_coord]. Can optionally be an [param alternative_tile].  ## Tile is a terrain from a terrain set. Allows for autotiling. Requires a [param terrain_set] and a [param terrain]
 
-enum Type {
-	SINGLE_CELL, ## Tile is just a single cell in the TileMap. Requires a [param source_id] and a [param atlas_coord]. Can optionally be an [param alternative_tile].
-	TERRAIN ## Tile is a terrain from a terrain set. Allows for autotiling. Requires a [param terrain_set] and a [param terrain]
-	}
-
-
-@export var type: Type = Type.SINGLE_CELL :
+@export var type: Type = Type.SINGLE_CELL:
 	set(value):
 		type = value
 		notify_property_list_changed()

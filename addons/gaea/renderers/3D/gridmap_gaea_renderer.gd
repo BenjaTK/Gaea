@@ -2,7 +2,6 @@
 class_name GridmapGaeaRenderer
 extends GaeaRenderer3D
 
-
 @export var grid_map: GridMap
 ## Draws only cells with an empty neighbor.
 @export var only_draw_visible_cells: bool = true
@@ -11,7 +10,8 @@ extends GaeaRenderer3D
 func _ready() -> void:
 	super()
 	if grid_map.cell_size * grid_map.scale != generator.tile_size:
-		push_warning("GridMap's cell size doesn't match with generator's tile size, can cause generation issues. The generator's tile size has been set to the GridMap's cell size.")
+		push_warning("GridMap's cell size doesn't match with generator's tile size, can cause generation issues.
+					The generator's tile size has been set to the GridMap's cell size.")
 		generator.tile_size = grid_map.cell_size * grid_map.scale
 
 
@@ -22,7 +22,7 @@ func _draw_area(area: AABB) -> void:
 				for layer in range(generator.grid.get_layer_count()):
 					var cell := Vector3i(x, y, z)
 					if not generator.grid.has_cell(cell, layer):
-						grid_map.call_thread_safe("set_cell_item", cell, -1) # thread_safe paces these calls out when threaded.
+						grid_map.call_thread_safe("set_cell_item", cell, -1)  # thread_safe paces these calls out when threaded.
 						continue
 
 					if only_draw_visible_cells and not generator.grid.has_empty_neighbor(cell, layer):
@@ -32,7 +32,7 @@ func _draw_area(area: AABB) -> void:
 					if not (tile_info is GridmapTileInfo):
 						continue
 
-					grid_map.call_thread_safe("set_cell_item", cell, tile_info.index) # thread_safe paces these calls out when threaded.
+					grid_map.call_thread_safe("set_cell_item", cell, tile_info.index)  # thread_safe paces these calls out when threaded.
 
 	(func(): area_rendered.emit()).call_deferred()
 

@@ -26,7 +26,7 @@ extends GeneratorSettings3D
 ## A [FalloffMap], which makes tiles
 ## farther away from the center be lower in the heightmap,
 ## forming islands. Doesn't work if [param infinite] is [code]true[/code].
-@export var falloff_map: FalloffMap :
+@export var falloff_map: FalloffMap:
 	set(value):
 		falloff_map = value
 		if falloff_map != null:

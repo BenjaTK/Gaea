@@ -15,21 +15,21 @@ extends Resource
 @export_group("Thresholds")
 # Note: i just dont want to call them threshold_min and threshold_max, it seems repetitive for me
 ## The minimum threshold
-@export_range(-1.0, 1.0) var min: float = -1.0 :
+@export_range(-1.0, 1.0) var min: float = -1.0:
 	set(value):
 		min = value
 		if min > max:
 			max = min
 		emit_changed()
 ## The maximum threshold
-@export_range(-1.0, 1.0) var max: float = 1.0 :
+@export_range(-1.0, 1.0) var max: float = 1.0:
 	set(value):
 		max = value
 		if max < min:
 			min = max
 		emit_changed()
 
-var settings: NoiseGeneratorSettings :
+var settings: NoiseGeneratorSettings:
 	set(value):
 		settings = value
 		settings.noise.changed.connect(emit_changed)

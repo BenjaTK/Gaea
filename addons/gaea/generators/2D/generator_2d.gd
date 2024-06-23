@@ -2,7 +2,6 @@
 class_name GaeaGenerator2D
 extends GaeaGenerator
 
-
 ## Used to transform a world position into a map position,
 ## mainly used by the [ChunkLoader]. May also be used by
 ## a [GaeaRenderer]. Otherwise doesn't affect generation.

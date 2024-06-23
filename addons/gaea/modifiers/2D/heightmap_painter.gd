@@ -5,11 +5,10 @@ extends ChunkAwareModifier2D
 ## Replaces tiles in the map with [param tile] based on a noise heightmap.
 ## @tutorial(Heightmap Painter Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-heightmap-painter
 
-
 ## Overrides [param noise] in favor of using the generator's noise (if it has one).[br]
 ## Useful for use with the [HeightmapGenerator2D], as it will make sure it follows
 ## the same terrain shape (especially if [param height_intensity] is the same as the generator's).
-@export var use_generator_noise: bool = true :
+@export var use_generator_noise: bool = true:
 	set(value):
 		use_generator_noise = value
 		notify_property_list_changed()

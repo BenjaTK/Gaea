@@ -7,13 +7,9 @@ extends GaeaGenerator2D
 ## and which neighbors those tiles can have.
 ## @tutorial(An explanation of the algorithm and inspiration for this implementation by Martin Donald): https://www.youtube.com/watch?v=2SuvO4Gi7uY
 
-
 const ADJACENT_NEIGHBORS: Dictionary = {
-	"right": Vector2i.RIGHT,
-	"left": Vector2i.LEFT,
-	"up": Vector2i.UP,
-	"down":Vector2i.DOWN
-	}
+	"right": Vector2i.RIGHT, "left": Vector2i.LEFT, "up": Vector2i.UP, "down": Vector2i.DOWN
+}
 
 @export var settings: WaveFunctionGenerator2DSettings
 ## Limit max iterations to avoid infinite loops.
@@ -33,7 +29,7 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 
 	generation_started.emit()
 
-	var time_now :int = Time.get_ticks_msec()
+	var _time_now: int = Time.get_ticks_msec()
 
 	if starting_grid == null:
 		erase()
@@ -65,9 +61,9 @@ func generate(starting_grid: GaeaGrid = null) -> void:
 		next_pass.generate(grid)
 		return
 
-	var time_elapsed :int = Time.get_ticks_msec() - time_now
+	var _time_elapsed: int = Time.get_ticks_msec() - _time_now
 	if OS.is_debug_build():
-		print("%s: Generating took %s seconds" % [name, float(time_elapsed) / 1000 ])
+		print("%s: Generating took %s seconds" % [name, float(_time_elapsed) / 1000])
 
 	grid_updated.emit()
 	generation_finished.emit()

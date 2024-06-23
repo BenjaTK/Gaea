@@ -1,10 +1,11 @@
 class_name GaeaGrid3D
 extends GaeaGrid
 
-
-const NEIGHBORS := [Vector3i.RIGHT, Vector3i.LEFT, Vector3i.UP, Vector3i.DOWN,
-					Vector3i.FORWARD, Vector3i.BACK]
-
+const NEIGHBORS := [
+	Vector3i.RIGHT, Vector3i.LEFT,
+	Vector3i.UP, Vector3i.DOWN,
+	Vector3i.FORWARD, Vector3i.BACK
+]
 
 
 ## Sets the value at the given position to [param value].

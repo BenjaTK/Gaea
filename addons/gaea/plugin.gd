@@ -1,7 +1,6 @@
 @tool
 extends EditorPlugin
 
-
 var _inspector_plugin = preload("./editor/inspector_plugin.gd")
 var _update_button = preload("./editor/update_button.tscn")
 

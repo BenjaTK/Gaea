@@ -5,7 +5,6 @@ extends Modifier2D
 ## Uses floodfill to remove areas that aren't connected to [param starting_cell]
 ## @tutorial(Remove Disconnected Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-noise-painter
 
-
 @export var starting_cell := Vector2i.ZERO
 
 
@@ -19,12 +18,17 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
 		if closest_cell == Vector2i(NAN, NAN):
 			push_error("RemoveDisconnected at %s failed, found no start cell." % generator.name)
 			return
-		push_warning("RemoveDisconnected at %s found no cell at starting cell %s, got closest one %s instead." % [generator.name, starting_cell, closest_cell])
+		push_warning(
+			(
+				"RemoveDisconnected at %s found no cell at starting cell %s, got closest one %s instead."
+				% [generator.name, starting_cell, closest_cell]
+			)
+		)
 		start_cell = closest_cell
 
-	var _temp_grid : GaeaGrid2D = GaeaGrid2D.new()
+	var _temp_grid: GaeaGrid2D = GaeaGrid2D.new()
 
-	var queue : Array[Vector2i]
+	var queue: Array[Vector2i]
 	queue.append(start_cell)
 
 	while not queue.is_empty():
@@ -50,9 +54,9 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
 
 
 func _find_closest_cell(to: Vector2i, grid: GaeaGrid) -> Vector2i:
-	var queue : Array[Vector2i]
+	var queue: Array[Vector2i]
 	queue.append(to)
-	var checked_cells : Array[Vector2i]
+	var checked_cells: Array[Vector2i]
 
 	while not queue.is_empty():
 		var cell = queue.pop_front()
