@@ -2,8 +2,8 @@
 @icon("chunk_loader.svg")
 class_name ChunkLoader2D
 extends Node2D
-## Used to handle chunk loading and unloading in conjunction with a Noise Generator
-##@tutorial(Chunk Generation): https://benjatk.github.io/Gaea/#/tutorials/chunk_generation
+## Used to handle chunk loading and unloading with a [ChunkAwareGenerator2D].
+## @tutorial(Chunk Generation): https://benjatk.github.io/Gaea/#/tutorials/chunk_generation
 
 ## The generator that loads the chunks.[br]
 ## [b]Note:[/b] If you're chaining generators together using [param next_pass],

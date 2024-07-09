@@ -1,9 +1,13 @@
 @tool
 class_name ThreadedGridmapGaeaRenderer
 extends GridmapGaeaRenderer
-## Wrapper for GridmapGaeaRenderer that runs multiple _draw_area calls
-##  in parallel using the WorkerThreadPool.
+## A threaded verison of [GridmapGaeaRenderer], allowing rendering code to run parallel to the main thread of your game.
+##
+## Wrapper for [GridmapGaeaRenderer] that runs multiple [method GaeaRenderer3D._draw_area] calls
+##  in parallel using the [WorkerThreadPool].
 ## @experimental
+##
+## @tutorial(Optimization): https://benjatk.github.io/Gaea/#/tutorials/optimization
 
 ## Whether or not to pass calls through to the default GridmapGaeaRenderer,
 ##  instead of threading them.

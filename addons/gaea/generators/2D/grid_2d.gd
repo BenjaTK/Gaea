@@ -1,5 +1,6 @@
 class_name GaeaGrid2D
 extends GaeaGrid
+## @tutorial(Gaea's Resources): https://benjatk.github.io/Gaea/#/resources
 
 const SURROUNDING := [
 	Vector2i.RIGHT, Vector2i.LEFT,

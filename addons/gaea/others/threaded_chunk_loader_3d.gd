@@ -2,6 +2,10 @@
 class_name ThreadedChunkLoader3D
 extends ChunkLoader3D
 ## @experimental
+## A threaded version of [ChunkLoader3D], allowing generation code to run parallel to the main thread of your game.
+##
+## @tutorial(Chunk Generation): https://benjatk.github.io/Gaea/#/tutorials/chunk_generation
+## @tutorial(Optimization): https://benjatk.github.io/Gaea/#/tutorials/optimization
 
 @export var threaded: bool = true
 
