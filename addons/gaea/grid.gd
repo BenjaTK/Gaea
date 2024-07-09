@@ -2,6 +2,7 @@ class_name GaeaGrid
 extends Resource
 ## The grid which all [GaeaGenerator]s fill, and the base
 ## of the Gaea plugin.
+## @tutorial(Gaea's Resources): https://benjatk.github.io/Gaea/#/resources
 
 ## Holds the layers as subdictionaries containing values for each position.
 var _grid: Dictionary

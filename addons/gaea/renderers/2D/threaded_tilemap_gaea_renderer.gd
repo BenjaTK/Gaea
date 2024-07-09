@@ -1,9 +1,13 @@
 @tool
 class_name ThreadedTilemapGaeaRenderer
 extends TilemapGaeaRenderer
-## Wrapper for TilemapGaeaRenderer that runs multiple _draw_area calls
-##  in parallel using the WorkerThreadPool.
+## A threaded verison of [TilemapGaeaRenderer], allowing rendering code to run parallel to the main thread of your game.
+##
+## Wrapper for [TilemapGaeaRenderer] that runs multiple [method GaeaRenderer2D._draw_area] calls
+##  in parallel using the [WorkerThreadPool].
 ## @experimental
+##
+## @tutorial(Optimization): https://benjatk.github.io/Gaea/#/tutorials/optimization
 
 ## Whether or not to pass calls through to the default TilemapGaeaRenderer,
 ##  instead of threading them.

@@ -2,6 +2,7 @@
 @icon("../chunk_aware_generator.svg")
 class_name ChunkAwareGenerator3D
 extends GaeaGenerator3D
+## @tutorial(Chunk Generation): https://benjatk.github.io/Gaea/#/tutorials/chunk_generation
 
 ## Emitted when any update to a chunk is made. Either erasing it or generating it.
 signal chunk_updated(chunk_position: Vector3i)

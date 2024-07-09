@@ -1,5 +1,6 @@
 class_name GaeaGrid3D
 extends GaeaGrid
+## @tutorial(Gaea's Resources): https://benjatk.github.io/Gaea/#/resources
 
 const NEIGHBORS := [
 	Vector3i.RIGHT, Vector3i.LEFT,
