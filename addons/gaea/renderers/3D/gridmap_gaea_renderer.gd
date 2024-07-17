@@ -34,7 +34,7 @@ func _draw_area(area: AABB) -> void:
 
 					grid_map.call_thread_safe("set_cell_item", cell, tile_info.index)  # thread_safe paces these calls out when threaded.
 
-	(func(): area_rendered.emit()).call_deferred()
+	(func(): area_rendered.emit(area)).call_deferred()
 
 
 func _draw() -> void:
