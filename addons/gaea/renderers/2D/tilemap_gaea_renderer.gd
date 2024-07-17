@@ -65,7 +65,7 @@ func _draw_area(area: Rect2i) -> void:
 			tile_info.terrain_set, tile_info.terrain
 		)
 
-	(func(): area_rendered.emit()).call_deferred()
+	(func(): area_rendered.emit(area)).call_deferred()
 
 
 func _draw() -> void:
