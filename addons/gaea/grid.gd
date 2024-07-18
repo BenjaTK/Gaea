@@ -53,6 +53,21 @@ func set_grid(grid: Dictionary) -> void:
 	_grid = grid
 
 
+## Sets the grid to the serialized grid that [param bytes] represents. See [method GaeaGenerator.serialize] and [method GaeaGenerator.deserialize].
+func set_grid_serialized(bytes: PackedByteArray) -> void:
+	var grid = bytes_to_var(bytes)
+	if not (grid is Dictionary):
+		push_error("Attempted to deserialize invalid grid")
+		return
+
+	for layer in grid:
+		for tile in grid[layer]:
+			var object = grid[layer][tile]
+			if object is EncodedObjectAsID:
+				grid[layer][tile] = instance_from_id(object.get_object_id())
+	_grid = grid
+
+
 ## Returns the grid [Dictionary].
 func get_grid() -> Dictionary:
 	return _grid
