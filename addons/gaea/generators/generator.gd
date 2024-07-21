@@ -73,17 +73,6 @@ func get_seed() -> int:
 	return seed
 
 
-## Returns the currently generated grid as a [PackedByteArray], allowing you to deserialize it later using [method deserialize].
-func serialize() -> PackedByteArray:
-	return var_to_bytes(grid.get_grid())
-
-
-## Deserializes the [param bytes] obtained from [method serialize], setting the grid to its value.
-func deserialize(bytes: PackedByteArray):
-	grid.set_grid_serialized(bytes)
-	grid_updated.emit()
-
-
 ### Modifiers ###
 
 

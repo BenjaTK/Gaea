@@ -9,13 +9,13 @@ signal chunk_rendered(chunk_position: Vector2i)
 
 ## Draws the [param area]. Override this function
 ## to make custom [GaeaRenderer]s.
-func _draw_area(area: Rect2i) -> void:
+func _draw_area(chunk_position) -> void:
 	push_warning("_draw_area at %s not overriden" % name)
 
 
 ## Draws the chunk at [param chunk_position].
 func _draw_chunk(chunk_position: Vector2i) -> void:
-	_draw_area(Rect2i(chunk_position * generator.chunk_size, generator.chunk_size))
+	_draw_area(chunk_position)
 	chunk_rendered.emit(chunk_position)
 
 

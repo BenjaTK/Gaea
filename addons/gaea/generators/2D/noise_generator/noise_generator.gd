@@ -74,11 +74,17 @@ func generate_chunk(chunk_position: Vector2i, starting_grid: GaeaGrid = null) ->
 
 
 func _set_grid() -> void:
-	_set_grid_area(Rect2i(Vector2i.ZERO, Vector2i(settings.world_size)))
+	if tile_shape == TileSet.TILE_SHAPE_HEXAGON:
+		_set_grid_hex_area(get_cells(Vector2i.ZERO, settings.world_size.x, tile_map))
+	else:
+		_set_grid_area(Rect2i(Vector2i.ZERO, Vector2i(settings.world_size)))
 
 
 func _set_grid_chunk(chunk_position: Vector2i) -> void:
-	_set_grid_area(Rect2i(chunk_position * chunk_size, chunk_size))
+	if tile_shape == TileSet.TILE_SHAPE_HEXAGON:
+		_set_grid_hex_area(get_cells(chunk_position, chunk_size.x, tile_map))
+	else:
+		_set_grid_area(Rect2i(chunk_position * chunk_size, chunk_size))
 
 
 func _set_grid_area(rect: Rect2i) -> void:
@@ -101,3 +107,20 @@ func _set_grid_area(rect: Rect2i) -> void:
 				if noise >= tile_data.min and noise <= tile_data.max:
 					grid.set_valuexy(x, y, tile_data.tile)
 					break
+
+
+func _set_grid_hex_area(cells: Array[Vector2i]) -> void:
+	for cell in cells:
+		if not settings.infinite:
+			if cell < Vector2i.ZERO or cell > settings.world_size:
+				continue
+
+		var noise = settings.noise.get_noise_2dv(cell)
+		if settings.falloff_enabled and settings.falloff_map and not settings.infinite:
+			noise = ((noise + 1) * settings.falloff_map.get_value(cell)) - 1.0
+
+		for tile_data in settings.tiles:
+			## Check if the noise is within the threshold
+			if noise >= tile_data.min and noise <= tile_data.max:
+				grid.set_valuexy(cell.x, cell.y, tile_data.tile)
+				break

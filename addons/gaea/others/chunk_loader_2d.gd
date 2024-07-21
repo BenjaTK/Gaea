@@ -99,12 +99,15 @@ func _get_actors_position() -> Vector2i:
 func _get_required_chunks(actor_position: Vector2i) -> PackedVector2Array:
 	var chunks: Array[Vector2] = []
 
-	var x_range = range(actor_position.x - abs(loading_radius).x, actor_position.x + abs(loading_radius).x + 1)
-	var y_range = range(actor_position.y - abs(loading_radius).y, actor_position.y + abs(loading_radius).y + 1)
+	if generator.tile_shape == TileSet.TILE_SHAPE_HEXAGON:
+		chunks.assign(generator.get_cells(actor_position, loading_radius.x, generator.tile_map))
+	else:
+		var x_range = range(actor_position.x - abs(loading_radius).x, actor_position.x + abs(loading_radius).x + 1)
+		var y_range = range(actor_position.y - abs(loading_radius).y, actor_position.y + abs(loading_radius).y + 1)
 
-	for x in x_range:
-		for y in y_range:
-			chunks.append(Vector2(x, y))
+		for x in x_range:
+			for y in y_range:
+				chunks.append(Vector2(x, y))
 
 	if load_closest_chunks_first:
 		chunks.sort_custom(
