@@ -3,7 +3,7 @@ class_name Modifier
 extends Resource
 ##@tutorial(Modifiers): https://benjatk.github.io/Gaea/#/modifiers
 
-enum FilterType { NONE, BLACKLIST, WHITELIST }  ## Won't apply any filtering.  ## The modifier won't affect the [TileInfo]s in any of the [param check_for_in_layers] whose [param id] can be found in [param filter_ids].  ## The modifier will ONLY affect the [TileInfo]s in any of the [param check_for_in_layers] whose [param id] can be found in [param filter_ids].
+enum FilterType { NONE, BLACKLIST, WHITELIST, ONLY_EMPTY_TILES }  ## Won't apply any filtering.  ## The modifier won't affect the [TileInfo]s in any of the [param check_for_in_layers] whose [param id] can be found in [param filter_ids].  ## The modifier will ONLY affect the [TileInfo]s in any of the [param check_for_in_layers] whose [param id] can be found in [param filter_ids].
 
 @export_group("")
 @export var enabled: bool = true
@@ -30,6 +30,12 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
 ## Returns true if the [param tile_info] can be modified according
 ## to the filters.
 func _passes_filter(grid: GaeaGrid, cell) -> bool:
+	if filter_type == FilterType.ONLY_EMPTY_TILES:
+		for layer in grid.get_layer_count():
+			if grid.get_value(cell, layer) != null:
+				return false
+		return true
+
 	if filter_type == FilterType.NONE:
 		return true
 
@@ -42,5 +48,5 @@ func _passes_filter(grid: GaeaGrid, cell) -> bool:
 
 
 func _validate_property(property: Dictionary) -> void:
-	if property.name.begins_with("filter_check") and filter_type == FilterType.NONE:
+	if property.name.begins_with("filter_check") and (filter_type == FilterType.NONE or filter_type == FilterType.ONLY_EMPTY_TILES):
 		property.usage = PROPERTY_USAGE_NONE
