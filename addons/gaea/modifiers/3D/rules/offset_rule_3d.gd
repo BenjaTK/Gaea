@@ -5,8 +5,8 @@ extends AdvancedModifierRule3D
 
 
 enum Offsets {
-	BELOW, ## Place the [AdvancedModifier3D]'s tile only BELOW any tiles from [param ids], or it will avoid placing the tile BELOW any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
 	ABOVE, ## Place the [AdvancedModifier3D]'s tile only ABOVE any tiles from [param ids], or it will avoid placing the tile ABOVE any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
+	BELOW, ## Place the [AdvancedModifier3D]'s tile only BELOW any tiles from [param ids], or it will avoid placing the tile BELOW any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
 	LEFT, ## Place the [AdvancedModifier3D]'s tile only to the LEFT of any tiles from [param ids], or it will avoid placing the tile to the LEFT of any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
 	RIGHT, ## Place the [AdvancedModifier3D]'s tile only to the RIGHT of any tiles from [param ids], or it will avoid placing the tile to the RIGHT of any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
 	FRONT, ## Place the [AdvancedModifier3D]'s tile only in FRONT of any tiles from [param ids], or it will avoid placing the tile in FRONT of any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
