@@ -5,13 +5,13 @@ extends AdvancedModifierRule2D
 
 
 enum Offsets {
-	ABOVE, ## Place the [AdvancedModifier2D]'s tile only ABOVE any tiles from [param ids], or it will avoid placing the tile ABOVE any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
-	BELOW, ## Place the [AdvancedModifier2D]'s tile only BELOW any tiles from [param ids], or it will avoid placing the tile BELOW any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
-	LEFT, ## Place the [AdvancedModifier2D]'s tile only to the LEFT of any tiles from [param ids], , or it will avoid placing the tile to the LEFT of any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
-	RIGHT, ## Place the [AdvancedModifier2D]'s tile only to the RIGHT of any tiles from [param ids], , or it will avoid placing the tile to the RIGHT of any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
+	ABOVE, ## Place the [AdvancedModifier2D]'s tile only ABOVE any tiles from [param ids].
+	BELOW, ## Place the [AdvancedModifier2D]'s tile only BELOW any tiles from [param ids].
+	LEFT, ## Place the [AdvancedModifier2D]'s tile only to the LEFT of any tiles from [param ids].
+	RIGHT, ## Place the [AdvancedModifier2D]'s tile only to the RIGHT of any tiles from [param ids].
 	CUSTOM ## Set your own [Vector2i] for the offset.
 	}
-## See [enum Offsets].
+## See [enum Offsets].If [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT], it will instead avoid placing the tile in the mentioned place.
 @export var offset: Offsets :
 	set(value):
 		offset = value
