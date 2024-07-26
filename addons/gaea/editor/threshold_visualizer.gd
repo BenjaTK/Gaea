@@ -35,8 +35,6 @@ func update() -> void:
 
 
 func _is_in_threshold(value: float) -> bool:
-	if object.get("threshold"):
-		return value > object.get("threshold")
-	elif object.get("max") and object.get("min"):
+	if object.get("max") and object.get("min"):
 		return value >= object.get("min") and value <= object.get("max")
 	return false
