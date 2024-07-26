@@ -14,7 +14,7 @@ func _parse_begin(object: Object) -> void:
 		if not object.get("noise"):
 			return
 
-		if not object.get("min") and object.get("max"):
+		if not object.get("min") and not object.get("max"):
 			return
 	elif object is NoiseGeneratorData:
 		if not object.settings:
