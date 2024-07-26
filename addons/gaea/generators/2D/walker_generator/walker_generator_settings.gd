@@ -8,7 +8,7 @@ enum FullnessCheck { TILE_AMOUNT, PERCENTAGE }  ## Restricts the generation to a
 ## Info for the tile that will be placed. Has information about
 ## it's position in the TileSet.
 @export var tile: TileInfo
-## The type of check to stop the generation.
+## The mode of check to stop the generation.
 @export var fullness_check: FullnessCheck:
 	set(value):
 		fullness_check = value
@@ -32,7 +32,7 @@ enum FullnessCheck { TILE_AMOUNT, PERCENTAGE }  ## Restricts the generation to a
 @export_group("Walkers")
 ## The amount of walkers that can be active at the same time.[br]
 ## [b]Walkers[/b] move in random directions and place floor tiles where they walk.
-## They are the foundation of this type of generation.
+## They are the foundation of this mode of generation.
 @export var max_walkers = 5
 ## The chance for a walker to change direction. Lower chances mean
 ## tighter hallways.

@@ -3,7 +3,7 @@ class_name AdvancedModifier3D
 extends ChunkAwareModifier3D
 
 ## All rules have to be followed by the target cell for the [param tile] to be placed.
-## (Unless the rule's type is [code]Invert[/code], in which case it's the opposite)
+## (Unless the rule's mode is [enum AdvancedModifierRule.Mode.INVERT], in which case it's the opposite)
 @export var rules: Array[AdvancedModifierRule]
 @export var tile: TileInfo
 
@@ -29,7 +29,7 @@ func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 
 					var rule_passed: bool = rule.passes_rule(grid, Vector3i(x, y, z))
 
-					if rule.type == AdvancedModifierRule.Type.INVERT:
+					if rule.mode == AdvancedModifierRule.Mode.INVERT:
 						rule_passed = not rule_passed
 
 					if not rule_passed:
