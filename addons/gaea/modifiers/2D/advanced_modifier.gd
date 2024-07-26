@@ -10,6 +10,9 @@ extends ChunkAwareModifier2D
 
 func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 	seed(_generator.seed + salt)
+	for rule in rules:
+		if rule.get("noise") != null and rule.get("noise") is FastNoiseLite:
+			rule.noise.seed = _generator.seed + salt
 
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):

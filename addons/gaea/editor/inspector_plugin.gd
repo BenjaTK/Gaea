@@ -2,7 +2,7 @@ extends EditorInspectorPlugin
 
 
 func _can_handle(object: Object) -> bool:
-	return object is GaeaGenerator or object is Modifier2D or object is Modifier3D or object is NoiseGeneratorData
+	return object is GaeaGenerator or object is Modifier2D or object is Modifier3D or object is NoiseGeneratorData or object is NoiseRule
 
 
 func _parse_begin(object: Object) -> void:
@@ -10,14 +10,11 @@ func _parse_begin(object: Object) -> void:
 		var generator_buttons := preload("./generator_buttons.gd").new()
 		add_custom_control(generator_buttons)
 
-	if object is Modifier:
+	if object is Modifier or object is NoiseRule:
 		if not object.get("noise"):
 			return
 
-		if not object.get("threshold"):
-			return
-
-		if not object.get("min") and object.get("max"):
+		if not object.get("min") and not object.get("max"):
 			return
 	elif object is NoiseGeneratorData:
 		if not object.settings:

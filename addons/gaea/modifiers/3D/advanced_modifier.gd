@@ -10,7 +10,9 @@ extends ChunkAwareModifier3D
 
 func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 	seed(_generator.seed + salt)
-
+	for rule in rules:
+		if rule.get("noise") != null and rule.get("noise") is FastNoiseLite:
+			rule.noise.seed = _generator.seed + salt
 
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
@@ -23,7 +25,10 @@ func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 					if rule is AdvancedModifierRule2D:
 						continue
 
+
+
 					var rule_passed: bool = rule.passes_rule(grid, Vector3i(x, y, z))
+
 					if rule.type == AdvancedModifierRule.Type.INVERT:
 						rule_passed = not rule_passed
 
