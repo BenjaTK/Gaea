@@ -5,10 +5,10 @@ extends AdvancedModifierRule2D
 
 
 enum Offsets {
-	BELOW, ## Place the [AdvancedModifier2D]'s tile only if it has any tiles from [param ids] below.
-	ABOVE, ## Place the [AdvancedModifier2D]'s tile only if it has any tiles from [param ids] above.
-	LEFT, ## Place the [AdvancedModifier2D]'s tile only if it has any tiles from [param ids] to the left.
-	RIGHT, ## Place the [AdvancedModifier2D]'s tile only if it has any tiles from [param ids] to the right.
+	BELOW, ## Place the [AdvancedModifier2D]'s tile only BELOW any tiles from [param ids], or it will avoid placing the tile BELOW any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
+	ABOVE, ## Place the [AdvancedModifier2D]'s tile only ABOVE any tiles from [param ids], or it will avoid placing the tile ABOVE any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
+	LEFT, ## Place the [AdvancedModifier2D]'s tile only to the LEFT of any tiles from [param ids], , or it will avoid placing the tile to the LEFT of any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
+	RIGHT, ## Place the [AdvancedModifier2D]'s tile only to the RIGHT of any tiles from [param ids], , or it will avoid placing the tile to the RIGHT of any tiles from [param ids] if [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT].
 	CUSTOM ## Set your own [Vector2i] for the offset.
 	}
 ## See [enum Offsets].
@@ -36,7 +36,7 @@ func passes_rule(grid: GaeaGrid, cell: Vector2i) -> bool:
 			_offset = Vector2i.RIGHT
 
 	for layer in layers:
-		var value = grid.get_value(cell + _offset, layer)
+		var value = grid.get_value(cell - _offset, layer)
 		if value is TileInfo and value.id in ids:
 			return true
 	return false
