@@ -195,6 +195,7 @@ id = ""
 layer = 0
 
 [sub_resource type="Resource" id="Resource_f4y1w"]
+resource_name = "Vegetation"
 script = ExtResource("7_ei7y7")
 rules = Array[Resource("res://addons/gaea/modifiers/rules/rule.gd")]([SubResource("Resource_kv6vo"), SubResource("Resource_ouxn8")])
 tile = SubResource("Resource_piada")
