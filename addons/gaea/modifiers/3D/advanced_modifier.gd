@@ -9,13 +9,14 @@ extends ChunkAwareModifier3D
 
 
 func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
+	seed(_generator.seed + salt)
+
+
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			for z in range(area.position.z, area.end.z + 1):
 				if not _passes_filter(grid, Vector3i(x, y, z)):
 					continue
-
-				seed(_generator.seed + salt + x + y + z)
 
 				var passes: bool = true
 				for rule in rules:

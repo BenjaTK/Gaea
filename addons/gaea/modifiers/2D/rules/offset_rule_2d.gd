@@ -11,6 +11,7 @@ enum Offsets {
 	RIGHT, ## Place the [AdvancedModifier2D]'s tile only if it has any tiles from [param ids] to the right.
 	CUSTOM ## Set your own [Vector2i] for the offset.
 	}
+## See [enum Offsets].
 @export var offset: Offsets :
 	set(value):
 		offset = value

@@ -9,12 +9,12 @@ extends ChunkAwareModifier2D
 
 
 func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
+	seed(_generator.seed + salt)
+
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			if not _passes_filter(grid, Vector2i(x, y)):
 				continue
-
-			seed(_generator.seed + salt + x + y)
 
 			var passes: bool = true
 			for rule in rules:
