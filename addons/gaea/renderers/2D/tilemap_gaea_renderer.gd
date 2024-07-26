@@ -12,7 +12,7 @@ extends GaeaRenderer2D
 		tile_map = value
 		update_configuration_warnings()
 @export var clear_tile_map_on_draw: bool = true
-## Erases the cell when an empty tile is found. Recommended: true.
+## Erases the cell when an empty tile is found in all layers. Recommended: [code]true[/code].
 @export var erase_empty_tiles: bool = true
 
 
@@ -30,15 +30,17 @@ func _draw_area(area: Rect2i) -> void:
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			var tile_position := Vector2i(x, y)
-			var has_cell_in_position: bool = false
-			for layer in range(generator.grid.get_layer_count()):
-				if generator.grid.has_cell(tile_position, layer):
-					has_cell_in_position = true
+			if erase_empty_tiles:
+				var has_cell_in_position: bool = false
+				for layer in range(generator.grid.get_layer_count()):
+					if generator.grid.has_cell(tile_position, layer):
+						has_cell_in_position = true
+						break
 
-			if erase_empty_tiles and not has_cell_in_position:
-				for l in range(tile_map.get_layers_count()):
-					tile_map.call_thread_safe("erase_cell", l, Vector2i(x, y)) # thread_safe paces these calls out when threaded.
-				continue
+				if not has_cell_in_position:
+					for l in range(tile_map.get_layers_count()):
+						tile_map.call_thread_safe("erase_cell", l, Vector2i(x, y)) # thread_safe paces these calls out when threaded.
+					continue
 
 			for layer in range(generator.grid.get_layer_count()):
 				var tile = tile_position

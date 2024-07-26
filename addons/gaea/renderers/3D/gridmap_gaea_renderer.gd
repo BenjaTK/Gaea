@@ -5,6 +5,9 @@ extends GaeaRenderer3D
 @export var grid_map: GridMap
 ## Draws only cells with an empty neighbor.
 @export var only_draw_visible_cells: bool = true
+## Erases the cell when an empty tile is found in all layers. Recommended: [code]true[/code].
+@export var erase_empty_tiles: bool = true
+
 
 
 func _ready() -> void:
@@ -19,12 +22,20 @@ func _draw_area(area: AABB) -> void:
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			for z in range(area.position.z, area.end.z + 1):
-				for layer in range(generator.grid.get_layer_count()):
-					var cell := Vector3i(x, y, z)
-					if not generator.grid.has_cell(cell, layer):
+				var cell := Vector3i(x, y, z)
+
+				if erase_empty_tiles:
+					var has_cell: bool = false
+					for layer in range(generator.grid.get_layer_count()):
+						if generator.grid.has_cell(cell, layer):
+							has_cell = true
+							break
+
+					if not has_cell:
 						grid_map.call_thread_safe("set_cell_item", cell, -1)  # thread_safe paces these calls out when threaded.
 						continue
 
+				for layer in range(generator.grid.get_layer_count()):
 					if only_draw_visible_cells and not generator.grid.has_empty_neighbor(cell, layer):
 						continue
 
