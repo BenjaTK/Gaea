@@ -1,4 +1,5 @@
 @tool
+@icon("res://addons/gaea/modifiers/2D/advanced_modifier.svg")
 class_name AdvancedModifier3D
 extends ChunkAwareModifier3D
 

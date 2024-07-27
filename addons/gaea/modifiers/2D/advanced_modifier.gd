@@ -1,4 +1,5 @@
 @tool
+@icon("advanced_modifier.svg")
 class_name AdvancedModifier2D
 extends ChunkAwareModifier2D
 

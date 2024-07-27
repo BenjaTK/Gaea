@@ -1,3 +1,4 @@
+@icon("rule.svg")
 class_name AdvancedModifierRule
 extends Resource
 ## Abstract class for rules used for [AdvancedModifier2D] and [AdvancedModifier3D].
