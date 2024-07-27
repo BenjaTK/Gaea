@@ -5,8 +5,8 @@
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/carver.gd" id="3_w1n11"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/noise_painter.gd" id="4_xyqnb"]
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/heightmap_generator/heightmap_generator_2d_settings.gd" id="5_haojk"]
-[ext_resource type="Script" path="res://addons/gaea/modifiers/2D/rules/offset_rule_2d.gd" id="5_wjn80"]
-[ext_resource type="Script" path="res://addons/gaea/modifiers/rules/chance_rule.gd" id="6_j542l"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/2D/conditions/offset_condition_2d.gd" id="5_yd776"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/conditions/chance_condition.gd" id="6_ei8am"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/advanced_modifier.gd" id="7_ei7y7"]
 [ext_resource type="Script" path="res://addons/gaea/tile_info/random_tile_info.gd" id="8_uaynf"]
 
@@ -56,7 +56,7 @@ filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
 noise_type = 3
-seed = 2082034835
+seed = 1856141230
 frequency = 0.012
 fractal_type = 2
 fractal_octaves = 3
@@ -77,7 +77,7 @@ affected_layers = Array[int]([0])
 filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
-seed = 1522530338
+seed = 1296636733
 frequency = 0.0617
 fractal_octaves = 2
 fractal_lacunarity = 2.95
@@ -108,7 +108,7 @@ enabled = true
 filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
-seed = 1516353795
+seed = 1290460190
 frequency = 0.0511
 fractal_lacunarity = 0.565
 domain_warp_type = 2
@@ -140,16 +140,16 @@ enabled = true
 filter_type = 0
 
 [sub_resource type="Resource" id="Resource_kv6vo"]
-script = ExtResource("5_wjn80")
+script = ExtResource("5_yd776")
 offset = 0
 ids = Array[StringName]([&"ground"])
 layers = Array[int]([0])
-type = 0
+mode = 0
 
 [sub_resource type="Resource" id="Resource_ouxn8"]
-script = ExtResource("6_j542l")
+script = ExtResource("6_ei8am")
 chance = 50.0
-type = 0
+mode = 0
 
 [sub_resource type="Resource" id="Resource_a6kch"]
 resource_name = "Tree"
@@ -197,7 +197,7 @@ layer = 0
 [sub_resource type="Resource" id="Resource_f4y1w"]
 resource_name = "Vegetation"
 script = ExtResource("7_ei7y7")
-rules = Array[Resource("res://addons/gaea/modifiers/rules/rule.gd")]([SubResource("Resource_kv6vo"), SubResource("Resource_ouxn8")])
+rules = Array[Resource("res://addons/gaea/modifiers/conditions/condition.gd")]([SubResource("Resource_kv6vo"), SubResource("Resource_ouxn8")])
 tile = SubResource("Resource_piada")
 salt = 3487287303
 enabled = true
@@ -206,7 +206,7 @@ filter_type = 3
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
-seed = -386018862
+seed = -611912467
 
 [sub_resource type="Resource" id="Resource_hitrj"]
 resource_name = "Ground"
