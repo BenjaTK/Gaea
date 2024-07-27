@@ -25,7 +25,7 @@ enum Offsets {
 @export var layers: Array[int] = [0]
 
 
-func passes_condition(grid: GaeaGrid, cell: Vector3i) -> bool:
+func is_condition_met(grid: GaeaGrid, cell: Vector3i) -> bool:
 	var _offset: Vector3i = custom_offset
 	match offset:
 		Offsets.BELOW:

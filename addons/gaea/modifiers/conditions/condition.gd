@@ -13,5 +13,5 @@ enum Mode {
 @export var mode: Mode = Mode.NORMAL
 
 
-func passes_condition(grid: GaeaGrid, cell) -> bool:
+func is_condition_met(grid: GaeaGrid, cell) -> bool:
 	return false

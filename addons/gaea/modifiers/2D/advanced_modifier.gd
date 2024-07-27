@@ -3,7 +3,7 @@
 class_name AdvancedModifier2D
 extends ChunkAwareModifier2D
 
-## All conditions have to be followed by the target cell for the [param tile] to be placed.
+## All conditions have to be met by the target cell for the [param tile] to be placed.
 ## (Unless the condition's mode is [enum AdvancedModifierCondition.Mode.INVERT], in which case it's the opposite)
 @export var conditions: Array[AdvancedModifierCondition]
 @export var tile: TileInfo
@@ -29,11 +29,11 @@ func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> voi
 				if condition is AdvancedModifierCondition3D:
 					continue
 
-				var condition_passed: bool = condition.passes_condition(grid, Vector2i(x, y))
+				var condition_met: bool = condition.is_condition_met(grid, Vector2i(x, y))
 				if condition.mode == AdvancedModifierCondition.Mode.INVERT:
-					condition_passed = not condition_passed
+					condition_met = not condition_met
 
-				if not condition_passed:
+				if not condition_met:
 					passes = false
 					break
 
