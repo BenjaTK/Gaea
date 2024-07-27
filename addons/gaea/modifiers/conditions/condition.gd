@@ -5,11 +5,11 @@ extends Resource
 
 
 enum Mode {
-	NORMAL, ## Only place the tile if the target cell follows this condition.
-	INVERT ## Only place the tile if the target cell doesn't follow this condition.
+	NORMAL, ## Condition works as normal.
+	INVERT ## Inverts the result of the condition, meaning where it would normally be met it isn't and viceversa.
 }
 
-## Can be normal or inverted.
+## The mode to use.
 @export var mode: Mode = Mode.NORMAL
 
 
