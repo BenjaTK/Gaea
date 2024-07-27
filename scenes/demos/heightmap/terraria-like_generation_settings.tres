@@ -56,7 +56,7 @@ filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
 noise_type = 3
-seed = 1856141230
+seed = 1150757179
 frequency = 0.012
 fractal_type = 2
 fractal_octaves = 3
@@ -77,7 +77,7 @@ affected_layers = Array[int]([0])
 filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
-seed = 1296636733
+seed = 591252682
 frequency = 0.0617
 fractal_octaves = 2
 fractal_lacunarity = 2.95
@@ -108,7 +108,7 @@ enabled = true
 filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
-seed = 1290460190
+seed = 585076139
 frequency = 0.0511
 fractal_lacunarity = 0.565
 domain_warp_type = 2
@@ -139,14 +139,14 @@ salt = 1902372657
 enabled = true
 filter_type = 0
 
-[sub_resource type="Resource" id="Resource_kv6vo"]
+[sub_resource type="Resource" id="Resource_06osm"]
 script = ExtResource("5_yd776")
 offset = 0
 ids = Array[StringName]([&"ground"])
 layers = Array[int]([0])
 mode = 0
 
-[sub_resource type="Resource" id="Resource_ouxn8"]
+[sub_resource type="Resource" id="Resource_px6f2"]
 script = ExtResource("6_ei8am")
 chance = 50.0
 mode = 0
@@ -197,7 +197,7 @@ layer = 0
 [sub_resource type="Resource" id="Resource_f4y1w"]
 resource_name = "Vegetation"
 script = ExtResource("7_ei7y7")
-rules = Array[Resource("res://addons/gaea/modifiers/conditions/condition.gd")]([SubResource("Resource_kv6vo"), SubResource("Resource_ouxn8")])
+conditions = Array[Resource("res://addons/gaea/modifiers/conditions/condition.gd")]([SubResource("Resource_06osm"), SubResource("Resource_px6f2")])
 tile = SubResource("Resource_piada")
 salt = 3487287303
 enabled = true
@@ -206,7 +206,7 @@ filter_type = 3
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
-seed = -611912467
+seed = -1317296518
 
 [sub_resource type="Resource" id="Resource_hitrj"]
 resource_name = "Ground"

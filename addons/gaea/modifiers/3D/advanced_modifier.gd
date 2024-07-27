@@ -3,17 +3,20 @@
 class_name AdvancedModifier3D
 extends ChunkAwareModifier3D
 
-## All rules have to be followed by the target cell for the [param tile] to be placed.
-## (Unless the rule's mode is [enum AdvancedModifierRule.Mode.INVERT], in which case it's the opposite)
-@export var rules: Array[AdvancedModifierRule]
+## All conditions have to be followed by the target cell for the [param tile] to be placed.
+## (Unless the condition's mode is [enum AdvancedModifierRule.Mode.INVERT], in which case it's the opposite)
+@export var conditions: Array[AdvancedModifierRule]
 @export var tile: TileInfo
 
 
 func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
+	if conditions.is_empty():
+		return
+
 	seed(_generator.seed + salt)
-	for rule in rules:
-		if rule.get("noise") != null and rule.get("noise") is FastNoiseLite:
-			rule.noise.seed = _generator.seed + salt
+	for condition in conditions:
+		if condition.get("noise") != null and condition.get("noise") is FastNoiseLite:
+			condition.noise.seed = _generator.seed + salt
 
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
@@ -22,18 +25,18 @@ func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 					continue
 
 				var passes: bool = true
-				for rule in rules:
-					if rule is AdvancedModifierRule2D:
+				for condition in conditions:
+					if condition is AdvancedModifierRule2D:
 						continue
 
 
 
-					var rule_passed: bool = rule.passes_rule(grid, Vector3i(x, y, z))
+					var condition_passed: bool = condition.passes_condition(grid, Vector3i(x, y, z))
 
-					if rule.mode == AdvancedModifierRule.Mode.INVERT:
-						rule_passed = not rule_passed
+					if condition.mode == AdvancedModifierRule.Mode.INVERT:
+						condition_passed = not condition_passed
 
-					if not rule_passed:
+					if not condition_passed:
 						passes = false
 						break
 

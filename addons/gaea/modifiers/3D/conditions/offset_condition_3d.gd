@@ -1,7 +1,7 @@
 @tool
 class_name OffsetRule3D
 extends AdvancedModifierRule3D
-## This rule is only met when a tile from [param ids] is found in an [param offset] from the target cell.
+## This condition is only met when a tile from [param ids] is found in an [param offset] from the target cell.
 
 
 enum Offsets {
@@ -25,7 +25,7 @@ enum Offsets {
 @export var layers: Array[int] = [0]
 
 
-func passes_rule(grid: GaeaGrid, cell: Vector3i) -> bool:
+func passes_condition(grid: GaeaGrid, cell: Vector3i) -> bool:
 	var _offset: Vector3i = custom_offset
 	match offset:
 		Offsets.BELOW:

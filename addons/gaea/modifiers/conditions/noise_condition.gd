@@ -23,7 +23,7 @@ extends AdvancedModifierRule
 		emit_changed()
 
 
-func passes_rule(grid: GaeaGrid, cell) -> bool:
+func passes_condition(grid: GaeaGrid, cell) -> bool:
 	var value: float = 0.0
 	if cell is Vector2i:
 		value = noise.get_noise_2dv(cell)
