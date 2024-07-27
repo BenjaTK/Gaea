@@ -14,7 +14,7 @@ func _ready() -> void:
 
 func update() -> void:
 	var noise: FastNoiseLite = null
-	if object is Modifier or object is NoiseRule:
+	if object is Modifier or object is NoiseCondition:
 		noise = object.get("noise") as FastNoiseLite
 	elif object is NoiseGeneratorData:
 		noise = object.settings.get("noise")

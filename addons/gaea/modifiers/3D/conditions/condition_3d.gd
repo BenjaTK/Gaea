@@ -1,5 +1,5 @@
-class_name AdvancedModifierRule3D
-extends AdvancedModifierRule
+class_name AdvancedModifierCondition3D
+extends AdvancedModifierCondition
 ## Abstract class for conditions used for [AdvancedModifier3D].
 
 

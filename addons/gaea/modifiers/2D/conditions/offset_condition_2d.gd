@@ -1,6 +1,6 @@
 @tool
-class_name OffsetRule2D
-extends AdvancedModifierRule2D
+class_name OffsetCondition2D
+extends AdvancedModifierCondition2D
 ## This condition is only met when a tile from [param ids] is found in an [param offset] from the target cell.
 
 
@@ -11,7 +11,7 @@ enum Offsets {
 	RIGHT, ## Place the [AdvancedModifier2D]'s tile only to the RIGHT of any tiles from [param ids].
 	CUSTOM ## Set your own [Vector2i] for the offset.
 	}
-## See [enum Offsets].If [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT], it will instead avoid placing the tile in the mentioned place.
+## See [enum Offsets].If [param mode] is set to [enum AdvancedModifierCondition.Mode.INVERT], it will instead avoid placing the tile in the mentioned place.
 @export var offset: Offsets :
 	set(value):
 		offset = value

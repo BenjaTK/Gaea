@@ -1,6 +1,6 @@
 @tool
-class_name NoiseRule
-extends AdvancedModifierRule
+class_name NoiseCondition
+extends AdvancedModifierCondition
 
 
 @export var noise: FastNoiseLite

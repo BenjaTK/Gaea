@@ -1,6 +1,6 @@
 @tool
-class_name OffsetRule3D
-extends AdvancedModifierRule3D
+class_name OffsetCondition3D
+extends AdvancedModifierCondition3D
 ## This condition is only met when a tile from [param ids] is found in an [param offset] from the target cell.
 
 
@@ -13,7 +13,7 @@ enum Offsets {
 	BACK, ## Place the [AdvancedModifier3D]'s tile only BEHIND any tiles from [param ids].
 	CUSTOM ## Set your own [Vector3i] for the offset.
 	}
-## See [enum Offsets]. If [param mode] is set to [enum AdvancedModifierRule.Mode.INVERT], it will instead avoid placing the tile in the mentioned place.
+## See [enum Offsets]. If [param mode] is set to [enum AdvancedModifierCondition.Mode.INVERT], it will instead avoid placing the tile in the mentioned place.
 @export var offset: Offsets :
 	set(value):
 		offset = value

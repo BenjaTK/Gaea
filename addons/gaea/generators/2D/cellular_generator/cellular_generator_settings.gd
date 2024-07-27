@@ -13,7 +13,7 @@ extends GeneratorSettings2D
 ## The amount of iterations the smoothing algorithm will do. Higher values lead to
 ## smoother terrain.[br][br]
 @export var smooth_iterations := 6
-@export_group("Rules")
+@export_group("Conditions")
 ## In the smoothing algorithm, if a floor tile has more empty
 ## neighbor tiles than [param max_floor_empty_neighbors], it will be removed.[br]
 ## Higher values means more floor, lower values can lead to empty maps.

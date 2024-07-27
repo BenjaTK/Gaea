@@ -1,6 +1,6 @@
 @tool
-class_name ChanceRule
-extends AdvancedModifierRule
+class_name ChanceCondition
+extends AdvancedModifierCondition
 
 
 @export_range(0.0, 100.0, 0.1, "suffix:%") var chance: float = 100.0

@@ -1,5 +1,5 @@
 @icon("condition.svg")
-class_name AdvancedModifierRule
+class_name AdvancedModifierCondition
 extends Resource
 ## Abstract class for conditions used for [AdvancedModifier2D] and [AdvancedModifier3D].
 
