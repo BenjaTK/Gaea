@@ -5,10 +5,10 @@ extends AdvancedModifierCondition2D
 
 
 enum Offsets {
-	ABOVE, ## Place the [AdvancedModifier2D]'s tile only ABOVE any tiles from [param ids].
-	BELOW, ## Place the [AdvancedModifier2D]'s tile only BELOW any tiles from [param ids].
-	LEFT, ## Place the [AdvancedModifier2D]'s tile only to the LEFT of any tiles from [param ids].
-	RIGHT, ## Place the [AdvancedModifier2D]'s tile only to the RIGHT of any tiles from [param ids].
+	BELOW, ## This condition is only met if the [TileInfo] [b]BELOW[/b] has an [param id] from [param ids].
+	ABOVE, ## This condition is only met if the [TileInfo] [b]ABOVE[/b] has an [param id] from [param ids].
+	LEFT, ## This condition is only met if the [TileInfo] to the [b]LEFT[/b] has an [param id] from [param ids].
+	RIGHT, ## This condition is only met if the [TileInfo] to the [b]RIGHT[/b] has an [param id] from [param ids].
 	CUSTOM ## Set your own [Vector2i] for the offset.
 	}
 ## See [enum Offsets].If [param mode] is set to [enum AdvancedModifierCondition.Mode.INVERT], it will instead avoid placing the tile in the mentioned place.
@@ -36,7 +36,7 @@ func is_condition_met(grid: GaeaGrid, cell: Vector2i) -> bool:
 			_offset = Vector2i.RIGHT
 
 	for layer in layers:
-		var value = grid.get_value(cell - _offset, layer)
+		var value = grid.get_value(cell + _offset, layer)
 		if value is TileInfo and value.id in ids:
 			return true
 	return false
