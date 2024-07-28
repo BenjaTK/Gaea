@@ -1,6 +1,6 @@
 # Modifiers
 
-**Modifiers** are similar to those in software like Blender. You add these to your GeneratorSettings, and they get applied after the generation is finished, giving you varied results and possibilities. 
+**Modifiers** are similar to those in software like Blender. You add these to your GeneratorSettings, and they get applied after the generation is finished, giving you varied results and possibilities.
 
 > **NOTE**: In Gaea, the modifiers' array order matters. Modifiers get applied in this order, so different sequences can give different results.
 
@@ -47,3 +47,7 @@ Replaces tiles in the map with another tile based on a noise heightmap.
 ### <img src="assets/icons/remove_disconnected.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Remove Disconnected
 
 Uses flood fill to remove all tiles that aren't connected to `starting_tile`.
+
+### <img src="assets/icons/advanced_modifier.svg" width="24" height="24" style="float:left;margin:0px 8px 0px 0px"> Advanced Modifier <sup>2D/3D</sup>
+
+Lets you basically make any modifier you want. Has a list of **conditions**. Every cell it tries to modify, it will check that all conditions are met, and only then will it (re)place that cell with the chosen `TileInfo`. See [the tutorial](tutorials/advanced_modifier.md) on how to use it.
