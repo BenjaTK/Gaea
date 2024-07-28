@@ -8,11 +8,11 @@
 
 Modifiers can be filtered. This means it will only modify certain tiles. 
 
-`filter_type`: can be NONE, BLACKLIST, WHITELIST, or ONLY_EMPTY_TILES.
+`filter_type`: can be NONE, BLACKLIST, WHITELIST, or ONLY_EMPTY_CELLS.
 
 `filter_ids`: in BLACKLIST, it will NOT attempt to modify tiles with an `id` that can be found in this list (`id`s are strings that make identifying `TileInfo`s easier, see [Gaea's Resources](resources.md)). WHITELIST will invert this logic. _For example, using a `NoisePainter` to only place gold ore in tiles with the `id` "stone"._
 
-`filter_layers`: it will only check in these layers for the `id`s mentioned above or, if `filter_type` is ONLY_EMPTY_TILES, for an empty tile. Leaving this array empty, the filtering will check for all layers.
+`filter_layers`: it will only check in these layers for the `id`s mentioned above or, if `filter_type` is ONLY_EMPTY_CELLS, for an empty cell. Leaving this array empty, the filtering will check for all layers.
 
 ## List
 
