@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HeightmapGenerator2DSettings" load_steps=35 format=3 uid="uid://db18nmw5jkbtc"]
+[gd_resource type="Resource" script_class="HeightmapGenerator2DSettings" load_steps=31 format=3 uid="uid://db18nmw5jkbtc"]
 
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/heightmap_painter.gd" id="1_qj0ns"]
 [ext_resource type="Script" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="2_6f082"]
@@ -8,8 +8,6 @@
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/conditions/offset_condition_2d.gd" id="5_yd776"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/conditions/chance_condition.gd" id="6_ei8am"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/advanced_modifier.gd" id="7_ei7y7"]
-[ext_resource type="Script" path="res://addons/gaea/modifiers/conditions/condition.gd" id="7_r5q26"]
-[ext_resource type="Script" path="res://addons/gaea/modifiers/2D/conditions/condition_2d.gd" id="8_k1dx6"]
 [ext_resource type="Script" path="res://addons/gaea/tile_info/random_tile_info.gd" id="8_uaynf"]
 
 [sub_resource type="Resource" id="Resource_6kmi4"]
@@ -153,14 +151,6 @@ script = ExtResource("6_ei8am")
 chance = 50.0
 mode = 0
 
-[sub_resource type="Resource" id="Resource_28q42"]
-script = ExtResource("7_r5q26")
-mode = 0
-
-[sub_resource type="Resource" id="Resource_dvg70"]
-script = ExtResource("8_k1dx6")
-mode = 0
-
 [sub_resource type="Resource" id="Resource_a6kch"]
 resource_name = "Tree"
 script = ExtResource("2_6f082")
@@ -207,7 +197,7 @@ layer = 0
 [sub_resource type="Resource" id="Resource_f4y1w"]
 resource_name = "Vegetation"
 script = ExtResource("7_ei7y7")
-conditions = Array[ExtResource("7_r5q26")]([SubResource("Resource_06osm"), SubResource("Resource_g0joc"), SubResource("Resource_28q42"), SubResource("Resource_dvg70")])
+conditions = Array[Resource("res://addons/gaea/modifiers/conditions/condition.gd")]([SubResource("Resource_06osm"), SubResource("Resource_g0joc")])
 tile = SubResource("Resource_piada")
 salt = 3487287303
 enabled = true
