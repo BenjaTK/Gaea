@@ -1,20 +1,23 @@
-[gd_resource type="Resource" script_class="HeightmapGenerator2DSettings" load_steps=20 format=3 uid="uid://db18nmw5jkbtc"]
+[gd_resource type="Resource" script_class="HeightmapGenerator2DSettings" load_steps=31 format=3 uid="uid://db18nmw5jkbtc"]
 
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/heightmap_painter.gd" id="1_qj0ns"]
 [ext_resource type="Script" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="2_6f082"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/carver.gd" id="3_w1n11"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/noise_painter.gd" id="4_xyqnb"]
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/heightmap_generator/heightmap_generator_2d_settings.gd" id="5_haojk"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/2D/conditions/offset_condition_2d.gd" id="5_yd776"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/conditions/chance_condition.gd" id="6_ei8am"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/2D/advanced_modifier.gd" id="7_ei7y7"]
+[ext_resource type="Script" path="res://addons/gaea/tile_info/random_tile_info.gd" id="8_uaynf"]
 
 [sub_resource type="Resource" id="Resource_6kmi4"]
-resource_name = "Stone"
 script = ExtResource("2_6f082")
 type = 0
 tilemap_layer = 0
 source_id = 1
 atlas_coord = Vector2i(0, 0)
 alternative_tile = 0
-id = "stone"
+id = ""
 layer = 0
 
 [sub_resource type="Resource" id="Resource_pu43q"]
@@ -53,7 +56,7 @@ filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1mckf"]
 noise_type = 3
-seed = 1045566220
+seed = -764944331
 frequency = 0.012
 fractal_type = 2
 fractal_octaves = 3
@@ -74,7 +77,7 @@ affected_layers = Array[int]([0])
 filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_kyspj"]
-seed = 486061723
+seed = -1324448828
 frequency = 0.0617
 fractal_octaves = 2
 fractal_lacunarity = 2.95
@@ -102,12 +105,10 @@ bounds_max = Vector2(0, 0)
 bounds_min = Vector2(0, 0)
 salt = 1908549200
 enabled = true
-filter_type = 2
-filter_ids = Array[String](["stone"])
-filter_layers = Array[int]([])
+filter_type = 0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vkmxs"]
-seed = 479885180
+seed = -1330625371
 frequency = 0.0511
 fractal_lacunarity = 0.565
 domain_warp_type = 2
@@ -136,21 +137,85 @@ bounds_max = Vector2(0, 0)
 bounds_min = Vector2(0, 0)
 salt = 1902372657
 enabled = true
-filter_type = 2
-filter_ids = Array[String](["stone"])
-filter_layers = Array[int]([])
+filter_type = 0
+
+[sub_resource type="Resource" id="Resource_06osm"]
+script = ExtResource("5_yd776")
+offset = 0
+ids = Array[StringName]([&"ground"])
+layers = Array[int]([0])
+mode = 0
+
+[sub_resource type="Resource" id="Resource_g0joc"]
+script = ExtResource("6_ei8am")
+chance = 50.0
+mode = 0
+
+[sub_resource type="Resource" id="Resource_a6kch"]
+resource_name = "Tree"
+script = ExtResource("2_6f082")
+type = 0
+tilemap_layer = 0
+source_id = 2
+atlas_coord = Vector2i(0, 0)
+alternative_tile = 1
+id = "tree"
+layer = 0
+
+[sub_resource type="Resource" id="Resource_6jmcy"]
+resource_name = "Grass"
+script = ExtResource("2_6f082")
+type = 0
+tilemap_layer = 0
+source_id = 3
+atlas_coord = Vector2i(4, 6)
+alternative_tile = 0
+id = "grass"
+layer = 0
+
+[sub_resource type="Resource" id="Resource_nbea2"]
+resource_name = "TallGrass"
+script = ExtResource("2_6f082")
+type = 0
+tilemap_layer = 0
+source_id = 3
+atlas_coord = Vector2i(5, 6)
+alternative_tile = 0
+id = "tall_grass"
+layer = 0
+
+[sub_resource type="Resource" id="Resource_piada"]
+script = ExtResource("8_uaynf")
+tiles = Array[Resource("res://addons/gaea/tile_info/tile_info.gd")]([SubResource("Resource_a6kch"), SubResource("Resource_6jmcy"), SubResource("Resource_nbea2")])
+use_weights = true
+weight_0 = 0.4
+weight_1 = 1.0
+weight_2 = 1.0
+id = ""
+layer = 0
+
+[sub_resource type="Resource" id="Resource_f4y1w"]
+resource_name = "Vegetation"
+script = ExtResource("7_ei7y7")
+conditions = Array[Resource("res://addons/gaea/modifiers/conditions/condition.gd")]([SubResource("Resource_06osm"), SubResource("Resource_g0joc")])
+tile = SubResource("Resource_piada")
+salt = 3487287303
+enabled = true
+affected_layers = Array[int]([0])
+filter_type = 3
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
-seed = -1422487477
+seed = 1061969268
 
 [sub_resource type="Resource" id="Resource_hitrj"]
+resource_name = "Ground"
 script = ExtResource("2_6f082")
 type = 1
 tilemap_layer = 0
 terrain_set = 0
 terrain = 0
-id = ""
+id = "ground"
 layer = 0
 
 [resource]
@@ -163,4 +228,4 @@ world_length = 128
 height_offset = 160
 height_intensity = 25
 min_height = -32
-modifiers = Array[Resource("res://addons/gaea/modifiers/2D/modifier_2d.gd")]([SubResource("Resource_pu43q"), SubResource("Resource_855mm"), SubResource("Resource_q887n"), SubResource("Resource_2w3lo"), SubResource("Resource_08u4d")])
+modifiers = Array[Resource("res://addons/gaea/modifiers/2D/modifier_2d.gd")]([SubResource("Resource_pu43q"), SubResource("Resource_855mm"), SubResource("Resource_q887n"), SubResource("Resource_2w3lo"), SubResource("Resource_08u4d"), SubResource("Resource_f4y1w")])

@@ -4,6 +4,7 @@
   * [⭐ Getting Started](/tutorials/getting_started.md)
   * [🗺 Chunk Generation](/tutorials/chunk_generation.md)
   * [⚡ Lightning Fast Generation](/tutorials/optimization.md)
+  * [⚙️ Advanced Modifier](/tutorials/advanced_modifier.md)
 * [🧠 Generators](/generators/)
   * [🚶 Walker](/generators/walker.md)
   * [🦠 Cellular](/generators/cellular.md)

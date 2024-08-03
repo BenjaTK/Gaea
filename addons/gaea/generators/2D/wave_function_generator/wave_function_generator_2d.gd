@@ -3,7 +3,7 @@
 class_name WaveFunctionGenerator2D
 extends GaeaGenerator2D
 ## @experimental
-## Generates a grid using a set of rules for which tiles to place
+## Generates a grid using a set of conditions for which tiles to place
 ## and which neighbors those tiles can have.
 ## @tutorial(An explanation of the algorithm and inspiration for this implementation by Martin Donald): https://www.youtube.com/watch?v=2SuvO4Gi7uY
 
