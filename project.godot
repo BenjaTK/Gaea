@@ -16,6 +16,10 @@ run/main_scene="res://scenes/test scene/test_scene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
+[debug]
+
+gdscript/warnings/exclude_addons=false
+
 [display]
 
 window/size/viewport_width=640

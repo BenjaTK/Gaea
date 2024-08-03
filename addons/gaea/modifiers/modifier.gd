@@ -35,6 +35,12 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
 ## Returns true if the [param tile_info] can be modified according
 ## to the filters.
 func _passes_filter(grid: GaeaGrid, cell) -> bool:
+	if filter_type == FilterType.ONLY_EMPTY_TILES:
+		for layer in grid.get_layer_count():
+			if grid.get_value(cell, layer) != null:
+				return false
+		return true
+
 	if filter_type == FilterType.NONE:
 		return true
 

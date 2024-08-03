@@ -37,7 +37,7 @@ extends ChunkAwareModifier3D
 func _apply_area(area: AABB, grid: GaeaGrid, _generator: GaeaGenerator) -> void:
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
-			for z in range(area.position.x, area.end.z + 1):
+			for z in range(area.position.z, area.end.z + 1):
 				for layer in affected_layers:
 					var cell := Vector3i(x, y, z)
 					if not grid.has_cell(cell, layer) or _is_out_of_bounds(cell):
