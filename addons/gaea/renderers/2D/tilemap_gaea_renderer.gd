@@ -64,7 +64,7 @@ func _draw_area(area: Rect2i) -> void:
 	for tile_info in terrains:
 		tile_map.set_cells_terrain_connect.call_deferred(
 			tile_info.tilemap_layer, terrains[tile_info],
-			tile_info.terrain_set, tile_info.terrain
+			tile_info.terrain_set, tile_info.terrain, false
 		)
 
 	(func(): area_rendered.emit(area)).call_deferred()
