@@ -203,6 +203,7 @@ salt = 3487287303
 enabled = true
 affected_layers = Array[int]([0])
 filter_type = 3
+filter_layers = Array[int]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mwtbk"]
 noise_type = 3
@@ -228,4 +229,5 @@ world_length = 128
 height_offset = 160
 height_intensity = 25
 min_height = -32
+air_layer = true
 modifiers = Array[Resource("res://addons/gaea/modifiers/2D/modifier_2d.gd")]([SubResource("Resource_pu43q"), SubResource("Resource_855mm"), SubResource("Resource_q887n"), SubResource("Resource_2w3lo"), SubResource("Resource_08u4d"), SubResource("Resource_f4y1w")])
