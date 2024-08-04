@@ -18,6 +18,8 @@ extends GeneratorSettings3D
 @export var height_intensity := 20
 ## Negative values means the HeightmapGenerator will go below y=0.
 @export var min_height := 0
+## If [code]true[/code], adds a layer of air ([code]null[/code] tiles above the generated terrain.
+@export var air_layer := true
 @export_group("Falloff", "falloff_")
 ## Enables the usage of a [FalloffMap], which makes tiles
 ## farther away from the center be lower in the heightmap,
