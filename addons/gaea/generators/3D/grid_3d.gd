@@ -70,7 +70,7 @@ func erasexyz(x: int, y: int, z: int, layer: int) -> void:
 ## Returns [code]true[/code] if the cell at the given position has a non-existing neighbor. Doesn't include diagonals.
 func has_empty_neighbor(pos: Vector3i, layer: int) -> bool:
 	for neighbor in NEIGHBORS:
-		if not has_cell(pos + neighbor, layer):
+		if not has_cell(pos + neighbor, layer) or get_value(pos + neighbor, layer) == null:
 			return true
 
 	return false

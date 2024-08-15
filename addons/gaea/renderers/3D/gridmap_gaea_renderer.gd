@@ -27,7 +27,7 @@ func _draw_area(area: AABB) -> void:
 				if erase_empty_tiles:
 					var has_cell: bool = false
 					for layer in range(generator.grid.get_layer_count()):
-						if generator.grid.has_cell(cell, layer):
+						if generator.grid.has_cell(cell, layer) and generator.grid.get_value(cell, layer) != null:
 							has_cell = true
 							break
 

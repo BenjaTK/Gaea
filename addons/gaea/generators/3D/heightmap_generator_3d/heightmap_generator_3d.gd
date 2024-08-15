@@ -79,7 +79,7 @@ func _set_grid() -> void:
 			max_height = maxi(
 				floor(settings.noise.get_noise_2d(x, z) * settings.height_intensity + settings.height_offset),
 				max_height
-			)
+			) + 1
 
 	var area := AABB(
 		# starting point
@@ -114,5 +114,5 @@ func _set_grid_area(area: AABB) -> void:
 				if y <= height and y >= settings.min_height:
 					grid.set_valuexyz(x, y, z, settings.tile)
 
-				if y == height and settings.air_layer:
+				elif y == height + 1 and settings.air_layer:
 					grid.set_valuexyz(x, y, z, null)
