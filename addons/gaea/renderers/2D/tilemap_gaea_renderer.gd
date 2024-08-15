@@ -6,7 +6,16 @@ extends GaeaRenderer2D
 ## Takes [TilemapTileInfo] to determine which tile to place
 ## in every cell.
 
+enum NodeType {TILEMAP_LAYERS, TILEMAP}
 
+@export var node_type: NodeType = NodeType.TILEMAP_LAYERS :
+	set(value):
+		node_type = value
+		notify_property_list_changed()
+@export var tile_map_layers: Array[TileMapLayer] :
+	set(value):
+		tile_map_layers = value
+		update_configuration_warnings()
 @export var tile_map: TileMap :
 	set(value):
 		tile_map = value
@@ -29,6 +38,13 @@ func _ready() -> void:
 func _draw_area(area: Rect2i) -> void:
 	var terrains: Dictionary
 
+	if not is_instance_valid(tile_map) and node_type == NodeType.TILEMAP:
+		push_error("Invalid TileMap, can't draw area.")
+		return
+	elif tile_map_layers.is_empty() and node_type == NodeType.TILEMAP_LAYERS:
+		push_error("No TileMapLayers assigned, can't draw area.")
+		return
+
 	for x in range(area.position.x, area.end.x + 1):
 		for y in range(area.position.y, area.end.y + 1):
 			var tile_position := Vector2i(x, y)
@@ -40,8 +56,8 @@ func _draw_area(area: Rect2i) -> void:
 						break
 
 				if not has_cell_in_position:
-					for l in range(tile_map.get_layers_count()):
-						tile_map.call_thread_safe("erase_cell", l, Vector2i(x, y)) # thread_safe paces these calls out when threaded.
+					for l in range(_get_tilemap_layers_count()):
+						_erase_tilemap_cell(l, Vector2i(x, y))
 					continue
 
 			for layer in range(generator.grid.get_layer_count()):
@@ -53,10 +69,8 @@ func _draw_area(area: Rect2i) -> void:
 
 				match tile_info.type:
 					TilemapTileInfo.Type.SINGLE_CELL:
-						tile_map.call_thread_safe("set_cell", # thread_safe paces these calls out when threaded.
-							tile_info.tilemap_layer, tile, tile_info.source_id,
-							tile_info.atlas_coord, tile_info.alternative_tile
-						)
+						_set_tile(tile_position, tile_info)
+
 					TilemapTileInfo.Type.TERRAIN:
 						if not terrains.has(tile_info):
 							terrains[tile_info] = [tile]
@@ -64,26 +78,79 @@ func _draw_area(area: Rect2i) -> void:
 							terrains[tile_info].append(tile)
 
 	for tile_info in terrains:
-		tile_map.set_cells_terrain_connect.call_deferred(
-			tile_info.tilemap_layer, terrains[tile_info],
-			tile_info.terrain_set, tile_info.terrain, !terrain_gap_fix
-		)
+		_set_terrain(terrains[tile_info], tile_info)
 
 	(func(): area_rendered.emit(area)).call_deferred()
 
 
 func _draw() -> void:
 	if clear_tile_map_on_draw:
-		tile_map.clear()
+		if node_type == NodeType.TILEMAP:
+			tile_map.clear()
+		else:
+			for layer in tile_map_layers:
+				layer.clear()
 	super._draw()
 
+
+func _set_tile(cell: Vector2i, tile_info: TilemapTileInfo) -> void:
+	match node_type:
+		NodeType.TILEMAP:
+			tile_map.call_thread_safe("set_cell", # thread_safe paces these calls out when threaded.
+				tile_info.tilemap_layer, cell, tile_info.source_id,
+				tile_info.atlas_coord, tile_info.alternative_tile
+			)
+		NodeType.TILEMAP_LAYERS:
+			tile_map_layers[tile_info.tilemap_layer].call_thread_safe("set_cell",
+				cell, tile_info.source_id,
+				tile_info.atlas_coord, tile_info.alternative_tile
+			)
+
+
+func _set_terrain(cells: Array, tile_info: TilemapTileInfo) -> void:
+	match node_type:
+		NodeType.TILEMAP:
+			tile_map.set_cells_terrain_connect.call_deferred(
+					tile_info.tilemap_layer, cells,
+					tile_info.terrain_set, tile_info.terrain, !terrain_gap_fix
+				)
+		NodeType.TILEMAP_LAYERS:
+			tile_map_layers[tile_info.tilemap_layer].set_cells_terrain_connect.call_deferred(
+					cells, tile_info.terrain_set, tile_info.terrain, !terrain_gap_fix
+				)
+
+
+func _get_tilemap_layers_count() -> int:
+	match node_type:
+		NodeType.TILEMAP:
+			return tile_map.get_layers_count()
+		NodeType.TILEMAP_LAYERS:
+			return tile_map_layers.size()
+	return 0
+
+
+func _erase_tilemap_cell(layer: int, cell: Vector2i) -> void:
+	match node_type:
+		NodeType.TILEMAP:
+			tile_map.call_thread_safe("erase_cell", layer, cell) # thread_safe paces these calls out when threaded.
+		NodeType.TILEMAP_LAYERS:
+			tile_map_layers[layer].call_thread_safe("erase_cell", cell)
 
 func _get_configuration_warnings() -> PackedStringArray:
 	var warnings: PackedStringArray
 
 	warnings.append_array(super._get_configuration_warnings())
 
-	if not is_instance_valid(tile_map):
+	if not is_instance_valid(tile_map) and node_type == NodeType.TILEMAP:
 		warnings.append("Needs a TileMap to work.")
+	elif tile_map_layers.is_empty() and node_type == NodeType.TILEMAP_LAYERS:
+		warnings.append("Needs at least one TileMapLayer to work.")
 
 	return warnings
+
+
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "tile_map" and node_type == NodeType.TILEMAP_LAYERS:
+		property.usage = PROPERTY_USAGE_NONE
+	elif property.name == "tile_map_layers" and node_type == NodeType.TILEMAP:
+		property.usage = PROPERTY_USAGE_NONE

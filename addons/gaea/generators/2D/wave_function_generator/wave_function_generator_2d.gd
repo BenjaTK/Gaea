@@ -124,7 +124,7 @@ func _propagate(coords: Vector2i) -> void:
 
 func _get_possible_neighbors(coords: Vector2i, direction: Vector2i) -> Array[WaveFunction2DEntry]:
 	var possible_neighbors: Array[WaveFunction2DEntry]
-	var dir_key := ADJACENT_NEIGHBORS.find_key(direction)
+	var dir_key = ADJACENT_NEIGHBORS.find_key(direction)
 	for entry in _wave_function[coords]:
 		for other_entry in _wave_function[coords + direction]:
 			if other_entry.tile_info.id in entry.get("neighbors_%s" % dir_key):

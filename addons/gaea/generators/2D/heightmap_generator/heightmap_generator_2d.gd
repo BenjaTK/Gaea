@@ -106,5 +106,3 @@ func _set_grid_area(area: Rect2i) -> void:
 				grid.set_valuexy(x, y, settings.tile)
 			elif y == -height - 1 and settings.air_layer:
 				grid.set_valuexy(x, y, null)
-
-
