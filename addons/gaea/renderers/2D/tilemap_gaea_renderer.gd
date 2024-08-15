@@ -14,6 +14,8 @@ extends GaeaRenderer2D
 @export var clear_tile_map_on_draw: bool = true
 ## Erases the cell when an empty tile is found in all layers. Recommended: [code]true[/code].
 @export var erase_empty_tiles: bool = true
+## Set this to [code]true[/code] if you have gaps between your terrains. Can cause problems.
+@export var terrain_gap_fix: bool = false
 
 
 func _ready() -> void:
@@ -64,7 +66,7 @@ func _draw_area(area: Rect2i) -> void:
 	for tile_info in terrains:
 		tile_map.set_cells_terrain_connect.call_deferred(
 			tile_info.tilemap_layer, terrains[tile_info],
-			tile_info.terrain_set, tile_info.terrain
+			tile_info.terrain_set, tile_info.terrain, !terrain_gap_fix
 		)
 
 	(func(): area_rendered.emit(area)).call_deferred()
