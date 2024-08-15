@@ -6,7 +6,10 @@ extends GaeaRenderer2D
 ## Takes [TilemapTileInfo] to determine which tile to place
 ## in every cell.
 
-enum NodeType {TILEMAP_LAYERS, TILEMAP}
+enum NodeType {
+	TILEMAP_LAYERS, ## Use [TileMapLayer]s, with an array of them determining which one is which.
+	TILEMAP ## Use a single [TileMap] node (not recommended by Godot).
+}
 
 @export var node_type: NodeType = NodeType.TILEMAP_LAYERS :
 	set(value):
