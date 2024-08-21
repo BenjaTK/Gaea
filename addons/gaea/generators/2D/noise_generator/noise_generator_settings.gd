@@ -16,7 +16,10 @@ extends GeneratorSettings2D
 			tile_data.settings = self
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 ## Infinite worlds only work with a [ChunkLoader].
-@export var infinite: bool = false
+@export var infinite: bool = false :
+	set(value):
+		infinite = value
+		notify_property_list_changed()
 @export var world_size: Vector2i = Vector2i(256, 256):
 	set(value):
 		world_size = value
@@ -35,3 +38,8 @@ extends GeneratorSettings2D
 		falloff_map = value
 		if falloff_map != null:
 			falloff_map.size = world_size
+
+
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "world_size" and infinite == true:
+		property.usage = PROPERTY_USAGE_NONE

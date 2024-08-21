@@ -6,7 +6,10 @@ extends GeneratorSettings2D
 @export var tile: TileInfo
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 ## Infinite worlds only work with a [ChunkLoader2D].
-@export var infinite := false
+@export var infinite := false :
+	set(value):
+		infinite = value
+		notify_property_list_changed()
 @export var world_length := 128
 ## The medium height at which the heightmap will start displacing from y=0.
 ## The heightmap displaces this height by a random number
@@ -19,3 +22,8 @@ extends GeneratorSettings2D
 @export var min_height := 0
 ## If [code]true[/code], adds a layer of air ([code]null[/code] tiles above the generated terrain.
 @export var air_layer := true
+
+
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "world_size" and infinite == true:
+		property.usage = PROPERTY_USAGE_NONE
