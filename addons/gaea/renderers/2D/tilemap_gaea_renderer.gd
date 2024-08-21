@@ -32,10 +32,26 @@ enum NodeType {
 
 func _ready() -> void:
 	super()
-	if Vector2i(Vector2(tile_map.tile_set.tile_size) * tile_map.scale) != generator.tile_size:
-		push_warning("TileMap's tile size doesn't match with generator's tile size, can cause generation issues.
-					The generator's tile size has been set to the TileMap's tile size.")
-		generator.tile_size = Vector2(tile_map.tile_set.tile_size) * tile_map.scale
+	match node_type:
+		NodeType.TILEMAP:
+			if not is_instance_valid(tile_map):
+				push_error("TilemapGaeaRenderer needs TileMap to work.")
+				return
+
+			if Vector2i(Vector2(tile_map.tile_set.tile_size) * tile_map.scale) != generator.tile_size:
+				push_warning("TileMap's tile size doesn't match with generator's tile size, can cause generation issues.
+							The generator's tile size has been set to the TileMap's tile size.")
+				generator.tile_size = Vector2(tile_map.tile_set.tile_size) * tile_map.scale
+		NodeType.TILEMAP_LAYERS:
+			if tile_map_layers.is_empty():
+				push_error("TilemapGaeaRenderer needs at least one TileMapLayer to work.")
+				return
+
+			var layer: TileMapLayer = tile_map_layers.front()
+			if Vector2i(Vector2(layer.tile_set.tile_size) * layer.scale) != generator.tile_size:
+				push_warning("The TileMapLayer's tile size doesn't match with generator's tile size, can cause generation issues.
+							The generator's tile size has been set to the layer's tile size. (Only layer 0 checked)")
+				generator.tile_size = Vector2(layer.tile_set.tile_size) * layer.scale
 
 
 func _draw_area(area: Rect2i) -> void:
