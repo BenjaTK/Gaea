@@ -6,7 +6,10 @@ extends GeneratorSettings3D
 @export var tile: TileInfo
 @export var noise: FastNoiseLite = FastNoiseLite.new()
 ## Infinite worlds only work with a [ChunkLoader3D].
-@export var infinite := false
+@export var infinite := false :
+	set(value):
+		infinite = value
+		notify_property_list_changed()
 ## The size in the x and z axis.
 @export var world_size := Vector2i(16, 16)
 ## The medium height at which the heightmap will start displacing from y=0.
@@ -33,3 +36,8 @@ extends GeneratorSettings3D
 		falloff_map = value
 		if falloff_map != null:
 			falloff_map.size = world_size
+
+
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "world_size" and infinite == true:
+		property.usage = PROPERTY_USAGE_NONE
