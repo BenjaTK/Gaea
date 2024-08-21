@@ -34,7 +34,7 @@ Once this node has been added to the tree, you need to assign the `Generator` an
 
 ![Set the settings' infinite property to true](../assets/tutorials/chunk_generation/infinite.png)
 
-It's also important that you set the settings `infinite` property to `true`!
+It's also important that you set the settings' `infinite` property to `true`!
 
 After this has been done ... **_VOILÀ!_** You now have Chunk Generation enabled for your 2D world! Once this is done, you can play around with the settings of the ChunkLoader to tune it to your liking!
 
