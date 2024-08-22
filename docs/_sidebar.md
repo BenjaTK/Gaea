@@ -2,6 +2,7 @@
 * [✨ Gaea's Resources](/resources.md)
 * [💡 Tutorials](/tutorials/)
   * [⭐ Getting Started](/tutorials/getting_started.md)
+  * [🌲 Side-view terrain](/tutorials/heightmap_generator.md)
   * [🗺 Chunk Generation](/tutorials/chunk_generation.md)
   * [⚡ Lightning Fast Generation](/tutorials/optimization.md)
   * [⚙️ Advanced Modifier](/tutorials/advanced_modifier.md)
