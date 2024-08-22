@@ -1,6 +1,6 @@
 # Gaea's resources
 
-Gaea takes advantage of Godot's **resources**. In this addon, they're used for the generators' settings, telling the generators which tiles from the TileMap to use, and for the modifiers.
+Gaea takes advantage of Godot's **resources**. In this addon, they're used for the generators' settings, to hold data for each cell in the grid, and for the modifiers.
 
 ## GaeaGrid
 

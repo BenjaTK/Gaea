@@ -702,9 +702,11 @@ sources/3 = SubResource("TileSetAtlasSource_x2mok")
 [node name="WalkerGenerator" type="Node2D" parent="."]
 script = ExtResource("1_s6jhf")
 
-[node name="TileMap" type="TileMap" parent="."]
+[node name="TileMap" type="Node2D" parent="."]
+
+[node name="Layer0" type="TileMapLayer" parent="TileMap"]
+use_parent_material = true
 tile_set = SubResource("TileSet_vnxuo")
-format = 2
 
 [node name="TilemapGaeaRenderer" type="Node" parent="."]
 script = ExtResource("4_1xbqd")

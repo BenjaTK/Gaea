@@ -12,7 +12,7 @@ In this tutorial, you'll learn how to make basic generation of a dungeon akin to
 
 Gaea comes with a bunch of different **generator nodes**. To make a dungeon, we'll use the [WalkerGenerator](/generators/walker.md), inspired by the algorithm used in Nuclear Throne.
 
-> You can use the scene at `res://scenes/tutorials/getting_started/getting_started.tscn` to follow this tutorial. It starts with WalkerGenerator, TilemapGaeaRenderer and TileMap nodes:
+> You can use the scene at `res://scenes/tutorials/getting_started/getting_started.tscn` to follow this tutorial. It starts with WalkerGenerator, TilemapGaeaRenderer and TileMapLayer nodes:
 > 
 > ![Scene tree](../assets/tutorials/getting_started/scene-tree.png)
 
@@ -21,6 +21,10 @@ Gaea comes with a bunch of different **generator nodes**. To make a dungeon, we'
 To see the generation, you'll have to render it with a `GaeaRenderer` node. In this case, we will use a `TilemapGaeaRenderer`, which uses a `TileMap` to draw the generator's grid. Set up its references to the `TileMap` and the `WalkerGenerator`.
 
 ![Referencing nodes](../assets/tutorials/getting_started/referencing_nodes.gif)
+
+> In Godot 4.3, you'll probably want to use `TileMapLayer`s instead. This is also the default in Gaea from that version.
+![Assinging TileMapLayer nodes](../assets/tutorials/getting_started/tilemap-layers.gif)
+
 
 ### GeneratorSettings
 

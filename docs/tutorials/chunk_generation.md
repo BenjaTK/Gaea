@@ -12,11 +12,11 @@ In this quick tutorial, you'll learn how to enable chunk generation to make it s
 > 
 > If you don't have an understanding of these topics, see [this lovely tutorial](https://www.youtube.com/watch?v=oB1xsCcO9wI) by [DevWorm](https://www.youtube.com/@dev-worm)!
 
-Gaea comes pre-packaged with multiple different generators, but for this example, we'll be using the `NoiseGenerator` node, the `TilemapGaeaRenderer` node, the Godot built-in `TileMap` node, and a `CharacterBody2D` node, which will represent our Player!
+Gaea comes pre-packaged with multiple different generators, but for this example, we'll be using the `NoiseGenerator` node, the `TilemapGaeaRenderer` node, the Godot built-in `TileMapLayer`s (or `TileMap`, if you prefer that), and a `CharacterBody2D` node, which will represent our Player!
 
 > Only certain generators work with chunk loading. These are the `ChunkAwareGenerator`s, such as the noise or heightmap generators. `ChunkAwareGenerator` is an abstract class that you can extend to make your own generators, but shouldn't be used on its own.
 
-![Nodes needed for the Tutorial](../assets/tutorials/chunk_generation/chunk-generation-nodes.png)
+![Nodes needed for the Tutorial](../assets/tutorials/chunk_generation/chunk-generation-loader.png)
 
 ### Setup
 
@@ -26,7 +26,7 @@ Once you have all the pre-requisite nodes mentioned above setup in your scene, y
 
 After finding this node, you can add it anywhere in the scene tree, in this instance, I've added it as a child node of the `NoiseGenerator`
 
-![Add the Chunk](..%2Fassets%2Ftutorials%2Fchunk_generation%2Fchunk-generation-loader.png)
+![Add the Chunk](../assets/tutorials/chunk_generation/chunk-generation-nodes.png)
 
 Once this node has been added to the tree, you need to assign the `Generator` and `Actor` nodes to the `ChunkLoader2D`, these map to the `NoiseGenerator` and `CharacterBody2D` nodes mentioned earlier!
 
