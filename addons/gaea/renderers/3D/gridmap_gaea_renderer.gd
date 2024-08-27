@@ -12,6 +12,11 @@ extends GaeaRenderer3D
 
 func _ready() -> void:
 	super()
+
+    if !generator:
+		push_error("GridmapGaeaRenderer needs a GaeaGenerator node assigned in its exports.")
+		return
+
 	if grid_map.cell_size * grid_map.scale != generator.tile_size:
 		push_warning("GridMap's cell size doesn't match with generator's tile size, can cause generation issues.
 					The generator's tile size has been set to the GridMap's cell size.")
