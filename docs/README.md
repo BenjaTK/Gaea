@@ -8,9 +8,9 @@
 > Join the **Gamedev Graveyard** discord server to get notified about Gaea and hang out with other devs.
 
 
-Gaea is an **add-on for Godot 4.2***, designed to empower your project with advanced **procedural generation** capabilities.
+Gaea is an **add-on for Godot 4.3***, designed to empower your project with advanced **procedural generation** capabilities.
 
-*For 4.0-4.1, use v0.6.2 or lower.
+*For 4.2, use v1.1.3 or lower. For 4.0-4.1, use v0.6.2 or lower.
 
 > **NOTE:** Gaea is currently in early development, and may not yet be optimized for larger, more complex projects. Stay tuned for ongoing improvements and enhancements!
 
