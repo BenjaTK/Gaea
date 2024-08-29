@@ -100,4 +100,3 @@ func _set_grid_area(rect: Rect2i) -> void:
 				## Check if the noise is within the threshold
 				if noise >= tile_data.min and noise <= tile_data.max:
 					grid.set_valuexy(x, y, tile_data.tile)
-					break
