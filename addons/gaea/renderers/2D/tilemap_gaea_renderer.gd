@@ -31,6 +31,8 @@ enum NodeType {
 
 
 func _ready() -> void:
+	super()
+
 	# generators are always required here, this warning serves purpose for both tilemap types
 	if !generator:
 		push_error("TilemapGaeaRenderer needs a GaeaGenerator node assigned in its exports.")
