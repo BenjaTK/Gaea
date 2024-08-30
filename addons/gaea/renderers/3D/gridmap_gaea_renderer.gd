@@ -11,6 +11,8 @@ extends GaeaRenderer3D
 
 
 func _ready() -> void:
+	super()
+
 	if !generator:
 		push_error("GridmapGaeaRenderer needs a GaeaGenerator node assigned in its exports.")
 		return
