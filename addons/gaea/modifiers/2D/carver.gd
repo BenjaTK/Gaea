@@ -53,4 +53,5 @@ func _apply_area(area: Rect2i, grid: GaeaGrid, _generator: GaeaGenerator) -> voi
 func _is_out_of_bounds(cell: Vector2i) -> bool:
 	if not bounds_enabled:
 		return false
-	return cell.x > bounds_max.x or cell.y > bounds_max.y or cell.x < bounds_min.x or cell.y < bounds_min.y
+	#return (cell.x > bounds_max.x) or (cell.y > bounds_max.y) or (cell.x < bounds_min.x) or (cell.y < bounds_min.y)
+	return (cell.x > bounds_max.x) or (cell.y < bounds_max.y) or (cell.x < bounds_min.x) or (cell.y > bounds_min.y)
