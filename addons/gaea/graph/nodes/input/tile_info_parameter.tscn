@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://p8jkpnrqbu8i" path="res://addons/gaea/graph/parameter_node.tscn" id="1_om6eh"]
 
 [node name="ParameterNode" instance=ExtResource("1_om6eh")]
+slot/1/left_color = Color(0.611765, 0.6, 0.619608, 1)
+slot/1/right_color = Color(1, 0.270588, 0.270588, 1)
 type = 24
 hint = 17
 hint_string = "TileInfo"

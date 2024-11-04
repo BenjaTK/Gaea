@@ -43,18 +43,11 @@ func set_param_value(new_value: Variant) -> void:
 	pass
 
 
-func disable() -> void:
-	pass
-
-
-func enable() -> void:
-	pass
-
 
 func _on_graph_node_connections_updated() -> void:
 	var _connected_node: GaeaGraphNode = _graph_node.get_connected_input_node(connection_idx)
 	if _connected_node != null:
-		disable()
+		hide()
 	else:
-		enable()
+		show()
 	param_value_changed.emit()

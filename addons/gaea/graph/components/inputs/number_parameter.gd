@@ -16,11 +16,3 @@ func get_param_value() -> float:
 
 func set_param_value(new_value: Variant) -> void:
 	self.value = new_value
-
-
-func disable() -> void:
-	self.editable = false
-
-
-func enable() -> void:
-	self.editable = true
