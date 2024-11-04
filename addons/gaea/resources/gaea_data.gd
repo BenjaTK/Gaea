@@ -18,6 +18,10 @@ func _init() -> void:
 func _get_property_list() -> Array[Dictionary]:
 	var list: Array[Dictionary]
 	for variable in parameters.values():
+		if variable == null:
+			parameters.erase(parameters.find_key(variable))
+			continue
+
 		list.append({
 			"name": variable.name,
 			"type": variable.type,
@@ -30,6 +34,9 @@ func _get_property_list() -> Array[Dictionary]:
 
 func _set(property: StringName, value: Variant) -> bool:
 	for variable in parameters.values():
+		if variable == null:
+			continue
+
 		if variable.name == property:
 			variable.value = value
 			return true
@@ -38,6 +45,9 @@ func _set(property: StringName, value: Variant) -> bool:
 
 func _get(property: StringName) -> Variant:
 	for variable in parameters.values():
+		if variable == null:
+			continue
+
 		if variable.name == property:
 			return variable.value
 	return

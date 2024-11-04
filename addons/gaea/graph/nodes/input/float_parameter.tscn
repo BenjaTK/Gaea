@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw2qhcwa7sdvs"]
+
+[ext_resource type="PackedScene" uid="uid://p8jkpnrqbu8i" path="res://addons/gaea/graph/parameter_node.tscn" id="1_ou7hy"]
+
+[node name="ParameterNode" instance=ExtResource("1_ou7hy")]
+title = "FloatParameter"
+slot/1/left_color = Color(0.611765, 0.6, 0.619608, 1)
+slot/1/right_color = Color(1, 0.270588, 0.270588, 1)
+type = 3
+
+[node name="LineEdit" parent="." index="1"]
+text = "FloatParameter"
+
+[node name="Slot" parent="." index="2"]
+right_type = 4

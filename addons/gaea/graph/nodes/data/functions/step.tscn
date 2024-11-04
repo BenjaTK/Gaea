@@ -16,9 +16,9 @@ slot/0/right_type = 0
 slot/0/right_color = Color(0.611765, 0.6, 0.619608, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
-slot/1/left_enabled = false
-slot/1/left_type = -1
-slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_enabled = true
+slot/1/left_type = 4
+slot/1/left_color = Color(0.827451, 0.827451, 0.827451, 1)
 slot/1/left_icon = null
 slot/1/right_enabled = false
 slot/1/right_type = -1
@@ -55,6 +55,8 @@ step = 0.005
 allow_greater = true
 allow_lesser = true
 script = ExtResource("3_44ybp")
+input_type = 4
+connection_idx = 1
 
 [node name="Slot2" parent="." index="3" instance=ExtResource("2_26h8s")]
 layout_mode = 2

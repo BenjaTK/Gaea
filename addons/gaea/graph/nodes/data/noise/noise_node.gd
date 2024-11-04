@@ -25,6 +25,12 @@ func _update_preview() -> void:
 
 func get_data(idx: int) -> Dictionary:
 	_noise.seed = _generator.seed
+
+	_noise.frequency = _frequency_param.get_param_value()
+	_noise.fractal_octaves = _octaves_param.get_param_value()
+	_noise.fractal_lacunarity = _lacunarity_param.get_param_value()
+	_preview.texture = ImageTexture.create_from_image(_noise.get_seamless_image(144, 144))
+
 	var dictionary: Dictionary
 	var _size: Vector2 = _size_parameter.get_param_value()
 	for x in range(_size.x):

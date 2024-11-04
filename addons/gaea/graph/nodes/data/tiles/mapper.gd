@@ -3,8 +3,8 @@ extends GaeaGraphNode
 
 
 @onready var _tile_info_input: HBoxContainer = $TileInfoInput
-@onready var _min_threshold: SpinBox = $HBoxContainer/SpinBox
-@onready var _max_threshold: SpinBox = $HBoxContainer2/SpinBox
+@onready var _min_threshold: SpinBox = %MinSpinBox
+@onready var _max_threshold: SpinBox = %MaxSpinBox
 
 
 func get_data(idx: int) -> Dictionary:

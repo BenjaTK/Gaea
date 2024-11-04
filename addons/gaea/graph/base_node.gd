@@ -4,9 +4,10 @@ extends GraphNode
 
 
 signal save_requested
+signal connections_updated
 
 enum SlotTypes {
-	VALUE_DATA, TILE_DATA, TILE_INFO
+	VALUE_DATA, TILE_DATA, TILE_INFO, VECTOR2, NUMBER
 }
 
 @export var is_output: bool = false
@@ -28,6 +29,10 @@ func get_color_from_type(type: SlotTypes) -> Color:
 			return Color("45ffa2")
 		SlotTypes.TILE_INFO:
 			return Color("ff4545")
+		SlotTypes.VECTOR2:
+			return Color("a579ff")
+		SlotTypes.NUMBER:
+			return Color.LIGHT_GRAY
 	return Color.WHITE
 
 
@@ -46,6 +51,10 @@ func on_added() -> void:
 
 func on_removed() -> void:
 	return
+
+
+func notify_connections_updated() -> void:
+	connections_updated.emit()
 #endregion
 
 
@@ -76,7 +85,7 @@ func request_save() -> void:
 func get_save_data() -> Dictionary:
 	var dictionary: Dictionary = {
 		"position": position_offset,
-		"size": size,
+		"size": size
 	}
 	return dictionary
 

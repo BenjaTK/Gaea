@@ -4,6 +4,7 @@
 
 [node name="VectorParameter" type="HBoxContainer"]
 script = ExtResource("1_lrh3m")
+input_type = 3
 
 [node name="XSpinBox" type="SpinBox" parent="."]
 layout_mode = 2

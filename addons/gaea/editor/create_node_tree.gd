@@ -35,7 +35,6 @@ func _populate_tree_with_files(folder_path: String, parent_item: TreeItem) -> vo
 		if dir.current_is_dir():
 			_populate_tree_with_files(file_path + "/", tree_item)
 
-		print(file_name)
 		if file_name.ends_with(".tscn"):
 			tree_item.set_metadata(0, load(file_path))
 

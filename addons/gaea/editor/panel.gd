@@ -73,15 +73,11 @@ func _on_generate_button_pressed() -> void:
 
 	var connections: Array[Dictionary] = _graph_edit.get_connection_list()
 	var output_node: GaeaGraphNode
-	for node in _graph_edit.get_children():
-		if node is GaeaGraphNode:
-			node.connections.clear()
 
 	for idx in connections.size():
 		var connection: Dictionary = connections[idx]
 		var node: GaeaGraphNode = _graph_edit.get_node(NodePath(connection.to_node))
 
-		node.connections.append(connection)
 		if node.is_output:
 			output_node = node
 
@@ -93,6 +89,17 @@ func get_selected_generator() -> GaeaGenerator:
 	return _selected_generator
 
 
+func update_connections() -> void:
+	for node in _graph_edit.get_children():
+		if node is GaeaGraphNode:
+			node.connections.clear()
+
+	var connections: Array[Dictionary] = _graph_edit.get_connection_list()
+	for connection in connections:
+		var to_node: GaeaGraphNode = _graph_edit.get_node(NodePath(connection.to_node))
+		to_node.connections.append(connection)
+
+
 func _save_data() -> void:
 	if not is_instance_valid(_selected_generator):
 		return
@@ -102,17 +109,18 @@ func _save_data() -> void:
 	var scenes: Array[PackedScene]
 	var node_data: Array[Dictionary]
 
+	for connection in connections:
+		var from_node: GaeaGraphNode = _graph_edit.get_node(NodePath(connection.from_node))
+		var to_node: GaeaGraphNode = _graph_edit.get_node(NodePath(connection.to_node))
+
+		connection.from_node = nodes.find(from_node)
+		connection.to_node = nodes.find(to_node)
+
 	for node in nodes:
 		if node is not GaeaGraphNode:
 			continue
 		scenes.append(load(node.scene_file_path))
 		node_data.append(node.get_save_data())
-
-	for connection in connections:
-		var from_node: GaeaGraphNode = _graph_edit.get_node(NodePath(connection.from_node))
-		var to_node: GaeaGraphNode = _graph_edit.get_node(NodePath(connection.to_node))
-		connection.from_node = nodes.find(from_node)
-		connection.to_node = nodes.find(to_node)
 
 	_selected_generator.data.connections = connections
 	_selected_generator.data.nodes = scenes
@@ -137,6 +145,8 @@ func _load_data() -> void:
 		var from_node: GaeaGraphNode = _graph_edit.get_child(connection.from_node)
 		var to_node: GaeaGraphNode = _graph_edit.get_child(connection.to_node)
 		_graph_edit.connect_node(from_node.name, connection.from_port, to_node.name, connection.to_port)
+
+	update_connections()
 
 
 func _on_graph_edit_connection_to_empty(from_node: StringName, from_port: int, release_position: Vector2) -> void:

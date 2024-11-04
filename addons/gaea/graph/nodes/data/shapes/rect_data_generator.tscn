@@ -9,18 +9,18 @@
 [node name="RectangleData" instance=ExtResource("1_g76s6")]
 custom_minimum_size = Vector2(256, 128)
 title = "Rect Data Generator"
-slot/0/left_enabled = false
-slot/0/left_type = -1
-slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_enabled = true
+slot/0/left_type = 3
+slot/0/left_color = Color(0.647059, 0.47451, 1, 1)
 slot/0/left_icon = null
 slot/0/right_enabled = false
 slot/0/right_type = -1
 slot/0/right_color = Color(1, 1, 1, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
-slot/1/left_enabled = false
-slot/1/left_type = -1
-slot/1/left_color = Color(1, 1, 1, 1)
+slot/1/left_enabled = true
+slot/1/left_type = 4
+slot/1/left_color = Color(0.827451, 0.827451, 0.827451, 1)
 slot/1/left_icon = null
 slot/1/right_enabled = false
 slot/1/right_type = -1
@@ -65,6 +65,8 @@ value = 1.0
 allow_greater = true
 allow_lesser = true
 script = ExtResource("4_grlwp")
+input_type = 4
+connection_idx = 1
 
 [node name="Slot" parent="." index="3" instance=ExtResource("2_wi5m1")]
 layout_mode = 2

@@ -13,6 +13,8 @@ func _ready() -> void:
 
 
 func get_param_value() -> Vector2:
+	if super() != null:
+		return super()
 	return Vector2(_x_spin_box.value, _y_spin_box.value)
 
 
@@ -21,3 +23,13 @@ func set_param_value(new_value: Variant) -> void:
 		return
 	_x_spin_box.value = new_value.x
 	_y_spin_box.value = new_value.y
+
+
+func disable() -> void:
+	_x_spin_box.editable = false
+	_y_spin_box.editable = false
+
+
+func enable() -> void:
+	_x_spin_box.editable = true
+	_y_spin_box.editable = true
