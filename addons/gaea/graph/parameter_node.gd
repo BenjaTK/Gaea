@@ -66,3 +66,6 @@ func load_save_data(data: Dictionary) -> void:
 	super(data)
 	variable_name = data["variable_name"]
 	_line_edit.text = variable_name
+
+	if not _generator.data.parameters.has(variable_name):
+		on_added()

@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://bjctwnfx3084n" path="res://addons/gaea/graph/nodes/output/render.tscn" id="7_skwvn"]
 [ext_resource type="PackedScene" uid="uid://c8ymetrcmradn" path="res://addons/gaea/graph/nodes/data/functions/random_chance.tscn" id="9_gq140"]
 
-[sub_resource type="Resource" id="Resource_2ss7l"]
+[sub_resource type="Resource" id="Resource_3oe00"]
 script = ExtResource("2_abtc7")
 type = 0
 tilemap_layer = 0
@@ -20,28 +20,28 @@ source_id = 0
 atlas_coord = Vector2i(0, 0)
 alternative_tile = 0
 
-[sub_resource type="Resource" id="Resource_2g8qr"]
+[sub_resource type="Resource" id="Resource_ukusw"]
 script = ExtResource("2_abtc7")
 type = 0
 tilemap_layer = 0
 source_id = 0
-atlas_coord = Vector2i(1, 0)
+atlas_coord = Vector2i(0, 0)
 alternative_tile = 0
 
-[sub_resource type="Resource" id="Resource_xfkcb"]
+[sub_resource type="Resource" id="Resource_ir8n7"]
 script = ExtResource("2_abtc7")
 type = 0
 tilemap_layer = 0
 source_id = 0
-atlas_coord = Vector2i(3, 0)
+atlas_coord = Vector2i(0, 0)
 alternative_tile = 0
 
-[sub_resource type="Resource" id="Resource_dcgm6"]
+[sub_resource type="Resource" id="Resource_wkrmt"]
 script = ExtResource("2_abtc7")
 type = 0
 tilemap_layer = 0
 source_id = 0
-atlas_coord = Vector2i(2, 0)
+atlas_coord = Vector2i(0, 0)
 alternative_tile = 0
 
 [sub_resource type="Resource" id="Resource_ny2x6"]
@@ -187,43 +187,40 @@ node_data = Array[Dictionary]([{
 "position": Vector2(3460, -180),
 "size": Vector2(256, 78)
 }])
-variables = {
+parameters = {
 "Grass": {
 "hint": 17,
 "hint_string": "TileInfo",
 "name": "Grass",
 "type": 24,
-"uuid": 6871457275181942444,
-"value": SubResource("Resource_2ss7l")
+"value": SubResource("Resource_3oe00")
 },
 "Sand": {
 "hint": 17,
 "hint_string": "TileInfo",
 "name": "Sand",
 "type": 24,
-"uuid": 1209550481847480532,
-"value": SubResource("Resource_2g8qr")
+"value": SubResource("Resource_ukusw")
 },
 "Tree": {
 "hint": 17,
 "hint_string": "TileInfo",
 "name": "Tree",
 "type": 24,
-"value": SubResource("Resource_xfkcb")
+"value": SubResource("Resource_ir8n7")
 },
 "Water": {
 "hint": 17,
 "hint_string": "TileInfo",
 "name": "Water",
 "type": 24,
-"uuid": 4393605443140054594,
-"value": SubResource("Resource_dcgm6")
+"value": SubResource("Resource_wkrmt")
 }
 }
-Grass = SubResource("Resource_2ss7l")
-Sand = SubResource("Resource_2g8qr")
-Tree = SubResource("Resource_xfkcb")
-Water = SubResource("Resource_dcgm6")
+Grass = SubResource("Resource_3oe00")
+Sand = SubResource("Resource_ukusw")
+Water = SubResource("Resource_wkrmt")
+Tree = SubResource("Resource_ir8n7")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smit1"]
 texture = ExtResource("3_snetl")
