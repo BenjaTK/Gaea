@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqpby5jyv71l0"]
+
+[ext_resource type="Script" path="res://addons/gaea/graph/components/slot.gd" id="1_ro1nl"]
+
+[node name="Slot" type="HBoxContainer"]
+size_flags_horizontal = 3
+script = ExtResource("1_ro1nl")
+
+[node name="LeftLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RightLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_alignment = 2

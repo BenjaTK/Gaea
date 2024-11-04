@@ -1,2 +1,0 @@
-class_name Modifier3D
-extends Modifier

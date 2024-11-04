@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://hj8fv43aod87"]
+
+[ext_resource type="Script" path="res://addons/gaea/graph/base_node.gd" id="1_0htrm"]
+
+[node name="BaseNode" type="GraphNode"]
+custom_minimum_size = Vector2(256, 0)
+offset_right = 9.0
+offset_bottom = 55.0
+title = "Node"
+script = ExtResource("1_0htrm")

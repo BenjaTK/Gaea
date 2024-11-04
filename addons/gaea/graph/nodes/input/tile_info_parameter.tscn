@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://jxthuig858lu"]
+
+[ext_resource type="PackedScene" uid="uid://p8jkpnrqbu8i" path="res://addons/gaea/graph/parameter_node.tscn" id="1_om6eh"]
+
+[node name="ParameterNode" instance=ExtResource("1_om6eh")]
+type = 24
+hint = 17
+hint_string = "TileInfo"
+
+[node name="LineEdit" parent="." index="1"]
+text = "TileInfo"
+
+[node name="Slot" parent="." index="2"]
+right_label = "TileInfo"
