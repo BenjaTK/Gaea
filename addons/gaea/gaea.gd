@@ -31,3 +31,4 @@ func _on_selection_changed() -> void:
 		_panel.populate(_selected.front())
 	else:
 		_panel_button.hide()
+		_panel_button.set_pressed(false)

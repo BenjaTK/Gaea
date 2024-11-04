@@ -6,7 +6,7 @@ extends Resource
 @export_storage var connections: Array[Dictionary]
 @export_storage var nodes: Array[PackedScene]
 @export_storage var node_data: Array[Dictionary]
-@export_storage var variables: Dictionary
+@export_storage var parameters: Dictionary
 
 
 func _init() -> void:
@@ -16,7 +16,7 @@ func _init() -> void:
 
 func _get_property_list() -> Array[Dictionary]:
 	var list: Array[Dictionary]
-	for variable in variables.values():
+	for variable in parameters.values():
 		list.append({
 			"name": variable.name,
 			"type": variable.type,
@@ -28,7 +28,7 @@ func _get_property_list() -> Array[Dictionary]:
 
 
 func _set(property: StringName, value: Variant) -> bool:
-	for variable in variables.values():
+	for variable in parameters.values():
 		if variable.name == property:
 			variable.value = value
 			return true
@@ -36,7 +36,7 @@ func _set(property: StringName, value: Variant) -> bool:
 
 
 func _get(property: StringName) -> Variant:
-	for variable in variables.values():
+	for variable in parameters.values():
 		if variable.name == property:
 			return variable.value
 	return

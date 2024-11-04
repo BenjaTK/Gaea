@@ -18,9 +18,13 @@ func populate(node: GaeaGenerator) -> void:
 	else:
 		_editor.show()
 		_no_data.hide()
-		if _selected_generator != node:
-			_selected_generator = node
-			_load_data()
+		_selected_generator = node
+		for child in _graph_edit.get_children():
+			if child is GraphNode:
+				child.queue_free()
+		# HACK: Nodes don't connect without this, don't really like using await though.
+		await get_tree().process_frame
+		_load_data.call_deferred()
 
 
 func _on_new_data_button_pressed() -> void:

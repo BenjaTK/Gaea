@@ -47,17 +47,37 @@ alternative_tile = 0
 [sub_resource type="Resource" id="Resource_ny2x6"]
 script = ExtResource("3_aq2cv")
 connections = Array[Dictionary]([{
-"from_node": 3,
+"from_node": 12,
 "from_port": 0,
-"to_node": 12,
+"to_node": 13,
 "to_port": 0
 }, {
 "from_node": 3,
+"from_port": 0,
+"to_node": 13,
+"to_port": 1
+}, {
+"from_node": 4,
+"from_port": 0,
+"to_node": 2,
+"to_port": 1
+}, {
+"from_node": 5,
+"from_port": 0,
+"to_node": 6,
+"to_port": 1
+}, {
+"from_node": 12,
 "from_port": 0,
 "to_node": 2,
 "to_port": 0
 }, {
 "from_node": 12,
+"from_port": 0,
+"to_node": 6,
+"to_port": 0
+}, {
+"from_node": 13,
 "from_port": 1,
 "to_node": 1,
 "to_port": 0
@@ -67,67 +87,47 @@ connections = Array[Dictionary]([{
 "to_node": 1,
 "to_port": 1
 }, {
-"from_node": 3,
-"from_port": 0,
-"to_node": 7,
-"to_port": 0
+"from_node": 6,
+"from_port": 1,
+"to_node": 9,
+"to_port": 1
 }, {
 "from_node": 1,
 "from_port": 0,
-"to_node": 10,
+"to_node": 9,
 "to_port": 0
 }, {
 "from_node": 7,
-"from_port": 1,
+"from_port": 0,
+"to_node": 10,
+"to_port": 0
+}, {
+"from_node": 13,
+"from_port": 0,
+"to_node": 7,
+"to_port": 0
+}, {
+"from_node": 11,
+"from_port": 0,
 "to_node": 10,
 "to_port": 1
 }, {
-"from_node": 4,
-"from_port": 0,
-"to_node": 12,
-"to_port": 1
+"from_node": 10,
+"from_port": 1,
+"to_node": 8,
+"to_port": 0
 }, {
-"from_node": 5,
+"from_node": 9,
 "from_port": 0,
-"to_node": 2,
-"to_port": 1
-}, {
-"from_node": 6,
-"from_port": 0,
-"to_node": 7,
+"to_node": 8,
 "to_port": 1
 }, {
 "from_node": 8,
 "from_port": 0,
-"to_node": 13,
+"to_node": 14,
 "to_port": 0
-}, {
-"from_node": 3,
-"from_port": 0,
-"to_node": 8,
-"to_port": 0
-}, {
-"from_node": 13,
-"from_port": 1,
-"to_node": 9,
-"to_port": 0
-}, {
-"from_node": 10,
-"from_port": 0,
-"to_node": 9,
-"to_port": 1
-}, {
-"from_node": 9,
-"from_port": 0,
-"to_node": 11,
-"to_port": 0
-}, {
-"from_node": 14,
-"from_port": 0,
-"to_node": 13,
-"to_port": 1
 }])
-nodes = Array[PackedScene]([ExtResource("6_56msw"), ExtResource("4_omq8i"), ExtResource("3_qbqrk"), ExtResource("2_ksth1"), ExtResource("2_ksth1"), ExtResource("2_ksth1"), ExtResource("4_omq8i"), ExtResource("9_gq140"), ExtResource("6_56msw"), ExtResource("6_56msw"), ExtResource("7_skwvn"), ExtResource("4_omq8i"), ExtResource("4_omq8i"), ExtResource("2_ksth1")])
+nodes = Array[PackedScene]([ExtResource("6_56msw"), ExtResource("4_omq8i"), ExtResource("2_ksth1"), ExtResource("2_ksth1"), ExtResource("2_ksth1"), ExtResource("4_omq8i"), ExtResource("9_gq140"), ExtResource("6_56msw"), ExtResource("6_56msw"), ExtResource("4_omq8i"), ExtResource("2_ksth1"), ExtResource("3_qbqrk"), ExtResource("4_omq8i"), ExtResource("7_skwvn")])
 node_data = Array[Dictionary]([{
 "position": Vector2(2060, -20),
 "size": Vector2(256, 128)
@@ -135,12 +135,6 @@ node_data = Array[Dictionary]([{
 "max": 0.0,
 "min": -0.2,
 "position": Vector2(1660, 200),
-"size": Vector2(256, 256)
-}, {
-"fractal_lacunarity": 2.0,
-"fractal_octaves": 7.0,
-"frequency": 0.02,
-"position": Vector2(1080, -380),
 "size": Vector2(256, 256)
 }, {
 "position": Vector2(1220, 160),
@@ -170,14 +164,6 @@ node_data = Array[Dictionary]([{
 "position": Vector2(2780, -20),
 "size": Vector2(256, 128)
 }, {
-"position": Vector2(3480, -180),
-"size": Vector2(256, 78)
-}, {
-"max": 1.0,
-"min": 0.0,
-"position": Vector2(1660, -100),
-"size": Vector2(256, 256)
-}, {
 "max": 1.0,
 "min": 0.2,
 "position": Vector2(2720, -400),
@@ -186,6 +172,20 @@ node_data = Array[Dictionary]([{
 "position": Vector2(2360, -600),
 "size": Vector2(256, 99),
 "variable_name": "Tree"
+}, {
+"fractal_lacunarity": 2.0,
+"fractal_octaves": 7.0,
+"frequency": 0.02,
+"position": Vector2(940, -380),
+"size": Vector2(256, 256)
+}, {
+"max": 1.0,
+"min": 0.0,
+"position": Vector2(1660, -100),
+"size": Vector2(256, 256)
+}, {
+"position": Vector2(3460, -180),
+"size": Vector2(256, 78)
 }])
 variables = {
 "Grass": {
