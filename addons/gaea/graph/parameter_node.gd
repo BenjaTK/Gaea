@@ -63,6 +63,7 @@ func _on_line_edit_text_changed(new_text: String) -> void:
 	if new_text == variable_name:
 		return
 
+	var original_idx: int = _generator.data.parameters.keys().find(variable_name)
 	_generator.data.parameters[new_text] = _generator.data.parameters.get(variable_name)
 	_generator.data.parameters.erase(variable_name)
 	_generator.data.parameters[new_text].name = new_text

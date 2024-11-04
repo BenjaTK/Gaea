@@ -17,17 +17,17 @@ func _init() -> void:
 
 func _get_property_list() -> Array[Dictionary]:
 	var list: Array[Dictionary]
+	list.append({
+		"name": "Parameters",
+		"type": TYPE_NIL,
+		"usage": PROPERTY_USAGE_GROUP,
+	})
 	for variable in parameters.values():
 		if variable == null:
 			parameters.erase(parameters.find_key(variable))
 			continue
 
-		list.append({
-			"name": variable.name,
-			"type": variable.type,
-			"hint": variable.hint,
-			"hint_string": variable.hint_string,
-		})
+		list.append(variable)
 
 	return list
 

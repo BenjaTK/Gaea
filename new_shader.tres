@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://c2pc7mfv0730k"]
+[gd_resource type="VisualShader" load_steps=7 format=3 uid="uid://c2pc7mfv0730k"]
 
 [sub_resource type="VisualShaderNodeIntConstant" id="VisualShaderNodeIntConstant_yo27r"]
 
@@ -9,9 +9,13 @@
 [sub_resource type="VisualShaderNodeVec2Constant" id="VisualShaderNodeVec2Constant_mfxsr"]
 
 [sub_resource type="VisualShaderNodeIntParameter" id="VisualShaderNodeIntParameter_bc4yo"]
-parameter_name = "asefa"
+parameter_name = "asefawfae"
 default_value_enabled = true
 default_value = 1
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_qgm27"]
+parameter_name = "asefasef"
+default_value_enabled = true
 
 [resource]
 code = "shader_type spatial;
@@ -21,7 +25,8 @@ render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_s
 // Varyings
 varying float var_ASd;
 
-uniform int asefa = 1;
+uniform int asefawfae = 1;
+uniform float asefasef = 0;
 
 
 
@@ -31,15 +36,21 @@ void vertex() {
 
 void fragment() {
 // IntParameter:6
-	int n_out6p0 = asefa;
+	int n_out6p0 = asefawfae;
+
+
+// FloatParameter:7
+	float n_out7p0 = asefasef;
 
 
 // Output:0
 	ALPHA = float(n_out6p0);
+	METALLIC = n_out7p0;
 
 
 }
 "
+graph_offset = Vector2(-231.686, 45.1897)
 varyings/ASd = "0,0"
 nodes/fragment/2/node = SubResource("VisualShaderNodeIntConstant_yo27r")
 nodes/fragment/2/position = Vector2(-236.376, 573.979)
@@ -50,5 +61,7 @@ nodes/fragment/4/position = Vector2(60.7646, 502.248)
 nodes/fragment/5/node = SubResource("VisualShaderNodeVec2Constant_mfxsr")
 nodes/fragment/5/position = Vector2(-240, 720)
 nodes/fragment/6/node = SubResource("VisualShaderNodeIntParameter_bc4yo")
-nodes/fragment/6/position = Vector2(-320, 160)
-nodes/fragment/connections = PackedInt32Array(2, 0, 4, 1, 3, 0, 4, 0, 6, 0, 0, 1)
+nodes/fragment/6/position = Vector2(-260, 40)
+nodes/fragment/7/node = SubResource("VisualShaderNodeFloatParameter_qgm27")
+nodes/fragment/7/position = Vector2(0, 200)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 1, 3, 0, 4, 0, 6, 0, 0, 1, 7, 0, 0, 2)

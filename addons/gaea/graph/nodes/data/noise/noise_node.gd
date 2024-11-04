@@ -32,9 +32,8 @@ func get_data(idx: int) -> Dictionary:
 	_preview.texture = ImageTexture.create_from_image(_noise.get_seamless_image(144, 144))
 
 	var dictionary: Dictionary
-	var _size: Vector2 = _size_parameter.get_param_value()
-	for x in range(_size.x):
-		for y in range(_size.y):
+	for x in range(_generator.world_size.x):
+		for y in range(_generator.world_size.y):
 			dictionary[Vector2(x, y)] = _noise.get_noise_2d(x, y)
 	return dictionary
 
@@ -44,7 +43,6 @@ func get_save_data() -> Dictionary:
 	dictionary["frequency"] = _frequency_param.get_param_value()
 	dictionary["fractal_octaves"] = _octaves_param.get_param_value()
 	dictionary["fractal_lacunarity"] = _lacunarity_param.get_param_value()
-	dictionary["size"] = _size_parameter.get_param_value()
 	return dictionary
 
 
@@ -53,5 +51,3 @@ func load_save_data(data: Dictionary) -> void:
 	_frequency_param.set_param_value(data["frequency"])
 	_octaves_param.set_param_value(data["fractal_octaves"])
 	_lacunarity_param.set_param_value(data["fractal_lacunarity"])
-	_size_parameter.set_param_value(data["size"])
-	_size_parameter.set_param_value(data["size"])
