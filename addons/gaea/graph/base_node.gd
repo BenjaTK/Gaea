@@ -3,6 +3,8 @@ class_name GaeaGraphNode
 extends GraphNode
 
 
+signal save_requested
+
 enum SlotTypes {
 	VALUE_DATA, TILE_DATA, TILE_INFO
 }
@@ -67,6 +69,10 @@ func get_from_port(connection_idx: int) -> int:
 #endregion
 
 #region Saving and Loading
+func request_save() -> void:
+	save_requested.emit()
+
+
 func get_save_data() -> Dictionary:
 	var dictionary: Dictionary = {
 		"position": position_offset,

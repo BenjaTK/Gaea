@@ -1,226 +1,29 @@
-[gd_scene load_steps=19 format=4 uid="uid://yj8lg31imwsl"]
+[gd_scene load_steps=10 format=4 uid="uid://yj8lg31imwsl"]
 
 [ext_resource type="Script" path="res://addons/gaea/nodes/generator.gd" id="1_b5xa0"]
-[ext_resource type="Script" path="res://addons/gaea/resources/tilemap_tile_info.gd" id="2_abtc7"]
-[ext_resource type="PackedScene" uid="uid://jxthuig858lu" path="res://addons/gaea/graph/nodes/input/tile_info_parameter.tscn" id="2_ksth1"]
+[ext_resource type="PackedScene" uid="uid://bvvkvcyx16vme" path="res://addons/gaea/graph/nodes/data/shapes/rect_data_generator.tscn" id="2_cr2ey"]
 [ext_resource type="Script" path="res://addons/gaea/resources/gaea_data.gd" id="3_aq2cv"]
 [ext_resource type="PackedScene" uid="uid://b71v5wgxhw5qt" path="res://addons/gaea/graph/nodes/data/noise/simplex_smooth.tscn" id="3_qbqrk"]
 [ext_resource type="Script" path="res://addons/gaea/nodes/renderer.gd" id="3_qqern"]
 [ext_resource type="Texture2D" uid="uid://cmy8ope6463sf" path="res://scenes/test/test_tileset.png" id="3_snetl"]
-[ext_resource type="PackedScene" uid="uid://b6ooa7v85xxvf" path="res://addons/gaea/graph/nodes/data/tiles/mapper.tscn" id="4_omq8i"]
-[ext_resource type="PackedScene" uid="uid://ddoj40ym5k7jn" path="res://addons/gaea/graph/nodes/data/tiles/map_merger.tscn" id="6_56msw"]
-[ext_resource type="PackedScene" uid="uid://bjctwnfx3084n" path="res://addons/gaea/graph/nodes/output/render.tscn" id="7_skwvn"]
-[ext_resource type="PackedScene" uid="uid://c8ymetrcmradn" path="res://addons/gaea/graph/nodes/data/functions/random_chance.tscn" id="9_gq140"]
-
-[sub_resource type="Resource" id="Resource_3oe00"]
-script = ExtResource("2_abtc7")
-type = 0
-tilemap_layer = 0
-source_id = 0
-atlas_coord = Vector2i(0, 0)
-alternative_tile = 0
-
-[sub_resource type="Resource" id="Resource_ukusw"]
-script = ExtResource("2_abtc7")
-type = 0
-tilemap_layer = 0
-source_id = 0
-atlas_coord = Vector2i(0, 0)
-alternative_tile = 0
-
-[sub_resource type="Resource" id="Resource_ir8n7"]
-script = ExtResource("2_abtc7")
-type = 0
-tilemap_layer = 0
-source_id = 0
-atlas_coord = Vector2i(0, 0)
-alternative_tile = 0
-
-[sub_resource type="Resource" id="Resource_wkrmt"]
-script = ExtResource("2_abtc7")
-type = 0
-tilemap_layer = 0
-source_id = 0
-atlas_coord = Vector2i(0, 0)
-alternative_tile = 0
 
 [sub_resource type="Resource" id="Resource_ny2x6"]
 script = ExtResource("3_aq2cv")
-connections = Array[Dictionary]([{
-"from_node": 12,
-"from_port": 0,
-"to_node": 13,
-"to_port": 0
-}, {
-"from_node": 3,
-"from_port": 0,
-"to_node": 13,
-"to_port": 1
-}, {
-"from_node": 4,
-"from_port": 0,
-"to_node": 2,
-"to_port": 1
-}, {
-"from_node": 5,
-"from_port": 0,
-"to_node": 6,
-"to_port": 1
-}, {
-"from_node": 12,
-"from_port": 0,
-"to_node": 2,
-"to_port": 0
-}, {
-"from_node": 12,
-"from_port": 0,
-"to_node": 6,
-"to_port": 0
-}, {
-"from_node": 13,
-"from_port": 1,
-"to_node": 1,
-"to_port": 0
-}, {
-"from_node": 2,
-"from_port": 1,
-"to_node": 1,
-"to_port": 1
-}, {
-"from_node": 6,
-"from_port": 1,
-"to_node": 9,
-"to_port": 1
-}, {
-"from_node": 1,
-"from_port": 0,
-"to_node": 9,
-"to_port": 0
-}, {
-"from_node": 7,
-"from_port": 0,
-"to_node": 10,
-"to_port": 0
-}, {
-"from_node": 13,
-"from_port": 0,
-"to_node": 7,
-"to_port": 0
-}, {
-"from_node": 11,
-"from_port": 0,
-"to_node": 10,
-"to_port": 1
-}, {
-"from_node": 10,
-"from_port": 1,
-"to_node": 8,
-"to_port": 0
-}, {
-"from_node": 9,
-"from_port": 0,
-"to_node": 8,
-"to_port": 1
-}, {
-"from_node": 8,
-"from_port": 0,
-"to_node": 14,
-"to_port": 0
-}])
-nodes = Array[PackedScene]([ExtResource("6_56msw"), ExtResource("4_omq8i"), ExtResource("2_ksth1"), ExtResource("2_ksth1"), ExtResource("2_ksth1"), ExtResource("4_omq8i"), ExtResource("9_gq140"), ExtResource("6_56msw"), ExtResource("6_56msw"), ExtResource("4_omq8i"), ExtResource("2_ksth1"), ExtResource("3_qbqrk"), ExtResource("4_omq8i"), ExtResource("7_skwvn")])
+connections = Array[Dictionary]([])
+nodes = Array[PackedScene]([ExtResource("2_cr2ey"), ExtResource("3_qbqrk")])
 node_data = Array[Dictionary]([{
-"position": Vector2(2060, -20),
-"size": Vector2(256, 128)
-}, {
-"max": 0.0,
-"min": -0.2,
-"position": Vector2(1660, 200),
-"size": Vector2(256, 256)
-}, {
-"position": Vector2(1220, 160),
-"size": Vector2(256, 99),
-"variable_name": "Grass"
-}, {
-"position": Vector2(1220, 300),
-"size": Vector2(256, 99),
-"variable_name": "Sand"
-}, {
-"position": Vector2(1240, 440),
-"size": Vector2(256, 99),
-"variable_name": "Water"
-}, {
-"max": 0.0,
-"min": -1.0,
-"position": Vector2(1640, 480),
-"size": Vector2(256, 256)
-}, {
-"chance": 50.0,
-"position": Vector2(2260, -440),
-"size": Vector2(256, 128)
-}, {
-"position": Vector2(3140, -240),
-"size": Vector2(256, 128)
-}, {
-"position": Vector2(2780, -20),
-"size": Vector2(256, 128)
-}, {
-"max": 1.0,
-"min": 0.2,
-"position": Vector2(2720, -400),
-"size": Vector2(256, 206)
-}, {
-"position": Vector2(2360, -600),
-"size": Vector2(256, 99),
-"variable_name": "Tree"
+"position": Vector2(60, 40),
+"size": Vector2(10, 10),
+"value": 1.0
 }, {
 "fractal_lacunarity": 2.0,
-"fractal_octaves": 7.0,
-"frequency": 0.02,
-"position": Vector2(940, -380),
-"size": Vector2(256, 256)
-}, {
-"max": 1.0,
-"min": 0.0,
-"position": Vector2(1660, -100),
-"size": Vector2(256, 256)
-}, {
-"position": Vector2(3460, -180),
-"size": Vector2(256, 78)
+"fractal_octaves": 5.0,
+"frequency": 0.01,
+"position": Vector2(-380, -80),
+"size": Vector2(10, 10)
 }])
-parameters = {
-"Grass": {
-"hint": 17,
-"hint_string": "TileInfo",
-"name": "Grass",
-"type": 24,
-"value": SubResource("Resource_3oe00")
-},
-"Sand": {
-"hint": 17,
-"hint_string": "TileInfo",
-"name": "Sand",
-"type": 24,
-"value": SubResource("Resource_ukusw")
-},
-"Tree": {
-"hint": 17,
-"hint_string": "TileInfo",
-"name": "Tree",
-"type": 24,
-"value": SubResource("Resource_ir8n7")
-},
-"Water": {
-"hint": 17,
-"hint_string": "TileInfo",
-"name": "Water",
-"type": 24,
-"value": SubResource("Resource_wkrmt")
-}
-}
-Grass = SubResource("Resource_3oe00")
-Sand = SubResource("Resource_ukusw")
-Water = SubResource("Resource_wkrmt")
-Tree = SubResource("Resource_ir8n7")
+parameters = {}
+scroll_offset = Vector2(-533.658, -76.2662)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smit1"]
 texture = ExtResource("3_snetl")

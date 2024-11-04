@@ -51,7 +51,7 @@ text = "Chance"
 
 [node name="ChanceParam" type="SpinBox" parent="HBoxContainer" index="1"]
 layout_mode = 2
-step = 0.005
+step = 0.1
 value = 50.0
 suffix = "%"
 script = ExtResource("3_h3qkj")

@@ -7,6 +7,7 @@ extends Resource
 @export_storage var nodes: Array[PackedScene]
 @export_storage var node_data: Array[Dictionary]
 @export_storage var parameters: Dictionary
+@export_storage var scroll_offset: Vector2
 
 
 func _init() -> void:

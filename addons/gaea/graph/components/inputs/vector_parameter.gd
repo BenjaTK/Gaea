@@ -7,6 +7,7 @@ extends "res://addons/gaea/graph/components/inputs/graph_node_parameter.gd"
 
 
 func _ready() -> void:
+	super()
 	_x_spin_box.value_changed.connect(param_value_changed.emit.unbind(1))
 	_y_spin_box.value_changed.connect(param_value_changed.emit.unbind(1))
 

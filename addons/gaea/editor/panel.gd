@@ -2,7 +2,7 @@
 extends Control
 
 
-var _selected_generator: GaeaGenerator = null
+var _selected_generator: GaeaGenerator = null : get = get_selected_generator
 
 @onready var _no_data: Control = $NoData
 @onready var _editor: Control = $Editor
@@ -19,12 +19,15 @@ func populate(node: GaeaGenerator) -> void:
 		_editor.show()
 		_no_data.hide()
 		_selected_generator = node
-		for child in _graph_edit.get_children():
-			if child is GraphNode:
-				child.queue_free()
-		# HACK: Nodes don't connect without this, don't really like using await though.
-		await get_tree().process_frame
 		_load_data.call_deferred()
+
+
+func unpopulate() -> void:
+	_save_data()
+	_selected_generator = null
+	for child in _graph_edit.get_children():
+		if child is GraphNode:
+			child.queue_free()
 
 
 func _on_new_data_button_pressed() -> void:
@@ -43,9 +46,7 @@ func _on_graph_edit_gui_input(event: InputEvent) -> void:
 			_popup_create_node_menu_at_mouse()
 
 
-func _on_tree_node_selected_for_creation(scene: PackedScene) -> void:
-	_create_node_popup.hide()
-
+func _add_node(scene: PackedScene) -> void:
 	var node: GraphNode = scene.instantiate()
 	_graph_edit.add_child(node)
 	node.set_position_offset((_graph_edit.get_local_mouse_position() + _graph_edit.scroll_offset) / _graph_edit.zoom)
@@ -53,6 +54,13 @@ func _on_tree_node_selected_for_creation(scene: PackedScene) -> void:
 	_save_data.call_deferred()
 	node.set_generator_reference(_selected_generator)
 	node.on_added()
+	node.save_requested.connect(_save_data)
+
+
+func _on_tree_node_selected_for_creation(scene: PackedScene) -> void:
+	_create_node_popup.hide()
+
+	_add_node(scene)
 
 
 func _on_cancel_create_button_pressed() -> void:
@@ -81,7 +89,14 @@ func _on_generate_button_pressed() -> void:
 	_save_data()
 
 
+func get_selected_generator() -> GaeaGenerator:
+	return _selected_generator
+
+
 func _save_data() -> void:
+	if not is_instance_valid(_selected_generator):
+		return
+
 	var connections: Array[Dictionary] = _graph_edit.get_connection_list()
 	var nodes: Array[Node] = _graph_edit.get_children()
 	var scenes: Array[PackedScene]
@@ -102,9 +117,11 @@ func _save_data() -> void:
 	_selected_generator.data.connections = connections
 	_selected_generator.data.nodes = scenes
 	_selected_generator.data.node_data = node_data
+	_selected_generator.data.scroll_offset = _graph_edit.scroll_offset
 
 
 func _load_data() -> void:
+	_graph_edit.scroll_offset = _selected_generator.data.scroll_offset
 	var scenes = _selected_generator.data.nodes
 	for idx in scenes.size():
 		var scene = scenes[idx]
@@ -124,3 +141,8 @@ func _load_data() -> void:
 
 func _on_graph_edit_connection_to_empty(from_node: StringName, from_port: int, release_position: Vector2) -> void:
 	_popup_create_node_menu_at_mouse()
+
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_EDITOR_PRE_SAVE:
+		_save_data()

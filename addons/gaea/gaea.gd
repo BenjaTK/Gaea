@@ -30,5 +30,7 @@ func _on_selection_changed() -> void:
 		_panel_button.set_pressed(true)
 		_panel.populate(_selected.front())
 	else:
-		_panel_button.hide()
-		_panel_button.set_pressed(false)
+		if is_instance_valid(_panel.get_selected_generator()):
+			_panel_button.hide()
+			_panel_button.set_pressed(false)
+			_panel.unpopulate()
