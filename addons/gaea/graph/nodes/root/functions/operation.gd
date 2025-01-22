@@ -13,14 +13,14 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 	)
 
 	for cell in passed_data:
-		passed_data[cell] = _get_new_value(passed_data[cell])
+		passed_data[cell] = _get_new_value(passed_data[cell], generator_data)
 
 	return passed_data
 
 
-func _get_new_value(original: float) -> float:
+func _get_new_value(original: float, generator_data: GaeaData) -> float:
 	match operation:
-		0: return original + get_arg("value")
-		1: return original * get_arg("value")
-		2: return original / get_arg("value")
+		0: return original + get_arg("value", generator_data)
+		1: return original * get_arg("value", generator_data)
+		2: return original / get_arg("value", generator_data)
 	return original
