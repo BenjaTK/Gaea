@@ -7,6 +7,9 @@ extends "res://addons/gaea/graph/components/inputs/graph_node_parameter.gd"
 
 func _ready() -> void:
 	super()
+	if not is_instance_valid(resource):
+		return
+
 	spin_box.value_changed.connect(param_value_changed.emit)
 
 	if resource.type == GaeaNodeArgument.Type.INT:

@@ -8,7 +8,8 @@ extends GaeaGraphNodeParameter
 
 func _ready() -> void:
 	await super()
-
+	if not is_instance_valid(resource):
+		return
 
 	line_edit.text_changed.connect(param_value_changed.emit)
 	_graph_node.set_slot_enabled_right(0, true)

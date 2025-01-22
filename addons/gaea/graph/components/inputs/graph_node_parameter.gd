@@ -16,6 +16,9 @@ signal param_value_changed(new_value: Variant)
 
 
 func _ready() -> void:
+	if not is_instance_valid(resource):
+		return
+
 	if resource.default_value != null:
 		set_param_value(resource.default_value)
 

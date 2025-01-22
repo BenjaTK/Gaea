@@ -3,7 +3,7 @@ class_name GaeaGenerator
 extends Node
 
 
-signal generation_finished(generation_data: Dictionary)
+signal generation_finished(grid: GaeaGrid)
 
 
 @export var data: GaeaData
@@ -19,6 +19,7 @@ func _ready() -> void:
 
 
 func generate() -> void:
+	data.generator = self
 	var connections: Array[Dictionary] = data.connections
 	var output_resource: GaeaNodeResource
 

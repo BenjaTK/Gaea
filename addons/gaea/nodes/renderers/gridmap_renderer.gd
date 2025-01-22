@@ -6,10 +6,11 @@ extends GaeaRenderer
 @export var gridmap: GridMap
 
 
-func render(data: Dictionary) -> void:
+func render(grid: GaeaGrid) -> void:
 	gridmap.clear()
 
-	for cell in data.keys():
-		var value = data[cell]
-		if value is GridmapMaterial:
-			gridmap.set_cell_item(cell, value.item_idx)
+	for layer in grid.get_layers():
+		for cell in layer.keys():
+			var value = layer[cell]
+			if value is GridmapMaterial:
+				gridmap.set_cell_item(cell, value.item_idx)

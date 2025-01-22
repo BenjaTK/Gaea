@@ -3,6 +3,7 @@ extends Control
 
 
 var _selected_generator: GaeaGenerator = null : get = get_selected_generator
+var _output_node: GraphNode
 
 @onready var _no_data: Control = $NoData
 @onready var _editor: Control = $Editor
@@ -11,6 +12,7 @@ var _selected_generator: GaeaGenerator = null : get = get_selected_generator
 
 
 func populate(node: GaeaGenerator) -> void:
+	_output_node = null
 	if node.data == null:
 		_editor.hide()
 		_no_data.show()
@@ -19,11 +21,15 @@ func populate(node: GaeaGenerator) -> void:
 		_editor.show()
 		_no_data.hide()
 		_selected_generator = node
+		if not _selected_generator.data.layer_count_modified.is_connected(_update_output_node):
+			_selected_generator.data.layer_count_modified.connect(_update_output_node)
 		_load_data.call_deferred()
 
 
 func unpopulate() -> void:
 	_save_data()
+	if _selected_generator.data.layer_count_modified.is_connected(_update_output_node):
+		_selected_generator.data.layer_count_modified.disconnect(_update_output_node)
 	_selected_generator = null
 	for child in _graph_edit.get_children():
 		if child is GraphNode:
@@ -84,6 +90,12 @@ func _on_generate_button_pressed() -> void:
 	_selected_generator.generate()
 
 
+func _update_output_node() -> void:
+	if is_instance_valid(_output_node):
+		await _output_node.update_slots()
+		await get_tree().process_frame
+		_graph_edit.remove_invalid_connections()
+
 
 func get_selected_generator() -> GaeaGenerator:
 	return _selected_generator
@@ -136,18 +148,30 @@ func _save_data() -> void:
 func _load_data() -> void:
 	_graph_edit.scroll_offset = _selected_generator.data.scroll_offset
 
+	var has_output_node: bool = false
 	for idx in _selected_generator.data.resources.size():
 		var resource: GaeaNodeResource = _selected_generator.data.resources[idx]
 		var node: GraphNode = _add_node(resource)
 		var node_data: Dictionary = _selected_generator.data.node_data[idx]
+
+		if resource.is_output:
+			has_output_node = true
+			_output_node = node
+
 		if is_instance_valid(node):
 			node.load_save_data.call_deferred(node_data)
+
+	if not has_output_node:
+		_add_node(preload("res://addons/gaea/graph/nodes/output_node_resource.tres"))
 
 	# from_node and to_node are indexes in the resources array
 	for connection in _selected_generator.data.connections:
 		var from_node: GraphNode = _selected_generator.data.resources[connection.from_node].node
 		var to_node: GraphNode = _selected_generator.data.resources[connection.to_node].node
-		_graph_edit.connect_node(from_node.name, connection.from_port, to_node.name, connection.to_port)
+
+		if to_node.get_input_port_count() <= connection.to_port:
+			continue
+		_graph_edit.connection_request.emit(from_node.name, connection.from_port, to_node.name, connection.to_port)
 
 	update_connections()
 

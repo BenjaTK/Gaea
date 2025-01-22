@@ -29,6 +29,7 @@ right_label = "Data"
 
 [resource]
 script = ExtResource("3_lluvy")
+operation = 0
 input_slots = Array[ExtResource("2_jv6bw")]([SubResource("Resource_i353x")])
 args = Array[ExtResource("1_5uh61")]([SubResource("Resource_wph30")])
 output_slots = Array[ExtResource("2_jv6bw")]([SubResource("Resource_avr7f")])

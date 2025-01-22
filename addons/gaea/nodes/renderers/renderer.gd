@@ -22,5 +22,5 @@ func _connect_signals() -> void:
 		generator.generation_finished.connect(render)
 
 
-func render(data: Dictionary) -> void:
+func render(grid: GaeaGrid) -> void:
 	pass

@@ -26,7 +26,8 @@ func _ready() -> void:
 	if _graph_node is not GraphNode:
 		return
 
-	await _graph_node.ready
+	if not _graph_node.is_node_ready():
+		await _graph_node.ready
 	var parent: Node = get_parent()
 	var idx: int = get_index()
 	if parent != owner and parent.get_parent() == owner:

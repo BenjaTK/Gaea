@@ -21,6 +21,9 @@ func _ready() -> void:
 
 
 func initialize() -> void:
+	if not is_instance_valid(resource):
+		return
+
 	for input_slot in resource.input_slots:
 		add_child(input_slot.get_node())
 
@@ -89,14 +92,12 @@ func get_save_data() -> Dictionary:
 		resource.data[arg.name.to_lower()] = get_arg_value(arg.name)
 
 	var dictionary: Dictionary = {
-		"position": position_offset,
-		"size": size
+		"position": position_offset
 	}
 	return dictionary
 
 
 func load_save_data(data: Dictionary) -> void:
-	size = data.size
 	position_offset = data.position
 
 	for child in get_children():

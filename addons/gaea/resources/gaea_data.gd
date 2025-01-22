@@ -3,11 +3,20 @@ class_name GaeaData
 extends Resource
 
 
+signal layer_count_modified
+
+
+@export var layers: Array[GaeaLayer] = [GaeaLayer.new()] :
+	set(value):
+		layers = value
+		layer_count_modified.emit()
 @export_storage var connections: Array[Dictionary]
 @export_storage var resources: Array[GaeaNodeResource]
 @export_storage var node_data: Array[Dictionary]
 @export_storage var parameters: Dictionary
 @export_storage var scroll_offset: Vector2
+
+var generator: GaeaGenerator
 
 
 func _init() -> void:
