@@ -19,8 +19,7 @@ func _enter_tree() -> void:
 
 
 func _exit_tree() -> void:
-	if is_instance_valid(_panel.get_selected_generator()):
-		_panel.unpopulate()
+	_panel.unpopulate()
 	remove_control_from_bottom_panel(_panel)
 
 

@@ -23,14 +23,25 @@ func populate(node: GaeaGenerator) -> void:
 		_selected_generator = node
 		if not _selected_generator.data.layer_count_modified.is_connected(_update_output_node):
 			_selected_generator.data.layer_count_modified.connect(_update_output_node)
+		if not _selected_generator.data_changed.is_connected(_on_data_changed):
+			_selected_generator.data_changed.connect(_on_data_changed)
 		_load_data.call_deferred()
 
 
 func unpopulate() -> void:
 	_save_data()
-	if _selected_generator.data.layer_count_modified.is_connected(_update_output_node):
-		_selected_generator.data.layer_count_modified.disconnect(_update_output_node)
+	if is_instance_valid(_selected_generator):
+		if _selected_generator.data.layer_count_modified.is_connected(_update_output_node):
+			_selected_generator.data.layer_count_modified.disconnect(_update_output_node)
+		if _selected_generator.data_changed.is_connected(_on_data_changed):
+			_selected_generator.data_changed.disconnect(_on_data_changed)
+
 	_selected_generator = null
+
+	_remove_children()
+
+
+func _remove_children() -> void:
 	for child in _graph_edit.get_children():
 		if child is GraphNode:
 			child.queue_free()
@@ -38,6 +49,11 @@ func unpopulate() -> void:
 
 func _on_new_data_button_pressed() -> void:
 	_selected_generator.data = GaeaData.new()
+	populate(_selected_generator)
+
+
+func _on_data_changed() -> void:
+	_remove_children()
 	populate(_selected_generator)
 
 

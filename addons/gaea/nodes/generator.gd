@@ -3,10 +3,14 @@ class_name GaeaGenerator
 extends Node
 
 
+signal data_changed
 signal generation_finished(grid: GaeaGrid)
 
 
-@export var data: GaeaData
+@export var data: GaeaData :
+	set(value):
+		data = value
+		data_changed.emit()
 @export var seed: int = randi()
 @export var random_seed_on_generate: bool = true
 ## Leave [param z] as [code]1[/code] for 2D worlds.
