@@ -1,7 +1,7 @@
 [gd_scene load_steps=36 format=4 uid="uid://yj8lg31imwsl"]
 
 [ext_resource type="Script" path="res://addons/gaea/nodes/generator.gd" id="1_b5xa0"]
-[ext_resource type="Script" path="res://addons/gaea/resources/tilemap_tile_info.gd" id="2_cmmaq"]
+[ext_resource type="Script" path="res://addons/gaea/resources/tilemap_material.gd" id="2_cmmaq"]
 [ext_resource type="Script" path="res://addons/gaea/resources/gaea_data.gd" id="3_aq2cv"]
 [ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_argument.gd" id="3_pv6db"]
 [ext_resource type="Script" path="res://addons/gaea/nodes/renderer.gd" id="3_qqern"]
@@ -14,12 +14,12 @@
 [ext_resource type="Script" path="res://addons/gaea/graph/nodes/root/data/basic/fill.gd" id="8_owafh"]
 [ext_resource type="Shader" uid="uid://c2pc7mfv0730k" path="res://new_shader.tres" id="11_kcwyn"]
 
-[sub_resource type="Resource" id="Resource_lto02"]
+[sub_resource type="Resource" id="Resource_avvua"]
 script = ExtResource("2_cmmaq")
 type = 0
 tilemap_layer = 0
 source_id = 0
-atlas_coord = Vector2i(2, 0)
+atlas_coord = Vector2i(1, 0)
 alternative_tile = 0
 
 [sub_resource type="Resource" id="Resource_521ip"]
@@ -159,19 +159,19 @@ script = ExtResource("3_pv6db")
 type = 3
 name = "name"
 
-[sub_resource type="Resource" id="Resource_6s8np"]
+[sub_resource type="Resource" id="Resource_m34i8"]
 script = ExtResource("8_3dpxg")
 type = 24
 hint = 17
-hint_string = "TileInfo"
+hint_string = "GaeaMaterial"
 output_type = 2
 input_slots = Array[ExtResource("4_5mrl4")]([])
 args = Array[ExtResource("3_pv6db")]([SubResource("Resource_cvpld")])
 output_slots = Array[ExtResource("4_5mrl4")]([])
-title = "TileInfoVariable"
+title = "MaterialVariable"
 is_output = false
 data = {
-"name": "TileInfoVariable"
+"name": "Material"
 }
 
 [sub_resource type="Resource" id="Resource_qmf2c"]
@@ -202,7 +202,7 @@ connections = Array[Dictionary]([{
 "to_node": 0,
 "to_port": 1
 }])
-resources = Array[ExtResource("5_d22to")]([SubResource("Resource_t5lsk"), SubResource("Resource_xgeab"), SubResource("Resource_sbcxf"), SubResource("Resource_wd54n"), SubResource("Resource_tprwj"), SubResource("Resource_6s8np")])
+resources = Array[ExtResource("5_d22to")]([SubResource("Resource_t5lsk"), SubResource("Resource_xgeab"), SubResource("Resource_sbcxf"), SubResource("Resource_wd54n"), SubResource("Resource_tprwj"), SubResource("Resource_m34i8")])
 node_data = Array[Dictionary]([{
 "position": Vector2(580, -300),
 "size": Vector2(256, 188)
@@ -219,23 +219,23 @@ node_data = Array[Dictionary]([{
 "position": Vector2(240, -60),
 "size": Vector2(256, 70)
 }, {
-"position": Vector2(140, -220),
+"position": Vector2(120, -220),
 "size": Vector2(256, 70)
 }])
 parameters = {
+"Material": {
+"hint": 17,
+"hint_string": "GaeaMaterial",
+"name": "Material",
+"type": 24,
+"value": SubResource("Resource_avvua")
+},
 "Min": {
 "hint": 0,
 "hint_string": "",
 "name": "Min",
 "type": 3,
 "value": 0.0
-},
-"TileInfoVariable": {
-"hint": 17,
-"hint_string": "TileInfo",
-"name": "TileInfoVariable",
-"type": 24,
-"value": SubResource("Resource_lto02")
 },
 "ValueToFill": {
 "hint": 0,
@@ -245,10 +245,10 @@ parameters = {
 "value": 0.0
 }
 }
-scroll_offset = Vector2(-308.516, -221)
-ValueToFill = 0.0
+scroll_offset = Vector2(-82.281, -294.237)
 Min = 0.0
-TileInfoVariable = SubResource("Resource_lto02")
+ValueToFill = 0.0
+Material = SubResource("Resource_avvua")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smit1"]
 texture = ExtResource("3_snetl")
@@ -271,7 +271,7 @@ shader_parameter/asefasef = 0.0
 [node name="GaeaGenerator" type="Node" parent="."]
 script = ExtResource("1_b5xa0")
 data = SubResource("Resource_qmf2c")
-seed = 2142827902
+seed = 4051942809
 world_size = Vector2i(4, 4)
 
 [node name="GaeaRenderer" type="Node" parent="." node_paths=PackedStringArray("tilemap")]
@@ -279,7 +279,7 @@ script = ExtResource("3_qqern")
 tilemap = NodePath("../TileMapLayer")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAABAAMAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAACAAMAAAAAAAAAAAADAAAAAAAAAAAAAAADAAEAAAAAAAAAAAADAAIAAAAAAAAAAAADAAMAAAAAAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAABAAAAAAAAAAIAAAABAAAAAAAAAAMAAAABAAAAAAABAAAAAAABAAAAAAABAAEAAAABAAAAAAABAAIAAAABAAAAAAABAAMAAAABAAAAAAACAAAAAAABAAAAAAACAAEAAAABAAAAAAACAAIAAAABAAAAAAACAAMAAAABAAAAAAADAAAAAAABAAAAAAADAAEAAAABAAAAAAADAAIAAAABAAAAAAADAAMAAAABAAAAAAA=")
 tile_set = SubResource("TileSet_5nfp8")
 
 [node name="Node2D" type="Node2D" parent="."]

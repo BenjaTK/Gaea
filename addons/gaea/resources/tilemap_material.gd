@@ -1,6 +1,6 @@
 @tool
-class_name TilemapTileInfo
-extends TileInfo
+class_name TilemapMaterial
+extends GaeaMaterial
 ## Resource used to tell the generators which tile from a [TileMap] to place.
 
 enum Type { SINGLE_CELL, TERRAIN }  ## Tile is just a single cell in the TileMap. Requires a [param source_id] and a [param atlas_coord]. Can optionally be an [param alternative_tile].  ## Tile is a terrain from a terrain set. Allows for autotiling. Requires a [param terrain_set] and a [param terrain]

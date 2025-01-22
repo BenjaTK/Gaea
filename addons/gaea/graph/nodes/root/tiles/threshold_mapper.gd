@@ -8,7 +8,7 @@ func get_data(output_port: int, area: Rect2i, generator_data: GaeaData) -> Dicti
 		get_connected_port_to(0),
 		area, generator_data
 	)
-	var tile_info: TileInfo = null
+	var tile_info: GaeaMaterial = null
 	if get_connected_resource_idx(1) != -1:
 		var tile_info_input_resource: GaeaNodeResource = generator_data.resources[get_connected_resource_idx(1)]
 		if is_instance_valid(tile_info_input_resource):
