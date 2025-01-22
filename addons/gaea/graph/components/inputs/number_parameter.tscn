@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dp7blnx7abb5e"]
+
+[ext_resource type="Script" path="res://addons/gaea/graph/components/inputs/number_parameter.gd" id="1_g0oou"]
+[ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/inputs/base_parameter.tscn" id="1_gco3q"]
+
+[node name="NumberParameter" instance=ExtResource("1_gco3q")]
+script = ExtResource("1_g0oou")
+input_type = 4
+
+[node name="SpinBox" type="SpinBox" parent="." index="1"]
+layout_mode = 2
+step = 0.01
+value = 1.0
+allow_greater = true
+allow_lesser = true

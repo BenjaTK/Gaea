@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://bvvkvcyx16vme"]
+
+[ext_resource type="PackedScene" path="res://addons/gaea/graph/base_node.tscn" id="1_g76s6"]
+[ext_resource type="Script" path="res://addons/gaea/graph/old_nodes/data/shapes/rect_data_generator.gd" id="2_vhf4b"]
+[ext_resource type="PackedScene" uid="uid://cqpby5jyv71l0" path="res://addons/gaea/graph/components/slot.tscn" id="2_wi5m1"]
+[ext_resource type="PackedScene" path="res://addons/gaea/graph/components/inputs/vector_parameter.tscn" id="3_v5avc"]
+[ext_resource type="Script" path="res://addons/gaea/graph/components/inputs/number_parameter.gd" id="4_grlwp"]
+
+[node name="RectangleData" instance=ExtResource("1_g76s6")]
+custom_minimum_size = Vector2(256, 128)
+title = "Rect Data Generator"
+slot/0/left_enabled = true
+slot/0/left_type = 3
+slot/0/left_color = Color(0.647059, 0.47451, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = -1
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+slot/1/left_enabled = true
+slot/1/left_type = 4
+slot/1/left_color = Color(0.827451, 0.827451, 0.827451, 1)
+slot/1/left_icon = null
+slot/1/right_enabled = false
+slot/1/right_type = -1
+slot/1/right_color = Color(1, 1, 1, 1)
+slot/1/right_icon = null
+slot/1/draw_stylebox = true
+slot/2/left_enabled = false
+slot/2/left_type = 0
+slot/2/left_color = Color(0.611765, 0.6, 0.619608, 1)
+slot/2/left_icon = null
+slot/2/right_enabled = true
+slot/2/right_type = 0
+slot/2/right_color = Color(0.611765, 0.6, 0.619608, 1)
+slot/2/right_icon = null
+slot/2/draw_stylebox = true
+script = ExtResource("2_vhf4b")
+
+[node name="SizeParameter" type="HBoxContainer" parent="." index="1"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SizeParameter" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Size"
+
+[node name="VectorParameter" parent="SizeParameter" index="1" instance=ExtResource("3_v5avc")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ValueParameter" type="HBoxContainer" parent="." index="2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ValueParameter" index="0"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Value"
+
+[node name="NumberParameter" type="SpinBox" parent="ValueParameter" index="1"]
+layout_mode = 2
+step = 0.1
+value = 1.0
+allow_greater = true
+allow_lesser = true
+script = ExtResource("4_grlwp")
+input_type = 4
+connection_idx = 1
+
+[node name="Slot" parent="." index="3" instance=ExtResource("2_wi5m1")]
+layout_mode = 2
+left_enabled = false
+right_label = "Data"

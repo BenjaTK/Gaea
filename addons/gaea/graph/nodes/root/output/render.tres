@@ -1,0 +1,23 @@
+[gd_resource type="Resource" load_steps=5 format=3 uid="uid://bbkdvyxkj2slo"]
+
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_qul6j"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_kjae6"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/root/output/render.gd" id="3_o7q0r"]
+
+[sub_resource type="Resource" id="Resource_42v85"]
+script = ExtResource("2_kjae6")
+left_enabled = true
+left_type = 1
+left_label = "Map"
+right_enabled = false
+right_type = 0
+right_label = ""
+
+[resource]
+script = ExtResource("3_o7q0r")
+input_slots = Array[ExtResource("2_kjae6")]([SubResource("Resource_42v85")])
+args = Array[ExtResource("1_qul6j")]([])
+output_slots = Array[ExtResource("2_kjae6")]([])
+title = "Render"
+is_output = true
+data = {}

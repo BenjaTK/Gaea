@@ -4,7 +4,7 @@ extends Resource
 
 
 @export_storage var connections: Array[Dictionary]
-@export_storage var nodes: Array[PackedScene]
+@export_storage var resources: Array[GaeaNodeResource]
 @export_storage var node_data: Array[Dictionary]
 @export_storage var parameters: Dictionary
 @export_storage var scroll_offset: Vector2

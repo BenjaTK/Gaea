@@ -157,6 +157,7 @@ text = "Create"
 [connection signal="disconnection_request" from="Editor/VBoxContainer/GraphEdit" to="Editor/VBoxContainer/GraphEdit" method="_on_disconnection_request"]
 [connection signal="end_node_move" from="Editor/VBoxContainer/GraphEdit" to="." method="_save_data"]
 [connection signal="gui_input" from="Editor/VBoxContainer/GraphEdit" to="." method="_on_graph_edit_gui_input"]
+[connection signal="node_selected" from="Editor/VBoxContainer/GraphEdit" to="Editor/VBoxContainer/GraphEdit" method="_on_node_selected"]
 [connection signal="request_connection_update" from="Editor/VBoxContainer/GraphEdit" to="." method="update_connections"]
 [connection signal="item_activated" from="Editor/CreateNodePopup/Margin/VBox/Tree" to="Editor/CreateNodePopup/Margin/VBox/Tree" method="_on_item_activated"]
 [connection signal="node_selected_for_creation" from="Editor/CreateNodePopup/Margin/VBox/Tree" to="." method="_on_tree_node_selected_for_creation"]

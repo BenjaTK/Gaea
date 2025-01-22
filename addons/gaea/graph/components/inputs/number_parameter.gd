@@ -2,17 +2,19 @@
 extends "res://addons/gaea/graph/components/inputs/graph_node_parameter.gd"
 
 
+@onready var spin_box: SpinBox = $SpinBox
+
+
 func _ready() -> void:
-	input_type = GaeaGraphNode.SlotTypes.NUMBER
 	super()
-	self.value_changed.connect(param_value_changed.emit.unbind(1))
+	spin_box.value_changed.connect(param_value_changed.emit)
 
 
 func get_param_value() -> float:
 	if super() != null:
 		return super()
-	return self.value
+	return spin_box.value
 
 
 func set_param_value(new_value: Variant) -> void:
-	self.value = new_value
+	spin_box.value = new_value

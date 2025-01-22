@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bn8i1l4q13pdw"]
+
+[ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/inputs/base_parameter.tscn" id="1_kwsdp"]
+[ext_resource type="Script" path="res://addons/gaea/graph/components/inputs/variable_name_parameter.gd" id="2_ofrdj"]
+
+[node name="VariableNameParameter" instance=ExtResource("1_kwsdp")]
+size_flags_horizontal = 3
+script = ExtResource("2_ofrdj")
+add_input_slot = false
+
+[node name="Label" parent="." index="0"]
+visible = false
+
+[node name="LineEdit" type="LineEdit" parent="." index="1"]
+layout_mode = 2
+size_flags_horizontal = 3

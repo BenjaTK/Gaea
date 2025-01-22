@@ -2,9 +2,9 @@
 extends Tree
 
 
-signal node_selected_for_creation(scene: PackedScene)
+signal node_selected_for_creation(resource: GaeaNodeResource)
 
-const NODES_FOLDER_PATH: String = "res://addons/gaea/graph/nodes/"
+const NODES_FOLDER_PATH: String = "res://addons/gaea/graph/nodes/root/"
 
 
 func _ready() -> void:
@@ -24,7 +24,7 @@ func _populate_tree_with_files(folder_path: String, parent_item: TreeItem) -> vo
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
 	while file_name != "":
-		if not dir.current_is_dir() and not file_name.ends_with(".tscn"):
+		if not dir.current_is_dir() and not file_name.ends_with(".tres"):
 			file_name = dir.get_next()
 			continue
 
@@ -35,16 +35,17 @@ func _populate_tree_with_files(folder_path: String, parent_item: TreeItem) -> vo
 		if dir.current_is_dir():
 			_populate_tree_with_files(file_path + "/", tree_item)
 
-		if file_name.ends_with(".tscn"):
+		if file_name.ends_with(".tres"):
 			tree_item.set_metadata(0, load(file_path))
+			print(file_name)
 
 		file_name = dir.get_next()
 
 
 func _on_item_activated() -> void:
 	var item: TreeItem = get_selected()
-	if item.get_metadata(0) is PackedScene:
-		node_selected_for_creation.emit(item.get_metadata(0))
+	if item.get_metadata(0) is GaeaNodeResource:
+		node_selected_for_creation.emit(item.get_metadata(0).duplicate())
 
 
 func _on_create_button_pressed() -> void:

@@ -1,0 +1,28 @@
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://ch7u7802bkv3v"]
+
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_uh15l"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/root/data/basic/fill.gd" id="1_uk2rb"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_5mlbf"]
+
+[sub_resource type="Resource" id="Resource_qmf8v"]
+script = ExtResource("1_uh15l")
+type = 0
+name = "value"
+
+[sub_resource type="Resource" id="Resource_4o1fi"]
+script = ExtResource("2_5mlbf")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 0
+right_label = "Data"
+
+[resource]
+script = ExtResource("1_uk2rb")
+input_slots = Array[ExtResource("2_5mlbf")]([])
+args = Array[ExtResource("1_uh15l")]([SubResource("Resource_qmf8v")])
+output_slots = Array[ExtResource("2_5mlbf")]([SubResource("Resource_4o1fi")])
+title = "FullData"
+is_output = false
+data = {}
