@@ -35,13 +35,6 @@ func _ready() -> void:
 
 
 func get_param_value() -> Variant:
-	if add_input_slot:
-		var _connected_node: GaeaGraphNode = _graph_node.get_connected_node(_input_idx)
-		prints(_connected_node, "is connected to", resource.name)
-		if _connected_node != null:
-			return _connected_node.resource.get_data(
-				_graph_node.resource.get_connected_port_to(_input_idx), Rect2i(), _graph_node.generator.data
-			).value
 	return null
 
 
