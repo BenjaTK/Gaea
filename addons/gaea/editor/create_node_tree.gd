@@ -6,6 +6,8 @@ signal node_selected_for_creation(resource: GaeaNodeResource)
 
 const NODES_FOLDER_PATH: String = "res://addons/gaea/graph/nodes/root/"
 
+@export var description_label: RichTextLabel
+
 
 func _ready() -> void:
 	var root: TreeItem = create_item()
@@ -49,3 +51,9 @@ func _on_item_activated() -> void:
 
 func _on_create_button_pressed() -> void:
 	_on_item_activated()
+
+
+func _on_item_selected() -> void:
+	var item: TreeItem = get_selected()
+	if item.get_metadata(0) is GaeaNodeResource:
+		description_label.set_description_text(item.get_metadata(0).description)

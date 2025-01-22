@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dngytsjlmkfg7"]
+[gd_scene load_steps=5 format=3 uid="uid://dngytsjlmkfg7"]
 
 [ext_resource type="Script" path="res://addons/gaea/editor/panel.gd" id="1_afcqa"]
 [ext_resource type="Script" path="res://addons/gaea/editor/graph_edit.gd" id="2_cdav6"]
 [ext_resource type="Script" path="res://addons/gaea/editor/create_node_tree.gd" id="2_vpeaa"]
+[ext_resource type="Script" path="res://addons/gaea/editor/description_label.gd" id="4_qpf66"]
 
 [node name="Gaea" type="Control"]
 custom_minimum_size = Vector2(0, 256)
@@ -114,12 +115,13 @@ layout_mode = 2
 placeholder_text = "Search"
 clear_button_enabled = true
 
-[node name="Tree" type="Tree" parent="Editor/CreateNodePopup/Margin/VBox"]
+[node name="Tree" type="Tree" parent="Editor/CreateNodePopup/Margin/VBox" node_paths=PackedStringArray("description_label")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
 script = ExtResource("2_vpeaa")
+description_label = NodePath("../PanelContainer/DescriptionLabel")
 
 [node name="Label" type="Label" parent="Editor/CreateNodePopup/Margin/VBox"]
 layout_mode = 2
@@ -128,10 +130,13 @@ text = "Description"
 [node name="PanelContainer" type="PanelContainer" parent="Editor/CreateNodePopup/Margin/VBox"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Editor/CreateNodePopup/Margin/VBox/PanelContainer"]
+[node name="DescriptionLabel" type="RichTextLabel" parent="Editor/CreateNodePopup/Margin/VBox/PanelContainer"]
+custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
+bbcode_enabled = true
 text = "Description of the selected node goes here"
 autowrap_mode = 2
+script = ExtResource("4_qpf66")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Editor/CreateNodePopup/Margin/VBox"]
 layout_mode = 2
@@ -160,6 +165,7 @@ text = "Create"
 [connection signal="node_selected" from="Editor/VBoxContainer/GraphEdit" to="Editor/VBoxContainer/GraphEdit" method="_on_node_selected"]
 [connection signal="request_connection_update" from="Editor/VBoxContainer/GraphEdit" to="." method="update_connections"]
 [connection signal="item_activated" from="Editor/CreateNodePopup/Margin/VBox/Tree" to="Editor/CreateNodePopup/Margin/VBox/Tree" method="_on_item_activated"]
+[connection signal="item_selected" from="Editor/CreateNodePopup/Margin/VBox/Tree" to="Editor/CreateNodePopup/Margin/VBox/Tree" method="_on_item_selected"]
 [connection signal="node_selected_for_creation" from="Editor/CreateNodePopup/Margin/VBox/Tree" to="." method="_on_tree_node_selected_for_creation"]
 [connection signal="pressed" from="Editor/CreateNodePopup/Margin/VBox/HBoxContainer/CancelButton" to="." method="_on_cancel_create_button_pressed"]
 [connection signal="pressed" from="Editor/CreateNodePopup/Margin/VBox/HBoxContainer/CreateButton" to="Editor/CreateNodePopup/Margin/VBox/Tree" method="_on_create_button_pressed"]

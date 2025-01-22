@@ -7,6 +7,7 @@ extends Resource
 @export var args: Array[GaeaNodeArgument]
 @export var output_slots: Array[GaeaNodeSlot]
 @export var title: String = "Node"
+@export_multiline var description: String = ""
 @export var is_output: bool = false
 
 @export_storage var data: Dictionary

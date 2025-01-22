@@ -4,17 +4,17 @@
 [ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_we7oc"]
 [ext_resource type="Script" path="res://addons/gaea/graph/nodes/root/tiles/threshold_mapper.gd" id="3_0cira"]
 
-[sub_resource type="Resource" id="Resource_521ip"]
+[sub_resource type="Resource" id="Resource_3vm82"]
 script = ExtResource("1_w2bvo")
 type = 0
 name = "min"
 
-[sub_resource type="Resource" id="Resource_7ihha"]
+[sub_resource type="Resource" id="Resource_qexl1"]
 script = ExtResource("1_w2bvo")
 type = 0
 name = "max"
 
-[sub_resource type="Resource" id="Resource_cn2o1"]
+[sub_resource type="Resource" id="Resource_ft4k8"]
 script = ExtResource("2_we7oc")
 left_enabled = true
 left_type = 0
@@ -23,16 +23,16 @@ right_enabled = false
 right_type = 0
 right_label = ""
 
-[sub_resource type="Resource" id="Resource_1rate"]
+[sub_resource type="Resource" id="Resource_7djyk"]
 script = ExtResource("2_we7oc")
 left_enabled = true
 left_type = 2
-left_label = "TileInfo"
+left_label = "Material"
 right_enabled = false
 right_type = 0
 right_label = ""
 
-[sub_resource type="Resource" id="Resource_603tl"]
+[sub_resource type="Resource" id="Resource_3bfbu"]
 script = ExtResource("2_we7oc")
 left_enabled = false
 left_type = 0
@@ -43,9 +43,11 @@ right_label = "Map"
 
 [resource]
 script = ExtResource("3_0cira")
-input_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_cn2o1"), SubResource("Resource_1rate")])
-args = Array[ExtResource("1_w2bvo")]([SubResource("Resource_521ip"), SubResource("Resource_7ihha")])
-output_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_603tl")])
+input_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_ft4k8"), SubResource("Resource_7djyk")])
+args = Array[ExtResource("1_w2bvo")]([SubResource("Resource_3vm82"), SubResource("Resource_qexl1")])
+output_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_3bfbu")])
 title = "ThresholdMapper"
+description = "Outputs a map.
+For every cell of a value between [param]min[/bg][/c] and [param]max[/bg][/c] (inclusive), sets that cell to [param]material[/bg][/c]. Otherwise, sets it to [code]null[/bg][/c]."
 is_output = false
 data = {}

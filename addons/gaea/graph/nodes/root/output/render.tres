@@ -19,5 +19,6 @@ input_slots = Array[ExtResource("2_kjae6")]([SubResource("Resource_42v85")])
 args = Array[ExtResource("1_qul6j")]([])
 output_slots = Array[ExtResource("2_kjae6")]([])
 title = "Render"
+description = ""
 is_output = true
 data = {}
