@@ -1,3 +1,4 @@
+@tool
 class_name GridmapMaterial
 extends GaeaMaterial
 
