@@ -1,0 +1,39 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://d4f3kftfw2inw"]
+
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_oxjdu"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_2lypi"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/root/functions/operation.gd" id="3_vodu1"]
+
+[sub_resource type="Resource" id="Resource_wph30"]
+script = ExtResource("1_oxjdu")
+type = 0
+name = "value"
+
+[sub_resource type="Resource" id="Resource_i353x"]
+script = ExtResource("2_2lypi")
+left_enabled = true
+left_type = 0
+left_label = "Data"
+right_enabled = false
+right_type = 0
+right_label = ""
+
+[sub_resource type="Resource" id="Resource_avr7f"]
+script = ExtResource("2_2lypi")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 0
+right_label = "Data"
+
+[resource]
+script = ExtResource("3_vodu1")
+operation = 2
+input_slots = Array[ExtResource("2_2lypi")]([SubResource("Resource_i353x")])
+args = Array[ExtResource("1_oxjdu")]([SubResource("Resource_wph30")])
+output_slots = Array[ExtResource("2_2lypi")]([SubResource("Resource_avr7f")])
+title = "Multiply"
+description = "Divides all cells in [param]data[/bg][/c] by [param]value[/bg][/c]."
+is_output = false
+data = {}
