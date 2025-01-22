@@ -2,6 +2,9 @@
 extends GaeaNodeResource
 
 
+@export_enum("2D", "3D") var type = 0
+
+
 
 func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
 	# TODO: Get generator's seed instead of random one.
@@ -15,5 +18,12 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 	for x in get_axis_range(Axis.X, area):
 		for y in get_axis_range(Axis.Y, area):
 			for z in get_axis_range(Axis.Z, area):
-				dictionary[Vector3i(x, y, z)] = _noise.get_noise_2d(x, y)
+				dictionary[Vector3i(x, y, z)] = _get_noise_value(Vector3i(x, y, z), _noise)
 	return dictionary
+
+
+func _get_noise_value(cell: Vector3i, noise: FastNoiseLite) -> float:
+	if type == 0:
+		return noise.get_noise_2d(cell.x, cell.y)
+	else:
+		return noise.get_noise_3d(cell.x, cell.y,cell.z)

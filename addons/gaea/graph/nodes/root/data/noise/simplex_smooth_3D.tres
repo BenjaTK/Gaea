@@ -1,0 +1,39 @@
+[gd_resource type="Resource" load_steps=8 format=3 uid="uid://bumgueaiw5d1f"]
+
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_0sim2"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_nispv"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/root/data/noise/simplex_smooth.gd" id="3_xxdok"]
+
+[sub_resource type="Resource" id="Resource_n5m4n"]
+script = ExtResource("1_0sim2")
+type = 0
+name = "frequency"
+
+[sub_resource type="Resource" id="Resource_vx1by"]
+script = ExtResource("1_0sim2")
+type = 0
+name = "lacunarity"
+
+[sub_resource type="Resource" id="Resource_smuhk"]
+script = ExtResource("1_0sim2")
+type = 1
+name = "octaves"
+
+[sub_resource type="Resource" id="Resource_cmwkl"]
+script = ExtResource("2_nispv")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 0
+right_label = "Data [-1, 1]"
+
+[resource]
+script = ExtResource("3_xxdok")
+type = 1
+input_slots = Array[ExtResource("2_nispv")]([])
+args = Array[ExtResource("1_0sim2")]([SubResource("Resource_n5m4n"), SubResource("Resource_vx1by"), SubResource("Resource_smuhk")])
+output_slots = Array[ExtResource("2_nispv")]([SubResource("Resource_cmwkl")])
+title = "SimplexSmooth3D"
+is_output = false
+data = {}

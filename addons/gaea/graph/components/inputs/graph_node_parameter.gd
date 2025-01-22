@@ -16,6 +16,8 @@ signal param_value_changed(new_value: Variant)
 
 
 func _ready() -> void:
+	if resource.default_value != null:
+		set_param_value(resource.default_value)
 
 	if get_parent() is GaeaGraphNode:
 		_graph_node = get_parent()

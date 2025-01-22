@@ -116,7 +116,6 @@ func _save_data() -> void:
 	for child in _graph_edit.get_children():
 		if child is GraphNode:
 			resources.append(child.resource)
-			print(child)
 
 	for connection in connections:
 		var from_node: GraphNode = _graph_edit.get_node(NodePath(connection.from_node))

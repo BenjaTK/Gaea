@@ -6,7 +6,6 @@ extends "res://addons/gaea/graph/components/inputs/graph_node_parameter.gd"
 
 
 func _ready() -> void:
-	set_param_value(resource.default_value)
 	super()
 	spin_box.value_changed.connect(param_value_changed.emit)
 
@@ -21,4 +20,6 @@ func get_param_value() -> float:
 
 
 func set_param_value(new_value: Variant) -> void:
+	if new_value == null:
+		new_value = 0.0
 	spin_box.value = new_value

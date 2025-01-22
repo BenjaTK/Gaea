@@ -30,7 +30,3 @@ func _on_disconnection_request(from_node: StringName, from_port: int, to_node: S
 
 	get_node(NodePath(from_node)).notify_connections_updated.call_deferred()
 	get_node(NodePath(to_node)).notify_connections_updated.call_deferred()
-
-
-func _on_node_selected(node: Node) -> void:
-	print(node.connections)

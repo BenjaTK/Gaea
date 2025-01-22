@@ -28,7 +28,7 @@ func initialize() -> void:
 		"type": resource.type,
 		"hint": resource.hint,
 		"hint_string": resource.hint_string,
-		"value": null,
+		"value": _get_default_value(resource.type),
 	}
 
 	generator.data.notify_property_list_changed()
@@ -63,7 +63,6 @@ func _on_param_value_changed(value: Variant, node: GaeaGraphNodeParameter, param
 
 	if value == previous_name:
 		return
-	prints(value, previous_name)
 
 	var original_idx: int = generator.data.parameters.keys().find(previous_name)
 	generator.data.parameters[value] = generator.data.parameters.get(previous_name)
@@ -73,3 +72,18 @@ func _on_param_value_changed(value: Variant, node: GaeaGraphNodeParameter, param
 	previous_name = value
 
 	generator.data.notify_property_list_changed()
+
+
+func _get_default_value(type: Variant.Type) -> Variant:
+	match type:
+		TYPE_FLOAT, TYPE_INT:
+			return 0
+		TYPE_VECTOR2:
+			return Vector2(0, 0)
+		TYPE_VECTOR2I:
+			return Vector2i(0, 0)
+		TYPE_VECTOR3:
+			return Vector3(0, 0, 0)
+		TYPE_VECTOR3I:
+			return Vector3i(0, 0, 0)
+	return null

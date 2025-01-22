@@ -37,7 +37,6 @@ func _populate_tree_with_files(folder_path: String, parent_item: TreeItem) -> vo
 
 		if file_name.ends_with(".tres"):
 			tree_item.set_metadata(0, load(file_path))
-			print(file_name)
 
 		file_name = dir.get_next()
 
