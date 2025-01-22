@@ -57,3 +57,26 @@ func _on_item_selected() -> void:
 	var item: TreeItem = get_selected()
 	if item.get_metadata(0) is GaeaNodeResource:
 		description_label.set_description_text(item.get_metadata(0).description)
+
+
+func _on_search_bar_text_changed(new_text: String) -> void:
+	if new_text.is_empty():
+		get_root().set_collapsed_recursive(true)
+		get_root().collapsed = false
+		deselect_all()
+		return
+
+	var item: TreeItem = get_root().get_next_in_tree()
+	var first_item_found: bool = false
+	item.collapsed = true
+
+	while item.get_next_in_tree() != null:
+		item = item.get_next_in_tree()
+		if item.get_text(0).to_lower().contains(new_text.to_lower()):
+			item.uncollapse_tree()
+			if not first_item_found:
+				scroll_to_item(item, true)
+				item.select(0)
+				first_item_found = true
+
+	ensure_cursor_is_visible()

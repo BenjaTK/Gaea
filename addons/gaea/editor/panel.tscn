@@ -110,7 +110,6 @@ theme_override_constants/margin_bottom = 6
 layout_mode = 2
 
 [node name="SearchBar" type="LineEdit" parent="Editor/CreateNodePopup/Margin/VBox"]
-visible = false
 layout_mode = 2
 placeholder_text = "Search"
 clear_button_enabled = true
@@ -164,6 +163,7 @@ text = "Create"
 [connection signal="gui_input" from="Editor/VBoxContainer/GraphEdit" to="." method="_on_graph_edit_gui_input"]
 [connection signal="node_selected" from="Editor/VBoxContainer/GraphEdit" to="Editor/VBoxContainer/GraphEdit" method="_on_node_selected"]
 [connection signal="request_connection_update" from="Editor/VBoxContainer/GraphEdit" to="." method="update_connections"]
+[connection signal="text_changed" from="Editor/CreateNodePopup/Margin/VBox/SearchBar" to="Editor/CreateNodePopup/Margin/VBox/Tree" method="_on_search_bar_text_changed"]
 [connection signal="item_activated" from="Editor/CreateNodePopup/Margin/VBox/Tree" to="Editor/CreateNodePopup/Margin/VBox/Tree" method="_on_item_activated"]
 [connection signal="item_selected" from="Editor/CreateNodePopup/Margin/VBox/Tree" to="Editor/CreateNodePopup/Margin/VBox/Tree" method="_on_item_selected"]
 [connection signal="node_selected_for_creation" from="Editor/CreateNodePopup/Margin/VBox/Tree" to="." method="_on_tree_node_selected_for_creation"]

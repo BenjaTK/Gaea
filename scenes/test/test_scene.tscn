@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://yj8lg31imwsl"]
+[gd_scene load_steps=22 format=4 uid="uid://yj8lg31imwsl"]
 
 [ext_resource type="Script" path="res://addons/gaea/nodes/generator.gd" id="1_b5xa0"]
 [ext_resource type="Script" path="res://addons/gaea/resources/gaea_data.gd" id="3_aq2cv"]
@@ -7,10 +7,67 @@
 [ext_resource type="Texture2D" uid="uid://cmy8ope6463sf" path="res://scenes/test/test_tileset.png" id="3_snetl"]
 [ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_slot.gd" id="4_5mrl4"]
 [ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_resource.gd" id="5_d22to"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/root/input/variable_node.gd" id="7_3487m"]
 [ext_resource type="Resource" uid="uid://bbkdvyxkj2slo" path="res://addons/gaea/graph/nodes/output_node_resource.tres" id="9_8skmy"]
-[ext_resource type="Script" path="res://addons/gaea/graph/nodes/root/data/noise/simplex_smooth.gd" id="9_fpx12"]
 [ext_resource type="Script" path="res://addons/gaea/nodes/renderers/tilemap_renderer.gd" id="11_db3f4"]
 [ext_resource type="Shader" uid="uid://c2pc7mfv0730k" path="res://new_shader.tres" id="11_kcwyn"]
+
+[sub_resource type="Resource" id="Resource_ruvqd"]
+script = ExtResource("3_hrvmf")
+enabled = true
+
+[sub_resource type="Resource" id="Resource_putew"]
+script = ExtResource("3_pv6db")
+type = 3
+name = "name"
+default_value = null
+
+[sub_resource type="Resource" id="Resource_8vyh2"]
+script = ExtResource("7_3487m")
+type = 3
+hint = 0
+hint_string = ""
+output_type = 4
+input_slots = Array[ExtResource("4_5mrl4")]([])
+args = Array[ExtResource("3_pv6db")]([SubResource("Resource_putew")])
+output_slots = Array[ExtResource("4_5mrl4")]([])
+title = "FloatVariable"
+description = "Float variable editable in the inspector."
+is_output = false
+data = {
+"name": "FloatVariable"
+}
+
+[sub_resource type="Resource" id="Resource_bv8x7"]
+script = ExtResource("7_3487m")
+type = 3
+hint = 0
+hint_string = ""
+output_type = 4
+input_slots = Array[ExtResource("4_5mrl4")]([])
+args = Array[ExtResource("3_pv6db")]([SubResource("Resource_putew")])
+output_slots = Array[ExtResource("4_5mrl4")]([])
+title = "FloatVariable"
+description = "Float variable editable in the inspector."
+is_output = false
+data = {
+"name": "FloatVariable2"
+}
+
+[sub_resource type="Resource" id="Resource_xx0qx"]
+script = ExtResource("3_aq2cv")
+layers = Array[ExtResource("3_hrvmf")]([SubResource("Resource_ruvqd")])
+connections = Array[Dictionary]([])
+resources = Array[ExtResource("5_d22to")]([ExtResource("9_8skmy"), SubResource("Resource_8vyh2"), SubResource("Resource_bv8x7")])
+node_data = Array[Dictionary]([{
+"position": Vector2(180, -120)
+}, {
+"position": Vector2(-260, -220)
+}, {
+"position": Vector2(-400, -120)
+}])
+parameters = {}
+scroll_offset = Vector2(-478.457, -247.803)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smit1"]
 texture = ExtResource("3_snetl")
@@ -38,111 +95,12 @@ item/0/shapes = []
 item/0/navigation_mesh_transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 item/0/navigation_layers = 1
 
-[sub_resource type="Resource" id="Resource_ruvqd"]
-script = ExtResource("3_hrvmf")
-enabled = true
-
-[sub_resource type="Resource" id="Resource_88nce"]
-script = ExtResource("3_pv6db")
-type = 0
-name = "frequency"
-default_value = 0.01
-
-[sub_resource type="Resource" id="Resource_w4c4h"]
-script = ExtResource("3_pv6db")
-type = 0
-name = "lacunarity"
-default_value = 2.0
-
-[sub_resource type="Resource" id="Resource_7ltu6"]
-script = ExtResource("3_pv6db")
-type = 1
-name = "octaves"
-default_value = 5
-
-[sub_resource type="Resource" id="Resource_8tvqk"]
-script = ExtResource("4_5mrl4")
-left_enabled = false
-left_type = 0
-left_label = ""
-right_enabled = true
-right_type = 0
-right_label = "Data [-1, 1]"
-
-[sub_resource type="Resource" id="Resource_vdo57"]
-script = ExtResource("9_fpx12")
-type = 0
-input_slots = Array[ExtResource("4_5mrl4")]([])
-args = Array[ExtResource("3_pv6db")]([SubResource("Resource_88nce"), SubResource("Resource_w4c4h"), SubResource("Resource_7ltu6")])
-output_slots = Array[ExtResource("4_5mrl4")]([SubResource("Resource_8tvqk")])
-title = "SimplexSmooth2D"
-description = "Creates a grid of values from [code]-1[/bg][/c] to [code]1[/bg][/c] based on a SimplexSmooth noise texture.
-[b]Ignores the z axis.[/b]"
-is_output = false
-data = {
-"frequency": 0.01,
-"lacunarity": 2.0,
-"octaves": 5.0
-}
-
-[sub_resource type="Resource" id="Resource_n5m4n"]
-script = ExtResource("3_pv6db")
-type = 0
-name = "frequency"
-default_value = 0.01
-
-[sub_resource type="Resource" id="Resource_vx1by"]
-script = ExtResource("3_pv6db")
-type = 0
-name = "lacunarity"
-default_value = 2.0
-
-[sub_resource type="Resource" id="Resource_smuhk"]
-script = ExtResource("3_pv6db")
-type = 1
-name = "octaves"
-default_value = 5
-
-[sub_resource type="Resource" id="Resource_cmwkl"]
-script = ExtResource("4_5mrl4")
-left_enabled = false
-left_type = 0
-left_label = ""
-right_enabled = true
-right_type = 0
-right_label = "Data [-1, 1]"
-
-[sub_resource type="Resource" id="Resource_j3krv"]
-script = ExtResource("9_fpx12")
-type = 1
-input_slots = Array[ExtResource("4_5mrl4")]([])
-args = Array[ExtResource("3_pv6db")]([SubResource("Resource_n5m4n"), SubResource("Resource_vx1by"), SubResource("Resource_smuhk")])
-output_slots = Array[ExtResource("4_5mrl4")]([SubResource("Resource_cmwkl")])
-title = "SimplexSmooth3D"
-description = "Creates a grid of values from [code]-1[/bg][/c] to [code]1[/bg][/c] based on a SimplexSmooth noise texture."
-is_output = false
-data = {
-"frequency": 0.01,
-"lacunarity": 2.0,
-"octaves": 5.0
-}
-
-[sub_resource type="Resource" id="Resource_xx0qx"]
-script = ExtResource("3_aq2cv")
-layers = Array[ExtResource("3_hrvmf")]([SubResource("Resource_ruvqd")])
-connections = Array[Dictionary]([])
-resources = Array[ExtResource("5_d22to")]([ExtResource("9_8skmy"), SubResource("Resource_vdo57"), SubResource("Resource_j3krv")])
-node_data = Array[Dictionary]([{
-"position": Vector2(180, -120)
-}, {
-"position": Vector2(-200, -320)
-}, {
-"position": Vector2(-400, -120)
-}])
-parameters = {}
-scroll_offset = Vector2(-584.681, -221)
-
 [node name="TestScene" type="Node2D"]
+
+[node name="GaeaGenerator" type="Node" parent="."]
+script = ExtResource("1_b5xa0")
+data = SubResource("Resource_xx0qx")
+seed = 3816219567
 
 [node name="GaeaTilemapRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map_layers")]
 script = ExtResource("11_db3f4")
@@ -162,8 +120,3 @@ material = SubResource("ShaderMaterial_c4gv6")
 [node name="GridMap" type="GridMap" parent="."]
 mesh_library = SubResource("MeshLibrary_onixc")
 cell_size = Vector3(1, 1, 1)
-
-[node name="GaeaGenerator" type="Node" parent="."]
-script = ExtResource("1_b5xa0")
-data = SubResource("Resource_xx0qx")
-seed = 3346669984

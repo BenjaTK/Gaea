@@ -9,8 +9,8 @@ extends GaeaRenderer
 func render(grid: GaeaGrid) -> void:
 	gridmap.clear()
 
-	for layer in grid.get_layers():
-		for cell in layer.keys():
-			var value = layer[cell]
-			if value is GridmapMaterial:
+	for layer_idx in grid.get_layers_count():
+		for cell in grid.get_layer(layer_idx):
+			var value = grid.get_layer(layer_idx)[cell]
+			if value is TilemapMaterial:
 				gridmap.set_cell_item(cell, value.item_idx)
