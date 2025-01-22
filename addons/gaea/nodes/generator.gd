@@ -9,7 +9,8 @@ signal generation_finished(generation_data: Dictionary)
 @export var data: GaeaData
 @export var seed: int = randi()
 @export var random_seed_on_generate: bool = true
-@export var world_size: Vector2i = Vector2i(128, 128)
+## Leave [param z] as [code]1[/code] for 2D worlds.
+@export var world_size: Vector3i = Vector3i(128, 128, 1)
 
 
 func _ready() -> void:
@@ -33,7 +34,7 @@ func generate() -> void:
 			output_resource = resource
 
 	output_resource.execute(
-		Rect2i(Vector2i.ZERO, world_size),
+		AABB(Vector3i.ZERO, world_size),
 		data,
 		self
 	)

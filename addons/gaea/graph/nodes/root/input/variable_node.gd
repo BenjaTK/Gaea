@@ -9,7 +9,7 @@ class_name GaeaVariableNodeResource
 @export var output_type: GaeaGraphNode.SlotTypes
 
 
-func get_data(output_port: int, area: Rect2i, generator_data: GaeaData) -> Dictionary:
+func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
 	return generator_data.parameters.get(get_arg("name"))
 
 

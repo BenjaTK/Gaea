@@ -16,6 +16,7 @@ signal param_value_changed(new_value: Variant)
 
 
 func _ready() -> void:
+
 	if get_parent() is GaeaGraphNode:
 		_graph_node = get_parent()
 		param_value_changed.connect(_graph_node._on_param_value_changed.bind(self, resource.name))

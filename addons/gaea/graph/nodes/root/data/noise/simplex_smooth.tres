@@ -26,7 +26,7 @@ left_type = 0
 left_label = ""
 right_enabled = true
 right_type = 0
-right_label = "Data"
+right_label = "Data [-1, 1]"
 
 [resource]
 script = ExtResource("3_8t7ga")

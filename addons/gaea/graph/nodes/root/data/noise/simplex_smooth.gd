@@ -3,7 +3,7 @@ extends GaeaNodeResource
 
 
 
-func get_data(output_port: int, area: Rect2i, generator_data: GaeaData) -> Dictionary:
+func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
 	# TODO: Get generator's seed instead of random one.
 	var _noise: FastNoiseLite = FastNoiseLite.new()
 	_noise.seed = randi()
@@ -14,5 +14,6 @@ func get_data(output_port: int, area: Rect2i, generator_data: GaeaData) -> Dicti
 	var dictionary: Dictionary
 	for x in get_axis_range(Axis.X, area):
 		for y in get_axis_range(Axis.Y, area):
-			dictionary[Vector2i(x, y)] = _noise.get_noise_2d(x, y)
+			for z in get_axis_range(Axis.Z, area):
+				dictionary[Vector3i(x, y, z)] = _noise.get_noise_2d(x, y)
 	return dictionary

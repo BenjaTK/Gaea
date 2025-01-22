@@ -6,8 +6,12 @@ extends "res://addons/gaea/graph/components/inputs/graph_node_parameter.gd"
 
 
 func _ready() -> void:
+	set_param_value(resource.default_value)
 	super()
 	spin_box.value_changed.connect(param_value_changed.emit)
+
+	if resource.type == GaeaNodeArgument.Type.INT:
+		spin_box.step = 1
 
 
 func get_param_value() -> float:

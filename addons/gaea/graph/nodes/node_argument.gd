@@ -9,8 +9,12 @@ enum Type {
 	VARIABLE_NAME
 }
 
-@export var type: Type
+@export var type: Type :
+	set(value):
+		type = value
+		notify_property_list_changed()
 @export var name: String
+var default_value: Variant
 
 var value: Variant
 
@@ -21,6 +25,7 @@ func get_arg_node() -> GaeaGraphNodeParameter:
 		return null
 	var node: GaeaGraphNodeParameter = scene.instantiate()
 	node.resource = self
+
 	return node
 
 
@@ -33,3 +38,17 @@ static func get_scene_from_type(type: Type) -> PackedScene:
 		Type.VARIABLE_NAME:
 			return preload("res://addons/gaea/graph/components/inputs/variable_name_parameter.tscn")
 	return null
+
+
+func _validate_property(property: Dictionary) -> void:
+	if property.name == "default_value":
+		match type:
+			Type.FLOAT:
+				property.type = TYPE_FLOAT
+				property.usage = PROPERTY_USAGE_EDITOR
+			Type.INT:
+				property.type = TYPE_INT
+				property.usage = PROPERTY_USAGE_EDITOR
+			Type.VECTOR2:
+				property.type = TYPE_VECTOR2
+				property.usage = PROPERTY_USAGE_EDITOR

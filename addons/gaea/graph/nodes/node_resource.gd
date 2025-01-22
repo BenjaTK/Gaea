@@ -13,14 +13,14 @@ extends Resource
 var connections: Array[Dictionary]
 var node: GraphNode
 
-enum Axis {X, Y}
+enum Axis {X, Y, Z}
 
 
-func get_data(output_port: int, area: Rect2i, generator_data: GaeaData) -> Dictionary:
+func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
 	return {}
 
 
-func execute(area: Rect2i, generator_data: GaeaData, generator: GaeaGenerator) -> void:
+func execute(area: AABB, generator_data: GaeaData, generator: GaeaGenerator) -> void:
 	pass
 
 
@@ -35,7 +35,7 @@ func get_arg(name: String, generator_data: GaeaData = null) -> Variant:
 		if get_connected_resource_idx(arg_connection_idx) != -1:
 			return generator_data.resources[get_connected_resource_idx(arg_connection_idx)].get_data(
 				get_connected_port_to(arg_connection_idx),
-				Rect2i(),
+				AABB(),
 				generator_data
 			).value
 
@@ -60,8 +60,9 @@ static func get_scene() -> PackedScene:
 	return preload("res://addons/gaea/graph/nodes/node.tscn")
 
 
-func get_axis_range(axis: Axis, area: Rect2i) -> Array:
+func get_axis_range(axis: Axis, area: AABB) -> Array:
 	match axis:
 		Axis.X: return range(area.position.x, area.size.x)
 		Axis.Y: return range(area.position.y, area.size.y)
+		Axis.Z: return range(area.position.z, area.size.z)
 	return []
