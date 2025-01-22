@@ -14,7 +14,7 @@ enum Type {
 		type = value
 		notify_property_list_changed()
 @export var name: String
-var default_value: Variant
+@export_storage var default_value: Variant
 
 var value: Variant
 
@@ -45,10 +45,10 @@ func _validate_property(property: Dictionary) -> void:
 		match type:
 			Type.FLOAT:
 				property.type = TYPE_FLOAT
-				property.usage = PROPERTY_USAGE_EDITOR
+				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
 			Type.INT:
 				property.type = TYPE_INT
-				property.usage = PROPERTY_USAGE_EDITOR
+				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
 			Type.VECTOR2:
 				property.type = TYPE_VECTOR2
-				property.usage = PROPERTY_USAGE_EDITOR
+				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE

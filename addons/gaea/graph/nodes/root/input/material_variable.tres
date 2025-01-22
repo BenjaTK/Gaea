@@ -8,6 +8,7 @@
 script = ExtResource("1_2h3fb")
 type = 3
 name = "name"
+default_value = null
 
 [resource]
 script = ExtResource("3_tkl3q")

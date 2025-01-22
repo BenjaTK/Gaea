@@ -8,11 +8,13 @@
 script = ExtResource("1_w2bvo")
 type = 0
 name = "min"
+default_value = null
 
 [sub_resource type="Resource" id="Resource_qexl1"]
 script = ExtResource("1_w2bvo")
 type = 0
 name = "max"
+default_value = null
 
 [sub_resource type="Resource" id="Resource_ft4k8"]
 script = ExtResource("2_we7oc")

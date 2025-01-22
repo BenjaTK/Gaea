@@ -8,6 +8,7 @@
 script = ExtResource("1_5uh61")
 type = 0
 name = "Value"
+default_value = null
 
 [sub_resource type="Resource" id="Resource_i353x"]
 script = ExtResource("2_jv6bw")
