@@ -19,12 +19,6 @@ var _temp_grid: GaeaGrid
 
 
 func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
-	# Check if the generator has a "settings" variable and if those
-	# settings have a "tile" variable.
-	if not generator.get("settings") or not generator.settings.get("tile"):
-		push_warning("GenerateBorder modifier not compatible with %s" % generator.name)
-		return
-
 	_temp_grid = grid.clone()
 
 	_generate_border_walls(grid)
