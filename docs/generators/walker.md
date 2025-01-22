@@ -6,4 +6,4 @@ The **Walker Generator** utilizes the principle of random walks to create intric
 
 ## Tutorials
 
-- [Getting Started](/tutorials/getting_started.md)
+- [Getting Started](../tutorials/getting_started.md)
