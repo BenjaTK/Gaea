@@ -3,6 +3,15 @@ class_name GaeaNodeResource
 extends Resource
 
 
+#region Description Formatting
+const PARAM_TEXT_COLOR := "cdbff0"
+const PARAM_BG_COLOR := "bfbfbf1a"
+const CODE_TEXT_COLOR := "da8a95"
+const CODE_BG_COLOR := "8080801a"
+
+const GAEA_MATERIAL_HINT := "Resource used to tell GaeaRenderers what to place."
+#endregion
+
 @export var input_slots: Array[GaeaNodeSlot]
 @export var args: Array[GaeaNodeArgument]
 @export var output_slots: Array[GaeaNodeSlot]
@@ -67,3 +76,13 @@ func get_axis_range(axis: Axis, area: AABB) -> Array:
 		Axis.Y: return range(area.position.y, area.size.y)
 		Axis.Z: return range(area.position.z, area.size.z)
 	return []
+
+
+static func get_formatted_text(unformatted_text: String) -> String:
+	unformatted_text = unformatted_text.replace("[param]", "[color=%s][bgcolor=%s]" % [PARAM_TEXT_COLOR, PARAM_BG_COLOR])
+	unformatted_text = unformatted_text.replace("GaeaMaterial", "[hint=%s]GaeaMaterial[/hint]" % GAEA_MATERIAL_HINT)
+	unformatted_text = unformatted_text.replace("[code]", "[color=%s][bgcolor=%s]" % [CODE_TEXT_COLOR, CODE_BG_COLOR])
+
+	unformatted_text = unformatted_text.replace("[/c]", "[/color]")
+	unformatted_text = unformatted_text.replace("[/bg]", "[/bgcolor]")
+	return unformatted_text

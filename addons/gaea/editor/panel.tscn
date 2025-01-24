@@ -1,9 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dngytsjlmkfg7"]
+[gd_scene load_steps=4 format=3 uid="uid://dngytsjlmkfg7"]
 
 [ext_resource type="Script" path="res://addons/gaea/editor/panel.gd" id="1_afcqa"]
 [ext_resource type="Script" path="res://addons/gaea/editor/graph_edit.gd" id="2_cdav6"]
 [ext_resource type="Script" path="res://addons/gaea/editor/create_node_tree.gd" id="2_vpeaa"]
-[ext_resource type="Script" path="res://addons/gaea/editor/description_label.gd" id="4_qpf66"]
 
 [node name="Gaea" type="Control"]
 custom_minimum_size = Vector2(0, 256)
@@ -135,7 +134,6 @@ layout_mode = 2
 bbcode_enabled = true
 text = "Description of the selected node goes here"
 autowrap_mode = 2
-script = ExtResource("4_qpf66")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Editor/CreateNodePopup/Margin/VBox"]
 layout_mode = 2

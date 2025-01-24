@@ -10,6 +10,6 @@ input_slots = Array[ExtResource("2_tcram")]([])
 args = Array[ExtResource("1_8mdcw")]([])
 output_slots = Array[ExtResource("2_tcram")]([])
 title = "Output"
-description = ""
+description = "Outputs the generated grid via the [param]generation_finished[/bg][/c] signal in the GaeaGenerator."
 is_output = true
 data = {}

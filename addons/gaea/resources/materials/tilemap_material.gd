@@ -9,8 +9,6 @@ enum Type { SINGLE_CELL, TERRAIN }  ## Tile is just a single cell in the TileMap
 	set(value):
 		type = value
 		notify_property_list_changed()
-## The [TileMap] layer the tile will be placed in.
-@export var tilemap_layer: int = 0
 ## A [TileSetSource] identifier. See [method TileSet.set_source_id].[br]
 ## If set to [code]-1[/code], the cell will be erased.
 @export var source_id: int = 0

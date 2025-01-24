@@ -19,6 +19,8 @@ var connections: Array[Dictionary]
 func _ready() -> void:
 	initialize()
 
+	set_tooltip_text(GaeaNodeResource.get_formatted_text(resource.description))
+
 
 func initialize() -> void:
 	if not is_instance_valid(resource):
@@ -119,3 +121,13 @@ func get_color_from_type(type: SlotTypes) -> Color:
 		SlotTypes.NUMBER:
 			return Color.LIGHT_GRAY
 	return Color.WHITE
+
+
+func _make_custom_tooltip(for_text: String) -> Object:
+	var rich_text_label: RichTextLabel = RichTextLabel.new()
+	rich_text_label.autowrap_mode = TextServer.AUTOWRAP_WORD
+	rich_text_label.bbcode_enabled = true
+	rich_text_label.text = for_text
+	rich_text_label.fit_content = true
+	rich_text_label.custom_minimum_size.x = 256.0
+	return rich_text_label
