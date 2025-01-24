@@ -5,6 +5,8 @@ extends Node
 
 signal data_changed
 signal generation_finished(grid: GaeaGrid)
+signal reset_requested
+signal area_erased(area: AABB)
 
 
 @export var data: GaeaData :
@@ -15,14 +17,23 @@ signal generation_finished(grid: GaeaGrid)
 @export var random_seed_on_generate: bool = true
 ## Leave [param z] as [code]1[/code] for 2D worlds.
 @export var world_size: Vector3i = Vector3i(128, 128, 1)
+## Used with [ChunkLoader]s, or to get the cell position of a node with [method global_to_map].
+## Not necessary for generation to work.
+@export var cell_size: Vector3i = Vector3i(16, 16, 1)
+@export var generate_on_ready: bool = true
 
 
 func _ready() -> void:
-	if not Engine.is_editor_hint():
+	if not Engine.is_editor_hint() and generate_on_ready:
 		generate()
 
 
 func generate() -> void:
+	reset()
+	generate_area(AABB(Vector3.ZERO, world_size))
+
+
+func generate_area(area: AABB) -> void:
 	data.generator = self
 	var connections: Array[Dictionary] = data.connections
 	var output_resource: GaeaNodeResource
@@ -39,7 +50,19 @@ func generate() -> void:
 			output_resource = resource
 
 	output_resource.execute(
-		AABB(Vector3i.ZERO, world_size),
+		area,
 		data,
 		self
 	)
+
+
+func erase_area(area: AABB) -> void:
+	area_erased.emit.call_deferred(area)
+
+
+func global_to_map(position: Vector3) -> Vector3i:
+	return (position / Vector3(cell_size)).floor()
+
+
+func reset() -> void:
+	reset_requested.emit()

@@ -25,4 +25,4 @@ func _get_noise_value(cell: Vector3i, noise: FastNoiseLite) -> float:
 	if type == 0:
 		return noise.get_noise_2d(cell.x, cell.y)
 	else:
-		return noise.get_noise_3d(cell.x, cell.y,cell.z)
+		return noise.get_noise_3d(cell.x, cell.y, cell.z)

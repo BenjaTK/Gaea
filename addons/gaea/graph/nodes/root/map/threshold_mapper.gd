@@ -19,13 +19,11 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 			).value
 	var grid: Dictionary
 
-	for x in get_axis_range(Axis.X, area):
-		for y in get_axis_range(Axis.Y, area):
-			for z in get_axis_range(Axis.Z, area):
-				var value: float = passed_data[Vector3i(x, y, z)]
-				if value < get_arg("min", generator_data) or value > get_arg("max", generator_data):
-					grid[Vector3i(x, y, z)] = null
-				else:
-					grid[Vector3i(x, y, z)] = material.get_resource()
+	for cell in passed_data:
+		var value: float = passed_data[cell]
+		if value < get_arg("min", generator_data) or value > get_arg("max", generator_data):
+			grid[cell] = null
+		else:
+			grid[cell] = material.get_resource()
 
 	return grid

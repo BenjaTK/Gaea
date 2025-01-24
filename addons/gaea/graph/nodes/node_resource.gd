@@ -72,9 +72,10 @@ static func get_scene() -> PackedScene:
 
 func get_axis_range(axis: Axis, area: AABB) -> Array:
 	match axis:
-		Axis.X: return range(area.position.x, area.size.x)
-		Axis.Y: return range(area.position.y, area.size.y)
-		Axis.Z: return range(area.position.z, area.size.z)
+		Axis.X:
+			return range(area.position.x, area.end.x)
+		Axis.Y: return range(area.position.y, area.end.y)
+		Axis.Z: return range(area.position.z, area.end.z)
 	return []
 
 

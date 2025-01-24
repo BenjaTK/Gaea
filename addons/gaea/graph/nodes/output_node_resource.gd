@@ -16,7 +16,7 @@ func execute(area: AABB, generator_data: GaeaData, generator: GaeaGenerator) -> 
 		)
 		grid.add_layer(layer_idx, grid_data, generator_data.layers[layer_idx])
 
-	generator.generation_finished.emit(grid)
+	generator.generation_finished.emit.call_deferred(grid)
 
 
 static func get_scene() -> PackedScene:
