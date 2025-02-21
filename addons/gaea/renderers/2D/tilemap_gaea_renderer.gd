@@ -152,9 +152,9 @@ func _set_pattern(cell:Vector2i, tile_info: TilemapTileInfo):
 	if (layer.tile_set.get_patterns_count() > tile_info.pattern_idx):
 		var pattern:TileMapPattern = layer.tile_set.get_pattern(tile_info.pattern_idx)
 		var position:Vector2i = cell + tile_info.pattern_offset
-		for x in range(pattern.get_size().x):
-			for y in range(pattern.get_size().y):
-				layer.set_pattern(position + Vector2i(x, y), pattern)
+		for tile in pattern.get_used_cells():
+			var pos = position + tile
+			layer.set_pattern(pos, pattern)
 
 func _get_tilemap_layers_count() -> int:
 	match node_type:
