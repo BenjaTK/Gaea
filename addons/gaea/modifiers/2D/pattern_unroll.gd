@@ -16,14 +16,21 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator) -> void:
 	
 	_temp_grid = grid.clone()
 
+	# For each coord in the affected layers...
 	for layer in affected_layers:
 		for coord in grid.get_cells(layer):
 			var tile_info:TilemapTileInfo = grid.get_value(coord, layer)
+			# Ignore invalid tiles...
+			if not _passes_filter(grid, coord):
+				return
+			# Find patterns...
 			if tile_info.type == TilemapTileInfo.Type.PATTERN:
 				if tile_set.get_patterns_count() > tile_info.pattern_idx:
 					var pattern:TileMapPattern = tile_set.get_pattern(tile_info.pattern_idx)
+					# And for each pattern cell...
 					for cell in pattern.get_used_cells():
 						var new_info:TilemapTileInfo = _get_from_pool(cell, pattern, tile_info, generator)
+						# Set the corresponding grid cell!
 						_temp_grid.set_value(coord + cell + tile_info.pattern_offset, new_info, layer)
 	
 	generator.grid = _temp_grid.clone()
