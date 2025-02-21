@@ -3,7 +3,7 @@ class_name TilemapTileInfo
 extends TileInfo
 ## Resource used to tell the generators which tile from a [TileMap] to place.
 
-enum Type { SINGLE_CELL, TERRAIN }  ## Tile is just a single cell in the TileMap. Requires a [param source_id] and a [param atlas_coord]. Can optionally be an [param alternative_tile].  ## Tile is a terrain from a terrain set. Allows for autotiling. Requires a [param terrain_set] and a [param terrain]
+enum Type { SINGLE_CELL, TERRAIN, PATTERN }  ## Tile is just a single cell in the TileMap. Requires a [param source_id] and a [param atlas_coord]. Can optionally be an [param alternative_tile].  ## Tile is a terrain from a terrain set. Allows for autotiling. Requires a [param terrain_set] and a [param terrain]
 
 @export var type: Type = Type.SINGLE_CELL:
 	set(value):
@@ -26,13 +26,24 @@ enum Type { SINGLE_CELL, TERRAIN }  ## Tile is just a single cell in the TileMap
 @export var terrain_set: int = 0
 ## Terrain in the terrain set determined previously.
 @export var terrain: int = 0
+## The Pattern Index
+@export var pattern_idx: int = 0
+@export var pattern_offset: Vector2i = Vector2i.ZERO
 
+# Property Validation
+
+var properties : Dictionary = {
+	Type.SINGLE_CELL:
+		func (name) -> bool: return name in ["source_id", "atlas_coord", "alternative_tile"],
+	Type.TERRAIN:
+		func (name) -> bool: return name.begins_with("terrain"),
+	Type.PATTERN:
+		func (name) -> bool: return name.begins_with("pattern"),
+}
 
 func _validate_property(property: Dictionary) -> void:
-	match type:
-		Type.SINGLE_CELL:
-			if property.name.begins_with("terrain"):
-				property.usage = PROPERTY_USAGE_NONE
-		Type.TERRAIN:
-			if property.name in ["source_id", "atlas_coord", "alternative_tile"]:
-				property.usage = PROPERTY_USAGE_NONE
+	var props = properties.keys().filter(func (key): return type != key)
+	for prop_type in props:
+		if (properties[prop_type] as Callable).call(property.name):
+			property.usage = PROPERTY_USAGE_NONE
+			return

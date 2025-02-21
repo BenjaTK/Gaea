@@ -101,6 +101,9 @@ func _draw_area(area: Rect2i) -> void:
 							terrains[tile_info] = [tile]
 						else:
 							terrains[tile_info].append(tile)
+					
+					TilemapTileInfo.Type.PATTERN:
+						_set_pattern(tile_position, tile_info)
 
 	for tile_info in terrains:
 		_set_terrain(terrains[tile_info], tile_info)
@@ -144,6 +147,14 @@ func _set_terrain(cells: Array, tile_info: TilemapTileInfo) -> void:
 					cells, tile_info.terrain_set, tile_info.terrain, !terrain_gap_fix
 				)
 
+func _set_pattern(cell:Vector2i, tile_info: TilemapTileInfo):
+	var layer:TileMapLayer = tile_map_layers[tile_info.tilemap_layer]
+	if (layer.tile_set.get_patterns_count() > tile_info.pattern_idx):
+		var pattern:TileMapPattern = layer.tile_set.get_pattern(tile_info.pattern_idx)
+		var position:Vector2i = cell + tile_info.pattern_offset
+		for tile in pattern.get_used_cells():
+			var pos = position + tile
+			layer.set_pattern(pos, pattern)
 
 func _get_tilemap_layers_count() -> int:
 	match node_type:

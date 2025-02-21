@@ -24,10 +24,17 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator):
 			if not _passes_filter(grid, cell):
 				continue
 
-			if grid.get_value(cell, layer) == generator.settings.tile:
-				var above: Vector2i = cell + Vector2i.UP
-				if grid.has_cell(above, layer) and grid.get_value(above, layer) != generator.settings.tile:
-					_temp_grid.set_value(cell, wall_tile)
+			print("Found ground?")
+
+			var above: Vector2i = cell + Vector2i.UP
+			if not _passes_filter(grid, above):
+				print("Found top of ground.")
+				_temp_grid.set_value(cell, wall_tile)
+
+			#if grid.get_value(cell, layer) == generator.settings.tile:
+				#var above: Vector2i = cell + Vector2i.UP
+				#if grid.has_cell(above, layer) and grid.get_value(above, layer) != generator.settings.tile:
+					#_temp_grid.set_value(cell, wall_tile)
 
 	generator.grid = _temp_grid.clone()
 	_temp_grid.unreference()

@@ -13,6 +13,7 @@ extends GaeaGenerator
 ## [b]Note:[/b] Using modifiers instead of multiple generators is recommended. Only chain generators if necessary.
 @export var next_pass: GaeaGenerator2D
 
+var tile_pool:Array[TilemapTileInfo]
 
 func _ready() -> void:
 	grid = GaeaGrid2D.new()
