@@ -89,7 +89,7 @@ func _set_grid_area(rect: Rect2i) -> void:
 
 		for y in range(rect.position.y, rect.end.y):
 			if not settings.infinite:
-				if y < 0 or y > settings.world_size.x:
+				if y < 0 or y > settings.world_size.y:
 					continue
 
 			var noise = settings.noise.get_noise_2d(x, y)
