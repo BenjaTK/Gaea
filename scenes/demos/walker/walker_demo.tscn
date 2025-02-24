@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=4 uid="uid://ccjjdx2d13wkk"]
+[gd_scene load_steps=31 format=4 uid="uid://ccjjdx2d13wkk"]
 
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/walker_generator/walker_generator.gd" id="2_07wvo"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/fill.gd" id="2_8wc1k"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/modifier_2d.gd" id="2_jsvll"]
 [ext_resource type="Script" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="3_iwilg"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/filter.gd" id="3_t134d"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/walls.gd" id="4_o7uq6"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/conditions/offset_condition_2d.gd" id="5_wi66h"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/conditions/condition.gd" id="6_dwn5n"]
@@ -33,7 +34,8 @@ expand_right = 2
 expand_bottom = 2
 enabled = true
 affected_layers = Array[int]([0])
-filter_type = 0
+strict_filters = true
+filters = Array[ExtResource("3_t134d")]([])
 
 [sub_resource type="Resource" id="Resource_vbeab"]
 resource_name = "Wall"
@@ -50,7 +52,8 @@ script = ExtResource("4_o7uq6")
 wall_tile = SubResource("Resource_vbeab")
 enabled = true
 affected_layers = Array[int]([0])
-filter_type = 0
+strict_filters = true
+filters = Array[ExtResource("3_t134d")]([])
 
 [sub_resource type="Resource" id="Resource_51jty"]
 resource_name = "Place in walls"
@@ -92,7 +95,8 @@ tile = SubResource("Resource_smsff")
 salt = 134178497321
 enabled = true
 affected_layers = Array[int]([0])
-filter_type = 0
+strict_filters = true
+filters = Array[ExtResource("3_t134d")]([])
 
 [sub_resource type="Resource" id="Resource_u3p7a"]
 resource_name = "Floor"
