@@ -2,13 +2,23 @@
 @icon("walls.svg")
 class_name Walls
 extends Modifier2D
-## Adds [param wall_tile] below any tile that isn't the Generator's default tile.
+## Adds [param wall_tile] below any tile that doesn't pass the modifier's filter.
+## If the modifier has it's Filter Type set to None, it will add [param wall_tile] below any tile that doesn't match the generator's default tile.
 ## Useful for tilesets whose walls are different tiles from the ceiling.
 ## @tutorial(Walls Modifier): https://benjatk.github.io/Gaea/#/modifiers?id=-walls
 
 ## The tile to be placed. Will be placed below any tile
 ## that isn't the Generator's default tile.
 @export var wall_tile: TileInfo
+
+@export var applies_to: Filter
+
+
+func _passes_walls_filter(grid: GaeaGrid, cell, layer:int, generator: GaeaGenerator) -> bool:
+	if not applies_to or applies_to.filter_type == Filter.FilterType.NONE:
+		return grid.get_value(cell, layer) == generator.settings.tile
+	else:
+		return applies_to._passes_filter(grid, cell)
 
 
 func apply(grid: GaeaGrid, generator: GaeaGenerator):
@@ -21,13 +31,13 @@ func apply(grid: GaeaGrid, generator: GaeaGenerator):
 	var _temp_grid: GaeaGrid = grid.clone()
 	for layer in affected_layers:
 		for cell in grid.get_cells(layer):
-			if not _passes_filter(grid, cell):
+			if not _passes_filter(grid, cell) or not _passes_walls_filter(grid, cell, layer, generator):
 				continue
 
 			print("Found ground?")
 
 			var above: Vector2i = cell + Vector2i.UP
-			if not _passes_filter(grid, above):
+			if not _passes_walls_filter(grid, above, layer, generator):
 				print("Found top of ground.")
 				_temp_grid.set_value(cell, wall_tile)
 

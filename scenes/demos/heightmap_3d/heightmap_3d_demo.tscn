@@ -1,9 +1,11 @@
-[gd_scene load_steps=37 format=3 uid="uid://dcn44kotave0d"]
+[gd_scene load_steps=39 format=3 uid="uid://dcn44kotave0d"]
 
+[ext_resource type="Script" path="res://addons/gaea/modifiers/3D/modifier_3d.gd" id="2_3y14a"]
 [ext_resource type="Script" path="res://addons/gaea/generators/3D/heightmap_generator_3d/heightmap_generator_3d.gd" id="2_fgwco"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/3D/heightmap_painter_3d.gd" id="2_mv8xs"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/3D/carver_3d.gd" id="2_t8akv"]
 [ext_resource type="Script" path="res://addons/gaea/generators/3D/heightmap_generator_3d/heightmap_generator_3d_settings.gd" id="3_d8yvu"]
+[ext_resource type="Script" path="res://addons/gaea/modifiers/filter.gd" id="3_qvx4p"]
 [ext_resource type="Script" path="res://addons/gaea/tile_info/gridmap_tile_info.gd" id="3_w4ec0"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/3D/threaded_gridmap_gaea_renderer.gd" id="6_dlrwi"]
 [ext_resource type="Texture2D" uid="uid://dn5fnbvvbowrl" path="res://scenes/demos/heightmap_3d/grass_top.png" id="6_r4fc5"]
@@ -48,7 +50,8 @@ height_offset = 94
 height_intensity = 19
 salt = 3271195367
 enabled = true
-filter_type = 0
+strict_filters = true
+filters = Array[ExtResource("3_qvx4p")]([])
 
 [sub_resource type="Resource" id="Resource_fxnuj"]
 script = ExtResource("3_w4ec0")
@@ -66,7 +69,8 @@ height_offset = 89
 height_intensity = 18
 salt = 3854112586
 enabled = true
-filter_type = 0
+strict_filters = true
+filters = Array[ExtResource("3_qvx4p")]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_87g0h"]
 noise_type = 3
@@ -86,7 +90,8 @@ bounds_min = Vector3(0, 0, 0)
 salt = 4265284190
 enabled = true
 affected_layers = Array[int]([0])
-filter_type = 0
+strict_filters = true
+filters = Array[ExtResource("3_qvx4p")]([])
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_g0ov0"]
 noise_type = 3
@@ -107,8 +112,9 @@ world_size = Vector2i(64, 64)
 height_offset = 96
 height_intensity = 20
 min_height = 0
+air_layer = true
 falloff_enabled = false
-modifiers = Array[Resource("res://addons/gaea/modifiers/3D/modifier_3d.gd")]([SubResource("Resource_7ejcr"), SubResource("Resource_51q2p"), SubResource("Resource_m5cy5")])
+modifiers = Array[ExtResource("2_3y14a")]([SubResource("Resource_7ejcr"), SubResource("Resource_51q2p"), SubResource("Resource_m5cy5")])
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o13k8"]
 albedo_texture = ExtResource("6_r4fc5")
