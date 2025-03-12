@@ -1,0 +1,44 @@
+[gd_resource type="Resource" load_steps=8 format=3 uid="uid://bh1u4kqfvh0fy"]
+
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_75iak"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_a0dir"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/root/data/paths/snake_path_2d.gd" id="3_ud703"]
+
+[sub_resource type="Resource" id="Resource_4i160"]
+script = ExtResource("1_75iak")
+type = 0
+name = "move_left_chance"
+default_value = 0.4
+
+[sub_resource type="Resource" id="Resource_0hjq7"]
+script = ExtResource("1_75iak")
+type = 0
+name = "move_right_chance"
+default_value = 0.4
+
+[sub_resource type="Resource" id="Resource_bhjed"]
+script = ExtResource("1_75iak")
+type = 0
+name = "move_down_chance"
+default_value = 0.2
+
+[sub_resource type="Resource" id="Resource_6iq26"]
+script = ExtResource("2_a0dir")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 0
+right_label = "Data"
+right_show_preview = true
+
+[resource]
+script = ExtResource("3_ud703")
+input_slots = Array[ExtResource("2_a0dir")]([])
+args = Array[ExtResource("1_75iak")]([SubResource("Resource_4i160"), SubResource("Resource_0hjq7"), SubResource("Resource_bhjed")])
+output_slots = Array[ExtResource("2_a0dir")]([SubResource("Resource_6iq26")])
+title = "SnakePath2D"
+description = "Generates a path that goes from the top of the world to the bottom, with each cell consisting of flags that indicate their exits (up, down, left, right). 
+The rest is filled with 0s."
+is_output = false
+data = {}
