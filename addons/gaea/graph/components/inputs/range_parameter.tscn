@@ -1,0 +1,112 @@
+[gd_scene load_steps=5 format=3 uid="uid://dy3oumbnydlmp"]
+
+[ext_resource type="Script" path="res://addons/gaea/graph/components/inputs/range_parameter.gd" id="1_xfmar"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4cr3l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jp0mk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4el5s"]
+bg_color = Color(1, 1, 1, 0.517647)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="RangeParameter" type="VBoxContainer"]
+offset_right = 211.0
+offset_bottom = 43.0
+script = ExtResource("1_xfmar")
+input_type = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Label"
+
+[node name="MinSlider" type="HSlider" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/slider = SubResource("StyleBoxEmpty_4cr3l")
+max_value = 1.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+editable = false
+scrollable = false
+
+[node name="MaxSlider" type="HSlider" parent="MinSlider"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+theme_override_styles/slider = SubResource("StyleBoxEmpty_jp0mk")
+max_value = 1.0
+step = 0.01
+value = 1.0
+allow_greater = true
+allow_lesser = true
+editable = false
+scrollable = false
+
+[node name="AreaPanel" type="Panel" parent="MinSlider"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4el5s")
+
+[node name="Panel" type="Panel" parent="MinSlider"]
+show_behind_parent = true
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Min"
+
+[node name="MinSpinBox" type="SpinBox" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Max"
+
+[node name="MaxSpinBox" type="SpinBox" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+
+[connection signal="gui_input" from="MinSlider" to="." method="_on_min_slider_gui_input"]

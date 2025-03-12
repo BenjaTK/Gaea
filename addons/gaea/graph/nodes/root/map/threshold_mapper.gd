@@ -18,12 +18,17 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 				area, generator_data
 			).value
 	var grid: Dictionary
+	var range: Dictionary = get_arg("range", generator_data)
+	prints("Range", range)
 
 	for cell in passed_data:
 		var value: float = passed_data[cell]
-		if value < get_arg("min", generator_data) or value > get_arg("max", generator_data):
+		if value < range.get("min", 0.0) or value > range.get("max", 0.0):
 			grid[cell] = null
 		else:
-			grid[cell] = material.get_resource()
+			if is_instance_valid(material):
+				grid[cell] = material.get_resource()
+			else:
+				grid[cell] = null
 
 	return grid

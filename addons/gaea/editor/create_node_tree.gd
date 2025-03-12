@@ -3,6 +3,7 @@ extends Tree
 
 
 signal node_selected_for_creation(resource: GaeaNodeResource)
+signal special_node_selected_for_creation(id: StringName)
 
 const NODES_FOLDER_PATH: String = "res://addons/gaea/graph/nodes/root/"
 
@@ -15,6 +16,10 @@ func _ready() -> void:
 	_populate_tree_with_files(NODES_FOLDER_PATH, root)
 	root.set_collapsed_recursive(true)
 	root.set_collapsed(false)
+
+	var frame_item: TreeItem = create_item()
+	frame_item.set_text(0, "Frame")
+	frame_item.set_metadata(0, &"frame")
 
 
 func _populate_tree_with_files(folder_path: String, parent_item: TreeItem) -> void:
@@ -47,6 +52,8 @@ func _on_item_activated() -> void:
 	var item: TreeItem = get_selected()
 	if item.get_metadata(0) is GaeaNodeResource:
 		node_selected_for_creation.emit(item.get_metadata(0).duplicate())
+	elif item.get_metadata(0) is StringName:
+		special_node_selected_for_creation.emit(item.get_metadata(0))
 
 
 func _on_create_button_pressed() -> void:
@@ -57,6 +64,9 @@ func _on_item_selected() -> void:
 	var item: TreeItem = get_selected()
 	if item.get_metadata(0) is GaeaNodeResource:
 		description_label.set_text(GaeaNodeResource.get_formatted_text(item.get_metadata(0).description))
+	elif item.get_metadata(0) is StringName:
+		match item.get_metadata(0):
+			&"frame": description_label.set_text("A rectangular area for better organziation.")
 
 
 func _on_search_bar_text_changed(new_text: String) -> void:

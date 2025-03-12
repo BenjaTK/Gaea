@@ -29,7 +29,8 @@ left_type = 0
 left_label = ""
 right_enabled = true
 right_type = 0
-right_label = "Data [-1, 1]"
+right_label = "Data [0, 1]"
+right_show_preview = true
 
 [resource]
 script = ExtResource("3_7romv")
@@ -38,6 +39,6 @@ input_slots = Array[ExtResource("2_vwhe4")]([])
 args = Array[ExtResource("1_5b1hk")]([SubResource("Resource_n5m4n"), SubResource("Resource_vx1by"), SubResource("Resource_smuhk")])
 output_slots = Array[ExtResource("2_vwhe4")]([SubResource("Resource_cmwkl")])
 title = "SimplexSmooth3D"
-description = "Creates a grid of values from [code]-1[/bg][/c] to [code]1[/bg][/c] based on a SimplexSmooth noise texture."
+description = "Creates a grid of values from [code]0[/bg][/c] to [code]1[/bg][/c] based on a SimplexSmooth noise texture."
 is_output = false
 data = {}

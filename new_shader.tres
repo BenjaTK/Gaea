@@ -1,12 +1,17 @@
-[gd_resource type="VisualShader" load_steps=8 format=3 uid="uid://c2pc7mfv0730k"]
+[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://c2pc7mfv0730k"]
 
-[sub_resource type="VisualShaderNodeIntConstant" id="VisualShaderNodeIntConstant_yo27r"]
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_43eqr"]
+size = Vector2(332, 261)
+title = "SAfawd"
+attached_nodes = PackedInt32Array(8)
 
-[sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_aubqu"]
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_tbxpa"]
+size = Vector2(291, 938)
+attached_nodes = PackedInt32Array(0)
 
-[sub_resource type="VisualShaderNodeStep" id="VisualShaderNodeStep_blcyh"]
+[sub_resource type="VisualShaderNodeReroute" id="VisualShaderNodeReroute_qui2g"]
 
-[sub_resource type="VisualShaderNodeVec2Constant" id="VisualShaderNodeVec2Constant_mfxsr"]
+[sub_resource type="VisualShaderNodeReroute" id="VisualShaderNodeReroute_6fpge"]
 
 [sub_resource type="VisualShaderNodeIntParameter" id="VisualShaderNodeIntParameter_bc4yo"]
 parameter_name = "asefawfae"
@@ -18,7 +23,10 @@ parameter_name = "asefasef"
 default_value_enabled = true
 
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_luf44"]
+linked_parent_graph_frame = 10
 parameter_name = "asefasef2"
+
+[sub_resource type="VisualShaderNodeCompare" id="VisualShaderNodeCompare_gk8fa"]
 
 [resource]
 code = "shader_type spatial;
@@ -42,30 +50,48 @@ void fragment() {
 	int n_out6p0 = asefawfae;
 
 
+// Compare:9
+	float n_in9p1 = 0.00000;
+	float n_in9p2 = 0.00001;
+	bool n_out9p0 = (abs(float(n_out6p0) - n_in9p1) < n_in9p2);
+
 // FloatParameter:7
 	float n_out7p0 = asefasef;
 
 
+// Reroute:12
+	float n_out12p0 = n_out7p0;
+
+
+// Reroute:13
+	float n_out13p0 = n_out12p0;
+
+
 // Output:0
-	ALPHA = float(n_out6p0);
+	ALPHA = (n_out9p0 ? 1.0 : 0.0);
 	METALLIC = n_out7p0;
+	AO_LIGHT_AFFECT = n_out13p0;
 
 
 }
 "
+graph_offset = Vector2(-34.3469, -115.11)
 varyings/ASd = "0,0"
-nodes/fragment/2/node = SubResource("VisualShaderNodeIntConstant_yo27r")
-nodes/fragment/2/position = Vector2(-236.376, 573.979)
-nodes/fragment/3/node = SubResource("VisualShaderNodeFloatConstant_aubqu")
-nodes/fragment/3/position = Vector2(-220, 460)
-nodes/fragment/4/node = SubResource("VisualShaderNodeStep_blcyh")
-nodes/fragment/4/position = Vector2(60.7646, 502.248)
-nodes/fragment/5/node = SubResource("VisualShaderNodeVec2Constant_mfxsr")
-nodes/fragment/5/position = Vector2(-240, 720)
+nodes/fragment/0/position = Vector2(420, 80)
 nodes/fragment/6/node = SubResource("VisualShaderNodeIntParameter_bc4yo")
 nodes/fragment/6/position = Vector2(-260, 40)
 nodes/fragment/7/node = SubResource("VisualShaderNodeFloatParameter_qgm27")
-nodes/fragment/7/position = Vector2(0, 200)
+nodes/fragment/7/position = Vector2(-100, 340)
 nodes/fragment/8/node = SubResource("VisualShaderNodeFloatParameter_luf44")
-nodes/fragment/8/position = Vector2(260, 60)
-nodes/fragment/connections = PackedInt32Array(2, 0, 4, 1, 3, 0, 4, 0, 6, 0, 0, 1, 7, 0, 0, 2)
+nodes/fragment/8/position = Vector2(900, 220)
+nodes/fragment/9/node = SubResource("VisualShaderNodeCompare_gk8fa")
+nodes/fragment/9/position = Vector2(0, 80)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFrame_43eqr")
+nodes/fragment/10/position = Vector2(860, 180)
+nodes/fragment/11/node = SubResource("VisualShaderNodeFrame_tbxpa")
+nodes/fragment/11/position = Vector2(420, 20)
+nodes/fragment/12/node = SubResource("VisualShaderNodeReroute_qui2g")
+nodes/fragment/12/position = Vector2(280, 620)
+nodes/fragment/13/node = SubResource("VisualShaderNodeReroute_6fpge")
+nodes/fragment/13/position = Vector2(320, 380)
+nodes/fragment/connections = PackedInt32Array(7, 0, 0, 2, 6, 0, 9, 0, 9, 0, 0, 1, 12, 0, 13, 0, 13, 0, 0, 7, 7, 0, 12, 0)

@@ -21,7 +21,7 @@ const GAEA_MATERIAL_HINT := "Resource used to tell GaeaRenderers what to place."
 
 @export_storage var data: Dictionary
 var connections: Array[Dictionary]
-var node: GraphNode
+var node: GaeaGraphNode
 
 enum Axis {X, Y, Z}
 

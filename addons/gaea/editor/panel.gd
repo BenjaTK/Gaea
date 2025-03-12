@@ -9,9 +9,12 @@ var _output_node: GraphNode
 @onready var _editor: Control = $Editor
 @onready var _graph_edit: GraphEdit = %GraphEdit
 @onready var _create_node_popup: PopupPanel = %CreateNodePopup
+@onready var _node_popup: PopupMenu = %NodePopup
+
 
 
 func populate(node: GaeaGenerator) -> void:
+	_remove_children()
 	_output_node = null
 	if node.data == null:
 		_editor.hide()
@@ -43,7 +46,7 @@ func unpopulate() -> void:
 
 func _remove_children() -> void:
 	for child in _graph_edit.get_children():
-		if child is GraphNode:
+		if child is GraphElement:
 			child.queue_free()
 
 
@@ -77,7 +80,14 @@ func _add_node(resource: GaeaNodeResource) -> GraphNode:
 	#node.set_generator_reference(_selected_generator)
 	node.on_added()
 	node.save_requested.connect(_save_data)
+	node.popup_requested.connect(_on_popup_requested.bind(node))
 	return node
+
+
+func _on_popup_requested(_node: GaeaGraphNode) -> void:
+	print(_node)
+	_node_popup.position = get_global_mouse_position()
+	_node_popup.popup()
 
 
 func _add_node_at_mouse(resource: GaeaNodeResource) -> GraphNode:
@@ -140,6 +150,7 @@ func _save_data() -> void:
 	var resources: Array[GaeaNodeResource]
 	var connections: Array[Dictionary] = _graph_edit.get_connection_list()
 	var node_data: Array[Dictionary]
+	var other: Dictionary
 
 	for child in _graph_edit.get_children():
 		if child is GraphNode:
@@ -199,3 +210,24 @@ func _on_graph_edit_connection_to_empty(from_node: StringName, from_port: int, r
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_EDITOR_PRE_SAVE:
 		_save_data()
+
+
+func _on_node_popup_id_pressed(id: int) -> void:
+	print(id)
+	match id:
+		0:
+			_popup_create_node_menu_at_mouse()
+		2:
+			_graph_edit.delete_nodes_request.emit(_graph_edit.get_selected_names())
+
+
+func _on_tree_special_node_selected_for_creation(id: StringName) -> void:
+	print(id)
+	match id:
+		&"frame":
+			var new_frame: GraphFrame = GraphFrame.new()
+			new_frame.size = Vector2(512, 256)
+			new_frame.set_position_offset((_graph_edit.get_local_mouse_position() + _graph_edit.scroll_offset) / _graph_edit.zoom)
+			new_frame.title = "Frame"
+			_graph_edit.add_child(new_frame)
+	_create_node_popup.hide()

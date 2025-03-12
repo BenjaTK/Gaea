@@ -6,7 +6,8 @@ enum Type {
 	FLOAT,
 	INT,
 	VECTOR2,
-	VARIABLE_NAME
+	VARIABLE_NAME,
+	RANGE
 }
 
 @export var type: Type :
@@ -37,6 +38,8 @@ static func get_scene_from_type(type: Type) -> PackedScene:
 			return preload("res://addons/gaea/graph/components/inputs/vector2_parameter.tscn")
 		Type.VARIABLE_NAME:
 			return preload("res://addons/gaea/graph/components/inputs/variable_name_parameter.tscn")
+		Type.RANGE:
+			return preload("res://addons/gaea/graph/components/inputs/range_parameter.tscn")
 	return null
 
 
@@ -51,4 +54,7 @@ func _validate_property(property: Dictionary) -> void:
 				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
 			Type.VECTOR2:
 				property.type = TYPE_VECTOR2
+				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
+			Type.RANGE:
+				property.type = TYPE_DICTIONARY
 				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE

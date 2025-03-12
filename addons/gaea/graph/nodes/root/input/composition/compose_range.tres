@@ -1,0 +1,37 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://bmjbf86en6cas"]
+
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_7wqu7"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_nkrai"]
+[ext_resource type="Script" path="res://addons/gaea/graph/nodes/root/input/composition/compose_range.gd" id="3_d0vpy"]
+
+[sub_resource type="Resource" id="Resource_a2hj1"]
+script = ExtResource("1_7wqu7")
+type = 0
+name = "min"
+default_value = null
+
+[sub_resource type="Resource" id="Resource_dkdok"]
+script = ExtResource("1_7wqu7")
+type = 0
+name = "max"
+default_value = 1.0
+
+[sub_resource type="Resource" id="Resource_gk2p2"]
+script = ExtResource("2_nkrai")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 5
+right_label = "Composed Range"
+right_show_preview = false
+
+[resource]
+script = ExtResource("3_d0vpy")
+input_slots = Array[ExtResource("2_nkrai")]([])
+args = Array[ExtResource("1_7wqu7")]([SubResource("Resource_a2hj1"), SubResource("Resource_dkdok")])
+output_slots = Array[ExtResource("2_nkrai")]([SubResource("Resource_gk2p2")])
+title = "ComposeRange"
+description = "Composes a range parameter from two numbers."
+is_output = false
+data = {}

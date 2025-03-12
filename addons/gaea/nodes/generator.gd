@@ -12,6 +12,7 @@ signal area_erased(area: AABB)
 @export var data: GaeaData :
 	set(value):
 		data = value
+		data.generator = self
 		data_changed.emit()
 @export var seed: int = randi()
 @export var random_seed_on_generate: bool = true
