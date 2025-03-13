@@ -25,11 +25,13 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 
 		var direction: Vector2i
 		while path.has(current_cell + direction):
-			if randf() < move_left_chance:
+			var weight_sum = move_left_chance + move_right_chance + move_down_chance
+			var rand = randf_range(0, weight_sum)
+			if (rand < move_left_chance):
 				direction = Vector2i.LEFT
-			elif randf() < move_right_chance:
+			elif rand < move_left_chance + move_right_chance:
 				direction = Vector2i.RIGHT
-			else:
+			elif rand <= weight_sum:
 				direction = Vector2i.DOWN
 
 		if (current_cell + direction).x < 0 or (current_cell + direction).x >= area.size.x:
