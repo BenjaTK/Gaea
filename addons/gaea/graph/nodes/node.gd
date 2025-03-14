@@ -6,7 +6,7 @@ extends GraphNode
 const PreviewTexture = preload("res://addons/gaea/graph/nodes/preview_texture.gd")
 
 enum SlotTypes {
-	VALUE_DATA, MAP_DATA, TILE_INFO, VECTOR2, NUMBER, RANGE
+	VALUE_DATA, MAP_DATA, TILE_INFO, VECTOR2, NUMBER, RANGE, BOOL
 }
 
 signal save_requested
@@ -25,7 +25,8 @@ var finished_loading: bool = false
 func _ready() -> void:
 	initialize()
 
-	set_tooltip_text(GaeaNodeResource.get_formatted_text(resource.description))
+	if is_instance_valid(resource):
+		set_tooltip_text(GaeaNodeResource.get_formatted_text(resource.description))
 
 
 func initialize() -> void:
@@ -153,6 +154,8 @@ static func get_color_from_type(type: SlotTypes) -> Color:
 			return Color.LIGHT_GRAY
 		SlotTypes.RANGE:
 			return Color.DIM_GRAY
+		SlotTypes.BOOL:
+			return Color("6f91f0")
 	return Color.WHITE
 
 

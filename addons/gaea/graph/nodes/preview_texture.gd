@@ -67,8 +67,10 @@ func update() -> void:
 	var image: Image = Image.create_empty(resolution.x, resolution.y, true, Image.FORMAT_LA8)
 	for x: int in resolution.x:
 		for y: int in resolution.y:
-			var value: float = data.get(Vector3i(x, y, 0), 0.0)
-			var color: Color = Color(value, value, value, 1.0 if value > scroll_bar.value else 0.0)
+			var value: float = data.get(Vector3i(x, y, 0), NAN)
+			if is_nan(value):
+				continue
+			var color: Color = Color(value, value, value, 1.0 if value >= scroll_bar.value else 0.0)
 			image.set_pixelv(Vector2i(x, y), color)
 
 	texture = ImageTexture.create_from_image(image)

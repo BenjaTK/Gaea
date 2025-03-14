@@ -14,8 +14,9 @@ func _ready() -> void:
 		button.text = str(button.get_index() + 1)
 		button.tooltip_text = "Bit %s, value %s" % [button.get_index() + 1, 1 << button.get_index()]
 
-		if resource.type == GaeaNodeArgument.Type.BITMASK_EXCLUSIVE:
-			button.button_group = button_group
+		if is_instance_valid(resource):
+			if resource.type == GaeaNodeArgument.Type.BITMASK_EXCLUSIVE:
+				button.button_group = button_group
 
 		button.toggled.connect(_on_value_changed.unbind(1))
 
