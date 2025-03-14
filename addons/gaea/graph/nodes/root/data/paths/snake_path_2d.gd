@@ -1,16 +1,20 @@
 @tool
 extends GaeaNodeResource
 
-
 const LEFT_FLAG = 1 << 0
 const RIGHT_FLAG = 1 << 1
 const DOWN_FLAG = 1 << 2
 const UP_FLAG = 1 << 3
 
 func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
-	var move_left_chance: float = get_arg("move_left_chance")
-	var move_right_chance: float = get_arg("move_right_chance")
-	var move_down_chance: float = get_arg("move_down_chance")
+	var weights: Dictionary = {
+		"move_left_weight" :{ "direction":Vector2i.LEFT,  "weight":get_arg("move_left_weight")  },
+		"move_right_weight":{ "direction":Vector2i.RIGHT, "weight":get_arg("move_right_weight") },
+		"move_down_weight" :{ "direction":Vector2i.DOWN,  "weight":get_arg("move_down_weight")  },
+	}
+	var weight_sum:int = 0
+	for weight in weights.values():
+		weight_sum += weight.weight
 
 	var path: Dictionary
 	var grid: Dictionary = {}
@@ -25,14 +29,13 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 
 		var direction: Vector2i
 		while path.has(current_cell + direction):
-			var weight_sum = move_left_chance + move_right_chance + move_down_chance
-			var rand = randf_range(0, weight_sum)
-			if (rand < move_left_chance):
-				direction = Vector2i.LEFT
-			elif rand < move_left_chance + move_right_chance:
-				direction = Vector2i.RIGHT
-			elif rand <= weight_sum:
-				direction = Vector2i.DOWN
+			var rand = randi_range(1, weight_sum)
+			var cur_range = 0
+			for weight in weights.values():
+				cur_range += weight.weight
+				if rand <= cur_range:
+					direction = weight.direction
+					break
 
 		if (current_cell + direction).x < 0 or (current_cell + direction).x >= area.size.x:
 			direction = Vector2i.DOWN
