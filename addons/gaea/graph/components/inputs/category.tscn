@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://x6n8ylnxoyno"]
+
+[ext_resource type="Script" uid="uid://dk8gbt41h5e08" path="res://addons/gaea/graph/components/inputs/graph_node_parameter.gd" id="1_kx84v"]
+
+[node name="BaseParameter" type="VBoxContainer"]
+offset_right = 42.0
+offset_bottom = 23.0
+script = ExtResource("1_kx84v")
+add_input_slot = false
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Label"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2

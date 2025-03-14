@@ -2,52 +2,57 @@
 extends GaeaNodeResource
 
 
-const LEFT_FLAG = 1 << 0
-const RIGHT_FLAG = 1 << 1
-const DOWN_FLAG = 1 << 2
-const UP_FLAG = 1 << 3
-
 func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
-	var move_left_chance: float = get_arg("move_left_chance")
-	var move_right_chance: float = get_arg("move_right_chance")
-	var move_down_chance: float = get_arg("move_down_chance")
+	var direction_weights: Dictionary = {
+		Vector2i.LEFT: get_arg("move_left_weight"),
+		Vector2i.RIGHT: get_arg("move_right_weight"),
+		Vector2i.DOWN: get_arg("move_down_weight"),
+	}
+	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
+	var left_flag: int = get_arg("left")
+	var right_flag: int = get_arg("right")
+	var down_flag: int = get_arg("down")
+	var up_flag: int = get_arg("up")
+	var direction_to_flags: Dictionary = {
+		Vector2i.LEFT: left_flag,
+		Vector2i.RIGHT: right_flag,
+		Vector2i.DOWN: down_flag,
+		Vector2i.UP: up_flag
+	}
+	seed(generator_data.generator.seed)
+	rng.set_seed(generator_data.generator.seed)
 
 	var path: Dictionary
 	var grid: Dictionary = {}
 	var starting_cell: Vector2i = Vector2i(randi_range(0, area.size.x - 1), 0)
 	var last_cell: Vector2i = starting_cell
 	var current_cell: Vector2i = starting_cell
+	var last_direction: Vector2i = Vector2i.ZERO
 
 	while true:
-		path[current_cell] = LEFT_FLAG | RIGHT_FLAG
-		if path.get(last_cell, 0) & DOWN_FLAG:
-			path[current_cell] |= UP_FLAG
+		path[current_cell] = direction_to_flags.get(-last_direction, 0)
+		if path.get(last_cell, 0) & down_flag:
+			path[current_cell] |= up_flag
 
 		var direction: Vector2i
 		while path.has(current_cell + direction):
-			var weight_sum = move_left_chance + move_right_chance + move_down_chance
-			var rand = randf_range(0, weight_sum)
-			if (rand < move_left_chance):
-				direction = Vector2i.LEFT
-			elif rand < move_left_chance + move_right_chance:
-				direction = Vector2i.RIGHT
-			elif rand <= weight_sum:
-				direction = Vector2i.DOWN
+			direction = direction_weights.keys()[rng.rand_weighted(direction_weights.values())]
 
 		if (current_cell + direction).x < 0 or (current_cell + direction).x >= area.size.x:
 			direction = Vector2i.DOWN
 
-		if direction == Vector2i.DOWN and current_cell.y == area.size.y:
+		if direction == Vector2i.DOWN and (current_cell.y + 1) >= area.size.y:
 			break
 
-		if direction == Vector2i.DOWN:
-			path[current_cell] |= DOWN_FLAG
+		path[current_cell] |= direction_to_flags.get(direction)
 
 		last_cell = current_cell
+		last_direction = direction
 		current_cell += direction
 
 	for x in get_axis_range(Axis.X, area):
 		for y in get_axis_range(Axis.Y, area):
-			grid[Vector3i(x, y, 0)] = path.get(Vector2i(x, y), 0)
+			if path.has(Vector2i(x, y)):
+				grid[Vector3i(x, y, 0)] = path.get(Vector2i(x, y))
 
 	return grid

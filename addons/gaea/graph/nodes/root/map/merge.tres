@@ -1,8 +1,8 @@
 [gd_resource type="Resource" load_steps=7 format=3 uid="uid://dtgm8q3pqox6c"]
 
-[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_i1ci7"]
-[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_f0eay"]
-[ext_resource type="Script" path="res://addons/gaea/graph/nodes/root/map/merge.gd" id="3_ya6an"]
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_i1ci7"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_f0eay"]
+[ext_resource type="Script" uid="uid://bmxbe51xh0t7d" path="res://addons/gaea/graph/nodes/root/map/merge.gd" id="3_ya6an"]
 
 [sub_resource type="Resource" id="Resource_qksdc"]
 script = ExtResource("2_f0eay")

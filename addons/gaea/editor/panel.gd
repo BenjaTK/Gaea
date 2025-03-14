@@ -85,7 +85,6 @@ func _add_node(resource: GaeaNodeResource) -> GraphNode:
 
 
 func _on_popup_requested(_node: GaeaGraphNode) -> void:
-	print(_node)
 	_node_popup.position = get_global_mouse_position()
 	_node_popup.popup()
 
@@ -213,7 +212,6 @@ func _notification(what: int) -> void:
 
 
 func _on_node_popup_id_pressed(id: int) -> void:
-	print(id)
 	match id:
 		0:
 			_popup_create_node_menu_at_mouse()
@@ -222,7 +220,6 @@ func _on_node_popup_id_pressed(id: int) -> void:
 
 
 func _on_tree_special_node_selected_for_creation(id: StringName) -> void:
-	print(id)
 	match id:
 		&"frame":
 			var new_frame: GraphFrame = GraphFrame.new()

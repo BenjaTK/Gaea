@@ -45,7 +45,6 @@ func remove_invalid_connections() -> void:
 			disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
 			continue
 
-		prints(to_node.get_input_port_count(), connection.to_port)
 		if to_node.get_input_port_count() <= connection.to_port:
 
 			disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
@@ -72,5 +71,4 @@ func get_selected_names() -> Array[StringName]:
 
 func _on_graph_elements_linked_to_frame_request(elements: Array, frame: StringName) -> void:
 	for element in elements:
-		prints("Element:", element)
 		attach_graph_element_to_frame(element, frame)

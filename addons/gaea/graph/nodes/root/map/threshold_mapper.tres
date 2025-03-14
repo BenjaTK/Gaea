@@ -1,16 +1,16 @@
 [gd_resource type="Resource" load_steps=8 format=3 uid="uid://conft7neua4ww"]
 
-[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_w2bvo"]
-[ext_resource type="Script" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_we7oc"]
-[ext_resource type="Script" path="res://addons/gaea/graph/nodes/root/map/threshold_mapper.gd" id="3_0cira"]
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_w2bvo"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_we7oc"]
+[ext_resource type="Script" uid="uid://djjvx650evm0n" path="res://addons/gaea/graph/nodes/root/map/threshold_mapper.gd" id="3_0cira"]
 
-[sub_resource type="Resource" id="Resource_cg26j"]
+[sub_resource type="Resource" id="Resource_o7clu"]
 script = ExtResource("1_w2bvo")
 type = 4
 name = "range"
 default_value = null
 
-[sub_resource type="Resource" id="Resource_ft4k8"]
+[sub_resource type="Resource" id="Resource_kqdcw"]
 script = ExtResource("2_we7oc")
 left_enabled = true
 left_type = 0
@@ -20,7 +20,7 @@ right_type = 0
 right_label = ""
 right_show_preview = false
 
-[sub_resource type="Resource" id="Resource_7djyk"]
+[sub_resource type="Resource" id="Resource_71boa"]
 script = ExtResource("2_we7oc")
 left_enabled = true
 left_type = 2
@@ -30,7 +30,7 @@ right_type = 0
 right_label = ""
 right_show_preview = false
 
-[sub_resource type="Resource" id="Resource_3bfbu"]
+[sub_resource type="Resource" id="Resource_ysd8o"]
 script = ExtResource("2_we7oc")
 left_enabled = false
 left_type = 0
@@ -42,9 +42,9 @@ right_show_preview = false
 
 [resource]
 script = ExtResource("3_0cira")
-input_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_ft4k8"), SubResource("Resource_7djyk")])
-args = Array[ExtResource("1_w2bvo")]([SubResource("Resource_cg26j")])
-output_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_3bfbu")])
+input_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_kqdcw"), SubResource("Resource_71boa")])
+args = Array[ExtResource("1_w2bvo")]([SubResource("Resource_o7clu")])
+output_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_ysd8o")])
 title = "ThresholdMapper"
 description = "Outputs a map.
 For every cell of a value between [param]min[/bg][/c] and [param]max[/bg][/c] (inclusive), sets that cell to [param]material[/bg][/c]. Otherwise, sets it to [code]null[/bg][/c]."

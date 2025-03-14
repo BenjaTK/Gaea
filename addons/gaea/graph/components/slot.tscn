@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cqpby5jyv71l0"]
 
-[ext_resource type="Script" path="res://addons/gaea/graph/components/slot.gd" id="1_ro1nl"]
+[ext_resource type="Script" uid="uid://dgb4blornaq38" path="res://addons/gaea/graph/components/slot.gd" id="1_ro1nl"]
 
 [node name="Slot" type="HBoxContainer"]
 size_flags_horizontal = 3

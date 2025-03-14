@@ -24,7 +24,6 @@ func _ready() -> void:
 	if _graph_node is not GraphNode:
 		return
 
-	print("asdhfakjsehfkashefkj")
 
 	toggle_preview_button.texture_normal = get_theme_icon(&"GuiVisibilityHidden", &"EditorIcons")
 	toggle_preview_button.texture_pressed = get_theme_icon(&"GuiVisibilityVisible", &"EditorIcons")

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dngytsjlmkfg7"]
 
-[ext_resource type="Script" path="res://addons/gaea/editor/panel.gd" id="1_afcqa"]
-[ext_resource type="Script" path="res://addons/gaea/editor/graph_edit.gd" id="2_cdav6"]
-[ext_resource type="Script" path="res://addons/gaea/editor/create_node_tree.gd" id="2_vpeaa"]
+[ext_resource type="Script" uid="uid://dpbmowgfmnxe5" path="res://addons/gaea/editor/panel.gd" id="1_afcqa"]
+[ext_resource type="Script" uid="uid://bedt1m4gyyvyv" path="res://addons/gaea/editor/graph_edit.gd" id="2_cdav6"]
+[ext_resource type="Script" uid="uid://coi2pynbl5ehe" path="res://addons/gaea/editor/create_node_tree.gd" id="2_vpeaa"]
 
 [node name="Gaea" type="Control"]
 custom_minimum_size = Vector2(0, 256)
@@ -155,6 +155,7 @@ text = "Create"
 unique_name_in_owner = true
 item_count = 3
 item_0/text = "Add Node"
+item_0/id = 0
 item_1/id = 1
 item_1/separator = true
 item_2/text = "Delete"

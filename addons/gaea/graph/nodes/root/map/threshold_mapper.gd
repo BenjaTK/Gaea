@@ -19,7 +19,6 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 			).value
 	var grid: Dictionary
 	var range: Dictionary = get_arg("range", generator_data)
-	prints("Range", range)
 
 	for cell in passed_data:
 		var value: float = passed_data[cell]

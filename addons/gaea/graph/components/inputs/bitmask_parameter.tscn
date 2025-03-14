@@ -1,0 +1,189 @@
+[gd_scene load_steps=4 format=3 uid="uid://chdg8ey4ln8d1"]
+
+[ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/inputs/base_parameter.tscn" id="1_bc048"]
+[ext_resource type="Script" uid="uid://ddawstb3cj6er" path="res://addons/gaea/graph/components/inputs/bitmask_parameter.gd" id="2_udo4f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_udo4f"]
+bg_color = Color(0.254902, 0.27451, 0.270588, 1)
+
+[node name="BaseParameter" instance=ExtResource("1_bc048")]
+script = ExtResource("2_udo4f")
+
+[node name="GridContainer" type="GridContainer" parent="." index="1"]
+layout_mode = 2
+theme_override_constants/h_separation = 2
+theme_override_constants/v_separation = 2
+columns = 8
+
+[node name="CheckBox" type="Button" parent="GridContainer" index="0"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 1, value 1"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "1"
+
+[node name="CheckBox2" type="Button" parent="GridContainer" index="1"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 2, value 2"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "2"
+
+[node name="CheckBox3" type="Button" parent="GridContainer" index="2"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 3, value 4"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "3"
+
+[node name="CheckBox4" type="Button" parent="GridContainer" index="3"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 4, value 8"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "4"
+
+[node name="CheckBox5" type="Button" parent="GridContainer" index="4"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 5, value 16"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "5"
+
+[node name="CheckBox6" type="Button" parent="GridContainer" index="5"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 6, value 32"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "6"
+
+[node name="CheckBox7" type="Button" parent="GridContainer" index="6"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 7, value 64"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "7"
+
+[node name="CheckBox8" type="Button" parent="GridContainer" index="7"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 8, value 128"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "8"
+
+[node name="CheckBox9" type="Button" parent="GridContainer" index="8"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 9, value 256"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "9"
+
+[node name="CheckBox10" type="Button" parent="GridContainer" index="9"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 10, value 512"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "10"
+
+[node name="CheckBox11" type="Button" parent="GridContainer" index="10"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 11, value 1024"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "11"
+
+[node name="CheckBox12" type="Button" parent="GridContainer" index="11"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 12, value 2048"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "12"
+
+[node name="CheckBox13" type="Button" parent="GridContainer" index="12"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 13, value 4096"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "13"
+
+[node name="CheckBox14" type="Button" parent="GridContainer" index="13"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 14, value 8192"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "14"
+
+[node name="CheckBox15" type="Button" parent="GridContainer" index="14"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 15, value 16384"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "15"
+
+[node name="CheckBox16" type="Button" parent="GridContainer" index="15"]
+visible = false
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+tooltip_text = "Bit 16, value 32768"
+theme_override_styles/normal = SubResource("StyleBoxFlat_udo4f")
+toggle_mode = true
+text = "16"
+
+[node name="DropButton" type="TextureButton" parent="." index="2"]
+layout_mode = 2
+size_flags_vertical = 0
+toggle_mode = true

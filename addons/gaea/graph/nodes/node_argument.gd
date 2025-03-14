@@ -7,7 +7,12 @@ enum Type {
 	INT,
 	VECTOR2,
 	VARIABLE_NAME,
-	RANGE
+	RANGE,
+	BITMASK,
+	CATEGORY,
+	BITMASK_EXCLUSIVE,
+	FLAGS,
+	BOOLEAN
 }
 
 @export var type: Type :
@@ -24,6 +29,7 @@ func get_arg_node() -> GaeaGraphNodeParameter:
 	var scene: PackedScene = get_scene_from_type(type)
 	if not is_instance_valid(scene):
 		return null
+
 	var node: GaeaGraphNodeParameter = scene.instantiate()
 	node.resource = self
 
@@ -40,6 +46,12 @@ static func get_scene_from_type(type: Type) -> PackedScene:
 			return preload("res://addons/gaea/graph/components/inputs/variable_name_parameter.tscn")
 		Type.RANGE:
 			return preload("res://addons/gaea/graph/components/inputs/range_parameter.tscn")
+		Type.BITMASK, Type.BITMASK_EXCLUSIVE, Type.FLAGS:
+			return preload("res://addons/gaea/graph/components/inputs/bitmask_parameter.tscn")
+		Type.CATEGORY:
+			return preload("res://addons/gaea/graph/components/inputs/category.tscn")
+		Type.BOOLEAN:
+			return preload("res://addons/gaea/graph/components/inputs/boolean_parameter.tscn")
 	return null
 
 
@@ -57,4 +69,11 @@ func _validate_property(property: Dictionary) -> void:
 				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
 			Type.RANGE:
 				property.type = TYPE_DICTIONARY
+				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
+			Type.BITMASK, Type.BITMASK_EXCLUSIVE, Type.FLAGS:
+				property.type = TYPE_INT
+				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
+				property.hint = PROPERTY_HINT_LAYERS_2D_PHYSICS
+			Type.BOOLEAN:
+				property.type = TYPE_BOOL
 				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE

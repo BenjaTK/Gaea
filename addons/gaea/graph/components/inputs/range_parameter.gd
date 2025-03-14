@@ -87,7 +87,6 @@ func get_param_value() -> Dictionary:
 
 
 func set_param_value(new_value: Variant) -> void:
-	prints("New value:", new_value)
 	if new_value == null:
 		new_value = {"max": 1.0, "min": 0.0}
 	max_slider.value = new_value["max"]

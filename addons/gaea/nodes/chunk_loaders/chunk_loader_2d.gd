@@ -56,7 +56,6 @@ func _update_loading(actor_position: Vector2i) -> void:
 					Vector3i(chunk_size.x, chunk_size.y, 1)
 				))
 
-	#print(required_chunks)
 	for required in required_chunks:
 		_loaded_chunks.append(required)
 		generator.generate_area(AABB(

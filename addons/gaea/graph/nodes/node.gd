@@ -125,17 +125,14 @@ func get_save_data() -> Dictionary:
 	var dictionary: Dictionary = {
 		"position": position_offset
 	}
-	print(resource.data)
 	return dictionary
 
 
 func load_save_data(data: Dictionary) -> void:
 	position_offset = data.position
-	prints("Data:", resource.data)
 
 	for child in get_children():
 		if child is GaeaGraphNodeParameter:
-			prints(child, child.resource.name, resource.data.has(child.resource.name))
 			if resource.data.has(child.resource.name):
 				child.set_param_value(resource.data[child.resource.name])
 

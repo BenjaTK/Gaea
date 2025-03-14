@@ -1,9 +1,10 @@
 [gd_scene load_steps=2 format=3 uid="uid://i2nwlab8rau"]
 
-[ext_resource type="Script" path="res://addons/gaea/graph/components/inputs/graph_node_parameter.gd" id="1_rylg1"]
+[ext_resource type="Script" uid="uid://dk8gbt41h5e08" path="res://addons/gaea/graph/components/inputs/graph_node_parameter.gd" id="1_rylg1"]
 
 [node name="BaseParameter" type="HBoxContainer"]
 script = ExtResource("1_rylg1")
+add_input_slot = false
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2

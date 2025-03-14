@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dp7blnx7abb5e"]
 
-[ext_resource type="Script" path="res://addons/gaea/graph/components/inputs/number_parameter.gd" id="1_g0oou"]
+[ext_resource type="Script" uid="uid://bogtvyatwgapj" path="res://addons/gaea/graph/components/inputs/number_parameter.gd" id="1_g0oou"]
 [ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/inputs/base_parameter.tscn" id="1_gco3q"]
 
 [node name="NumberParameter" instance=ExtResource("1_gco3q")]

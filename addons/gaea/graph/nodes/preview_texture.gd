@@ -19,6 +19,8 @@ func _ready() -> void:
 
 	var scroll_bar_container: HBoxContainer = HBoxContainer.new()
 
+	texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+
 	scroll_bar_label = SpinBox.new()
 	scroll_bar_label.step = 0.01
 	scroll_bar_label.min_value = 0.0
@@ -46,18 +48,21 @@ func _ready() -> void:
 func _on_visibility_changed() -> void:
 	await get_tree().process_frame
 	node.size = node.get_combined_minimum_size()
+	#update()
 
 
 func update() -> void:
-	var data: Dictionary = resource.get_data(
-		output_idx,
-		AABB(Vector3.ZERO, Vector3(RESOLUTION.x, RESOLUTION.y, 1)),
-		node.generator.data
-		)
-
+	node.request_save()
 	var resolution: Vector2i = RESOLUTION
 	if is_instance_valid(node.generator):
 		resolution = resolution.min(Vector2i(node.generator.world_size.x, node.generator.world_size.y))
+
+	var data: Dictionary = resource.get_data(
+		output_idx,
+		AABB(Vector3.ZERO, Vector3(resolution.x, resolution.y, 1)),
+		node.generator.data
+		)
+
 
 	var image: Image = Image.create_empty(resolution.x, resolution.y, true, Image.FORMAT_LA8)
 	for x: int in resolution.x:
