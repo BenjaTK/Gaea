@@ -52,7 +52,7 @@ func _on_min_slider_gui_input(event: InputEvent) -> void:
 		var relative_position: float = event.position.x / min_slider.size.x
 
 		if max_slider.has_focus():
-			max_slider.value = relative_position
+			max_slider.value = clampf(relative_position, 0.0, 1.0)
 
 	if event is not InputEventMouseButton:
 		return

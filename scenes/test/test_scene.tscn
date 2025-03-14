@@ -482,7 +482,7 @@ title = "Fill"
 description = "Fills the grid with [param]value[/bg][/c]."
 is_output = false
 data = {
-"value": 0.0
+"value": -1.0
 }
 
 [sub_resource type="Resource" id="Resource_yss8d"]
@@ -637,7 +637,7 @@ parameters = {
 "value": SubResource("Resource_douw8")
 }
 }
-scroll_offset = Vector2(-795.266, -775.641)
+scroll_offset = Vector2(-1086.98, -1250.84)
 LeftRightDownMaterial = SubResource("Resource_0p08d")
 LeftRightMaterial = SubResource("Resource_yfi7r")
 LeftRightUpDownMaterial = SubResource("Resource_qs20u")

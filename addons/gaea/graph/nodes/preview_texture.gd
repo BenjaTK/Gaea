@@ -36,6 +36,11 @@ func _ready() -> void:
 	scroll_bar_label.value_changed.connect(update.unbind(1))
 	scroll_bar.value_changed.connect(update.unbind(1))
 	scroll_bar.value_changed.connect(scroll_bar_label.set_value_no_signal)
+	scroll_bar.allow_greater = true
+	scroll_bar.allow_lesser = true
+
+	scroll_bar_label.allow_greater = true
+	scroll_bar_label.allow_lesser = true
 
 	scroll_bar_container.add_child(scroll_bar)
 	scroll_bar_container.add_child(scroll_bar_label)
