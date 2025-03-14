@@ -1,7 +1,7 @@
 [gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://c2pc7mfv0730k"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_43eqr"]
-size = Vector2(336, 278)
+size = Vector2(244, 124)
 title = "SAfawd"
 attached_nodes = PackedInt32Array(8)
 
@@ -75,7 +75,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-284.474, -118.564)
 varyings/ASd = "0,0"
 nodes/fragment/0/position = Vector2(420, 80)
 nodes/fragment/6/node = SubResource("VisualShaderNodeIntParameter_bc4yo")

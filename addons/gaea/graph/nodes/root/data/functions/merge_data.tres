@@ -1,0 +1,71 @@
+[gd_resource type="Resource" load_steps=9 format=3 uid="uid://4ybwu0m8kw1a"]
+
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_h4yhw"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_m7j8q"]
+[ext_resource type="Script" uid="uid://bmxbe51xh0t7d" path="res://addons/gaea/graph/nodes/merge.gd" id="3_h4yhw"]
+
+[sub_resource type="Resource" id="Resource_m7j8q"]
+script = ExtResource("2_m7j8q")
+left_enabled = true
+left_type = 0
+left_label = "Data A"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[sub_resource type="Resource" id="Resource_l204x"]
+script = ExtResource("2_m7j8q")
+left_enabled = true
+left_type = 0
+left_label = "Data B"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[sub_resource type="Resource" id="Resource_h4yhw"]
+script = ExtResource("2_m7j8q")
+left_enabled = true
+left_type = 0
+left_label = "Data C"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[sub_resource type="Resource" id="Resource_tpjb4"]
+script = ExtResource("2_m7j8q")
+left_enabled = true
+left_type = 0
+left_label = "Data D"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[sub_resource type="Resource" id="Resource_bie4n"]
+script = ExtResource("2_m7j8q")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 0
+right_label = "Merged Data"
+right_show_preview = true
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[resource]
+script = ExtResource("3_h4yhw")
+input_slots = Array[ExtResource("2_m7j8q")]([SubResource("Resource_m7j8q"), SubResource("Resource_l204x"), SubResource("Resource_h4yhw"), SubResource("Resource_tpjb4")])
+args = Array[ExtResource("1_h4yhw")]([])
+output_slots = Array[ExtResource("2_m7j8q")]([SubResource("Resource_bie4n")])
+title = "MergeData"
+description = "Merges [param]data A-D[/bg][/c]. Later grids override any cells from the previous grids when valid. (B overrides A, C overrides B, etc.)"
+is_output = false
+data = {}
+metadata/_custom_type_script = "uid://brb1clh2y2bv0"
