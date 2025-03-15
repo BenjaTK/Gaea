@@ -565,12 +565,6 @@ connections = Array[Dictionary]([{
 "to_node": 9,
 "to_port": 0
 }, {
-"from_node": 10,
-"from_port": 0,
-"keep_alive": false,
-"to_node": 3,
-"to_port": 1
-}, {
 "from_node": 3,
 "from_port": 0,
 "keep_alive": false,
@@ -601,11 +595,17 @@ connections = Array[Dictionary]([{
 "to_node": 11,
 "to_port": 0
 }, {
+"from_node": 10,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 3,
+"to_port": 2
+}, {
 "from_node": 11,
 "from_port": 0,
 "keep_alive": false,
 "to_node": 3,
-"to_port": 0
+"to_port": 1
 }])
 resources = Array[ExtResource("5_d22to")]([SubResource("Resource_q2emp"), SubResource("Resource_nfpq6"), SubResource("Resource_kagp6"), SubResource("Resource_xi4pl"), SubResource("Resource_42x5e"), SubResource("Resource_7wlr4"), SubResource("Resource_5ojly"), SubResource("Resource_teij2"), SubResource("Resource_ysd8o"), ExtResource("5_flipl"), SubResource("Resource_ggy6f"), SubResource("Resource_f1mpl"), SubResource("Resource_k3bxl"), SubResource("Resource_f38r3")])
 node_data = Array[Dictionary]([{
@@ -681,7 +681,7 @@ parameters = {
 "value": SubResource("Resource_douw8")
 }
 }
-scroll_offset = Vector2(430.433, -1053.96)
+scroll_offset = Vector2(-530.883, -617.458)
 Fil = 0
 Fill = 0.0
 LeftRightDownMaterial = SubResource("Resource_0p08d")
@@ -719,7 +719,7 @@ script = ExtResource("1_i42dh")
 [node name="GaeaGenerator" type="Node" parent="."]
 script = ExtResource("1_b5xa0")
 data = SubResource("Resource_yss8d")
-seed = 4001415066
+seed = 2043992354
 world_size = Vector3i(8, 8, 1)
 generate_on_ready = false
 
@@ -729,7 +729,7 @@ tile_map_layers = [NodePath("../TileMapLayer"), NodePath("../TileMapLayer2"), No
 generator = NodePath("../GaeaGenerator")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAFAAAAAQAAAAAAAAAFAAQAAQABAAAAAAAFAAYAAQADAAAAAAAFAAcAAQAAAAAAAAAGAAAAAQAAAAAAAAAGAAMAAQABAAAAAAAGAAQAAQADAAAAAAAGAAYAAQABAAAAAAAGAAcAAQADAAAAAAAHAAAAAQABAAAAAAAHAAMAAQADAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAAAAAEAAQACAAAAAAAAAAIAAQACAAAAAAAAAAMAAQACAAAAAAAAAAQAAQACAAAAAAAAAAUAAQACAAAAAAAAAAYAAQACAAAAAAAAAAcAAQADAAAAAAABAAAAAQAAAAAAAAA=")
 tile_set = SubResource("TileSet_5nfp8")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]
