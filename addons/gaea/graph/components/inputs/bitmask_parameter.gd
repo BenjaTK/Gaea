@@ -54,12 +54,17 @@ func get_param_value() -> Variant:
 
 
 func set_param_value(new_value: Variant) -> void:
-	if typeof(new_value) != TYPE_INT:
-		return
+
 
 	if resource.type != GaeaNodeArgument.Type.FLAGS:
+		if typeof(new_value) != TYPE_INT:
+			return
+
 		for button: Button in grid_container.get_children():
 			button.set_pressed_no_signal(new_value & (1 << button.get_index()))
 	else:
+		if typeof(new_value) != TYPE_ARRAY:
+			return
+
 		for button: Button in grid_container.get_children():
 			button.set_pressed_no_signal(new_value.has(1 << button.get_index()))
