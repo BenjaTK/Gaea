@@ -57,7 +57,7 @@ func remove_invalid_connections() -> void:
 
 func get_selected() -> Array:
 	return get_children().filter(func(child: Node) -> bool:
-		return child is GaeaGraphNode and child.selected
+		return child is GraphElement and child.selected
 	)
 
 

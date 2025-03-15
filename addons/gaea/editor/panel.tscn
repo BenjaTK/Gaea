@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dngytsjlmkfg7"]
+[gd_scene load_steps=5 format=3 uid="uid://dngytsjlmkfg7"]
 
 [ext_resource type="Script" uid="uid://dpbmowgfmnxe5" path="res://addons/gaea/editor/panel.gd" id="1_afcqa"]
 [ext_resource type="Script" uid="uid://bedt1m4gyyvyv" path="res://addons/gaea/editor/graph_edit.gd" id="2_cdav6"]
 [ext_resource type="Script" uid="uid://coi2pynbl5ehe" path="res://addons/gaea/editor/create_node_tree.gd" id="2_vpeaa"]
+[ext_resource type="Script" uid="uid://bybvolyg1u0v4" path="res://addons/gaea/editor/node_popup.gd" id="4_vtsfx"]
 
 [node name="Gaea" type="Control"]
 custom_minimum_size = Vector2(0, 256)
@@ -151,15 +152,26 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Create"
 
-[node name="NodePopup" type="PopupMenu" parent="Editor"]
+[node name="NodePopup" type="PopupMenu" parent="Editor" node_paths=PackedStringArray("graph_edit")]
 unique_name_in_owner = true
-item_count = 3
+size = Vector2i(100, 124)
+visible = true
+item_count = 6
 item_0/text = "Add Node"
 item_0/id = 0
 item_1/id = 1
 item_1/separator = true
 item_2/text = "Delete"
 item_2/id = 2
+item_3/id = 9999
+item_3/separator = true
+item_4/text = "Rename"
+item_4/id = 3
+item_4/disabled = true
+item_5/text = "Set Color"
+item_5/id = 5
+script = ExtResource("4_vtsfx")
+graph_edit = NodePath("../VBoxContainer/GraphEdit")
 
 [connection signal="pressed" from="NoData/NewDataButton" to="." method="_on_new_data_button_pressed"]
 [connection signal="pressed" from="Editor/VBoxContainer/GenerateButton" to="." method="_on_generate_button_pressed"]
@@ -179,4 +191,3 @@ item_2/id = 2
 [connection signal="special_node_selected_for_creation" from="Editor/CreateNodePopup/Margin/VBox/Tree" to="." method="_on_tree_special_node_selected_for_creation"]
 [connection signal="pressed" from="Editor/CreateNodePopup/Margin/VBox/HBoxContainer/CancelButton" to="." method="_on_cancel_create_button_pressed"]
 [connection signal="pressed" from="Editor/CreateNodePopup/Margin/VBox/HBoxContainer/CreateButton" to="Editor/CreateNodePopup/Margin/VBox/Tree" method="_on_create_button_pressed"]
-[connection signal="id_pressed" from="Editor/NodePopup" to="." method="_on_node_popup_id_pressed"]

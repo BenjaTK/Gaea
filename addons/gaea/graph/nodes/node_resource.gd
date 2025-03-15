@@ -47,7 +47,7 @@ func get_arg(name: String, generator_data: GaeaData = null) -> Variant:
 				get_connected_port_to(arg_connection_idx),
 				AABB(),
 				generator_data
-			).value
+			).get("value")
 
 	return data.get(name)
 
@@ -60,6 +60,7 @@ func get_connected_resource_idx(at: int) -> int:
 
 
 func get_connected_port_to(to: int) -> int:
+	print(connections)
 	for connection in connections:
 		if connection.to_port == to:
 			return connection.from_port

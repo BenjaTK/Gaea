@@ -11,7 +11,6 @@ enum SlotTypes {
 
 signal save_requested
 signal connections_updated
-signal popup_requested
 
 @export var resource: GaeaNodeResource
 
@@ -57,13 +56,6 @@ func initialize() -> void:
 
 	title = resource.title
 	resource.node = self
-
-
-func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.is_pressed():
-		if event.button_index == MOUSE_BUTTON_RIGHT and selected:
-			popup_requested.emit()
-			get_viewport().set_input_as_handled()
 
 
 func on_added() -> void:
@@ -124,6 +116,7 @@ func get_save_data() -> Dictionary:
 		resource.data[arg.name.to_lower()] = get_arg_value(arg.name)
 
 	var dictionary: Dictionary = {
+		"name": name,
 		"position": position_offset
 	}
 	return dictionary

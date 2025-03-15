@@ -6,12 +6,12 @@ enum Type {
 	FLOAT,
 	INT,
 	VECTOR2,
-	VARIABLE_NAME,
-	RANGE,
-	BITMASK,
-	CATEGORY,
-	BITMASK_EXCLUSIVE,
-	FLAGS,
+	VARIABLE_NAME, ## Used for VariableNodes.
+	RANGE, ## Dictionary holding 2 keys: min and max.
+	BITMASK, ## Int representing a bitmask.
+	CATEGORY, ## For visual separation, doesn't get saved.
+	BITMASK_EXCLUSIVE, ## Same as bitmask but only one bit can be active at once.
+	FLAGS, ## Same interface as bitmask, but returns an Array of flags.
 	BOOLEAN
 }
 

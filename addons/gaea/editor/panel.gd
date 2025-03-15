@@ -68,7 +68,11 @@ func _popup_create_node_menu_at_mouse() -> void:
 func _on_graph_edit_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
-			_popup_create_node_menu_at_mouse()
+			var _selected: Array = _graph_edit.get_selected()
+			if _selected.is_empty():
+				_popup_create_node_menu_at_mouse()
+			else:
+				_popup_context_menu_at_mouse(_selected)
 
 
 func _add_node(resource: GaeaNodeResource) -> GraphNode:
@@ -80,13 +84,17 @@ func _add_node(resource: GaeaNodeResource) -> GraphNode:
 	#node.set_generator_reference(_selected_generator)
 	node.on_added()
 	node.save_requested.connect(_save_data)
-	node.popup_requested.connect(_on_popup_requested.bind(node))
 	return node
 
 
-func _on_popup_requested(_node: GaeaGraphNode) -> void:
+func _popup_context_menu_at_mouse(selected_nodes: Array) -> void:
+	_node_popup.clear()
+	_node_popup.populate(selected_nodes)
+
 	_node_popup.position = get_global_mouse_position()
 	_node_popup.popup()
+
+
 
 
 func _add_node_at_mouse(resource: GaeaNodeResource) -> GraphNode:
@@ -151,6 +159,15 @@ func _save_data() -> void:
 	for child in _graph_edit.get_children():
 		if child is GraphNode:
 			resources.append(child.resource)
+		elif child is GraphFrame:
+			other.get_or_add("frames", []).append({
+				"title": child.title,
+				"tint_color": child.tint_color,
+				"tint_color_enabled": child.tint_color_enabled,
+				"position": child.position_offset,
+				"attached": _graph_edit.get_attached_nodes_of_frame(child.name),
+				"size": child.size
+			})
 
 	for connection in connections:
 		var from_node: GraphNode = _graph_edit.get_node(NodePath(connection.from_node))
@@ -162,14 +179,15 @@ func _save_data() -> void:
 	for resource in resources:
 		node_data.append(resource.node.get_save_data())
 
+	other["scroll_offset"] = _graph_edit.scroll_offset
 	_selected_generator.data.connections = connections
 	_selected_generator.data.resources = resources
 	_selected_generator.data.node_data = node_data
-	_selected_generator.data.scroll_offset = _graph_edit.scroll_offset
+	_selected_generator.data.other = other
 
 
 func _load_data() -> void:
-	_graph_edit.scroll_offset = _selected_generator.data.scroll_offset
+	_graph_edit.scroll_offset = _selected_generator.data.other.get("scroll_offset", Vector2.ZERO)
 
 	var has_output_node: bool = false
 	for idx in _selected_generator.data.resources.size():
@@ -177,12 +195,16 @@ func _load_data() -> void:
 		var node: GraphNode = _add_node(resource)
 		var node_data: Dictionary = _selected_generator.data.node_data[idx]
 
+		if node_data.has("name"):
+			node.name = node_data.get("name")
+
 		if resource.is_output:
 			has_output_node = true
 			_output_node = node
 
 		if is_instance_valid(node):
 			node.load_save_data.call_deferred(node_data)
+
 
 	if not has_output_node:
 		_add_node(preload("res://addons/gaea/graph/nodes/output_node_resource.tres"))
@@ -197,6 +219,15 @@ func _load_data() -> void:
 		_graph_edit.connection_request.emit(from_node.name, connection.from_port, to_node.name, connection.to_port)
 
 	update_connections()
+
+	for frame: Dictionary in _selected_generator.data.other.get("frames", []):
+		var new_frame: GraphFrame = GraphFrame.new()
+		new_frame.title = frame.get("title", "Frame")
+		new_frame.position_offset = frame.get("position", Vector2.ZERO)
+		new_frame.size = frame.get("size", Vector2(64, 64))
+		_graph_edit.add_child(new_frame)
+		for attached: StringName in frame.get("attached", []):
+			_graph_edit.attach_graph_element_to_frame(attached, new_frame.name)
 
 
 func _on_graph_edit_connection_to_empty(from_node: StringName, from_port: int, release_position: Vector2) -> void:

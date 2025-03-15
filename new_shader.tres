@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=9 format=3 uid="uid://c2pc7mfv0730k"]
+[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://c2pc7mfv0730k"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_43eqr"]
 size = Vector2(244, 124)
@@ -12,6 +12,17 @@ attached_nodes = PackedInt32Array(0)
 [sub_resource type="VisualShaderNodeReroute" id="VisualShaderNodeReroute_qui2g"]
 
 [sub_resource type="VisualShaderNodeReroute" id="VisualShaderNodeReroute_6fpge"]
+
+[sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_lsw1g"]
+size = Vector2(320, 180)
+title = "aedfse"
+tint_color_enabled = true
+tint_color = Color(0.753906, 0.214981, 0.214981, 0.75)
+
+[sub_resource type="VisualShaderNodeIntParameter" id="VisualShaderNodeIntParameter_lsw1g"]
+parameter_name = "asefawfae2"
+default_value_enabled = true
+default_value = 1
 
 [sub_resource type="VisualShaderNodeIntParameter" id="VisualShaderNodeIntParameter_bc4yo"]
 parameter_name = "asefawfae"
@@ -93,4 +104,8 @@ nodes/fragment/12/node = SubResource("VisualShaderNodeReroute_qui2g")
 nodes/fragment/12/position = Vector2(280, 620)
 nodes/fragment/13/node = SubResource("VisualShaderNodeReroute_6fpge")
 nodes/fragment/13/position = Vector2(320, 380)
+nodes/fragment/14/node = SubResource("VisualShaderNodeFrame_lsw1g")
+nodes/fragment/14/position = Vector2(100, -60)
+nodes/fragment/15/node = SubResource("VisualShaderNodeIntParameter_lsw1g")
+nodes/fragment/15/position = Vector2(-700, -120)
 nodes/fragment/connections = PackedInt32Array(7, 0, 0, 2, 6, 0, 9, 0, 9, 0, 0, 1, 12, 0, 13, 0, 13, 0, 0, 7, 7, 0, 12, 0)

@@ -13,7 +13,7 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 	_noise.frequency = get_arg("frequency", generator_data)
 	_noise.fractal_octaves = get_arg("octaves", generator_data)
 	_noise.fractal_lacunarity = get_arg("lacunarity", generator_data)
-	var dictionary: Dictionary
+	var dictionary: Dictionary[Vector3i, float]
 	for x in get_axis_range(Axis.X, area):
 		for y in get_axis_range(Axis.Y, area):
 			for z in get_axis_range(Axis.Z, area):
