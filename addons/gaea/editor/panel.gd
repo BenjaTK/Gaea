@@ -109,9 +109,6 @@ func _on_cancel_create_button_pressed() -> void:
 func _on_generate_button_pressed() -> void:
 	_save_data()
 
-	if _selected_generator.random_seed_on_generate:
-		_selected_generator.seed = randi()
-
 	_selected_generator.generate()
 
 

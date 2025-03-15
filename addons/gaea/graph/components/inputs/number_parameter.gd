@@ -23,6 +23,6 @@ func get_param_value() -> float:
 
 
 func set_param_value(new_value: Variant) -> void:
-	if new_value == null:
+	if new_value is not float or new_value is not int:
 		new_value = 0.0
 	spin_box.value = new_value

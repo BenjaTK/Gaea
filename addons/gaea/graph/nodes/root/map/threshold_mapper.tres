@@ -8,7 +8,10 @@
 script = ExtResource("1_w2bvo")
 type = 4
 name = "range"
-default_value = null
+default_value = {
+"max": 5.0,
+"min": 0.0
+}
 
 [sub_resource type="Resource" id="Resource_kqdcw"]
 script = ExtResource("2_we7oc")

@@ -30,6 +30,8 @@ func _ready() -> void:
 
 
 func generate() -> void:
+	if random_seed_on_generate:
+		seed = randi()
 	reset()
 	generate_area(AABB(Vector3.ZERO, world_size))
 

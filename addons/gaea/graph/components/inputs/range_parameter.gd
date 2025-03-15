@@ -12,11 +12,11 @@ extends "res://addons/gaea/graph/components/inputs/graph_node_parameter.gd"
 
 
 func _ready() -> void:
-	super()
 	min_slider.value_changed.connect(_on_slider_changed_value.unbind(1))
 	max_slider.value_changed.connect(_on_slider_changed_value.unbind(1))
 	min_spin_box.value_changed.connect(_on_spin_box_changed_value.unbind(1))
 	max_spin_box.value_changed.connect(_on_spin_box_changed_value.unbind(1))
+	super()
 
 
 func _on_slider_changed_value() -> void:
