@@ -24,6 +24,6 @@ func get_param_value() -> String:
 
 
 func set_param_value(new_value: Variant) -> void:
-	if new_value is not String:
+	if typeof(new_value) not in [TYPE_STRING, TYPE_STRING_NAME]:
 		return
 	line_edit.text = new_value

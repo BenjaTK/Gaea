@@ -1,4 +1,4 @@
-[gd_scene load_steps=80 format=4 uid="uid://yj8lg31imwsl"]
+[gd_scene load_steps=74 format=4 uid="uid://yj8lg31imwsl"]
 
 [ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/nodes/generator.gd" id="1_b5xa0"]
 [ext_resource type="Script" uid="uid://b2d60cevb336w" path="res://scenes/test/test_scene.gd" id="1_i42dh"]
@@ -17,7 +17,6 @@
 [ext_resource type="Script" uid="uid://d0bgv7yf1t1m6" path="res://addons/gaea/graph/nodes/root/data/paths/snake_path_2d.gd" id="12_1k6mo"]
 [ext_resource type="Script" uid="uid://bmxbe51xh0t7d" path="res://addons/gaea/graph/nodes/merge.gd" id="12_kqdcw"]
 [ext_resource type="Script" uid="uid://b7naniphpp341" path="res://addons/gaea/graph/nodes/root/data/basic/fill.gd" id="13_71boa"]
-[ext_resource type="Script" uid="uid://djjvx650evm0n" path="res://addons/gaea/graph/nodes/root/map/threshold_mapper.gd" id="14_ysd8o"]
 [ext_resource type="Texture2D" uid="uid://f8b05yxijdkl" path="res://scenes/test/rooms_tileset_test.png" id="15_ggy6f"]
 [ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="17_307sj"]
 [ext_resource type="Script" uid="uid://7o1q54p6wv71" path="res://scenes/test/test_actor.gd" id="18_l07il"]
@@ -508,58 +507,6 @@ data = {
 "name": "Fill"
 }
 
-[sub_resource type="Resource" id="Resource_o7clu"]
-script = ExtResource("6_ihln5")
-type = 4
-name = "range"
-default_value = null
-
-[sub_resource type="Resource" id="Resource_5odk7"]
-script = ExtResource("7_8n6j2")
-left_enabled = true
-left_type = 0
-left_label = "Data"
-right_enabled = false
-right_type = 0
-right_label = ""
-right_show_preview = false
-
-[sub_resource type="Resource" id="Resource_r83pm"]
-script = ExtResource("7_8n6j2")
-left_enabled = true
-left_type = 2
-left_label = "Material"
-right_enabled = false
-right_type = 0
-right_label = ""
-right_show_preview = false
-
-[sub_resource type="Resource" id="Resource_2j7op"]
-script = ExtResource("7_8n6j2")
-left_enabled = false
-left_type = 0
-left_label = ""
-right_enabled = true
-right_type = 1
-right_label = "Map"
-right_show_preview = false
-
-[sub_resource type="Resource" id="Resource_7hrwv"]
-script = ExtResource("14_ysd8o")
-input_slots = Array[ExtResource("7_8n6j2")]([SubResource("Resource_5odk7"), SubResource("Resource_r83pm")])
-args = Array[ExtResource("6_ihln5")]([SubResource("Resource_o7clu")])
-output_slots = Array[ExtResource("7_8n6j2")]([SubResource("Resource_2j7op")])
-title = "ThresholdMapper"
-description = "Outputs a map.
-For every cell of a value between [param]min[/bg][/c] and [param]max[/bg][/c] (inclusive), sets that cell to [param]material[/bg][/c]. Otherwise, sets it to [code]null[/bg][/c]."
-is_output = false
-data = {
-"range": {
-"max": 5.0,
-"min": 0.0
-}
-}
-
 [sub_resource type="Resource" id="Resource_yss8d"]
 script = ExtResource("3_aq2cv")
 layers = Array[ExtResource("3_hrvmf")]([SubResource("Resource_axg3r")])
@@ -660,7 +607,7 @@ connections = Array[Dictionary]([{
 "to_node": 12,
 "to_port": 0
 }])
-resources = Array[ExtResource("5_d22to")]([SubResource("Resource_f38r3"), SubResource("Resource_q2emp"), SubResource("Resource_nfpq6"), SubResource("Resource_kagp6"), SubResource("Resource_xi4pl"), SubResource("Resource_42x5e"), SubResource("Resource_7wlr4"), SubResource("Resource_5ojly"), SubResource("Resource_teij2"), SubResource("Resource_ysd8o"), ExtResource("5_flipl"), SubResource("Resource_ggy6f"), SubResource("Resource_f1mpl"), SubResource("Resource_k3bxl"), SubResource("Resource_7hrwv")])
+resources = Array[ExtResource("5_d22to")]([SubResource("Resource_f38r3"), SubResource("Resource_q2emp"), SubResource("Resource_nfpq6"), SubResource("Resource_kagp6"), SubResource("Resource_xi4pl"), SubResource("Resource_42x5e"), SubResource("Resource_7wlr4"), SubResource("Resource_5ojly"), SubResource("Resource_teij2"), SubResource("Resource_ysd8o"), ExtResource("5_flipl"), SubResource("Resource_ggy6f"), SubResource("Resource_f1mpl"), SubResource("Resource_k3bxl")])
 node_data = Array[Dictionary]([{
 "position": Vector2(660, -660)
 }, {
@@ -689,8 +636,6 @@ node_data = Array[Dictionary]([{
 "position": Vector2(-440, -960)
 }, {
 "position": Vector2(-800, -1040)
-}, {
-"position": Vector2(528.869, 307.226)
 }])
 parameters = {
 "Fil": {
@@ -736,7 +681,7 @@ parameters = {
 "value": SubResource("Resource_douw8")
 }
 }
-scroll_offset = Vector2(-261.467, -2.57913)
+scroll_offset = Vector2(-33.3354, 0)
 LeftRightDownMaterial = SubResource("Resource_0p08d")
 LeftRightMaterial = SubResource("Resource_yfi7r")
 LeftRightUpDownMaterial = SubResource("Resource_qs20u")

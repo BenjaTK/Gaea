@@ -19,7 +19,7 @@ func get_param_value() -> Vector2:
 
 
 func set_param_value(new_value: Variant) -> void:
-	if new_value is not Vector2:
+	if typeof(new_value) != TYPE_VECTOR2:
 		return
 	_x_spin_box.value = new_value.x
 	_y_spin_box.value = new_value.y
