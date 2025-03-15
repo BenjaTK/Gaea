@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=4 uid="uid://yj8lg31imwsl"]
+[gd_scene load_steps=74 format=4 uid="uid://yj8lg31imwsl"]
 
 [ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/nodes/generator.gd" id="1_b5xa0"]
 [ext_resource type="Script" uid="uid://b2d60cevb336w" path="res://scenes/test/test_scene.gd" id="1_i42dh"]
@@ -482,7 +482,29 @@ title = "Fill"
 description = "Fills the grid with [param]value[/bg][/c]."
 is_output = false
 data = {
-"value": -1.0
+"value": 0.0
+}
+
+[sub_resource type="Resource" id="Resource_putew"]
+script = ExtResource("6_ihln5")
+type = 3
+name = "name"
+default_value = null
+
+[sub_resource type="Resource" id="Resource_k3bxl"]
+script = ExtResource("10_y272n")
+type = 3
+hint = 0
+hint_string = ""
+output_type = 4
+input_slots = Array[ExtResource("7_8n6j2")]([])
+args = Array[ExtResource("6_ihln5")]([SubResource("Resource_putew")])
+output_slots = Array[ExtResource("7_8n6j2")]([])
+title = "FloatVariable"
+description = "Float variable editable in the inspector."
+is_output = false
+data = {
+"name": "FloatVariable"
 }
 
 [sub_resource type="Resource" id="Resource_yss8d"]
@@ -579,7 +601,7 @@ connections = Array[Dictionary]([{
 "to_node": 2,
 "to_port": 0
 }])
-resources = Array[ExtResource("5_d22to")]([SubResource("Resource_f38r3"), SubResource("Resource_q2emp"), SubResource("Resource_nfpq6"), SubResource("Resource_kagp6"), SubResource("Resource_xi4pl"), SubResource("Resource_42x5e"), SubResource("Resource_7wlr4"), SubResource("Resource_5ojly"), SubResource("Resource_teij2"), SubResource("Resource_ysd8o"), ExtResource("5_flipl"), SubResource("Resource_ggy6f"), SubResource("Resource_f1mpl")])
+resources = Array[ExtResource("5_d22to")]([SubResource("Resource_f38r3"), SubResource("Resource_q2emp"), SubResource("Resource_nfpq6"), SubResource("Resource_kagp6"), SubResource("Resource_xi4pl"), SubResource("Resource_42x5e"), SubResource("Resource_7wlr4"), SubResource("Resource_5ojly"), SubResource("Resource_teij2"), SubResource("Resource_ysd8o"), ExtResource("5_flipl"), SubResource("Resource_ggy6f"), SubResource("Resource_f1mpl"), SubResource("Resource_k3bxl")])
 node_data = Array[Dictionary]([{
 "position": Vector2(660, -660)
 }, {
@@ -603,11 +625,20 @@ node_data = Array[Dictionary]([{
 }, {
 "position": Vector2(1720, -620)
 }, {
-"position": Vector2(-880, -800)
+"position": Vector2(-700, -800)
 }, {
-"position": Vector2(-700, -1240)
+"position": Vector2(-440, -960)
+}, {
+"position": Vector2(-622.826, -1085.63)
 }])
 parameters = {
+"Fill": {
+"hint": 0,
+"hint_string": "",
+"name": "Fill",
+"type": 3,
+"value": 0
+},
 "LeftRightDownMaterial": {
 "hint": 17,
 "hint_string": "GaeaMaterial",
@@ -637,11 +668,12 @@ parameters = {
 "value": SubResource("Resource_douw8")
 }
 }
-scroll_offset = Vector2(-1086.98, -1250.84)
+scroll_offset = Vector2(-817.09, -815.799)
 LeftRightDownMaterial = SubResource("Resource_0p08d")
 LeftRightMaterial = SubResource("Resource_yfi7r")
 LeftRightUpDownMaterial = SubResource("Resource_qs20u")
 LeftRightUpMaterial = SubResource("Resource_douw8")
+Fill = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smit1"]
 texture = ExtResource("3_snetl")
@@ -673,8 +705,9 @@ script = ExtResource("1_i42dh")
 [node name="GaeaGenerator" type="Node" parent="."]
 script = ExtResource("1_b5xa0")
 data = SubResource("Resource_yss8d")
-seed = 2140568095
+seed = 1936109067
 world_size = Vector3i(8, 8, 1)
+generate_on_ready = false
 
 [node name="GaeaTilemapRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map_layers", "generator")]
 script = ExtResource("11_db3f4")
@@ -682,7 +715,7 @@ tile_map_layers = [NodePath("../TileMapLayer"), NodePath("../TileMapLayer2"), No
 generator = NodePath("../GaeaGenerator")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAAAAQABAAAAAAAAAAEAAQADAAAAAAABAAEAAQAAAAAAAAABAAcAAQAAAAAAAAACAAEAAQAAAAAAAAACAAUAAQABAAAAAAACAAYAAQADAAAAAAACAAcAAQAAAAAAAAADAAEAAQAAAAAAAAADAAUAAQAAAAAAAAADAAYAAQAAAAAAAAADAAcAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAQAAQABAAAAAAAEAAUAAQADAAAAAAAEAAYAAQAAAAAAAAAEAAcAAQAAAAAAAAAFAAEAAQAAAAAAAAAFAAQAAQAAAAAAAAAFAAYAAQAAAAAAAAAFAAcAAQAAAAAAAAAGAAEAAQAAAAAAAAAGAAQAAQAAAAAAAAAGAAYAAQABAAAAAAAGAAcAAQADAAAAAAAHAAEAAQABAAAAAAAHAAIAAQACAAAAAAAHAAMAAQACAAAAAAAHAAQAAQADAAAAAAA=")
+tile_map_data = PackedByteArray("AAAAAAEAAQABAAAAAAAAAAIAAQACAAAAAAAAAAMAAQACAAAAAAAAAAQAAQADAAAAAAAAAAUAAQABAAAAAAAAAAYAAQACAAAAAAAAAAcAAQADAAAAAAABAAEAAQAAAAAAAAABAAQAAQABAAAAAAABAAUAAQADAAAAAAACAAEAAQAAAAAAAAADAAAAAQABAAAAAAADAAEAAQADAAAAAAA=")
 tile_set = SubResource("TileSet_5nfp8")
 
 [node name="TileMapLayer2" type="TileMapLayer" parent="."]

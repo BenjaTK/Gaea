@@ -23,6 +23,13 @@ func _init() -> void:
 	notify_property_list_changed()
 
 
+func get_parameter(name: StringName) -> Variant:
+	return _get(name)
+
+
+func set_parameter(name: StringName, value: Variant) -> void:
+	_set(name, value)
+
 
 func _get_property_list() -> Array[Dictionary]:
 	var list: Array[Dictionary]
@@ -46,7 +53,7 @@ func _set(property: StringName, value: Variant) -> bool:
 		if variable == null:
 			continue
 
-		if variable.name == property:
+		if variable.name == property and typeof(value) == variable.type:
 			variable.value = value
 			return true
 	return false

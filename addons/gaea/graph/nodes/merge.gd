@@ -5,6 +5,9 @@ extends GaeaNodeResource
 func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
 	var grids: Array[Dictionary] = []
 	for i: int in input_slots.size():
+		if get_connected_resource_idx(i) == -1:
+			continue
+
 		var resource: GaeaNodeResource = generator_data.resources.get(get_connected_resource_idx(i))
 		var data: Dictionary = {}
 		if is_instance_valid(resource):
