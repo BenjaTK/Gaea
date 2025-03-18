@@ -10,8 +10,18 @@ var _output_node: GraphNode
 @onready var _graph_edit: GraphEdit = %GraphEdit
 @onready var _create_node_popup: PopupPanel = %CreateNodePopup
 @onready var _node_popup: PopupMenu = %NodePopup
+@onready var _create_node_tree: Tree = %Tree
+@onready var _reload_node_tree_button: Button = $Editor/VBoxContainer/HBoxContainer/ReloadNodeTreeButton
+@onready var _save_button: Button = $Editor/VBoxContainer/HBoxContainer/SaveButton
+@onready var _load_button: Button = $Editor/VBoxContainer/HBoxContainer/LoadButton
+@onready var _file_dialog: FileDialog = $FileDialog
 
 
+
+func _ready() -> void:
+	_reload_node_tree_button.icon = EditorInterface.get_base_control().get_theme_icon(&"ReloadSmall", &"EditorIcons")
+	_save_button.icon = EditorInterface.get_base_control().get_theme_icon(&"Save", &"EditorIcons")
+	_load_button.icon = EditorInterface.get_base_control().get_theme_icon(&"Load", &"EditorIcons")
 
 func populate(node: GaeaGenerator) -> void:
 	_remove_children()
@@ -257,3 +267,19 @@ func _on_tree_special_node_selected_for_creation(id: StringName) -> void:
 			new_frame.title = "Frame"
 			_graph_edit.add_child(new_frame)
 	_create_node_popup.hide()
+
+
+func _on_reload_node_tree_button_pressed() -> void:
+	_create_node_tree.populate()
+
+
+func _on_save_button_pressed() -> void:
+	_save_data()
+
+
+func _on_load_button_pressed() -> void:
+	_file_dialog.popup_centered()
+
+
+func _on_file_dialog_file_selected(path: String) -> void:
+	_selected_generator.data = load(path)

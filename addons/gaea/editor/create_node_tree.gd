@@ -11,6 +11,11 @@ const NODES_FOLDER_PATH: String = "res://addons/gaea/graph/nodes/root/"
 
 
 func _ready() -> void:
+	populate()
+
+
+func populate() -> void:
+	clear()
 	var root: TreeItem = create_item()
 	hide_root = true
 	_populate_tree_with_files(NODES_FOLDER_PATH, root)

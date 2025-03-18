@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="GaeaData" load_steps=5 format=3 uid="uid://c0y548raifwlu"]
+
+[ext_resource type="Script" uid="uid://3qsmwhn2sk47" path="res://addons/gaea/resources/gaea_layer.gd" id="1_uauhc"]
+[ext_resource type="Script" uid="uid://brb1clh2y2bv0" path="res://addons/gaea/graph/nodes/node_resource.gd" id="2_3gp3i"]
+[ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/resources/gaea_data.gd" id="3_xonew"]
+
+[sub_resource type="Resource" id="Resource_y3mkl"]
+script = ExtResource("1_uauhc")
+enabled = true
+
+[resource]
+script = ExtResource("3_xonew")
+layers = Array[ExtResource("1_uauhc")]([SubResource("Resource_y3mkl")])
+connections = Array[Dictionary]([])
+resources = Array[ExtResource("2_3gp3i")]([])
+node_data = Array[Dictionary]([])
+parameters = Dictionary[StringName, Variant]({})
+scroll_offset = Vector2(0, 0)
+other = {}
+metadata/_custom_type_script = "uid://dae6umbqb872e"
