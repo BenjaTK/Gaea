@@ -46,7 +46,7 @@ func get_param_value() -> Variant:
 				num |= 1 << button.get_index()
 		return num
 	else:
-		var flags: Array[int]
+		var flags: Array[int] = []
 		for button: Button in grid_container.get_children():
 			if button.button_pressed:
 				flags.append(1 << button.get_index())

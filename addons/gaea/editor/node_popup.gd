@@ -30,7 +30,8 @@ func _on_id_pressed(id: int) -> void:
 		Action.ADD:
 			create_node_popup_requested.emit()
 		Action.DELETE:
-			graph_edit.delete_nodes_request.emit(graph_edit.get_selected_names())
+			graph_edit.delete_nodes(graph_edit.get_selected_names())
+
 		Action.RENAME:
 			var selected: Array = graph_edit.get_selected()
 			var node: GraphElement = selected.front()

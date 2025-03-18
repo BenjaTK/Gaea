@@ -155,7 +155,6 @@ text = "Create"
 [node name="NodePopup" type="PopupMenu" parent="Editor" node_paths=PackedStringArray("graph_edit")]
 unique_name_in_owner = true
 size = Vector2i(100, 124)
-visible = true
 item_count = 6
 item_0/text = "Add Node"
 item_0/id = 0
@@ -184,6 +183,7 @@ graph_edit = NodePath("../VBoxContainer/GraphEdit")
 [connection signal="gui_input" from="Editor/VBoxContainer/GraphEdit" to="." method="_on_graph_edit_gui_input"]
 [connection signal="node_selected" from="Editor/VBoxContainer/GraphEdit" to="Editor/VBoxContainer/GraphEdit" method="_on_node_selected"]
 [connection signal="request_connection_update" from="Editor/VBoxContainer/GraphEdit" to="." method="update_connections"]
+[connection signal="request_save" from="Editor/VBoxContainer/GraphEdit" to="." method="_save_data"]
 [connection signal="text_changed" from="Editor/CreateNodePopup/Margin/VBox/SearchBar" to="Editor/CreateNodePopup/Margin/VBox/Tree" method="_on_search_bar_text_changed"]
 [connection signal="item_activated" from="Editor/CreateNodePopup/Margin/VBox/Tree" to="Editor/CreateNodePopup/Margin/VBox/Tree" method="_on_item_activated"]
 [connection signal="item_selected" from="Editor/CreateNodePopup/Margin/VBox/Tree" to="Editor/CreateNodePopup/Margin/VBox/Tree" method="_on_item_selected"]
@@ -191,3 +191,4 @@ graph_edit = NodePath("../VBoxContainer/GraphEdit")
 [connection signal="special_node_selected_for_creation" from="Editor/CreateNodePopup/Margin/VBox/Tree" to="." method="_on_tree_special_node_selected_for_creation"]
 [connection signal="pressed" from="Editor/CreateNodePopup/Margin/VBox/HBoxContainer/CancelButton" to="." method="_on_cancel_create_button_pressed"]
 [connection signal="pressed" from="Editor/CreateNodePopup/Margin/VBox/HBoxContainer/CreateButton" to="Editor/CreateNodePopup/Margin/VBox/Tree" method="_on_create_button_pressed"]
+[connection signal="create_node_popup_requested" from="Editor/NodePopup" to="." method="_popup_create_node_menu_at_mouse"]

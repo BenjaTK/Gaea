@@ -66,7 +66,7 @@ func update() -> void:
 		output_idx,
 		AABB(Vector3.ZERO, Vector3(resolution.x, resolution.y, 1)),
 		node.generator.data
-		)
+	)
 
 
 	var image: Image = Image.create_empty(resolution.x, resolution.y, true, Image.FORMAT_LA8)

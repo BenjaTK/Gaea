@@ -156,6 +156,7 @@ func _save_data() -> void:
 	var node_data: Array[Dictionary]
 	var other: Dictionary
 
+
 	for child in _graph_edit.get_children():
 		if child is GraphNode:
 			resources.append(child.resource)
@@ -169,6 +170,7 @@ func _save_data() -> void:
 				"size": child.size
 			})
 
+	print(resources.size())
 	for connection in connections:
 		var from_node: GraphNode = _graph_edit.get_node(NodePath(connection.from_node))
 		var to_node: GraphNode = _graph_edit.get_node(NodePath(connection.to_node))

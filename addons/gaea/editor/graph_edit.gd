@@ -3,9 +3,14 @@ extends GraphEdit
 
 
 signal request_connection_update
+signal request_save
 
 
 func _on_delete_nodes_request(nodes: Array[StringName]) -> void:
+	delete_nodes(nodes)
+
+
+func delete_nodes(nodes: Array[StringName]) -> void:
 	for node_name in nodes:
 		var node: GraphElement = get_node(NodePath(node_name))
 		if node is GaeaGraphNode:
@@ -17,6 +22,7 @@ func _on_delete_nodes_request(nodes: Array[StringName]) -> void:
 			node.on_removed()
 			#remove_child(node)
 		node.queue_free()
+
 	request_connection_update.emit.call_deferred()
 
 
