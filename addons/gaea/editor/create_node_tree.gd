@@ -7,6 +7,8 @@ signal special_node_selected_for_creation(id: StringName)
 
 const NODES_FOLDER_PATH: String = "res://addons/gaea/graph/nodes/root/"
 
+var _custom_nodes_path: String
+
 @export var description_label: RichTextLabel
 
 
@@ -18,20 +20,34 @@ func populate() -> void:
 	clear()
 	var root: TreeItem = create_item()
 	hide_root = true
-	_populate_tree_with_files(NODES_FOLDER_PATH, root)
+	var tree_dictionary: Dictionary = _populate_dict_with_files(NODES_FOLDER_PATH, {})
+	tree_dictionary["Special"] = {
+		"Frame": &"frame"
+	}
+	if not ProjectSettings.get_setting("gaea/custom_nodes_path", "").is_empty():
+		tree_dictionary = _populate_dict_with_files(ProjectSettings.get_setting("gaea/custom_nodes_path", ""), tree_dictionary)
+	_populate_from_dictionary(tree_dictionary, root)
 	root.set_collapsed_recursive(true)
 	root.set_collapsed(false)
 
-	var frame_item: TreeItem = create_item()
-	frame_item.set_text(0, "Frame")
-	frame_item.set_metadata(0, &"frame")
+
+func _populate_from_dictionary(dictionary: Dictionary, parent_item: TreeItem) -> void:
+	for key: String in dictionary:
+		var tree_item: TreeItem = create_item(parent_item)
+		tree_item.set_text(0, key)
+
+		if dictionary.get(key) is Dictionary:
+			_populate_from_dictionary(dictionary.get(key), tree_item)
+		else:
+			tree_item.set_metadata(0, dictionary.get(key))
 
 
-func _populate_tree_with_files(folder_path: String, parent_item: TreeItem) -> void:
+func _populate_dict_with_files(folder_path: String, dict: Dictionary) -> Dictionary:
+	folder_path += ("/" if not folder_path.ends_with("/") else "")
 	var dir := DirAccess.open(folder_path)
 	if dir == null:
 		push_error(error_string(DirAccess.get_open_error()))
-		return
+		return {}
 
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
@@ -40,17 +56,25 @@ func _populate_tree_with_files(folder_path: String, parent_item: TreeItem) -> vo
 			file_name = dir.get_next()
 			continue
 
-		var tree_item: TreeItem = create_item(parent_item)
-		tree_item.set_text(0, file_name.get_basename().capitalize())
+		#var tree_item: TreeItem = create_item(parent_item)
+		#tree_item.set_text(0, file_name.get_basename().capitalize())
+
+		var tree_name: String = file_name.get_basename().capitalize()
 
 		var file_path = folder_path + file_name
 		if dir.current_is_dir():
-			_populate_tree_with_files(file_path + "/", tree_item)
+			_populate_dict_with_files(file_path + "/", dict.get_or_add(tree_name, {}))
 
 		if file_name.ends_with(".tres"):
-			tree_item.set_metadata(0, load(file_path))
+			var resource: Resource = load(file_path)
+			if resource is GaeaNodeResource:
+				tree_name = resource.title
+				dict.get_or_add(tree_name, resource)
+
 
 		file_name = dir.get_next()
+
+	return dict
 
 
 func _on_item_activated() -> void:

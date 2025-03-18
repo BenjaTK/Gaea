@@ -1,18 +1,18 @@
 [gd_resource type="Resource" load_steps=7 format=3 uid="uid://d4f3kftfw2inw"]
 
-[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_oxjdu"]
-[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_2lypi"]
-[ext_resource type="Script" uid="uid://d1jaftbgxy7ru" path="res://addons/gaea/graph/nodes/root/functions/operation.gd" id="3_vodu1"]
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_bga6e"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_1mf7m"]
+[ext_resource type="Script" uid="uid://d1jaftbgxy7ru" path="res://addons/gaea/graph/nodes/root/data/operations/operation.gd" id="3_ba22e"]
 
 [sub_resource type="Resource" id="Resource_wph30"]
-script = ExtResource("1_oxjdu")
+script = ExtResource("1_bga6e")
 type = 0
 name = &"value"
 default_value = null
 hint = Dictionary[String, Variant]({})
 
 [sub_resource type="Resource" id="Resource_i353x"]
-script = ExtResource("2_2lypi")
+script = ExtResource("2_1mf7m")
 left_enabled = true
 left_type = 0
 left_label = "Data"
@@ -22,7 +22,7 @@ right_label = ""
 right_show_preview = false
 
 [sub_resource type="Resource" id="Resource_avr7f"]
-script = ExtResource("2_2lypi")
+script = ExtResource("2_1mf7m")
 left_enabled = false
 left_type = 0
 left_label = ""
@@ -32,11 +32,11 @@ right_label = "Data"
 right_show_preview = false
 
 [resource]
-script = ExtResource("3_vodu1")
+script = ExtResource("3_ba22e")
 operation = 2
-input_slots = Array[ExtResource("2_2lypi")]([SubResource("Resource_i353x")])
-args = Array[ExtResource("1_oxjdu")]([SubResource("Resource_wph30")])
-output_slots = Array[ExtResource("2_2lypi")]([SubResource("Resource_avr7f")])
+input_slots = Array[ExtResource("2_1mf7m")]([SubResource("Resource_i353x")])
+args = Array[ExtResource("1_bga6e")]([SubResource("Resource_wph30")])
+output_slots = Array[ExtResource("2_1mf7m")]([SubResource("Resource_avr7f")])
 title = "Divide"
 description = "Divides all cells in [param]data[/bg][/c] by [param]value[/bg][/c]."
 is_output = false

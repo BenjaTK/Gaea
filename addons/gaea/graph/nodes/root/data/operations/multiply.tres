@@ -1,18 +1,18 @@
 [gd_resource type="Resource" load_steps=7 format=3 uid="uid://coi1put8oap60"]
 
-[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_l306p"]
-[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_ou5ot"]
-[ext_resource type="Script" uid="uid://d1jaftbgxy7ru" path="res://addons/gaea/graph/nodes/root/functions/operation.gd" id="3_43nmj"]
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_rtyw0"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_n0whf"]
+[ext_resource type="Script" uid="uid://d1jaftbgxy7ru" path="res://addons/gaea/graph/nodes/root/data/operations/operation.gd" id="3_offgf"]
 
 [sub_resource type="Resource" id="Resource_wph30"]
-script = ExtResource("1_l306p")
+script = ExtResource("1_rtyw0")
 type = 0
 name = &"value"
 default_value = null
 hint = Dictionary[String, Variant]({})
 
 [sub_resource type="Resource" id="Resource_i353x"]
-script = ExtResource("2_ou5ot")
+script = ExtResource("2_n0whf")
 left_enabled = true
 left_type = 0
 left_label = "Data"
@@ -22,7 +22,7 @@ right_label = ""
 right_show_preview = false
 
 [sub_resource type="Resource" id="Resource_avr7f"]
-script = ExtResource("2_ou5ot")
+script = ExtResource("2_n0whf")
 left_enabled = false
 left_type = 0
 left_label = ""
@@ -32,11 +32,11 @@ right_label = "Data"
 right_show_preview = false
 
 [resource]
-script = ExtResource("3_43nmj")
+script = ExtResource("3_offgf")
 operation = 1
-input_slots = Array[ExtResource("2_ou5ot")]([SubResource("Resource_i353x")])
-args = Array[ExtResource("1_l306p")]([SubResource("Resource_wph30")])
-output_slots = Array[ExtResource("2_ou5ot")]([SubResource("Resource_avr7f")])
+input_slots = Array[ExtResource("2_n0whf")]([SubResource("Resource_i353x")])
+args = Array[ExtResource("1_rtyw0")]([SubResource("Resource_wph30")])
+output_slots = Array[ExtResource("2_n0whf")]([SubResource("Resource_avr7f")])
 title = "Multiply"
 description = "Multiplies all cells in [param]data[/bg][/c] with [param]value[/bg][/c]."
 is_output = false

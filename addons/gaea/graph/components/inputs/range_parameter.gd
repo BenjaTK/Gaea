@@ -12,19 +12,19 @@ extends "res://addons/gaea/graph/components/inputs/graph_node_parameter.gd"
 
 
 func _ready() -> void:
+	if is_instance_valid(resource):
+		min_slider.min_value = resource.hint.get("min", 0.0)
+		min_slider.max_value = maxf(min_slider.min_value, resource.hint.get("max", 1.0))
+		max_slider.min_value = min_slider.min_value
+		max_slider.max_value = min_slider.max_value
 
-	min_slider.min_value = resource.hint.get("min", 0.0)
-	min_slider.max_value = maxf(min_slider.min_value, resource.hint.get("max", 1.0))
-	max_slider.min_value = min_slider.min_value
-	max_slider.max_value = min_slider.max_value
+		min_spin_box.min_value = min_slider.min_value
+		max_spin_box.max_value = max_slider.max_value
 
-	min_spin_box.min_value = min_slider.min_value
-	max_spin_box.max_value = max_slider.max_value
-
-	min_slider.allow_lesser = resource.hint.get("allow_lesser", true)
-	min_spin_box.allow_lesser = min_slider.allow_lesser
-	min_slider.allow_greater = resource.hint.get("allow_greater", true)
-	max_spin_box.allow_greater = max_slider.allow_greater
+		min_slider.allow_lesser = resource.hint.get("allow_lesser", true)
+		min_spin_box.allow_lesser = min_slider.allow_lesser
+		min_slider.allow_greater = resource.hint.get("allow_greater", true)
+		max_spin_box.allow_greater = max_slider.allow_greater
 
 	min_slider.value_changed.connect(_on_slider_changed_value.unbind(1))
 	max_slider.value_changed.connect(_on_slider_changed_value.unbind(1))

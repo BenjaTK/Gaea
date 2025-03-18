@@ -1,15 +1,16 @@
-[gd_resource type="Resource" script_class="GaeaData" load_steps=55 format=3 uid="uid://da68qp01kbdwp"]
+[gd_resource type="Resource" script_class="GaeaData" load_steps=59 format=3 uid="uid://da68qp01kbdwp"]
 
 [ext_resource type="Script" uid="uid://e45byecr4gi6" path="res://addons/gaea/resources/materials/tilemap_material.gd" id="1_361tb"]
 [ext_resource type="Script" uid="uid://3qsmwhn2sk47" path="res://addons/gaea/resources/gaea_layer.gd" id="2_kcfdl"]
 [ext_resource type="Script" uid="uid://brb1clh2y2bv0" path="res://addons/gaea/graph/nodes/node_resource.gd" id="3_7s7mp"]
 [ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="4_bd3lp"]
 [ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="5_51m1p"]
-[ext_resource type="Script" uid="uid://d0bgv7yf1t1m6" path="res://addons/gaea/graph/nodes/root/data/paths/snake_path_2d.gd" id="6_qtqlc"]
+[ext_resource type="Script" uid="uid://d0bgv7yf1t1m6" path="res://addons/gaea/graph/nodes/root/data/generation/snake_path_2d.gd" id="6_361tb"]
 [ext_resource type="Script" uid="uid://bmxbe51xh0t7d" path="res://addons/gaea/graph/nodes/merge.gd" id="7_jc3yr"]
 [ext_resource type="Resource" uid="uid://bbkdvyxkj2slo" path="res://addons/gaea/graph/nodes/output_node_resource.tres" id="8_ncx5p"]
-[ext_resource type="Script" uid="uid://bdwxrdlr0267t" path="res://addons/gaea/graph/nodes/root/map/flags_mapper.gd" id="9_1wku3"]
-[ext_resource type="Script" uid="uid://bqa8aufofkr81" path="res://addons/gaea/graph/nodes/root/input/variable_node.gd" id="10_ajtlj"]
+[ext_resource type="Script" uid="uid://bdwxrdlr0267t" path="res://addons/gaea/graph/nodes/root/map/mappers/flags_mapper.gd" id="9_361tb"]
+[ext_resource type="Script" uid="uid://bqa8aufofkr81" path="res://addons/gaea/graph/nodes/root/input/variables/variable_node.gd" id="10_kcfdl"]
+[ext_resource type="Script" uid="uid://b7naniphpp341" path="res://addons/gaea/graph/nodes/root/data/basic/fill.gd" id="11_kcfdl"]
 [ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/resources/gaea_data.gd" id="11_t7ff4"]
 
 [sub_resource type="Resource" id="Resource_0p08d"]
@@ -47,169 +48,6 @@ metadata/_custom_type_script = "uid://e45byecr4gi6"
 [sub_resource type="Resource" id="Resource_axg3r"]
 script = ExtResource("2_kcfdl")
 enabled = true
-
-[sub_resource type="Resource" id="Resource_5odk7"]
-script = ExtResource("4_bd3lp")
-type = 1
-name = &"move_left_weight"
-default_value = 40
-hint = Dictionary[String, Variant]({
-"min": 0.0
-})
-
-[sub_resource type="Resource" id="Resource_r83pm"]
-script = ExtResource("4_bd3lp")
-type = 1
-name = &"move_right_weight"
-default_value = 40
-hint = Dictionary[String, Variant]({
-"min": 0.0
-})
-
-[sub_resource type="Resource" id="Resource_2j7op"]
-script = ExtResource("4_bd3lp")
-type = 1
-name = &"move_down_weight"
-default_value = 20
-hint = Dictionary[String, Variant]({
-"min": 0.0
-})
-metadata/_custom_type_script = "uid://bh3sajxnmp14w"
-
-[sub_resource type="Resource" id="Resource_7hrwv"]
-script = ExtResource("4_bd3lp")
-type = 6
-name = &"Flags"
-default_value = null
-metadata/_custom_type_script = "uid://bh3sajxnmp14w"
-
-[sub_resource type="Resource" id="Resource_4yg0g"]
-script = ExtResource("4_bd3lp")
-type = 5
-name = &"left"
-default_value = 1
-hint = Dictionary[String, Variant]({})
-metadata/_custom_type_script = "uid://bh3sajxnmp14w"
-
-[sub_resource type="Resource" id="Resource_fpsoe"]
-script = ExtResource("4_bd3lp")
-type = 5
-name = &"right"
-default_value = 2
-hint = Dictionary[String, Variant]({})
-metadata/_custom_type_script = "uid://bh3sajxnmp14w"
-
-[sub_resource type="Resource" id="Resource_f1mpl"]
-script = ExtResource("4_bd3lp")
-type = 5
-name = &"down"
-default_value = 4
-hint = Dictionary[String, Variant]({})
-metadata/_custom_type_script = "uid://bh3sajxnmp14w"
-
-[sub_resource type="Resource" id="Resource_qr7np"]
-script = ExtResource("4_bd3lp")
-type = 5
-name = &"up"
-default_value = 8
-hint = Dictionary[String, Variant]({})
-metadata/_custom_type_script = "uid://bh3sajxnmp14w"
-
-[sub_resource type="Resource" id="Resource_ci3aq"]
-script = ExtResource("5_51m1p")
-left_enabled = false
-left_type = 0
-left_label = ""
-right_enabled = true
-right_type = 0
-right_label = "Data"
-right_show_preview = true
-
-[sub_resource type="Resource" id="Resource_xi4pl"]
-script = ExtResource("6_qtqlc")
-input_slots = Array[ExtResource("5_51m1p")]([])
-args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_5odk7"), SubResource("Resource_r83pm"), SubResource("Resource_2j7op"), SubResource("Resource_7hrwv"), SubResource("Resource_4yg0g"), SubResource("Resource_fpsoe"), SubResource("Resource_f1mpl"), SubResource("Resource_qr7np")])
-output_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_ci3aq")])
-title = "SnakePath2D"
-description = "Generates a path that goes from the top of the world to the bottom, with each cell consisting of flags that indicate their exits (up, down, left, right). 
-The rest is filled with 0s."
-is_output = false
-data = {
-&"Flags": null,
-&"down": 4,
-&"left": 1,
-&"move_down_weight": 20.0,
-&"move_left_weight": 40.0,
-&"move_right_weight": 40.0,
-&"right": 2,
-&"up": 8
-}
-
-[sub_resource type="Resource" id="Resource_m7j8q"]
-script = ExtResource("5_51m1p")
-left_enabled = true
-left_type = 0
-left_label = "Data A"
-right_enabled = false
-right_type = 0
-right_label = ""
-right_show_preview = false
-metadata/_custom_type_script = "uid://ote622wl6axc"
-
-[sub_resource type="Resource" id="Resource_l204x"]
-script = ExtResource("5_51m1p")
-left_enabled = true
-left_type = 0
-left_label = "Data B"
-right_enabled = false
-right_type = 0
-right_label = ""
-right_show_preview = false
-metadata/_custom_type_script = "uid://ote622wl6axc"
-
-[sub_resource type="Resource" id="Resource_h4yhw"]
-script = ExtResource("5_51m1p")
-left_enabled = true
-left_type = 0
-left_label = "Data C"
-right_enabled = false
-right_type = 0
-right_label = ""
-right_show_preview = false
-metadata/_custom_type_script = "uid://ote622wl6axc"
-
-[sub_resource type="Resource" id="Resource_tpjb4"]
-script = ExtResource("5_51m1p")
-left_enabled = true
-left_type = 0
-left_label = "Data D"
-right_enabled = false
-right_type = 0
-right_label = ""
-right_show_preview = false
-metadata/_custom_type_script = "uid://ote622wl6axc"
-
-[sub_resource type="Resource" id="Resource_bie4n"]
-script = ExtResource("5_51m1p")
-left_enabled = false
-left_type = 0
-left_label = ""
-right_enabled = true
-right_type = 0
-right_label = "Merged Data"
-right_show_preview = true
-metadata/_custom_type_script = "uid://ote622wl6axc"
-
-[sub_resource type="Resource" id="Resource_k3bxl"]
-script = ExtResource("7_jc3yr")
-input_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_m7j8q"), SubResource("Resource_l204x"), SubResource("Resource_h4yhw"), SubResource("Resource_tpjb4")])
-args = Array[ExtResource("4_bd3lp")]([])
-output_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_bie4n")])
-title = "MergeData"
-description = "Merges [param]data A-D[/bg][/c]. Later grids override any cells from the previous grids when valid. (B overrides A, C overrides B, etc.)"
-is_output = false
-data = {}
-metadata/_custom_type_script = "uid://brb1clh2y2bv0"
 
 [sub_resource type="Resource" id="Resource_qksdc"]
 script = ExtResource("5_51m1p")
@@ -325,7 +163,7 @@ right_label = "Map"
 right_show_preview = false
 
 [sub_resource type="Resource" id="Resource_q2emp"]
-script = ExtResource("9_1wku3")
+script = ExtResource("9_361tb")
 input_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_v3mus"), SubResource("Resource_f360t")])
 args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_ds3wq"), SubResource("Resource_kqdcw"), SubResource("Resource_c4b2i")])
 output_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_7diey")])
@@ -339,31 +177,8 @@ data = {
 "match_flags": Array[int]([4, 8])
 }
 
-[sub_resource type="Resource" id="Resource_cvpld"]
-script = ExtResource("4_bd3lp")
-type = 3
-name = &"name"
-default_value = null
-hint = Dictionary[String, Variant]({})
-
-[sub_resource type="Resource" id="Resource_teij2"]
-script = ExtResource("10_ajtlj")
-type = 24
-hint = 17
-hint_string = "GaeaMaterial"
-output_type = 2
-input_slots = Array[ExtResource("5_51m1p")]([])
-args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_cvpld")])
-output_slots = Array[ExtResource("5_51m1p")]([])
-title = "MaterialVariable"
-description = "GaeaMaterial variable editable in the inspector."
-is_output = false
-data = {
-"name": "LeftRightUpDownMaterial"
-}
-
 [sub_resource type="Resource" id="Resource_f38r3"]
-script = ExtResource("9_1wku3")
+script = ExtResource("9_361tb")
 input_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_v3mus"), SubResource("Resource_f360t")])
 args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_ds3wq"), SubResource("Resource_kqdcw"), SubResource("Resource_c4b2i")])
 output_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_7diey")])
@@ -377,24 +192,8 @@ data = {
 "match_flags": Array[int]([4])
 }
 
-[sub_resource type="Resource" id="Resource_42x5e"]
-script = ExtResource("10_ajtlj")
-type = 24
-hint = 17
-hint_string = "GaeaMaterial"
-output_type = 2
-input_slots = Array[ExtResource("5_51m1p")]([])
-args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_cvpld")])
-output_slots = Array[ExtResource("5_51m1p")]([])
-title = "MaterialVariable"
-description = "GaeaMaterial variable editable in the inspector."
-is_output = false
-data = {
-"name": "LeftRightDownMaterial"
-}
-
 [sub_resource type="Resource" id="Resource_nfpq6"]
-script = ExtResource("9_1wku3")
+script = ExtResource("9_361tb")
 input_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_v3mus"), SubResource("Resource_f360t")])
 args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_ds3wq"), SubResource("Resource_kqdcw"), SubResource("Resource_c4b2i")])
 output_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_7diey")])
@@ -408,31 +207,8 @@ data = {
 "match_flags": Array[int]([1, 2])
 }
 
-[sub_resource type="Resource" id="Resource_71boa"]
-script = ExtResource("4_bd3lp")
-type = 3
-name = &"name"
-default_value = null
-hint = Dictionary[String, Variant]({})
-
-[sub_resource type="Resource" id="Resource_ysd8o"]
-script = ExtResource("10_ajtlj")
-type = 24
-hint = 17
-hint_string = "GaeaMaterial"
-output_type = 2
-input_slots = Array[ExtResource("5_51m1p")]([])
-args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_71boa")])
-output_slots = Array[ExtResource("5_51m1p")]([])
-title = "MaterialVariable"
-description = "GaeaMaterial variable editable in the inspector."
-is_output = false
-data = {
-"name": "LeftRightMaterial"
-}
-
 [sub_resource type="Resource" id="Resource_kagp6"]
-script = ExtResource("9_1wku3")
+script = ExtResource("9_361tb")
 input_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_v3mus"), SubResource("Resource_f360t")])
 args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_ds3wq"), SubResource("Resource_kqdcw"), SubResource("Resource_c4b2i")])
 output_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_7diey")])
@@ -446,8 +222,15 @@ data = {
 "match_flags": Array[int]([8])
 }
 
+[sub_resource type="Resource" id="Resource_cvpld"]
+script = ExtResource("4_bd3lp")
+type = 3
+name = &"name"
+default_value = null
+hint = Dictionary[String, Variant]({})
+
 [sub_resource type="Resource" id="Resource_7wlr4"]
-script = ExtResource("10_ajtlj")
+script = ExtResource("10_kcfdl")
 type = 24
 hint = 17
 hint_string = "GaeaMaterial"
@@ -462,131 +245,381 @@ data = {
 "name": "LeftRightUpMaterial"
 }
 
+[sub_resource type="Resource" id="Resource_m7j8q"]
+script = ExtResource("5_51m1p")
+left_enabled = true
+left_type = 0
+left_label = "Data A"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[sub_resource type="Resource" id="Resource_l204x"]
+script = ExtResource("5_51m1p")
+left_enabled = true
+left_type = 0
+left_label = "Data B"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[sub_resource type="Resource" id="Resource_h4yhw"]
+script = ExtResource("5_51m1p")
+left_enabled = true
+left_type = 0
+left_label = "Data C"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[sub_resource type="Resource" id="Resource_tpjb4"]
+script = ExtResource("5_51m1p")
+left_enabled = true
+left_type = 0
+left_label = "Data D"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[sub_resource type="Resource" id="Resource_bie4n"]
+script = ExtResource("5_51m1p")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 0
+right_label = "Merged Data"
+right_show_preview = true
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[sub_resource type="Resource" id="Resource_k3bxl"]
+script = ExtResource("7_jc3yr")
+input_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_m7j8q"), SubResource("Resource_l204x"), SubResource("Resource_h4yhw"), SubResource("Resource_tpjb4")])
+args = Array[ExtResource("4_bd3lp")]([])
+output_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_bie4n")])
+title = "MergeData"
+description = "Merges [param]data A-D[/bg][/c]. Later grids override any cells from the previous grids when valid. (B overrides A, C overrides B, etc.)"
+is_output = false
+data = {}
+metadata/_custom_type_script = "uid://brb1clh2y2bv0"
+
+[sub_resource type="Resource" id="Resource_teij2"]
+script = ExtResource("10_kcfdl")
+type = 24
+hint = 17
+hint_string = "GaeaMaterial"
+output_type = 2
+input_slots = Array[ExtResource("5_51m1p")]([])
+args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_cvpld")])
+output_slots = Array[ExtResource("5_51m1p")]([])
+title = "MaterialVariable"
+description = "GaeaMaterial variable editable in the inspector."
+is_output = false
+data = {
+"name": "LeftRightUpDownMaterial"
+}
+
+[sub_resource type="Resource" id="Resource_42x5e"]
+script = ExtResource("10_kcfdl")
+type = 24
+hint = 17
+hint_string = "GaeaMaterial"
+output_type = 2
+input_slots = Array[ExtResource("5_51m1p")]([])
+args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_cvpld")])
+output_slots = Array[ExtResource("5_51m1p")]([])
+title = "MaterialVariable"
+description = "GaeaMaterial variable editable in the inspector."
+is_output = false
+data = {
+"name": "LeftRightDownMaterial"
+}
+
+[sub_resource type="Resource" id="Resource_71boa"]
+script = ExtResource("4_bd3lp")
+type = 3
+name = &"name"
+default_value = null
+hint = Dictionary[String, Variant]({})
+
+[sub_resource type="Resource" id="Resource_ysd8o"]
+script = ExtResource("10_kcfdl")
+type = 24
+hint = 17
+hint_string = "GaeaMaterial"
+output_type = 2
+input_slots = Array[ExtResource("5_51m1p")]([])
+args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_71boa")])
+output_slots = Array[ExtResource("5_51m1p")]([])
+title = "MaterialVariable"
+description = "GaeaMaterial variable editable in the inspector."
+is_output = false
+data = {
+"name": "LeftRightMaterial"
+}
+
+[sub_resource type="Resource" id="Resource_5odk7"]
+script = ExtResource("4_bd3lp")
+type = 1
+name = &"move_left_weight"
+default_value = 40
+hint = Dictionary[String, Variant]({
+"min": 0.0
+})
+
+[sub_resource type="Resource" id="Resource_r83pm"]
+script = ExtResource("4_bd3lp")
+type = 1
+name = &"move_right_weight"
+default_value = 40
+hint = Dictionary[String, Variant]({
+"min": 0.0
+})
+
+[sub_resource type="Resource" id="Resource_2j7op"]
+script = ExtResource("4_bd3lp")
+type = 1
+name = &"move_down_weight"
+default_value = 20
+hint = Dictionary[String, Variant]({
+"min": 0.0
+})
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_7hrwv"]
+script = ExtResource("4_bd3lp")
+type = 6
+name = &"Flags"
+default_value = null
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_4yg0g"]
+script = ExtResource("4_bd3lp")
+type = 5
+name = &"left"
+default_value = 1
+hint = Dictionary[String, Variant]({})
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_fpsoe"]
+script = ExtResource("4_bd3lp")
+type = 5
+name = &"right"
+default_value = 2
+hint = Dictionary[String, Variant]({})
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_f1mpl"]
+script = ExtResource("4_bd3lp")
+type = 5
+name = &"down"
+default_value = 4
+hint = Dictionary[String, Variant]({})
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_qr7np"]
+script = ExtResource("4_bd3lp")
+type = 5
+name = &"up"
+default_value = 8
+hint = Dictionary[String, Variant]({})
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_ci3aq"]
+script = ExtResource("5_51m1p")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 0
+right_label = "Data"
+right_show_preview = true
+
+[sub_resource type="Resource" id="Resource_xi4pl"]
+script = ExtResource("6_361tb")
+input_slots = Array[ExtResource("5_51m1p")]([])
+args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_5odk7"), SubResource("Resource_r83pm"), SubResource("Resource_2j7op"), SubResource("Resource_7hrwv"), SubResource("Resource_4yg0g"), SubResource("Resource_fpsoe"), SubResource("Resource_f1mpl"), SubResource("Resource_qr7np")])
+output_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_ci3aq")])
+title = "SnakePath2D"
+description = "Generates a path that goes from the top of the world to the bottom, with each cell consisting of flags that indicate their exits (up, down, left, right). 
+The rest is filled with 0s."
+is_output = false
+data = {
+&"Flags": null,
+&"down": 4,
+&"left": 1,
+&"move_down_weight": 20.0,
+&"move_left_weight": 40.0,
+&"move_right_weight": 40.0,
+&"right": 2,
+&"up": 8
+}
+
+[sub_resource type="Resource" id="Resource_qmf8v"]
+script = ExtResource("4_bd3lp")
+type = 0
+name = &"value"
+default_value = null
+hint = Dictionary[String, Variant]({})
+
+[sub_resource type="Resource" id="Resource_4o1fi"]
+script = ExtResource("5_51m1p")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 0
+right_label = "Data"
+right_show_preview = true
+
+[sub_resource type="Resource" id="Resource_7s7mp"]
+script = ExtResource("11_kcfdl")
+input_slots = Array[ExtResource("5_51m1p")]([])
+args = Array[ExtResource("4_bd3lp")]([SubResource("Resource_qmf8v")])
+output_slots = Array[ExtResource("5_51m1p")]([SubResource("Resource_4o1fi")])
+title = "Fill3"
+description = "Fills the grid with [param]value[/bg][/c]."
+is_output = false
+data = {
+&"value": 0.0
+}
+
 [resource]
 script = ExtResource("11_t7ff4")
 layers = Array[ExtResource("2_kcfdl")]([SubResource("Resource_axg3r")])
 connections = Array[Dictionary]([{
-"from_node": 9,
-"from_port": 0,
-"keep_alive": false,
-"to_node": 8,
-"to_port": 1
-}, {
-"from_node": 1,
+"from_node": 10,
 "from_port": 0,
 "keep_alive": false,
 "to_node": 4,
-"to_port": 0
-}, {
-"from_node": 1,
-"from_port": 0,
-"keep_alive": false,
-"to_node": 10,
-"to_port": 0
-}, {
-"from_node": 11,
-"from_port": 0,
-"keep_alive": false,
-"to_node": 10,
 "to_port": 1
 }, {
-"from_node": 1,
+"from_node": 7,
 "from_port": 0,
 "keep_alive": false,
-"to_node": 6,
+"to_node": 2,
+"to_port": 0
+}, {
+"from_node": 7,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 5,
 "to_port": 0
 }, {
 "from_node": 6,
 "from_port": 0,
 "keep_alive": false,
-"to_node": 2,
-"to_port": 2
+"to_node": 5,
+"to_port": 1
 }, {
 "from_node": 7,
 "from_port": 0,
 "keep_alive": false,
-"to_node": 6,
-"to_port": 1
-}, {
-"from_node": 4,
-"from_port": 0,
-"keep_alive": false,
-"to_node": 2,
-"to_port": 1
-}, {
-"from_node": 10,
-"from_port": 0,
-"keep_alive": false,
-"to_node": 2,
+"to_node": 3,
 "to_port": 0
 }, {
-"from_node": 5,
+"from_node": 3,
 "from_port": 0,
 "keep_alive": false,
-"to_node": 4,
+"to_node": 0,
+"to_port": 2
+}, {
+"from_node": 9,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 3,
 "to_port": 1
 }, {
 "from_node": 2,
 "from_port": 0,
 "keep_alive": false,
-"to_node": 3,
+"to_node": 0,
+"to_port": 1
+}, {
+"from_node": 5,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 0,
 "to_port": 0
 }, {
 "from_node": 8,
 "from_port": 0,
 "keep_alive": false,
 "to_node": 2,
-"to_port": 3
-}, {
-"from_node": 1,
-"from_port": 0,
-"keep_alive": false,
-"to_node": 8,
-"to_port": 0
+"to_port": 1
 }, {
 "from_node": 0,
 "from_port": 0,
 "keep_alive": false,
 "to_node": 1,
 "to_port": 0
+}, {
+"from_node": 4,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 0,
+"to_port": 3
+}, {
+"from_node": 7,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 4,
+"to_port": 0
+}, {
+"from_node": 11,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 7,
+"to_port": 0
 }])
-resources = Array[ExtResource("3_7s7mp")]([SubResource("Resource_xi4pl"), SubResource("Resource_k3bxl"), SubResource("Resource_5ojly"), ExtResource("8_ncx5p"), SubResource("Resource_q2emp"), SubResource("Resource_teij2"), SubResource("Resource_f38r3"), SubResource("Resource_42x5e"), SubResource("Resource_nfpq6"), SubResource("Resource_ysd8o"), SubResource("Resource_kagp6"), SubResource("Resource_7wlr4")])
+resources = Array[ExtResource("3_7s7mp")]([SubResource("Resource_5ojly"), ExtResource("8_ncx5p"), SubResource("Resource_q2emp"), SubResource("Resource_f38r3"), SubResource("Resource_nfpq6"), SubResource("Resource_kagp6"), SubResource("Resource_7wlr4"), SubResource("Resource_k3bxl"), SubResource("Resource_teij2"), SubResource("Resource_42x5e"), SubResource("Resource_ysd8o"), SubResource("Resource_xi4pl"), SubResource("Resource_7s7mp")])
 node_data = Array[Dictionary]([{
-"name": &"_GraphNode_44773",
-"position": Vector2(560, -1220)
+"name": &"_GraphNode_28883",
+"position": Vector2(2980, -840)
 }, {
-"name": &"_GraphNode_84554",
-"position": Vector2(1020, -920)
+"name": &"_GraphNode_28890",
+"position": Vector2(3320, -700)
 }, {
-"name": &"_GraphNode_28882",
-"position": Vector2(2880, -640)
+"name": &"BaseNode3",
+"position": Vector2(2020, -1280)
 }, {
-"name": &"_GraphNode_28889",
-"position": Vector2(3220, -500)
+"name": &"_GraphNode_28862",
+"position": Vector2(2020, -900)
 }, {
-"name": &"BaseNode2",
-"position": Vector2(2020, -1200)
+"name": &"_GraphNode_28869",
+"position": Vector2(2000, -560)
 }, {
-"name": &"_GraphNode_28753",
-"position": Vector2(1640, -1080)
+"name": &"_GraphNode_28876",
+"position": Vector2(2000, -240)
 }, {
-"name": &"_GraphNode_28861",
-"position": Vector2(2020, -820)
+"name": &"_GraphNode_28785",
+"position": Vector2(1620, -140)
 }, {
-"name": &"_GraphNode_28750",
-"position": Vector2(1620, -820)
+"name": &"_GraphNode_84555",
+"position": Vector2(1140, -920)
 }, {
-"name": &"_GraphNode_28868",
-"position": Vector2(2000, -480)
+"name": &"_GraphNode_28754",
+"position": Vector2(1620, -1160)
 }, {
-"name": &"_GraphNode_28858",
-"position": Vector2(1640, -400)
+"name": &"_GraphNode_28751",
+"position": Vector2(1620, -900)
 }, {
-"name": &"_GraphNode_28875",
-"position": Vector2(2000, -160)
+"name": &"_GraphNode_28859",
+"position": Vector2(1620, -480)
 }, {
-"name": &"_GraphNode_28784",
-"position": Vector2(1620, -60)
+"name": &"_GraphNode_44774",
+"position": Vector2(660, -1140)
+}, {
+"name": &"BaseNode",
+"position": Vector2(171.9, -1368.79)
 }])
 parameters = Dictionary[StringName, Variant]({
 &"Fil": {
@@ -628,21 +661,21 @@ parameters = Dictionary[StringName, Variant]({
 scroll_offset = Vector2(0, 0)
 other = {
 "frames": [{
-"attached": Array[StringName]([&"_GraphNode_28882", &"_GraphNode_28889"]),
-"position": Vector2(2840, -681),
-"size": Vector2(676, 295),
-"tint_color": Color(0.3, 0.3, 0.3, 0.75),
-"tint_color_enabled": false,
-"title": "Merge All Maps"
-}, {
-"attached": Array[StringName]([&"BaseNode2", &"_GraphNode_28753", &"_GraphNode_28861", &"_GraphNode_28750", &"_GraphNode_28868", &"_GraphNode_28858", &"_GraphNode_28875"]),
-"position": Vector2(1580, -1241),
+"attached": Array[StringName]([]),
+"position": Vector2(1580, -1321),
 "size": Vector2(901, 1374),
 "tint_color": Color(0.3, 0.3, 0.3, 0.75),
 "tint_color_enabled": false,
 "title": "Assign Tiles"
+}, {
+"attached": Array[StringName]([]),
+"position": Vector2(2940, -880),
+"size": Vector2(676, 295),
+"tint_color": Color(0.3, 0.3, 0.3, 0.75),
+"tint_color_enabled": false,
+"title": "Merge All Maps"
 }],
-"scroll_offset": Vector2(497.819, -165.609)
+"scroll_offset": Vector2(-214.022, -359.337)
 }
 Fil = 0
 LeftRightDownMaterial = SubResource("Resource_0p08d")
