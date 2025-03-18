@@ -79,7 +79,7 @@ func get_connected_port(connection_idx: int) -> int:
 func get_arg_value(arg_name: String) -> Variant:
 	for child in get_children():
 		if child is GaeaGraphNodeParameter:
-			if child.resource.name.to_lower() == arg_name.to_lower():
+			if child.resource.name == arg_name:
 				return child.get_param_value()
 	return null
 
@@ -113,7 +113,7 @@ func notify_connections_updated() -> void:
 
 func get_save_data() -> Dictionary:
 	for arg in resource.args:
-		resource.data[arg.name.to_lower()] = get_arg_value(arg.name)
+		resource.data[arg.name] = get_arg_value(arg.name)
 
 	var dictionary: Dictionary = {
 		"name": name,

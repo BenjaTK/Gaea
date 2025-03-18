@@ -59,7 +59,7 @@ enabled = true
 [sub_resource type="Resource" id="Resource_71boa"]
 script = ExtResource("6_ihln5")
 type = 3
-name = "name"
+name = &"name"
 default_value = null
 
 [sub_resource type="Resource" id="Resource_ysd8o"]
@@ -141,7 +141,7 @@ data = {}
 [sub_resource type="Resource" id="Resource_cvpld"]
 script = ExtResource("6_ihln5")
 type = 3
-name = "name"
+name = &"name"
 default_value = null
 
 [sub_resource type="Resource" id="Resource_teij2"]
@@ -163,20 +163,20 @@ data = {
 [sub_resource type="Resource" id="Resource_ds3wq"]
 script = ExtResource("6_ihln5")
 type = 9
-name = "match_all"
+name = &"match_all"
 default_value = true
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
 [sub_resource type="Resource" id="Resource_kqdcw"]
 script = ExtResource("6_ihln5")
 type = 8
-name = "match_flags"
+name = &"match_flags"
 default_value = null
 
 [sub_resource type="Resource" id="Resource_c4b2i"]
 script = ExtResource("6_ihln5")
 type = 8
-name = "exclude_flags"
+name = &"exclude_flags"
 default_value = null
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
@@ -371,54 +371,54 @@ data = {
 [sub_resource type="Resource" id="Resource_4i160"]
 script = ExtResource("6_ihln5")
 type = 1
-name = "move_left_weight"
+name = &"move_left_weight"
 default_value = 40
 
 [sub_resource type="Resource" id="Resource_0hjq7"]
 script = ExtResource("6_ihln5")
 type = 1
-name = "move_right_weight"
+name = &"move_right_weight"
 default_value = 40
 
 [sub_resource type="Resource" id="Resource_yo187"]
 script = ExtResource("6_ihln5")
 type = 1
-name = "move_down_weight"
+name = &"move_down_weight"
 default_value = 20
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
 [sub_resource type="Resource" id="Resource_3urdm"]
 script = ExtResource("6_ihln5")
 type = 6
-name = "Flags"
+name = &"Flags"
 default_value = null
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
 [sub_resource type="Resource" id="Resource_cvvda"]
 script = ExtResource("6_ihln5")
 type = 5
-name = "left"
+name = &"left"
 default_value = 1
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
 [sub_resource type="Resource" id="Resource_435by"]
 script = ExtResource("6_ihln5")
 type = 5
-name = "right"
+name = &"right"
 default_value = 2
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
 [sub_resource type="Resource" id="Resource_gy3rq"]
 script = ExtResource("6_ihln5")
 type = 5
-name = "down"
+name = &"down"
 default_value = 4
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
 [sub_resource type="Resource" id="Resource_bms0f"]
 script = ExtResource("6_ihln5")
 type = 5
-name = "up"
+name = &"up"
 default_value = 8
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 

@@ -7,13 +7,13 @@
 [sub_resource type="Resource" id="Resource_a2hj1"]
 script = ExtResource("1_7wqu7")
 type = 0
-name = "min"
+name = &"min"
 default_value = null
 
 [sub_resource type="Resource" id="Resource_dkdok"]
 script = ExtResource("1_7wqu7")
 type = 0
-name = "max"
+name = &"max"
 default_value = 1.0
 
 [sub_resource type="Resource" id="Resource_gk2p2"]

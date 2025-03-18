@@ -19,7 +19,7 @@ enum Type {
 	set(value):
 		type = value
 		notify_property_list_changed()
-@export var name: String
+@export var name: StringName
 @export_storage var default_value: Variant
 
 var value: Variant
@@ -34,6 +34,10 @@ func get_arg_node() -> GaeaGraphNodeParameter:
 	node.resource = self
 
 	return node
+
+
+func get_arg_name() -> StringName:
+	return name
 
 
 static func get_scene_from_type(type: Type) -> PackedScene:

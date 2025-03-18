@@ -7,19 +7,19 @@
 [sub_resource type="Resource" id="Resource_88nce"]
 script = ExtResource("1_dum5g")
 type = 0
-name = "frequency"
+name = &"frequency"
 default_value = 0.01
 
 [sub_resource type="Resource" id="Resource_w4c4h"]
 script = ExtResource("1_dum5g")
 type = 0
-name = "lacunarity"
+name = &"lacunarity"
 default_value = 2.0
 
 [sub_resource type="Resource" id="Resource_7ltu6"]
 script = ExtResource("1_dum5g")
 type = 1
-name = "octaves"
+name = &"octaves"
 default_value = 5
 
 [sub_resource type="Resource" id="Resource_8tvqk"]

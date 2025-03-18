@@ -1,7 +1,7 @@
 [gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://c2pc7mfv0730k"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_43eqr"]
-size = Vector2(336, 278)
+size = Vector2(244, 124)
 title = "SAfawd"
 attached_nodes = PackedInt32Array(8)
 
