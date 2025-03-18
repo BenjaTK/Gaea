@@ -1,3 +1,4 @@
+@icon("../../assets/chunk_loader.svg")
 class_name ChunkLoader2D
 extends Node
 

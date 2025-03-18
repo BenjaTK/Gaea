@@ -1,4 +1,5 @@
 @tool
+@icon("../assets/data.svg")
 class_name GaeaData
 extends Resource
 

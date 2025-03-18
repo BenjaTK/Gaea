@@ -1,14 +1,11 @@
-[gd_scene load_steps=14 format=4 uid="uid://yj8lg31imwsl"]
+[gd_scene load_steps=10 format=4 uid="uid://yj8lg31imwsl"]
 
 [ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/nodes/generator.gd" id="1_b5xa0"]
 [ext_resource type="Script" uid="uid://b2d60cevb336w" path="res://scenes/test/test_scene.gd" id="1_i42dh"]
 [ext_resource type="Resource" uid="uid://da68qp01kbdwp" path="res://scenes/test/snake_path_generation.tres" id="3_coxib"]
 [ext_resource type="Texture2D" uid="uid://cmy8ope6463sf" path="res://scenes/test/test_tileset.png" id="3_snetl"]
 [ext_resource type="Script" uid="uid://b4x16tyyfihmb" path="res://addons/gaea/nodes/renderers/tilemap_renderer.gd" id="11_db3f4"]
-[ext_resource type="Shader" uid="uid://c2pc7mfv0730k" path="res://new_shader.tres" id="11_kcwyn"]
 [ext_resource type="Texture2D" uid="uid://f8b05yxijdkl" path="res://scenes/test/rooms_tileset_test.png" id="15_ggy6f"]
-[ext_resource type="Texture2D" uid="uid://bh3d1rgohpb4x" path="res://icon.svg" id="17_307sj"]
-[ext_resource type="Script" uid="uid://7o1q54p6wv71" path="res://scenes/test/test_actor.gd" id="18_l07il"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smit1"]
 texture = ExtResource("3_snetl")
@@ -28,42 +25,20 @@ texture = ExtResource("15_ggy6f")
 sources/0 = SubResource("TileSetAtlasSource_smit1")
 sources/1 = SubResource("TileSetAtlasSource_kqdcw")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c4gv6"]
-render_priority = 0
-shader = ExtResource("11_kcwyn")
-shader_parameter/asefawfae = 1
-shader_parameter/asefasef = 0.0
-
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_i42dh")
 
 [node name="GaeaGenerator" type="Node" parent="."]
 script = ExtResource("1_b5xa0")
 data = ExtResource("3_coxib")
-seed = 429539969
+seed = 3093510215
 world_size = Vector3i(8, 8, 1)
 
 [node name="GaeaTilemapRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map_layers", "generator")]
 script = ExtResource("11_db3f4")
-tile_map_layers = [NodePath("../TileMapLayer"), NodePath("../TileMapLayer2"), NodePath("../TileMapLayer3")]
+tile_map_layers = [NodePath("../TileMapLayer")]
 generator = NodePath("../GaeaGenerator")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAEAAQABAAAAAAAAAAIAAQADAAAAAAAAAAcAAQAAAAAAAAABAAEAAQAAAAAAAAABAAIAAQAAAAAAAAABAAcAAQAAAAAAAAACAAAAAQAAAAAAAAACAAEAAQAAAAAAAAACAAIAAQAAAAAAAAACAAYAAQABAAAAAAACAAcAAQADAAAAAAADAAAAAQAAAAAAAAADAAEAAQAAAAAAAAADAAIAAQAAAAAAAAADAAYAAQAAAAAAAAAEAAAAAQAAAAAAAAAEAAEAAQAAAAAAAAAEAAIAAQAAAAAAAAAEAAYAAQAAAAAAAAAFAAAAAQAAAAAAAAAFAAEAAQAAAAAAAAAFAAIAAQABAAAAAAAFAAMAAQADAAAAAAAFAAYAAQAAAAAAAAAGAAAAAQABAAAAAAAGAAEAAQADAAAAAAAGAAMAAQAAAAAAAAAGAAQAAQABAAAAAAAGAAUAAQADAAAAAAAGAAYAAQAAAAAAAAAHAAMAAQABAAAAAAAHAAQAAQADAAAAAAAHAAUAAQABAAAAAAAHAAYAAQADAAAAAAA=")
+tile_map_data = PackedByteArray("AAAEAAIAAQABAAAAAAAEAAMAAQADAAAAAAAFAAIAAQAAAAAAAAAFAAMAAQABAAAAAAAFAAQAAQADAAAAAAAGAAAAAQAAAAAAAAAGAAIAAQAAAAAAAAAGAAQAAQABAAAAAAAGAAUAAQADAAAAAAAHAAAAAQABAAAAAAAHAAEAAQACAAAAAAAHAAIAAQADAAAAAAAHAAUAAQABAAAAAAAHAAYAAQACAAAAAAAHAAcAAQADAAAAAAA=")
 tile_set = SubResource("TileSet_5nfp8")
-
-[node name="TileMapLayer2" type="TileMapLayer" parent="."]
-tile_set = SubResource("TileSet_5nfp8")
-
-[node name="TileMapLayer3" type="TileMapLayer" parent="."]
-tile_set = SubResource("TileSet_5nfp8")
-
-[node name="Node2D" type="Node2D" parent="."]
-material = SubResource("ShaderMaterial_c4gv6")
-
-[node name="TestActor" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("17_307sj")
-script = ExtResource("18_l07il")
-
-[node name="Camera2D" type="Camera2D" parent="TestActor"]
