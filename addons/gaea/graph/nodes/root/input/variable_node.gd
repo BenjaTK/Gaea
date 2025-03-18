@@ -10,7 +10,7 @@ class_name GaeaVariableNodeResource
 
 
 func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
-	return generator_data.parameters.get(get_arg("name"))
+	return generator_data.parameters.get(get_arg("name", null))
 
 
 static func get_scene() -> PackedScene:

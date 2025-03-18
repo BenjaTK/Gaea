@@ -23,7 +23,7 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 	var grid: Dictionary
 	var flags: Array = get_arg("match_flags", generator_data)
 	var exclude_flags: Array = get_arg("exclude_flags", generator_data)
-	var match_all: bool = get_arg("match_all")
+	var match_all: bool = get_arg("match_all", generator_data)
 
 	for cell in passed_data:
 		var value: float = passed_data[cell]

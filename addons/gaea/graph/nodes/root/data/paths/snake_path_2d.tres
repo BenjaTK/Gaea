@@ -4,61 +4,74 @@
 [ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_a0dir"]
 [ext_resource type="Script" uid="uid://d0bgv7yf1t1m6" path="res://addons/gaea/graph/nodes/root/data/paths/snake_path_2d.gd" id="3_ud703"]
 
-[sub_resource type="Resource" id="Resource_4i160"]
+[sub_resource type="Resource" id="Resource_5odk7"]
 script = ExtResource("1_75iak")
 type = 1
 name = &"move_left_weight"
 default_value = 40
+hint = Dictionary[String, Variant]({
+"min": 0.0
+})
 
-[sub_resource type="Resource" id="Resource_0hjq7"]
+[sub_resource type="Resource" id="Resource_r83pm"]
 script = ExtResource("1_75iak")
 type = 1
 name = &"move_right_weight"
 default_value = 40
+hint = Dictionary[String, Variant]({
+"min": 0.0
+})
 
-[sub_resource type="Resource" id="Resource_yo187"]
+[sub_resource type="Resource" id="Resource_2j7op"]
 script = ExtResource("1_75iak")
 type = 1
 name = &"move_down_weight"
 default_value = 20
+hint = Dictionary[String, Variant]({
+"min": 0.0
+})
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
-[sub_resource type="Resource" id="Resource_3urdm"]
+[sub_resource type="Resource" id="Resource_7hrwv"]
 script = ExtResource("1_75iak")
 type = 6
 name = &"Flags"
 default_value = null
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
-[sub_resource type="Resource" id="Resource_cvvda"]
+[sub_resource type="Resource" id="Resource_4yg0g"]
 script = ExtResource("1_75iak")
 type = 5
 name = &"left"
 default_value = 1
+hint = Dictionary[String, Variant]({})
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
-[sub_resource type="Resource" id="Resource_435by"]
+[sub_resource type="Resource" id="Resource_fpsoe"]
 script = ExtResource("1_75iak")
 type = 5
 name = &"right"
 default_value = 2
+hint = Dictionary[String, Variant]({})
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
-[sub_resource type="Resource" id="Resource_gy3rq"]
+[sub_resource type="Resource" id="Resource_f1mpl"]
 script = ExtResource("1_75iak")
 type = 5
 name = &"down"
 default_value = 4
+hint = Dictionary[String, Variant]({})
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
-[sub_resource type="Resource" id="Resource_bms0f"]
+[sub_resource type="Resource" id="Resource_qr7np"]
 script = ExtResource("1_75iak")
 type = 5
 name = &"up"
 default_value = 8
+hint = Dictionary[String, Variant]({})
 metadata/_custom_type_script = "uid://bh3sajxnmp14w"
 
-[sub_resource type="Resource" id="Resource_6iq26"]
+[sub_resource type="Resource" id="Resource_ci3aq"]
 script = ExtResource("2_a0dir")
 left_enabled = false
 left_type = 0
@@ -71,8 +84,8 @@ right_show_preview = true
 [resource]
 script = ExtResource("3_ud703")
 input_slots = Array[ExtResource("2_a0dir")]([])
-args = Array[ExtResource("1_75iak")]([SubResource("Resource_4i160"), SubResource("Resource_0hjq7"), SubResource("Resource_yo187"), SubResource("Resource_3urdm"), SubResource("Resource_cvvda"), SubResource("Resource_435by"), SubResource("Resource_gy3rq"), SubResource("Resource_bms0f")])
-output_slots = Array[ExtResource("2_a0dir")]([SubResource("Resource_6iq26")])
+args = Array[ExtResource("1_75iak")]([SubResource("Resource_5odk7"), SubResource("Resource_r83pm"), SubResource("Resource_2j7op"), SubResource("Resource_7hrwv"), SubResource("Resource_4yg0g"), SubResource("Resource_fpsoe"), SubResource("Resource_f1mpl"), SubResource("Resource_qr7np")])
+output_slots = Array[ExtResource("2_a0dir")]([SubResource("Resource_ci3aq")])
 title = "SnakePath2D"
 description = "Generates a path that goes from the top of the world to the bottom, with each cell consisting of flags that indicate their exits (up, down, left, right). 
 The rest is filled with 0s."

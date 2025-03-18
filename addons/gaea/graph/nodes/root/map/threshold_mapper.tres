@@ -8,12 +8,13 @@
 script = ExtResource("1_w2bvo")
 type = 4
 name = &"range"
-default_value = {
-"max": 5.0,
-"min": 0.0
-}
+default_value = null
+hint = Dictionary[String, Variant]({
+"allow_lesser": false,
+"min": -10.0
+})
 
-[sub_resource type="Resource" id="Resource_kqdcw"]
+[sub_resource type="Resource" id="Resource_ppkgb"]
 script = ExtResource("2_we7oc")
 left_enabled = true
 left_type = 0
@@ -23,7 +24,7 @@ right_type = 0
 right_label = ""
 right_show_preview = false
 
-[sub_resource type="Resource" id="Resource_71boa"]
+[sub_resource type="Resource" id="Resource_37mns"]
 script = ExtResource("2_we7oc")
 left_enabled = true
 left_type = 2
@@ -33,7 +34,7 @@ right_type = 0
 right_label = ""
 right_show_preview = false
 
-[sub_resource type="Resource" id="Resource_ysd8o"]
+[sub_resource type="Resource" id="Resource_qu5f3"]
 script = ExtResource("2_we7oc")
 left_enabled = false
 left_type = 0
@@ -45,9 +46,9 @@ right_show_preview = false
 
 [resource]
 script = ExtResource("3_0cira")
-input_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_kqdcw"), SubResource("Resource_71boa")])
+input_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_ppkgb"), SubResource("Resource_37mns")])
 args = Array[ExtResource("1_w2bvo")]([SubResource("Resource_o7clu")])
-output_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_ysd8o")])
+output_slots = Array[ExtResource("2_we7oc")]([SubResource("Resource_qu5f3")])
 title = "ThresholdMapper"
 description = "Outputs a map.
 For every cell of a value between [param]min[/bg][/c] and [param]max[/bg][/c] (inclusive), sets that cell to [param]material[/bg][/c]. Otherwise, sets it to [code]null[/bg][/c]."

@@ -15,7 +15,7 @@ func initialize() -> void:
 	if resource is not GaeaVariableNodeResource:
 		return
 
-	set_arg_value("name", resource.get_arg("name"))
+	set_arg_value("name", resource.get_arg("name", null))
 	previous_name = get_arg_value("name")
 	if generator.data.parameters.has(get_arg_value("name")):
 		return

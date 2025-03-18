@@ -15,6 +15,12 @@ func _ready() -> void:
 	if resource.type == GaeaNodeArgument.Type.INT:
 		spin_box.step = 1
 
+	spin_box.min_value = resource.hint.get("min", 0.0)
+	spin_box.allow_lesser = not resource.hint.has("min")
+
+	spin_box.max_value = resource.hint.get("max", 1.0)
+	spin_box.allow_greater = not resource.hint.has("max")
+
 
 func get_param_value() -> float:
 	if super() != null:

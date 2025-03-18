@@ -4,15 +4,15 @@ extends GaeaNodeResource
 
 func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
 	var direction_weights: Dictionary = {
-		Vector2i.LEFT: get_arg("move_left_weight"),
-		Vector2i.RIGHT: get_arg("move_right_weight"),
-		Vector2i.DOWN: get_arg("move_down_weight"),
+		Vector2i.LEFT: get_arg("move_left_weight", generator_data),
+		Vector2i.RIGHT: get_arg("move_right_weight", generator_data),
+		Vector2i.DOWN: get_arg("move_down_weight", generator_data),
 	}
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-	var left_flag: int = get_arg("left")
-	var right_flag: int = get_arg("right")
-	var down_flag: int = get_arg("down")
-	var up_flag: int = get_arg("up")
+	var left_flag: int = get_arg("left", generator_data)
+	var right_flag: int = get_arg("right", generator_data)
+	var down_flag: int = get_arg("down", generator_data)
+	var up_flag: int = get_arg("up", generator_data)
 	var direction_to_flags: Dictionary = {
 		Vector2i.LEFT: left_flag,
 		Vector2i.RIGHT: right_flag,

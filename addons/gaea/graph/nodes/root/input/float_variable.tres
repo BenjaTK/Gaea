@@ -9,6 +9,7 @@ script = ExtResource("1_d7ydr")
 type = 3
 name = &"name"
 default_value = null
+hint = Dictionary[String, Variant]({})
 
 [resource]
 script = ExtResource("3_lemr5")

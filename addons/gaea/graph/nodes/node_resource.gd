@@ -34,7 +34,8 @@ func execute(area: AABB, generator_data: GaeaData, generator: GaeaGenerator) -> 
 	pass
 
 
-func get_arg(name: String, generator_data: GaeaData = null) -> Variant:
+## Pass in `generator_data` to allow overriding with input slots.
+func get_arg(name: String, generator_data: GaeaData) -> Variant:
 	var arg_connection_idx: int = 0
 	for i in args.size():
 		if args[i].name == name:

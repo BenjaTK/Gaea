@@ -170,7 +170,6 @@ func _save_data() -> void:
 				"size": child.size
 			})
 
-	print(resources.size())
 	for connection in connections:
 		var from_node: GraphNode = _graph_edit.get_node(NodePath(connection.from_node))
 		var to_node: GraphNode = _graph_edit.get_node(NodePath(connection.to_node))

@@ -9,12 +9,14 @@ script = ExtResource("1_7wqu7")
 type = 0
 name = &"min"
 default_value = null
+hint = Dictionary[String, Variant]({})
 
 [sub_resource type="Resource" id="Resource_dkdok"]
 script = ExtResource("1_7wqu7")
 type = 0
 name = &"max"
 default_value = 1.0
+hint = Dictionary[String, Variant]({})
 
 [sub_resource type="Resource" id="Resource_gk2p2"]
 script = ExtResource("2_nkrai")

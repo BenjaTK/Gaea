@@ -21,6 +21,7 @@ enum Type {
 		notify_property_list_changed()
 @export var name: StringName
 @export_storage var default_value: Variant
+@export var hint: Dictionary[String, Variant]
 
 var value: Variant
 
@@ -74,10 +75,18 @@ func _validate_property(property: Dictionary) -> void:
 			Type.RANGE:
 				property.type = TYPE_DICTIONARY
 				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
-			Type.BITMASK, Type.BITMASK_EXCLUSIVE, Type.FLAGS:
+			Type.BITMASK, Type.BITMASK_EXCLUSIVE:
 				property.type = TYPE_INT
 				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
 				property.hint = PROPERTY_HINT_LAYERS_2D_PHYSICS
 			Type.BOOLEAN:
 				property.type = TYPE_BOOL
 				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
+			Type.FLAGS:
+				property.type = TYPE_ARRAY
+				property.hint = PROPERTY_HINT_TYPE_STRING
+				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
+				property.hint_string = "%d:" % [TYPE_INT]
+
+	if property.name == "hint" and type == Type.CATEGORY:
+		property.usage = PROPERTY_USAGE_NONE
