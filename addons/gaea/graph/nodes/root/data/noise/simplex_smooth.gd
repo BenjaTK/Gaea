@@ -6,7 +6,7 @@ extends GaeaNodeResource
 
 
 
-func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
+func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary[Vector3i, float]:
 	var _noise: FastNoiseLite = FastNoiseLite.new()
 	_noise.seed = generator_data.generator.seed
 

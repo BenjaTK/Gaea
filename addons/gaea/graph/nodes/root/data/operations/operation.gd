@@ -5,12 +5,12 @@ extends GaeaNodeResource
 @export_enum("Sum", "Multiplication", "Division") var operation: int = 0
 
 
-func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
+func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary[Vector3i, float]:
 	var data_input_resource: GaeaNodeResource = generator_data.resources[get_connected_resource_idx(0)]
 	if not is_instance_valid(data_input_resource):
 		return {}
 
-	var passed_data: Dictionary = data_input_resource.get_data(
+	var passed_data: Dictionary[Vector3i, float] = data_input_resource.get_data(
 		get_connected_port_to(0),
 		area, generator_data
 	)

@@ -2,7 +2,7 @@
 extends GaeaNodeResource
 
 
-func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
+func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary[Vector3i, GaeaMaterial]:
 	if get_connected_resource_idx(0) == -1:
 		return {}
 
@@ -20,7 +20,7 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 				get_connected_port_to(1),
 				area, generator_data
 			).value
-	var grid: Dictionary
+	var grid: Dictionary[Vector3i, GaeaMaterial]
 	var flags: Array = get_arg("match_flags", generator_data)
 	var exclude_flags: Array = get_arg("exclude_flags", generator_data)
 	var match_all: bool = get_arg("match_all", generator_data)

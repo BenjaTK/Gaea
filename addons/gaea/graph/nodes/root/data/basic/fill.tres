@@ -1,9 +1,8 @@
-[gd_resource type="Resource" load_steps=7 format=3 uid="uid://ch7u7802bkv3v"]
+[gd_resource type="Resource" load_steps=6 format=3 uid="uid://ch7u7802bkv3v"]
 
 [ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_uh15l"]
 [ext_resource type="Script" uid="uid://b7naniphpp341" path="res://addons/gaea/graph/nodes/root/data/basic/fill.gd" id="1_uk2rb"]
 [ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_5mlbf"]
-[ext_resource type="Texture2D" uid="uid://dkccxw7yq1mth" path="res://addons/gaea/assets/types/data_grid.svg" id="2_b846r"]
 
 [sub_resource type="Resource" id="Resource_qmf8v"]
 script = ExtResource("1_uh15l")
@@ -29,6 +28,5 @@ args = Array[ExtResource("1_uh15l")]([SubResource("Resource_qmf8v")])
 output_slots = Array[ExtResource("2_5mlbf")]([SubResource("Resource_4o1fi")])
 title = "Fill"
 description = "Fills the grid with [param]value[/bg][/c]."
-icon = ExtResource("2_b846r")
 is_output = false
 data = {}

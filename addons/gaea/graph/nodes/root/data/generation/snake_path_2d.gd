@@ -2,7 +2,7 @@
 extends GaeaNodeResource
 
 
-func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
+func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary[Vector3i, float]:
 	var direction_weights: Dictionary = {
 		Vector2i.LEFT: get_arg("move_left_weight", generator_data),
 		Vector2i.RIGHT: get_arg("move_right_weight", generator_data),
@@ -23,7 +23,7 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 	rng.set_seed(generator_data.generator.seed)
 
 	var path: Dictionary
-	var grid: Dictionary = {}
+	var grid: Dictionary[Vector3i, float] = {}
 	var starting_cell: Vector2i = Vector2i(randi_range(0, area.size.x - 1), 0)
 	var last_cell: Vector2i = starting_cell
 	var current_cell: Vector2i = starting_cell

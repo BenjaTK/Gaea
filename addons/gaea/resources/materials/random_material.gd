@@ -7,4 +7,4 @@ extends GaeaMaterial
 
 
 func get_resource() -> GaeaMaterial:
-	return materials.pick_random()
+	return materials.pick_random().get_resource()

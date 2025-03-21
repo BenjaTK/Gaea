@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="GaeaVariableNodeResource" load_steps=6 format=3 uid="uid://byrhtfsduac1x"]
+[gd_resource type="Resource" script_class="GaeaVariableNodeResource" load_steps=5 format=3 uid="uid://byrhtfsduac1x"]
 
 [ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_2h3fb"]
-[ext_resource type="Texture2D" uid="uid://b0vqox8bodse" path="res://addons/gaea/assets/material.svg" id="2_qq3ag"]
 [ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_x7okg"]
 [ext_resource type="Script" uid="uid://bqa8aufofkr81" path="res://addons/gaea/graph/nodes/root/input/variables/variable_node.gd" id="3_tkl3q"]
 
@@ -23,6 +22,5 @@ args = Array[ExtResource("1_2h3fb")]([SubResource("Resource_cvpld")])
 output_slots = Array[ExtResource("2_x7okg")]([])
 title = "MaterialVariable"
 description = "GaeaMaterial variable editable in the inspector."
-icon = ExtResource("2_qq3ag")
 is_output = false
 data = {}

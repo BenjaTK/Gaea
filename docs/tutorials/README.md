@@ -1,12 +1,9 @@
 # Tutorials
 
-## [Getting Started](tutorials/getting_started.md)
-A look at how to get started where you'll learn how to generate a basic dungeon.
+- [Anatomy of a Graph](../tutorials/anatomy-of-a-graph.md)
+    
+    Learn how Gaea's graphs work, what each part of the nodes mean, and more.
 
----
-## [Enabling Chunk Generation](tutorials/chunk_generation.md)
-How you can optimize your large worlds, or be able to generate infinite worlds!
+- [Generating Terrain](../tutorials/generating-terrain.md)
 
----
-## [Lightning Fast Generation](tutorials/optimization.md)
-How you can optimize even further your worlds using threading.
+    Make natural-looking terrain with noise.

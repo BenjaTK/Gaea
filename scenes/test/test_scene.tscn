@@ -1,11 +1,20 @@
-[gd_scene load_steps=10 format=4 uid="uid://yj8lg31imwsl"]
+[gd_scene load_steps=45 format=3 uid="uid://yj8lg31imwsl"]
 
 [ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/nodes/generator.gd" id="1_b5xa0"]
 [ext_resource type="Script" uid="uid://b2d60cevb336w" path="res://scenes/test/test_scene.gd" id="1_i42dh"]
-[ext_resource type="Resource" uid="uid://da68qp01kbdwp" path="res://scenes/test/snake_path_generation.tres" id="3_coxib"]
 [ext_resource type="Texture2D" uid="uid://cmy8ope6463sf" path="res://scenes/test/test_tileset.png" id="3_snetl"]
+[ext_resource type="Script" uid="uid://e45byecr4gi6" path="res://addons/gaea/resources/materials/tilemap_material.gd" id="5_eo0ll"]
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="6_x44rx"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="7_f5gst"]
+[ext_resource type="Script" uid="uid://3qsmwhn2sk47" path="res://addons/gaea/resources/gaea_layer.gd" id="7_nr2x3"]
+[ext_resource type="Script" uid="uid://brb1clh2y2bv0" path="res://addons/gaea/graph/nodes/node_resource.gd" id="8_7xtry"]
+[ext_resource type="Script" uid="uid://bcp5jmkertrct" path="res://addons/gaea/graph/nodes/root/data/noise/simplex_smooth.gd" id="8_ktudl"]
+[ext_resource type="Resource" uid="uid://bbkdvyxkj2slo" path="res://addons/gaea/graph/nodes/output_node_resource.tres" id="9_x44rx"]
+[ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/resources/gaea_data.gd" id="10_f5gst"]
+[ext_resource type="Script" uid="uid://djjvx650evm0n" path="res://addons/gaea/graph/nodes/root/map/mappers/threshold_mapper.gd" id="10_ktudl"]
 [ext_resource type="Script" uid="uid://b4x16tyyfihmb" path="res://addons/gaea/nodes/renderers/tilemap_renderer.gd" id="11_db3f4"]
-[ext_resource type="Texture2D" uid="uid://f8b05yxijdkl" path="res://scenes/test/rooms_tileset_test.png" id="15_ggy6f"]
+[ext_resource type="Script" uid="uid://bqa8aufofkr81" path="res://addons/gaea/graph/nodes/root/input/variables/variable_node.gd" id="13_ktudl"]
+[ext_resource type="Script" uid="uid://bmxbe51xh0t7d" path="res://addons/gaea/graph/nodes/merge.gd" id="14_x3eyd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_smit1"]
 texture = ExtResource("3_snetl")
@@ -14,25 +23,410 @@ texture = ExtResource("3_snetl")
 2:0/0 = 0
 3:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kqdcw"]
-texture = ExtResource("15_ggy6f")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-
 [sub_resource type="TileSet" id="TileSet_5nfp8"]
 sources/0 = SubResource("TileSetAtlasSource_smit1")
-sources/1 = SubResource("TileSetAtlasSource_kqdcw")
+
+[sub_resource type="Resource" id="Resource_ggy6f"]
+script = ExtResource("5_eo0ll")
+type = 0
+source_id = 0
+atlas_coord = Vector2i(0, 0)
+alternative_tile = 0
+metadata/_custom_type_script = "uid://e45byecr4gi6"
+
+[sub_resource type="Resource" id="Resource_eo0ll"]
+script = ExtResource("5_eo0ll")
+type = 0
+source_id = 0
+atlas_coord = Vector2i(1, 0)
+alternative_tile = 0
+metadata/_custom_type_script = "uid://e45byecr4gi6"
+
+[sub_resource type="Resource" id="Resource_42x5e"]
+script = ExtResource("5_eo0ll")
+type = 0
+source_id = 0
+atlas_coord = Vector2i(2, 0)
+alternative_tile = 0
+metadata/_custom_type_script = "uid://e45byecr4gi6"
+
+[sub_resource type="Resource" id="Resource_coxib"]
+script = ExtResource("7_nr2x3")
+enabled = true
+
+[sub_resource type="Resource" id="Resource_o7clu"]
+script = ExtResource("6_x44rx")
+type = 4
+name = &"range"
+default_value = null
+hint = Dictionary[String, Variant]({})
+
+[sub_resource type="Resource" id="Resource_ppkgb"]
+script = ExtResource("7_f5gst")
+left_enabled = true
+left_type = 0
+left_label = "Data"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_37mns"]
+script = ExtResource("7_f5gst")
+left_enabled = true
+left_type = 2
+left_label = "Material"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_qu5f3"]
+script = ExtResource("7_f5gst")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 1
+right_label = "Map"
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_kqdcw"]
+script = ExtResource("10_ktudl")
+input_slots = Array[ExtResource("7_f5gst")]([SubResource("Resource_ppkgb"), SubResource("Resource_37mns")])
+args = Array[ExtResource("6_x44rx")]([SubResource("Resource_o7clu")])
+output_slots = Array[ExtResource("7_f5gst")]([SubResource("Resource_qu5f3")])
+title = "ThresholdMapper"
+description = "Outputs a map.
+For every cell of a value between [param]min[/bg][/c] and [param]max[/bg][/c] (inclusive), sets that cell to [param]material[/bg][/c]. Otherwise, sets it to [code]null[/bg][/c]."
+is_output = false
+data = {
+&"range": {
+"max": 0.5,
+"min": 0.45
+}
+}
+
+[sub_resource type="Resource" id="Resource_cvpld"]
+script = ExtResource("6_x44rx")
+type = 3
+name = &"name"
+default_value = null
+hint = Dictionary[String, Variant]({})
+
+[sub_resource type="Resource" id="Resource_ysd8o"]
+script = ExtResource("13_ktudl")
+type = 24
+hint = 17
+hint_string = "GaeaMaterial"
+output_type = 2
+input_slots = Array[ExtResource("7_f5gst")]([])
+args = Array[ExtResource("6_x44rx")]([SubResource("Resource_cvpld")])
+output_slots = Array[ExtResource("7_f5gst")]([])
+title = "MaterialVariable"
+description = "GaeaMaterial variable editable in the inspector."
+is_output = false
+data = {
+&"name": "GrassMaterial"
+}
+
+[sub_resource type="Resource" id="Resource_f5gst"]
+script = ExtResource("10_ktudl")
+input_slots = Array[ExtResource("7_f5gst")]([SubResource("Resource_ppkgb"), SubResource("Resource_37mns")])
+args = Array[ExtResource("6_x44rx")]([SubResource("Resource_o7clu")])
+output_slots = Array[ExtResource("7_f5gst")]([SubResource("Resource_qu5f3")])
+title = "ThresholdMapper"
+description = "Outputs a map.
+For every cell of a value between [param]min[/bg][/c] and [param]max[/bg][/c] (inclusive), sets that cell to [param]material[/bg][/c]. Otherwise, sets it to [code]null[/bg][/c]."
+is_output = false
+data = {
+&"range": {
+"max": 1.0,
+"min": 0.5
+}
+}
+
+[sub_resource type="Resource" id="Resource_f38r3"]
+script = ExtResource("10_ktudl")
+input_slots = Array[ExtResource("7_f5gst")]([SubResource("Resource_ppkgb"), SubResource("Resource_37mns")])
+args = Array[ExtResource("6_x44rx")]([SubResource("Resource_o7clu")])
+output_slots = Array[ExtResource("7_f5gst")]([SubResource("Resource_qu5f3")])
+title = "ThresholdMapper"
+description = "Outputs a map.
+For every cell of a value between [param]min[/bg][/c] and [param]max[/bg][/c] (inclusive), sets that cell to [param]material[/bg][/c]. Otherwise, sets it to [code]null[/bg][/c]."
+is_output = false
+data = {
+&"range": {
+"max": 0.45,
+"min": 0.0
+}
+}
+
+[sub_resource type="Resource" id="Resource_c4b2i"]
+script = ExtResource("13_ktudl")
+type = 24
+hint = 17
+hint_string = "GaeaMaterial"
+output_type = 2
+input_slots = Array[ExtResource("7_f5gst")]([])
+args = Array[ExtResource("6_x44rx")]([SubResource("Resource_cvpld")])
+output_slots = Array[ExtResource("7_f5gst")]([])
+title = "MaterialVariable"
+description = "GaeaMaterial variable editable in the inspector."
+is_output = false
+data = {
+&"name": "WaterMaterial"
+}
+
+[sub_resource type="Resource" id="Resource_qksdc"]
+script = ExtResource("7_f5gst")
+left_enabled = true
+left_type = 1
+left_label = "Map A"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_x35wo"]
+script = ExtResource("7_f5gst")
+left_enabled = true
+left_type = 1
+left_label = "Map B"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_ij1ao"]
+script = ExtResource("7_f5gst")
+left_enabled = true
+left_type = 1
+left_label = "Map C"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_abt6c"]
+script = ExtResource("7_f5gst")
+left_enabled = true
+left_type = 1
+left_label = "Map D"
+right_enabled = false
+right_type = 0
+right_label = ""
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_t3085"]
+script = ExtResource("7_f5gst")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 1
+right_label = "Merged"
+right_show_preview = false
+
+[sub_resource type="Resource" id="Resource_yfi7r"]
+script = ExtResource("14_x3eyd")
+input_slots = Array[ExtResource("7_f5gst")]([SubResource("Resource_qksdc"), SubResource("Resource_x35wo"), SubResource("Resource_ij1ao"), SubResource("Resource_abt6c")])
+args = Array[ExtResource("6_x44rx")]([])
+output_slots = Array[ExtResource("7_f5gst")]([SubResource("Resource_t3085")])
+title = "MergeMaps"
+description = "Merges [param]map A[/bg][/c] with [param]map B[/bg][/c]. The latter overrides any overlapping cells from the former."
+is_output = false
+data = {}
+
+[sub_resource type="Resource" id="Resource_71boa"]
+script = ExtResource("13_ktudl")
+type = 24
+hint = 17
+hint_string = "GaeaMaterial"
+output_type = 2
+input_slots = Array[ExtResource("7_f5gst")]([])
+args = Array[ExtResource("6_x44rx")]([SubResource("Resource_cvpld")])
+output_slots = Array[ExtResource("7_f5gst")]([])
+title = "MaterialVariable"
+description = "GaeaMaterial variable editable in the inspector."
+is_output = false
+data = {
+&"name": "SandMaterial"
+}
+
+[sub_resource type="Resource" id="Resource_88nce"]
+script = ExtResource("6_x44rx")
+type = 0
+name = &"frequency"
+default_value = 0.01
+hint = Dictionary[String, Variant]({})
+
+[sub_resource type="Resource" id="Resource_w4c4h"]
+script = ExtResource("6_x44rx")
+type = 0
+name = &"lacunarity"
+default_value = 2.0
+hint = Dictionary[String, Variant]({})
+
+[sub_resource type="Resource" id="Resource_7ltu6"]
+script = ExtResource("6_x44rx")
+type = 1
+name = &"octaves"
+default_value = 5
+hint = Dictionary[String, Variant]({})
+
+[sub_resource type="Resource" id="Resource_8tvqk"]
+script = ExtResource("7_f5gst")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 0
+right_label = "Data [0, 1]"
+right_show_preview = true
+
+[sub_resource type="Resource" id="Resource_x3eyd"]
+script = ExtResource("8_ktudl")
+type = 0
+input_slots = Array[ExtResource("7_f5gst")]([])
+args = Array[ExtResource("6_x44rx")]([SubResource("Resource_88nce"), SubResource("Resource_w4c4h"), SubResource("Resource_7ltu6")])
+output_slots = Array[ExtResource("7_f5gst")]([SubResource("Resource_8tvqk")])
+title = "SimplexSmooth2D"
+description = "Creates a grid of values from [code]0[/bg][/c] to [code]1[/bg][/c] based on a SimplexSmooth noise texture.
+[b]Ignores the z axis.[/b]"
+is_output = false
+data = {
+&"frequency": 0.01,
+&"lacunarity": 2.0,
+&"octaves": 5.0
+}
+
+[sub_resource type="Resource" id="Resource_nr2x3"]
+script = ExtResource("10_f5gst")
+layers = Array[ExtResource("7_nr2x3")]([SubResource("Resource_coxib")])
+connections = Array[Dictionary]([{
+"from_node": 8,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 2,
+"to_port": 0
+}, {
+"from_node": 1,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 2,
+"to_port": 1
+}, {
+"from_node": 7,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 0,
+"to_port": 1
+}, {
+"from_node": 8,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 0,
+"to_port": 0
+}, {
+"from_node": 2,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 5,
+"to_port": 0
+}, {
+"from_node": 5,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 6,
+"to_port": 0
+}, {
+"from_node": 8,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 3,
+"to_port": 0
+}, {
+"from_node": 4,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 3,
+"to_port": 1
+}, {
+"from_node": 0,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 5,
+"to_port": 1
+}, {
+"from_node": 3,
+"from_port": 0,
+"keep_alive": false,
+"to_node": 5,
+"to_port": 2
+}])
+resources = Array[ExtResource("8_7xtry")]([SubResource("Resource_kqdcw"), SubResource("Resource_ysd8o"), SubResource("Resource_f5gst"), SubResource("Resource_f38r3"), SubResource("Resource_c4b2i"), SubResource("Resource_yfi7r"), ExtResource("9_x44rx"), SubResource("Resource_71boa"), SubResource("Resource_x3eyd")])
+node_data = Array[Dictionary]([{
+"name": &"_GraphNode_56930",
+"position": Vector2(-500, -80)
+}, {
+"name": &"_GraphNode_54275",
+"position": Vector2(-780, -280)
+}, {
+"name": &"_GraphNode_53374",
+"position": Vector2(-500, -340)
+}, {
+"name": &"_GraphNode_57590",
+"position": Vector2(-500, 220)
+}, {
+"name": &"_GraphNode_57637",
+"position": Vector2(-780, 280)
+}, {
+"name": &"_GraphNode_57077",
+"position": Vector2(-140, 40)
+}, {
+"name": &"BaseNode",
+"position": Vector2(140, 180)
+}, {
+"name": &"_GraphNode_56975",
+"position": Vector2(-780, 0)
+}, {
+"name": &"_GraphNode_31039",
+"position": Vector2(-1060, -180)
+}])
+parameters = Dictionary[StringName, Variant]({
+&"GrassMaterial": {
+"hint": 17,
+"hint_string": "GaeaMaterial",
+"name": "GrassMaterial",
+"type": 24,
+"value": SubResource("Resource_ggy6f")
+},
+&"SandMaterial": {
+"hint": 17,
+"hint_string": "GaeaMaterial",
+"name": "SandMaterial",
+"type": 24,
+"value": SubResource("Resource_eo0ll")
+},
+&"WaterMaterial": {
+"hint": 17,
+"hint_string": "GaeaMaterial",
+"name": "WaterMaterial",
+"type": 24,
+"value": SubResource("Resource_42x5e")
+}
+})
+scroll_offset = Vector2(0, 0)
+other = {
+"scroll_offset": Vector2(-644.889, 0)
+}
+GrassMaterial = SubResource("Resource_ggy6f")
+SandMaterial = SubResource("Resource_eo0ll")
+WaterMaterial = SubResource("Resource_42x5e")
 
 [node name="TestScene" type="Node2D"]
 script = ExtResource("1_i42dh")
-
-[node name="GaeaGenerator" type="Node" parent="."]
-script = ExtResource("1_b5xa0")
-data = ExtResource("3_coxib")
-seed = 3800669203
-world_size = Vector3i(8, 8, 1)
 
 [node name="GaeaTilemapRenderer" type="Node" parent="." node_paths=PackedStringArray("tile_map_layers", "generator")]
 script = ExtResource("11_db3f4")
@@ -40,5 +434,10 @@ tile_map_layers = [NodePath("../TileMapLayer")]
 generator = NodePath("../GaeaGenerator")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAIAAQABAAAAAAAAAAMAAQADAAAAAAAAAAUAAQABAAAAAAAAAAYAAQADAAAAAAABAAIAAQAAAAAAAAABAAMAAQAAAAAAAAABAAQAAQABAAAAAAABAAUAAQADAAAAAAABAAYAAQAAAAAAAAACAAIAAQAAAAAAAAACAAMAAQAAAAAAAAACAAQAAQAAAAAAAAACAAYAAQAAAAAAAAADAAIAAQAAAAAAAAADAAMAAQAAAAAAAAADAAQAAQAAAAAAAAADAAYAAQAAAAAAAAAEAAAAAQABAAAAAAAEAAEAAQADAAAAAAAEAAIAAQAAAAAAAAAEAAMAAQABAAAAAAAEAAQAAQADAAAAAAAEAAYAAQAAAAAAAAAFAAAAAQAAAAAAAAAFAAEAAQABAAAAAAAFAAIAAQADAAAAAAAFAAYAAQAAAAAAAAAGAAAAAQAAAAAAAAAGAAYAAQAAAAAAAAAGAAcAAQAAAAAAAAAHAAAAAQAAAAAAAAAHAAYAAQABAAAAAAAHAAcAAQADAAAAAAA=")
 tile_set = SubResource("TileSet_5nfp8")
+
+[node name="GaeaGenerator" type="Node" parent="."]
+script = ExtResource("1_b5xa0")
+data = SubResource("Resource_nr2x3")
+seed = 2961808754
+metadata/_custom_type_script = "uid://d4feanreabm81"

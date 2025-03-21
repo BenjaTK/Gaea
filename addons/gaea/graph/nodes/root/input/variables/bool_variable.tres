@@ -1,7 +1,6 @@
-[gd_resource type="Resource" script_class="GaeaVariableNodeResource" load_steps=6 format=3 uid="uid://cta2ipm8oe120"]
+[gd_resource type="Resource" script_class="GaeaVariableNodeResource" load_steps=5 format=3 uid="uid://cta2ipm8oe120"]
 
 [ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_irqh6"]
-[ext_resource type="Texture2D" uid="uid://0l53mu4blspj" path="res://addons/gaea/assets/types/bool.svg" id="2_qscn1"]
 [ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_v72lx"]
 [ext_resource type="Script" uid="uid://bqa8aufofkr81" path="res://addons/gaea/graph/nodes/root/input/variables/variable_node.gd" id="3_yqn5n"]
 
@@ -23,6 +22,5 @@ args = Array[ExtResource("1_irqh6")]([SubResource("Resource_putew")])
 output_slots = Array[ExtResource("2_v72lx")]([])
 title = "BoolVariable"
 description = "Boolean variable editable in the inspector."
-icon = ExtResource("2_qscn1")
 is_output = false
 data = {}
