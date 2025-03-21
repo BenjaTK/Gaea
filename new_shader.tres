@@ -1,7 +1,7 @@
-[gd_resource type="VisualShader" load_steps=11 format=3 uid="uid://c2pc7mfv0730k"]
+[gd_resource type="VisualShader" load_steps=12 format=3 uid="uid://c2pc7mfv0730k"]
 
 [sub_resource type="VisualShaderNodeFrame" id="VisualShaderNodeFrame_43eqr"]
-size = Vector2(244, 124)
+size = Vector2(336, 278)
 title = "SAfawd"
 attached_nodes = PackedInt32Array(8)
 
@@ -23,6 +23,10 @@ tint_color = Color(0.753906, 0.214981, 0.214981, 0.75)
 parameter_name = "asefawfae2"
 default_value_enabled = true
 default_value = 1
+
+[sub_resource type="VisualShaderNodeSwitch" id="VisualShaderNodeSwitch_lsw1g"]
+default_input_values = [0, false, 1, true, 2, false]
+op_type = 6
 
 [sub_resource type="VisualShaderNodeIntParameter" id="VisualShaderNodeIntParameter_bc4yo"]
 parameter_name = "asefawfae"
@@ -86,12 +90,13 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-500.528, 211.385)
 varyings/ASd = "0,0"
 nodes/fragment/0/position = Vector2(420, 80)
 nodes/fragment/6/node = SubResource("VisualShaderNodeIntParameter_bc4yo")
 nodes/fragment/6/position = Vector2(-260, 40)
 nodes/fragment/7/node = SubResource("VisualShaderNodeFloatParameter_qgm27")
-nodes/fragment/7/position = Vector2(-100, 340)
+nodes/fragment/7/position = Vector2(-120, 400)
 nodes/fragment/8/node = SubResource("VisualShaderNodeFloatParameter_luf44")
 nodes/fragment/8/position = Vector2(900, 220)
 nodes/fragment/9/node = SubResource("VisualShaderNodeCompare_gk8fa")
@@ -108,4 +113,6 @@ nodes/fragment/14/node = SubResource("VisualShaderNodeFrame_lsw1g")
 nodes/fragment/14/position = Vector2(100, -60)
 nodes/fragment/15/node = SubResource("VisualShaderNodeIntParameter_lsw1g")
 nodes/fragment/15/position = Vector2(-700, -120)
+nodes/fragment/16/node = SubResource("VisualShaderNodeSwitch_lsw1g")
+nodes/fragment/16/position = Vector2(820, 20)
 nodes/fragment/connections = PackedInt32Array(7, 0, 0, 2, 6, 0, 9, 0, 9, 0, 0, 1, 12, 0, 13, 0, 13, 0, 0, 7, 7, 0, 12, 0)

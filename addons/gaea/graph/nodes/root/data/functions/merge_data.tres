@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=9 format=3 uid="uid://4ybwu0m8kw1a"]
+[gd_resource type="Resource" load_steps=10 format=3 uid="uid://4ybwu0m8kw1a"]
 
 [ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_h4yhw"]
+[ext_resource type="Texture2D" uid="uid://dkccxw7yq1mth" path="res://addons/gaea/assets/types/data_grid.svg" id="2_l204x"]
 [ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_m7j8q"]
 [ext_resource type="Script" uid="uid://bmxbe51xh0t7d" path="res://addons/gaea/graph/nodes/merge.gd" id="3_h4yhw"]
 
@@ -66,6 +67,7 @@ args = Array[ExtResource("1_h4yhw")]([])
 output_slots = Array[ExtResource("2_m7j8q")]([SubResource("Resource_bie4n")])
 title = "MergeData"
 description = "Merges [param]data A-D[/bg][/c]. Later grids override any cells from the previous grids when valid. (B overrides A, C overrides B, etc.)"
+icon = ExtResource("2_l204x")
 is_output = false
 data = {}
 metadata/_custom_type_script = "uid://brb1clh2y2bv0"

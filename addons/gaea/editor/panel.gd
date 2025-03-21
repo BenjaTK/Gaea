@@ -11,15 +11,17 @@ var _output_node: GraphNode
 @onready var _create_node_popup: PopupPanel = %CreateNodePopup
 @onready var _node_popup: PopupMenu = %NodePopup
 @onready var _create_node_tree: Tree = %Tree
-@onready var _reload_node_tree_button: Button = $Editor/VBoxContainer/HBoxContainer/ReloadNodeTreeButton
 @onready var _save_button: Button = $Editor/VBoxContainer/HBoxContainer/SaveButton
 @onready var _load_button: Button = $Editor/VBoxContainer/HBoxContainer/LoadButton
+@onready var _reload_node_tree_button: Button = $Editor/VBoxContainer/HBoxContainer/ReloadNodeTreeButton
+@onready var _reload_parameters_list_button: Button = $Editor/VBoxContainer/HBoxContainer/ReloadParametersListButton
 @onready var _file_dialog: FileDialog = $FileDialog
 
 
 
 func _ready() -> void:
-	_reload_node_tree_button.icon = EditorInterface.get_base_control().get_theme_icon(&"ReloadSmall", &"EditorIcons")
+	_reload_node_tree_button.icon = preload("../assets/reload_tree.svg")
+	_reload_parameters_list_button.icon = preload("../assets/reload_variables_list.svg")
 	_save_button.icon = EditorInterface.get_base_control().get_theme_icon(&"Save", &"EditorIcons")
 	_load_button.icon = EditorInterface.get_base_control().get_theme_icon(&"Load", &"EditorIcons")
 
@@ -283,3 +285,24 @@ func _on_load_button_pressed() -> void:
 
 func _on_file_dialog_file_selected(path: String) -> void:
 	_selected_generator.data = load(path)
+
+
+func _on_reload_parameters_list_button_pressed() -> void:
+	if not is_instance_valid(_selected_generator) or not is_instance_valid(_selected_generator.data):
+		return
+
+	var existing_parameters: Array[String]
+	for node in _graph_edit.get_children():
+		if node is not GaeaGraphNode:
+			continue
+
+		if node.resource is GaeaVariableNodeResource:
+			existing_parameters.append(node.get_arg_value("name"))
+
+
+	for param in _selected_generator.data.parameters:
+		if param in existing_parameters:
+			continue
+
+		_selected_generator.data.parameters.erase(param)
+	_selected_generator.notify_property_list_changed()

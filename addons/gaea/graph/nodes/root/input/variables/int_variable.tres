@@ -1,7 +1,8 @@
-[gd_resource type="Resource" script_class="GaeaVariableNodeResource" load_steps=5 format=3 uid="uid://37ihrctuxf3"]
+[gd_resource type="Resource" script_class="GaeaVariableNodeResource" load_steps=6 format=3 uid="uid://37ihrctuxf3"]
 
 [ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_5fkkh"]
 [ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_0ncn6"]
+[ext_resource type="Texture2D" uid="uid://bilsfh3nrbhkl" path="res://addons/gaea/assets/types/int.svg" id="2_d52xf"]
 [ext_resource type="Script" uid="uid://bqa8aufofkr81" path="res://addons/gaea/graph/nodes/root/input/variables/variable_node.gd" id="3_xpm8k"]
 
 [sub_resource type="Resource" id="Resource_putew"]
@@ -22,5 +23,6 @@ args = Array[ExtResource("1_5fkkh")]([SubResource("Resource_putew")])
 output_slots = Array[ExtResource("2_0ncn6")]([])
 title = "IntVariable"
 description = "Integer variable editable in the inspector."
+icon = ExtResource("2_d52xf")
 is_output = false
 data = {}

@@ -1,6 +1,7 @@
-[gd_resource type="Resource" load_steps=13 format=3 uid="uid://bh1u4kqfvh0fy"]
+[gd_resource type="Resource" load_steps=14 format=3 uid="uid://bh1u4kqfvh0fy"]
 
 [ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_75iak"]
+[ext_resource type="Texture2D" uid="uid://dkccxw7yq1mth" path="res://addons/gaea/assets/types/data_grid.svg" id="2_0bq5q"]
 [ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_a0dir"]
 [ext_resource type="Script" uid="uid://d0bgv7yf1t1m6" path="res://addons/gaea/graph/nodes/root/data/generation/snake_path_2d.gd" id="3_ud703"]
 
@@ -89,5 +90,6 @@ output_slots = Array[ExtResource("2_a0dir")]([SubResource("Resource_ci3aq")])
 title = "SnakePath2D"
 description = "Generates a path that goes from the top of the world to the bottom, with each cell consisting of flags that indicate their exits (up, down, left, right). 
 The rest is filled with 0s."
+icon = ExtResource("2_0bq5q")
 is_output = false
 data = {}

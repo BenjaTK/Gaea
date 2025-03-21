@@ -88,3 +88,28 @@ static func get_formatted_text(unformatted_text: String) -> String:
 	unformatted_text = unformatted_text.replace("[/c]", "[/color]")
 	unformatted_text = unformatted_text.replace("[/bg]", "[/bgcolor]")
 	return unformatted_text
+
+
+func get_icon() -> Texture2D:
+	if output_slots.is_empty():
+		return null
+
+	if not is_instance_valid(output_slots.back()):
+		return null
+
+	match output_slots.back().right_type:
+		GaeaGraphNode.SlotTypes.VALUE_DATA:
+			return preload("../../assets/types/data_grid.svg")
+		GaeaGraphNode.SlotTypes.MAP_DATA:
+			return preload("../../assets/types/map.svg")
+		GaeaGraphNode.SlotTypes.TILE_INFO:
+			return preload("../../assets/material.svg")
+		GaeaGraphNode.SlotTypes.VECTOR2:
+			return preload("../../assets/types/vec2.svg")
+		GaeaGraphNode.SlotTypes.NUMBER:
+			return preload("../../assets/types/num.svg")
+		GaeaGraphNode.SlotTypes.RANGE:
+			return preload("../../assets/types/range.svg")
+		GaeaGraphNode.SlotTypes.BOOL:
+			return preload("../../assets/types/bool.svg")
+	return null

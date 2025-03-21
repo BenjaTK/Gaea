@@ -148,8 +148,11 @@ static func get_color_from_type(type: SlotTypes) -> Color:
 		SlotTypes.RANGE:
 			return Color.DIM_GRAY
 		SlotTypes.BOOL:
-			return Color("6f91f0")
+			return Color("3e9c59")
 	return Color.WHITE
+
+
+
 
 
 func _make_custom_tooltip(for_text: String) -> Object:
