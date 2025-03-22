@@ -57,6 +57,9 @@ func _on_visibility_changed() -> void:
 
 
 func update() -> void:
+	if not visible:
+		return
+
 	node.request_save()
 	var resolution: Vector2i = RESOLUTION
 	if is_instance_valid(node.generator):
@@ -68,14 +71,21 @@ func update() -> void:
 		node.generator.data
 	)
 
-
-	var image: Image = Image.create_empty(resolution.x, resolution.y, true, Image.FORMAT_LA8)
+	var image: Image = Image.create_empty(resolution.x, resolution.y, true, Image.FORMAT_RGBA8)
 	for x: int in resolution.x:
 		for y: int in resolution.y:
-			var value: float = data.get(Vector3i(x, y, 0), NAN)
-			if is_nan(value):
+			var color: Color
+			var value = data.get(Vector3i(x, y, 0))
+			if value is float:
+				if is_nan(value):
+					continue
+				color = Color(value, value, value, 1.0 if value >= scroll_bar.value else 0.0)
+			elif value is GaeaMaterial:
+				if not is_instance_valid(value):
+					continue
+				color = value.preview_color
+			else:
 				continue
-			var color: Color = Color(value, value, value, 1.0 if value >= scroll_bar.value else 0.0)
 			image.set_pixelv(Vector2i(x, y), color)
 
 	texture = ImageTexture.create_from_image(image)
