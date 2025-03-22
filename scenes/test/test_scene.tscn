@@ -517,7 +517,7 @@ node_data = Array[Dictionary]([{
 "name": &"BaseNode",
 "position": Vector2(200, 180)
 }, {
-"name": &"@GraphNode@30653",
+"name": &"_GraphNode_30653",
 "position": Vector2(-1280, -380)
 }])
 parameters = Dictionary[StringName, Variant]({
