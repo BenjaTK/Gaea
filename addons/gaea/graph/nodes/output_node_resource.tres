@@ -13,3 +13,4 @@ title = "Output"
 description = "Outputs the generated grid via the [param]generation_finished[/bg][/c] signal in the GaeaGenerator."
 is_output = true
 data = {}
+salt = null
