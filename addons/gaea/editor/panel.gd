@@ -162,6 +162,7 @@ func _save_data() -> void:
 	_selected_generator.data.node_data.clear()
 	_selected_generator.data.resources.clear()
 	_selected_generator.data.connections.clear()
+	_selected_generator.data.other.clear()
 
 	var resources: Array[GaeaNodeResource]
 	var connections: Array[Dictionary] = _graph_edit.get_connection_list()
@@ -218,7 +219,6 @@ func _load_data() -> void:
 		if is_instance_valid(node):
 			node.load_save_data.call_deferred(node_data)
 
-
 	if not has_output_node:
 		_add_node(preload("res://addons/gaea/graph/nodes/output_node_resource.tres"))
 
@@ -238,6 +238,8 @@ func _load_data() -> void:
 		new_frame.title = frame.get("title", "Frame")
 		new_frame.position_offset = frame.get("position", Vector2.ZERO)
 		new_frame.size = frame.get("size", Vector2(64, 64))
+		new_frame.tint_color = frame.get("tint_color", new_frame.tint_color)
+		new_frame.tint_color_enabled = frame.get("tint_color_enabled", false)
 		_graph_edit.add_child(new_frame)
 		for attached: StringName in frame.get("attached", []):
 			_graph_edit.attach_graph_element_to_frame(attached, new_frame.name)
