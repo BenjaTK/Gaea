@@ -32,6 +32,9 @@ func initialize() -> void:
 	if not is_instance_valid(resource):
 		return
 
+	if resource.salt == 0:
+		resource.salt = randi()
+
 	for input_slot in resource.input_slots:
 		add_child(input_slot.get_node())
 

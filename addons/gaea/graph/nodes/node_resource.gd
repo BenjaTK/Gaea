@@ -20,17 +20,18 @@ const GAEA_MATERIAL_HINT := "Resource used to tell GaeaRenderers what to place."
 @export var is_output: bool = false
 
 @export_storage var data: Dictionary
+@export_storage var salt: int = 0
 var connections: Array[Dictionary]
 var node: GaeaGraphNode
 
 enum Axis {X, Y, Z}
 
 
-func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Dictionary:
+func get_data(_output_port: int, _area: AABB, _generator_data: GaeaData) -> Dictionary:
 	return {}
 
 
-func execute(area: AABB, generator_data: GaeaData, generator: GaeaGenerator) -> void:
+func execute(_area: AABB, _generator_data: GaeaData, _generator: GaeaGenerator) -> void:
 	pass
 
 

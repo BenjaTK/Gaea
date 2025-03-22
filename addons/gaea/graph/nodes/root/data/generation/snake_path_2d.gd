@@ -19,12 +19,11 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 		Vector2i.DOWN: down_flag,
 		Vector2i.UP: up_flag
 	}
-	seed(generator_data.generator.seed)
-	rng.set_seed(generator_data.generator.seed)
+	rng.set_seed(generator_data.generator.seed + salt)
 
 	var path: Dictionary
 	var grid: Dictionary[Vector3i, float] = {}
-	var starting_cell: Vector2i = Vector2i(randi_range(0, area.size.x - 1), 0)
+	var starting_cell: Vector2i = Vector2i(rng.randi_range(0, area.size.x - 1), 0)
 	var last_cell: Vector2i = starting_cell
 	var current_cell: Vector2i = starting_cell
 	var last_direction: Vector2i = Vector2i.ZERO
