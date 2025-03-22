@@ -11,20 +11,20 @@ input_type = 7
 [node name="XSpinBox" type="SpinBox" parent="." index="1"]
 layout_mode = 2
 size_flags_horizontal = 3
-value = 10.0
 allow_greater = true
+allow_lesser = true
 prefix = "X"
 
 [node name="YSpinBox" type="SpinBox" parent="." index="2"]
 layout_mode = 2
 size_flags_horizontal = 3
-value = 10.0
 allow_greater = true
+allow_lesser = true
 prefix = "Y"
 
 [node name="ZSpinBox" type="SpinBox" parent="." index="3"]
 layout_mode = 2
 size_flags_horizontal = 3
-value = 10.0
 allow_greater = true
+allow_lesser = true
 prefix = "Z"

@@ -1,0 +1,53 @@
+[gd_resource type="Resource" load_steps=8 format=3 uid="uid://dfjr83x416ec4"]
+
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_0wgj8"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_hjfge"]
+[ext_resource type="Script" uid="uid://cmo7oilfgh0gs" path="res://addons/gaea/graph/nodes/root/input/composition/compose_vector.gd" id="3_0wgj8"]
+
+[sub_resource type="Resource" id="Resource_5ecun"]
+script = ExtResource("1_0wgj8")
+type = 0
+name = &"x"
+default_value = null
+hint = Dictionary[String, Variant]({})
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_iooy1"]
+script = ExtResource("1_0wgj8")
+type = 0
+name = &"y"
+default_value = null
+hint = Dictionary[String, Variant]({})
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_hjfge"]
+script = ExtResource("1_0wgj8")
+type = 0
+name = &"z"
+default_value = null
+hint = Dictionary[String, Variant]({})
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_oc7x7"]
+script = ExtResource("2_hjfge")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 7
+right_label = "Composed Vector3"
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[resource]
+script = ExtResource("3_0wgj8")
+type = 1
+input_slots = Array[ExtResource("2_hjfge")]([])
+args = Array[ExtResource("1_0wgj8")]([SubResource("Resource_5ecun"), SubResource("Resource_iooy1"), SubResource("Resource_hjfge")])
+output_slots = Array[ExtResource("2_hjfge")]([SubResource("Resource_oc7x7")])
+title = "ComposeVector3"
+description = "Composes a Vector3 from three numbers."
+is_output = false
+data = {}
+salt = 0
+metadata/_custom_type_script = "uid://brb1clh2y2bv0"
