@@ -52,7 +52,7 @@ left_label = ""
 right_enabled = true
 right_type = 1
 right_label = "Merged"
-right_show_preview = false
+right_show_preview = true
 
 [resource]
 script = ExtResource("3_sotjw")
