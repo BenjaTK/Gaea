@@ -113,4 +113,6 @@ func get_icon() -> Texture2D:
 			return preload("../../assets/types/range.svg")
 		GaeaGraphNode.SlotTypes.BOOL:
 			return preload("../../assets/types/bool.svg")
+		GaeaGraphNode.SlotTypes.VECTOR3:
+			return preload("../../assets/types/vec3.svg")
 	return null

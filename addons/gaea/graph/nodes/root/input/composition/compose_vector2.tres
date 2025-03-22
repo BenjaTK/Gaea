@@ -1,0 +1,45 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://dv28660onn7fl"]
+
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_aer6b"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_8dago"]
+[ext_resource type="Script" uid="uid://cmo7oilfgh0gs" path="res://addons/gaea/graph/nodes/root/input/composition/compose_vector.gd" id="3_aer6b"]
+
+[sub_resource type="Resource" id="Resource_aer6b"]
+script = ExtResource("1_aer6b")
+type = 0
+name = &"x"
+default_value = null
+hint = Dictionary[String, Variant]({})
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_8dago"]
+script = ExtResource("1_aer6b")
+type = 0
+name = &"y"
+default_value = null
+hint = Dictionary[String, Variant]({})
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_4s5b1"]
+script = ExtResource("2_8dago")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 3
+right_label = "Composed Vector2"
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[resource]
+script = ExtResource("3_aer6b")
+type = 0
+input_slots = Array[ExtResource("2_8dago")]([])
+args = Array[ExtResource("1_aer6b")]([SubResource("Resource_aer6b"), SubResource("Resource_8dago")])
+output_slots = Array[ExtResource("2_8dago")]([SubResource("Resource_4s5b1")])
+title = "ComposeVector2"
+description = "Composes a Vector2 from two numbers."
+is_output = false
+data = {}
+salt = 0
+metadata/_custom_type_script = "uid://brb1clh2y2bv0"

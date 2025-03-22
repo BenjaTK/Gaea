@@ -25,8 +25,14 @@ func get_icon() -> Texture2D:
 			return preload("../../../../../assets/types/int.svg")
 		TYPE_VECTOR2:
 			return preload("../../../../../assets/types/vec2.svg")
+		TYPE_VECTOR2I:
+			return preload("../../../../../assets/types/vec2i.svg")
 		TYPE_BOOL:
 			return preload("../../../../../assets/types/bool.svg")
 		TYPE_OBJECT:
 			if hint_string == "GaeaMaterial": return preload("../../../../../assets/material.svg")
+		TYPE_VECTOR3:
+			return preload("../../../../../assets/types/vec3.svg")
+		TYPE_VECTOR3I:
+			return preload("../../../../../assets/types/vec3i.svg")
 	return null
