@@ -46,3 +46,4 @@ description = "Creates a grid of values from [code]0[/bg][/c] to [code]1[/bg][/c
 [b]Ignores the z axis.[/b]"
 is_output = false
 data = {}
+salt = 0

@@ -30,3 +30,4 @@ title = "Fill"
 description = "Fills the grid with [param]value[/bg][/c]."
 is_output = false
 data = {}
+salt = 0

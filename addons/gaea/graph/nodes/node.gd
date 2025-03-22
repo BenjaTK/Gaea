@@ -6,7 +6,7 @@ extends GraphNode
 const PreviewTexture = preload("res://addons/gaea/graph/nodes/preview_texture.gd")
 
 enum SlotTypes {
-	VALUE_DATA, MAP_DATA, TILE_INFO, VECTOR2, NUMBER, RANGE, BOOL
+	VALUE_DATA, MAP_DATA, TILE_INFO, VECTOR2, NUMBER, RANGE, BOOL, VECTOR3
 }
 
 signal save_requested
@@ -146,6 +146,8 @@ static func get_color_from_type(type: SlotTypes) -> Color:
 			return Color("ff4545")
 		SlotTypes.VECTOR2:
 			return Color("a579ff")
+		SlotTypes.VECTOR3:
+			return Color("f9ff79")
 		SlotTypes.NUMBER:
 			return Color.LIGHT_GRAY
 		SlotTypes.RANGE:

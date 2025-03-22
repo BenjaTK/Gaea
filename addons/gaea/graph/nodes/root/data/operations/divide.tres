@@ -41,3 +41,4 @@ title = "Divide (/)"
 description = "Divides all cells in [param]data[/bg][/c] by [param]value[/bg][/c]."
 is_output = false
 data = {}
+salt = 0

@@ -7,6 +7,7 @@ extends "res://addons/gaea/graph/components/inputs/graph_node_parameter.gd"
 
 func _ready() -> void:
 	super()
+
 	if not is_instance_valid(resource):
 		return
 
@@ -20,6 +21,9 @@ func _ready() -> void:
 
 	spin_box.max_value = resource.hint.get("max", 1.0)
 	spin_box.allow_greater = not resource.hint.has("max")
+
+	spin_box.suffix = resource.hint.get("suffix", "")
+	spin_box.prefix = resource.hint.get("prefix", "")
 
 
 func get_param_value() -> float:

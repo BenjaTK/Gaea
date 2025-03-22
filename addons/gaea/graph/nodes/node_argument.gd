@@ -12,7 +12,8 @@ enum Type {
 	CATEGORY, ## For visual separation, doesn't get saved.
 	BITMASK_EXCLUSIVE, ## Same as bitmask but only one bit can be active at once.
 	FLAGS, ## Same interface as bitmask, but returns an Array of flags.
-	BOOLEAN
+	BOOLEAN,
+	VECTOR3
 }
 
 @export var type: Type :
@@ -57,6 +58,8 @@ static func get_scene_from_type(type: Type) -> PackedScene:
 			return preload("res://addons/gaea/graph/components/inputs/category.tscn")
 		Type.BOOLEAN:
 			return preload("res://addons/gaea/graph/components/inputs/boolean_parameter.tscn")
+		Type.VECTOR3:
+			return preload("res://addons/gaea/graph/components/inputs/vector3_parameter.tscn")
 	return null
 
 
@@ -87,6 +90,9 @@ func _validate_property(property: Dictionary) -> void:
 				property.hint = PROPERTY_HINT_TYPE_STRING
 				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
 				property.hint_string = "%d:" % [TYPE_INT]
+			Type.VECTOR3:
+				property.type = TYPE_VECTOR3
+				property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
 
 	if property.name == "hint" and type == Type.CATEGORY:
 		property.usage = PROPERTY_USAGE_NONE

@@ -5,6 +5,7 @@
 
 [node name="Vector2Parameter" instance=ExtResource("1_3oy3s")]
 script = ExtResource("2_nngsd")
+add_input_slot = true
 input_type = 3
 
 [node name="XSpinBox" type="SpinBox" parent="." index="1"]

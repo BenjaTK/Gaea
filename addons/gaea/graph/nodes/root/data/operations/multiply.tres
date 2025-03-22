@@ -41,3 +41,4 @@ title = "Multiply (*)"
 description = "Multiplies all cells in [param]data[/bg][/c] with [param]value[/bg][/c]."
 is_output = false
 data = {}
+salt = 0

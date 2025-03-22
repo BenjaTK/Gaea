@@ -91,3 +91,4 @@ description = "Generates a path that goes from the top of the world to the botto
 The rest is filled with 0s."
 is_output = false
 data = {}
+salt = 0

@@ -45,3 +45,4 @@ title = "SimplexSmooth3D"
 description = "Creates a grid of values from [code]0[/bg][/c] to [code]1[/bg][/c] based on a SimplexSmooth noise texture."
 is_output = false
 data = {}
+salt = 0
