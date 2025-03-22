@@ -24,8 +24,8 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 	var range: Dictionary = get_arg("range", generator_data)
 
 	for cell in passed_data:
-		var value: float = passed_data[cell]
-		if value < range.get("min", 0.0) or value > range.get("max", 0.0):
+		var value = passed_data[cell]
+		if value is float and value < range.get("min", 0.0) or value > range.get("max", 0.0):
 			grid[cell] = null
 		else:
 			if is_instance_valid(material):

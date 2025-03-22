@@ -53,7 +53,7 @@ func _ready() -> void:
 func _on_visibility_changed() -> void:
 	await get_tree().process_frame
 	node.size = node.get_combined_minimum_size()
-	update()
+	#update()
 
 
 func update() -> void:
