@@ -87,8 +87,7 @@ input_slots = Array[ExtResource("2_a0dir")]([])
 args = Array[ExtResource("1_75iak")]([SubResource("Resource_5odk7"), SubResource("Resource_r83pm"), SubResource("Resource_2j7op"), SubResource("Resource_7hrwv"), SubResource("Resource_4yg0g"), SubResource("Resource_fpsoe"), SubResource("Resource_f1mpl"), SubResource("Resource_qr7np")])
 output_slots = Array[ExtResource("2_a0dir")]([SubResource("Resource_ci3aq")])
 title = "SnakePath2D"
-description = "Generates a path that goes from the top of the world to the bottom, with each cell consisting of flags that indicate their exits (up, down, left, right). 
-The rest is filled with 0s."
+description = "Generates a path that goes from the top of the world to the bottom, with each cell consisting of flags that indicate their exits (up, down, left, right). "
 is_output = false
 data = {}
 salt = 0
