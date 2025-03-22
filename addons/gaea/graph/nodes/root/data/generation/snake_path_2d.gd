@@ -49,9 +49,7 @@ func get_data(output_port: int, area: AABB, generator_data: GaeaData) -> Diction
 		last_direction = direction
 		current_cell += direction
 
-	for x in get_axis_range(Axis.X, area):
-		for y in get_axis_range(Axis.Y, area):
-			if path.has(Vector2i(x, y)):
-				grid[Vector3i(x, y, 0)] = path.get(Vector2i(x, y))
+	for cell in path:
+		grid[Vector3i(cell.x, cell.y, 0)] = path.get(cell)
 
 	return grid
