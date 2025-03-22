@@ -1,0 +1,47 @@
+[gd_resource type="Resource" load_steps=7 format=3 uid="uid://o054c8xv8xb"]
+
+[ext_resource type="Script" uid="uid://bh3sajxnmp14w" path="res://addons/gaea/graph/nodes/node_argument.gd" id="1_lx85c"]
+[ext_resource type="Script" uid="uid://ote622wl6axc" path="res://addons/gaea/graph/nodes/node_slot.gd" id="2_0xxnj"]
+[ext_resource type="Script" uid="uid://cgqpchc8aym4t" path="res://addons/gaea/graph/nodes/root/input/decomposition/decompose_vector.gd" id="3_lx85c"]
+
+[sub_resource type="Resource" id="Resource_0xxnj"]
+script = ExtResource("1_lx85c")
+type = 2
+name = &"vector"
+default_value = null
+hint = Dictionary[String, Variant]({})
+metadata/_custom_type_script = "uid://bh3sajxnmp14w"
+
+[sub_resource type="Resource" id="Resource_kk1e5"]
+script = ExtResource("2_0xxnj")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 4
+right_label = "X"
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[sub_resource type="Resource" id="Resource_d8fxv"]
+script = ExtResource("2_0xxnj")
+left_enabled = false
+left_type = 0
+left_label = ""
+right_enabled = true
+right_type = 4
+right_label = "Y"
+right_show_preview = false
+metadata/_custom_type_script = "uid://ote622wl6axc"
+
+[resource]
+script = ExtResource("3_lx85c")
+input_slots = Array[ExtResource("2_0xxnj")]([])
+args = Array[ExtResource("1_lx85c")]([SubResource("Resource_0xxnj")])
+output_slots = Array[ExtResource("2_0xxnj")]([SubResource("Resource_kk1e5"), SubResource("Resource_d8fxv")])
+title = "DecomposeVector2"
+description = "Decomposes a Vector2 into 2 numbers."
+is_output = false
+data = {}
+salt = 0
+metadata/_custom_type_script = "uid://brb1clh2y2bv0"
