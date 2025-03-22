@@ -24,3 +24,4 @@ title = "FloatVariable"
 description = "Float variable editable in the inspector."
 is_output = false
 data = {}
+salt = 0

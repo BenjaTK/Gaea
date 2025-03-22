@@ -12,6 +12,7 @@ extends "res://addons/gaea/graph/components/inputs/graph_node_parameter.gd"
 
 
 func _ready() -> void:
+
 	if is_instance_valid(resource):
 		min_slider.min_value = resource.hint.get("min", 0.0)
 		min_slider.max_value = maxf(min_slider.min_value, resource.hint.get("max", 1.0))
@@ -26,18 +27,39 @@ func _ready() -> void:
 		min_slider.allow_greater = resource.hint.get("allow_greater", true)
 		max_spin_box.allow_greater = max_slider.allow_greater
 
+		min_slider.step = resource.hint.get("step", min_slider.step)
+		max_slider.step = min_slider.step
+		min_spin_box.step = min_slider.step
+		max_spin_box.step = min_slider.step
+
+		min_spin_box.suffix = resource.hint.get("suffix", "")
+		max_spin_box.suffix = min_spin_box.suffix
+
+		min_spin_box.prefix = resource.hint.get("prefix", "")
+		max_spin_box.prefix = min_spin_box.prefix
+
 	min_slider.value_changed.connect(_on_slider_changed_value.unbind(1))
 	max_slider.value_changed.connect(_on_slider_changed_value.unbind(1))
 	min_spin_box.value_changed.connect(_on_spin_box_changed_value.unbind(1))
 	max_spin_box.value_changed.connect(_on_spin_box_changed_value.unbind(1))
-
 	super()
+
+	_on_slider_changed_value.call_deferred()
 
 
 func _on_slider_changed_value() -> void:
 	min_slider.set_value_no_signal(minf(min_slider.value, max_slider.value))
 	max_slider.set_value_no_signal(maxf(max_slider.value, min_slider.value))
-	area_panel.size.x = min_slider.size.x * clampf(minf(1.0, _get_relative(max_slider.value)) - maxf(0.0, _get_relative(min_slider.value)), 0.0, 1.0)
+	area_panel.set_size.call_deferred(
+		Vector2(
+			min_slider.size.x * clampf(
+				minf(1.0, _get_relative(max_slider.value)) - maxf(0.0, _get_relative(min_slider.value)),
+				0.0,
+				1.0
+			),
+			area_panel.size.y
+		)
+	)
 	area_panel.position.x = min_slider.size.x * _get_relative(min_slider.value)
 	min_spin_box.set_value_no_signal(min_slider.value)
 	max_spin_box.set_value_no_signal(max_slider.value)

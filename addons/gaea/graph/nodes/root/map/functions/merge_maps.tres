@@ -63,3 +63,4 @@ title = "MergeMaps"
 description = "Merges [param]map A[/bg][/c] with [param]map B[/bg][/c]. The latter overrides any overlapping cells from the former."
 is_output = false
 data = {}
+salt = 0

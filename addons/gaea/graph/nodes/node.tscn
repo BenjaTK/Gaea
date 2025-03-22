@@ -7,5 +7,6 @@ custom_minimum_size = Vector2(256, 0)
 offset_right = 9.0
 offset_bottom = 55.0
 theme_override_constants/separation = 4
+resizable = true
 title = "Node"
 script = ExtResource("1_67l81")

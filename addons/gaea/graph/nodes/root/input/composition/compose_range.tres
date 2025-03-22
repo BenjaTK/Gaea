@@ -37,3 +37,4 @@ title = "ComposeRange"
 description = "Composes a range parameter from two numbers."
 is_output = false
 data = {}
+salt = 0

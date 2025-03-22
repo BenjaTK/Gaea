@@ -68,4 +68,5 @@ title = "MergeData"
 description = "Merges [param]data A-D[/bg][/c]. Later grids override any cells from the previous grids when valid. (B overrides A, C overrides B, etc.)"
 is_output = false
 data = {}
+salt = 0
 metadata/_custom_type_script = "uid://brb1clh2y2bv0"
