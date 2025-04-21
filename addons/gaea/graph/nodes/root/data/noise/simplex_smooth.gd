@@ -6,10 +6,10 @@ class_name GaeaNodeSimplexSmooth
 ## Generic class for both the 2D and 3D version of this node.
 
 
-enum Type {TWOD, THREED}
+enum Type {TYPE_2D, TYPE_3D}
 
 ## Whether it uses the [method Noise.get_noise_2d] or [method Noise.get_noise_3d].
-var type = Type.TWOD
+var type = Type.TYPE_2D
 
 
 func _get_title() -> String:
@@ -48,18 +48,18 @@ func _get_tree_items() -> Array[GaeaNodeResource]:
 	var items: Array[GaeaNodeResource]
 	var simplex_smooth_2d: GaeaNodeSimplexSmooth = get_script().new()
 	simplex_smooth_2d.set_tree_name_override("SimplexSmooth2D")
-	simplex_smooth_2d.type = Type.TWOD
+	simplex_smooth_2d.type = Type.TYPE_2D
 	items.append(simplex_smooth_2d)
 
 	var simplex_smooth_3d: GaeaNodeSimplexSmooth = get_script().new()
 	simplex_smooth_3d.set_tree_name_override("SimplexSmooth3D")
-	simplex_smooth_3d.type = Type.THREED
+	simplex_smooth_3d.type = Type.TYPE_3D
 	items.append(simplex_smooth_3d)
 
 	return items
 
 
-func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: GaeaData) -> Dictionary:
+func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
 	_log_data(output_port, generator_data)
 
 	var _noise: FastNoiseLite = FastNoiseLite.new()
@@ -73,7 +73,7 @@ func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: Gaea
 		for y in _get_axis_range(Axis.Y, area):
 			for z in _get_axis_range(Axis.Z, area):
 				dictionary[Vector3i(x, y, z)] = (_get_noise_value(Vector3i(x, y, z), _noise) + 1.0) / 2.0
-	return output_port.return_value(dictionary)
+	return dictionary
 
 
 func _get_noise_value(cell: Vector3i, noise: FastNoiseLite) -> float:

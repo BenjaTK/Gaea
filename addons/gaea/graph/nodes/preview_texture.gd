@@ -4,7 +4,7 @@ extends TextureRect
 
 const RESOLUTION: Vector2i = Vector2i(64, 64)
 
-var selected_output: GaeaNodeSlotOutput
+var selected_output: StringName
 var node: GaeaGraphNode
 var slider_container: HBoxContainer
 var slider: HSlider
@@ -53,17 +53,17 @@ func _ready() -> void:
 	texture = ImageTexture.create_from_image(Image.create_empty(RESOLUTION.x, RESOLUTION.y, true, Image.FORMAT_RGBA8))
 
 
-func toggle(for_output: GaeaNodeSlotOutput) -> void:
+func toggle(for_output: StringName) -> void:
 	if not get_parent().visible:
 		get_parent().show()
-		slider_container.visible = for_output.type == GaeaValue.Type.DATA
+		slider_container.visible = node.resource.get_output_port_type(for_output)
 		selected_output = for_output
 		update()
 	else:
 		if selected_output == for_output:
-			selected_output = null
+			selected_output = ""
 		get_parent().hide()
-	
+
 	node.auto_shrink.call_deferred()
 
 
@@ -80,7 +80,7 @@ func update() -> void:
 		AABB(Vector3.ZERO, Vector3(resolution.x, resolution.y, 1)),
 		node.generator.data
 	).get("value")
-	
+
 	node.generator.data.cache.clear()
 
 	var image: Image = Image.create_empty(resolution.x, resolution.y, true, Image.FORMAT_RGBA8)
@@ -90,7 +90,7 @@ func update() -> void:
 			var value = data.get(Vector3i(x, y, 0))
 			if value == null:
 				continue
-			match selected_output.type:
+			match node.resource.get_output_port_type(selected_output):
 				GaeaValue.Type.DATA:
 					if typeof(value) != TYPE_FLOAT or is_nan(value):
 						continue

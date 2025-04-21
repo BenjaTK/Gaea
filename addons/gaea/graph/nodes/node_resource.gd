@@ -16,6 +16,8 @@ extends Resource
 ## @tutorial(Anatomy of a Graph): https://gaea-godot.github.io/gaea-docs/#/2.0/tutorials/anatomy-of-a-graph
 
 
+signal argument_list_changed
+
 #region Description Formatting
 const PARAM_TEXT_COLOR := "cdbff0"
 const PARAM_BG_COLOR := "bfbfbf1a"
@@ -29,7 +31,7 @@ const GAEA_MATERIAL_GRADIENT_HINT := "Resource that maps values from 0.0-1.0 to 
 ## A list of parameters and/or input slots.
 @export var params: Array[GaeaNodeSlotParam]
 ## A list of the output slots this node has.
-@export var outputs: Array[GaeaNodeSlotOutput]
+@export var outputs: Array[StringName]
 
 ## The title to be used in the 'Create Node' pop-up or in the graph.
 @export var title: String = "Node"
@@ -69,6 +71,10 @@ enum Axis {
 	Z
 }
 
+
+
+func notify_argument_list_changed() -> void:
+	argument_list_changed.emit()
 
 
 func set_tree_name_override(value: String) -> void:
@@ -205,7 +211,7 @@ func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 #region Old Code
 #region Execution
 ## Traverses the graph using this node's connections, and returns the result for [param output_port].
-func traverse(output_port: GaeaNodeSlotOutput, area: AABB, generator_data:GaeaData) -> Variant:
+func traverse(output_port: StringName, area: AABB, generator_data:GaeaData) -> Variant:
 	_log_traverse(generator_data)
 
 	# Caching
@@ -222,40 +228,40 @@ func traverse(output_port: GaeaNodeSlotOutput, area: AABB, generator_data:GaeaDa
 
 	if use_caching:
 		_set_cached_data(output_port, generator_data, results)
-	return results
+	return {&"value": results, &"type": _get_output_port_type(output_port)}
 
 
 ## Returns the data corresponding to [param output_port]. Should be overriden to create custom
 ## behavior for each node.
 @warning_ignore("unused_parameter")
-func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: GaeaData) -> Dictionary:
+func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
 	return {}
 #endregion
 
 
 #region Caching
 ## Checks if this node should use caching or not. Can be overriden to disable it.
-func _use_caching(_output_port: GaeaNodeSlotOutput, _generator_data:GaeaData) -> bool:
+func _use_caching(_output_port: StringName, _generator_data:GaeaData) -> bool:
 	return true
 
 
 ## Adds or sets data to the cache at GaeaNodeResource, then output_port index.
 ## This is called during [method traverse] if [method _use_caching] returns [code]true[/code],
 ## but can also be called in special cases where you want to manually add cached values.
-func _set_cached_data(output_port: GaeaNodeSlotOutput, generator_data:GaeaData, new_data:Dictionary) -> void:
+func _set_cached_data(output_port: StringName, generator_data:GaeaData, new_data:Dictionary) -> void:
 	var node_cache:Dictionary = generator_data.cache.get_or_add(self, {})
-	node_cache[output_port.name] = new_data
+	node_cache[output_port] = new_data
 
 
 # Checks if the cache has data corresponding to this node, then if it has it for output_port.
-func _has_cached_data(output_port: GaeaNodeSlotOutput, generator_data:GaeaData) -> bool:
-	return generator_data.cache.has(self) and generator_data.cache[self].has(output_port.name)
+func _has_cached_data(output_port: StringName, generator_data:GaeaData) -> bool:
+	return generator_data.cache.has(self) and generator_data.cache[self].has(output_port)
 
 
 # Gets cached data by GaeaNodeResource, then output_port index.
 # Assumes that data exists, will error out if it doesn't.
-func _get_cached_data(output_port: GaeaNodeSlotOutput, generator_data:GaeaData) -> Dictionary:
-	return generator_data.cache[self][output_port.name]
+func _get_cached_data(output_port: StringName, generator_data:GaeaData) -> Dictionary:
+	return generator_data.cache[self][output_port]
 #endregion
 
 
@@ -275,9 +281,8 @@ func _has_inputs_connected(required: Array[StringName], generator_data:GaeaData)
 
 
 # Gets the [GaeaNodeResource] connected to the input of name [param param_name].
-func _get_input_resource(param_name: StringName, generator_data:GaeaData) -> GaeaNodeResource:
-	var param := _find_param_by_name(param_name)
-	var connection = _get_param_connection(param)
+func _get_input_resource(arg_name: StringName, generator_data:GaeaData) -> GaeaNodeResource:
+	var connection = _get_argument_connection(arg_name)
 	if connection.is_empty() or connection.from_node == -1:
 		return null
 
@@ -292,14 +297,13 @@ func _get_input_resource(param_name: StringName, generator_data:GaeaData) -> Gae
 #region Args
 ## Returns the value of the argument of [param name]. Pass in [param generator_data] to allow overriding with input slots.[br]
 ## [param area] is used for values of the type Data or Map. (See [enum GaeaValue.Type]).
-func _get_arg(name: StringName, area: AABB, generator_data: GaeaData) -> Variant:
-	_log_arg(name, generator_data)
-
-	var param := _find_param_by_name(name)
-	if not is_instance_valid(param):
+func _get_arg(arg_name: StringName, area: AABB, generator_data: GaeaData) -> Variant:
+	if not arg_name in _get_arguments_list():
 		return null
 
-	var connection := _get_param_connection(param)
+	_log_arg(arg_name, generator_data)
+
+	var connection := _get_argument_connection(arg_name)
 	if not connection.is_empty():
 		var connected_idx = connection.from_node
 		var connected_node = generator_data.resources[connected_idx]
@@ -311,18 +315,18 @@ func _get_arg(name: StringName, area: AABB, generator_data: GaeaData) -> Variant
 		)
 		if connected_data.has("value"):
 			var connected_value = connected_data.get("value")
-			var connected_type: GaeaValue.Type = connected_output.type
+			var connected_type: GaeaValue.Type = connected_node.get_output_port_type(connected_output)
 			if connected_data.has("type"):
 				connected_type = connected_data.get("type")
-			if connected_type == param.type:
+			if connected_type == _get_argument_type(arg_name):
 				return connected_value
 			else:
-				return GaeaValue.cast_value(connected_type, param.type, connected_value)
+				return GaeaValue.cast_value(connected_type, _get_argument_type(arg_name), connected_value)
 		else:
 			_log_error("Could not get data from previous node, using default value instead.", generator_data, connected_idx)
-			return param.default_value
+			return _get_argument_default_value(arg_name)
 
-	return data.get(name, param.default_value)
+	return data.get(arg_name, _get_argument_default_value(arg_name))
 #endregion
 
 
@@ -333,6 +337,16 @@ func _find_param_by_name(param_name: StringName) -> GaeaNodeSlotParam:
 		if param.name == param_name:
 			return param
 	return null
+
+
+func _get_argument_connection(arg_name: StringName) -> Dictionary:
+	var idx = _get_arguments_list().find(arg_name)
+	if idx == -1:
+		return {}
+	for connection in connections:
+		if connection.to_port == idx:
+			return connection
+	return {}
 
 
 ## Returns the connection idx of [param param].
@@ -356,22 +370,16 @@ func _get_param_connection(param: GaeaNodeSlotParam) -> Dictionary:
 
 
 #region Output connections
-# Returns the [GaeaNodeSlotOutput] in [member outputs] corresponding to [param output_name].
-func _find_output_by_name(output_name: StringName) -> GaeaNodeSlotOutput:
-	for output in outputs:
-		if output.name == output_name:
-			return output
-	return null
-
-
 ## Returns the connection idx of [param output].
-func output_to_connection_idx(output: GaeaNodeSlotOutput) -> int:
+func output_to_connection_idx(output: StringName) -> int:
 	return outputs.find(output)
 
 
-## Returns the [GaeaNodeSlotOutput] corresponding to [param output_idx].
-func connection_idx_to_output(output_idx: int) -> GaeaNodeSlotOutput:
-	return outputs[output_idx]
+## Returns the [StringName] corresponding to [param output_idx].
+func connection_idx_to_output(output_idx: int) -> StringName:
+	if _get_output_ports_list().size() <= output_idx:
+		return &""
+	return _get_output_ports_list().get(output_idx)
 #endregion
 
 
@@ -400,9 +408,9 @@ func _log_traverse(generator_data:GaeaData):
 
 ## If enabled in [member GaeaData.logging], log the data information. (See [enum GaeaData.Log]).
 ## Should be called in [method _get_data]
-func _log_data(output_port: GaeaNodeSlotOutput, generator_data:GaeaData):
+func _log_data(output_port: StringName, generator_data:GaeaData):
 	if is_instance_valid(generator_data) and generator_data.logging & GaeaData.Log.Data > 0:
-		print("Data      |   %s from port &\"%s\"" % [title, output_port.name])
+		print("Data      |   %s from port &\"%s\"" % [title, output_port])
 
 
 # If enabled in [member GaeaData.logging], log the argument information. (See [enum GaeaData.Log]).

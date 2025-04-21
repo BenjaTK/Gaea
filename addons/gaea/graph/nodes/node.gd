@@ -27,6 +27,7 @@ static var _titlebar_styleboxes: Dictionary[GaeaValue.Type, Dictionary]
 var _preview: _PreviewTexture
 var _preview_container: VBoxContainer
 var _finished_loading: bool = false : set = set_finished_loading, get = has_finished_loading
+var _editors: Dictionary[StringName, GaeaGraphNodeParameterEditor]
 
 
 func _ready() -> void:
@@ -45,6 +46,9 @@ func _on_added() -> void:
 	if not is_instance_valid(resource) or is_part_of_edited_scene():
 		return
 
+	resource.node = self
+	_editors.clear()
+
 	for argument in resource.get_arguments_list():
 		var scene: PackedScene = GaeaValue.get_editor_for_type(resource.get_argument_type(argument))
 		var node: GaeaGraphNodeParameterEditor = scene.instantiate()
@@ -55,6 +59,11 @@ func _on_added() -> void:
 			resource.get_argument_display_name(argument),
 			resource.get_argument_default_value(argument)
 		)
+		_editors.set(argument, node)
+		node.param_value_changed.connect(_on_param_value_changed.bind(node, argument))
+
+	var preview_button_group: ButtonGroup = ButtonGroup.new()
+	preview_button_group.allow_unpress = true
 
 	for output in resource.get_output_ports_list():
 		var node: GaeaGraphNodeOutput = preload("uid://cqpby5jyv71l0").instantiate()
@@ -64,10 +73,20 @@ func _on_added() -> void:
 			resource.get_output_port_type(output),
 			resource.get_output_port_display_name(output)
 		)
+		if GaeaValue.has_preview(resource.get_output_port_type(output)):
+			node.get_toggle_preview_button().show()
+
+			if not is_instance_valid(_preview):
+				_preview_container = VBoxContainer.new()
+				_preview = _PreviewTexture.new()
+				_preview.node = self
+				generator.generation_finished.connect(_preview.update.unbind(1))
+
+			node.get_toggle_preview_button().button_group = preview_button_group
+			node.get_toggle_preview_button().toggled.connect(_preview.toggle.bind(output).unbind(1))
 
 #
-	#var preview_button_group: ButtonGroup = ButtonGroup.new()
-	#preview_button_group.allow_unpress = true
+
 #
 	#if resource.salt == 0:
 		#resource.salt = randi()
@@ -82,22 +101,13 @@ func _on_added() -> void:
 		#var node := output.get_node(self, idx)
 		#add_child(node)
 		#idx += 1
-		#if GaeaValue.has_preview(output.type):
-			#node.get_toggle_preview_button().show()
+
 #
-			#if not is_instance_valid(_preview):
-				#_preview_container = VBoxContainer.new()
-				#_preview = _PreviewTexture.new()
-				#_preview.node = self
-				#generator.generation_finished.connect(_preview.update.unbind(1))
-#
-			#node.get_toggle_preview_button().button_group = preview_button_group
-			#node.get_toggle_preview_button().toggled.connect(_preview.toggle.bind(output).unbind(1))
-#
-	#if is_instance_valid(_preview_container):
-		#add_child(_preview_container)
-		#_preview_container.add_child(_preview)
-		#_preview_container.hide()
+	if is_instance_valid(_preview_container):
+		add_child(_preview_container)
+		_preview_container.add_child(_preview)
+		_preview_container.hide()
+
 	title = resource.get_title()
 	#resource.node = self
 #
@@ -120,22 +130,21 @@ func _on_added() -> void:
 
 ## Returns the current value set in the [GaeaGraphNodeParameterEditor] for the argument of [param arg_name].
 func get_arg_value(arg_name: String) -> Variant:
-	for child in get_children():
-		if child is GaeaGraphNodeParameterEditor:
-			if child.resource.name == arg_name:
-				return child.get_param_value()
+	var editor: GaeaGraphNodeParameterEditor = _editors.get(arg_name, null)
+	if is_instance_valid(editor):
+		return editor.get_param_value()
 	return null
 
 
 ## Sets the [GaeaGraphNodeParameterEditor] associated to the argument of [param arg_name] to [param value].
 func _set_arg_value(arg_name: String, value: Variant) -> void:
-	for child in get_children():
-		if child is GaeaGraphNodeParameterEditor:
-			if child.resource.name == arg_name:
-				child.set_param_value(value)
-				return
+	var editor: GaeaGraphNodeParameterEditor = _editors.get(arg_name, null)
+	if is_instance_valid(editor):
+		editor.set_param_value(value)
+
 
 func _on_param_value_changed(_value: Variant, _node: GaeaGraphNodeParameterEditor, _param_name: String) -> void:
+	resource.notify_argument_list_changed()
 	if _finished_loading:
 		save_requested.emit()
 		if is_instance_valid(_preview):
@@ -188,14 +197,14 @@ func get_save_data() -> Dictionary:
 		"position": position_offset,
 		"salt": resource.salt
 	}
-	if resource.params.size() > 0:
-		dictionary.set("data", {})
-		for param : GaeaNodeSlotParam in resource.params:
-			var value: Variant = get_arg_value(param.name)
-			if value == null:
-				continue
-			if value != param.default_value:
-				dictionary.data[param.name] = get_arg_value(param.name)
+	dictionary.set("arguments", {})
+	for argument in resource.get_arguments_list():
+		var value: Variant = get_arg_value(argument)
+		if value == null:
+			continue
+		if value != resource.get_argument_default_value(argument):
+			dictionary.data[argument] = get_arg_value(argument)
+	print(dictionary)
 	return dictionary
 
 
@@ -203,14 +212,22 @@ func get_save_data() -> Dictionary:
 func load_save_data(saved_data: Dictionary) -> void:
 	if saved_data.has("position"):
 		position_offset = saved_data.position
-	if saved_data.has("data"):
-		var data = saved_data.get("data")
-		for child in get_children():
-			if child is GaeaGraphNodeParameterEditor:
-				if not data.has(child.resource.name):
-					data.set(child.resource.name, child.resource.default_value)
-				if data.get(child.resource.name) != null:
-					child.set_param_value(data[child.resource.name])
+	if saved_data.has("arguments"):
+		var data = saved_data.get("arguments")
+		for argument: StringName in resource.get_arguments_list():
+			var editor: GaeaGraphNodeParameterEditor = _editors.get(argument)
+			if not is_instance_valid(editor):
+				break
+
+			if not data.has(argument):
+				data.set(argument, resource.get_argument_default_value(argument))
+
+			if data.get(argument) != null:
+				editor.set_param_value(data.get(argument))
+
+		#for child in get_children():
+			#if child is GaeaGraphNodeParameterEditor:
+
 
 	_finished_loading = true
 

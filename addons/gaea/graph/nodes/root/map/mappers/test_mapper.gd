@@ -1,12 +1,12 @@
 @tool
 extends GaeaNodeResource
-class_name GaeaNodeMapper
+class_name GaeaNodeTestMapper
 ## Abstract class used for mapper nodes. Can be overriden to customize behavior,
 ## otherwise maps all non-empty cells in [param data] to [param material].
 
 
 func _get_title() -> String:
-	return "Mapper"
+	return "TEST MAPPER. DELETE THIS"
 
 
 func _get_description() -> String:
@@ -14,7 +14,7 @@ func _get_description() -> String:
 
 
 func _get_arguments_list() -> Array[StringName]:
-	return [&"data", &"material"]
+	return [&"data"]
 
 
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
@@ -30,14 +30,14 @@ func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 
 
 func _get_required_params() -> Array[StringName]:
-	return [&"data", &"material"]
+	return [&"data"]
 
 
 func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
 	_log_data(output_port, generator_data)
 
 	var grid_data = _get_arg(&"data", area, generator_data)
-	var material: GaeaMaterial = _get_arg(&"material", area, generator_data)
+	var material: GaeaMaterial = TileMapMaterial.new()
 
 	var grid: Dictionary[Vector3i, GaeaMaterial]
 
@@ -50,4 +50,4 @@ func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) ->
 
 @warning_ignore("unused_parameter")
 func _passes_mapping(grid_data: Dictionary, cell: Vector3i, area: AABB, generator_data: GaeaData) -> bool:
-	return grid_data.get(cell) != null
+	return grid_data.get(cell) > 0.5

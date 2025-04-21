@@ -157,8 +157,11 @@ func _save_data() -> void:
 	var children = _graph_edit.get_children()
 	children.sort_custom(func(a: Node, b: Node): return a.name.naturalcasecmp_to(b.name) < 0)
 	for child in children:
-		if child is GraphNode:
-			resource_uids.append(child.resource.resource_uid)
+		if child is GaeaGraphNode:
+
+			resource_uids.append(ResourceUID.id_to_text(
+				ResourceLoader.get_resource_uid(child.resource.get_script().get_path())
+			))
 			resources.append(child.resource)
 		elif child is GraphFrame:
 			other.get_or_add(&"frames", []).append(_get_frame_save_data(child))
@@ -214,6 +217,7 @@ func _load_data() -> void:
 		if child is GaeaGraphNode and child.resource.is_output():
 			_output_node = child
 			has_output_node = true
+			break
 
 	if not has_output_node:
 		_output_node = _add_node_from_resource(preload("uid://bbkdvyxkj2slo"))

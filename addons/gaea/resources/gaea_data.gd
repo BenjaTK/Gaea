@@ -121,7 +121,7 @@ func _setup_local_to_scene() -> void:
 	for idx in resource_uids.size():
 		var base_uid = resource_uids[idx]
 		var data: Dictionary = node_data[idx]
-		var resource: GaeaNodeResource = load(base_uid)
+		var resource: GaeaNodeResource = load(base_uid).new()
 		if not resource is GaeaNodeResource:
 			push_error("Something went wrong, the resource at %s is not a GaeaNodeResource" % base_uid)
 			return
