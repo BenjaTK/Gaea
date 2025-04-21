@@ -68,6 +68,79 @@ enum Axis {
 }
 
 
+
+## Public version of [method _get_tree_items]. Prefer to override that method over this one.
+func get_tree_items() -> Array[GaeaNodeResource]:
+	return _get_tree_items()
+
+
+## Override this method to define the name shown in the title bar of this node.
+## Defining this method is [b]optional[/b], but recommended. If not defined, the description will be empty.
+func _get_name() -> String:
+	return "Unnamed"
+
+
+## Override this method to define the description shown in the 'Create Node' dialog and in a
+## tooltip when hovering over this node in the graph editor.
+## Defining this method is [b]optional[/b], but recommended. If not defined, the description will be empty.
+func _get_description() -> String:
+	return ""
+
+
+## Override this method to change the items shown in the 'Create Node' dialog related to this resource.
+## Defining this method can be useful to add multiple items with different default values and names if needed,
+## but it is not recommended to change this.
+func _get_tree_items() -> Array[GaeaNodeResource]:
+	return [self.duplicate()]
+
+
+## Override this method to define the arguments and inputs that will be available in the node.[br][br]
+## Defining this method is [b]required[/b].
+func _get_arguments_list() -> Array[StringName]:
+	return []
+
+
+## Override this method to define the type of the arguments defined in [method _get_arguments_list].[br][br]
+## Defining this method is [b]required[/b].
+func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.NULL
+
+
+## Override this method if you want to change the display name for any arguments in [method _get_arguments_list].[br][br]
+## Defining this method is [b]optional[/b]. If not defined, the name will be [code]arg_name.capitalize()[/code].
+func _get_argument_display_name(arg_name: StringName) -> String:
+	return arg_name.capitalize()
+
+
+## Override this method to define the default value of the arguments defined in [method _get_arguments_list].[br][br]
+## Defining this method is [b]optional[/b]. If not defined, the used default value will be the one in [method GaeaValue.get_default_value]
+## corresponding to the argument's type.
+func _get_argument_default_value(arg_name: StringName) -> Variant:
+	return GaeaValue.get_default_value(_get_argument_type(arg_name))
+
+
+## Override this method to define the outputs this node will have.[br][br]
+## Defining this method is [b]required[/b].
+func _get_output_ports_list() -> Array[StringName]:
+	return []
+
+
+## Override this method to define the display name for any outputs in [method _get_output_ports_list].[br][br]
+## Defining this method is [b]optional[/b]. If not defined, the name will be [code]output_name.capitalize()[/code].
+func _get_output_port_display_name(output_name: StringName) -> String:
+	return output_name.capitalize()
+
+
+## Override this method to define the type of the outputs defined in [method _get_output_ports_list].[br][br]
+## Defining this method is [b]required[/b].
+func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.NULL
+
+
+
+
+
+#region Old Code
 #region Execution
 ## Traverses the graph using this node's connections, and returns the result for [param output_port].
 func traverse(output_port: GaeaNodeSlotOutput, area: AABB, generator_data:GaeaData) -> Variant:
@@ -368,3 +441,4 @@ func _instantiate_duplicate() -> GaeaNodeResource:
 func _load_save_data(saved_data: Dictionary) -> void:
 	salt = saved_data.get("salt", 0)
 	data = saved_data.get("data", {})
+#endregion
