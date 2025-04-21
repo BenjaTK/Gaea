@@ -34,7 +34,7 @@ func _ready() -> void:
 	_on_added()
 
 	if is_instance_valid(resource):
-		set_tooltip_text(GaeaNodeResource.get_formatted_text(resource.description))
+		set_tooltip_text(GaeaNodeResource.get_formatted_text(resource.get_description()))
 
 	connections_updated.connect(_update_arguments_visibility)
 	removed.connect(_on_removed)

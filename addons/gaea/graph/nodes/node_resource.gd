@@ -84,6 +84,11 @@ func get_title() -> String:
 	return _get_title()
 
 
+## Public version of [method get_description]. Prefer to override that method over this one.
+func get_description() -> String:
+	return _get_description()
+
+
 func get_type() -> GaeaValue.Type:
 	if not _get_output_ports_list().is_empty():
 		return _get_output_port_type(_get_output_ports_list().back())
@@ -193,6 +198,11 @@ func _get_output_port_display_name(output_name: StringName) -> String:
 ## Defining this method is [b]required[/b].
 func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.NULL
+
+
+## If this returns [code]false[/code], this node won't show up in the 'Create Node' dialog.
+func _get_enabled() -> bool:
+	return true
 
 
 

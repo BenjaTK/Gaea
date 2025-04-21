@@ -39,7 +39,6 @@ func populate() -> void:
 	_populate_from_dictionary(tree_dictionary, root)
 	root.set_collapsed_recursive(true)
 	root.set_collapsed(false)
-	print(tree_dictionary)
 
 
 func _populate_from_dictionary(dictionary: Dictionary, parent_item: TreeItem) -> void:
@@ -106,7 +105,7 @@ func _on_create_button_pressed() -> void:
 func _on_item_selected() -> void:
 	var item: TreeItem = get_selected()
 	if item.get_metadata(0) is GaeaNodeResource:
-		description_label.set_text(GaeaNodeResource.get_formatted_text(item.get_metadata(0).description))
+		description_label.set_text(GaeaNodeResource.get_formatted_text(item.get_metadata(0).get_description()))
 	elif item.get_metadata(0) is StringName:
 		match item.get_metadata(0):
 			&"frame": description_label.set_text("A rectangular area for better organziation.")

@@ -60,7 +60,6 @@ func generate_area(area: AABB) -> void:
 		var connection: Dictionary = connections[idx]
 		var resource: GaeaNodeResource = data.resources[connection.to_node]
 		resource.connections.append(connection)
-		print(resource.connections, resource.get_title())
 
 	output_resource.execute(
 		area,

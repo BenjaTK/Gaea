@@ -154,6 +154,8 @@ func _save_data() -> void:
 	var node_data: Array[Dictionary]
 	var other: Dictionary
 
+	other.set(&"save_version", GaeaData.CURRENT_SAVE_VERSION)
+
 	var children = _graph_edit.get_children()
 	children.sort_custom(func(a: Node, b: Node): return a.name.naturalcasecmp_to(b.name) < 0)
 	for child in children:

@@ -17,7 +17,7 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "Creates a grid of values from [code]0[/bg][/c] to [code]1[/bg][/c] based on a SimplexSmooth noise texture.\n [b]Ignores the z axis.[/b]"
+	return "Creates a grid of values from [code]0[/bg][/c] to [code]1[/bg][/c] based on a SimplexSmooth noise texture.\n[b]Ignores the z axis.[/b]"
 
 
 func _get_arguments_list() -> Array[StringName]:
@@ -42,21 +42,6 @@ func _get_output_ports_list() -> Array[StringName]:
 
 func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.DATA
-
-
-func _get_tree_items() -> Array[GaeaNodeResource]:
-	var items: Array[GaeaNodeResource]
-	var simplex_smooth_2d: GaeaNodeSimplexSmooth = get_script().new()
-	simplex_smooth_2d.set_tree_name_override("SimplexSmooth2D")
-	simplex_smooth_2d.type = Type.TYPE_2D
-	items.append(simplex_smooth_2d)
-
-	var simplex_smooth_3d: GaeaNodeSimplexSmooth = get_script().new()
-	simplex_smooth_3d.set_tree_name_override("SimplexSmooth3D")
-	simplex_smooth_3d.type = Type.TYPE_3D
-	items.append(simplex_smooth_3d)
-
-	return items
 
 
 func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:

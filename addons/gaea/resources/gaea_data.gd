@@ -5,6 +5,8 @@ extends Resource
 ## Resource that holds the saved data for a Gaea graph.
 
 
+const CURRENT_SAVE_VERSION := 2
+
 ## Emitted when the size of [member layers] is changed, or when one of its values is changed.
 signal layer_count_modified
 
@@ -115,7 +117,7 @@ func _get(property: StringName) -> Variant:
 
 func _setup_local_to_scene() -> void:
 	#Data migration from 2.0 beta. See PR #305. Remove before releasing 2.X.
-	if resources.size() > 0:
+	if other.get(&"save_version", -1) != CURRENT_SAVE_VERSION:
 		_migrate_data()
 	resources = []
 	for idx in resource_uids.size():
@@ -152,6 +154,12 @@ func _migrate_data() -> void:
 		if resource.salt:
 			data.set("salt", resource.salt)
 		node_data[idx] = data
+
+	for idx in resource_uids.size():
+		var loaded := load(resource_uids.get(idx))
+		if loaded is GaeaNodeResource:
+			resource_uids.set(idx, ResourceUID.id_to_text(ResourceLoader.get_resource_uid(loaded.get_script())))
+
 
 # Data migration from 2.0 beta. See PR #305. Remove before releasing 2.X.
 func _get_all_node_files(path: String, files: Dictionary[String, String] = {}) -> Dictionary[String, String]:
