@@ -47,7 +47,15 @@ func _on_added() -> void:
 		return
 
 	resource.node = self
+	resource.argument_list_changed.connect(_rebuild, CONNECT_DEFERRED)
+	_rebuild()
+
+
+func _rebuild() -> void:
 	_editors.clear()
+	for child in get_children():
+		child.queue_free()
+		await child.tree_exited
 
 	for argument in resource.get_arguments_list():
 		var scene: PackedScene = GaeaValue.get_editor_for_type(resource.get_argument_type(argument))
@@ -84,7 +92,6 @@ func _on_added() -> void:
 
 			node.get_toggle_preview_button().button_group = preview_button_group
 			node.get_toggle_preview_button().toggled.connect(_preview.toggle.bind(output).unbind(1))
-
 #
 
 #
@@ -127,6 +134,8 @@ func _on_added() -> void:
 		add_theme_stylebox_override("titlebar", titlebar)
 		add_theme_stylebox_override("titlebar_selected", titlebar_selected)
 
+	auto_shrink.call_deferred()
+
 
 ## Returns the current value set in the [GaeaGraphNodeParameterEditor] for the argument of [param arg_name].
 func get_arg_value(arg_name: String) -> Variant:
@@ -144,7 +153,6 @@ func _set_arg_value(arg_name: String, value: Variant) -> void:
 
 
 func _on_param_value_changed(_value: Variant, _node: GaeaGraphNodeParameterEditor, _param_name: String) -> void:
-	resource.notify_argument_list_changed()
 	if _finished_loading:
 		save_requested.emit()
 		if is_instance_valid(_preview):
@@ -197,14 +205,13 @@ func get_save_data() -> Dictionary:
 		"position": position_offset,
 		"salt": resource.salt
 	}
-	dictionary.set("arguments", {})
+	dictionary.set(&"arguments", {})
 	for argument in resource.get_arguments_list():
 		var value: Variant = get_arg_value(argument)
 		if value == null:
 			continue
 		if value != resource.get_argument_default_value(argument):
-			dictionary.data[argument] = get_arg_value(argument)
-	print(dictionary)
+			dictionary[&"arguments"][argument] = get_arg_value(argument)
 	return dictionary
 
 

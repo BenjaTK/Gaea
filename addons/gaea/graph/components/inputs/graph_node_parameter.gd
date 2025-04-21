@@ -19,7 +19,7 @@ var graph_node: GaeaGraphNode
 ## Index of the slot in the [GaeaGraphNode].
 var slot_idx: int
 
-@onready var _label: Label = $Label
+@onready var _label: RichTextLabel = $Label
 
 
 ## Sets the corresponding variables.

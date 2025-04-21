@@ -28,17 +28,6 @@ const GAEA_MATERIAL_HINT := "Resource used to tell GaeaRenderers what to place."
 const GAEA_MATERIAL_GRADIENT_HINT := "Resource that maps values from 0.0-1.0 to certain GaeaMaterials."
 #endregion
 
-## A list of parameters and/or input slots.
-@export var params: Array[GaeaNodeSlotParam]
-## A list of the output slots this node has.
-@export var outputs: Array[StringName]
-
-## The title to be used in the 'Create Node' pop-up or in the graph.
-@export var title: String = "Node"
-## The description to be used in the 'Create Node' pop-up or as a tooltip when
-## hovering over the node in the graph.
-@export_multiline var description: String = ""
-
 ## List of all connections to this node. Doesn't include connections [i]from[/i] this node.[br]
 ## The dictionaries contain the following properties:
 ## [codeblock]
@@ -162,7 +151,8 @@ func _get_tree_items() -> Array[GaeaNodeResource]:
 	return [get_script().new()]
 
 
-## Override this method to define the arguments and inputs that will be available in the node.[br][br]
+## Override this method to define the arguments and inputs that will be available in the node.
+## Should be a list of (preferably) [code]snake_case[/code] names.[br][br]
 ## Defining this method is [b]required[/b].
 func _get_arguments_list() -> Array[StringName]:
 	return []
@@ -206,9 +196,42 @@ func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 
 
 
+#region Args
+## Returns the value of the argument of [param name]. Pass in [param generator_data] to allow overriding with input slots.[br]
+## [param area] is used for values of the type Data or Map. (See [enum GaeaValue.Type]).
+func _get_arg(arg_name: StringName, area: AABB, generator_data: GaeaData) -> Variant:
+	if not arg_name in _get_arguments_list():
+		return null
+
+	_log_arg(arg_name, generator_data)
+
+	var connection := _get_argument_connection(arg_name)
+	if not connection.is_empty():
+		var connected_idx = connection.from_node
+		var connected_node = generator_data.resources[connected_idx]
+		var connected_output = connected_node.connection_idx_to_output(connection.from_port)
+		var connected_data = connected_node.traverse(
+			connected_output,
+			area,
+			generator_data
+		)
+		if connected_data.has("value"):
+			var connected_value = connected_data.get("value")
+			var connected_type: GaeaValue.Type = connected_node.get_output_port_type(connected_output)
+			if connected_data.has("type"):
+				connected_type = connected_data.get("type")
+			if connected_type == _get_argument_type(arg_name):
+				return connected_value
+			else:
+				return GaeaValue.cast_value(connected_type, _get_argument_type(arg_name), connected_value)
+		else:
+			_log_error("Could not get data from previous node, using default value instead.", generator_data, connected_idx)
+			return _get_argument_default_value(arg_name)
+
+	return data.get(arg_name, _get_argument_default_value(arg_name))
+#endregion
 
 
-#region Old Code
 #region Execution
 ## Traverses the graph using this node's connections, and returns the result for [param output_port].
 func traverse(output_port: StringName, area: AABB, generator_data:GaeaData) -> Variant:
@@ -294,51 +317,7 @@ func _get_input_resource(arg_name: StringName, generator_data:GaeaData) -> GaeaN
 #endregion
 
 
-#region Args
-## Returns the value of the argument of [param name]. Pass in [param generator_data] to allow overriding with input slots.[br]
-## [param area] is used for values of the type Data or Map. (See [enum GaeaValue.Type]).
-func _get_arg(arg_name: StringName, area: AABB, generator_data: GaeaData) -> Variant:
-	if not arg_name in _get_arguments_list():
-		return null
-
-	_log_arg(arg_name, generator_data)
-
-	var connection := _get_argument_connection(arg_name)
-	if not connection.is_empty():
-		var connected_idx = connection.from_node
-		var connected_node = generator_data.resources[connected_idx]
-		var connected_output = connected_node.connection_idx_to_output(connection.from_port)
-		var connected_data = connected_node.traverse(
-			connected_output,
-			area,
-			generator_data
-		)
-		if connected_data.has("value"):
-			var connected_value = connected_data.get("value")
-			var connected_type: GaeaValue.Type = connected_node.get_output_port_type(connected_output)
-			if connected_data.has("type"):
-				connected_type = connected_data.get("type")
-			if connected_type == _get_argument_type(arg_name):
-				return connected_value
-			else:
-				return GaeaValue.cast_value(connected_type, _get_argument_type(arg_name), connected_value)
-		else:
-			_log_error("Could not get data from previous node, using default value instead.", generator_data, connected_idx)
-			return _get_argument_default_value(arg_name)
-
-	return data.get(arg_name, _get_argument_default_value(arg_name))
-#endregion
-
-
-#region Params connections
-# Returns the [GaeaNodeSlotParam] in [member params] corresponding to [param param_name].
-func _find_param_by_name(param_name: StringName) -> GaeaNodeSlotParam:
-	for param in params:
-		if param.name == param_name:
-			return param
-	return null
-
-
+#region Argument Connections
 func _get_argument_connection(arg_name: StringName) -> Dictionary:
 	var idx = _get_arguments_list().find(arg_name)
 	if idx == -1:
@@ -347,32 +326,12 @@ func _get_argument_connection(arg_name: StringName) -> Dictionary:
 		if connection.to_port == idx:
 			return connection
 	return {}
-
-
-## Returns the connection idx of [param param].
-func param_to_connection_idx(param: GaeaNodeSlotParam) -> int:
-	return params.find(param)
-
-
-## Returns the [GaeaNodeSlotParam] corresponding to [param param_idx].
-func connection_idx_to_param(param_idx: int) -> GaeaNodeSlotParam:
-	return params[param_idx]
-
-
-# Returns the connection data corresponding to [param param].
-func _get_param_connection(param: GaeaNodeSlotParam) -> Dictionary:
-	var idx = param_to_connection_idx(param)
-	for connection in connections:
-		if connection.to_port == idx:
-			return connection
-	return {}
 #endregion
-
 
 #region Output connections
 ## Returns the connection idx of [param output].
 func output_to_connection_idx(output: StringName) -> int:
-	return outputs.find(output)
+	return _get_output_ports_list().find(output)
 
 
 ## Returns the [StringName] corresponding to [param output_idx].
@@ -389,7 +348,7 @@ func _log_execute(message:String, area:AABB, generator_data:GaeaData):
 	if is_instance_valid(generator_data) and generator_data.logging & GaeaData.Log.Execute > 0:
 		message = message.strip_edges()
 		message = message if message == "" else message + " "
-		print("Execute   |   %sArea %s on %s" % [message, area, title])
+		print("Execute   |   %sArea %s on %s" % [message, area, _get_title()])
 
 
 # If enabled in [member GaeaData.logging], log the layer information. (See [enum GaeaData.Log]).
@@ -397,26 +356,26 @@ func _log_layer(message:String, layer:int, generator_data:GaeaData):
 	if is_instance_valid(generator_data) and generator_data.logging & GaeaData.Log.Execute > 0:
 		message = message.strip_edges()
 		message = message if message == "" else message + " "
-		print("Execute   |   %sLayer %d on %s" % [message, layer, title])
+		print("Execute   |   %sLayer %d on %s" % [message, layer, _get_title()])
 
 
 # If enabled in [member GaeaData.logging], log the traverse information. (See [enum GaeaData.Log]).
 func _log_traverse(generator_data:GaeaData):
 	if is_instance_valid(generator_data) and generator_data.logging & GaeaData.Log.Traverse > 0:
-		print("Traverse  |   %s" % [title])
+		print("Traverse  |   %s" % [_get_title()])
 
 
 ## If enabled in [member GaeaData.logging], log the data information. (See [enum GaeaData.Log]).
 ## Should be called in [method _get_data]
 func _log_data(output_port: StringName, generator_data:GaeaData):
 	if is_instance_valid(generator_data) and generator_data.logging & GaeaData.Log.Data > 0:
-		print("Data      |   %s from port &\"%s\"" % [title, output_port])
+		print("Data      |   %s from port &\"%s\"" % [_get_title(), output_port])
 
 
 # If enabled in [member GaeaData.logging], log the argument information. (See [enum GaeaData.Log]).
 func _log_arg(arg:String, generator_data:GaeaData):
 	if is_instance_valid(generator_data) and generator_data.logging & GaeaData.Log.Args > 0:
-		print("Arg       |   %s on %s" % [arg, title])
+		print("Arg       |   %s on %s" % [arg, _get_title()])
 
 
 ## Display a error message in the Output log panel.
@@ -471,10 +430,6 @@ static func get_formatted_text(unformatted_text: String) -> String:
 	return unformatted_text
 
 
-## Returns the type of the last output to be used for icon and title color.
-
-
-
 ## Returns the corresponding type icon.
 func get_icon() -> Texture2D:
 	return GaeaValue.get_display_icon(get_type())
@@ -483,11 +438,6 @@ func get_icon() -> Texture2D:
 ## Returns the corresponding type color.
 func get_title_color() -> Color:
 	return GaeaValue.get_color(get_type())
-
-
-## Returns whether or not it's an output node.
-func is_output() -> bool:
-	return has_meta(&"is_output") and get_meta(&"is_output") == true
 
 
 func _is_point_outside_area(area: AABB, point: Vector3) -> bool:
@@ -508,4 +458,24 @@ func _instantiate_duplicate() -> GaeaNodeResource:
 func _load_save_data(saved_data: Dictionary) -> void:
 	salt = saved_data.get("salt", 0)
 	data = saved_data.get("data", {})
+
+#region Old Code
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #endregion

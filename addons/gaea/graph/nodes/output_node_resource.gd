@@ -11,6 +11,50 @@ class_name GaeaNodeOutput
 ## This node can't and shouldn't be deleted.
 
 
+func _get_title() -> String:
+	return "Output"
+
+
+func _get_arguments_list() -> Array[StringName]:
+	if not is_instance_valid(node) or not is_instance_valid(node.generator):
+		return []
+
+	var layers: Array[StringName]
+	for layer_idx in node.generator.data.layers.size():
+		layers.append(str(layer_idx))
+
+	return layers
+
+
+func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.MAP
+
+
+func _get_argument_display_name(arg_name: StringName) -> String:
+	if not is_instance_valid(node) or not is_instance_valid(node.generator):
+		return ""
+
+	var idx: int = int(arg_name)
+	if node.generator.data.layers.size() < idx:
+		return "Invalid Layer"
+
+	var layer: GaeaLayer = node.generator.data.layers.get(idx)
+
+	if not is_instance_valid(layer):
+		return "[color=RED](%d) Missing GaeaLayer resource[/color]" % idx
+
+	var layer_name: String
+	if not layer.resource_name.is_empty():
+		layer_name = "(%d) %s" % [idx, layer.resource_name]
+	else:
+		layer_name = "(%d) Layer %s" % [idx, idx]
+
+	if not layer.enabled:
+		layer_name = "[color=DIM_GRAY][s]%s[/s][/color]" % layer_name
+
+	return layer_name
+
+
 ## Start generation for [param area], and emit the [param generator]'s [signal GaeaGenerator.generation_finished]
 ## signal when done.
 func execute(area: AABB, generator_data: GaeaData, generator: GaeaGenerator) -> void:
@@ -25,7 +69,7 @@ func execute(area: AABB, generator_data: GaeaData, generator: GaeaGenerator) -> 
 
 		_log_layer("Start", layer_idx, generator_data)
 
-		var grid_data: Dictionary = _get_arg(&"layer_%s" % layer_idx, area, generator_data)
+		var grid_data: Dictionary = _get_arg(&"%d" % layer_idx, area, generator_data)
 		grid.add_layer(layer_idx, grid_data, layer_resource)
 
 		_log_layer("End", layer_idx, generator_data)

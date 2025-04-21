@@ -18,10 +18,11 @@ offset_right = 211.0
 offset_bottom = 43.0
 script = ExtResource("1_xfmar")
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="RichTextLabel" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Label"
+fit_content = true
 
 [node name="MinSlider" type="HSlider" parent="."]
 layout_mode = 2

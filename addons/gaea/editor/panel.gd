@@ -209,12 +209,12 @@ func _load_data() -> void:
 		var saved_data = _selected_generator.data.node_data[idx]
 		var node: GaeaGraphNode = _load_node(_selected_generator.data.resources[idx], saved_data)
 
-		if node.resource.is_output():
+		if node.resource is GaeaNodeOutput:
 			has_output_node = true
 			_output_node = node
 
 	for child in _graph_edit.get_children():
-		if child is GaeaGraphNode and child.resource.is_output():
+		if child is GaeaGraphNode and child.resource is GaeaNodeOutput:
 			_output_node = child
 			has_output_node = true
 			break

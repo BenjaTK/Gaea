@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://b5mukn8hdt8ww"
 
 [resource]
 script = ExtResource("3_ufwtk")
-params = Array[ExtResource("4_ff6uq")]([SubResource("Resource_1jyr0")])
-outputs = Array[ExtResource("3_i7rb4")]([SubResource("Resource_63img")])
+params = [SubResource("Resource_1jyr0")]
+outputs = [SubResource("Resource_63img")]
 title = "New Reroute"
 description = ""
