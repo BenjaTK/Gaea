@@ -87,7 +87,7 @@ func _get_description() -> String:
 	return ""
 
 
-## Override this method to change the items shown in the 'Create Node' dialog related to this resource.
+## Override this method to change the items shown in the 'Create Node' dialog related to this resource.[br][br]
 ## Defining this method can be useful to add multiple items with different default values and names if needed,
 ## but it is not recommended to change this.
 func _get_tree_items() -> Array[GaeaNodeResource]:
