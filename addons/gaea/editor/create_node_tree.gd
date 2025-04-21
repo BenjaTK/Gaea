@@ -39,6 +39,7 @@ func populate() -> void:
 	_populate_from_dictionary(tree_dictionary, root)
 	root.set_collapsed_recursive(true)
 	root.set_collapsed(false)
+	print(tree_dictionary)
 
 
 func _populate_from_dictionary(dictionary: Dictionary, parent_item: TreeItem) -> void:
@@ -53,7 +54,7 @@ func _populate_from_dictionary(dictionary: Dictionary, parent_item: TreeItem) ->
 			var value: Variant = dictionary.get(key)
 			tree_item.set_metadata(0, value)
 			if value is GaeaNodeResource:
-				tree_item.set_text(0, value.title)
+				tree_item.set_text(0, value.get_tree_name())
 				tree_item.set_icon(0, GaeaValue.get_display_icon(value.get_type()))
 				tree_item.set_icon_max_width(0, 16)
 
@@ -68,7 +69,7 @@ func _populate_dict_with_files(folder_path: String, dict: Dictionary) -> Diction
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
 	while file_name != "":
-		if not dir.current_is_dir() and not file_name.ends_with(".tres"):
+		if not dir.current_is_dir() and not file_name.ends_with(".gd"):
 			file_name = dir.get_next()
 			continue
 
@@ -78,11 +79,11 @@ func _populate_dict_with_files(folder_path: String, dict: Dictionary) -> Diction
 		if dir.current_is_dir():
 			_populate_dict_with_files(file_path + "/", dict.get_or_add(tree_name, {}))
 
-		if file_name.ends_with(".tres"):
-			var resource: Resource = load(file_path)
+		if file_name.ends_with(".gd"):
+			var resource: GaeaNodeResource = load(file_path).new()
 			if resource is GaeaNodeResource:
-				tree_name = resource.title
-				dict.get_or_add(file_name, resource)
+				for item in resource.get_tree_items():
+					dict.get_or_add(file_name + item.get_tree_name(), item)
 		file_name = dir.get_next()
 
 	return dict

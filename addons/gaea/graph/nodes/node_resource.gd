@@ -59,6 +59,8 @@ var data: Dictionary
 ## An additional value added to the generation's seed to prevent
 ## duplicates of the same node from having the same randomness. (See [member GaeaGenerator.seed]).
 var salt: int = 0
+var tree_name_override: String = "" : set = set_tree_name_override
+var default_value_overrides: Dictionary[StringName, Variant]
 
 ## Used in [method _get_axis_range].
 enum Axis {
@@ -69,14 +71,74 @@ enum Axis {
 
 
 
+func set_tree_name_override(value: String) -> void:
+	tree_name_override = value
+
+
+func set_default_value_override(arg_name: StringName, value: Variant) -> void:
+	default_value_overrides.set(arg_name, value)
+
+
 ## Public version of [method _get_tree_items]. Prefer to override that method over this one.
 func get_tree_items() -> Array[GaeaNodeResource]:
 	return _get_tree_items()
 
 
+## Public version of [method _get_title]. Prefer to override that method over this one.
+func get_title() -> String:
+	return _get_title()
+
+
+func get_type() -> GaeaValue.Type:
+	if not _get_output_ports_list().is_empty():
+		return _get_output_port_type(_get_output_ports_list().back())
+	return GaeaValue.Type.NULL
+
+
+## Public version of [method _get_arguments_list]. Prefer to override that method over this one.
+func get_arguments_list() -> Array[StringName]:
+	return _get_arguments_list()
+
+
+## Public version of [method _get_argument_type]. Prefer to override that method over this one.
+func get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	return _get_argument_type(arg_name)
+
+
+## Public version of [method _get_argument_display_name]. Prefer to override that method over this one.
+func get_argument_display_name(arg_name: StringName) -> String:
+	return _get_argument_display_name(arg_name)
+
+
+## Public version of [method _get_argument_default_value]. Prefer to override that method over this one.
+func get_argument_default_value(arg_name: StringName) -> Variant:
+	return _get_argument_default_value(arg_name)
+
+
+## Public version of [method _get_output_ports_list]. Prefer to override that method over this one.
+func get_output_ports_list() -> Array[StringName]:
+	return _get_output_ports_list()
+
+
+## Public version of [method _get_output_port_display_name]. Prefer to override that method over this one.
+func get_output_port_display_name(output_name: StringName) -> String:
+	return _get_output_port_display_name(output_name)
+
+
+## Public version of [method _get_output_port_type]. Prefer to override that method over this one.
+func get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+	return _get_output_port_type(output_name)
+
+
+## Get the name of the node as shown in the 'Create Node' dialog. Is normally the same
+## title as in the graph, but can be overriden with [member tree_name_override].
+func get_tree_name() -> String:
+	return tree_name_override if not tree_name_override.is_empty() else _get_title()
+
+
 ## Override this method to define the name shown in the title bar of this node.
 ## Defining this method is [b]optional[/b], but recommended. If not defined, the description will be empty.
-func _get_name() -> String:
+func _get_title() -> String:
 	return "Unnamed"
 
 
@@ -91,7 +153,7 @@ func _get_description() -> String:
 ## Defining this method can be useful to add multiple items with different default values and names if needed,
 ## but it is not recommended to change this.
 func _get_tree_items() -> Array[GaeaNodeResource]:
-	return [self.duplicate()]
+	return [get_script().new()]
 
 
 ## Override this method to define the arguments and inputs that will be available in the node.[br][br]
@@ -113,7 +175,7 @@ func _get_argument_display_name(arg_name: StringName) -> String:
 
 
 ## Override this method to define the default value of the arguments defined in [method _get_arguments_list].[br][br]
-## Defining this method is [b]optional[/b]. If not defined, the used default value will be the one in [method GaeaValue.get_default_value]
+## Defining this method is [b]optional[/b], but recommended. If not defined, the used default value will be the one in [method GaeaValue.get_default_value]
 ## corresponding to the argument's type.
 func _get_argument_default_value(arg_name: StringName) -> Variant:
 	return GaeaValue.get_default_value(_get_argument_type(arg_name))
@@ -402,10 +464,7 @@ static func get_formatted_text(unformatted_text: String) -> String:
 
 
 ## Returns the type of the last output to be used for icon and title color.
-func get_type() -> GaeaValue.Type:
-	if outputs.size() > 0:
-		return outputs[-1].type
-	return GaeaValue.Type.NULL
+
 
 
 ## Returns the corresponding type icon.

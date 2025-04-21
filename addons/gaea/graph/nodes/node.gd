@@ -45,54 +45,75 @@ func _on_added() -> void:
 	if not is_instance_valid(resource) or is_part_of_edited_scene():
 		return
 
-	var preview_button_group: ButtonGroup = ButtonGroup.new()
-	preview_button_group.allow_unpress = true
-
-	if resource.salt == 0:
-		resource.salt = randi()
-
-	var idx: int = 0
-
-	for param in resource.params:
-		add_child(param.get_node(self, idx))
-		idx += 1
-
-	for output in resource.outputs:
-		var node := output.get_node(self, idx)
+	for argument in resource.get_arguments_list():
+		var scene: PackedScene = GaeaValue.get_editor_for_type(resource.get_argument_type(argument))
+		var node: GaeaGraphNodeParameterEditor = scene.instantiate()
 		add_child(node)
-		idx += 1
-		if GaeaValue.has_preview(output.type):
-			node.get_toggle_preview_button().show()
+		node.initialize(
+			self,
+			resource.get_argument_type(argument),
+			resource.get_argument_display_name(argument),
+			resource.get_argument_default_value(argument)
+		)
 
-			if not is_instance_valid(_preview):
-				_preview_container = VBoxContainer.new()
-				_preview = _PreviewTexture.new()
-				_preview.node = self
-				generator.generation_finished.connect(_preview.update.unbind(1))
+	for output in resource.get_output_ports_list():
+		var node: GaeaGraphNodeOutput = preload("uid://cqpby5jyv71l0").instantiate()
+		add_child(node)
+		node.initialize(
+			self,
+			resource.get_output_port_type(output),
+			resource.get_output_port_display_name(output)
+		)
 
-			node.get_toggle_preview_button().button_group = preview_button_group
-			node.get_toggle_preview_button().toggled.connect(_preview.toggle.bind(output).unbind(1))
-
-	if is_instance_valid(_preview_container):
-		add_child(_preview_container)
-		_preview_container.add_child(_preview)
-		_preview_container.hide()
-	title = resource.title
-	resource.node = self
-
-	var output_type: GaeaValue.Type = resource.get_type()
+#
+	#var preview_button_group: ButtonGroup = ButtonGroup.new()
+	#preview_button_group.allow_unpress = true
+#
+	#if resource.salt == 0:
+		#resource.salt = randi()
+#
+	#var idx: int = 0
+#
+	#for param in resource.params:
+		#add_child(param.get_node(self, idx))
+		#idx += 1
+#
+	#for output in resource.outputs:
+		#var node := output.get_node(self, idx)
+		#add_child(node)
+		#idx += 1
+		#if GaeaValue.has_preview(output.type):
+			#node.get_toggle_preview_button().show()
+#
+			#if not is_instance_valid(_preview):
+				#_preview_container = VBoxContainer.new()
+				#_preview = _PreviewTexture.new()
+				#_preview.node = self
+				#generator.generation_finished.connect(_preview.update.unbind(1))
+#
+			#node.get_toggle_preview_button().button_group = preview_button_group
+			#node.get_toggle_preview_button().toggled.connect(_preview.toggle.bind(output).unbind(1))
+#
+	#if is_instance_valid(_preview_container):
+		#add_child(_preview_container)
+		#_preview_container.add_child(_preview)
+		#_preview_container.hide()
+	title = resource.get_title()
+	#resource.node = self
+#
+	var type: GaeaValue.Type = resource.get_type()
 	var titlebar: StyleBoxFlat
 	var titlebar_selected: StyleBoxFlat
-	if output_type != GaeaValue.Type.NULL:
-		if not _titlebar_styleboxes.has(output_type) or _titlebar_styleboxes.get(output_type).get("for_color", Color.TRANSPARENT) != resource.get_title_color():
+	if type != GaeaValue.Type.NULL:
+		if not _titlebar_styleboxes.has(type) or _titlebar_styleboxes.get(type).get("for_color", Color.TRANSPARENT) != resource.get_title_color():
 			titlebar = get_theme_stylebox("titlebar", "GraphNode").duplicate()
 			titlebar_selected = get_theme_stylebox("titlebar_selected", "GraphNode").duplicate()
 			titlebar.bg_color = titlebar.bg_color.blend(Color(resource.get_title_color(), 0.3))
 			titlebar_selected.bg_color = titlebar.bg_color
-			_titlebar_styleboxes.set(output_type, {"titlebar": titlebar, "selected": titlebar_selected, "for_color": resource.get_title_color()})
+			_titlebar_styleboxes.set(type, {"titlebar": titlebar, "selected": titlebar_selected, "for_color": resource.get_title_color()})
 		else:
-			titlebar = _titlebar_styleboxes.get(output_type).get("titlebar")
-			titlebar_selected = _titlebar_styleboxes.get(output_type).get("selected")
+			titlebar = _titlebar_styleboxes.get(type).get("titlebar")
+			titlebar_selected = _titlebar_styleboxes.get(type).get("selected")
 		add_theme_stylebox_override("titlebar", titlebar)
 		add_theme_stylebox_override("titlebar_selected", titlebar_selected)
 

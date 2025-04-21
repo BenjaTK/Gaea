@@ -10,6 +10,7 @@ extends Control
 ## Emitted when the value is changed using the editor.
 signal param_value_changed(new_value: Variant)
 
+var type: GaeaValue.Type
 ## The resource that holds the information of this node, such as [member GaeaNodeSlotParam.default_value]
 ## and [member GaeaNodeSlotParam.name], and others.
 var resource: GaeaNodeSlotParam
@@ -22,34 +23,34 @@ var slot_idx: int
 
 
 ## Sets the corresponding variables.
-func initialize(for_graph_node: GaeaGraphNode, for_slot_idx: int) -> void:
+func initialize(for_graph_node: GaeaGraphNode, for_type: GaeaValue.Type, display_name: String, default_value: Variant) -> void:
 	graph_node = for_graph_node
-	slot_idx = for_slot_idx
+	type = for_type
+	set_label_text(display_name)
+	set_param_value(default_value)
+	slot_idx = get_index()
+
+	_configure()
 
 
-func _ready() -> void:
+func _configure() -> void:
 	if is_part_of_edited_scene():
 		return
-
-	if resource.default_value != null:
-		set_param_value(resource.default_value)
 
 	if not graph_node.is_node_ready():
 		await graph_node.ready
 
-	param_value_changed.connect(graph_node._on_param_value_changed.bind(self, resource.name))
+	#param_value_changed.connect(graph_node._on_param_value_changed.bind(self, resource.name))
 
-	if GaeaValue.is_wireable(resource.type):
+	if GaeaValue.is_wireable(type):
 		graph_node.set_slot_enabled_left(slot_idx, true)
-		graph_node.set_slot_type_left(slot_idx, resource.type)
-		graph_node.set_slot_color_left(slot_idx, GaeaValue.get_color(resource.type))
-		graph_node.set_slot_custom_icon_left(slot_idx, GaeaValue.get_slot_icon(resource.type))
+		graph_node.set_slot_type_left(slot_idx, type)
+		graph_node.set_slot_color_left(slot_idx, GaeaValue.get_color(type))
+		graph_node.set_slot_custom_icon_left(slot_idx, GaeaValue.get_slot_icon(type))
 	else:
 		# This is required because without it the color of the slots after is OK but not the icon.
 		# Probably a Godot issue.
 		graph_node.set_slot_enabled_left(slot_idx, false)
-
-	set_label_text(resource.name.capitalize())
 
 
 ## Override to return the value in the editor.

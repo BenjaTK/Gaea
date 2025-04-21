@@ -215,6 +215,31 @@ static func get_default_slot_icon(type: Type) -> Texture2D:
 	return load("uid://dqob6v3dudlri")
 
 
+static func get_editor_for_type(for_type: GaeaValue.Type) -> PackedScene:
+	match for_type:
+		GaeaValue.Type.FLOAT, GaeaValue.Type.INT:
+			return preload("uid://dp7blnx7abb5e")
+		GaeaValue.Type.VECTOR2:
+			return preload("uid://rlocedi6g62i")
+		GaeaValue.Type.VARIABLE_NAME:
+			return preload("uid://bn8i1l4q13pdw")
+		GaeaValue.Type.RANGE:
+			return preload("uid://dy3oumbnydlmp")
+		GaeaValue.Type.BITMASK, GaeaValue.Type.BITMASK_EXCLUSIVE, GaeaValue.Type.FLAGS:
+			return preload("uid://chdg8ey4ln8d1")
+		GaeaValue.Type.CATEGORY:
+			return preload("uid://x6n8ylnxoyno")
+		GaeaValue.Type.BOOLEAN:
+			return preload("uid://byaonbbfa2bx8")
+		GaeaValue.Type.VECTOR3:
+			return preload("uid://mlwupvg8a886")
+		GaeaValue.Type.NEIGHBORS:
+			return preload("uid://d11yc7l6sneof")
+		GaeaValue.Type.RULES:
+			return preload("uid://dy4n2a5hkaxsb")
+	return preload("uid://i2nwlab8rau")
+
+
 ## Get property type hint, this is mostly used with [method Object._validate_property].
 ## This will modify the input property object.
 static func apply_property_type_hint(property: Dictionary, type: Type) -> void:
