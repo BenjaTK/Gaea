@@ -28,6 +28,7 @@ var _preview: _PreviewTexture
 var _preview_container: VBoxContainer
 var _finished_loading: bool = false : set = set_finished_loading, get = has_finished_loading
 var _editors: Dictionary[StringName, GaeaGraphNodeParameterEditor]
+var _enum_editors: Array[OptionButton]
 
 
 func _ready() -> void:
@@ -48,72 +49,17 @@ func _on_added() -> void:
 
 	resource.node = self
 	resource.argument_list_changed.connect(_rebuild, CONNECT_DEFERRED)
+
+	for enum_idx in resource.get_enums_count():
+		var option_button: OptionButton = OptionButton.new()
+		for option in resource.get_enum_options(enum_idx).values():
+			option_button.add_item(resource.get_enum_option_display_name(enum_idx, option), option)
+
+		add_child(option_button)
+		option_button.item_selected.connect(resource.notify_argument_list_changed.unbind(1))
+		_enum_editors.append(option_button)
+
 	_rebuild()
-
-
-func _rebuild() -> void:
-	_editors.clear()
-	for child in get_children():
-		child.queue_free()
-		await child.tree_exited
-
-	for argument in resource.get_arguments_list():
-		var scene: PackedScene = GaeaValue.get_editor_for_type(resource.get_argument_type(argument))
-		var node: GaeaGraphNodeParameterEditor = scene.instantiate()
-		add_child(node)
-		node.initialize(
-			self,
-			resource.get_argument_type(argument),
-			resource.get_argument_display_name(argument),
-			resource.get_argument_default_value(argument)
-		)
-		_editors.set(argument, node)
-		node.param_value_changed.connect(_on_param_value_changed.bind(node, argument))
-
-	var preview_button_group: ButtonGroup = ButtonGroup.new()
-	preview_button_group.allow_unpress = true
-
-	for output in resource.get_output_ports_list():
-		var node: GaeaGraphNodeOutput = preload("uid://cqpby5jyv71l0").instantiate()
-		add_child(node)
-		node.initialize(
-			self,
-			resource.get_output_port_type(output),
-			resource.get_output_port_display_name(output)
-		)
-		if GaeaValue.has_preview(resource.get_output_port_type(output)):
-			node.get_toggle_preview_button().show()
-
-			if not is_instance_valid(_preview):
-				_preview_container = VBoxContainer.new()
-				_preview = _PreviewTexture.new()
-				_preview.node = self
-				generator.generation_finished.connect(_preview.update.unbind(1))
-
-			node.get_toggle_preview_button().button_group = preview_button_group
-			node.get_toggle_preview_button().toggled.connect(_preview.toggle.bind(output).unbind(1))
-#
-
-#
-	#if resource.salt == 0:
-		#resource.salt = randi()
-#
-	#var idx: int = 0
-#
-	#for param in resource.params:
-		#add_child(param.get_node(self, idx))
-		#idx += 1
-#
-	#for output in resource.outputs:
-		#var node := output.get_node(self, idx)
-		#add_child(node)
-		#idx += 1
-
-#
-	if is_instance_valid(_preview_container):
-		add_child(_preview_container)
-		_preview_container.add_child(_preview)
-		_preview_container.hide()
 
 	title = resource.get_title()
 	#resource.node = self
@@ -134,7 +80,98 @@ func _rebuild() -> void:
 		add_theme_stylebox_override("titlebar", titlebar)
 		add_theme_stylebox_override("titlebar_selected", titlebar_selected)
 
+
+
+func _rebuild() -> void:
+
+	var saved_data = get_save_data()
+	resource.enum_selections = saved_data.get("enums", [])
+	_editors.clear()
+
+	_preview_container = null
+	_preview = null
+
+	for child in get_children():
+		if child is OptionButton:
+			continue
+		child.queue_free()
+		await child.tree_exited
+
+	clear_all_slots()
+
+	_add_slots.call_deferred()
+
+	load_save_data.call_deferred(saved_data)
+
+	if is_instance_valid(_preview_container):
+		add_child(_preview_container)
+		_preview_container.add_child(_preview)
+		_preview_container.hide()
+
 	auto_shrink.call_deferred()
+
+
+func _add_slots() -> void:
+	for argument in resource.get_arguments_list():
+		_editors.set(argument, _add_argument_editor(argument))
+
+	var preview_button_group: ButtonGroup = ButtonGroup.new()
+	preview_button_group.allow_unpress = true
+
+	for output in resource.get_output_ports_list():
+		_add_output_slot(output).get_toggle_preview_button().button_group = preview_button_group
+
+
+func _add_argument_editor(for_arg: StringName) -> GaeaGraphNodeParameterEditor:
+	var scene: PackedScene = GaeaValue.get_editor_for_type(resource.get_argument_type(for_arg))
+	var node: GaeaGraphNodeParameterEditor = scene.instantiate()
+	add_child(node)
+	node.initialize(
+		self,
+		resource.get_argument_type(for_arg),
+		resource.get_argument_display_name(for_arg),
+		resource.data.get(for_arg, resource.get_argument_default_value(for_arg))
+	)
+	node.param_value_changed.connect(_on_param_value_changed.bind(node, for_arg))
+	return node
+
+
+func _add_output_slot(for_output: StringName) -> GaeaGraphNodeOutput:
+	var node: GaeaGraphNodeOutput = preload("uid://cqpby5jyv71l0").instantiate()
+	add_child(node)
+	node.initialize(
+		self,
+		resource.get_output_port_type(for_output),
+		resource.get_output_port_display_name(for_output)
+	)
+	if GaeaValue.has_preview(resource.get_output_port_type(for_output)):
+		node.get_toggle_preview_button().show()
+
+		if not is_instance_valid(_preview):
+			_preview_container = VBoxContainer.new()
+			_preview = _PreviewTexture.new()
+			_preview.node = self
+			generator.generation_finished.connect(_preview.update.unbind(1))
+
+		node.get_toggle_preview_button().toggled.connect(_preview.toggle.bind(for_output).unbind(1))
+	return node
+
+	#if resource.salt == 0:
+		#resource.salt = randi()
+#
+	#var idx: int = 0
+#
+	#for param in resource.params:
+		#add_child(param.get_node(self, idx))
+		#idx += 1
+#
+	#for output in resource.outputs:
+		#var node := output.get_node(self, idx)
+		#add_child(node)
+		#idx += 1
+
+#
+
 
 
 ## Returns the current value set in the [GaeaGraphNodeParameterEditor] for the argument of [param arg_name].
@@ -212,6 +249,11 @@ func get_save_data() -> Dictionary:
 			continue
 		if value != resource.get_argument_default_value(argument):
 			dictionary[&"arguments"][argument] = get_arg_value(argument)
+
+	dictionary.set(&"enums", [])
+	for enum_idx in resource.get_enums_count():
+		dictionary[&"enums"].append(_enum_editors[enum_idx].get_selected_id())
+
 	return dictionary
 
 
@@ -219,6 +261,11 @@ func get_save_data() -> Dictionary:
 func load_save_data(saved_data: Dictionary) -> void:
 	if saved_data.has("position"):
 		position_offset = saved_data.position
+
+	if saved_data.has("enums"):
+		for enum_idx: int in saved_data.get("enums").size():
+			_enum_editors[enum_idx].select(saved_data.get("enums")[enum_idx])
+
 	if saved_data.has("arguments"):
 		var data = saved_data.get("arguments")
 		for argument: StringName in resource.get_arguments_list():

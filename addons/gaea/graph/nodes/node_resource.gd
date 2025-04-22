@@ -47,6 +47,7 @@ var node: GaeaGraphNode
 ## A Dictionary holding the values of the arguments in [member params]
 ## where the keys are their names.
 var data: Dictionary
+var enum_selections: Array
 ## An additional value added to the generation's seed to prevent
 ## duplicates of the same node from having the same randomness. (See [member GaeaGenerator.seed]).
 var salt: int = 0
@@ -93,6 +94,22 @@ func get_type() -> GaeaValue.Type:
 	if not _get_output_ports_list().is_empty():
 		return _get_output_port_type(_get_output_ports_list().back())
 	return GaeaValue.Type.NULL
+
+
+func get_enums_count() -> int:
+	return _get_enums_count()
+
+
+func get_enum_options(idx: int) -> Dictionary:
+	return _get_enum_options(idx)
+
+
+func get_enum_selection(idx: int) -> int:
+	return 0 if enum_selections.size() <= idx else enum_selections[idx]
+
+
+func get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
+	return _get_enum_option_display_name(enum_idx, option_value)
 
 
 ## Public version of [method _get_arguments_list]. Prefer to override that method over this one.
@@ -154,6 +171,25 @@ func _get_description() -> String:
 ## but it is not recommended to change this.
 func _get_tree_items() -> Array[GaeaNodeResource]:
 	return [get_script().new()]
+
+
+## Override this method to add enum properties on the top of the nodes for things like changing
+## operations or types.
+func _get_enums_count() -> int:
+	return 0
+
+
+## Override this method to define the options available for the added enums.[br]
+## Dictionary should be [code]{String: int}[/code]
+func _get_enum_options(idx: int) -> Dictionary:
+	return {}
+
+
+## Override this method if you want to change the display name for the options in the added enums.[br][br]
+## Defining this method is [b]optional[/b]. If not defined, the name will be [code]_get_enum_options(enum_idx).find_key(option_value).capitalize().capitalize()[/code].
+func _get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
+	var options := _get_enum_options(enum_idx)
+	return options.find_key(option_value).capitalize()
 
 
 ## Override this method to define the arguments and inputs that will be available in the node.

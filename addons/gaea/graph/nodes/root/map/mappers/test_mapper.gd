@@ -5,6 +5,18 @@ class_name GaeaNodeTestMapper
 ## otherwise maps all non-empty cells in [param data] to [param material].
 
 
+enum TestEnum1 {
+	FIRST_OPTION,
+	SECOND_OPTION,
+	THIRD_OPTION
+}
+
+enum TestEnum2 {
+	OPTION_FIRST,
+	OPTION_SECOND,
+	OPTION_THIRD
+}
+
 func _get_title() -> String:
 	return "TEST MAPPER. DELETE THIS"
 
@@ -13,12 +25,36 @@ func _get_description() -> String:
 	return "Maps all non-empty cells in [param]data[/bg][/c] to [param]material[/bg][/c]."
 
 
+func _get_enums_count() -> int:
+	return 2
+
+
+func _get_enum_options(enum_idx: int) -> Dictionary:
+	match enum_idx:
+		0: return TestEnum1
+		1: return TestEnum2
+	return super(enum_idx)
+
+
 func _get_arguments_list() -> Array[StringName]:
-	return [&"data"]
+	var _args: Array[StringName] = [&"data_or_map"]
+	if get_enum_selection(1) == TestEnum2.OPTION_FIRST:
+		_args.append_array([&"a", &"b", &"c", &"d", &"f"])
+	else:
+		_args.append(&"material")
+	return _args
 
 
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.DATA if arg_name == &"data" else GaeaValue.Type.MATERIAL
+	match arg_name:
+		&"data_or_map":
+			return (GaeaValue.Type.DATA if get_enum_selection(0) == TestEnum1.FIRST_OPTION else GaeaValue.Type.MAP)
+		&"material":
+			return GaeaValue.Type.MATERIAL
+		_:
+			return GaeaValue.Type.FLOAT
+
+	return super(arg_name)
 
 
 func _get_output_ports_list() -> Array[StringName]:
