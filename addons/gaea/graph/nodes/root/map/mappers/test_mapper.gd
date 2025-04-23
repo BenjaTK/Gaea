@@ -22,7 +22,7 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "Maps all non-empty cells in [param]data[/bg][/c] to [param]material[/bg][/c]."
+	return "Maps all non-empty cells in [param data] to [param material]."
 
 
 func _get_enums_count() -> int:

@@ -17,7 +17,7 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "Creates a grid of values from [code]0[/bg][/c] to [code]1[/bg][/c] based on a SimplexSmooth noise texture.\n[b]Ignores the z axis.[/b]"
+	return "Creates a grid of values from [code]0[/code] to [code]1[/code] based on a SimplexSmooth noise texture.\n[b]Ignores the z axis.[/b]"
 
 
 func _get_arguments_list() -> Array[StringName]:
