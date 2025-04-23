@@ -68,13 +68,13 @@ func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 
 
 func _get_required_params() -> Array[StringName]:
-	return [&"data"]
+	return [&"data_or_map"]
 
 
 func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
 	_log_data(output_port, generator_data)
 
-	var grid_data = _get_arg(&"data", area, generator_data)
+	var grid_data = _get_arg(&"data_or_map", area, generator_data)
 	var material: GaeaMaterial = TileMapMaterial.new()
 
 	var grid: Dictionary[Vector3i, GaeaMaterial]
@@ -89,3 +89,8 @@ func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) ->
 @warning_ignore("unused_parameter")
 func _passes_mapping(grid_data: Dictionary, cell: Vector3i, area: AABB, generator_data: GaeaData) -> bool:
 	return grid_data.get(cell) > 0.5
+
+
+func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
+	super(_enum_idx, _option_value)
+	notify_argument_list_changed()

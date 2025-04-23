@@ -98,20 +98,29 @@ func get_type() -> GaeaValue.Type:
 	return GaeaValue.Type.NULL
 
 
+## Public version of [method _get_enums_count]. Prefer to override that method over this one.
 func get_enums_count() -> int:
 	return _get_enums_count()
 
 
+## Public version of [method _get_enum_options]. Prefer to override that method over this one.
 func get_enum_options(idx: int) -> Dictionary:
 	return _get_enum_options(idx)
 
 
+## Returns the currently selected option for the enum at [param idx].
 func get_enum_selection(idx: int) -> int:
-	return 0 if enum_selections.size() <= idx else enum_selections[idx]
+	return _get_enum_default_value(idx) if enum_selections.size() <= idx else enum_selections[idx]
 
 
+## Public version of [method _get_enum_option_display_name]. Prefer to override that method over this one.
 func get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
 	return _get_enum_option_display_name(enum_idx, option_value)
+
+
+## Public version of [method _get_enum_default_value]. Prefer to override that method over this one.
+func get_enum_default_value(enum_idx: int) -> int:
+	return _get_enum_default_value(enum_idx)
 
 
 ## Public version of [method _get_arguments_list]. Prefer to override that method over this one.
@@ -191,7 +200,16 @@ func _get_enum_options(idx: int) -> Dictionary:
 ## Defining this method is [b]optional[/b]. If not defined, the name will be [code]_get_enum_options(enum_idx).find_key(option_value).capitalize().capitalize()[/code].
 func _get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
 	var options := _get_enum_options(enum_idx)
-	return options.find_key(option_value).capitalize()
+	var key = options.find_key(option_value)
+	if typeof(key) != TYPE_STRING or key == null:
+		return ""
+	return key.capitalize()
+
+
+## Override this method to define the default value of the added enums.[br][br]
+## Defining this method is [b]optional[/b].
+func _get_enum_default_value(enum_idx: int) -> int:
+	return _get_enum_options(enum_idx).values().front()
 
 
 ## Override this method to define the arguments and inputs that will be available in the node.
@@ -243,8 +261,13 @@ func _get_enabled() -> bool:
 	return true
 
 
+## Called when an enum is changed in the editor. Does nothing by default, but can be used to call
+## [method notify_arguments_list_changed] to rebuild the node.
 func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
-	notify_argument_list_changed()
+	if _enum_idx >= enum_selections.size():
+		enum_selections.resize(_enum_idx + 1)
+
+	enum_selections.set(_enum_idx, _option_value)
 
 
 
@@ -440,7 +463,7 @@ func _log_error(message:String, generator_data:GaeaData, node_idx: int = -1):
 		printerr("%s:%s in node '%s' - %s" % [
 			generator_data.resources[node_idx].resource_path,
 			generator_data.node_data[node_idx].position,
-			generator_data.resources[node_idx].title,
+			generator_data.resources[node_idx].get_title(),
 			message,
 		])
 	else:

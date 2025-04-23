@@ -38,7 +38,7 @@ func delete_nodes(nodes: Array[StringName]) -> void:
 		await node.tree_exited
 
 	connection_update_requested.emit()
-	save_requested.emit()
+	save_requested.emit.call_deferred()
 
 
 func _on_connection_request(from_node: StringName, from_port: int, to_node: StringName, to_port: int) -> void:

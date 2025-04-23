@@ -58,15 +58,14 @@ func _on_added() -> void:
 		option_button.select(resource.get_enum_selection(enum_idx))
 
 		add_child(option_button)
-		option_button.item_selected.connect(
-			(func(idx: int, button: OptionButton) -> void:
-				resource._on_enum_value_changed(enum_idx, button.get_item_id(idx))).bind(option_button)
-		)
+		option_button.item_selected.connect(_on_enum_value_changed.bind(enum_idx, option_button))
 		_enum_editors.append(option_button)
 
 	await _rebuild()
 
 	title = resource.get_title()
+	if resource.salt == 0:
+		resource.salt = randi()
 
 	var type: GaeaValue.Type = resource.get_type()
 	var titlebar: StyleBoxFlat
@@ -83,7 +82,6 @@ func _on_added() -> void:
 			titlebar_selected = _titlebar_styleboxes.get(type).get("selected")
 		add_theme_stylebox_override("titlebar", titlebar)
 		add_theme_stylebox_override("titlebar_selected", titlebar_selected)
-
 
 
 func _rebuild() -> void:
@@ -105,11 +103,7 @@ func _rebuild() -> void:
 	_add_slots.call_deferred()
 
 	load_save_data.call_deferred(saved_data)
-
-	if is_instance_valid(_preview_container):
-		add_child(_preview_container)
-		_preview_container.add_child(_preview)
-		_preview_container.hide()
+	_add_preview_container.call_deferred()
 
 	auto_shrink.call_deferred()
 	remove_invalid_connections_requested.emit.call_deferred()
@@ -161,22 +155,13 @@ func _add_output_slot(for_output: StringName) -> GaeaGraphNodeOutput:
 		node.get_toggle_preview_button().toggled.connect(_preview.toggle.bind(for_output).unbind(1))
 	return node
 
-	#if resource.salt == 0:
-		#resource.salt = randi()
-#
-	#var idx: int = 0
-#
-	#for param in resource.params:
-		#add_child(param.get_node(self, idx))
-		#idx += 1
-#
-	#for output in resource.outputs:
-		#var node := output.get_node(self, idx)
-		#add_child(node)
-		#idx += 1
 
-#
-
+func _add_preview_container() -> void:
+	if is_instance_valid(_preview_container):
+		add_child(_preview_container)
+		_preview_container.add_child(_preview)
+		_preview_container.hide()
+		_preview.update()
 
 
 ## Returns the current value set in the [GaeaGraphNodeParameterEditor] for the argument of [param arg_name].
@@ -199,6 +184,15 @@ func _on_param_value_changed(_value: Variant, _node: GaeaGraphNodeParameterEdito
 		save_requested.emit()
 		if is_instance_valid(_preview):
 			_preview.update()
+
+
+func _on_enum_value_changed(option_idx: int, enum_idx: int, button: OptionButton) -> void:
+	if _finished_loading:
+		resource._on_enum_value_changed(enum_idx, button.get_item_id(option_idx))
+		save_requested.emit()
+		if is_instance_valid(_preview):
+			_preview.update()
+
 
 # Makes argument editors invisible if there's a wire connected to their input slot.
 func _update_arguments_visibility() -> void:
@@ -257,7 +251,10 @@ func get_save_data() -> Dictionary:
 
 	dictionary.set(&"enums", [])
 	for enum_idx in resource.get_enums_count():
-		dictionary[&"enums"].append(_enum_editors[enum_idx].get_selected_id())
+		if _enum_editors.size() <= enum_idx:
+			dictionary[&"enums"].append(resource.get_enum_default_value(enum_idx))
+		else:
+			dictionary[&"enums"].append(_enum_editors[enum_idx].get_selected_id())
 
 	return dictionary
 
