@@ -1,12 +1,11 @@
 @tool
 extends GaeaNodeResource
 class_name GaeaNodeNoise
-## Creates a grid of values from [code]0.0[/code] to [code]1.0[/code] based on a SimplexSmooth noise texture.
+## Creates a grid of values from [code]0.0[/code] to [code]1.0[/code] based on a noise algorithm.
 ##
-## Generic class for both the 2D and 3D version of this node.
+## Base class for both the 2D and 3D version of this node.
 
 
-enum Type {TYPE_2D, TYPE_3D}
 enum NoiseType {
 	SIMPLEX = FastNoiseLite.NoiseType.TYPE_SIMPLEX,
 	SIMPLEX_SMOOTH = FastNoiseLite.NoiseType.TYPE_SIMPLEX_SMOOTH,
@@ -15,9 +14,6 @@ enum NoiseType {
 	VALUE_CUBIC = FastNoiseLite.NoiseType.TYPE_VALUE_CUBIC,
 	VALUE = FastNoiseLite.NoiseType.TYPE_VALUE
 } # This has to be copied because you can't use FastNoiseLite.NoiseType directly.
-
-## Whether it uses the [method Noise.get_noise_2d] or [method Noise.get_noise_3d].
-var type = Type.TYPE_2D
 
 
 func _get_title() -> String:
@@ -82,8 +78,9 @@ func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) ->
 	return dictionary
 
 
+func _is_available() -> bool:
+	return false
+
+
 func _get_noise_value(cell: Vector3i, noise: FastNoiseLite) -> float:
-	if type == 0:
-		return noise.get_noise_2d(cell.x, cell.y)
-	else:
-		return noise.get_noise_3d(cell.x, cell.y, cell.z)
+	return -1.0

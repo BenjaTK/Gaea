@@ -102,7 +102,8 @@ func _rebuild() -> void:
 
 	_add_slots.call_deferred()
 
-	load_save_data.call_deferred(saved_data)
+	if _finished_loading:
+		load_save_data.call_deferred(saved_data)
 	_add_preview_container.call_deferred()
 
 	auto_shrink.call_deferred()

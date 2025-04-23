@@ -81,8 +81,9 @@ func _populate_dict_with_files(folder_path: String, dict: Dictionary) -> Diction
 		if file_name.ends_with(".gd"):
 			var resource: GaeaNodeResource = load(file_path).new()
 			if resource is GaeaNodeResource:
-				for item in resource.get_tree_items():
-					dict.get_or_add(file_name + item.get_tree_name(), item)
+				if resource.is_available():
+					for item in resource.get_tree_items():
+						dict.get_or_add(file_name + item.get_tree_name(), item)
 		file_name = dir.get_next()
 
 	return dict

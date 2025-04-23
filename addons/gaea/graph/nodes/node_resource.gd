@@ -163,6 +163,9 @@ func get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 func get_tree_name() -> String:
 	return tree_name_override if not tree_name_override.is_empty() else _get_title()
 
+## Public version of [method _is_available]. Prefer to override that method over this one.
+func is_available() -> bool:
+	return _is_available()
 
 ## Override this method to define the name shown in the title bar of this node.
 ## Defining this method is [b]optional[/b], but recommended. If not defined, the description will be empty.
@@ -257,7 +260,7 @@ func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 
 
 ## If this returns [code]false[/code], this node won't show up in the 'Create Node' dialog.
-func _get_enabled() -> bool:
+func _is_available() -> bool:
 	return true
 
 
