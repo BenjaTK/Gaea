@@ -1,6 +1,7 @@
 @tool
 class_name GaeaNodeMaterialVariable
 extends GaeaNodeVariable
+## [GaeaMaterial] variable editable in the inspector.
 
 
 

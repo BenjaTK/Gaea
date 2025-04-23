@@ -1,6 +1,7 @@
 @tool
 class_name GaeaNodeBoolVariable
 extends GaeaNodeVariable
+## [bool] variable editable in the inspector.
 
 
 func _get_variant_type() -> int:

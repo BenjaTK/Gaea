@@ -1,6 +1,7 @@
 @tool
 class_name GaeaNodeVector2Variable
 extends GaeaNodeVariable
+## [Vector2] variable editable in the inspector.
 
 
 func _get_variant_type() -> int:

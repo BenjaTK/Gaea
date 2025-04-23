@@ -1,6 +1,7 @@
 @tool
 class_name GaeaNodeFloatVariable
 extends GaeaNodeVariable
+## [float] variable editable in the inspector.
 
 
 func _get_variant_type() -> int:
