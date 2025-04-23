@@ -106,8 +106,8 @@ func remove_invalid_connections() -> void:
 			disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
 			continue
 
-
 	save_requested.emit()
+
 
 func is_nodes_connected_relatively(from_node: StringName, to_node: StringName) -> bool:
 	var nodes_to_check: Array[StringName] = [from_node]

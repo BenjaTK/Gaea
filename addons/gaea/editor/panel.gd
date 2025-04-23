@@ -215,11 +215,6 @@ func _load_data() -> void:
 			has_output_node = true
 			_output_node = node
 
-	for child in _graph_edit.get_children():
-		if child is GaeaGraphNode and child.resource is GaeaNodeOutput:
-			_output_node = child
-			has_output_node = true
-			break
 
 	if not has_output_node:
 		_output_node = _add_node_from_resource(preload("uid://bbkdvyxkj2slo"))
@@ -234,7 +229,14 @@ func _load_data() -> void:
 		_load_attached_elements.bind(frame_data).call_deferred()
 
 	# from_node and to_node are indexes in the resources array
-	for connection in _selected_generator.data.connections:
+	_load_connections.call_deferred(_selected_generator.data.connections)
+
+	update_connections()
+	is_loading = false
+
+
+func _load_connections(connections: Array[Dictionary]) -> void:
+	for connection in connections:
 		var from_node: GraphNode = _selected_generator.data.resources[connection.from_node].node
 		var to_node: GraphNode = _selected_generator.data.resources[connection.to_node].node
 		if not is_instance_valid(from_node) or not is_instance_valid(to_node):
@@ -242,9 +244,6 @@ func _load_data() -> void:
 		if to_node.get_input_port_count() <= connection.to_port:
 			continue
 		_graph_edit.connection_request.emit(from_node.name, connection.from_port, to_node.name, connection.to_port)
-
-	update_connections()
-	is_loading = false
 
 
 func _load_frame(frame_data: Dictionary) -> void:

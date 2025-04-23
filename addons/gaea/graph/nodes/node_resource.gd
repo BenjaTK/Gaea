@@ -17,6 +17,8 @@ extends Resource
 
 
 signal argument_list_changed
+signal argument_value_changed
+signal enum_value_changed(enum_idx: int, option_value: int)
 
 #region Description Formatting
 const PARAM_TEXT_COLOR := "cdbff0"
@@ -239,6 +241,10 @@ func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 ## If this returns [code]false[/code], this node won't show up in the 'Create Node' dialog.
 func _get_enabled() -> bool:
 	return true
+
+
+func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
+	notify_argument_list_changed()
 
 
 

@@ -52,17 +52,19 @@ func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
 		&"material":
 			return GaeaValue.Type.MAP
 		_:
-			return GaeaValue.Type.DATA
+			return GaeaValue.Type.BOOLEAN
 
 	return super(arg_name)
 
 
 func _get_output_ports_list() -> Array[StringName]:
+	if get_enum_selection(1) == TestEnum2.OPTION_THIRD:
+		return [&"test"]
 	return [&"map"]
 
 
 func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.MAP
+	return (GaeaValue.Type.MAP if output_name == &"map" else GaeaValue.Type.FLOAT)
 
 
 func _get_required_params() -> Array[StringName]:

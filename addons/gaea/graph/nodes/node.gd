@@ -55,16 +55,19 @@ func _on_added() -> void:
 		var option_button: OptionButton = OptionButton.new()
 		for option in resource.get_enum_options(enum_idx).values():
 			option_button.add_item(resource.get_enum_option_display_name(enum_idx, option), option)
+		option_button.select(resource.get_enum_selection(enum_idx))
 
 		add_child(option_button)
-		option_button.item_selected.connect(resource.notify_argument_list_changed.unbind(1))
+		option_button.item_selected.connect(
+			(func(idx: int, button: OptionButton) -> void:
+				resource._on_enum_value_changed(enum_idx, button.get_item_id(idx))).bind(option_button)
+		)
 		_enum_editors.append(option_button)
 
-	_rebuild()
+	await _rebuild()
 
 	title = resource.get_title()
-	#resource.node = self
-#
+
 	var type: GaeaValue.Type = resource.get_type()
 	var titlebar: StyleBoxFlat
 	var titlebar_selected: StyleBoxFlat
@@ -84,12 +87,9 @@ func _on_added() -> void:
 
 
 func _rebuild() -> void:
-
 	var saved_data = get_save_data()
 	resource.enum_selections = saved_data.get("enums", [])
 	_editors.clear()
-
-
 
 	_preview_container = null
 	_preview = null
@@ -113,6 +113,7 @@ func _rebuild() -> void:
 
 	auto_shrink.call_deferred()
 	remove_invalid_connections_requested.emit.call_deferred()
+	_update_arguments_visibility.call_deferred()
 
 
 func _add_slots() -> void:
