@@ -9,36 +9,69 @@ class_name GaeaNodeVariable
 
 
 ## See [enum Variant.Type] and equivalents in [method GaeaValue.from_variant_type].
-@export var type: Variant.Type:
-	set(new_value):
-		type = new_value
-		_update_output_slot()
+var type: int: get = _get_variant_type
 ## See [enum PropertyHint].
-@export var hint: PropertyHint:
-	set(new_value):
-		hint = new_value
-		_update_output_slot()
+var hint: PropertyHint: get = _get_property_hint
 ## See [enum PropertyHint].
-@export var hint_string: String:
-	set(new_value):
-		hint_string = new_value
-		_update_output_slot()
+var hint_string: String: get = _get_property_hint_string
 
 
-func _update_output_slot():
-	var output = GaeaNodeSlotOutput.new()
-	output.name = "value"
-	output.type = GaeaValue.from_variant_type(type, hint, hint_string)
-	outputs = [output]
+## Override this method to determine the [enum Variant.Type] for the variable this node adds.[br][br]
+## Overriding this method is [b]required[/b].
+func _get_variant_type() -> int:
+	return TYPE_NIL
 
 
-func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: GaeaData) -> Dictionary:
+## Override this method to set a [enum PropertyHint] for the variable this node adds.
+func _get_property_hint() -> PropertyHint:
+	return PROPERTY_HINT_NONE
+
+
+## Override this method to set the hint string for the [enum PropertyHint] of the variable this node adds.
+func _get_property_hint_string() -> String:
+	return ""
+
+
+func _get_arguments_list() -> Array[StringName]:
+	return [&"name"]
+
+
+func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.VARIABLE_NAME
+
+
+func _get_argument_default_value(arg_name: StringName) -> Variant:
+	return _get_available_name(_get_title())
+
+
+func _get_available_name(from: String) -> String:
+	var _available_name: String = from
+	var _suffix: int = 1
+	while node.generator.data.parameters.has(_available_name):
+		_suffix += 1
+		_available_name = "%s%s" % [from, _suffix]
+	return _available_name
+
+
+func _get_output_ports_list() -> Array[StringName]:
+	return [&"value"]
+
+
+func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.from_variant_type(_get_variant_type(), _get_property_hint(), _get_property_hint_string())
+
+
+func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Variant:
 	_log_data(output_port, generator_data)
 	var data = generator_data.parameters.get(_get_arg(&"name", area, null))
 	if data.has("value"):
-		return output_port.return_value(data.get("value"))
+		return data.get("value")
 	return {}
 
 
 func _get_scene() -> PackedScene:
 	return preload("uid://bodjhgqp1bpui")
+
+
+func _is_available() -> bool:
+	return _get_variant_type() != TYPE_NIL

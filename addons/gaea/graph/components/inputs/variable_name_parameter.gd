@@ -6,7 +6,7 @@ class_name GaeaVariableNameParameterEditor
 @onready var line_edit: LineEdit = $LineEdit
 
 
-func _ready() -> void:
+func _configure() -> void:
 	if is_part_of_edited_scene():
 		return
 	await super()

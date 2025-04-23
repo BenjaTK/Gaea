@@ -7,6 +7,7 @@ var hint: PropertyHint
 var hint_string: String
 
 var previous_name: String
+var _is_invalid_name: bool = false
 
 
 func _on_added() -> void:
@@ -20,16 +21,12 @@ func _on_added() -> void:
 		await get_tree().process_frame
 		_loading_loop_limit -= 1
 	if not _finished_loading:
-		push_error("Something went wrong during loading of the variable node '%s'" % title)
+		push_error("Something went wrong during loading of the variable node '%s'" % resource.get_title())
 
-	_set_arg_value("name", resource._get_arg(&"name", AABB(), null))
 	previous_name = get_arg_value("name")
 
 	if generator.data.parameters.has(get_arg_value("name")):
 		return
-
-	_set_arg_value("name", _get_available_name(resource.title))
-	previous_name = get_arg_value("name")
 
 	generator.data.parameters[get_arg_value("name")] = {
 		"name": get_arg_value("name"),
@@ -43,18 +40,19 @@ func _on_added() -> void:
 	generator.data.notify_property_list_changed()
 
 
-func _get_available_name(from: String) -> String:
-	var _available_name: String = from
-	var _suffix: int = 1
-	while generator.data.parameters.has(_available_name):
-		_suffix += 1
-		_available_name = "%s%s" % [from, _suffix]
-	return _available_name
-
-
 func _on_removed() -> void:
 	generator.data.parameters.erase(get_arg_value("name"))
 	generator.data.notify_property_list_changed()
+
+
+func get_save_data() -> Dictionary:
+	var save_data := super()
+	if _is_invalid_name:
+		if previous_name.is_empty():
+			previous_name = resource.get_argument_default_value(&"name")
+		save_data.get(&"arguments").set(&"name", previous_name)
+	return save_data
+
 
 
 func _on_param_value_changed(value: Variant, node: GaeaGraphNodeParameterEditor, param_name: String) -> void:
@@ -66,7 +64,9 @@ func _on_param_value_changed(value: Variant, node: GaeaGraphNodeParameterEditor,
 		return
 
 	node.line_edit.remove_theme_color_override("font_color")
+	_is_invalid_name = false
 	if generator.data.parameters.has(value) and value != previous_name:
+		_is_invalid_name = true
 		node.line_edit.add_theme_color_override("font_color", Color.RED)
 		return
 

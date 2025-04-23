@@ -326,17 +326,21 @@ func traverse(output_port: StringName, area: AABB, generator_data:GaeaData) -> V
 		return {}
 
 	# Get Data
-	var results:Dictionary = _get_data(output_port, area, generator_data)
+
+	var results: Dictionary = {
+		&"value": _get_data(output_port, area, generator_data),
+		&"type": _get_output_port_type(output_port)
+	}
 
 	if use_caching:
 		_set_cached_data(output_port, generator_data, results)
-	return {&"value": results, &"type": _get_output_port_type(output_port)}
+	return results
 
 
 ## Returns the data corresponding to [param output_port]. Should be overriden to create custom
 ## behavior for each node.
 @warning_ignore("unused_parameter")
-func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
+func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Variant:
 	return {}
 #endregion
 
