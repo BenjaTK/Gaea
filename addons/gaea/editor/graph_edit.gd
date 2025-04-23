@@ -85,8 +85,8 @@ func _on_disconnection_request(from_node: StringName, from_port: int, to_node: S
 
 func remove_invalid_connections() -> void:
 	for connection in get_connection_list():
-		var to_node: GraphNode = get_node(NodePath(connection.to_node))
-		var from_node: GraphNode = get_node(NodePath(connection.from_node))
+		var to_node: GaeaGraphNode = get_node(NodePath(connection.to_node))
+		var from_node: GaeaGraphNode = get_node(NodePath(connection.from_node))
 
 		if not is_instance_valid(from_node) or not is_instance_valid(to_node):
 			disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
@@ -99,6 +99,13 @@ func remove_invalid_connections() -> void:
 		if from_node.get_output_port_count() <= connection.from_port:
 			disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
 			continue
+
+		var from_type: GaeaValue.Type = from_node.get_output_port_type(connection.from_port)
+		var to_type: GaeaValue.Type = to_node.get_input_port_type(connection.to_port)
+		if not is_valid_connection_type(from_type, to_type) and from_type != to_type:
+			disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
+			continue
+
 
 	save_requested.emit()
 

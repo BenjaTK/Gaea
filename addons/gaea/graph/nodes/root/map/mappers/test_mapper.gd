@@ -50,9 +50,9 @@ func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
 		&"data_or_map":
 			return (GaeaValue.Type.DATA if get_enum_selection(0) == TestEnum1.FIRST_OPTION else GaeaValue.Type.MAP)
 		&"material":
-			return GaeaValue.Type.MATERIAL
+			return GaeaValue.Type.MAP
 		_:
-			return GaeaValue.Type.FLOAT
+			return GaeaValue.Type.DATA
 
 	return super(arg_name)
 

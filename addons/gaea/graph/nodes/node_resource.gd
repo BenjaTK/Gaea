@@ -242,6 +242,7 @@ func _get_enabled() -> bool:
 
 
 
+
 #region Args
 ## Returns the value of the argument of [param name]. Pass in [param generator_data] to allow overriding with input slots.[br]
 ## [param area] is used for values of the type Data or Map. (See [enum GaeaValue.Type]).

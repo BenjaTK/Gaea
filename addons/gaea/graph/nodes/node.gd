@@ -11,6 +11,7 @@ signal save_requested
 signal connections_updated
 ## Emitted when this node is removed from the graph.
 signal removed
+signal remove_invalid_connections_requested
 
 ## The [GaeaNodeResource] this acts as an editor of.
 @export var resource: GaeaNodeResource
@@ -88,6 +89,8 @@ func _rebuild() -> void:
 	resource.enum_selections = saved_data.get("enums", [])
 	_editors.clear()
 
+
+
 	_preview_container = null
 	_preview = null
 
@@ -109,6 +112,7 @@ func _rebuild() -> void:
 		_preview_container.hide()
 
 	auto_shrink.call_deferred()
+	remove_invalid_connections_requested.emit.call_deferred()
 
 
 func _add_slots() -> void:
@@ -278,9 +282,6 @@ func load_save_data(saved_data: Dictionary) -> void:
 
 			if data.get(argument) != null:
 				editor.set_param_value(data.get(argument))
-
-		#for child in get_children():
-			#if child is GaeaGraphNodeParameterEditor:
 
 
 	_finished_loading = true

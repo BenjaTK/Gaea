@@ -324,6 +324,7 @@ func _add_node_from_resource(resource: GaeaNodeResource, p_is_loading: bool = fa
 	var node: GaeaGraphNode = resource.get_scene().instantiate()
 	node.resource = resource
 	node.generator = get_selected_generator()
+	node.remove_invalid_connections_requested.connect(_graph_edit.remove_invalid_connections)
 	_graph_edit.add_child(node)
 	node.save_requested.connect(_save_data)
 	node.name = node.name.replace("@", "_")
