@@ -1,7 +1,7 @@
 @tool
 class_name GaeaNodeMaterialParameter
 extends GaeaNodeParameter
-## [GaeaMaterial] variable editable in the inspector.
+## [GaeaMaterial] parameter editable in the inspector.
 
 
 
@@ -22,4 +22,4 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "GaeaMaterial variable editable in the inspector."
+	return "GaeaMaterial parameter editable in the inspector."

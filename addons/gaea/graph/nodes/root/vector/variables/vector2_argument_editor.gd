@@ -1,7 +1,7 @@
 @tool
 class_name GaeaNodeVector2Parameter
 extends GaeaNodeParameter
-## [Vector2] variable editable in the inspector.
+## [Vector2] parameter editable in the inspector.
 
 
 func _get_variant_type() -> int:
@@ -13,4 +13,4 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "[code]Vector2[/bg][/c] variable editable in the inspector."
+	return "[code]Vector2[/bg][/c] parameter editable in the inspector."

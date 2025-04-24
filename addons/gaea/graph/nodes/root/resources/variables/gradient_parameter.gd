@@ -1,7 +1,7 @@
 @tool
 class_name GaeaNodeGradientParameter
 extends GaeaNodeParameter
-## [GaeaMaterialGradient] variable editable in the inspector.
+## [GaeaMaterialGradient] parameter editable in the inspector.
 
 
 func _get_variant_type() -> int:
@@ -21,4 +21,4 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "GaeaMaterialGradient variable editable in the inspector."
+	return "GaeaMaterialGradient parameter editable in the inspector."

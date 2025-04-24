@@ -1,7 +1,7 @@
 @tool
 class_name GaeaNodeFloatParameter
 extends GaeaNodeParameter
-## [float] variable editable in the inspector.
+## [float] parameter editable in the inspector.
 
 
 func _get_variant_type() -> int:
@@ -13,4 +13,4 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "[code]float[/bg][/c] variable editable in the inspector."
+	return "[code]float[/bg][/c] parameter editable in the inspector."

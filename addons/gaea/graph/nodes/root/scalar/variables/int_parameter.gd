@@ -1,7 +1,7 @@
 @tool
 class_name GaeaNodeIntParameter
 extends GaeaNodeParameter
-## [int] variable editable in the inspector.
+## [int] parameter editable in the inspector.
 
 
 func _get_variant_type() -> int:
@@ -13,4 +13,4 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "[code]int[/bg][/c] variable editable in the inspector."
+	return "[code]int[/bg][/c] parameter editable in the inspector."
