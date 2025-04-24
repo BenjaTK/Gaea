@@ -16,9 +16,8 @@ func _configure() -> void:
 		button.text = str(button.get_index() + 1)
 		button.tooltip_text = "Bit %s, value %s" % [button.get_index() + 1, 1 << button.get_index()]
 
-		if is_instance_valid(resource):
-			if resource.type == GaeaValue.Type.BITMASK_EXCLUSIVE:
-				button.button_group = button_group
+		if type == GaeaValue.Type.BITMASK_EXCLUSIVE:
+			button.button_group = button_group
 
 		button.toggled.connect(_on_value_changed.unbind(1))
 
@@ -41,7 +40,7 @@ func get_arg_value() -> Variant:
 	if super() != null:
 		return super()
 
-	if resource.type != GaeaValue.Type.FLAGS:
+	if type != GaeaValue.Type.FLAGS:
 		var num: int = 0
 		for button: Button in grid_container.get_children():
 			if button.button_pressed:
@@ -56,7 +55,7 @@ func get_arg_value() -> Variant:
 
 
 func set_arg_value(new_value: Variant) -> void:
-	if resource.type != GaeaValue.Type.FLAGS:
+	if type != GaeaValue.Type.FLAGS:
 		if typeof(new_value) != TYPE_INT:
 			return
 
