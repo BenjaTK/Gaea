@@ -44,7 +44,6 @@ func _get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
 
 func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
 	notify_argument_list_changed()
-	notify_property_list_changed()
 #endregion
 
 
@@ -80,7 +79,7 @@ func _get_output_port_display_name(output_name: StringName) -> String:
 
 @warning_ignore("unused_parameter")
 func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
-	return (GaeaValue.Type.FLOAT if get_enum_selection(0) in [VectorType.VECTOR2, VectorType.VECTOR3] else GaeaValue.Type.INT)
+	return (GaeaValue.Type.FLOAT if get_enum_selection(EnumList.InputVectorType) in [VectorType.VECTOR2, VectorType.VECTOR3] else GaeaValue.Type.INT)
 #endregion
 
 

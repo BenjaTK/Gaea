@@ -68,22 +68,6 @@ func _on_added() -> void:
 	if resource.salt == 0:
 		resource.salt = randi()
 
-	var type: GaeaValue.Type = resource.get_type()
-	var titlebar: StyleBoxFlat
-	var titlebar_selected: StyleBoxFlat
-	if type != GaeaValue.Type.NULL:
-		if not _titlebar_styleboxes.has(type) or _titlebar_styleboxes.get(type).get("for_color", Color.TRANSPARENT) != resource.get_title_color():
-			titlebar = get_theme_stylebox("titlebar", "GraphNode").duplicate()
-			titlebar_selected = get_theme_stylebox("titlebar_selected", "GraphNode").duplicate()
-			titlebar.bg_color = titlebar.bg_color.blend(Color(resource.get_title_color(), 0.3))
-			titlebar_selected.bg_color = titlebar.bg_color
-			_titlebar_styleboxes.set(type, {"titlebar": titlebar, "selected": titlebar_selected, "for_color": resource.get_title_color()})
-		else:
-			titlebar = _titlebar_styleboxes.get(type).get("titlebar")
-			titlebar_selected = _titlebar_styleboxes.get(type).get("selected")
-		add_theme_stylebox_override("titlebar", titlebar)
-		add_theme_stylebox_override("titlebar_selected", titlebar_selected)
-
 
 func _rebuild() -> void:
 	if not has_finished_rebuilding():
@@ -117,6 +101,8 @@ func _rebuild() -> void:
 	remove_invalid_connections_requested.emit.call_deferred()
 	_update_arguments_visibility.call_deferred()
 	_finished_rebuilding = true
+
+	_set_titlebar()
 
 
 func _add_slots() -> void:
@@ -185,6 +171,26 @@ func _add_preview_container() -> void:
 		_preview_container.add_child(_preview)
 		_preview_container.hide()
 		_preview.update()
+
+
+func _set_titlebar() -> void:
+	var type: GaeaValue.Type = resource.get_type()
+	var titlebar: StyleBoxFlat
+	var titlebar_selected: StyleBoxFlat
+	if type != GaeaValue.Type.NULL:
+		remove_theme_stylebox_override("titlebar")
+		remove_theme_stylebox_override("titlebar_selected")
+		if not _titlebar_styleboxes.has(type) or _titlebar_styleboxes.get(type).get("for_color", Color.TRANSPARENT) != resource.get_title_color():
+			titlebar = get_theme_stylebox("titlebar", "GraphNode").duplicate()
+			titlebar_selected = get_theme_stylebox("titlebar_selected", "GraphNode").duplicate()
+			titlebar.bg_color = titlebar.bg_color.blend(Color(resource.get_title_color(), 0.3))
+			titlebar_selected.bg_color = titlebar.bg_color
+			_titlebar_styleboxes.set(type, {"titlebar": titlebar, "selected": titlebar_selected, "for_color": resource.get_title_color()})
+		else:
+			titlebar = _titlebar_styleboxes.get(type).get("titlebar")
+			titlebar_selected = _titlebar_styleboxes.get(type).get("selected")
+		add_theme_stylebox_override("titlebar", titlebar)
+		add_theme_stylebox_override("titlebar_selected", titlebar_selected)
 
 
 ## Returns the current value set in the [GaeaGraphNodeArgumentEditor] for the argument of [param arg_name].
@@ -269,6 +275,9 @@ func get_save_data() -> Dictionary:
 	for argument in resource.get_arguments_list():
 		var value: Variant = get_arg_value(argument)
 		if value == null:
+			continue
+		if typeof(value) != typeof(resource.get_argument_default_value(argument)):
+			dictionary[&"arguments"][argument] = resource.get_argument_default_value(argument)
 			continue
 		if value != resource.get_argument_default_value(argument):
 			dictionary[&"arguments"][argument] = get_arg_value(argument)
