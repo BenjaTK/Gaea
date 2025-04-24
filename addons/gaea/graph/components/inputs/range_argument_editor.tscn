@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dy3oumbnydlmp"]
+[gd_scene load_steps=6 format=3 uid="uid://dy3oumbnydlmp"]
 
 [ext_resource type="Script" uid="uid://6jlpafuof6fs" path="res://addons/gaea/graph/components/inputs/range_argument_editor.gd" id="1_xfmar"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3xeyn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4cr3l"]
 
@@ -21,6 +23,7 @@ script = ExtResource("1_xfmar")
 [node name="Label" type="RichTextLabel" parent="."]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3xeyn")
 text = "Label"
 fit_content = true
 

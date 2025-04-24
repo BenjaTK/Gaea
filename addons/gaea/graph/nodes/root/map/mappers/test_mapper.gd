@@ -6,9 +6,9 @@ class_name GaeaNodeTestMapper
 
 
 enum TestEnum1 {
-	FIRST_OPTION,
-	SECOND_OPTION,
-	THIRD_OPTION
+	FIRST_OPTION = 4,
+	SECOND_OPTION = 5,
+	THIRD_OPTION = 7
 }
 
 enum TestEnum2 {

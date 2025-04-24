@@ -12,13 +12,46 @@ class_name GaeaNodeBorder2D
 ## Output data is a grid of [code]1.0[/code]s.
 
 
+func _get_title() -> String:
+	return "Border2D"
+
+
+func _get_description() -> String:
+	return "Returns the border of [param]data[/bg][/c]. If [param]inside[/bg][/c] is [code]true[/bg][/c], returns the inner border."
+
+
+func _get_arguments_list() -> Array[StringName]:
+	return [&"data", &"neighbors", &"inside"]
+
+
+func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	match arg_name:
+		&"data": return GaeaValue.Type.DATA
+		&"neighbors": return GaeaValue.Type.NEIGHBORS
+		&"inside": return GaeaValue.Type.BOOLEAN
+	return super(arg_name)
+
+
+func _get_argument_default_value(arg_name: StringName) -> Variant:
+	match arg_name:
+		&"neighbors": return [Vector2i.RIGHT, Vector2i.LEFT, Vector2i.UP, Vector2i.DOWN]
+	return super(arg_name)
+
+
+func _get_output_ports_list() -> Array[StringName]:
+	return [&"border"]
+
+
+func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.DATA
+
+
 func _get_required_arguments() -> Array[StringName]:
 	return [&"data"]
 
 
-func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: GaeaData) -> Dictionary:
+func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
 	_log_data(output_port, generator_data)
-	assert(output_port.name == &"border")
 
 	var neighbors: Array[Vector2i] = _get_arg(&"neighbors", area, generator_data)
 	var inside: bool = _get_arg(&"inside", area, generator_data)
@@ -44,4 +77,4 @@ func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: Gaea
 							border.set(cell, 1)
 							break
 
-	return output_port.return_value(border)
+	return border

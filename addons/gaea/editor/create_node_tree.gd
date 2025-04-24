@@ -67,10 +67,13 @@ func _populate_dict_with_files(folder_path: String, dict: Dictionary) -> Diction
 
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
+	var idx: int = 0
 	while file_name != "":
 		if not dir.current_is_dir() and not file_name.ends_with(".gd"):
 			file_name = dir.get_next()
 			continue
+
+		idx += 1
 
 		var tree_name: String = file_name.get_basename().capitalize()
 
@@ -78,12 +81,14 @@ func _populate_dict_with_files(folder_path: String, dict: Dictionary) -> Diction
 		if dir.current_is_dir():
 			_populate_dict_with_files(file_path + "/", dict.get_or_add(tree_name, {}))
 
+
 		if file_name.ends_with(".gd"):
 			var resource: GaeaNodeResource = load(file_path).new()
 			if resource is GaeaNodeResource:
 				if resource.is_available():
 					for item in resource.get_tree_items():
-						dict.get_or_add(file_name + item.get_tree_name(), item)
+						idx += 1
+						dict.get_or_add(str(idx), item)
 		file_name = dir.get_next()
 
 	return dict

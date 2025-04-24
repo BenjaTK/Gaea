@@ -79,7 +79,7 @@ func update() -> void:
 		selected_output,
 		AABB(Vector3.ZERO, Vector3(resolution.x, resolution.y, 1)),
 		node.generator.data
-	).get("value")
+	).get("value", {})
 
 	node.generator.data.cache.clear()
 
