@@ -11,9 +11,9 @@ class_name GaeaVector3ParameterEditor
 func _ready() -> void:
 	if is_part_of_edited_scene():
 		return
-	_x_spin_box.value_changed.connect(param_value_changed.emit)
-	_y_spin_box.value_changed.connect(param_value_changed.emit)
-	_z_spin_box.value_changed.connect(param_value_changed.emit)
+	_x_spin_box.value_changed.connect(argument_value_changed.emit)
+	_y_spin_box.value_changed.connect(argument_value_changed.emit)
+	_z_spin_box.value_changed.connect(argument_value_changed.emit)
 
 	await super()
 

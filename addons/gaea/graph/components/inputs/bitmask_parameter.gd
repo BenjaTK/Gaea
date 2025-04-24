@@ -34,7 +34,7 @@ func _on_drop_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_value_changed() -> void:
-	param_value_changed.emit(get_param_value())
+	argument_value_changed.emit(get_param_value())
 
 
 func get_param_value() -> Variant:

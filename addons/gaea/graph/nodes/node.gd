@@ -132,7 +132,7 @@ func _add_argument_editor(for_arg: StringName) -> GaeaGraphNodeParameterEditor:
 		resource.get_argument_display_name(for_arg),
 		resource.data.get(for_arg, resource.get_argument_default_value(for_arg))
 	)
-	node.param_value_changed.connect(_on_param_value_changed.bind(node, for_arg))
+	node.argument_value_changed.connect(_on_argument_value_changed.bind(node, for_arg))
 	return node
 
 
@@ -180,8 +180,9 @@ func _set_arg_value(arg_name: String, value: Variant) -> void:
 		editor.set_param_value(value)
 
 
-func _on_param_value_changed(_value: Variant, _node: GaeaGraphNodeParameterEditor, _param_name: String) -> void:
+func _on_argument_value_changed(value: Variant, _node: GaeaGraphNodeParameterEditor, arg_name: String) -> void:
 	if _finished_loading:
+		resource.set_argument_value(arg_name, value)
 		save_requested.emit()
 		if is_instance_valid(_preview):
 			_preview.update()
@@ -189,7 +190,7 @@ func _on_param_value_changed(_value: Variant, _node: GaeaGraphNodeParameterEdito
 
 func _on_enum_value_changed(option_idx: int, enum_idx: int, button: OptionButton) -> void:
 	if _finished_loading:
-		resource._on_enum_value_changed(enum_idx, button.get_item_id(option_idx))
+		resource.set_enum_value(enum_idx, button.get_item_id(option_idx))
 		save_requested.emit()
 		if is_instance_valid(_preview):
 			_preview.update()

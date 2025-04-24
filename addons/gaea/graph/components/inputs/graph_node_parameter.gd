@@ -8,7 +8,7 @@ extends Control
 ## This class can be extended to create editors for the different value types in Gaea.
 
 ## Emitted when the value is changed using the editor.
-signal param_value_changed(new_value: Variant)
+signal argument_value_changed(new_value: Variant)
 
 var type: GaeaValue.Type
 ## The resource that holds the information of this node, such as [member GaeaNodeSlotParam.default_value]
@@ -40,7 +40,7 @@ func _configure() -> void:
 	if not graph_node.is_node_ready():
 		await graph_node.ready
 
-	#param_value_changed.connect(graph_node._on_param_value_changed.bind(self, resource.name))
+	#argument_value_changed.connect(graph_node._on_argument_value_changed.bind(self, resource.name))
 
 	if GaeaValue.is_wireable(type):
 		graph_node.set_slot_enabled_left(slot_idx, true)

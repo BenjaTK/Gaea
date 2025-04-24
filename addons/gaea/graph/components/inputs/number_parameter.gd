@@ -11,7 +11,7 @@ func _configure() -> void:
 		return
 	await super()
 
-	spin_box.value_changed.connect(param_value_changed.emit)
+	spin_box.value_changed.connect(argument_value_changed.emit)
 
 	if type == GaeaValue.Type.INT:
 		spin_box.step = 1

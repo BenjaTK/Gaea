@@ -63,7 +63,7 @@ func _on_slider_changed_value() -> void:
 	area_panel.position.x = min_slider.size.x * _get_relative(min_slider.value)
 	min_spin_box.set_value_no_signal(min_slider.value)
 	max_spin_box.set_value_no_signal(max_slider.value)
-	param_value_changed.emit(get_param_value())
+	argument_value_changed.emit(get_param_value())
 
 
 func _on_spin_box_changed_value() -> void:

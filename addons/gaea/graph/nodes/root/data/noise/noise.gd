@@ -78,6 +78,7 @@ func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) ->
 	return dictionary
 
 
+# Hide from the 'Create Node' dialog because this is the base class and only the 2D and 3D versions should show.
 func _is_available() -> bool:
 	return false
 

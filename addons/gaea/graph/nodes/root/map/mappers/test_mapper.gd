@@ -92,5 +92,4 @@ func _passes_mapping(grid_data: Dictionary, cell: Vector3i, area: AABB, generato
 
 
 func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
-	super(_enum_idx, _option_value)
 	notify_argument_list_changed()

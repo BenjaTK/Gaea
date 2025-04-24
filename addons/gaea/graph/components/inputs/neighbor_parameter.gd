@@ -19,7 +19,7 @@ func _ready() -> void:
 
 
 func _on_value_changed() -> void:
-	param_value_changed.emit(get_param_value())
+	argument_value_changed.emit(get_param_value())
 
 
 func get_param_value() -> Array[Vector2i]:

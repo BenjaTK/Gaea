@@ -16,8 +16,11 @@ extends Resource
 ## @tutorial(Anatomy of a Graph): https://gaea-godot.github.io/gaea-docs/#/2.0/tutorials/anatomy-of-a-graph
 
 
+@warning_ignore_start("unused_parameter")
+@warning_ignore_start("unused_signal")
+
 signal argument_list_changed
-signal argument_value_changed
+signal argument_value_changed(arg_name: StringName, new_value: Variant)
 signal enum_value_changed(enum_idx: int, option_value: int)
 
 #region Description Formatting
@@ -163,12 +166,14 @@ func get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 func get_tree_name() -> String:
 	return tree_name_override if not tree_name_override.is_empty() else _get_title()
 
+
 ## Public version of [method _is_available]. Prefer to override that method over this one.
 func is_available() -> bool:
 	return _is_available()
 
+
 ## Override this method to define the name shown in the title bar of this node.
-## Defining this method is [b]optional[/b], but recommended. If not defined, the description will be empty.
+## Defining this method is [b]optional[/b], but recommended. If not defined, the title will be "Unnamed".
 func _get_title() -> String:
 	return "Unnamed"
 
@@ -193,14 +198,14 @@ func _get_enums_count() -> int:
 	return 0
 
 
-## Override this method to define the options available for the added enums.[br]
-## Dictionary should be [code]{String: int}[/code]
+## Override this method to define the options available for the added enums.[br][br]
+## The returned [Dictionary] should be [code]{String: int}[/code]. Built-in enums can be used directly.
 func _get_enum_options(idx: int) -> Dictionary:
 	return {}
 
 
 ## Override this method if you want to change the display name for the options in the added enums.[br][br]
-## Defining this method is [b]optional[/b]. If not defined, the name will be [code]_get_enum_options(enum_idx).find_key(option_value).capitalize().capitalize()[/code].
+## Defining this method is [b]optional[/b]. If not defined, the name will be [code]_get_enum_options(enum_idx).find_key(option_value).capitalize()[/code].
 func _get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
 	var options := _get_enum_options(enum_idx)
 	var key = options.find_key(option_value)
@@ -219,6 +224,7 @@ func _get_enum_default_value(enum_idx: int) -> int:
 ## Should be a list of (preferably) [code]snake_case[/code] names.[br][br]
 ## Defining this method is [b]required[/b].
 func _get_arguments_list() -> Array[StringName]:
+	push_warning("_get_arguments_list wasn't overriden in %s, node will have no arguments." % get_script().resource_path)
 	return []
 
 
@@ -264,13 +270,31 @@ func _is_available() -> bool:
 	return true
 
 
+func set_enum_value(enum_idx: int, option_value: int) -> void:
+	if enum_idx >= enum_selections.size():
+		enum_selections.resize(enum_idx + 1)
+
+	enum_selections.set(enum_idx, option_value)
+	enum_value_changed.emit(enum_idx, option_value)
+	_on_enum_value_changed(enum_idx, option_value)
+
+
+## Called when an enum is changed in the editor. When overriden,
+## [method super] should [b]always[/b] be called at the head of the function.
+func _on_enum_value_changed(enum_idx: int, option_value: int) -> void:
+	return
+
+
+func set_argument_value(arg_name: StringName, new_value: Variant) -> void:
+	data.set(arg_name, new_value)
+	argument_value_changed.emit(arg_name, new_value)
+	_on_argument_value_changed(arg_name, new_value)
+
+
 ## Called when an enum is changed in the editor. Does nothing by default, but can be used to call
 ## [method notify_arguments_list_changed] to rebuild the node.
-func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
-	if _enum_idx >= enum_selections.size():
-		enum_selections.resize(_enum_idx + 1)
-
-	enum_selections.set(_enum_idx, _option_value)
+func _on_argument_value_changed(arg_name: StringName, new_value: Variant) -> void:
+	return
 
 
 
@@ -386,7 +410,7 @@ func _has_inputs_connected(required: Array[StringName], generator_data:GaeaData)
 	return true
 
 
-# Gets the [GaeaNodeResource] connected to the input of name [param param_name].
+# Gets the [GaeaNodeResource] connected to the input of name [param arg_name].
 func _get_input_resource(arg_name: StringName, generator_data:GaeaData) -> GaeaNodeResource:
 	var connection = _get_argument_connection(arg_name)
 	if connection.is_empty() or connection.from_node == -1:

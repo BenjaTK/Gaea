@@ -11,7 +11,7 @@ func _configure() -> void:
 		return
 	await super()
 
-	line_edit.text_changed.connect(param_value_changed.emit)
+	line_edit.text_changed.connect(argument_value_changed.emit)
 
 func get_param_value() -> String:
 	if super() != null:

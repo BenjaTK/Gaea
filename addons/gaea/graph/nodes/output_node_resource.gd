@@ -21,7 +21,7 @@ func _get_arguments_list() -> Array[StringName]:
 
 	var layers: Array[StringName]
 	for layer_idx in node.generator.data.layers.size():
-		layers.append(str(layer_idx))
+		layers.append(&"%d" % layer_idx)
 
 	return layers
 

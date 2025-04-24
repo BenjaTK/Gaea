@@ -11,7 +11,7 @@ func _configure() -> void:
 		return
 	await super()
 
-	check_box.toggled.connect(param_value_changed.emit)
+	check_box.toggled.connect(argument_value_changed.emit)
 
 
 func get_param_value() -> bool:
