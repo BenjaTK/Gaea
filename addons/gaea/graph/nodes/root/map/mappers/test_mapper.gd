@@ -17,6 +17,18 @@ enum TestEnum2 {
 	OPTION_THIRD
 }
 
+
+func _get_tree_items() -> Array[GaeaNodeResource]:
+	var array: Array[GaeaNodeResource]
+
+	for i in TestEnum1.values():
+		var item: GaeaNodeResource = get_script().new()
+		item.set_default_enum_value_override(0, i)
+		item.set_tree_name_override(_get_title() + "%d" % i)
+		array.append(item)
+
+	return array
+
 func _get_title() -> String:
 	return "TEST MAPPER. DELETE THIS"
 

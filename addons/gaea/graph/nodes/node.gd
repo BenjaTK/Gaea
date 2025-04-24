@@ -55,7 +55,7 @@ func _on_added() -> void:
 		var option_button: OptionButton = OptionButton.new()
 		for option in resource.get_enum_options(enum_idx).values():
 			option_button.add_item(resource.get_enum_option_display_name(enum_idx, option), option)
-		option_button.select(resource.get_enum_selection(enum_idx))
+		option_button.select(option_button.get_item_index(resource.get_enum_selection(enum_idx)))
 
 		add_child(option_button)
 		option_button.item_selected.connect(_on_enum_value_changed.bind(enum_idx, option_button))
@@ -85,8 +85,10 @@ func _on_added() -> void:
 
 
 func _rebuild() -> void:
-	var saved_data = get_save_data()
-	resource.enum_selections = saved_data.get("enums", [])
+	var saved_data := {}
+	if _finished_loading:
+		saved_data = get_save_data()
+		resource.enum_selections = saved_data.get("enums", [])
 	_editors.clear()
 
 	_preview_container = null

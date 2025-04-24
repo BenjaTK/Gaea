@@ -56,8 +56,10 @@ var enum_selections: Array
 ## An additional value added to the generation's seed to prevent
 ## duplicates of the same node from having the same randomness. (See [member GaeaGenerator.seed]).
 var salt: int = 0
+## If empty, [method _get_title] will be used instead.
 var tree_name_override: String = "" : set = set_tree_name_override
-var default_value_overrides: Dictionary[StringName, Variant]
+@export_storage var default_value_overrides: Dictionary[StringName, Variant]
+@export_storage var default_enum_value_overrides: Dictionary[int, int]
 
 ## Used in [method _get_axis_range].
 enum Axis {
@@ -67,17 +69,33 @@ enum Axis {
 }
 
 
-
 func notify_argument_list_changed() -> void:
 	argument_list_changed.emit()
 
 
+## Override the name used in the 'Create Node' dialog.
 func set_tree_name_override(value: String) -> void:
 	tree_name_override = value
 
 
-func set_default_value_override(arg_name: StringName, value: Variant) -> void:
+## Override the default value of the argument of [param arg_name].
+func set_default_argument_value_override(arg_name: StringName, value: Variant) -> void:
 	default_value_overrides.set(arg_name, value)
+
+
+## Clear the overriden default value of the argument of [param arg_name].
+func clear_default_argument_value_override(arg_name: StringName) -> void:
+	default_value_overrides.erase(arg_name)
+
+
+## Override the default value of the enum at [param enum_idx].
+func set_default_enum_value_override(enum_idx: int, value: int) -> void:
+	default_enum_value_overrides.set(enum_idx, value)
+
+
+## Clear the overriden default value of the enum at [param enum_idx].
+func clear_default_enum_value_override(enum_idx: int) -> void:
+	default_enum_value_overrides.erase(enum_idx)
 
 
 ## Public version of [method _get_tree_items]. Prefer to override that method over this one.
@@ -113,7 +131,7 @@ func get_enum_options(idx: int) -> Dictionary:
 
 ## Returns the currently selected option for the enum at [param idx].
 func get_enum_selection(idx: int) -> int:
-	return _get_enum_default_value(idx) if enum_selections.size() <= idx else enum_selections[idx]
+	return get_enum_default_value(idx) if enum_selections.size() <= idx else enum_selections[idx]
 
 
 ## Public version of [method _get_enum_option_display_name]. Prefer to override that method over this one.
@@ -123,7 +141,7 @@ func get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
 
 ## Public version of [method _get_enum_default_value]. Prefer to override that method over this one.
 func get_enum_default_value(enum_idx: int) -> int:
-	return _get_enum_default_value(enum_idx)
+	return default_enum_value_overrides.get(enum_idx, _get_enum_default_value(enum_idx))
 
 
 ## Public version of [method _get_arguments_list]. Prefer to override that method over this one.
@@ -143,7 +161,7 @@ func get_argument_display_name(arg_name: StringName) -> String:
 
 ## Public version of [method _get_argument_default_value]. Prefer to override that method over this one.
 func get_argument_default_value(arg_name: StringName) -> Variant:
-	return _get_argument_default_value(arg_name)
+	return default_value_overrides.get(arg_name, _get_argument_default_value(arg_name))
 
 
 ## Public version of [method _get_output_ports_list]. Prefer to override that method over this one.
@@ -272,7 +290,8 @@ func _is_available() -> bool:
 
 func set_enum_value(enum_idx: int, option_value: int) -> void:
 	if enum_idx >= enum_selections.size():
-		enum_selections.resize(enum_idx + 1)
+		for idx in _get_enums_count():
+			enum_selections.append(_get_enum_default_value(idx))
 
 	enum_selections.set(enum_idx, option_value)
 	enum_value_changed.emit(enum_idx, option_value)
