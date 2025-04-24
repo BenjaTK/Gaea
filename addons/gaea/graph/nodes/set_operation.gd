@@ -35,7 +35,7 @@ func _get_tree_items() -> Array[GaeaNodeResource]:
 	var items: Array[GaeaNodeResource]
 	for operation: Operation in _get_enum_options(0).values():
 		var item: GaeaNodeResource = get_script().new()
-		var tree_name: String = "%s (%s)" % [Operation.find_key(operation).capitalize(), OPERATION_SYMBOLS[operation]]
+		var tree_name: String = "%s (%s)" % [Operation.find_key(operation).to_pascal_case(), OPERATION_SYMBOLS[operation]]
 		item.set_tree_name_override(tree_name)
 		item.set_default_enum_value_override(0, operation)
 		items.append(item)
