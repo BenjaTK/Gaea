@@ -284,7 +284,9 @@ func load_save_data(saved_data: Dictionary) -> void:
 
 	if saved_data.has("enums"):
 		for enum_idx: int in saved_data.get("enums").size():
-			_enum_editors[enum_idx].select(saved_data.get("enums")[enum_idx])
+			_enum_editors[enum_idx].select(
+				_enum_editors[enum_idx].get_item_index(saved_data.get("enums")[enum_idx])
+			)
 
 	if saved_data.has("arguments"):
 		var arguments = saved_data.get("arguments")
