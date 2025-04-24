@@ -62,10 +62,6 @@ func _get_arguments_list() -> Array[StringName]:
 	return super()
 
 
-func _on_connections_changed() -> void:
-	notify_argument_list_changed.call_deferred()
-
-
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
 	return get_type()
 

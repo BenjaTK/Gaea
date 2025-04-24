@@ -89,3 +89,7 @@ func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) ->
 				_get_arg(&"z", area, generator_data),
 			)
 	return null
+
+
+func _is_available() -> bool:
+	return true

@@ -94,6 +94,7 @@ func remove_invalid_connections() -> void:
 		var to_node: GaeaGraphNode = get_node(NodePath(connection.to_node))
 		var from_node: GaeaGraphNode = get_node(NodePath(connection.from_node))
 
+
 		if not is_instance_valid(from_node) or not is_instance_valid(to_node):
 			disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
 			continue
@@ -110,6 +111,8 @@ func remove_invalid_connections() -> void:
 		var to_type: GaeaValue.Type = to_node.get_input_port_type(connection.to_port)
 		if not is_valid_connection_type(from_type, to_type) and from_type != to_type:
 			disconnect_node(connection.from_node, connection.from_port, connection.to_node, connection.to_port)
+			to_node.notify_connections_updated.call_deferred()
+			from_node.notify_connections_updated.call_deferred()
 			continue
 
 	save_requested.emit()

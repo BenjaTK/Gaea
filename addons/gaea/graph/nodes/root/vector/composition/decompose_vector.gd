@@ -65,3 +65,7 @@ func _get_tree_items() -> Array[GaeaNodeResource]:
 func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> float:
 	_log_data(output_port, generator_data)
 	return _get_arg(&"vector", area, generator_data)[output_port]
+
+
+func _is_available() -> bool:
+	return true
