@@ -251,13 +251,16 @@ func _get_arguments_list() -> Array[StringName]:
 ## Override this method to define the type of the arguments defined in [method _get_arguments_list].[br][br]
 ## Defining this method is [b]required[/b].
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	if arg_name.begins_with(&"CATEGORY"):
+		return GaeaValue.Type.CATEGORY
+
 	return GaeaValue.Type.NULL
 
 
 ## Override this method if you want to change the display name for any arguments in [method _get_arguments_list].[br][br]
 ## Defining this method is [b]optional[/b]. If not defined, the name will be [code]arg_name.capitalize()[/code].
 func _get_argument_display_name(arg_name: StringName) -> String:
-	return arg_name.capitalize()
+	return arg_name.trim_prefix(&"CATEGORY_").capitalize()
 
 
 ## Override this method to define the default value of the arguments defined in [method _get_arguments_list].[br][br]

@@ -76,10 +76,6 @@ func _get_argument_default_value(arg_name: StringName) -> Variant:
 	return super(arg_name)
 
 
-func _get_argument_display_name(arg_name: StringName) -> String:
-	return super(arg_name.trim_prefix(&"CATEGORY_"))
-
-
 
 func _get_output_ports_list() -> Array[StringName]:
 	return [&"data"]

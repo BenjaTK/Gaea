@@ -15,7 +15,48 @@ class_name GaeaNodeSnakePath2D
 ## generates its level layouts as seen [url=https://tinysubversions.com/spelunkyGen/]here[/url].
 
 
-func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: GaeaData) -> Dictionary:
+func _get_title() -> String:
+	return "SnakePath2D"
+
+
+func _get_description() -> String:
+	return "Generates a path that goes from the top of the world to the bottom, with each cell consisting of flags that indicate their exits (up, down, left, right)."
+
+
+func _get_arguments_list() -> Array[StringName]:
+	return [&"move_left_weight", &"move_right_weight", &"move_down_weight",
+			&"CATEGORY_FLAGS", &"left", &"right", &"down", &"up"]
+
+
+func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	match arg_name:
+		&"move_left_weight", &"move_right_weight", &"move_down_weight":
+			return GaeaValue.Type.INT
+		&"left", &"right", &"down", &"up":
+			return GaeaValue.Type.BITMASK_EXCLUSIVE
+
+	return super(arg_name)
+
+
+func _get_argument_default_value(arg_name: StringName) -> Variant:
+	match arg_name:
+		&"move_left_weight", &"move_right_weight", &"move_down_weight": return 40
+		&"left": return 1
+		&"right": return 2
+		&"down": return 4
+		&"up": return 8
+	return super(arg_name)
+
+
+func _get_output_ports_list() -> Array[StringName]:
+	return [&"data"]
+
+
+func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.DATA
+
+
+func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
 	_log_data(output_port, generator_data)
 
 	var direction_weights: Dictionary[Vector2i, float] = {
@@ -67,4 +108,4 @@ func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: Gaea
 	for cell in path:
 		grid[Vector3i(cell.x, cell.y, 0)] = path.get(cell)
 
-	return output_port.return_value(grid)
+	return grid
