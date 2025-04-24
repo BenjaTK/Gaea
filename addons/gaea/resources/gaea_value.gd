@@ -36,7 +36,7 @@ enum Type {
 	FLAGS = 302, ## Same interface as bitmask, but returns an Array of flags.
 	NEIGHBORS = 303, ## An array of offset neighbors from a center tile.
 	RULES = 304, ## Rules for each cell in an area, whether it should be activate, inactive or there's no rule.
-	VARIABLE_NAME = 305, ## Name for [GaeaNodeVariable]s.
+	VARIABLE_NAME = 305, ## Name for [GaeaNodeParameter]s.
 }
 
 

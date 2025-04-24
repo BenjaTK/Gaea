@@ -49,7 +49,7 @@ var resources: Array[GaeaNodeResource]
 ## Saved data for each [GaeaNodeResource] such as position in the graph and changed arguments.
 ## [br][color=yellow][b]Warning:[/b][/color] Setting this directly can break your saved graph.
 @export_storage var node_data: Array[Dictionary]
-## List of parameters created with [GaeaNodeVariable].
+## List of parameters created with [GaeaNodeParameter].
 ## [br][color=yellow][b]Warning:[/b][/color] Setting this directly can break your saved graph.
 ## Use [method set_parameter] instead.
 @export_storage var parameters: Dictionary[StringName, Variant]

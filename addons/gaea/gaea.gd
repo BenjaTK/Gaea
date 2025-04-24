@@ -34,7 +34,7 @@ func _enter_tree() -> void:
 
 
 func _exit_tree() -> void:
-	await _panel.unpopulate()
+	_panel.unpopulate()
 	remove_inspector_plugin(_inspector_plugin)
 	remove_control_from_bottom_panel(_container)
 	_container.queue_free()

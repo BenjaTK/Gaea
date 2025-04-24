@@ -1,6 +1,6 @@
 @tool
-class_name GaeaNodeFloatVariable
-extends GaeaNodeVariable
+class_name GaeaNodeFloatParameter
+extends GaeaNodeParameter
 ## [float] variable editable in the inspector.
 
 
@@ -9,7 +9,7 @@ func _get_variant_type() -> int:
 
 
 func _get_title() -> String:
-	return "FloatVariable"
+	return "FloatParameter"
 
 
 func _get_description() -> String:

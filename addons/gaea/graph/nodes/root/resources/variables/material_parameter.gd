@@ -1,7 +1,8 @@
 @tool
-class_name GaeaNodeGradientVariable
-extends GaeaNodeVariable
-## [GaeaMaterialGradient] variable editable in the inspector.
+class_name GaeaNodeMaterialParameter
+extends GaeaNodeParameter
+## [GaeaMaterial] variable editable in the inspector.
+
 
 
 func _get_variant_type() -> int:
@@ -13,12 +14,12 @@ func _get_property_hint() -> PropertyHint:
 
 
 func _get_property_hint_string() -> String:
-	return "GaeaMaterialGradient"
+	return "GaeaMaterial"
 
 
 func _get_title() -> String:
-	return "MaterialGradientVariable"
+	return "MaterialParameter"
 
 
 func _get_description() -> String:
-	return "GaeaMaterialGradient variable editable in the inspector."
+	return "GaeaMaterial variable editable in the inspector."

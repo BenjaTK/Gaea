@@ -1,11 +1,11 @@
 @tool
 extends GaeaNodeResource
-class_name GaeaNodeVariable
-## Generic class for [b]TypeVariable[/b] nodes. See [enum GaeaValue.Type].
+class_name GaeaNodeParameter
+## Generic class for [b]TypeParameter[/b] nodes. See [enum GaeaValue.Type].
 ##
 ## Adds a variable of [member type], with [member hint] and [member hint_string], editable in the
 ## inspector, which can be accessed by other nodes through this node's output.[br]
-## Variables are added to the [member GaeaData.parameters] array.
+## Parameters are added to the [member GaeaData.parameters] array.
 
 
 ## See [enum Variant.Type] and equivalents in [method GaeaValue.from_variant_type].
@@ -71,10 +71,6 @@ func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) ->
 	if data.has("value"):
 		return data.get("value")
 	return {}
-
-
-func _get_scene() -> PackedScene:
-	return preload("uid://bodjhgqp1bpui")
 
 
 func _is_available() -> bool:

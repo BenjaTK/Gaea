@@ -463,7 +463,7 @@ func _on_reload_parameters_list_button_pressed() -> void:
 		if node is not GaeaGraphNode:
 			continue
 
-		if node.resource is GaeaNodeVariable:
+		if node.resource is GaeaNodeParameter:
 			existing_parameters.append(node.get_arg_value("name"))
 
 

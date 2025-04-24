@@ -13,7 +13,7 @@ var _is_invalid_name: bool = false
 func _on_added() -> void:
 	super()
 
-	if resource is not GaeaNodeVariable:
+	if resource is not GaeaNodeParameter:
 		return
 
 	var _loading_loop_limit = 60

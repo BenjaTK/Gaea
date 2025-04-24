@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="GaeaNodeVariable" load_steps=6 format=3 uid="uid://btf8xr1jdb3xf"]
 
 [ext_resource type="Script" uid="uid://dil6xg31ctqdu" path="res://addons/gaea/graph/nodes/node_slot_output.gd" id="3_3cys7"]
-[ext_resource type="Script" uid="uid://bqa8aufofkr81" path="res://addons/gaea/graph/nodes/variable_node_resource.gd" id="3_5ww5p"]
+[ext_resource type="Script" uid="uid://bqa8aufofkr81" path="res://addons/gaea/graph/nodes/parameter_node_resource.gd" id="3_5ww5p"]
 [ext_resource type="Resource" uid="uid://i46iucpudaxi" path="res://addons/gaea/graph/components/slot_params/variable_name.tres" id="3_wp11r"]
 [ext_resource type="Script" uid="uid://b5mukn8hdt8ww" path="res://addons/gaea/graph/nodes/node_slot_param.gd" id="4_e01xd"]
 

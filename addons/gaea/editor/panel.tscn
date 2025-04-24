@@ -148,8 +148,8 @@ flat = true
 [node name="ReloadParametersListButton" type="Button" parent="Editor/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-tooltip_text = "Reload variables list.
-(Sometimes some variables aren't deleted properly, this helps remove those)"
+tooltip_text = "Reload parameters list.
+(Sometimes some parameters aren't deleted properly, this helps remove those)"
 icon = ExtResource("3_dhpru")
 flat = true
 

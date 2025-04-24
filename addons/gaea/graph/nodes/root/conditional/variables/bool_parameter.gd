@@ -1,6 +1,6 @@
 @tool
-class_name GaeaNodeBoolVariable
-extends GaeaNodeVariable
+class_name GaeaNodeBoolParameter
+extends GaeaNodeParameter
 ## [bool] variable editable in the inspector.
 
 
@@ -9,7 +9,7 @@ func _get_variant_type() -> int:
 
 
 func _get_title() -> String:
-	return "BoolVariable"
+	return "BoolParameter"
 
 
 func _get_description() -> String:

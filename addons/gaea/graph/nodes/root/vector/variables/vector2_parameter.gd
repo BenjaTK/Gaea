@@ -1,6 +1,6 @@
 @tool
-class_name GaeaNodeVector2Variable
-extends GaeaNodeVariable
+class_name GaeaNodeVector2Parameter
+extends GaeaNodeParameter
 ## [Vector2] variable editable in the inspector.
 
 
@@ -9,7 +9,7 @@ func _get_variant_type() -> int:
 
 
 func _get_title() -> String:
-	return "Vector2Variable"
+	return "Vector2Parameter"
 
 
 func _get_description() -> String:
