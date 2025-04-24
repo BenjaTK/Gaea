@@ -4,7 +4,7 @@ class_name GaeaNodeFilter
 ## Abstract class used for filter nodes.
 
 
-func _get_required_params() -> Array[StringName]:
+func _get_required_arguments() -> Array[StringName]:
 	return [params[0].name]
 
 

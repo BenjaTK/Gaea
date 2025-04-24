@@ -4,7 +4,7 @@ class_name GaeaNodeDataOperation
 ## Applies [member operation] to a value of [enum GaeaValue.Type] Data and a value of type [code]float[/code].
 
 
-func _get_required_params() -> Array[StringName]:
+func _get_required_arguments() -> Array[StringName]:
 	return [&"data"]
 
 func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: GaeaData) -> Dictionary:

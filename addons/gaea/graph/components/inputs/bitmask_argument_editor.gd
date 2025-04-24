@@ -1,6 +1,6 @@
 @tool
-extends GaeaGraphNodeParameterEditor
-class_name GaeaBitsParameterEditor
+extends GaeaGraphNodeArgumentEditor
+class_name GaeaBitsArgumentEditor
 
 @onready var grid_container: GridContainer = $GridContainer
 @onready var drop_button: TextureButton = $DropButton
@@ -34,10 +34,10 @@ func _on_drop_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_value_changed() -> void:
-	argument_value_changed.emit(get_param_value())
+	argument_value_changed.emit(get_arg_value())
 
 
-func get_param_value() -> Variant:
+func get_arg_value() -> Variant:
 	if super() != null:
 		return super()
 
@@ -55,7 +55,7 @@ func get_param_value() -> Variant:
 		return flags
 
 
-func set_param_value(new_value: Variant) -> void:
+func set_arg_value(new_value: Variant) -> void:
 	if resource.type != GaeaValue.Type.FLAGS:
 		if typeof(new_value) != TYPE_INT:
 			return

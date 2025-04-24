@@ -1,6 +1,6 @@
 @tool
-extends GaeaGraphNodeParameterEditor
-class_name GaeaRulesParameterEditor
+extends GaeaGraphNodeArgumentEditor
+class_name GaeaRulesArgumentEditor
 
 @onready var grid_container: GridContainer = $GridContainer
 
@@ -15,10 +15,10 @@ func _configure() -> void:
 
 
 func _on_value_changed() -> void:
-	argument_value_changed.emit(get_param_value())
+	argument_value_changed.emit(get_arg_value())
 
 
-func get_param_value() -> Dictionary:
+func get_arg_value() -> Dictionary:
 	if super() != null:
 		return super()
 	var dict: Dictionary
@@ -28,7 +28,7 @@ func get_param_value() -> Dictionary:
 	return dict
 
 
-func set_param_value(new_value: Variant) -> void:
+func set_arg_value(new_value: Variant) -> void:
 	if typeof(new_value) != TYPE_DICTIONARY:
 		return
 

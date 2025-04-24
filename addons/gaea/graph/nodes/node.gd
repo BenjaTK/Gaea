@@ -28,7 +28,7 @@ static var _titlebar_styleboxes: Dictionary[GaeaValue.Type, Dictionary]
 var _preview: _PreviewTexture
 var _preview_container: VBoxContainer
 var _finished_loading: bool = false : set = set_finished_loading, get = has_finished_loading
-var _editors: Dictionary[StringName, GaeaGraphNodeParameterEditor]
+var _editors: Dictionary[StringName, GaeaGraphNodeArgumentEditor]
 var _enum_editors: Array[OptionButton]
 
 
@@ -43,7 +43,7 @@ func _ready() -> void:
 
 
 ## Initializes the node with a preview if needed, a salt value and instantiates all the
-## [GaeaGraphNodeParameterEditor] and [GaeaGraphNodeOutput] nodes.
+## [GaeaGraphNodeArgumentEditor] and [GaeaGraphNodeOutput] nodes.
 func _on_added() -> void:
 	if not is_instance_valid(resource) or is_part_of_edited_scene():
 		return
@@ -126,9 +126,9 @@ func _add_slots() -> void:
 			slot.get_toggle_preview_button().button_group = preview_button_group
 
 
-func _add_argument_editor(for_arg: StringName) -> GaeaGraphNodeParameterEditor:
+func _add_argument_editor(for_arg: StringName) -> GaeaGraphNodeArgumentEditor:
 	var scene: PackedScene = GaeaValue.get_editor_for_type(resource.get_argument_type(for_arg))
-	var node: GaeaGraphNodeParameterEditor = scene.instantiate()
+	var node: GaeaGraphNodeArgumentEditor = scene.instantiate()
 	add_child(node)
 	node.initialize(
 		self,
@@ -181,22 +181,22 @@ func _add_preview_container() -> void:
 		_preview.update()
 
 
-## Returns the current value set in the [GaeaGraphNodeParameterEditor] for the argument of [param arg_name].
+## Returns the current value set in the [GaeaGraphNodeArgumentEditor] for the argument of [param arg_name].
 func get_arg_value(arg_name: String) -> Variant:
-	var editor: GaeaGraphNodeParameterEditor = _editors.get(arg_name, null)
+	var editor: GaeaGraphNodeArgumentEditor = _editors.get(arg_name, null)
 	if is_instance_valid(editor):
-		return editor.get_param_value()
+		return editor.get_arg_value()
 	return null
 
 
-## Sets the [GaeaGraphNodeParameterEditor] associated to the argument of [param arg_name] to [param value].
+## Sets the [GaeaGraphNodeArgumentEditor] associated to the argument of [param arg_name] to [param value].
 func _set_arg_value(arg_name: String, value: Variant) -> void:
-	var editor: GaeaGraphNodeParameterEditor = _editors.get(arg_name, null)
+	var editor: GaeaGraphNodeArgumentEditor = _editors.get(arg_name, null)
 	if is_instance_valid(editor):
-		editor.set_param_value(value)
+		editor.set_arg_value(value)
 
 
-func _on_argument_value_changed(value: Variant, _node: GaeaGraphNodeParameterEditor, arg_name: String) -> void:
+func _on_argument_value_changed(value: Variant, _node: GaeaGraphNodeArgumentEditor, arg_name: String) -> void:
 	if _finished_loading:
 		resource.set_argument_value(arg_name, value)
 		save_requested.emit()
@@ -220,8 +220,8 @@ func _update_arguments_visibility() -> void:
 			continue
 		input_idx += 1
 
-		if child is GaeaGraphNodeParameterEditor:
-			child.set_param_visible(not connections.any(_is_connected_to.bind(input_idx)))
+		if child is GaeaGraphNodeArgumentEditor:
+			child.set_editor_visible(not connections.any(_is_connected_to.bind(input_idx)))
 
 	auto_shrink()
 
@@ -289,7 +289,7 @@ func load_save_data(saved_data: Dictionary) -> void:
 	if saved_data.has("arguments"):
 		var arguments = saved_data.get("arguments")
 		for argument: StringName in resource.get_arguments_list():
-			var editor: GaeaGraphNodeParameterEditor = _editors.get(argument)
+			var editor: GaeaGraphNodeArgumentEditor = _editors.get(argument)
 			if not is_instance_valid(editor):
 				break
 
@@ -297,7 +297,7 @@ func load_save_data(saved_data: Dictionary) -> void:
 				arguments.set(argument, resource.get_argument_default_value(argument))
 
 			if arguments.get(argument) != null:
-				editor.set_param_value(arguments.get(argument))
+				editor.set_arg_value(arguments.get(argument))
 
 
 	_finished_loading = true

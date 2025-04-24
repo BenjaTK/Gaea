@@ -12,7 +12,7 @@ class_name GaeaNodeBorder2D
 ## Output data is a grid of [code]1.0[/code]s.
 
 
-func _get_required_params() -> Array[StringName]:
+func _get_required_arguments() -> Array[StringName]:
 	return [&"data"]
 
 

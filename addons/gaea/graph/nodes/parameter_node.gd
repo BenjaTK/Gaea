@@ -54,7 +54,7 @@ func get_save_data() -> Dictionary:
 	return save_data
 
 
-func _on_argument_value_changed(value: Variant, node: GaeaGraphNodeParameterEditor, arg_name: String) -> void:
+func _on_argument_value_changed(value: Variant, node: GaeaGraphNodeArgumentEditor, arg_name: String) -> void:
 	if arg_name != "name" and value is not String:
 		return
 

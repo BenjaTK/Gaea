@@ -1,6 +1,6 @@
 @tool
-extends GaeaGraphNodeParameterEditor
-class_name GaeaNeighborParameterEditor
+extends GaeaGraphNodeArgumentEditor
+class_name GaeaNeighborArgumentEditor
 
 
 const DIRECTIONS = [Vector2i.UP + Vector2i.LEFT		, Vector2i.UP	, Vector2i.UP + Vector2i.RIGHT,
@@ -19,10 +19,10 @@ func _configure() -> void:
 
 
 func _on_value_changed() -> void:
-	argument_value_changed.emit(get_param_value())
+	argument_value_changed.emit(get_arg_value())
 
 
-func get_param_value() -> Array[Vector2i]:
+func get_arg_value() -> Array[Vector2i]:
 	if super() != null:
 		return super()
 
@@ -34,7 +34,7 @@ func get_param_value() -> Array[Vector2i]:
 	return value
 
 
-func set_param_value(new_value: Variant) -> void:
+func set_arg_value(new_value: Variant) -> void:
 	if typeof(new_value) != TYPE_ARRAY:
 		return
 

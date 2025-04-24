@@ -48,7 +48,7 @@ func _validate_property(property: Dictionary) -> void:
 
 func get_node(_graph_node: GaeaGraphNode, _idx: int) -> Control:
 	var scene: PackedScene = get_scene_from_type(type)
-	var node: GaeaGraphNodeParameterEditor = scene.instantiate()
+	var node: GaeaGraphNodeArgumentEditor = scene.instantiate()
 	node.resource = self
 	node.initialize(_graph_node, _idx)
 	return node

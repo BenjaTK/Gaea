@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dox5e4tnafwet"
-path="res://.godot/imported/parameter_editor.svg-8a5814218dcd6dff896188e64ebe9abb.ctex"
+path="res://.godot/imported/argument_editor.svg-133fa3c24b8951fdee65446f91ec95b9.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gaea/assets/parameter_editor.svg"
-dest_files=["res://.godot/imported/parameter_editor.svg-8a5814218dcd6dff896188e64ebe9abb.ctex"]
+source_file="res://addons/gaea/assets/argument_editor.svg"
+dest_files=["res://.godot/imported/argument_editor.svg-133fa3c24b8951fdee65446f91ec95b9.ctex"]
 
 [params]
 

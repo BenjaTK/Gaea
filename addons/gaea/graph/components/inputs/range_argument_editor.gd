@@ -1,6 +1,6 @@
 @tool
-extends GaeaGraphNodeParameterEditor
-class_name GaeaRangeParameterEditor
+extends GaeaGraphNodeArgumentEditor
+class_name GaeaRangeArgumentEditor
 
 
 @onready var min_slider: HSlider = $MinSlider
@@ -63,7 +63,7 @@ func _on_slider_changed_value() -> void:
 	area_panel.position.x = min_slider.size.x * _get_relative(min_slider.value)
 	min_spin_box.set_value_no_signal(min_slider.value)
 	max_spin_box.set_value_no_signal(max_slider.value)
-	argument_value_changed.emit(get_param_value())
+	argument_value_changed.emit(get_arg_value())
 
 
 func _on_spin_box_changed_value() -> void:
@@ -118,7 +118,7 @@ func _on_min_slider_gui_input(event: InputEvent) -> void:
 		max_slider.release_focus()
 
 
-func get_param_value() -> Dictionary:
+func get_arg_value() -> Dictionary:
 	if super() != null:
 		return super()
 	return {
@@ -127,7 +127,7 @@ func get_param_value() -> Dictionary:
 	}
 
 
-func set_param_value(new_value: Variant) -> void:
+func set_arg_value(new_value: Variant) -> void:
 	if typeof(new_value) != TYPE_DICTIONARY:
 		return
 	max_slider.value = new_value.get("max", 1.0)

@@ -17,7 +17,7 @@ class_name GaeaNodeRulesPlacer
 ## will have [param material] there.
 
 
-func _get_required_params() -> Array[StringName]:
+func _get_required_arguments() -> Array[StringName]:
 	return [&"data", &"material"]
 
 

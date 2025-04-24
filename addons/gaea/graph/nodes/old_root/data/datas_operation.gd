@@ -4,7 +4,7 @@ class_name GaeaNodeDatasOperation
 ## Applies [member operation] to 2 grids of [enum GaeaValue.Type] Data.
 
 
-func _get_required_params() -> Array[StringName]:
+func _get_required_arguments() -> Array[StringName]:
 	return [&"data_a", &"data_b"]
 
 

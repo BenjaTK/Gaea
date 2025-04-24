@@ -5,7 +5,7 @@ class_name GaeaNodeGradientMapper
 ## corresponding material to the values in [param data].
 
 
-func _get_required_params() -> Array[StringName]:
+func _get_required_arguments() -> Array[StringName]:
 	return [&"data", &"gradient"]
 
 

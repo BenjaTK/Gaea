@@ -29,7 +29,7 @@ func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.MAP
 
 
-func _get_required_params() -> Array[StringName]:
+func _get_required_arguments() -> Array[StringName]:
 	return [&"data", &"material"]
 
 

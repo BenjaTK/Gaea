@@ -1,6 +1,6 @@
 @tool
-extends GaeaGraphNodeParameterEditor
-class_name GaeaVector3ParameterEditor
+extends GaeaGraphNodeArgumentEditor
+class_name GaeaVector3ArgumentEditor
 
 
 @onready var _x_spin_box: SpinBox = $XSpinBox
@@ -19,13 +19,13 @@ func _configure() -> void:
 
 
 
-func get_param_value() -> Vector3:
+func get_arg_value() -> Vector3:
 	if super() != null:
 		return super()
 	return Vector3(_x_spin_box.value, _y_spin_box.value, _z_spin_box.value)
 
 
-func set_param_value(new_value: Variant) -> void:
+func set_arg_value(new_value: Variant) -> void:
 	if typeof(new_value) != TYPE_VECTOR3:
 		return
 

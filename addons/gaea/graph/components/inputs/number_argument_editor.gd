@@ -1,6 +1,6 @@
 @tool
-extends GaeaGraphNodeParameterEditor
-class_name GaeaNumberParameterEditor
+extends GaeaGraphNodeArgumentEditor
+class_name GaeaNumberArgumentEditor
 
 
 @onready var spin_box: SpinBox = $SpinBox
@@ -26,13 +26,13 @@ func _configure() -> void:
 	#spin_box.prefix = resource.hint.get("prefix", "")
 
 
-func get_param_value() -> float:
+func get_arg_value() -> float:
 	if super() != null:
 		return super()
 	return spin_box.value
 
 
-func set_param_value(new_value: Variant) -> void:
+func set_arg_value(new_value: Variant) -> void:
 	if typeof(new_value) not in [TYPE_FLOAT, TYPE_INT]:
 		return
 	spin_box.value = new_value

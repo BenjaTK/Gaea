@@ -7,10 +7,7 @@ extends Resource
 ## Nodes are the base of Gaea's generation system. Some nodes generate data from scratch,
 ## while others modify said data to produce different results.[br][br]
 ##
-## This resource holds data such as required inputs, [member params], [member outputs], etc.,
-## and are in charge of the generation and/or modification of data/values. See [GaeaValue]
-## for what this data can be.[br][br]
-##
+## Gaea nodes are configured and created through their script.
 ## They are then modified using [GaeaGraphNode]s in the bottom Gaea panel.
 ##
 ## @tutorial(Anatomy of a Graph): https://gaea-godot.github.io/gaea-docs/#/2.0/tutorials/anatomy-of-a-graph
@@ -49,7 +46,7 @@ var connections: Array[Dictionary]
 var resource_uid: String
 ## The related [GaeaGraphNode] for editing in the Gaea graph editor.
 var node: GaeaGraphNode
-## A Dictionary holding the values of the arguments in [member params]
+## A Dictionary holding the values of the arguments
 ## where the keys are their names.
 var arguments: Dictionary
 var enum_selections: Array
@@ -378,7 +375,7 @@ func traverse(output_port: StringName, area: AABB, generator_data:GaeaData) -> V
 		return _get_cached_data(output_port, generator_data)
 
 	# Validation
-	if not _has_inputs_connected(_get_required_params(), generator_data):
+	if not _has_inputs_connected(_get_required_arguments(), generator_data):
 		return {}
 
 	# Get Data
@@ -428,9 +425,9 @@ func _get_cached_data(output_port: StringName, generator_data:GaeaData) -> Dicti
 
 
 #region Inputs
-## Returns an array of the name of the parameters that are expected to be connected for the Node Resource to
+## Returns an array of the name of the arguments that are expected to be connected for the Node Resource to
 ## execute properly. Can be overridden in nodes that extend [GaeaNodeResource].
-func _get_required_params() -> Array[StringName]:
+func _get_required_arguments() -> Array[StringName]:
 	return []
 
 

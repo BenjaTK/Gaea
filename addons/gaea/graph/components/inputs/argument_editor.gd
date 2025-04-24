@@ -1,6 +1,6 @@
 @tool
-@icon("../../../assets/parameter_editor.svg")
-class_name GaeaGraphNodeParameterEditor
+@icon("../../../assets/argument_editor.svg")
+class_name GaeaGraphNodeArgumentEditor
 extends Control
 ## An editor inside [GaeaGraphNode]s to change values of arguments, or a simple input slot
 ## if there's no existing editor.
@@ -11,9 +11,6 @@ extends Control
 signal argument_value_changed(new_value: Variant)
 
 var type: GaeaValue.Type
-## The resource that holds the information of this node, such as [member GaeaNodeSlotParam.default_value]
-## and [member GaeaNodeSlotParam.name], and others.
-var resource: GaeaNodeSlotParam
 ## Reference to the [GaeaGraphNode] instance
 var graph_node: GaeaGraphNode
 ## Index of the slot in the [GaeaGraphNode].
@@ -27,7 +24,7 @@ func initialize(for_graph_node: GaeaGraphNode, for_type: GaeaValue.Type, display
 	graph_node = for_graph_node
 	type = for_type
 	set_label_text(display_name)
-	set_param_value(default_value)
+	set_arg_value(default_value)
 	slot_idx = get_index()
 
 	_configure()
@@ -54,12 +51,12 @@ func _configure() -> void:
 
 
 ## Override to return the value in the editor.
-func get_param_value() -> Variant:
+func get_arg_value() -> Variant:
 	return null
 
 
 ## Override to allow setting the value in the editor.
-func set_param_value(_new_value: Variant) -> void:
+func set_arg_value(_new_value: Variant) -> void:
 	pass
 
 
@@ -74,7 +71,7 @@ func get_label_text() -> String:
 
 
 ## If [param value] is [code]false[/code], hides everything in the editor except the name label.
-func set_param_visible(value: bool) -> void:
+func set_editor_visible(value: bool) -> void:
 	for child in get_children():
 		if child == _label:
 			continue

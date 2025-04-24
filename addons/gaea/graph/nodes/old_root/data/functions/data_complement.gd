@@ -6,7 +6,7 @@ class_name GaeaNodeDataComplement
 ## Returns all the points outside [param data] set to [code]1.0[/code].
 
 
-func _get_required_params() -> Array[StringName]:
+func _get_required_arguments() -> Array[StringName]:
 	return [&"data"]
 
 
