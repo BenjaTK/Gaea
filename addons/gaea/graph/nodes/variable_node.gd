@@ -54,7 +54,6 @@ func get_save_data() -> Dictionary:
 	return save_data
 
 
-
 func _on_argument_value_changed(value: Variant, node: GaeaGraphNodeParameterEditor, arg_name: String) -> void:
 	if arg_name != "name" and value is not String:
 		return
@@ -81,6 +80,7 @@ func _on_argument_value_changed(value: Variant, node: GaeaGraphNodeParameterEdit
 
 	generator.data.notify_property_list_changed()
 	save_requested.emit.call_deferred()
+
 
 
 func _get_default_value(for_type: Variant.Type) -> Variant:

@@ -179,6 +179,11 @@ func get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 	return _get_output_port_type(output_name)
 
 
+## Public version of [method _get_output_arguments_merged_with]. Prefer to override that method over this one.
+func get_output_argument_merged_with(output_name: StringName) -> StringName:
+	return _get_output_argument_merged_with(output_name)
+
+
 ## Get the name of the node as shown in the 'Create Node' dialog. Is normally the same
 ## title as in the graph, but can be overriden with [member tree_name_override].
 func get_tree_name() -> String:
@@ -281,6 +286,14 @@ func _get_output_port_display_name(output_name: StringName) -> String:
 ## Defining this method is [b]required[/b].
 func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.NULL
+
+
+## If this returns a valid argument name, the output slot for [param output_name] will be
+## added in that argument's index instead.[br][br]
+## Overriding this method is [b]dangerous[/b]. Outputs should still follow the same order as in
+## [method _get_output_list]; and the slot won't have a display name nor a preview.
+func _get_output_argument_merged_with(output_name: StringName) -> StringName:
+	return &""
 
 
 ## If this returns [code]false[/code], this node won't show up in the 'Create Node' dialog.

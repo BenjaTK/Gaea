@@ -121,7 +121,9 @@ func _add_slots() -> void:
 	preview_button_group.allow_unpress = true
 
 	for output in resource.get_output_ports_list():
-		_add_output_slot(output).get_toggle_preview_button().button_group = preview_button_group
+		var slot := _add_output_slot(output)
+		if is_instance_valid(slot):
+			slot.get_toggle_preview_button().button_group = preview_button_group
 
 
 func _add_argument_editor(for_arg: StringName) -> GaeaGraphNodeParameterEditor:
@@ -139,6 +141,18 @@ func _add_argument_editor(for_arg: StringName) -> GaeaGraphNodeParameterEditor:
 
 
 func _add_output_slot(for_output: StringName) -> GaeaGraphNodeOutput:
+	if not resource.get_output_argument_merged_with(for_output).is_empty():
+		var merge_with: StringName = resource.get_output_argument_merged_with(for_output)
+		if _editors.has(merge_with):
+			var editor := _editors[merge_with]
+			var idx: int = editor.get_index()
+			var type: GaeaValue.Type = resource.get_output_port_type(for_output)
+			set_slot_enabled_right(idx, true)
+			set_slot_type_right(idx, type)
+			set_slot_color_right(idx, GaeaValue.get_color(type))
+			set_slot_custom_icon_right(idx, GaeaValue.get_slot_icon(type))
+			return null
+
 	var node: GaeaGraphNodeOutput = preload("uid://cqpby5jyv71l0").instantiate()
 	add_child(node)
 	node.initialize(

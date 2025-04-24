@@ -4,9 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/inputs/base_parameter.tscn" id="1_gco3q"]
 
 [node name="NumberParameter" instance=ExtResource("1_gco3q")]
+size_flags_horizontal = 3
 script = ExtResource("1_g0oou")
-add_input_slot = true
-input_type = 4
 
 [node name="SpinBox" type="SpinBox" parent="." index="1"]
 layout_mode = 2
