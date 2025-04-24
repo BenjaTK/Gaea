@@ -57,7 +57,7 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"value"]
 
 
-func _get_overriden_slot_idx_for_output(output_name: StringName) -> int:
+func _get_overridden_output_port_idx(output_name: StringName) -> int:
 	return 0
 
 

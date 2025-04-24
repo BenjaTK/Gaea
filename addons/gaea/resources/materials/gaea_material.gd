@@ -21,7 +21,7 @@ func _init() -> void:
 		preview_color = Color(randf(), randf(), randf())
 
 
-## Normally returns itself, but can be overriden to return other [GaeaMaterial] resources
+## Normally returns itself, but can be overridden to return other [GaeaMaterial] resources
 ## depending on certain behavior.
 func get_resource() -> GaeaMaterial:
 	return self

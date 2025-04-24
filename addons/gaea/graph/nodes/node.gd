@@ -134,8 +134,8 @@ func _add_argument_editor(for_arg: StringName) -> GaeaGraphNodeArgumentEditor:
 
 
 func _add_output_slot(for_output: StringName) -> GaeaGraphNodeOutput:
-	if resource.get_overriden_slot_idx_for_output(for_output) >= 0:
-		var new_idx: int = resource.get_overriden_slot_idx_for_output(for_output)
+	if resource.get_overridden_output_port_idx(for_output) >= 0:
+		var new_idx: int = resource.get_overridden_output_port_idx(for_output)
 		if get_child_count() > new_idx:
 			var type: GaeaValue.Type = resource.get_output_port_type(for_output)
 			set_slot_enabled_right(new_idx, true)

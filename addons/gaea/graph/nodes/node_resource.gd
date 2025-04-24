@@ -80,7 +80,7 @@ func set_default_argument_value_override(arg_name: StringName, value: Variant) -
 	default_value_overrides.set(arg_name, value)
 
 
-## Clear the overriden default value of the argument of [param arg_name].
+## Clear the overridden default value of the argument of [param arg_name].
 func clear_default_argument_value_override(arg_name: StringName) -> void:
 	default_value_overrides.erase(arg_name)
 
@@ -90,7 +90,7 @@ func set_default_enum_value_override(enum_idx: int, value: int) -> void:
 	default_enum_value_overrides.set(enum_idx, value)
 
 
-## Clear the overriden default value of the enum at [param enum_idx].
+## Clear the overridden default value of the enum at [param enum_idx].
 func clear_default_enum_value_override(enum_idx: int) -> void:
 	default_enum_value_overrides.erase(enum_idx)
 
@@ -180,13 +180,13 @@ func get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 	return _get_output_port_type(output_name)
 
 
-## Public version of [method _get_overriden_slot_idx_for_output]. Prefer to override that method over this one.
-func get_overriden_slot_idx_for_output(output_name: StringName) -> int:
-	return _get_overriden_slot_idx_for_output(output_name)
+## Public version of [method _get_overridden_output_port_idx]. Prefer to override that method over this one.
+func get_overridden_output_port_idx(output_name: StringName) -> int:
+	return _get_overridden_output_port_idx(output_name)
 
 
 ## Get the name of the node as shown in the 'Create Node' dialog. Is normally the same
-## title as in the graph, but can be overriden with [member tree_name_override].
+## title as in the graph, but can be overridden with [member tree_name_override].
 func get_tree_name() -> String:
 	return tree_name_override if not tree_name_override.is_empty() else _get_title()
 
@@ -248,7 +248,7 @@ func _get_enum_default_value(enum_idx: int) -> int:
 ## Should be a list of (preferably) [code]snake_case[/code] names.[br][br]
 ## Defining this method is [b]required[/b].
 func _get_arguments_list() -> Array[StringName]:
-	push_warning("_get_arguments_list wasn't overriden in %s, node will have no arguments." % get_script().resource_path)
+	push_warning("_get_arguments_list wasn't overridden in %s, node will have no arguments." % get_script().resource_path)
 	return []
 
 
@@ -303,7 +303,7 @@ func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 ## added in that index instead of below the arguments.[br][br]
 ## Overriding this method is [b]dangerous[/b]. Outputs should still follow the same order as in
 ## [method _get_output_list]; and the slot won't have a display name nor a preview.
-func _get_overriden_slot_idx_for_output(output_name: StringName) -> int:
+func _get_overridden_output_port_idx(output_name: StringName) -> int:
 	return -1
 
 
@@ -322,7 +322,7 @@ func set_enum_value(enum_idx: int, option_value: int) -> void:
 	_on_enum_value_changed(enum_idx, option_value)
 
 
-## Called when an enum is changed in the editor. When overriden,
+## Called when an enum is changed in the editor. When overridden,
 ## [method super] should [b]always[/b] be called at the head of the function.
 func _on_enum_value_changed(enum_idx: int, option_value: int) -> void:
 	return
@@ -404,7 +404,7 @@ func traverse(output_port: StringName, area: AABB, generator_data:GaeaData) -> V
 	return results
 
 
-## Returns the data corresponding to [param output_port]. Should be overriden to create custom
+## Returns the data corresponding to [param output_port]. Should be overridden to create custom
 ## behavior for each node.
 @warning_ignore("unused_parameter")
 func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Variant:
@@ -413,7 +413,7 @@ func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) ->
 
 
 #region Caching
-## Checks if this node should use caching or not. Can be overriden to disable it.
+## Checks if this node should use caching or not. Can be overridden to disable it.
 func _use_caching(_output_port: StringName, _generator_data:GaeaData) -> bool:
 	return true
 
@@ -554,7 +554,7 @@ func get_scene() -> PackedScene:
 	return _get_scene()
 
 
-## Virtual method. Should be overriden if the node should use a different scene in the Gaea editor from the base one.
+## Virtual method. Should be overridden if the node should use a different scene in the Gaea editor from the base one.
 func _get_scene() -> PackedScene:
 	return preload("uid://b7e2d15kxt2im")
 

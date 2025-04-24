@@ -39,19 +39,19 @@ func _connect_signals() -> void:
 		generator.reset_requested.connect(_reset)
 
 
-## Should be overriden with custom behavior for rendering the [param grid].
+## Should be overridden with custom behavior for rendering the [param grid].
 @warning_ignore("unused_parameter")
 func _render(grid: GaeaGrid) -> void:
 	pass
 
 
-## Should be overriden with custom behavior for erasing the rendered [param area].
+## Should be overridden with custom behavior for erasing the rendered [param area].
 @warning_ignore("unused_parameter")
 func _on_area_erased(area: AABB) -> void:
 	pass
 
 
-## Should be overriden with custom behavior to clear/_reset the previously-rendered generation.
+## Should be overridden with custom behavior to clear/_reset the previously-rendered generation.
 ## Should return the _render to a 'default' state,
 func _reset() -> void:
 	pass
