@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://n5b6hp10iv25"]
+
+[ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/inputs/argument_editor.tscn" id="1_yiyco"]
+[ext_resource type="Script" uid="uid://cdbogn6evfm3k" path="res://addons/gaea/graph/components/inputs/vector2i_argument_editor.gd" id="2_yiyco"]
+
+[node name="Vector2iParameter" instance=ExtResource("1_yiyco")]
+script = ExtResource("2_yiyco")
+
+[node name="XSpinBox" type="SpinBox" parent="." index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+rounded = true
+allow_greater = true
+allow_lesser = true
+prefix = "X"
+
+[node name="YSpinBox" type="SpinBox" parent="." index="2"]
+layout_mode = 2
+size_flags_horizontal = 3
+rounded = true
+allow_greater = true
+allow_lesser = true
+prefix = "Y"

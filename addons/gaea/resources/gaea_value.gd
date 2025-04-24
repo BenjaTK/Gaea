@@ -67,8 +67,12 @@ static func get_default_value(type: Type) -> Variant:
 			return 0.0
 		Type.VECTOR2:
 			return Vector2.ZERO
+		Type.VECTOR2I:
+			return Vector2i.ZERO
 		Type.VECTOR3:
 			return Vector3.ZERO
+		Type.VECTOR3I:
+			return Vector3i.ZERO
 		# Simple types
 		Type.RANGE:
 			return {"min": 0.0, "max": 1.0}
@@ -92,7 +96,7 @@ static func from_variant_type(type: Variant.Type, hint: PropertyHint = PROPERTY_
 			return Type.INT
 		TYPE_FLOAT:
 			return Type.FLOAT
-		TYPE_VECTOR2, TYPE_VECTOR2I:
+		TYPE_VECTOR2I, TYPE_VECTOR2:
 			return Type.VECTOR2
 		TYPE_BOOL:
 			return Type.BOOLEAN
@@ -101,7 +105,7 @@ static func from_variant_type(type: Variant.Type, hint: PropertyHint = PROPERTY_
 				return Type.MATERIAL
 			elif hint_string == "GaeaMaterialGradient":
 				return Type.GRADIENT
-		TYPE_VECTOR3, TYPE_VECTOR3I:
+		TYPE_VECTOR3I, TYPE_VECTOR3:
 			return Type.VECTOR3
 	return Type.NULL
 
@@ -132,9 +136,9 @@ static func get_default_color(type: Type) -> Color:
 			return Color("ffdd59") # YELLOW
 		Type.INT, Type.FLOAT:
 			return Color("a0a0a0") # GRAY
-		Type.VECTOR2:
+		Type.VECTOR2I, Type.VECTOR2:
 			return Color("00bfff") # LIGHT BLUE
-		Type.VECTOR3:
+		Type.VECTOR3I, Type.VECTOR3:
 			return Color("8e44ad") # MAGENTA
 		# Simple types
 		Type.RANGE:
@@ -164,9 +168,9 @@ static func get_display_icon(type: Type) -> Texture2D:
 			return load("uid://bilsfh3nrbhkl")
 		Type.FLOAT:
 			return load("uid://baw7ye0h4xdcx")
-		Type.VECTOR2:
+		Type.VECTOR2I, Type.VECTOR2:
 			return load("uid://c8uvy6c2syjk5")
-		Type.VECTOR3:
+		Type.VECTOR3I, Type.VECTOR3:
 			return load("uid://bkknri7u8ghs4")
 		# Simple types
 		Type.RANGE:
@@ -196,9 +200,9 @@ static func get_default_slot_icon(type: Type) -> Texture2D:
 			return load("uid://4b3i1xqd4052")
 		Type.INT, Type.FLOAT:
 			return load("uid://dqob6v3dudlri")
-		Type.VECTOR2:
+		Type.VECTOR2I, Type.VECTOR2:
 			return load("uid://bidpo1iw1t0vt")
-		Type.VECTOR3:
+		Type.VECTOR3I, Type.VECTOR3:
 			return load("uid://dbvw3j8fnmhpu")
 		# Simple types
 		Type.RANGE:
@@ -221,6 +225,8 @@ static func get_editor_for_type(for_type: GaeaValue.Type) -> PackedScene:
 			return preload("uid://dp7blnx7abb5e")
 		GaeaValue.Type.VECTOR2:
 			return preload("uid://rlocedi6g62i")
+		GaeaValue.Type.VECTOR2I:
+			return preload("uid://n5b6hp10iv25")
 		GaeaValue.Type.VARIABLE_NAME:
 			return preload("uid://bn8i1l4q13pdw")
 		GaeaValue.Type.RANGE:
@@ -233,6 +239,8 @@ static func get_editor_for_type(for_type: GaeaValue.Type) -> PackedScene:
 			return preload("uid://byaonbbfa2bx8")
 		GaeaValue.Type.VECTOR3:
 			return preload("uid://mlwupvg8a886")
+		GaeaValue.Type.VECTOR3I:
+			return preload("uid://be2xa7mvelrbn")
 		GaeaValue.Type.NEIGHBORS:
 			return preload("uid://d11yc7l6sneof")
 		GaeaValue.Type.RULES:
@@ -253,6 +261,9 @@ static func apply_property_type_hint(property: Dictionary, type: Type) -> void:
 		GaeaValue.Type.VECTOR2:
 			property.type = TYPE_VECTOR2
 			property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
+		GaeaValue.Type.VECTOR2I:
+			property.type = TYPE_VECTOR2I
+			property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
 		GaeaValue.Type.RANGE:
 			property.type = TYPE_DICTIONARY
 			property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
@@ -270,6 +281,9 @@ static func apply_property_type_hint(property: Dictionary, type: Type) -> void:
 			property.hint_string = "%d:" % [TYPE_INT]
 		GaeaValue.Type.VECTOR3:
 			property.type = TYPE_VECTOR3
+			property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
+		GaeaValue.Type.VECTOR3I:
+			property.type = TYPE_VECTOR3I
 			property.usage = PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_STORAGE
 		GaeaValue.Type.NEIGHBORS:
 			property.type = TYPE_ARRAY
