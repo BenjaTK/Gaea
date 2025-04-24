@@ -180,9 +180,9 @@ func get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 	return _get_output_port_type(output_name)
 
 
-## Public version of [method _get_output_arguments_merged_with]. Prefer to override that method over this one.
-func get_output_argument_merged_with(output_name: StringName) -> StringName:
-	return _get_output_argument_merged_with(output_name)
+## Public version of [method _get_overriden_slot_idx_for_output]. Prefer to override that method over this one.
+func get_overriden_slot_idx_for_output(output_name: StringName) -> int:
+	return _get_overriden_slot_idx_for_output(output_name)
 
 
 ## Get the name of the node as shown in the 'Create Node' dialog. Is normally the same
@@ -299,12 +299,12 @@ func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.NULL
 
 
-## If this returns a valid argument name, the output slot for [param output_name] will be
-## added in that argument's index instead.[br][br]
+## If this returns a value higher than 0, the output slot for [param output_name] will be
+## added in that index instead of below the arguments.[br][br]
 ## Overriding this method is [b]dangerous[/b]. Outputs should still follow the same order as in
 ## [method _get_output_list]; and the slot won't have a display name nor a preview.
-func _get_output_argument_merged_with(output_name: StringName) -> StringName:
-	return &""
+func _get_overriden_slot_idx_for_output(output_name: StringName) -> int:
+	return -1
 
 
 ## If this returns [code]false[/code], this node won't show up in the 'Create Node' dialog.

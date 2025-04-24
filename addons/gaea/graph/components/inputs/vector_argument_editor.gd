@@ -24,7 +24,26 @@ func _configure() -> void:
 	if type == GaeaValue.Type.VECTOR2 or type == GaeaValue.Type.VECTOR2I:
 		_z_spin_box.set_visible.call_deferred(false)
 		graph_node.auto_shrink.call_deferred()
-		
+
+	if hint.has("min"):
+		_x_spin_box.min_value = hint.get("min").x
+		_y_spin_box.min_value = hint.get("min").y
+		if type == GaeaValue.Type.VECTOR3 or type == GaeaValue.Type.VECTOR3I:
+			_z_spin_box.min_value = hint.get("min").z
+
+	if hint.has("max"):
+		_x_spin_box.min_value = hint.get("max").x
+		_y_spin_box.min_value = hint.get("max").y
+		if type == GaeaValue.Type.VECTOR3 or type == GaeaValue.Type.VECTOR3I:
+			_z_spin_box.min_value = hint.get("max").z
+
+	_x_spin_box.allow_lesser = not hint.has("min")
+	_y_spin_box.allow_lesser = not hint.has("min")
+	_z_spin_box.allow_lesser = not hint.has("min")
+	_x_spin_box.allow_greater = not hint.has("max")
+	_y_spin_box.allow_greater = not hint.has("max")
+	_z_spin_box.allow_greater = not hint.has("max")
+
 
 
 func get_arg_value() -> Variant:

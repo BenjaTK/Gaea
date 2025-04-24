@@ -57,8 +57,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"value"]
 
 
-func _get_output_argument_merged_with(output_name: StringName) -> StringName:
-	return &"name"
+func _get_overriden_slot_idx_for_output(output_name: StringName) -> int:
+	return 0
 
 
 func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:

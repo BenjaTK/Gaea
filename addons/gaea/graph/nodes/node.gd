@@ -134,16 +134,14 @@ func _add_argument_editor(for_arg: StringName) -> GaeaGraphNodeArgumentEditor:
 
 
 func _add_output_slot(for_output: StringName) -> GaeaGraphNodeOutput:
-	if not resource.get_output_argument_merged_with(for_output).is_empty():
-		var merge_with: StringName = resource.get_output_argument_merged_with(for_output)
-		if _editors.has(merge_with):
-			var editor := _editors[merge_with]
-			var idx: int = editor.get_index()
+	if resource.get_overriden_slot_idx_for_output(for_output) >= 0:
+		var new_idx: int = resource.get_overriden_slot_idx_for_output(for_output)
+		if get_child_count() > new_idx:
 			var type: GaeaValue.Type = resource.get_output_port_type(for_output)
-			set_slot_enabled_right(idx, true)
-			set_slot_type_right(idx, type)
-			set_slot_color_right(idx, GaeaValue.get_color(type))
-			set_slot_custom_icon_right(idx, GaeaValue.get_slot_icon(type))
+			set_slot_enabled_right(new_idx, true)
+			set_slot_type_right(new_idx, type)
+			set_slot_color_right(new_idx, GaeaValue.get_color(type))
+			set_slot_custom_icon_right(new_idx, GaeaValue.get_slot_icon(type))
 			return null
 
 	var node: GaeaGraphNodeOutput = preload("uid://cqpby5jyv71l0").instantiate()
