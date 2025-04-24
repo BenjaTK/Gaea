@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="GaeaNodeSnakePath2D" load_steps=13 format=3 uid="uid://bh1u4kqfvh0fy"]
 
 [ext_resource type="Resource" uid="uid://8w0nsvq1cu1r" path="res://addons/gaea/graph/components/slot_outputs/data.tres" id="2_0bq5q"]
-[ext_resource type="Script" uid="uid://d0bgv7yf1t1m6" path="res://addons/gaea/graph/nodes/old_root/data/generation/snake_path_2d.gd" id="3_ud703"]
+[ext_resource type="Script" uid="uid://d0bgv7yf1t1m6" path="res://addons/gaea/graph/nodes/root/data/generation/snake_path_2d.gd" id="3_ud703"]
 [ext_resource type="Script" uid="uid://dil6xg31ctqdu" path="res://addons/gaea/graph/nodes/node_slot_output.gd" id="3_w1xco"]
 [ext_resource type="Script" uid="uid://b5mukn8hdt8ww" path="res://addons/gaea/graph/nodes/node_slot_param.gd" id="4_tpsk7"]
 

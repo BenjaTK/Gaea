@@ -9,7 +9,39 @@ class_name GaeaNodeFalloffMap
 ## Multiplying this with a [GaeaNodeSimplexSmooth]'s generation can create island-looking terrains.
 
 
-func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: GaeaData) -> Dictionary:
+func _get_title() -> String:
+	return "FalloffMap"
+
+
+func _get_description() -> String:
+	return "Returns a grid that goes from higher values in the center to lower in the borders.\nRate can be adjusted with [param]start[/bg][/c] and [param]end[/bg][/c]."
+
+
+func _get_arguments_list() -> Array[StringName]:
+	return [&"start", &"end"]
+
+
+func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.FLOAT
+
+
+func _get_argument_default_value(arg_name: StringName) -> Variant:
+	match arg_name:
+		&"start": return 0.5
+		&"end": return 1.0
+	return super(arg_name)
+
+
+func _get_output_ports_list() -> Array[StringName]:
+	return [&"data"]
+
+
+func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.DATA
+
+
+
+func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
 	var start: float = _get_arg(&"start", area, generator_data)
 	var end: float = _get_arg(&"end", area, generator_data)
 	var new_grid: Dictionary[Vector3i, float]
@@ -32,4 +64,4 @@ func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: Gaea
 
 			new_grid[Vector3i(x, y, 0)] = falloff_value
 
-	return output_port.return_value(new_grid)
+	return new_grid

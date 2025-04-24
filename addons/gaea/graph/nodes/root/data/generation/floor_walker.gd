@@ -14,9 +14,9 @@ class_name GaeaNodeFloorWalker
 ## for example, as seen [url=https://web.archive.org/web/20151009004931/https://www.vlambeer.com/2013/04/02/random-level-generation-in-wasteland-kings/]here[/url].
 
 
-## Whether the walkers should walk along the [code]X[/code] and [code]Y[/code] axis
-## or the [code]X[/code] and [code]Z[/code] axis.
-@export var second_axis: Axis = Axis.Y
+enum AxisType {
+	XY, XZ
+}
 
 
 ## Walker as used in [GaeaNodeFloorWalker].
@@ -25,8 +25,73 @@ class Walker:
 	var pos: Vector3 ## Current position, should be rounded.
 
 
-func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: GaeaData) -> Dictionary:
+func _get_title() -> String:
+	return "FloorWalker"
+
+
+func _get_description() -> String:
+	return "Generates a floor by using [b]walkers[/b], which move around and set cells where they walk to [code]1.0[/bg][/c], while changing direction and/or spawning new walkers."
+
+
+func _get_enums_count() -> int:
+	return 1
+
+
+func _get_enum_options(_enum_idx: int) -> Dictionary:
+	return AxisType
+
+
+func _get_enum_option_display_name(_enum_idx: int, option_value: int) -> String:
+	return "%s Axis" % AxisType.find_key(option_value)
+
+
+func _get_arguments_list() -> Array[StringName]:
+	return [&"max_cells", &"starting_position",
+			&"CATEGORY_DIRECTION_CHANCES", &"direction_change_chance", &"rotate_90_weight", &"rotate_-90_weight", &"rotate_180_weight",
+			&"CATEGORY_WALKER_CHANCE", &"new_walker_chance", &"destroy_walker_chance", &"bigger_room_chance", &"bigger_room_size_range"
+			]
+
+
+func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	if arg_name.begins_with(&"CATEGORY"):
+		return GaeaValue.Type.CATEGORY
+
+	match arg_name:
+		&"starting_position":
+			return GaeaValue.Type.VECTOR3I
+		&"bigger_room_size_range":
+			return GaeaValue.Type.RANGE
+		_:
+			return GaeaValue.Type.INT
+
+
+func _get_argument_default_value(arg_name: StringName) -> Variant:
+	match arg_name:
+		&"max_cells": return 100
+		&"direction_change_chance": return 50
+		&"rotate_90_weight", &"rotate_-90_weight", &"rotate_180_weight": return 40
+		&"new_walker_chance", &"destroy_walker_chance": return 5
+		&"bigger_room_chance": return 15
+		&"bigger_room_size_range": return {"min": 2, "max": 3}
+	return super(arg_name)
+
+
+func _get_argument_display_name(arg_name: StringName) -> String:
+	return super(arg_name.trim_prefix(&"CATEGORY_"))
+
+
+
+func _get_output_ports_list() -> Array[StringName]:
+	return [&"data"]
+
+
+func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.DATA
+
+
+func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
 	_log_data(output_port, generator_data)
+	var axis_type: AxisType = get_enum_selection(0)
 
 	var _starting_position: Vector3 = _get_arg(&"starting_position", area, generator_data)
 	_starting_position = _starting_position.round()
@@ -48,7 +113,7 @@ func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: Gaea
 	var max_cells: int = _get_arg(&"max_cells", area, generator_data)
 	max_cells = mini(
 		max_cells,
-		roundi(area.size.x) * (roundi(area.size.y) if second_axis == Axis.Y else roundi(area.size.z))
+		roundi(area.size.x) * (roundi(area.size.y) if axis_type == AxisType.XY else roundi(area.size.z))
 	)
 
 	var _walkers: Array[Walker]
@@ -70,13 +135,13 @@ func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: Gaea
 
 			if rng.randf() <= direction_change_chance:
 				walker.dir = walker.dir.rotated(
-					Vector3(0, 0, 1) if second_axis == Axis.Y else Vector3(0, 1, 0),
+					Vector3(0, 0, 1) if axis_type == AxisType.XY else Vector3(0, 1, 0),
 					rotation_weights.keys()[rng.rand_weighted(rotation_weights.values())]
 					).round()
 
 			if rng.randf() <= bigger_room_chance:
 				var size: int = rng.randi_range(bigger_room_size_range.min, bigger_room_size_range.max)
-				for cell in _get_square_room(walker.pos, Vector3(size, size if second_axis == Axis.Y else 1, size if second_axis == Axis.Z else 1)):
+				for cell in _get_square_room(walker.pos, Vector3(size, size if axis_type == AxisType.XY else 1, size if axis_type == AxisType.XZ else 1)):
 					cell = cell.clamp(area.position, area.end - Vector3.ONE)
 					if not _walked_cells.has(Vector3i(cell)):
 						_walked_cells.append(Vector3i(cell))
@@ -96,7 +161,7 @@ func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: Gaea
 	for cell in _walked_cells:
 		grid[cell] = 1.0
 
-	return output_port.return_value(grid)
+	return grid
 
 
 func _add_walker(pos: Vector3, array: Array[Walker]) -> void:
@@ -105,8 +170,8 @@ func _add_walker(pos: Vector3, array: Array[Walker]) -> void:
 	walker.dir = [
 		Vector3.LEFT,
 		Vector3.RIGHT,
-		Vector3.DOWN if second_axis == Axis.Y else Vector3.FORWARD,
-		Vector3.UP if second_axis == Axis.Y else Vector3.BACK].pick_random()
+		Vector3.DOWN if get_enum_selection(0) == AxisType.XY else Vector3.FORWARD,
+		Vector3.UP if get_enum_selection(0) == AxisType.XY else Vector3.BACK].pick_random()
 	array.append(walker)
 
 
