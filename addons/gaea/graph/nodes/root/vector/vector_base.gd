@@ -30,6 +30,10 @@ func _get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
 	return super(enum_idx, option_value).replace(" ", "")
 
 
+func _get_enum_option_icon(_enum_idx: int, option_value: int) -> Texture:
+	return GaeaValue.get_display_icon(option_value)
+
+
 func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
 	notify_argument_list_changed()
 

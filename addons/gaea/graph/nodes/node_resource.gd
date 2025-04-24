@@ -136,6 +136,10 @@ func get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
 	return _get_enum_option_display_name(enum_idx, option_value)
 
 
+func get_enum_option_icon(enum_idx: int, option_value: int) -> Texture:
+	return _get_enum_option_icon(enum_idx, option_value)
+
+
 ## Public version of [method _get_enum_default_value]. Prefer to override that method over this one.
 func get_enum_default_value(enum_idx: int) -> int:
 	return default_enum_value_overrides.get(enum_idx, _get_enum_default_value(enum_idx))
@@ -236,6 +240,12 @@ func _get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
 	if typeof(key) != TYPE_STRING or key == null:
 		return ""
 	return key.capitalize()
+
+
+## Override this method if you want to add icons to the options in the added enums.[br][br]
+## Defining this method is [b]optional[/b].
+func _get_enum_option_icon(enum_idx: int, option_value: int) -> Texture:
+	return null
 
 
 ## Override this method to define the default value of the added enums.[br][br]

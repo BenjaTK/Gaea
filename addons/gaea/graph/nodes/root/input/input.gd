@@ -4,7 +4,7 @@ class_name GaeaNodeInput
 ## Returns different input variables.
 
 
-enum InputVars {
+enum InputVar {
 	WORLD_SIZE,
 	AREA_SIZE,
 	AREA_POSITION,
@@ -18,10 +18,10 @@ func _get_title() -> String:
 
 func _get_tree_items() -> Array[GaeaNodeResource]:
 	var items: Array[GaeaNodeResource]
-	for input_type in InputVars.values():
+	for input_type in InputVar.values():
 		var item: GaeaNodeResource = get_script().new()
 		item.set_default_enum_value_override(0, input_type)
-		item.set_tree_name_override(InputVars.find_key(input_type).to_pascal_case())
+		item.set_tree_name_override(InputVar.find_key(input_type).to_pascal_case())
 		items.append(item)
 
 	return items
@@ -32,11 +32,15 @@ func _get_enums_count() -> int:
 
 
 func _get_enum_options(_enum_idx: int) -> Dictionary:
-	return InputVars
+	return InputVar
 
 
 func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
 	notify_argument_list_changed()
+
+
+func _get_enum_option_icon(_enum_idx: int, option_value: int) -> Texture:
+	return GaeaValue.get_display_icon(_get_type_of_input(option_value))
 
 
 func _get_output_ports_list() -> Array[StringName]:
@@ -52,19 +56,23 @@ func _get_overridden_output_port_idx(_output_name: StringName) -> int:
 
 
 func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	match get_enum_selection(0):
-		InputVars.WORLD_SIZE: return GaeaValue.Type.VECTOR3I
-		InputVars.AREA_SIZE, InputVars.AREA_POSITION, InputVars.AREA_END: return GaeaValue.Type.VECTOR3
-	return GaeaValue.Type.NULL
+	return _get_type_of_input(get_enum_selection(0))
+
+
+func _get_type_of_input(input: InputVar) -> GaeaValue.Type:
+	match input:
+		InputVar.WORLD_SIZE: return GaeaValue.Type.VECTOR3I
+		InputVar.AREA_SIZE, InputVar.AREA_POSITION, InputVar.AREA_END: return GaeaValue.Type.VECTOR3
+		_: return GaeaValue.Type.NULL
 
 
 func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Variant:
 	_log_data(output_port, generator_data)
 
 	match get_enum_selection(0):
-		InputVars.WORLD_SIZE: return generator_data.generator.world_size
-		InputVars.AREA_SIZE: return area.size
-		InputVars.AREA_POSITION: return area.position
-		InputVars.AREA_END: return area.end
+		InputVar.WORLD_SIZE: return generator_data.generator.world_size
+		InputVar.AREA_SIZE: return area.size
+		InputVar.AREA_POSITION: return area.position
+		InputVar.AREA_END: return area.end
 
 	return null

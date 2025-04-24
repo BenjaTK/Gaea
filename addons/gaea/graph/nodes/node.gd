@@ -56,6 +56,10 @@ func _on_added() -> void:
 		var option_button: OptionButton = OptionButton.new()
 		for option in resource.get_enum_options(enum_idx).values():
 			option_button.add_item(resource.get_enum_option_display_name(enum_idx, option), option)
+			option_button.set_item_icon(
+				option_button.get_item_index(option),
+				resource.get_enum_option_icon(enum_idx, option)
+				)
 		option_button.select(option_button.get_item_index(resource.get_enum_selection(enum_idx)))
 
 		add_child(option_button)

@@ -172,9 +172,13 @@ static func get_display_icon(type: Type) -> Texture2D:
 			return load("uid://bilsfh3nrbhkl")
 		Type.FLOAT:
 			return load("uid://baw7ye0h4xdcx")
-		Type.VECTOR2I, Type.VECTOR2:
+		Type.VECTOR2I:
+			return load("uid://bpel4ys42dkjc")
+		Type.VECTOR2:
 			return load("uid://c8uvy6c2syjk5")
-		Type.VECTOR3I, Type.VECTOR3:
+		Type.VECTOR3I:
+			return load("uid://cd0polwxfqhyi")
+		Type.VECTOR3:
 			return load("uid://bkknri7u8ghs4")
 		# Simple types
 		Type.RANGE:
