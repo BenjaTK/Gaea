@@ -291,7 +291,7 @@ func _is_available() -> bool:
 func set_enum_value(enum_idx: int, option_value: int) -> void:
 	if enum_idx >= enum_selections.size():
 		for idx in _get_enums_count():
-			enum_selections.append(_get_enum_default_value(idx))
+			enum_selections.append(get_enum_default_value(idx))
 
 	enum_selections.set(enum_idx, option_value)
 	enum_value_changed.emit(enum_idx, option_value)
@@ -348,9 +348,9 @@ func _get_arg(arg_name: StringName, area: AABB, generator_data: GaeaData) -> Var
 				return GaeaValue.cast_value(connected_type, _get_argument_type(arg_name), connected_value)
 		else:
 			_log_error("Could not get data from previous node, using default value instead.", generator_data, connected_idx)
-			return _get_argument_default_value(arg_name)
+			return get_argument_default_value(arg_name)
 
-	return arguments.get(arg_name, _get_argument_default_value(arg_name))
+	return arguments.get(arg_name, get_argument_default_value(arg_name))
 #endregion
 
 

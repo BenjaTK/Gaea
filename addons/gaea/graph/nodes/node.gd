@@ -36,7 +36,7 @@ func _ready() -> void:
 	_on_added()
 
 	if is_instance_valid(resource):
-		set_tooltip_text(GaeaNodeResource.get_formatted_text(resource.get_description()))
+		set_tooltip_text("tooltip")
 
 	connections_updated.connect(_update_arguments_visibility)
 	removed.connect(_on_removed)
@@ -290,6 +290,7 @@ func load_save_data(saved_data: Dictionary) -> void:
 
 
 func _make_custom_tooltip(for_text: String) -> Object:
+	for_text = GaeaNodeResource.get_formatted_text(resource.get_description())
 	var rich_text_label: RichTextLabel = RichTextLabel.new()
 	rich_text_label.autowrap_mode = TextServer.AUTOWRAP_WORD
 

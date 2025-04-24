@@ -34,7 +34,7 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "Maps all non-empty cells in [param]data[/bg][/c] to [param]material[/bg][/c]."
+	return "ENUMS RIGHT NOW: %d and %d" % [get_enum_selection(0), get_enum_selection(1)]
 
 
 func _get_enums_count() -> int:
