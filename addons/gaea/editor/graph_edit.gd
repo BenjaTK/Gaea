@@ -69,17 +69,23 @@ func _on_connection_request(from_node: StringName, from_port: int, to_node: Stri
 	connect_node(from_node, from_port, to_node, to_port)
 	connection_update_requested.emit()
 
-	get_node(NodePath(from_node)).notify_connections_updated.call_deferred()
-	target_node.notify_connections_updated.call_deferred()
+	if get_node(NodePath(from_node)).has_finished_loading():
+		get_node(NodePath(from_node)).notify_connections_updated.call_deferred()
+
+	if target_node.has_finished_loading():
+		target_node.notify_connections_updated.call_deferred()
 
 	save_requested.emit()
+
 
 func _on_disconnection_request(from_node: StringName, from_port: int, to_node: StringName, to_port: int) -> void:
 	disconnect_node(from_node, from_port, to_node, to_port)
 	connection_update_requested.emit()
 
-	get_node(NodePath(from_node)).notify_connections_updated.call_deferred()
-	get_node(NodePath(to_node)).notify_connections_updated.call_deferred()
+	if get_node(NodePath(from_node)).has_finished_loading():
+		get_node(NodePath(from_node)).notify_connections_updated.call_deferred()
+	if get_node(NodePath(to_node)).has_finished_loading():
+		get_node(NodePath(to_node)).notify_connections_updated.call_deferred()
 
 	save_requested.emit()
 

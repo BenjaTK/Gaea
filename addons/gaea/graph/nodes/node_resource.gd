@@ -545,6 +545,14 @@ func _get_scene() -> PackedScene:
 	return preload("uid://b7e2d15kxt2im")
 
 
+func get_scene_script() -> GDScript:
+	return _get_scene_script()
+
+
+func _get_scene_script() -> GDScript:
+	return null
+
+
 ## Returns an array of points in the [param axis] of [param area].
 func _get_axis_range(axis: Axis, area: AABB) -> Array:
 	match axis:

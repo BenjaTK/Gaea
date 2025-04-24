@@ -28,6 +28,7 @@ static var _titlebar_styleboxes: Dictionary[GaeaValue.Type, Dictionary]
 var _preview: _PreviewTexture
 var _preview_container: VBoxContainer
 var _finished_loading: bool = false : set = set_finished_loading, get = has_finished_loading
+var _finished_rebuilding: bool = true : get = has_finished_rebuilding
 var _editors: Dictionary[StringName, GaeaGraphNodeArgumentEditor]
 var _enum_editors: Array[OptionButton]
 
@@ -85,6 +86,10 @@ func _on_added() -> void:
 
 
 func _rebuild() -> void:
+	if not has_finished_rebuilding():
+		return
+	_finished_rebuilding = false
+
 	var saved_data := {}
 	if _finished_loading:
 		saved_data = get_save_data()
@@ -111,6 +116,7 @@ func _rebuild() -> void:
 	auto_shrink.call_deferred()
 	remove_invalid_connections_requested.emit.call_deferred()
 	_update_arguments_visibility.call_deferred()
+	_finished_rebuilding = true
 
 
 func _add_slots() -> void:
@@ -325,3 +331,7 @@ func set_finished_loading(value: bool) -> void:
 ## Returns [code]true[/code] if this node has finished its loading process.
 func has_finished_loading() -> bool:
 	return _finished_loading
+
+
+func has_finished_rebuilding() -> bool:
+	return _finished_rebuilding

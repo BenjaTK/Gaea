@@ -75,3 +75,7 @@ func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) ->
 
 func _is_available() -> bool:
 	return _get_variant_type() != TYPE_NIL
+
+
+func _get_scene_script() -> GDScript:
+	return preload("uid://cdihgtg613ft2")

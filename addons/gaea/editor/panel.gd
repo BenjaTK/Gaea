@@ -321,6 +321,8 @@ func _add_node_from_resource(resource: GaeaNodeResource, p_is_loading: bool = fa
 	if not p_is_loading:
 		resource = resource._instantiate_duplicate()
 	var node: GaeaGraphNode = resource.get_scene().instantiate()
+	if resource.get_scene_script() != null:
+		node.set_script(resource.get_scene_script())
 	node.resource = resource
 	node.generator = get_selected_generator()
 	node.remove_invalid_connections_requested.connect(_graph_edit.remove_invalid_connections)
