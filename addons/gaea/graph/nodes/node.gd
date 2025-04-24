@@ -130,7 +130,7 @@ func _add_argument_editor(for_arg: StringName) -> GaeaGraphNodeParameterEditor:
 		self,
 		resource.get_argument_type(for_arg),
 		resource.get_argument_display_name(for_arg),
-		resource.data.get(for_arg, resource.get_argument_default_value(for_arg))
+		resource.arguments.get(for_arg, resource.get_argument_default_value(for_arg))
 	)
 	node.argument_value_changed.connect(_on_argument_value_changed.bind(node, for_arg))
 	return node
@@ -271,17 +271,17 @@ func load_save_data(saved_data: Dictionary) -> void:
 			_enum_editors[enum_idx].select(saved_data.get("enums")[enum_idx])
 
 	if saved_data.has("arguments"):
-		var data = saved_data.get("arguments")
+		var arguments = saved_data.get("arguments")
 		for argument: StringName in resource.get_arguments_list():
 			var editor: GaeaGraphNodeParameterEditor = _editors.get(argument)
 			if not is_instance_valid(editor):
 				break
 
-			if not data.has(argument):
-				data.set(argument, resource.get_argument_default_value(argument))
+			if not arguments.has(argument):
+				arguments.set(argument, resource.get_argument_default_value(argument))
 
-			if data.get(argument) != null:
-				editor.set_param_value(data.get(argument))
+			if arguments.get(argument) != null:
+				editor.set_param_value(arguments.get(argument))
 
 
 	_finished_loading = true

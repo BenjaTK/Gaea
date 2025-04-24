@@ -177,7 +177,7 @@ func _save_data() -> void:
 
 	for resource in resources:
 		var save_data = resource.node.get_save_data()
-		resource.data = save_data.get("arguments", {})
+		resource.arguments = save_data.get("arguments", {})
 		node_data.append(save_data)
 
 	_selected_generator.data.connections = connections

@@ -51,7 +51,7 @@ var resource_uid: String
 var node: GaeaGraphNode
 ## A Dictionary holding the values of the arguments in [member params]
 ## where the keys are their names.
-var data: Dictionary
+var arguments: Dictionary
 var enum_selections: Array
 ## An additional value added to the generation's seed to prevent
 ## duplicates of the same node from having the same randomness. (See [member GaeaGenerator.seed]).
@@ -286,7 +286,7 @@ func _on_enum_value_changed(enum_idx: int, option_value: int) -> void:
 
 
 func set_argument_value(arg_name: StringName, new_value: Variant) -> void:
-	data.set(arg_name, new_value)
+	arguments.set(arg_name, new_value)
 	argument_value_changed.emit(arg_name, new_value)
 	_on_argument_value_changed(arg_name, new_value)
 
@@ -331,7 +331,7 @@ func _get_arg(arg_name: StringName, area: AABB, generator_data: GaeaData) -> Var
 			_log_error("Could not get data from previous node, using default value instead.", generator_data, connected_idx)
 			return _get_argument_default_value(arg_name)
 
-	return data.get(arg_name, _get_argument_default_value(arg_name))
+	return arguments.get(arg_name, _get_argument_default_value(arg_name))
 #endregion
 
 
@@ -564,7 +564,7 @@ func _instantiate_duplicate() -> GaeaNodeResource:
 
 func _load_save_data(saved_data: Dictionary) -> void:
 	salt = saved_data.get("salt", 0)
-	data = saved_data.get("data", {})
+	arguments = saved_data.get("arguments", {})
 
 #region Old Code
 
