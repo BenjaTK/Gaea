@@ -126,7 +126,8 @@ func _add_argument_editor(for_arg: StringName) -> GaeaGraphNodeArgumentEditor:
 		self,
 		resource.get_argument_type(for_arg),
 		resource.get_argument_display_name(for_arg),
-		resource.arguments.get(for_arg, resource.get_argument_default_value(for_arg))
+		resource.arguments.get(for_arg, resource.get_argument_default_value(for_arg)),
+		resource.get_argument_hint(for_arg)
 	)
 	node.argument_value_changed.connect(_on_argument_value_changed.bind(node, for_arg))
 	return node

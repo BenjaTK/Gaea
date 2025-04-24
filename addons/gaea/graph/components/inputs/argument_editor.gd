@@ -15,17 +15,20 @@ var type: GaeaValue.Type
 var graph_node: GaeaGraphNode
 ## Index of the slot in the [GaeaGraphNode].
 var slot_idx: int
+## Hint as declared in [GaeaNodeResource._get_argument_hint].
+var hint: Dictionary[String, Variant]
 
 @onready var _label: RichTextLabel = $Label
 
 
 ## Sets the corresponding variables.
-func initialize(for_graph_node: GaeaGraphNode, for_type: GaeaValue.Type, display_name: String, default_value: Variant) -> void:
+func initialize(for_graph_node: GaeaGraphNode, for_type: GaeaValue.Type, display_name: String, default_value: Variant, for_hint: Dictionary) -> void:
 	graph_node = for_graph_node
 	type = for_type
 	set_label_text(display_name)
 	set_arg_value(default_value)
 	slot_idx = get_index()
+	hint = for_hint
 
 	_configure()
 

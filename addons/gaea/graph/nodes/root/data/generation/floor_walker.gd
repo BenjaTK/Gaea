@@ -81,6 +81,17 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"data"]
 
 
+func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
+	if arg_name == &"bigger_room_size_range":
+		return {"min": 1, "max": 5, "suffix": "²", "step": 1, "allow_lesser": false}
+	elif arg_name.ends_with(&"chance"):
+		return {"suffix": "%", "min": 0, "max": 100}
+	elif arg_name.ends_with(&"weight") or arg_name == &"max_cells":
+		return {"min": 0}
+
+	return super(arg_name)
+
+
 func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.DATA
 

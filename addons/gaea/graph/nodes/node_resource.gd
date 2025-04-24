@@ -160,6 +160,10 @@ func get_argument_display_name(arg_name: StringName) -> String:
 func get_argument_default_value(arg_name: StringName) -> Variant:
 	return default_value_overrides.get(arg_name, _get_argument_default_value(arg_name))
 
+## Public version of [method _get_argument_hint]. Prefer to override that method over this one.
+func get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
+	return _get_argument_hint(arg_name)
+
 
 ## Public version of [method _get_output_ports_list]. Prefer to override that method over this one.
 func get_output_ports_list() -> Array[StringName]:
@@ -268,6 +272,13 @@ func _get_argument_display_name(arg_name: StringName) -> String:
 ## corresponding to the argument's type.
 func _get_argument_default_value(arg_name: StringName) -> Variant:
 	return GaeaValue.get_default_value(_get_argument_type(arg_name))
+
+
+## Override this method to change the way the editors for the arguments behave. For example,
+## if the returned [Dictionary] has a [code]"min"[/code] key, [GaeaNumberArgumentEditor] will not be able to go below that number.[br][br]
+## Defining this method is [b]optional[/b].
+func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
+	return {}
 
 
 ## Override this method to define the outputs this node will have.[br][br]

@@ -16,20 +16,20 @@ func _configure() -> void:
 	if type == GaeaValue.Type.INT:
 		spin_box.step = 1
 
-	#spin_box.min_value = resource.hint.get("min", 0.0)
-	#spin_box.allow_lesser = not resource.hint.has("min")
-#
-	#spin_box.max_value = resource.hint.get("max", 1.0)
-	#spin_box.allow_greater = not resource.hint.has("max")
-#
-	#spin_box.suffix = resource.hint.get("suffix", "")
-	#spin_box.prefix = resource.hint.get("prefix", "")
+	spin_box.min_value = hint.get("min", 0.0)
+	spin_box.allow_lesser = not hint.has("min")
+
+	spin_box.max_value = hint.get("max", 1.0)
+	spin_box.allow_greater = not hint.has("max")
+
+	spin_box.suffix = hint.get("suffix", "")
+	spin_box.prefix = hint.get("prefix", "")
 
 
-func get_arg_value() -> float:
+func get_arg_value() -> Variant:
 	if super() != null:
 		return super()
-	return spin_box.value
+	return float(spin_box.value) if type == GaeaValue.Type.FLOAT else int(spin_box.value)
 
 
 func set_arg_value(new_value: Variant) -> void:

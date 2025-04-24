@@ -14,28 +14,34 @@ func _configure() -> void:
 	if is_part_of_edited_scene():
 		return
 
-	#min_slider.min_value = resource.hint.get("min", 0.0)
-	#min_slider.max_value = maxf(min_slider.min_value, resource.hint.get("max", 1.0))
-	max_slider.min_value = min_slider.min_value
-	max_slider.max_value = min_slider.max_value
+	var range_min: float = hint.get("min", 0.0)
+	var range_max: float = hint.get("max", 1.0)
+	min_slider.min_value = range_min
+	min_slider.max_value = maxf(range_min, range_max)
+	max_slider.min_value = range_min
+	max_slider.max_value = range_max
 
-	min_spin_box.min_value = min_slider.min_value
-	max_spin_box.max_value = max_slider.max_value
+	min_spin_box.min_value = range_min
+	max_spin_box.min_value = range_min
+	max_spin_box.max_value = range_max
+	min_spin_box.max_value = range_max
 
-	#min_slider.allow_lesser = resource.hint.get("allow_lesser", true)
+	min_slider.allow_lesser = hint.get("allow_lesser", true)
 	min_spin_box.allow_lesser = min_slider.allow_lesser
-	#min_slider.allow_greater = resource.hint.get("allow_greater", true)
+	max_spin_box.allow_lesser = min_slider.allow_lesser
+	min_slider.allow_greater = hint.get("allow_greater", true)
 	max_spin_box.allow_greater = max_slider.allow_greater
+	min_spin_box.allow_greater = max_slider.allow_greater
 
-	#min_slider.step = resource.hint.get("step", min_slider.step)
+	min_slider.step = hint.get("step", min_slider.step)
 	max_slider.step = min_slider.step
 	min_spin_box.step = min_slider.step
 	max_spin_box.step = min_slider.step
 
-	#min_spin_box.suffix = resource.hint.get("suffix", "")
+	min_spin_box.suffix = hint.get("suffix", "")
 	max_spin_box.suffix = min_spin_box.suffix
 
-	#min_spin_box.prefix = resource.hint.get("prefix", "")
+	min_spin_box.prefix = hint.get("prefix", "")
 	max_spin_box.prefix = min_spin_box.prefix
 
 	min_slider.value_changed.connect(_on_slider_changed_value.unbind(1))
