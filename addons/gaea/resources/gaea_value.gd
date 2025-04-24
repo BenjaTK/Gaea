@@ -223,10 +223,8 @@ static func get_editor_for_type(for_type: GaeaValue.Type) -> PackedScene:
 	match for_type:
 		GaeaValue.Type.FLOAT, GaeaValue.Type.INT:
 			return preload("uid://dp7blnx7abb5e")
-		GaeaValue.Type.VECTOR2:
-			return preload("uid://rlocedi6g62i")
-		GaeaValue.Type.VECTOR2I:
-			return preload("uid://n5b6hp10iv25")
+		GaeaValue.Type.VECTOR2, GaeaValue.Type.VECTOR2I, GaeaValue.Type.VECTOR3, GaeaValue.Type.VECTOR3I:
+			return preload("uid://mlwupvg8a886")
 		GaeaValue.Type.VARIABLE_NAME:
 			return preload("uid://bn8i1l4q13pdw")
 		GaeaValue.Type.RANGE:
@@ -237,10 +235,6 @@ static func get_editor_for_type(for_type: GaeaValue.Type) -> PackedScene:
 			return preload("uid://x6n8ylnxoyno")
 		GaeaValue.Type.BOOLEAN:
 			return preload("uid://byaonbbfa2bx8")
-		GaeaValue.Type.VECTOR3:
-			return preload("uid://mlwupvg8a886")
-		GaeaValue.Type.VECTOR3I:
-			return preload("uid://be2xa7mvelrbn")
 		GaeaValue.Type.NEIGHBORS:
 			return preload("uid://d11yc7l6sneof")
 		GaeaValue.Type.RULES:
