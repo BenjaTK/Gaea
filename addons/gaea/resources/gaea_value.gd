@@ -92,21 +92,25 @@ static func get_default_value(type: Type) -> Variant:
 @warning_ignore("unused_parameter")
 static func from_variant_type(type: Variant.Type, hint: PropertyHint = PROPERTY_HINT_NONE, hint_string: String = "") -> Type:
 	match type:
+		TYPE_BOOL:
+			return Type.BOOLEAN
 		TYPE_INT:
 			return Type.INT
 		TYPE_FLOAT:
 			return Type.FLOAT
-		TYPE_VECTOR2I, TYPE_VECTOR2:
+		TYPE_VECTOR2I:
+			return Type.VECTOR2I
+		TYPE_VECTOR2:
 			return Type.VECTOR2
-		TYPE_BOOL:
-			return Type.BOOLEAN
+		TYPE_VECTOR3I:
+			return Type.VECTOR3I
+		TYPE_VECTOR3:
+			return Type.VECTOR3
 		TYPE_OBJECT:
 			if hint_string == "GaeaMaterial":
 				return Type.MATERIAL
 			elif hint_string == "GaeaMaterialGradient":
 				return Type.GRADIENT
-		TYPE_VECTOR3I, TYPE_VECTOR3:
-			return Type.VECTOR3
 	return Type.NULL
 
 
