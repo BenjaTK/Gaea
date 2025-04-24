@@ -8,7 +8,7 @@ class_name GaeaVector3ParameterEditor
 @onready var _z_spin_box: SpinBox = $ZSpinBox
 
 
-func _ready() -> void:
+func _configure() -> void:
 	if is_part_of_edited_scene():
 		return
 	_x_spin_box.value_changed.connect(argument_value_changed.emit)
