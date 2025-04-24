@@ -48,6 +48,13 @@ func _get_argument_default_value(arg_name: StringName) -> Variant:
 	return super(arg_name)
 
 
+func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
+	if arg_name.ends_with(&"weight"):
+		return {"min": 0}
+
+	return super(arg_name)
+
+
 func _get_output_ports_list() -> Array[StringName]:
 	return [&"data"]
 
