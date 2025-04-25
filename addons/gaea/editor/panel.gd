@@ -2,7 +2,6 @@
 extends Control
 
 const _LinkPopup = preload("uid://btt4eqjkp5pyf")
-const _RerouteNode = preload("uid://bs40iof8ipbkq")
 
 var _selected_generator: GaeaGenerator = null: get = get_selected_generator
 var _output_node: GaeaGraphNode
@@ -360,15 +359,14 @@ func _on_tree_special_node_selected_for_creation(id: StringName) -> void:
 
 
 func _on_new_reroute_requested(connection: Dictionary) -> void:
-	var reroute: _RerouteNode = _add_node_from_resource(preload("uid://kdn03ei2yp6e"))
+	var reroute: GaeaGraphNode = _add_node_from_resource(GaeaNodeReroute.new())
 
 	var offset = - reroute.get_output_port_position(0)
 	offset.y -= reroute.get_slot_custom_icon_right(0).get_size().y * 0.5
 	reroute.set_position_offset(_graph_edit.local_to_grid(_node_creation_target, offset))
 
 	var from_node: GraphNode = _graph_edit.get_node(NodePath(connection.from_node))
-	var link_type := from_node.get_output_port_type(connection.from_port) as GaeaValue.Type
-	reroute.type = link_type
+	reroute.resource.type = from_node.get_output_port_type(connection.from_port) as GaeaValue.Type
 
 	_graph_edit.disconnection_request.emit.call_deferred(
 		connection.from_node, connection.from_port,

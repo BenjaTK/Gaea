@@ -1,16 +1,8 @@
 @tool
 extends GaeaGraphNode
 
-const _RerouteResource = preload("uid://bgqqucap4kua4")
 
 var tween: Tween
-var type: GaeaValue.Type = GaeaValue.Type.FLOAT:
-	set(new_value):
-		if type != new_value:
-			type = new_value
-			if not is_part_of_edited_scene():
-				resource.title = "Reroute (%s)" % GaeaValue.Type.find_key(new_value).capitalize()
-			_update_slots()
 
 var icon_opacity: float = 0.0:
 	set(new_value):
@@ -28,6 +20,7 @@ func _on_added() -> void:
 		return
 
 	resource.node = self
+	resource.argument_list_changed.connect(on_type_changed)
 
 	connections_updated.connect(_validate_connections)
 
@@ -40,20 +33,30 @@ func _on_added() -> void:
 	titlebar_hbox.mouse_entered.connect(_set_icon_opacity.bind(1.0))
 	titlebar_hbox.mouse_exited.connect(_set_icon_opacity.bind(0.0))
 
-	_update_slots()
 	_validate_connections()
+	
+	on_type_changed()
 
 
-func _update_slots():
+func get_save_data() -> Dictionary:
+	var data = super()
+	data.set("type", resource.get_type())
+	return data
+
+
+func load_save_data(saved_data: Dictionary) -> void:
+	if saved_data.has("type"):
+		resource.type = saved_data.get("type")
+	super(saved_data)
+
+
+func on_type_changed():
+	var type = resource.get_type()
 	var color = GaeaValue.get_color(type)
 	set_slot(0, true, type, color, true, type, color)
 	set_slot_type_left(0, type)
 	set_slot_type_right(0, type)
 	set_slot_custom_icon_right(0, GaeaValue.get_slot_icon(type))
-	if not is_part_of_edited_scene():
-		resource.params[0].type = type
-		resource.outputs[0].type = type
-		resource.title = "Reroute (%s)" % GaeaValue.Type.find_key(type).capitalize()
 #endregion
 
 
@@ -86,25 +89,6 @@ func _on_removed() -> void:
 					connection.to_node,
 					connection.to_port,
 				)
-#endregion
-
-
-#region Save/Load
-func get_save_data() -> Dictionary:
-	var data = super()
-	if data.has("salt"):
-		data.erase("salt")
-	data.type = type
-	return data
-
-
-func load_save_data(data: Dictionary) -> void:
-	# Data migration from 2.0 beta. See PR #310. Remove before releasing 2.X.
-	if data.has(&"salt"):
-		data.set(&"type", GaeaValue.from_old_slot_type(data.get(&"type")))
-	if data.has(&"type"):
-		type = data.type
-	super(data)
 #endregion
 
 
