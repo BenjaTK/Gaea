@@ -1,7 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://leflx3tpvb4s"]
-
-[ext_resource type="PackedScene" uid="uid://b7e2d15kxt2im" path="res://addons/gaea/graph/nodes/node.tscn" id="1_hqp31"]
-[ext_resource type="Script" uid="uid://34dullcgrsk7" path="res://addons/gaea/graph/nodes/output_node.gd" id="2_hlx7w"]
-
-[node name="BaseNode" instance=ExtResource("1_hqp31")]
-script = ExtResource("2_hlx7w")

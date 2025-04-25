@@ -216,7 +216,7 @@ func _load_data() -> void:
 
 
 	if not has_output_node:
-		_output_node = _add_node_from_resource(preload("uid://bbkdvyxkj2slo"))
+		_output_node = _add_node_from_resource(GaeaNodeOutput.new())
 		_save_data.call_deferred()
 
 	# If scroll offset is saved, set it to that. Else, center the output node.
