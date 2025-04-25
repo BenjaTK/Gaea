@@ -87,10 +87,10 @@ func _populate_dict_with_files(folder_path: String, dict: Dictionary) -> Diction
 			if resource is GaeaNodeResource:
 				if resource.is_available():
 					for item in resource.get_tree_items():
-						idx += 1
-						dict.get_or_add(str(idx), item)
+						dict.get_or_add(item.get_tree_name() + str(idx), item)
 		file_name = dir.get_next()
 
+	dict.sort()
 	return dict
 
 
