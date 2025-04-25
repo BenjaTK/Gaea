@@ -10,15 +10,15 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "Maps all non-empty cells in [param]data[/bg][/c] to [param]material[/bg][/c]."
+	return "Maps all non-empty cells in [param]reference_data[/bg][/c] to [param]material[/bg][/c]."
 
 
 func _get_arguments_list() -> Array[StringName]:
-	return [&"data", &"material"]
+	return [&"reference_data", &"material"]
 
 
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.DATA if arg_name == &"data" else GaeaValue.Type.MATERIAL
+	return GaeaValue.Type.DATA if arg_name == &"reference_data" else GaeaValue.Type.MATERIAL
 
 
 func _get_output_ports_list() -> Array[StringName]:
@@ -30,13 +30,13 @@ func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 
 
 func _get_required_arguments() -> Array[StringName]:
-	return [&"data", &"material"]
+	return [&"reference_data", &"material"]
 
 
 func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
 	_log_data(output_port, generator_data)
 
-	var grid_data = _get_arg(&"data", area, generator_data)
+	var grid_data = _get_arg(&"reference_data", area, generator_data)
 	var material: GaeaMaterial = _get_arg(&"material", area, generator_data)
 
 	var grid: Dictionary[Vector3i, GaeaMaterial]
