@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="GaeaNodeSlotParam" load_steps=2 format=3 uid="uid://dw6tgqr675e7i"]
 
-[ext_resource type="Script" uid="uid://b5mukn8hdt8ww" path="res://addons/gaea/graph/nodes/node_slot_param.gd" id="1_6sipt"]
+[ext_resource type="Script" uid="uid://b5mukn8hdt8ww" path="res://addons/gaea/graph/graph_nodes/node_slot_param.gd" id="1_6sipt"]
 
 [resource]
 resource_name = "Material"
