@@ -20,7 +20,7 @@ func _on_added() -> void:
 		return
 
 	resource.node = self
-	resource.enum_value_changed.connect(on_enum_value_changed)
+	resource.argument_list_changed.connect(on_type_changed)
 
 	connections_updated.connect(_validate_connections)
 
@@ -31,25 +31,32 @@ func _on_added() -> void:
 	var slot_size = Vector2(32, 32) * EditorInterface.get_editor_scale()
 	titlebar_hbox.set_custom_minimum_size(slot_size)
 	titlebar_hbox.mouse_entered.connect(_set_icon_opacity.bind(1.0))
-	titlebar_hbox.mouse_exited.connect(_set_icon_opacity.bind(0.0))	
+	titlebar_hbox.mouse_exited.connect(_set_icon_opacity.bind(0.0))
 
 	_validate_connections()
 	
-	on_enum_value_changed(
-		GaeaNodeReroute.EnumList.RerouteType,
-		resource.get_enum_selection(GaeaNodeReroute.EnumList.RerouteType)
-	)
+	on_type_changed()
 
 
-func on_enum_value_changed(enum_idx: int, option_value: int):
-	if enum_idx != GaeaNodeReroute.EnumList.RerouteType:
-		return
+func get_save_data() -> Dictionary:
+	var data = super()
+	data.set("type", resource.get_type())
+	return data
 
-	var color = GaeaValue.get_color(option_value)
-	set_slot(0, true, option_value, color, true, option_value, color)
-	set_slot_type_left(0, option_value)
-	set_slot_type_right(0, option_value)
-	set_slot_custom_icon_right(0, GaeaValue.get_slot_icon(option_value))
+
+func load_save_data(saved_data: Dictionary) -> void:
+	if saved_data.has("type"):
+		resource.type = saved_data.get("type")
+	super(saved_data)
+
+
+func on_type_changed():
+	var type = resource.get_type()
+	var color = GaeaValue.get_color(type)
+	set_slot(0, true, type, color, true, type, color)
+	set_slot_type_left(0, type)
+	set_slot_type_right(0, type)
+	set_slot_custom_icon_right(0, GaeaValue.get_slot_icon(type))
 #endregion
 
 
