@@ -17,14 +17,44 @@ class_name GaeaNodeRulesPlacer
 ## will have [param material] there.
 
 
+func _get_title() -> String:
+	return "RulesPlacer"
+
+
+func _get_description() -> String:
+	return "Places [param]material[/bg][/c] on every world cell that follows [param]rules[/bg][/c] based
+on [param]reference_data[/bg][/c].\n[img]res://addons/gaea/assets/cross.svg[/img] means data DOESN'T have a cell there,\
+ [img]res://addons/gaea/assets/check.svg[/img] means the opposite."
+
+
+func _get_arguments_list() -> Array[StringName]:
+	return [&"reference_data", &"material", &"rules"]
+
+
+func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	match arg_name:
+		&"reference_data": return GaeaValue.Type.DATA
+		&"material": return GaeaValue.Type.MATERIAL
+		&"rules": return GaeaValue.Type.RULES
+	return super(arg_name)
+
+
+func _get_output_ports_list() -> Array[StringName]:
+	return [&"map"]
+
+
+func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.MAP
+
+
 func _get_required_arguments() -> Array[StringName]:
-	return [&"data", &"material"]
+	return [&"reference_data", &"material"]
 
 
-func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: GaeaData) -> Dictionary:
+func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
 	_log_data(output_port, generator_data)
 
-	var grid_data: Dictionary = _get_arg(&"data", area, generator_data)
+	var grid_data: Dictionary = _get_arg(&"reference_data", area, generator_data)
 	var material: GaeaMaterial = _get_arg(&"material", area, generator_data)
 
 	var grid: Dictionary[Vector3i, GaeaMaterial]
@@ -48,4 +78,4 @@ func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: Gaea
 				if place:
 					grid.set(cell, null if not is_instance_valid(material) else material.get_resource())
 
-	return output_port.return_value(grid)
+	return grid

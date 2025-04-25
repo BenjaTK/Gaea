@@ -85,6 +85,8 @@ static func get_default_value(type: Type) -> Variant:
 			return [] as Array[Vector2i]
 		Type.FLAGS:
 			return [] as Array[int]
+		Type.RULES:
+			return {}
 	return null
 
 

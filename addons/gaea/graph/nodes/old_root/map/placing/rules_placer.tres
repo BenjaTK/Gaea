@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="GaeaNodeRulesPlacer" load_steps=8 format=3 uid="uid://c2u75oyoi2lne"]
 
 [ext_resource type="Resource" uid="uid://dh1ay72s0vge" path="res://addons/gaea/graph/components/slot_outputs/map.tres" id="2_ygcj7"]
-[ext_resource type="Script" uid="uid://br8gcsyc04ksj" path="res://addons/gaea/graph/nodes/old_root/map/placing/rules_placer.gd" id="3_ugwx0"]
+[ext_resource type="Script" uid="uid://br8gcsyc04ksj" path="res://addons/gaea/graph/nodes/root/map/placing/rules_placer.gd" id="3_ugwx0"]
 [ext_resource type="Script" uid="uid://dil6xg31ctqdu" path="res://addons/gaea/graph/nodes/node_slot_output.gd" id="3_ygcj7"]
 [ext_resource type="Resource" uid="uid://chudwi8qvv3so" path="res://addons/gaea/graph/components/slot_params/data.tres" id="4_awbrb"]
 [ext_resource type="Script" uid="uid://b5mukn8hdt8ww" path="res://addons/gaea/graph/nodes/node_slot_param.gd" id="4_jn5ut"]
