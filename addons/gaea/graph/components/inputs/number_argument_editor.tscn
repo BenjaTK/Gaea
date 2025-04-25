@@ -9,6 +9,7 @@ script = ExtResource("2_xix24")
 
 [node name="SpinBox" type="SpinBox" parent="." index="1"]
 layout_mode = 2
+size_flags_horizontal = 10
 step = 0.01
 allow_greater = true
 allow_lesser = true

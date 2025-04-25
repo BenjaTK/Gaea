@@ -133,6 +133,9 @@ func _add_argument_editor(for_arg: StringName) -> GaeaGraphNodeArgumentEditor:
 		resource.arguments.get(for_arg, resource.get_argument_default_value(for_arg)),
 		resource.get_argument_hint(for_arg)
 	)
+
+	if resource.has_input_slot(for_arg):
+		node.add_input_slot()
 	node.argument_value_changed.connect(_on_argument_value_changed.bind(node, for_arg))
 	return node
 
@@ -197,7 +200,7 @@ func _set_titlebar() -> void:
 
 
 ## Returns the current value set in the [GaeaGraphNodeArgumentEditor] for the argument of [param arg_name].
-func get_arg_value(arg_name: String) -> Variant:
+func get_arg_value(arg_name: StringName) -> Variant:
 	var editor: GaeaGraphNodeArgumentEditor = _editors.get(arg_name, null)
 	if is_instance_valid(editor):
 		return editor.get_arg_value()
@@ -205,7 +208,7 @@ func get_arg_value(arg_name: String) -> Variant:
 
 
 ## Sets the [GaeaGraphNodeArgumentEditor] associated to the argument of [param arg_name] to [param value].
-func _set_arg_value(arg_name: String, value: Variant) -> void:
+func _set_arg_value(arg_name: StringName, value: Variant) -> void:
 	var editor: GaeaGraphNodeArgumentEditor = _editors.get(arg_name, null)
 	if is_instance_valid(editor):
 		editor.set_arg_value(value)

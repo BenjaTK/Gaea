@@ -28,6 +28,12 @@ func _get_argument_default_value(arg_name: StringName) -> Variant:
 	return super(arg_name)
 
 
+func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
+	match arg_name:
+		&"chance": return {"suffix": "%", "min": 0, "max": 100}
+	return super(arg_name)
+
+
 func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.DATA
 

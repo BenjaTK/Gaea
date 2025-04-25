@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://d1ekekpocvwxj" path="res://addons/gaea/graph/nodes/node.gd" id="1_67l81"]
 
 [node name="BaseNode" type="GraphNode"]
-custom_minimum_size = Vector2(192, 0)
+custom_minimum_size = Vector2(160, 0)
 offset_right = 9.0
 offset_bottom = 55.0
 theme_override_constants/separation = 4

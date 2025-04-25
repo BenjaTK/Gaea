@@ -40,8 +40,8 @@ func _configure() -> void:
 	if not graph_node.is_node_ready():
 		await graph_node.ready
 
-	#argument_value_changed.connect(graph_node._on_argument_value_changed.bind(self, resource.name))
 
+func add_input_slot() -> void:
 	if GaeaValue.is_wireable(type):
 		graph_node.set_slot_enabled_left(slot_idx, true)
 		graph_node.set_slot_type_left(slot_idx, type)
@@ -65,6 +65,12 @@ func set_arg_value(_new_value: Variant) -> void:
 
 ## Set this parameter's name label text to [param new_text]
 func set_label_text(new_text: String) -> void:
+	if new_text.is_empty():
+		_label.hide()
+		for child in get_children():
+			if child is Control:
+				child.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		return
 	_label.text = new_text
 
 

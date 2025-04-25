@@ -13,6 +13,8 @@ var _is_invalid_name: bool = false
 func _on_added() -> void:
 	super()
 
+	custom_minimum_size.x = 192.0
+
 	if resource is not GaeaNodeParameter:
 		return
 
@@ -23,13 +25,13 @@ func _on_added() -> void:
 	if not _finished_loading:
 		push_error("Something went wrong during loading of the variable node '%s'" % resource.get_title())
 
-	previous_name = get_arg_value("name")
+	previous_name = get_arg_value(&"name")
 
-	if generator.data.parameters.has(get_arg_value("name")):
+	if generator.data.parameters.has(get_arg_value(&"name")):
 		return
 
-	generator.data.parameters[get_arg_value("name")] = {
-		"name": get_arg_value("name"),
+	generator.data.parameters[get_arg_value(&"name")] = {
+		"name": get_arg_value(&"name"),
 		"type": resource.type,
 		"hint": resource.hint,
 		"hint_string": resource.hint_string,

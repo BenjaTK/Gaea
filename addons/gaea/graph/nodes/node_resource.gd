@@ -169,6 +169,11 @@ func get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
 	return _get_argument_hint(arg_name)
 
 
+## Public version of [method _has_input_slot]. Prefer to override that method over this one.
+func has_input_slot(arg_name: StringName) -> bool:
+	return _has_input_slot(arg_name)
+
+
 ## Public version of [method _get_output_ports_list]. Prefer to override that method over this one.
 func get_output_ports_list() -> Array[StringName]:
 	return _get_output_ports_list()
@@ -289,6 +294,13 @@ func _get_argument_default_value(arg_name: StringName) -> Variant:
 ## Defining this method is [b]optional[/b].
 func _get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
 	return {}
+
+
+## Override this method to determine whether or not arguments can be connected to.[br]
+## [b]Note[/b]: Some argument types can't have input slots. See [method GaeaValue.is_wireable].[br][br]
+## Defining this method is [b]optional[/b]. If not defined, it'll always be true.
+func _has_input_slot(arg_name: StringName) -> bool:
+	return true
 
 
 ## Override this method to define the outputs this node will have.[br][br]
@@ -479,13 +491,17 @@ func _get_input_resource(arg_name: StringName, generator_data:GaeaData) -> GaeaN
 
 #region Argument Connections
 func _get_argument_connection(arg_name: StringName) -> Dictionary:
-	var idx = _get_arguments_list().find(arg_name)
+	var idx = _get_arguments_list().filter(_filter_has_input).find(arg_name)
 	if idx == -1:
 		return {}
 	for connection in connections:
 		if connection.to_port == idx:
 			return connection
 	return {}
+
+
+func _filter_has_input(arg_name: StringName) -> bool:
+	return GaeaValue.is_wireable(_get_argument_type(arg_name)) and _has_input_slot(arg_name)
 #endregion
 
 #region Output connections

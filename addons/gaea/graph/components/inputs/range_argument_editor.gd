@@ -30,8 +30,8 @@ func _configure() -> void:
 	min_spin_box.allow_lesser = min_slider.allow_lesser
 	max_spin_box.allow_lesser = min_slider.allow_lesser
 	min_slider.allow_greater = hint.get("allow_greater", true)
-	max_spin_box.allow_greater = max_slider.allow_greater
-	min_spin_box.allow_greater = max_slider.allow_greater
+	max_spin_box.allow_greater = min_slider.allow_greater
+	min_spin_box.allow_greater = min_slider.allow_greater
 
 	min_slider.step = hint.get("step", min_slider.step)
 	max_slider.step = min_slider.step

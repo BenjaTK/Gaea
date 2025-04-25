@@ -192,7 +192,7 @@ static func get_display_icon(type: Type) -> Texture2D:
 			return load("uid://dkccxw7yq1mth")
 		Type.MAP:
 			return load("uid://c2i5wqidu1r1o")
-	return load("uid://by6s78k1thpy2")
+	return null
 
 
 ## Returns the configured icon for slots of [param type].
