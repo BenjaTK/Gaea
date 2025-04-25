@@ -5,11 +5,38 @@ class_name GaeaNodeGradientMapper
 ## corresponding material to the values in [param data].
 
 
+func _get_title() -> String:
+	return "GradientMapper"
+
+
+func _get_description() -> String:
+	return "Takes a GaeaMaterialGradient resource and samples the corresponding material to the values in [param]data[/bg][/c]."
+
+
+func _get_arguments_list() -> Array[StringName]:
+	return [&"data", &"gradient"]
+
+
+func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	match arg_name:
+		&"data": return GaeaValue.Type.DATA
+		&"gradient": return GaeaValue.Type.GRADIENT
+	return super(arg_name)
+
+
 func _get_required_arguments() -> Array[StringName]:
 	return [&"data", &"gradient"]
 
 
-func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: GaeaData) -> Dictionary:
+func _get_output_ports_list() -> Array[StringName]:
+	return [&"map"]
+
+
+func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.MAP
+
+
+func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
 	_log_data(output_port, generator_data)
 
 	var grid_data: Dictionary = _get_arg(&"data", area, generator_data)
@@ -28,4 +55,4 @@ func _get_data(output_port: GaeaNodeSlotOutput, area: AABB, generator_data: Gaea
 		if is_instance_valid(material):
 			grid[cell] = material.get_resource()
 
-	return output_port.return_value(grid)
+	return grid

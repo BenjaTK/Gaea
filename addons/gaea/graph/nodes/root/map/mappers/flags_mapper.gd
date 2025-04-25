@@ -10,6 +10,26 @@ class_name GaeaNodeFlagsMapper
 ## If a value matches [b]any[/b] of the [param exclude_flags], the cell's excluded from the output.
 
 
+func _get_title() -> String:
+	return "FlagsMapper"
+
+
+func _get_description() -> String:
+	return "Maps every cell of [param]data[/bg][/c] that matches the flag conditions to [param]material[/bg][/c]."
+
+
+func _get_arguments_list() -> Array[StringName]:
+	return super() + ([&"match_all", &"match_flags", &"exclude_flags"] as Array[StringName])
+
+
+func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	match arg_name:
+		&"match_all": return GaeaValue.Type.BOOLEAN
+		&"match_flags": return GaeaValue.Type.FLAGS
+		&"exclude_flags": return GaeaValue.Type.FLAGS
+	return super(arg_name)
+
+
 func _passes_mapping(grid_data: Dictionary, cell: Vector3i, area: AABB, generator_data: GaeaData) -> bool:
 	var match_all: bool = _get_arg(&"match_all", area, generator_data)
 	var flags: Array = _get_arg(&"match_flags", area, generator_data)
