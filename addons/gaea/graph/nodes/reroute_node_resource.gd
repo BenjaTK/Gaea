@@ -36,25 +36,14 @@ func _get_enum_options(enum_idx: int) -> Dictionary:
 	return {}
 
 
-func _get_enum_option_display_name(enum_idx: int, option_value: int) -> String:
-	return super(enum_idx, option_value).replace(" ", "")
-
-
 func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
-	prints("_on_enum_value_changed", _enum_idx, _option_value)
 	notify_argument_list_changed()
-	notify_property_list_changed()
 #endregion
 
 
 #region Arguments
 func _get_arguments_list() -> Array[StringName]:
 	return [&"value"]
-
-
-@warning_ignore("unused_parameter")
-func _get_argument_display_name(arg_name: StringName) -> String:
-	return ""
 
 
 @warning_ignore("unused_parameter")
@@ -67,11 +56,6 @@ func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
 #region Outputs
 func _get_output_ports_list() -> Array[StringName]:
 	return _get_arguments_list()
-
-
-@warning_ignore("unused_parameter")
-func _get_output_port_display_name(output_name: StringName) -> String:
-	return ""
 
 
 @warning_ignore("unused_parameter")
