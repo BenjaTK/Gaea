@@ -6,7 +6,7 @@ static func migrate(data: GaeaData):
 	var current_version = data.other.get(&"save_version", -1)
 	
 	if current_version == -1:
-		_migration_step_from_beta(current_version)
+		_migration_step_from_beta(data)
 
 
 ## Migrate data from rework [url=https://github.com/gaea-godot/gaea/pull/344]#344[/url].
@@ -85,7 +85,6 @@ static func _migration_step_from_beta(data: GaeaData):
 		"uid://c2u75oyoi2lne": "uid://br8gcsyc04ksj", #root/map/placing/rules_placer.tres
 		"uid://buu32u5bluejt": "uid://bjmyuomcmtwq6", #root/map/random/random_scatter.tres
 
-
 		"uid://dtc6nrgjvi8pw": ["uid://yu78bj4he27g", {&"enums": [GaeaNodeNumOp.Operation.Add]}], #root/scalar/operations/add.tres
 		"uid://167vhd3o81mk": ["uid://yu78bj4he27g", {&"enums": [GaeaNodeNumOp.Operation.Subtract]}], #root/scalar/operations/substract.tres
 		"uid://rcvehn8ulhem": ["uid://yu78bj4he27g", {&"enums": [GaeaNodeNumOp.Operation.Multiply]}], #root/scalar/operations/multiply.tres
@@ -97,14 +96,14 @@ static func _migration_step_from_beta(data: GaeaData):
 		"uid://o054c8xv8xb": ["uid://b1vu2sfwynxql", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR2]}], #root/vector/decomposition/decompose_vector2.tres
 		"uid://evg3g607sf40": ["uid://b1vu2sfwynxql", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR3]}], #root/vector/decomposition/decompose_vector3.tres
 		
-		"uid://cm0wp1if8nc6k": "", #root/vector/operations/add_vector2.tres
-		"uid://bq878twqcc5f": "", #root/vector/operations/add_vector3.tres
-		"uid://cgd05tlepxucw": "", #root/vector/operations/divide_vector2.tres
-		"uid://hut3x2e74y85": "", #root/vector/operations/divide_vector3.tres
-		"uid://cktjgkxfx8pyh": "", #root/vector/operations/multiply_vector2.tres
-		"uid://cq0gpnw7juqpk": "", #root/vector/operations/multiply_vector3.tres
-		"uid://d20pwbkvqkqnq": "", #root/vector/operations/substract_vector2.tres
-		"uid://boe1a3sogwvyw": "", #root/vector/operations/substract_vector3.tres
+		"uid://cm0wp1if8nc6k": ["uid://bclwjwmoudxkh", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR2, GaeaNodeVectorOp.Operation.Add]}], #root/vector/operations/add_vector2.tres
+		"uid://bq878twqcc5f": ["uid://bclwjwmoudxkh", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR3, GaeaNodeVectorOp.Operation.Add]}], #root/vector/operations/add_vector3.tres
+		"uid://d20pwbkvqkqnq": ["uid://bclwjwmoudxkh", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR2, GaeaNodeVectorOp.Operation.Subtract]}], #root/vector/operations/substract_vector2.tres
+		"uid://boe1a3sogwvyw": ["uid://bclwjwmoudxkh", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR3, GaeaNodeVectorOp.Operation.Subtract]}], #root/vector/operations/substract_vector3.tres
+		"uid://cktjgkxfx8pyh": ["uid://bclwjwmoudxkh", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR2, GaeaNodeVectorOp.Operation.Multiply]}], #root/vector/operations/multiply_vector2.tres
+		"uid://cq0gpnw7juqpk": ["uid://bclwjwmoudxkh", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR3, GaeaNodeVectorOp.Operation.Multiply]}], #root/vector/operations/multiply_vector3.tres
+		"uid://cgd05tlepxucw": ["uid://bclwjwmoudxkh", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR2, GaeaNodeVectorOp.Operation.Divide]}], #root/vector/operations/divide_vector2.tres
+		"uid://hut3x2e74y85": ["uid://bclwjwmoudxkh", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR3, GaeaNodeVectorOp.Operation.Divide]}], #root/vector/operations/divide_vector3.tres
 	}
 
 	for idx in data.resource_uids.size():
