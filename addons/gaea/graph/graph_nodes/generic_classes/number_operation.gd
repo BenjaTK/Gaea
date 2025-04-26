@@ -38,6 +38,7 @@ class Definition:
 		conversion = _conversion
 
 
+## All possible operations.
 var OPERATION_DEFINITIONS: Dictionary[Operation, Definition] : get = _get_operation_definitions
 
 
