@@ -1,0 +1,50 @@
+@tool
+extends GaeaNodeResource
+class_name GaeaNodeComposeRange
+## Composes a range value from 2 numbers, [param min] and [param max].
+##
+## Ranges internally have the following format:
+## [codeblock]
+## {
+##     min: float,
+##     max: float
+## }
+## [/codeblock]
+## See [enum GaeaValue.Type].
+
+
+func _get_title() -> String:
+	return "ComposeRange"
+
+
+func _get_description() -> String:
+	return "Composes a range value from 2 numbers, [param]min[/bg][/c] and [param]max[/bg][/c]."
+
+
+func _get_arguments_list() -> Array[StringName]:
+	return [&"min", &"max"]
+
+
+func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.FLOAT
+
+
+func _get_argument_default_value(arg_name: StringName) -> Variant:
+	return 0.0 if arg_name == &"min" else 1.0
+
+
+func _get_output_ports_list() -> Array[StringName]:
+	return [&"composed_range"]
+
+
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
+	return GaeaValue.Type.RANGE
+
+
+
+func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) -> Dictionary:
+	_log_data(output_port, generator_data)
+	return {
+		"min": _get_arg(&"min", area, generator_data),
+		"max": _get_arg(&"max", area, generator_data),
+	}
