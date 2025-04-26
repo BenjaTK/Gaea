@@ -6,14 +6,14 @@ extends GaeaNodeResource
 
 enum Operation {
 	Add,
-	Substract,
+	Subtract,
 	Multiply,
 	Divide,
 	#Remainder,
 	Power,
 	Max,
 	Min,
-	Snapped,
+	#Snapped,
 	Abs,
 	Ceil,
 	Clamp,
@@ -39,6 +39,37 @@ class Definition:
 
 
 var OPERATION_DEFINITIONS: Dictionary[Operation, Definition] : get = _get_operation_definitions
+
+
+func _get_description() -> String:
+	match get_enum_selection(0):
+		Operation.Power:
+			return "Returns the value of [param]base[/bg][/c] raised to the power of [param]exp[/bg][/c]."
+		Operation.Max:
+			return "Returns the maximum between [param]a[/bg][/c] and [param]b[/bg][/c]."
+		Operation.Min:
+			return "Returns the minimum between [param]a[/bg][/c] and [param]b[/bg][/c]."
+		Operation.Abs:
+			return "Returns the absolute value of [param]a[/bg][/c]."
+		Operation.Clamp:
+			return "Constrains [param]a[/bg][/c] to lie between [param]min[/bg][/c] and [param]max[/bg][/c] (inclusive)."
+		Operation.Remap:
+			return "Maps [param]a[/bg][/c] from range [code][istart, istop][/bg][/c] to [code][ostart, ostop][/bg][/c]."
+		Operation.Ceil:
+			return "Finds the nearest integer that is greater or equal to [param]a[/bg][/c]."
+		Operation.Floor:
+			return "Finds the nearest integer that is lower or equal to [param]a[/bg][/c]."
+		Operation.Round:
+			return "Finds the nearest integer to [param]a[/bg][/c]."
+		Operation.Sign:
+			return "Returns [code]-1[/bg][/c] for negative numbers, [code]1[/bg][/c] for positive numbers and [code]0[/bg][/c] for zeroes."
+		Operation.Smoothstep:
+			return "Returns [code]0[/bg][/c] if [param]a[/bg][/c] < [param]from[/bg][/c], [code]1[/bg][/c] if [param]a[/bg][/c] > [param]to[/bg][/c], otherwise returns an interpolated value between [code]0[/bg][/c] and [code]1[/bg][/c]."
+		Operation.Step:
+			return "Returns [code]0[/bg][/c] if [param]a[/bg][/c] < [param]edge[/bg][/c], otherwise [code]1[/bg][/c]."
+		Operation.Wrap:
+			return "Wraps [param]a[/bg][/c] between [param]min[/bg][/c] and [param]max[/bg][/c]."
+	return super()
 
 
 func _get_tree_items() -> Array[GaeaNodeResource]:
@@ -78,6 +109,8 @@ func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
 	return get_type()
 
 
+
+
 func _is_available() -> bool:
 	return get_type() != GaeaValue.Type.NULL
 
@@ -115,7 +148,7 @@ func _get_operation_definitions() -> Dictionary[Operation, Definition]:
 	OPERATION_DEFINITIONS = {
 		Operation.Add:
 			Definition.new([&"a", &"b"], "a + b", func(a: Variant, b: Variant): return a + b),
-		Operation.Substract:
+		Operation.Subtract:
 			Definition.new([&"a", &"b"], "a - b", func(a: Variant, b: Variant): return a - b),
 		Operation.Multiply:
 			Definition.new([&"a", &"b"], "a * b", func(a: Variant, b: Variant): return a * b),
@@ -129,8 +162,8 @@ func _get_operation_definitions() -> Dictionary[Operation, Definition]:
 			Definition.new([&"a",&"b"], "max(a, b)", max),
 		Operation.Min:
 			Definition.new([&"a",&"b"], "min(a, b)", min),
-		Operation.Snapped:
-			Definition.new([&"a", "Step"], "snapped(a, step)", snapped),
+		#Operation.Snapped:
+			#Definition.new([&"a", "Step"], "snapped(a, step)", snapped),
 		Operation.Abs:
 			Definition.new([&"a"], "abs(a)", abs),
 		Operation.Ceil:

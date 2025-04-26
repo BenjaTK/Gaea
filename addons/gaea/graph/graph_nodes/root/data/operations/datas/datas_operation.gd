@@ -6,7 +6,7 @@ extends GaeaNodeResource
 
 enum Operation {
 	Add,
-	Substract,
+	Subtract,
 	Multiply,
 	Divide,
 }
@@ -26,6 +26,23 @@ var OPERATION_DEFINITIONS: Dictionary[Operation, Definition] : get = _get_operat
 
 func _get_title() -> String:
 	return "DatasOp"
+
+
+func _get_description() -> String:
+	if get_tree_name() == "DatasOp" and not is_instance_valid(node):
+		return "Operation between 2 data grids."
+
+	match get_enum_selection(0):
+		Operation.Add:
+			return "Adds all cells in [param]B[/bg][/c] to all cells in [param]A[/bg][/c]."
+		Operation.Subtract:
+			return "Adds all cells in [param]B[/bg][/c] from all cells in [param]A[/bg][/c]."
+		Operation.Multiply:
+			return "Multiplies all cells in [param]B[/bg][/c] with all cells in [param]A[/bg][/c]."
+		Operation.Divide:
+			return "Adds all cells in [param]A[/bg][/c] by all cells in [param]B[/bg][/c]."
+		_:
+			return super()
 
 
 func _get_tree_items() -> Array[GaeaNodeResource]:
@@ -100,7 +117,7 @@ func _get_operation_definitions() -> Dictionary[Operation, Definition]:
 	OPERATION_DEFINITIONS = {
 		Operation.Add:
 			Definition.new([&"a", &"b"], "A + B", func(a: Variant, b: Variant): return a + b),
-		Operation.Substract:
+		Operation.Subtract:
 			Definition.new([&"a", &"b"], "A - B", func(a: Variant, b: Variant): return a - b),
 		Operation.Multiply:
 			Definition.new([&"a", &"b"], "A * B", func(a: Variant, b: Variant): return a * b),

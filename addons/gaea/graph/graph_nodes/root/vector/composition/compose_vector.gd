@@ -9,7 +9,7 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "Composes %d floats into %s." % [_get_arguments_list().size(), _get_vector_type_name().capitalize()]
+	return "Composes %d [code]float[/bg][/c]s into [code]%s[/bg][/c]." % [_get_arguments_list().size(), _get_vector_type_name().to_pascal_case()]
 
 
 #region Arguments
