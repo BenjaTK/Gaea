@@ -1,6 +1,7 @@
 @tool
 class_name GaeaNodeDataOp
 extends GaeaNodeNumOp
+## Operations between all the cells of a data grid and a [float] number.
 
 
 func _get_title() -> String:
@@ -48,5 +49,5 @@ func _get_data(output_port: StringName, area: AABB, generator_data: GaeaData) ->
 	var new_grid: Dictionary[Vector3i, float]
 
 	for cell: Vector3i in input_grid:
-		new_grid.set(cell, _get_new_value(operation, [input_grid[cell]] + args))
+		new_grid.set(cell, operation_definition.conversion.callv([input_grid[cell]] + args))
 	return new_grid
