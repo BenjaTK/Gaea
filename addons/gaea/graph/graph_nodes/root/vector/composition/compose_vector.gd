@@ -9,7 +9,7 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "Composes %d [code]float[/bg][/c]s into [code]%s[/bg][/c]." % [_get_arguments_list().size(), _get_vector_type_name().to_pascal_case()]
+	return "Composes %d [code]float[/bg][/c]s into [code]%s[/bg][/c]." % [_get_arguments_list().size(), _get_vector_type_name()]
 
 
 #region Arguments
@@ -37,14 +37,12 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"vector"]
 
 
-@warning_ignore("unused_parameter")
-func _get_output_port_display_name(output_name: StringName) -> String:
-	return "Composed %s" % _get_vector_type_name().to_pascal_case()
+func _get_output_port_display_name(_output_name: StringName) -> String:
+	return "Composed %s" % _get_vector_type_name()
 
 
-@warning_ignore("unused_parameter")
-func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type[_get_vector_type_name()]
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
+	return get_enum_selection(0) as GaeaValue.Type
 #endregion
 
 

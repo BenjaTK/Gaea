@@ -13,7 +13,7 @@ enum VectorType {
 
 
 func _get_vector_type_name() -> String:
-	return VectorType.find_key(get_enum_selection(0))
+	return VectorType.find_key(get_enum_selection(0)).to_pascal_case()
 
 
 func _get_enums_count() -> int:

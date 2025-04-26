@@ -318,7 +318,7 @@ func _clamp_popup_in_window(popup: Window, main_window: Window) -> void:
 
 func _add_node_from_resource(resource: GaeaNodeResource, p_is_loading: bool = false) -> GraphNode:
 	if not p_is_loading:
-		resource = resource._instantiate_duplicate()
+		resource = resource.duplicate()
 	var node: GaeaGraphNode = resource.get_scene().instantiate()
 	if resource.get_scene_script() != null:
 		node.set_script(resource.get_scene_script())

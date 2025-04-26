@@ -50,8 +50,7 @@ func _get_tree_items() -> Array[GaeaNodeResource]:
 	for vector_type in VectorType.keys():
 		for operation in OPERATION_DEFINITIONS.keys():
 			var item: GaeaNodeResource = get_script().new()
-			item.set_tree_name_override("%s%s (%s)" % [
-				vector_type.to_pascal_case(),
+			item.set_tree_name_override("%s (%s)" % [
 				Operation.find_key(operation).to_pascal_case(),
 				OPERATION_DEFINITIONS[operation].output
 			])
@@ -110,14 +109,12 @@ func _get_output_port_display_name(_output_name: StringName) -> String:
 
 
 func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
-	@warning_ignore("int_as_enum_without_cast")
-	return get_enum_selection(0)
+	return get_enum_selection(0) as GaeaValue.Type
 
 
 func _get_data(output_port: StringName, _area: AABB, generator_data: GaeaData) -> Variant:
 	_log_data(output_port, generator_data)
-	@warning_ignore("int_as_enum_without_cast")
-	var operation: Operation = get_enum_selection(1)
+	var operation: Operation = get_enum_selection(1) as Operation
 	var args: Array
 	for arg_name: StringName in OPERATION_DEFINITIONS[operation].args:
 		args.append(_get_arg(arg_name, _area, generator_data))

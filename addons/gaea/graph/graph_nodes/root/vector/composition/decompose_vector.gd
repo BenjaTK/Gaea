@@ -9,7 +9,7 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "Decomposes a [code]%s[/bg][/c] into %d [code]float[/bg][/c]s." % [_get_vector_type_name().to_pascal_case(), _get_output_ports_list().size()]
+	return "Decomposes a [code]%s[/bg][/c] into %d [code]float[/bg][/c]s." % [_get_vector_type_name(), _get_output_ports_list().size()]
 
 
 #region Arguments
@@ -17,14 +17,12 @@ func _get_arguments_list() -> Array[StringName]:
 	return [&"vector"]
 
 
-@warning_ignore("unused_parameter")
-func _get_argument_display_name(arg_name: StringName) -> String:
+func _get_argument_display_name(_arg_name: StringName) -> String:
 	return ""
 
 
-@warning_ignore("unused_parameter")
-func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type[_get_vector_type_name()]
+func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
+	return get_enum_selection(0) as GaeaValue.Type
 #endregion
 
 
