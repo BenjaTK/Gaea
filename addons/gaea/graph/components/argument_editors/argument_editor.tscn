@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://i2nwlab8rau"]
 
-[ext_resource type="Script" uid="uid://dk8gbt41h5e08" path="res://addons/gaea/graph/components/inputs/argument_editor.gd" id="1_rylg1"]
+[ext_resource type="Script" uid="uid://dk8gbt41h5e08" path="res://addons/gaea/graph/components/argument_editors/argument_editor.gd" id="1_rylg1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i7tyw"]
 

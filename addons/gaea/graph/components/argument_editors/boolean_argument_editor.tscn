@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://byaonbbfa2bx8"]
+
+[ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/argument_editors/argument_editor.tscn" id="1_xkrhe"]
+[ext_resource type="Script" uid="uid://cofg2ptqkqs3f" path="res://addons/gaea/graph/components/argument_editors/boolean_argument_editor.gd" id="2_pbrqj"]
+
+[node name="BaseParameter" instance=ExtResource("1_xkrhe")]
+script = ExtResource("2_pbrqj")
+add_input_slot = true
+input_type = 6
+
+[node name="CheckBox" type="CheckBox" parent="." index="1"]
+layout_mode = 2
+size_flags_horizontal = 8

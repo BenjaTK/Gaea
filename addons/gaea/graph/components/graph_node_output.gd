@@ -4,8 +4,6 @@ extends MarginContainer
 ## An output slot inside a [GaeaGraphNode].
 
 
-## The resource holding the information for this slot such as [member GaeaNodeSlotOutput.name].
-var resource: GaeaNodeSlotOutput
 ## Reference to the [GaeaGraphNode] instance
 var graph_node: GaeaGraphNode
 ## Index of the slot in the [GaeaGraphNode].

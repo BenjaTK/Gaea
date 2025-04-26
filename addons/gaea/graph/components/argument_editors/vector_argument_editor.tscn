@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://mlwupvg8a886"]
 
-[ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/inputs/argument_editor.tscn" id="1_22r3d"]
-[ext_resource type="Script" uid="uid://bo1ptrbf2x7kt" path="res://addons/gaea/graph/components/inputs/vector_argument_editor.gd" id="2_22r3d"]
+[ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/argument_editors/argument_editor.tscn" id="1_22r3d"]
+[ext_resource type="Script" uid="uid://bo1ptrbf2x7kt" path="res://addons/gaea/graph/components/argument_editors/vector_argument_editor.gd" id="2_22r3d"]
 
 [node name="Vector3Parameter" instance=ExtResource("1_22r3d")]
 script = ExtResource("2_22r3d")

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dy4n2a5hkaxsb"]
 
-[ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/inputs/argument_editor.tscn" id="1_3sl2w"]
-[ext_resource type="Script" uid="uid://dwod0xjb4srbu" path="res://addons/gaea/graph/components/inputs/rules_argument_editor.gd" id="2_rl5k1"]
-[ext_resource type="PackedScene" uid="uid://dvwpfgoidnak6" path="res://addons/gaea/graph/components/inputs/three_state_button.tscn" id="3_rl5k1"]
+[ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/argument_editors/argument_editor.tscn" id="1_3sl2w"]
+[ext_resource type="Script" uid="uid://dwod0xjb4srbu" path="res://addons/gaea/graph/components/argument_editors/rules_argument_editor.gd" id="2_rl5k1"]
+[ext_resource type="PackedScene" uid="uid://dvwpfgoidnak6" path="res://addons/gaea/graph/components/argument_editors/three_state_button.tscn" id="3_rl5k1"]
 
 [node name="RulesParameter" instance=ExtResource("1_3sl2w")]
 script = ExtResource("2_rl5k1")
