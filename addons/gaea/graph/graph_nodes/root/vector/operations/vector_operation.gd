@@ -1,0 +1,143 @@
+@tool
+class_name GaeaNodeVectorOp
+extends GaeaNodeVectorBase
+## Base class for operations between 2 vectors.
+
+enum Operation {
+	Add,
+	Subtract,
+	Multiply,
+	Divide,
+}
+
+
+class Definition:
+	var args: Array[StringName]
+	var output: String
+	var conversion: Callable
+	func _init(_args: Array[StringName], _output: String, _conversion: Callable):
+		args = _args
+		output = _output
+		conversion = _conversion
+
+
+var OPERATION_DEFINITIONS: Dictionary[Operation, Definition] : get = _get_operation_definitions
+
+
+func _get_title() -> String:
+	return "VectorOp"
+
+
+func _get_description() -> String:
+	match get_enum_selection(0):
+		Operation.Add:
+			return "Sums 2 [code]Vector[/bg][/c]."
+		Operation.Subtract:
+			return "Subtracts 2 [code]Vector[/bg][/c]."
+		Operation.Multiply:
+			return "Multiplies 2 [code]Vector[/bg][/c] together."
+		Operation.Divide:
+			return "Divides 2 [code]Vector[/bg][/c] together."
+	return ""
+
+
+func _get_tree_items() -> Array[GaeaNodeResource]:
+	var items: Array[GaeaNodeResource]
+	for vector_type in VectorType.keys():
+		for operation in OPERATION_DEFINITIONS.keys():
+			var item: GaeaNodeResource = get_script().new()
+			item.set_tree_name_override("%s %s (%s)" % [
+				vector_type.to_pascal_case().replace(" ", ""),
+				Operation.find_key(operation).to_pascal_case(),
+				OPERATION_DEFINITIONS[operation].output
+			])
+			item.set_default_enum_value_override(0, VectorType[vector_type])
+			item.set_default_enum_value_override(1, operation)
+			items.append(item)
+	return items
+
+
+func _get_enums_count() -> int:
+	return super() + 1
+
+
+func _get_enum_options(_idx: int) -> Dictionary:
+	if _idx < super._get_enums_count():
+		return super(_idx)
+
+	var options: Dictionary = {}
+	for operation in OPERATION_DEFINITIONS.keys():
+		options.set(Operation.find_key(operation), operation)
+	return options
+
+
+func _get_enum_option_icon(enum_idx: int, option_value: int) -> Texture:
+	if enum_idx < super._get_enums_count():
+		return super(enum_idx, option_value)
+	return null
+
+
+func _get_arguments_list() -> Array[StringName]:
+	return OPERATION_DEFINITIONS.get(get_enum_selection(1)).args
+
+
+func _get_argument_display_name(arg_name: StringName) -> String:
+	return arg_name
+
+
+func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
+	return get_type()
+
+
+func _is_available() -> bool:
+	return get_type() != GaeaValue.Type.NULL
+
+
+func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
+	notify_argument_list_changed()
+
+
+func _get_output_ports_list() -> Array[StringName]:
+	return [&"result"]
+
+
+@warning_ignore("unused_parameter")
+func _get_output_port_display_name(output_name: StringName) -> String:
+	return OPERATION_DEFINITIONS[get_enum_selection(1)].output
+
+
+@warning_ignore("unused_parameter")
+func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+	@warning_ignore("int_as_enum_without_cast")
+	return get_enum_selection(0)
+
+
+func _get_data(output_port: StringName, _area: AABB, generator_data: GaeaData) -> Variant:
+	_log_data(output_port, generator_data)
+	@warning_ignore("int_as_enum_without_cast")
+	var operation: Operation = get_enum_selection(1)
+	var args: Array
+	for arg_name: StringName in OPERATION_DEFINITIONS[operation].args:
+		args.append(_get_arg(arg_name, _area, generator_data))
+	return _get_new_value(operation, args)
+
+
+func _get_new_value(operation: Operation, args: Array) -> Variant:
+	return OPERATION_DEFINITIONS[operation].conversion.callv(args)
+
+
+func _get_operation_definitions() -> Dictionary[Operation, Definition]:
+	if not OPERATION_DEFINITIONS.is_empty():
+		return OPERATION_DEFINITIONS
+		
+	OPERATION_DEFINITIONS = {
+		Operation.Add:
+			Definition.new([&"a", &"b"], "a + b", func(a: Variant, b: Variant): return a + b),
+		Operation.Subtract:
+			Definition.new([&"a", &"b"], "a - b", func(a: Variant, b: Variant): return a - b),
+		Operation.Multiply:
+			Definition.new([&"a", &"b"], "a * b", func(a: Variant, b: Variant): return a * b),
+		Operation.Divide:
+			Definition.new([&"a", &"b"], "a / b", func(a: Variant, b: Variant): return 0 if b.is_zero_approx() else a / b),
+	}
+	return OPERATION_DEFINITIONS
