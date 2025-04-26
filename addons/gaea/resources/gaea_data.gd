@@ -128,6 +128,5 @@ func _setup_local_to_scene() -> void:
 		if not resource is GaeaNodeResource:
 			push_error("Something went wrong, the resource at %s is not a GaeaNodeResource" % base_uid)
 			return
-		resource = resource._instantiate_duplicate()
 		resource._load_save_data(data)
 		resources.append(resource)

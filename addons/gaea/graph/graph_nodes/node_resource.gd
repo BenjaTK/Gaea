@@ -42,13 +42,12 @@ const GAEA_MATERIAL_GRADIENT_HINT := "Resource that maps values from 0.0-1.0 to 
 ## }
 ## [/codeblock]
 var connections: Array[Dictionary]
-## The UID of the original resource this was duplicated from.
-var resource_uid: String
 ## The related [GaeaGraphNode] for editing in the Gaea graph editor.
 var node: GaeaGraphNode
 ## A Dictionary holding the values of the arguments
 ## where the keys are their names.
 var arguments: Dictionary
+## All the currently-selected values for the enums.
 var enum_selections: Array
 ## An additional value added to the generation's seed to prevent
 ## duplicates of the same node from having the same randomness. (See [member GaeaGenerator.seed]).
@@ -628,14 +627,6 @@ func _is_point_outside_area(area: AABB, point: Vector3) -> bool:
 	area.end -= Vector3.ONE
 	return (point.x < area.position.x or point.y < area.position.y or point.z < area.position.z or
 			point.x > area.end.x or point.y > area.end.y or point.z > area.end.z)
-
-
-func _instantiate_duplicate() -> GaeaNodeResource:
-	var new_resource = duplicate() as GaeaNodeResource
-	new_resource.resource_uid = ResourceUID.id_to_text(
-		ResourceLoader.get_resource_uid(resource_path)
-	)
-	return new_resource
 #endregion
 
 
@@ -643,24 +634,3 @@ func _load_save_data(saved_data: Dictionary) -> void:
 	salt = saved_data.get("salt", 0)
 	arguments = saved_data.get("arguments", {})
 	enum_selections = saved_data.get("enums", [])
-
-#region Old Code
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#endregion

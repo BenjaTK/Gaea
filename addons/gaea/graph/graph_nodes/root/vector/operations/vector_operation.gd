@@ -131,7 +131,7 @@ func _get_new_value(operation: Operation, args: Array) -> Variant:
 func _get_operation_definitions() -> Dictionary[Operation, Definition]:
 	if not OPERATION_DEFINITIONS.is_empty():
 		return OPERATION_DEFINITIONS
-		
+
 	OPERATION_DEFINITIONS = {
 		Operation.Add:
 			Definition.new([&"a", &"b"], "a + b", func(a: Variant, b: Variant): return a + b),
