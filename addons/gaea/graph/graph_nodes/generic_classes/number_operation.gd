@@ -24,6 +24,7 @@ enum Operation {
 	Remap,
 	Sign,
 	Smoothstep,
+	Step,
 	Wrap,
 }
 
@@ -103,16 +104,14 @@ func _get_data(output_port: StringName, _area: AABB, generator_data: GaeaData) -
 
 
 func _get_new_value(operation: Operation, args: Array) -> Variant:
-	if OPERATION_DEFINITIONS.has(operation):
-		return OPERATION_DEFINITIONS[operation].conversion.callv(args)
-	return 0.0
+	return OPERATION_DEFINITIONS[operation].conversion.callv(args)
 
 
 func _get_operation_definitions() -> Dictionary[Operation, Definition]:
 	if not OPERATION_DEFINITIONS.is_empty():
 		return OPERATION_DEFINITIONS
 
-	return {
+	OPERATION_DEFINITIONS = {
 		Operation.Add:
 			Definition.new([&"a", &"b"], "a + b", func(a: Variant, b: Variant): return a + b),
 		Operation.Substract:
@@ -140,21 +139,24 @@ func _get_operation_definitions() -> Dictionary[Operation, Definition]:
 		Operation.Round:
 			Definition.new([&"a"], "round(a)", round),
 		Operation.Clamp:
-			Definition.new([&"value", &"min", &"max"], "clamp(value, min, max)", clamp),
+			Definition.new([&"a", &"min", &"max"], "clamp(a, min, max)", clamp),
 		#Operation.Lerp:
 			#Definition.new([&"from", &"to", &"weight"], "lerpf(from, to, weight)", lerpf),
 		#Operation.Log:
 			#Definition.new([&"a"], "log(a)", log),
 		Operation.Remap:
 			Definition.new(
-				[&"value", &"in_start", &"in_stop", &"out_start", &"out_stop"],
-				"remap(value, ...)",
+				[&"a", &"in_start", &"in_stop", &"out_start", &"out_stop"],
+				"remap(a, ...)",
 				remap
 			),
 		Operation.Sign:
 			Definition.new([&"a"], "sign(a)", sign),
 		Operation.Smoothstep:
 			Definition.new([&"from", &"to", &"a"], "smoothstep(from, to, a)", smoothstep),
+		Operation.Step:
+			Definition.new([&"a", &"edge"], "step(a, edge)", func(a, edge): return 0 if a < edge else 1),
 		Operation.Wrap:
-			Definition.new([&"value", &"min", &"max"], "wrap(value, min, max)", wrap),
+			Definition.new([&"a", &"min", &"max"], "wrap(a, min, max)", wrap),
 	}
+	return OPERATION_DEFINITIONS

@@ -5,7 +5,7 @@ extends Tree
 signal node_selected_for_creation(resource: GaeaNodeResource)
 signal special_node_selected_for_creation(id: StringName)
 
-const NODES_FOLDER_PATH: String = "res://addons/gaea/graph/nodes/root/"
+const NODES_FOLDER_PATH: String = "res://addons/gaea/graph/graph_nodes/root/"
 
 @export var description_label: RichTextLabel
 var tree_dictionary: Dictionary
