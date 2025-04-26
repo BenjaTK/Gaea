@@ -4,7 +4,7 @@ class_name GaeaData
 extends Resource
 ## Resource that holds the saved data for a Gaea graph.
 
-
+## Current save version used for [GaeaDataMigration].
 const CURRENT_SAVE_VERSION := 2
 
 ## Emitted when the size of [member layers] is changed, or when one of its values is changed.
@@ -116,9 +116,10 @@ func _get(property: StringName) -> Variant:
 
 
 func _setup_local_to_scene() -> void:
-	#Data migration from 2.0 beta. See PR #305. Remove before releasing 2.X.
+	#Data migration from previous version.
 	if other.get(&"save_version", -1) != CURRENT_SAVE_VERSION:
-		_migrate_data()
+		GaeaDataMigration.migrate(self)
+
 	resources = []
 	for idx in resource_uids.size():
 		var base_uid = resource_uids[idx]
@@ -130,60 +131,3 @@ func _setup_local_to_scene() -> void:
 		resource = resource._instantiate_duplicate()
 		resource._load_save_data(data)
 		resources.append(resource)
-
-
-#region Migration from previous save format
-# Data migration from 2.0 beta. See PR #305. Remove before releasing 2.X.
-func _migrate_data() -> void:
-	var node_map := _get_all_node_files("res://addons/gaea/graph/nodes/root/")
-	resource_uids = []
-	for idx in resources.size():
-		var resource = resources[idx]
-		var data = node_data[idx]
-		if node_map.has(resource.title):
-			resource_uids.append(node_map.get(resource.title))
-		elif resource.title.left(7) == "Reroute":
-			resource_uids.append("uid://kdn03ei2yp6e")
-		elif resource.title == "Output":
-			resource_uids.append("uid://bbkdvyxkj2slo")
-		else:
-			resource_uids.append("uid://kdn03ei2yp6e")
-			push_error("Could not migrate node '%s'" % resource.title)
-		if resource.data:
-			data.set("data", resource.data)
-		if resource.salt:
-			data.set("salt", resource.salt)
-		node_data[idx] = data
-
-	for idx in resource_uids.size():
-		var loaded := load(resource_uids.get(idx))
-		if loaded is GaeaNodeResource:
-			resource_uids.set(idx, ResourceUID.id_to_text(ResourceLoader.get_resource_uid(loaded.get_script())))
-
-
-# Data migration from 2.0 beta. See PR #305. Remove before releasing 2.X.
-func _get_all_node_files(path: String, files: Dictionary[String, String] = {}) -> Dictionary[String, String]:
-	var dir : = DirAccess.open(path)
-
-	if DirAccess.get_open_error() == OK:
-		dir.list_dir_begin()
-
-		var file_name = dir.get_next()
-
-		while file_name != "":
-			if dir.current_is_dir():
-				# recursion
-				files = _get_all_node_files(dir.get_current_dir() + "/" + file_name, files)
-			else:
-				if file_name.get_extension() != "tres":
-					file_name = dir.get_next()
-					continue
-
-				var node_path = dir.get_current_dir() + "/" + file_name
-				var node = ResourceLoader.load(node_path)
-				files.set(node.title, ResourceUID.id_to_text(ResourceLoader.get_resource_uid(node_path)))
-			file_name = dir.get_next()
-	else:
-		push_error("Can't open directory %s." % path)
-	return files
-#endregion
