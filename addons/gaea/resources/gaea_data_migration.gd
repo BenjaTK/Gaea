@@ -90,7 +90,7 @@ static func _migration_step_from_beta(data: GaeaData):
 		"uid://rcvehn8ulhem": ["uid://yu78bj4he27g", {&"enums": [GaeaNodeNumOp.Operation.Multiply]}], #root/scalar/operations/multiply.tres
 		"uid://cs35p7d6oiu4w": ["uid://yu78bj4he27g", {&"enums": [GaeaNodeNumOp.Operation.Divide]}], #root/scalar/operations/divide.tres
 
-		"uid://bmjbf86en6cas": ["uid://c1koyt7wh4c4v", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR2]}, {&"min": &"x", &"max": &"y"}], #root/other/composition/compose_range.tres
+		"uid://bmjbf86en6cas": "uid://m0m4x6trd11h", #root/other/composition/compose_range.tres
 		"uid://dv28660onn7fl": ["uid://c1koyt7wh4c4v", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR2]}], #root/vector/composition/compose_vector2.tres
 		"uid://dfjr83x416ec4": ["uid://c1koyt7wh4c4v", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR3]}], #root/vector/composition/compose_vector3.tres
 		"uid://o054c8xv8xb": ["uid://b1vu2sfwynxql", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR2]}], #root/vector/decomposition/decompose_vector2.tres
