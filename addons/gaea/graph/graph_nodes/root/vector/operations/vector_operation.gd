@@ -29,25 +29,29 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	match get_enum_selection(0):
+	if get_tree_name() == _get_title() and not is_instance_valid(node):
+		return "Operation between 2 [code]Vector[/bg][/c]s."
+
+	match get_enum_selection(1):
 		Operation.Add:
-			return "Sums 2 [code]Vector[/bg][/c]."
+			return "Sums 2 [code]%s[/bg][/c]s." % _get_enum_option_display_name(0, get_enum_selection(0))
 		Operation.Subtract:
-			return "Subtracts 2 [code]Vector[/bg][/c]."
+			return "Subtracts 2 [code]%s[/bg][/c]s." % _get_enum_option_display_name(0, get_enum_selection(0))
 		Operation.Multiply:
-			return "Multiplies 2 [code]Vector[/bg][/c] together."
+			return "Multiplies 2 [code]%s[/bg][/c]s together." % _get_enum_option_display_name(0, get_enum_selection(0))
 		Operation.Divide:
-			return "Divides 2 [code]Vector[/bg][/c] together."
+			return "Divides 2 [code]%s[/bg][/c]s together." % _get_enum_option_display_name(0, get_enum_selection(0))
 	return ""
 
 
 func _get_tree_items() -> Array[GaeaNodeResource]:
 	var items: Array[GaeaNodeResource]
+	items.append_array(super())
 	for vector_type in VectorType.keys():
 		for operation in OPERATION_DEFINITIONS.keys():
 			var item: GaeaNodeResource = get_script().new()
-			item.set_tree_name_override("%s %s (%s)" % [
-				vector_type.to_pascal_case().replace(" ", ""),
+			item.set_tree_name_override("%s%s (%s)" % [
+				vector_type.to_pascal_case(),
 				Operation.find_key(operation).to_pascal_case(),
 				OPERATION_DEFINITIONS[operation].output
 			])
@@ -101,13 +105,11 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"result"]
 
 
-@warning_ignore("unused_parameter")
-func _get_output_port_display_name(output_name: StringName) -> String:
+func _get_output_port_display_name(_output_name: StringName) -> String:
 	return OPERATION_DEFINITIONS[get_enum_selection(1)].output
 
 
-@warning_ignore("unused_parameter")
-func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 	@warning_ignore("int_as_enum_without_cast")
 	return get_enum_selection(0)
 
