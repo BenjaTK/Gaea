@@ -40,6 +40,7 @@ class Definition:
 
 var OPERATION_DEFINITIONS: Dictionary[Operation, Definition] : get = _get_operation_definitions
 
+
 func _get_tree_items() -> Array[GaeaNodeResource]:
 	var items: Array[GaeaNodeResource]
 	items.append_array(super())

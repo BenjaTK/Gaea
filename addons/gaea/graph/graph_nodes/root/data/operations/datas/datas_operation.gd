@@ -1,7 +1,7 @@
 @tool
 class_name GaeaNodeDatasOp
 extends GaeaNodeResource
-## Operations between 2 data grids.
+## Operation between 2 data grids.
 
 
 enum Operation {
