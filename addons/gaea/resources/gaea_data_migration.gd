@@ -4,9 +4,11 @@ class_name GaeaDataMigration
 
 static func migrate(data: GaeaData):
 	var current_version = data.other.get(&"save_version", -1)
-	
+
 	if current_version == -1:
 		_migration_step_from_beta(data)
+
+	push_warning("Gaea migrated previous save file to new format.")
 
 
 ## Migrate data from rework [url=https://github.com/gaea-godot/gaea/pull/344]#344[/url].
@@ -95,7 +97,7 @@ static func _migration_step_from_beta(data: GaeaData):
 		"uid://dfjr83x416ec4": ["uid://c1koyt7wh4c4v", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR3]}], #root/vector/composition/compose_vector3.tres
 		"uid://o054c8xv8xb": ["uid://b1vu2sfwynxql", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR2]}], #root/vector/decomposition/decompose_vector2.tres
 		"uid://evg3g607sf40": ["uid://b1vu2sfwynxql", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR3]}], #root/vector/decomposition/decompose_vector3.tres
-		
+
 		"uid://cm0wp1if8nc6k": ["uid://bclwjwmoudxkh", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR2, GaeaNodeVectorOp.Operation.Add]}], #root/vector/operations/add_vector2.tres
 		"uid://bq878twqcc5f": ["uid://bclwjwmoudxkh", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR3, GaeaNodeVectorOp.Operation.Add]}], #root/vector/operations/add_vector3.tres
 		"uid://d20pwbkvqkqnq": ["uid://bclwjwmoudxkh", {&"enums": [GaeaNodeVectorBase.VectorType.VECTOR2, GaeaNodeVectorOp.Operation.Subtract]}], #root/vector/operations/substract_vector2.tres
@@ -108,7 +110,7 @@ static func _migration_step_from_beta(data: GaeaData):
 
 	for idx in data.resource_uids.size():
 		var base_uid = data.resource_uids[idx]
-		
+
 		if data.node_data[idx].has("data"):
 			data.node_data[idx].set(&"arguments", data.node_data[idx].get("data"))
 			data.node_data[idx].erase("data")
