@@ -1,4 +1,4 @@
-class_name ScriptEditorContextMenuHandler
+@tool
 extends Control
 
 var _context_menus := Dictionary()
@@ -10,19 +10,9 @@ func _init(context_menus: Array[GdUnitContextMenuItem]) -> void:
 	for menu in context_menus:
 		_context_menus[menu.id] = menu
 	_editor = EditorInterface.get_script_editor()
+	@warning_ignore("return_value_discarded")
 	_editor.editor_script_changed.connect(on_script_changed)
 	on_script_changed(active_script())
-
-
-static func dispose() -> void:
-	if  Engine.get_main_loop().root == null:
-		return
-	var handler: ScriptEditorContextMenuHandler = Engine.get_main_loop().root.find_child("ScriptEditorContextMenuHandler*", false, false)
-	if handler:
-		var editor := EditorInterface.get_script_editor()
-		if editor.editor_script_changed.is_connected(handler.on_script_changed):
-			editor.editor_script_changed.disconnect(handler.on_script_changed)
-		GodotVersionFixures.free_fix(handler)
 
 
 func _input(event: InputEvent) -> void:
@@ -37,13 +27,13 @@ func _input(event: InputEvent) -> void:
 
 
 func has_editor_focus() -> bool:
-	return Engine.get_main_loop().root.gui_get_focus_owner() == active_base_editor()
+	return (Engine.get_main_loop() as SceneTree).root.gui_get_focus_owner() == active_base_editor()
 
 
 func on_script_changed(script: Script) -> void:
 	if script is Script:
 		var popups: Array[Node] = GdObjects.find_nodes_by_class(active_editor(), "PopupMenu", true)
-		for popup in popups:
+		for popup: PopupMenu in popups:
 			if not popup.about_to_popup.is_connected(on_context_menu_show):
 				popup.about_to_popup.connect(on_context_menu_show.bind(script, popup))
 			if not popup.id_pressed.is_connected(on_context_menu_pressed):

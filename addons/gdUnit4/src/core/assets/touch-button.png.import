@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8duoevjrvx65"
-path="res://.godot/imported/icon.png-62697e17645466394a12e1821970bc28.ctex"
+uid="uid://btx5kcrsngasl"
+path="res://.godot/imported/touch-button.png-2fff40c8520d8e97a57db1b2b043f641.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/gdUnit4/src/report/template/css/icon.png"
-dest_files=["res://.godot/imported/icon.png-62697e17645466394a12e1821970bc28.ctex"]
+source_file="res://addons/gdUnit4/src/core/assets/touch-button.png"
+dest_files=["res://.godot/imported/touch-button.png-2fff40c8520d8e97a57db1b2b043f641.ctex"]
 
 [params]
 
