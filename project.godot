@@ -34,7 +34,7 @@ project/assembly_name="Gaea"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gaea/plugin.cfg")
+enabled=PackedStringArray("res://addons/gaea/plugin.cfg", "res://addons/gdUnit4/plugin.cfg")
 
 [importer_defaults]
 
