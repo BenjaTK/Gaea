@@ -39,7 +39,7 @@ signal area_erased(area: AABB)
 ## Start the generaton process. First resets the current generation, then generates the whole
 ## [member world_size].
 func generate() -> void:
-	if random_seed_on_generate or false :
+	if random_seed_on_generate or false:
 		seed = randi()
 	request_reset()
 	generate_area(AABB(Vector3.ZERO, world_size))
