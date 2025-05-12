@@ -20,10 +20,6 @@ func _get_description() -> String:
 	return "Returns the border of [param data]. If [param inside] is [code]true[/code], returns the inner border."
 
 
-func _get_arguments_list() -> Array[StringName]:
-	return [&"data", &"neighbors", &"inside"]
-
-
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
 	match arg_name:
 		&"data": return GaeaValue.Type.DATA
