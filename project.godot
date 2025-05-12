@@ -39,6 +39,7 @@ enabled=PackedStringArray("res://addons/gaea/plugin.cfg", "res://addons/gdUnit4/
 [gdunit4]
 
 settings/test/test_lookup_folder="testing"
+ui/toolbar/run_overall=true
 
 [importer_defaults]
 
