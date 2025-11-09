@@ -34,12 +34,12 @@ signal area_erased(area: AABB)
 ## Leave [param z] as [code]1[/code] for 2D worlds.
 @export var world_size: Vector3i = Vector3i(128, 128, 1):
 	set(value):
-		world_size = value.clamp(Vector3i.ONE, Vector3i.MAX)
+		world_size = value.max(Vector3i.ONE)
 ## Used with [ChunkLoader]s, or to get the cell position of a node with [method global_to_map].
 ## Not necessary for generation to work.
 @export var cell_size: Vector3i = Vector3i(16, 16, 1):
 	set(value):
-		cell_size = value.clamp(Vector3i.ONE, Vector3i.MAX)
+		cell_size = value.max(Vector3i.ONE)
 
 
 ## Start the generaton process. First resets the current generation, then generates the whole
