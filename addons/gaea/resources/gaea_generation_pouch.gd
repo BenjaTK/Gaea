@@ -1,4 +1,5 @@
 @tool
+@icon("../assets/generation_pouch.svg")
 class_name GaeaGenerationPouch
 extends RefCounted
 

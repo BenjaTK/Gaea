@@ -1,4 +1,5 @@
 @tool
+@icon("../assets/grid.svg")
 class_name GaeaGrid
 extends Resource
 ## Result of a Gaea generation.

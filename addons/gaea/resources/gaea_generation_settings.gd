@@ -1,4 +1,5 @@
 @tool
+@icon("../assets/generation_settings.svg")
 class_name GaeaGenerationSettings
 extends Resource
 

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d01oerqx1xuok"
-path="res://.godot/imported/gaea_node_resource.svg-22fbdf1f633d28c47aacd2eb3d0636e4.ctex"
+uid="uid://bh2gflywcw254"
+path="res://.godot/imported/generation_settings.svg-b75b97becc185c50936ecd7bca2599da.ctex"
 metadata={
 "has_editor_variant": true,
 "vram_texture": false
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://addons/gaea/assets/gaea_node_resource.svg"
-dest_files=["res://.godot/imported/gaea_node_resource.svg-22fbdf1f633d28c47aacd2eb3d0636e4.ctex"]
+source_file="res://addons/gaea/assets/generation_settings.svg"
+dest_files=["res://.godot/imported/generation_settings.svg-b75b97becc185c50936ecd7bca2599da.ctex"]
 
 [params]
 
