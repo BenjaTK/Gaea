@@ -5,12 +5,19 @@ extends RefCounted
 const CIRCLE := preload("uid://dqob6v3dudlri")
 
 const LINE_CURVATURE := "gaea/graph/line_curvature"
+const LINE_CURVATURE_DEFAULT := 0.5
 const LINE_THICKNESS := "gaea/graph/line_thickness"
+const LINE_THICKNESS_DEFAULT := 4.0
 const MINIMAP_OPACITY := "gaea/graph/minimap_opacity"
+const MINIMAP_OPACITY_DEFAULT := 0.85
 const GRID_PATTERN := "gaea/graph/grid_pattern"
+const GRID_PATTERN_DEFAULT := 1
 const PREVIEW_RESOLUTION := "gaea/graph/preview/preview_resolution"
+const PREVIEW_RESOLUTION_DEFAULT := 64
 const PREVIEW_MAX_SIMULATION_SIZE := "gaea/graph/preview/max_simulation_size"
+const PREVIEW_MAX_SIMULATION_SIZE_DEFAULT := 128
 const OUTPUT_TITLE_COLOR := "gaea/graph/output_title_color"
+const OUTPUT_TITLE_COLOR_DEFAULT := Color("632639")
 const COLOR_BASE := "gaea/graph/slot_colors/%s"
 const ICON_BASE := "gaea/graph/slot_icons/%s"
 const CONFIGURABLE_SLOT_COLORS := {
@@ -34,36 +41,36 @@ var editor_settings: EditorSettings
 func add_settings() -> void:
 	var editor_interface = Engine.get_singleton("EditorInterface")
 	editor_settings = editor_interface.get_editor_settings()
-	_add_setting(LINE_CURVATURE, 0.5, {
+	_add_setting(LINE_CURVATURE, LINE_CURVATURE_DEFAULT, {
 		"type": TYPE_FLOAT,
 		"hint": PROPERTY_HINT_RANGE,
 		"hint_string": "0.0,1.0"
 	})
-	_add_setting(LINE_THICKNESS, 4.0, {
+	_add_setting(LINE_THICKNESS, LINE_THICKNESS_DEFAULT, {
 		"type": TYPE_FLOAT,
 		"hint": PROPERTY_HINT_RANGE,
 		"hint_string": "0.0,100.0"
 	})
-	_add_setting(MINIMAP_OPACITY, 0.85, {
+	_add_setting(MINIMAP_OPACITY, MINIMAP_OPACITY_DEFAULT, {
 		"type": TYPE_FLOAT,
 		"hint": PROPERTY_HINT_RANGE,
 		"hint_string": "0.0,1.0"
 	})
-	_add_setting(GRID_PATTERN, 1, {
+	_add_setting(GRID_PATTERN,GRID_PATTERN_DEFAULT, {
 		"type": TYPE_INT,
 		"hint": PROPERTY_HINT_ENUM,
 		"hint_string": "Lines,Dots"
 	})
-	_add_setting(PREVIEW_RESOLUTION, 64, {
+	_add_setting(PREVIEW_RESOLUTION, PREVIEW_RESOLUTION_DEFAULT, {
 		"type": TYPE_INT
 	})
-	_add_setting(PREVIEW_MAX_SIMULATION_SIZE, 128, {
+	_add_setting(PREVIEW_MAX_SIMULATION_SIZE, PREVIEW_MAX_SIMULATION_SIZE_DEFAULT, {
 		"type": TYPE_INT
 	})
 
 	_add_setting(
 		OUTPUT_TITLE_COLOR,
-		Color("632639"),
+		OUTPUT_TITLE_COLOR_DEFAULT,
 		{"type": TYPE_COLOR, "hint": PROPERTY_HINT_COLOR_NO_ALPHA}
 	)
 
@@ -132,29 +139,41 @@ static func get_configured_icon_for_value_type(value_type: GaeaValue.Type) -> Te
 
 static func get_line_curvature() -> float:
 	var editor_interface = Engine.get_singleton("EditorInterface")
-	return editor_interface.get_editor_settings().get_setting(LINE_CURVATURE)
+	if editor_interface.get_editor_settings().has_setting(LINE_CURVATURE):
+		return editor_interface.get_editor_settings().get_setting(LINE_CURVATURE)
+	return LINE_CURVATURE_DEFAULT
 
 
 static func get_line_thickness() -> float:
 	var editor_interface = Engine.get_singleton("EditorInterface")
-	return editor_interface.get_editor_settings().get_setting(LINE_THICKNESS)
+	if editor_interface.get_editor_settings().has_setting(LINE_THICKNESS):
+		return editor_interface.get_editor_settings().get_setting(LINE_THICKNESS)
+	return LINE_THICKNESS_DEFAULT
 
 
 static func get_minimap_opacity() -> float:
 	var editor_interface = Engine.get_singleton("EditorInterface")
-	return editor_interface.get_editor_settings().get_setting(MINIMAP_OPACITY)
+	if editor_interface.get_editor_settings().has_setting(MINIMAP_OPACITY):
+		return editor_interface.get_editor_settings().get_setting(MINIMAP_OPACITY)
+	return MINIMAP_OPACITY_DEFAULT
 
 
 static func get_grid_pattern() -> int:
 	var editor_interface = Engine.get_singleton("EditorInterface")
-	return editor_interface.get_editor_settings().get_setting(GRID_PATTERN)
+	if editor_interface.get_editor_settings().has_setting(GRID_PATTERN):
+		return editor_interface.get_editor_settings().get_setting(GRID_PATTERN)
+	return GRID_PATTERN_DEFAULT
 
 
 static func get_preview_resolution() -> int:
 	var editor_interface = Engine.get_singleton("EditorInterface")
-	return editor_interface.get_editor_settings().get_setting(PREVIEW_RESOLUTION)
+	if editor_interface.get_editor_settings().has_setting(PREVIEW_RESOLUTION):
+		return editor_interface.get_editor_settings().get_setting(PREVIEW_RESOLUTION)
+	return PREVIEW_RESOLUTION_DEFAULT
 
 
 static func get_preview_max_simulation_size() -> int:
 	var editor_interface = Engine.get_singleton("EditorInterface")
-	return editor_interface.get_editor_settings().get_setting(PREVIEW_MAX_SIMULATION_SIZE)
+	if editor_interface.get_editor_settings().has_setting(PREVIEW_MAX_SIMULATION_SIZE):
+		return editor_interface.get_editor_settings().get_setting(PREVIEW_MAX_SIMULATION_SIZE)
+	return PREVIEW_MAX_SIMULATION_SIZE_DEFAULT
