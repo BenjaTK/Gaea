@@ -211,6 +211,10 @@ func has_input_slot(arg_name: StringName) -> bool:
 	return _has_input_slot(arg_name)
 
 
+func is_input_only(arg_name: StringName) -> bool:
+	return _is_input_only(arg_name)
+
+
 ## Public version of [method _get_output_ports_list]. Prefer to override that method over this one.
 func get_output_ports_list() -> Array[StringName]:
 	return _get_output_ports_list()
@@ -345,6 +349,10 @@ func _get_argument_hint(_arg_name: StringName) -> Dictionary[String, Variant]:
 ## Defining this method is [b]optional[/b]. If not defined, it'll always be true.
 func _has_input_slot(_arg_name: StringName) -> bool:
 	return true
+
+
+func _is_input_only(_arg_name: StringName) -> bool:
+	return false
 
 
 ## Override this method to define the outputs this node will have.[br][br]

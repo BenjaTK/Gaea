@@ -4,6 +4,8 @@ extends GraphNode
 ## The in-editor representation of a [GaeaNodeResource] to be used in the Gaea bottom panel.
 
 
+const KEEP_IN_REBUILD_GROUP := &"keep"
+
 ## Emitted when connections to this node are updated.
 signal connections_updated
 ## Emitted when this node is removed from the graph.
@@ -72,6 +74,7 @@ func _on_added() -> void:
 
 	for enum_idx in resource.get_enums_count():
 		var option_button: OptionButton = OptionButton.new()
+		option_button.add_to_group(KEEP_IN_REBUILD_GROUP)
 		for option in resource.get_enum_options(enum_idx).values():
 			option_button.add_item(resource.get_enum_option_display_name(enum_idx, option), option)
 			option_button.set_item_icon(
@@ -111,7 +114,7 @@ func _rebuild() -> void:
 	_preview = null
 
 	for child in get_children():
-		if child is OptionButton:
+		if child.is_in_group(KEEP_IN_REBUILD_GROUP):
 			continue
 		child.queue_free()
 		await child.tree_exited
@@ -150,6 +153,8 @@ func _add_slots() -> void:
 func _add_argument_editor(for_arg: StringName) -> GaeaGraphNodeArgumentEditor:
 	var type: GaeaValue.Type = resource.get_argument_type(for_arg)
 	var scene: PackedScene = GaeaValue.get_editor_for_type(type)
+	if resource.is_input_only(for_arg):
+		scene = GaeaValue.get_editor_for_type(GaeaValue.Type.NULL)
 	var node: GaeaGraphNodeArgumentEditor = scene.instantiate()
 	add_child(node)
 	if type == GaeaValue.Type.CATEGORY:

@@ -30,8 +30,8 @@ func populate() -> void:
 	clear()
 	var root: TreeItem = create_item()
 	hide_root = true
-	tree_dictionary = _populate_dict_with_files(NODES_FOLDER_PATH, {})
 	tree_dictionary["Special"] = {"Frame": &"frame"}
+	tree_dictionary = _populate_dict_with_files(NODES_FOLDER_PATH, {})
 	if not GaeaProjectSettings.get_custom_nodes_path().is_empty():
 		tree_dictionary = _populate_dict_with_files(
 			GaeaProjectSettings.get_custom_nodes_path(), tree_dictionary
