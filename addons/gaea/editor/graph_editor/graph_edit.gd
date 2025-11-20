@@ -708,14 +708,14 @@ func _get_copy_data(nodes: Array) -> GaeaNodesCopy:
 				selected.resource.id,
 				selected.resource.duplicate_deep(),
 				selected.position_offset,
-				graph.get_node_data(selected.resource.id).duplicate_deep()
+				graph.get_node_data(selected.resource.id).duplicate(true)
 			)
 			copy_data.add_connections(graph.get_node_connections(selected.resource.id).duplicate())
 		elif selected is GaeaGraphFrame:
 			copy_data.add_frame(
 				selected.id,
 				selected.position_offset,
-				graph.get_node_data(selected.id).duplicate_deep()
+				graph.get_node_data(selected.id).duplicate(true)
 			)
 	return copy_data
 
