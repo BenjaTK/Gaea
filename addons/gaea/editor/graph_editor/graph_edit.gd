@@ -71,7 +71,7 @@ func populate(new_graph: GaeaGraph) -> void:
 	graph = new_graph
 	_subgraph_overlay.visible = new_graph is GaeaSubGraph
 	graph.ensure_initialized()
-	if not graph.layer_count_modified.is_connected(_update_output_node):
+	if not graph.layer_count_modified.is_connected(_update_output_node) and graph is not GaeaSubGraph:
 		graph.layer_count_modified.connect(_update_output_node)
 	_load_data()
 
@@ -104,13 +104,14 @@ func _load_data() -> void:
 				has_output_node = true
 				_output_node = node
 
-	if not has_output_node:
+	if not has_output_node and graph is not GaeaSubGraph:
 		_output_node = _add_node(GaeaNodeOutput.new(), Vector2.ZERO)
 
-	_output_node.add_to_group(&"cant_delete")
-	_load_scroll_offset.call_deferred(
-		_output_node.size * 0.5 - get_rect().size * 0.5
-	)
+	if is_instance_valid(_output_node):
+		_output_node.add_to_group(&"cant_delete")
+		_load_scroll_offset.call_deferred(
+			_output_node.size * 0.5 - get_rect().size * 0.5
+		)
 
 	_update_output_node()
 	# from_node and to_node are indexes in the resources array

@@ -10,6 +10,13 @@ extends GaeaGraph
 @export_storage var outputs: Dictionary[int, StringName] : get = get_output_nodes
 
 
+func _init() -> void:
+	resource_local_to_scene = false
+
+	if resource_path.is_empty():
+		save_version = CURRENT_SAVE_VERSION
+
+
 func add_node(node: GaeaNodeResource, position: Vector2, id: int = get_next_available_id()) -> int:
 	id = super(node, position, id)
 
@@ -40,7 +47,6 @@ func set_node_argument(id: int, arg_name: StringName, value: Variant) -> void:
 			inputs.set(id, value)
 		elif id in outputs:
 			outputs.set(id, value)
-
 
 
 func set_title(value: String) -> void:

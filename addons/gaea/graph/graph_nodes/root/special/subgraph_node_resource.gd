@@ -16,8 +16,9 @@ func _get_description() -> String:
 
 
 func _on_added_to_graph(graph: GaeaGraph) -> void:
-	subgraph = GaeaSubGraph.new()
-	graph.set_node_data_value(id, &"subgraph", subgraph)
+	if not is_instance_valid(subgraph):
+		subgraph = GaeaSubGraph.new()
+		graph.set_node_data_value(id, &"subgraph", subgraph)
 
 
 func _get_scene() -> PackedScene:
@@ -52,12 +53,12 @@ func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 
 
 func _get_data(output_port: StringName, graph: GaeaGraph, pouch: GaeaGenerationPouch) -> Variant:
-	for in_id in subgraph.get_input_nodes().values():
+	for in_id in subgraph.get_input_nodes().keys():
 		var in_node := subgraph.get_node(in_id)
 		in_node.parent_node = self
 		in_node.parent_graph = graph
 
-	var output_node: GaeaNodeSubGraphOutput = subgraph.get_output_nodes().get(output_port)
+	var output_node: GaeaNodeSubGraphOutput = subgraph.get_node(subgraph.get_output_nodes().find_key(output_port))
 	return output_node.traverse(&"value", subgraph, pouch).value
 
 
