@@ -34,6 +34,7 @@ var _window_popout_button: Button
 
 var _back_icon: Texture2D
 var _forward_icon: Texture2D
+var _subgraph_overlay: Panel
 
 
 func _init() -> void:
@@ -49,10 +50,26 @@ func _ready() -> void:
 	EditorInterface.get_script_editor().editor_script_changed.connect(_on_editor_script_changed)
 	_add_toolbar_buttons()
 
+	_subgraph_overlay = Panel.new()
+
+	var stylebox_flat: StyleBoxFlat = StyleBoxFlat.new()
+	stylebox_flat.border_color = Color("6766ff", 0.5)
+	stylebox_flat.bg_color = Color("6766ff", 0.025)
+	stylebox_flat.set_border_width_all(2)
+	_subgraph_overlay.add_theme_stylebox_override("panel", stylebox_flat)
+
+	_subgraph_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	_subgraph_overlay.z_index = 1
+	_subgraph_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_subgraph_overlay.hide()
+
+	add_child(_subgraph_overlay)
+
 
 #region Saving and Loading
 func populate(new_graph: GaeaGraph) -> void:
 	graph = new_graph
+	_subgraph_overlay.visible = new_graph is GaeaSubGraph
 	graph.ensure_initialized()
 	if not graph.layer_count_modified.is_connected(_update_output_node):
 		graph.layer_count_modified.connect(_update_output_node)

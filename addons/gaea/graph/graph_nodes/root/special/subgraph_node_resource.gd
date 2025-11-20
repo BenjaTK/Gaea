@@ -66,7 +66,7 @@ func _get_icon() -> Texture2D:
 
 
 func get_title_color() -> Color:
-	return Color("6766ffff")
+	return Color("6766ff")
 
 
 func _load_save_data(saved_data: Dictionary) -> void:
