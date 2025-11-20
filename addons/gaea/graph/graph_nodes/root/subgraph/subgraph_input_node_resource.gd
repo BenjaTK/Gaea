@@ -64,5 +64,9 @@ func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
 	return get_enum_selection(0)
 
 
+func _get_icon() -> Texture2D:
+	return null
+
+
 func _get_data(_output_port: StringName, graph: GaeaGraph, pouch: GaeaGenerationPouch) -> Variant:
 	return parent_node._get_arg(_get_arg(&"name", graph, pouch), parent_graph, pouch)

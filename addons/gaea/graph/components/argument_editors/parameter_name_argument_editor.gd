@@ -70,10 +70,10 @@ func _is_valid(text: String) -> bool:
 				push_error("Parameter name '%s' matches an already existing parameter." % text)
 				return false
 		Mode.SUBGRAPH_INPUT:
-			if graph_node.graph_edit.graph.get_input_nodes().has(text):
+			if graph_node.graph_edit.graph.get_input_nodes().values().has(text):
 				return false
 		Mode.SUBGRAPH_OUTPUT:
-			if graph_node.graph_edit.graph.get_output_nodes().has(text):
+			if graph_node.graph_edit.graph.get_output_nodes().values().has(text):
 				return false
 	return true
 

@@ -51,6 +51,7 @@ oversampling_override = 1.0
 [node name="FileList" type="ItemList" parent="FileSystemContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+allow_reselect = true
 allow_rmb_select = true
 
 [node name="ContextMenu" type="PopupMenu" parent="FileSystemContainer/FileList"]

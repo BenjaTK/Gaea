@@ -43,21 +43,7 @@ static var _titlebar_styleboxes: Dictionary[GaeaValue.Type, Dictionary]
 
 func _ready() -> void:
 	_on_added()
-
-	if is_instance_valid(resource):
-		set_tooltip_text("tooltip")
-		if Engine.get_version_info().hex >= 0x040500 and not resource is GaeaNodeReroute:
-			var script = resource.get_script()
-			if is_instance_valid(script):
-				var documentation_button := Button.new()
-				var editor_interface = Engine.get_singleton("EditorInterface")
-				documentation_button.icon = editor_interface.get_editor_theme().get_icon(
-					&"HelpSearch", &"EditorIcons"
-				)
-				documentation_button.flat = true
-				get_titlebar_hbox().add_child(documentation_button)
-				documentation_button.pressed.connect(_open_node_documentation)
-
+	_add_titlebar_nodes()
 
 	connections_updated.connect(_update_arguments_visibility)
 	removed.connect(_on_removed)
@@ -93,6 +79,22 @@ func _on_added() -> void:
 	if resource.salt == 0:
 		resource.salt = randi()
 		graph_edit.graph.set_node_salt(resource.id, resource.salt)
+
+
+func _add_titlebar_nodes() -> void:
+	if is_instance_valid(resource):
+		set_tooltip_text("tooltip")
+		if Engine.get_version_info().hex >= 0x040500 and not resource is GaeaNodeReroute:
+			var script = resource.get_script()
+			if is_instance_valid(script):
+				var documentation_button := Button.new()
+				var editor_interface = Engine.get_singleton("EditorInterface")
+				documentation_button.icon = editor_interface.get_editor_theme().get_icon(
+					&"HelpSearch", &"EditorIcons"
+				)
+				documentation_button.flat = true
+				get_titlebar_hbox().add_child(documentation_button)
+				documentation_button.pressed.connect(_open_node_documentation)
 
 
 func _rebuild() -> void:
@@ -133,7 +135,7 @@ func _rebuild() -> void:
 
 	_finished_rebuilding = true
 
-	_set_titlebar()
+	_apply_style()
 	_last_category = null
 
 
@@ -243,7 +245,7 @@ func _open_preview(for_output: StringName) -> void:
 		slot.get_toggle_preview_button().set_pressed(true)
 
 
-func _set_titlebar() -> void:
+func _apply_style() -> void:
 	var type: GaeaValue.Type = resource.get_type()
 	var titlebar: StyleBoxFlat
 	var titlebar_selected: StyleBoxFlat

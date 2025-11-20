@@ -4,17 +4,6 @@
 [ext_resource type="Script" uid="uid://drwun6m0ocgao" path="res://addons/gaea/graph/graph_nodes/special/subgraph/subgraph_node.gd" id="2_2v4uc"]
 
 [node name="BaseNode" instance=ExtResource("1_k13nn")]
-slot/0/left_enabled = false
-slot/0/left_type = 0
-slot/0/left_color = Color(1, 1, 1, 1)
-slot/0/left_icon = null
-slot/0/right_enabled = false
-slot/0/right_type = 0
-slot/0/right_color = Color(1, 1, 1, 1)
-slot/0/right_icon = null
-slot/0/draw_stylebox = true
 script = ExtResource("2_2v4uc")
 
-[node name="OpenButton" type="Button" parent="." index="1"]
-layout_mode = 2
-text = "Open"
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
