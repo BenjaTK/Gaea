@@ -27,14 +27,20 @@ func _get_scene() -> PackedScene:
 
 # List of all the arguments, preferably in &"snake_case".
 func _get_arguments_list() -> Array[StringName]:
+	if not is_instance_valid(subgraph):
+		return []
 	return subgraph.get_input_nodes().values()
 
 
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	if not is_instance_valid(subgraph):
+		return GaeaValue.Type.NULL
 	return subgraph.get_node(subgraph.get_input_nodes().find_key(arg_name)).get_type()
 
 
 func _get_argument_default_value(arg_name: StringName) -> Variant:
+	if not is_instance_valid(subgraph):
+		return null
 	return subgraph.get_node(
 		subgraph.get_input_nodes().find_key(arg_name)
 	).get_argument_default_value(arg_name)
@@ -45,10 +51,14 @@ func _is_input_only(_arg_name: StringName) -> bool:
 
 # List of all the outputs, preferably in &"snake_case"
 func _get_output_ports_list() -> Array[StringName]:
+	if not is_instance_valid(subgraph):
+		return []
 	return subgraph.get_output_nodes().values()
 
 
 func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+	if not is_instance_valid(subgraph):
+		return GaeaValue.Type.NULL
 	return subgraph.get_node(subgraph.get_output_nodes().find_key(output_name)).get_type()
 
 
