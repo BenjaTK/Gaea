@@ -4,7 +4,6 @@ extends GraphNode
 ## The in-editor representation of a [GaeaNodeResource] to be used in the Gaea bottom panel.
 
 
-const KEEP_IN_REBUILD_GROUP := &"keep"
 
 ## Emitted when connections to this node are updated.
 signal connections_updated
@@ -13,6 +12,7 @@ signal removed
 signal remove_invalid_connections_requested
 
 const PreviewTexture = preload("uid://dns7s4v8lom4t")
+const KEEP_IN_REBUILD_GROUP := &"keep"
 
 ## The [GaeaNodeResource] this acts as an editor of.
 @export var resource: GaeaNodeResource
