@@ -187,6 +187,25 @@ func filter_to_output_type(type: GaeaValue.Type) -> void:
 	)
 
 
+func filter_for_subgraph() -> void:
+	add_filter(
+		(func(item: TreeItem) -> bool:
+			return not (item.get_metadata(0) is GaeaNodeParameter)),
+			&"subgraph"
+	)
+
+
+func filter_for_main_graph() -> void:
+	add_filter(
+		(func(item: TreeItem) -> bool:
+			var metadata = item.get_metadata(0)
+			return not (
+				metadata is GaeaNodeSubGraphInput or metadata is GaeaNodeSubGraphOutput
+			)),
+			&"main_graph"
+	)
+
+
 func add_filter(filter: Callable, id: StringName) -> void:
 	filters[id] = filter
 	apply_filters(true)
