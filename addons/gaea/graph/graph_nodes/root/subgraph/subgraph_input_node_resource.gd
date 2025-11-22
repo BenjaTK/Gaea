@@ -60,8 +60,8 @@ func _get_output_ports_list() -> Array[StringName]:
 	return [&"value"]
 
 
-func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
-	return get_enum_selection(0)
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
+	return get_enum_selection(0) as GaeaValue.Type
 
 
 func _get_icon() -> Texture2D:

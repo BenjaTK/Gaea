@@ -50,7 +50,7 @@ func _get_output_ports_list() -> Array[StringName]:
 	return []
 
 
-func _get_output_port_type(output_name: StringName) -> GaeaValue.Type:
+func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.NULL
 
 
@@ -59,7 +59,7 @@ func _get_icon() -> Texture2D:
 
 
 func get_type() -> GaeaValue.Type:
-	return get_enum_selection(0)
+	return get_enum_selection(0) as GaeaValue.Type
 
 
 func _get_data(_output_port: StringName, graph: GaeaGraph, pouch: GaeaGenerationPouch) -> Variant:
