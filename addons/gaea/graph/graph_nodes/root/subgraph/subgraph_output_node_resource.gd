@@ -9,7 +9,7 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "Adds an input argument to the subgraph node."
+	return "Adds an output slot to the subgraph node."
 
 
 func _get_enums_count() -> int:
@@ -26,6 +26,10 @@ func _get_enum_options(_idx: int) -> Dictionary:
 
 func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
 	notify_argument_list_changed()
+
+
+func _get_enum_option_icon(_enum_idx: int, option_value: int) -> Texture:
+	return GaeaValue.get_display_icon(option_value)
 
 
 # List of all the arguments, preferably in &"snake_case".
