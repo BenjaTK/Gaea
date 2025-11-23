@@ -155,6 +155,7 @@ func _on_item_selected(index: int) -> void:
 
 	graph_edit.unpopulate()
 	graph_edit.populate(metadata)
+	EditorInterface.inspect_object(metadata)
 
 
 func _on_file_dialog_file_selected(path: String) -> void:
