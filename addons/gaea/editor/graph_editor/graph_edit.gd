@@ -2,6 +2,9 @@
 class_name GaeaGraphEdit
 extends GraphEdit
 
+
+signal subgraph_opened(subgraph: GaeaSubGraph, parent: GaeaGraph)
+
 @export var main_editor: GaeaMainEditor
 @export var bottom_note_label: RichTextLabel
 
@@ -75,6 +78,12 @@ func populate(new_graph: GaeaGraph) -> void:
 	if not graph.layer_count_modified.is_connected(_update_output_node) and graph is not GaeaSubGraph:
 		graph.layer_count_modified.connect(_update_output_node)
 	_load_data()
+
+
+func open_subgraph(subgraph: GaeaSubGraph, parent: GaeaGraph = null) -> void:
+	unpopulate()
+	populate(subgraph)
+	subgraph_opened.emit(subgraph, parent)
 
 
 func unpopulate() -> void:

@@ -71,8 +71,7 @@ func _make_square() -> void:
 
 
 func _open() -> void:
-	graph_edit.unpopulate()
-	graph_edit.populate(resource.subgraph)
+	graph_edit.open_subgraph(resource.subgraph, graph_edit.graph)
 
 
 func _on_gui_input(event: InputEvent) -> void:
