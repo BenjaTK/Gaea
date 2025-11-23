@@ -77,7 +77,9 @@ func open_file(graph: GaeaGraph, parent: GaeaGraph = null) -> void:
 func _create_item_for_graph(graph: GaeaGraph, parent: TreeItem = null) -> TreeItem:
 	var item := file_list.create_item(parent)
 	item.set_metadata(0, graph)
-	item.set_text(0, graph.resource_path.get_file())
+	item.set_text(
+		0, graph.resource_path.get_file() if not graph.resource_path.is_empty() else "[unsaved]"
+	)
 	item.set_icon(0, GRAPH_ICON)
 	item.set_tooltip_text(0, graph.resource_path)
 	item.select(0)
@@ -156,7 +158,7 @@ func _on_unsaved_file_found(file: GaeaGraph) -> void:
 
 	var item := edited_graphs[idx].get_tree_item()
 	item.set_text(0, "[unsaved]")
-	item.set_tooltip_text(0, "[unsaved]")
+	item.set_tooltip_text(0, "")
 	_start_save_as(file)
 
 
