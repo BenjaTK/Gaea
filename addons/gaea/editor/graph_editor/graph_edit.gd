@@ -69,7 +69,8 @@ func _ready() -> void:
 #region Saving and Loading
 func populate(new_graph: GaeaGraph) -> void:
 	graph = new_graph
-	_subgraph_overlay.visible = new_graph is GaeaSubGraph
+	if is_instance_valid(_subgraph_overlay):
+		_subgraph_overlay.visible = new_graph is GaeaSubGraph
 	graph.ensure_initialized()
 	if not graph.layer_count_modified.is_connected(_update_output_node) and graph is not GaeaSubGraph:
 		graph.layer_count_modified.connect(_update_output_node)
