@@ -21,11 +21,12 @@ func _ready() -> void:
 		return
 
 	file_list.item_selected.connect(_on_item_selected)
+	file_list.gui_input.connect(_on_file_list_gui_input)
 	file_list.create_item()
 	file_list.hide_root = true
-	graph_edit.subgraph_opened.connect(_on_subgraph_opened)
-	file_list.item_mouse_selected.connect(_on_item_clicked)
 	file_list.set_column_expand(1, false)
+
+	graph_edit.subgraph_opened.connect(_on_subgraph_opened)
 
 	context_menu.close_file_selected.connect(close_file)
 	context_menu.close_all_selected.connect(close_all)
@@ -165,17 +166,7 @@ func _on_subgraph_opened(subgraph: GaeaSubGraph, parent: GaeaGraph) -> void:
 #endregion
 
 
-#region Signals
-func _on_item_clicked(_mouse_position: Vector2, mouse_button_index: int) -> void:
-	var item := file_list.get_selected()
-	if mouse_button_index == MOUSE_BUTTON_RIGHT:
-		main_editor.move_popup_at_mouse(context_menu)
-		context_menu.graph = item.get_metadata(0)
-		context_menu.popup()
-	elif mouse_button_index == MOUSE_BUTTON_MIDDLE:
-		_remove(item.get_metadata(1))
-
-
+#region Signal
 func _on_item_selected() -> void:
 	var item := file_list.get_selected()
 
@@ -185,6 +176,25 @@ func _on_item_selected() -> void:
 
 	graph_edit.unpopulate()
 	graph_edit.populate(metadata)
+
+
+func _on_file_list_gui_input(event: InputEvent) -> void:
+	if event is not InputEventMouseButton:
+		return
+
+	if not event.is_pressed():
+		return
+
+	var item := file_list.get_item_at_position(event.position)
+	if not is_instance_valid(item):
+		return
+
+	if event.button_index == MOUSE_BUTTON_MIDDLE:
+		_remove(item.get_metadata(1))
+	elif event.button_index == MOUSE_BUTTON_RIGHT:
+		main_editor.move_popup_at_mouse(context_menu)
+		context_menu.graph = item.get_metadata(0)
+		context_menu.popup()
 
 
 func _on_file_dialog_file_selected(path: String) -> void:
