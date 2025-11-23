@@ -154,7 +154,7 @@ func _on_unsaved_file_found(file: GaeaGraph) -> void:
 	if idx == -1:
 		return
 
-	var item := file_list.get_root().get_child(idx)
+	var item := edited_graphs[idx].get_tree_item()
 	item.set_text(0, "[unsaved]")
 	item.set_tooltip_text(0, "[unsaved]")
 	_start_save_as(file)
