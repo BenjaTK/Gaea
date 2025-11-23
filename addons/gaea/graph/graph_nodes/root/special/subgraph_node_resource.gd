@@ -77,7 +77,7 @@ func _get_icon() -> Texture2D:
 	return load("uid://cerisdpavr7v3")
 
 
-func get_title_color() -> Color:
+func _get_title_color() -> Color:
 	return GaeaEditorSettings.get_configured_subgraph_color()
 
 

@@ -699,10 +699,15 @@ func _get_icon() -> Texture2D:
 func get_icon() -> Texture2D:
 	return _get_icon()
 
-
-## Returns the corresponding type color.
-func get_title_color() -> Color:
+## Returns the color to be used for the titlebar.
+## If not overriden, returns the default color for the node's type.
+func _get_title_color() -> Color:
 	return GaeaValue.get_color(get_type())
+
+
+## Public version of [method _get_title_color].
+func get_title_color() -> Color:
+	return _get_title_color()
 
 
 func _is_point_outside_area(area: AABB, point: Vector3) -> bool:
