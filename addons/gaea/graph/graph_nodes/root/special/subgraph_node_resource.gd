@@ -73,7 +73,7 @@ func _get_data(output_port: StringName, graph: GaeaGraph, pouch: GaeaGenerationP
 
 
 func _get_icon() -> Texture2D:
-	return null
+	return load("uid://cerisdpavr7v3")
 
 
 func get_title_color() -> Color:
