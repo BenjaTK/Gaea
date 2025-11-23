@@ -161,6 +161,8 @@ func _on_unsaved_file_found(file: GaeaGraph) -> void:
 
 
 func _on_subgraph_opened(subgraph: GaeaSubGraph, parent: GaeaGraph) -> void:
+	if not subgraph.is_built_in():
+		parent = null
 	open_file(subgraph, parent)
 #endregion
 
