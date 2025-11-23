@@ -1,9 +1,10 @@
 @tool
 class_name GaeaNodeSubGraph
 extends GaeaNodeResource
-## Node description.
+## Holds a sub-graph, which can take arguments in and output data.
 
 
+## The sub-graph this node represents.
 var subgraph: GaeaSubGraph
 
 
@@ -12,7 +13,7 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "Node description."
+	return "Holds a sub-graph, which can take arguments in and output data."
 
 
 func _on_added_to_graph(graph: GaeaGraph) -> void:
