@@ -54,7 +54,7 @@ func open_file(graph: GaeaGraph, parent: GaeaGraph = null) -> void:
 	var item: TreeItem
 	if idx != -1:
 		var edited_graph := edited_graphs[idx]
-		item = edited_graph.tree_item
+		item = edited_graph.get_tree_item()
 		if item.get_metadata(0) == graph:
 			if not item.is_selected(0):
 				item.select(0)
@@ -65,11 +65,10 @@ func open_file(graph: GaeaGraph, parent: GaeaGraph = null) -> void:
 	if is_instance_valid(parent):
 		parent_item = edited_graphs[
 			edited_graphs.find_custom(EditedGraph.is_graph.bind(parent))
-		].tree_item
+		].get_tree_item()
 	item = _create_item_for_graph(graph, parent_item)
 	_on_item_selected()
-	var new_edited_graph := EditedGraph.new(graph)
-	new_edited_graph.tree_item = item
+	var new_edited_graph := EditedGraph.new(graph, item)
 	item.set_metadata(1, new_edited_graph)
 	edited_graphs.append(new_edited_graph)
 	new_edited_graph.dirty_changed.connect(_on_edited_graph_dirty_changed.bind(new_edited_graph))
@@ -111,11 +110,11 @@ func _remove(edited_graph: EditedGraph) -> void:
 	if not is_instance_valid(edited_graph) or not (edited_graph in edited_graphs):
 		return
 
-	var graph: GaeaGraph = edited_graph.tree_item.get_metadata(0)
-	for child in edited_graph.tree_item.get_children():
+	var graph: GaeaGraph = edited_graph.get_tree_item().get_metadata(0)
+	for child in edited_graph.get_tree_item().get_children():
 		_remove(child.get_metadata(1))
 
-	edited_graph.tree_item.get_parent().remove_child(edited_graph.tree_item)
+	edited_graph.get_tree_item().get_parent().remove_child(edited_graph.get_tree_item())
 	edited_graphs.erase(edited_graph)
 	if graph_edit.graph == graph:
 		graph_edit.unpopulate()
@@ -226,11 +225,11 @@ func _on_file_dialog_canceled() -> void:
 
 
 func _on_edited_graph_dirty_changed(new_value: bool, edited_graph: EditedGraph) -> void:
-	var text := edited_graph.tree_item.get_text(0)
+	var text := edited_graph.get_tree_item().get_text(0)
 	text = text.trim_suffix("(*)")
 	if new_value == true:
 		text += "(*)"
-	edited_graph.tree_item.set_text(0, text)
+	edited_graph.get_tree_item().set_text(0, text)
 #endregion
 
 
@@ -239,16 +238,17 @@ class EditedGraph extends RefCounted:
 
 	var _graph: GaeaGraph : get = get_graph
 	var _dirty: bool = false : set = set_dirty, get = is_unsaved
-	var tree_item: TreeItem
+	var _tree_item: TreeItem : get = get_tree_item
 
 
 	static func is_graph(edited_graph: EditedGraph, graph: GaeaGraph) -> bool:
 		return edited_graph.get_graph() == graph
 
 
-	func _init(graph: GaeaGraph) -> void:
+	func _init(graph: GaeaGraph, tree_item: TreeItem) -> void:
 		_graph = graph
 		_graph.changed.connect(set_dirty.bind(true))
+		_tree_item = tree_item
 
 
 	func set_dirty(value: bool) -> void:
@@ -264,3 +264,7 @@ class EditedGraph extends RefCounted:
 
 	func get_graph() -> GaeaGraph:
 		return _graph
+
+
+	func get_tree_item() -> TreeItem:
+		return _tree_item
