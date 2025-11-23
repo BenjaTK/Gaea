@@ -56,8 +56,9 @@ func _ready() -> void:
 	_subgraph_overlay = Panel.new()
 
 	var stylebox_flat: StyleBoxFlat = StyleBoxFlat.new()
-	stylebox_flat.border_color = Color("6766ff", 0.5)
-	stylebox_flat.bg_color = Color("6766ff", 0.025)
+	var color := GaeaEditorSettings.get_configured_subgraph_color()
+	stylebox_flat.border_color = Color(color, 0.5)
+	stylebox_flat.bg_color = Color(color, 0.025)
 	stylebox_flat.set_border_width_all(2)
 	_subgraph_overlay.add_theme_stylebox_override("panel", stylebox_flat)
 

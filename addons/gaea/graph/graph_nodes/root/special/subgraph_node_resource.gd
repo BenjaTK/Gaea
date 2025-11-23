@@ -77,7 +77,7 @@ func _get_icon() -> Texture2D:
 
 
 func get_title_color() -> Color:
-	return Color("6766ff")
+	return GaeaEditorSettings.get_configured_subgraph_color()
 
 
 func _load_save_data(saved_data: Dictionary) -> void:
