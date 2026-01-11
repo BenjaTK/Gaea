@@ -46,11 +46,11 @@ func _get_enum_options(_enum_idx: int) -> Dictionary:
 	return InputVar
 
 
-func _get_enum_title(enum_idx: int) -> String:
+func _get_enum_title(_enum_idx: int) -> String:
 	return "Input"
 
 
-func _get_enum_description(enum_idx: int) -> String:
+func _get_enum_description(_enum_idx: int) -> String:
 	return "The available inputs, information about generation accessible from this node."
 
 
