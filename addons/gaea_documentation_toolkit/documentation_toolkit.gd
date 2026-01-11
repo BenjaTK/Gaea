@@ -181,13 +181,15 @@ category: {category}
 		var headers: Array[String] = ["Type", "Name", "Description", "Default"]
 		var rows: Array[Array] = []
 		var column_size: Array[int] = [4, 4, 11, 7]
-		for arg_name in arguments:
+		for arg_name: String in arguments:
 			if resource.get_argument_type(arg_name) == GaeaValue.Type.CATEGORY:
 				continue
+				
+			var display_name: String = resource.get_argument_display_name(arg_name)
 
 			var current_row: Array[String] = [
 				GaeaValue.get_type_string(resource.get_argument_type(arg_name)),
-				resource.get_argument_display_name(arg_name),
+				display_name if not display_name.is_empty() else arg_name,
 				resource.get_argument_description(arg_name)
 			]
 

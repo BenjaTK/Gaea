@@ -58,6 +58,10 @@ func _get_property_hint_string() -> String:
 
 func _get_arguments_list() -> Array[StringName]:
 	return [&"name"]
+	
+	
+func _get_argument_description(_arg_name: StringName) -> String:
+	return "Name of the argument exported in the editor, and by which it can be accessed in [GaeaGraph]."
 
 
 func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
@@ -84,6 +88,10 @@ func _get_available_name(from: String) -> String:
 
 func _get_output_ports_list() -> Array[StringName]:
 	return [&"value"]
+	
+	
+func _get_output_port_description(_output_name: StringName) -> String:
+	return "Returns the value as set in [GaeaGraph]."
 
 
 func _get_overridden_output_port_idx(_output_name: StringName) -> int:

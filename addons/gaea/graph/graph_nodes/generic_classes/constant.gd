@@ -13,6 +13,10 @@ func _get_arguments_list() -> Array[StringName]:
 
 func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
 	return get_type()
+	
+	
+func _get_argument_description(_arg_name: StringName) -> String:
+	return "A %s constant." % GaeaValue.get_type_string(get_type())
 
 
 func _get_argument_display_name(_arg_name: StringName) -> String:
@@ -25,6 +29,10 @@ func _has_input_slot(_arg_name: StringName) -> bool:
 
 func _get_output_ports_list() -> Array[StringName]:
 	return [&"constant"]
+	
+	
+func _get_output_port_description(_output_name: StringName) -> String:
+	return "Returns [param value]."
 
 
 func _get_overridden_output_port_idx(_output_name: StringName) -> int:
