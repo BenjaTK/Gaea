@@ -124,12 +124,7 @@ func _get_node_documentation(resource: GaeaNodeResource) -> String:
 
 	var text: String = ""
 	var data: Dictionary[String, String] = {}
-	var type_metadata: String = GaeaValue.get_type_string(resource.get_type()).to_snake_case()
-	match resource.get_type():
-		[GaeaValue.Type.VECTOR3I, GaeaValue.Type.VECTOR2I]:
-			type_metadata = type_metadata.trim_suffix("i")
-		[GaeaValue.Type.FLOAT, GaeaValue.Type.INT]:
-			type_metadata = "scalar"
+	var type_metadata: String = GaeaValue.get_type_string(resource.get_type())
 	data.set("type", type_metadata)
 	data.set("image_path", _get_file_name(resource))
 
