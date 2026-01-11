@@ -19,6 +19,10 @@ func _get_argument_display_name(arg_name: StringName) -> String:
 	if arg_name == &"input_grid":
 		return "Sample" if get_type() == GaeaValue.Type.SAMPLE else "Map"
 	return super(arg_name)
+	
+
+func _get_argument_description(_arg_name: StringName) -> String:
+	return "%s to be filtered." % _get_argument_display_name(&"input_grid")
 
 
 func _get_required_arguments() -> Array[StringName]:
@@ -33,6 +37,10 @@ func _get_output_port_display_name(output_name: StringName) -> String:
 	if output_name == &"filtered_grid":
 		return "Filtered " + _get_argument_display_name(&"input_grid")
 	return super(output_name)
+	
+	
+func _get_output_port_description(_output_name: StringName) -> String:
+	return "Returns the %s after filtering has been applied." % _get_argument_display_name(&"input_grid")
 
 
 func _get_data(_output_port: StringName, graph: GaeaGraph, pouch: GaeaGenerationPouch) -> GaeaValue.GridType:

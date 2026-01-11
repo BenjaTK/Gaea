@@ -16,6 +16,16 @@ func _get_arguments_list() -> Array[StringName]:
 	return super() + ([&"to_point", &"distance_range"] as Array[StringName])
 
 
+func _get_argument_description(arg_name: StringName) -> String:
+	match arg_name:
+		&"to_point":
+			return "Reference point for distance calculations."
+		&"distance_range":
+			return "For each cell, if it's outside this range of distance, it's filtered out."
+		_:
+			return super(arg_name)
+
+
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
 	match arg_name:
 		&"to_point":
