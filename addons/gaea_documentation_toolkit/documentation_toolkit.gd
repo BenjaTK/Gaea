@@ -124,7 +124,13 @@ func _get_node_documentation(resource: GaeaNodeResource) -> String:
 
 	var text: String = ""
 	var data: Dictionary[String, String] = {}
-	data.set("type", GaeaValue.get_type_string(resource.get_type()))
+	var type_metadata: String = GaeaValue.get_type_string(resource.get_type()).to_snake_case()
+	match resource.get_type():
+		[GaeaValue.Type.VECTOR3I, GaeaValue.Type.VECTOR2I]:
+			type_metadata = type_metadata.trim_suffix("i")
+		[GaeaValue.Type.FLOAT, GaeaValue.Type.INT]:
+			type_metadata = "scalar"
+	data.set("type", type_metadata)
 	data.set("image_path", _get_file_name(resource))
 
 	var node_path: String = resource.get_script().resource_path
@@ -135,9 +141,9 @@ func _get_node_documentation(resource: GaeaNodeResource) -> String:
 
 	var extra_title = resource.get_extra_documentation(GaeaNodeResource.DocumentationSection.TITLE)
 	if not extra_title.is_empty():
-		data.set("title", resource.get_title() + " " + extra_title)
+		data.set("title", resource.get_tree_name() + " " + extra_title)
 	else:
-		data.set("title", resource.get_title())
+		data.set("title", resource.get_tree_name())
 	data.set("description", resource.get_description())
 
 	var template: String = """---
