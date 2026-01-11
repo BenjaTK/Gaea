@@ -44,6 +44,14 @@ func _get_enums_count() -> int:
 
 func _get_enum_options(_enum_idx: int) -> Dictionary:
 	return InputVar
+	
+	
+func _get_enum_title(enum_idx: int) -> String:
+	return "Input"
+	
+
+func _get_enum_description(enum_idx: int) -> String:
+	return "The available inputs, information about generation accessible from this node."
 
 
 func _on_enum_value_changed(_enum_idx: int, _option_value: int) -> void:
@@ -68,6 +76,10 @@ func _get_overridden_output_port_idx(_output_name: StringName) -> int:
 
 func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 	return _get_type_of_input(get_enum_selection(0))
+	
+	
+func _get_output_port_description(_output_name: StringName) -> String:
+	return "Returns the selected value, in this case: %s" % _get_description().trim_prefix("Outputs ")
 
 
 func _get_type_of_input(input: InputVar) -> GaeaValue.Type:
