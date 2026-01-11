@@ -32,7 +32,7 @@ func _get_argument_description(arg_name: StringName) -> String:
 			return "For each cell, if it has any of these flags, it's always filtered out."
 		_:
 			return super(arg_name)
-			
+
 
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
 	match arg_name:

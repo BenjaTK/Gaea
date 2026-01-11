@@ -14,11 +14,11 @@ func _get_description() -> String:
 
 func _get_arguments_list() -> Array[StringName]:
 	return super() + ([&"chance"] as Array[StringName])
-	
-	
+
+
 func _get_argument_description(arg_name: StringName) -> String:
 	match arg_name:
-		&"chance": 
+		&"chance":
 			return "For each cell, the chance (in percentage) it's filtered or not."
 		_:
 			return super(arg_name)

@@ -184,7 +184,7 @@ category: {category}
 		for arg_name: String in arguments:
 			if resource.get_argument_type(arg_name) == GaeaValue.Type.CATEGORY:
 				continue
-				
+
 			var display_name: String = resource.get_argument_display_name(arg_name)
 
 			var current_row: Array[String] = [
