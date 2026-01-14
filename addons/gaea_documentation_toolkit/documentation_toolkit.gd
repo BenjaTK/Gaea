@@ -274,7 +274,8 @@ func _bbcode_to_markdown(input: String) -> String:
 	for tag: String in tags:
 		if ClassDB.class_exists(tag):
 			input = input.replace("[%s]" % tag, DOC_CLASS_URL % [tag, tag.to_lower()])
-
+		else:
+			input = input.replace("[%s]" % tag, tag)
 	var param_regex := RegEx.new()
 	param_regex.compile("\\[param ([^\\]]+)\\]")
 	input = param_regex.sub(input, "[$1](#arguments)", true)
