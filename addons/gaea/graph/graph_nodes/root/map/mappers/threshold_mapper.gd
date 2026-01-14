@@ -9,11 +9,20 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "Maps every cell of [param reference] of a value in [param range] to [param material]."
+	return "Maps every cell of [param reference] with a value in [param range] to [param material]."
 
 
 func _get_arguments_list() -> Array[StringName]:
 	return super() + ([&"range"] as Array[StringName])
+
+
+func _get_argument_description(arg_name: StringName) -> String:
+	match arg_name:
+		&"range":
+			return ("For each cell, if its value is inside this range"
+					+ ", it will be mapped to [param material]. Otherwise, it will be empty.")
+		_:
+			return super(arg_name)
 
 
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:

@@ -9,7 +9,7 @@ func _get_title() -> String:
 
 
 func _get_description() -> String:
-	return "Filters [param sample] to only the cells of a value in [param range]."
+	return "Filters [param sample] to only the cells with a value in [param range]."
 
 
 func _get_arguments_list() -> Array[StringName]:
@@ -19,7 +19,8 @@ func _get_arguments_list() -> Array[StringName]:
 func _get_argument_description(arg_name: StringName) -> String:
 	match arg_name:
 		&"range":
-			return "For each cell, if it's outside this range, it's filtered out."
+			return ("For each cell, if its value is inside (inclusive) this range, "
+				+ "it's kept in. Otherwise, it's filtered out.")
 		_:
 			return super(arg_name)
 

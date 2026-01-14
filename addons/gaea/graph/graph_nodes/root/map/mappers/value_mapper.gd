@@ -18,11 +18,23 @@ func _get_arguments_list() -> Array[StringName]:
 	return super() + ([&"value"] as Array[StringName])
 
 
+func _get_argument_description(arg_name: StringName) -> String:
+	match arg_name:
+		&"value":
+			return ("For each cell, if its value is equal to this"
+			+ ", it will be mapped to [param material]. Otherwise, it will be empty.")
+		_:
+			return super(arg_name)
+
+
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
 	match arg_name:
 		&"value":
 			return GaeaValue.Type.FLOAT
 	return super(arg_name)
+
+
+
 
 
 func _passes_mapping(

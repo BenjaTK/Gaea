@@ -5,8 +5,25 @@ extends GaeaNodeResource
 ## Abstract class for mappers.
 
 
+func _get_extra_documentation(for_section: DocumentationSection) -> String:
+	if for_section == DocumentationSection.DESCRIPTION:
+		return ("A cell being mapped to [param material] means that, in the output Map, " +
+				"that cell will contain that material.")
+	return super(for_section)
+
+
 func _get_arguments_list() -> Array[StringName]:
 	return [&"reference", &"material"]
+
+
+func _get_argument_description(arg_name: StringName) -> String:
+	match arg_name:
+		&"reference":
+			return "A grid of type Sample, which will be used as a reference for mapping."
+		&"material":
+			return "The [GaeaMaterial] used for the mapping."
+		_:
+			return super(arg_name)
 
 
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
@@ -15,6 +32,10 @@ func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
 
 func _get_output_ports_list() -> Array[StringName]:
 	return [&"map"]
+
+
+func _get_output_port_description(_output_name: StringName) -> String:
+	return "The final, generated map."
 
 
 func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
