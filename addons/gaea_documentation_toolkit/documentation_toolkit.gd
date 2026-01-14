@@ -208,7 +208,14 @@ category: {category}
 			if default_value is GaeaValue.GridType:
 				current_row.append("")
 			elif default_value is Dictionary or default_value is Array:
-				current_row.append(JSON.stringify(default_value))
+				if resource.get_argument_type(arg_name) == GaeaValue.Type.RANGE:
+					current_row.append("%s-%s" % [
+						default_value.get("min", "N/A"),
+						default_value.get("max", "N/A")
+					])
+				else:
+					current_row.append(JSON.stringify(default_value))
+
 			else:
 				current_row.append(var_to_str(default_value))
 
