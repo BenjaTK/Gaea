@@ -183,7 +183,7 @@ category: {category}
 	var arguments: Array[StringName] = resource.get_arguments_list()
 	if arguments.size() > 0:
 		text += "\n## Arguments\n"
-		var headers: Array[String] = ["Type", "Name", "Description", "Default"]
+		var headers: Array[String] = ["Type", "Name (Display Name)", "Description", "Default"]
 		var rows: Array[Array] = []
 		var column_size: Array[int] = [4, 4, 11, 7]
 		for arg_name: String in arguments:
