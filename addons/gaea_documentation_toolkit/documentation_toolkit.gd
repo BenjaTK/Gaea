@@ -1,6 +1,18 @@
 @tool
 extends Control
 
+
+
+enum ExportDirectory {
+	COMMON,
+	IMAGES,
+	MARKDOWN,
+}
+
+const DOC_CLASS_URL: String = "[%s](https://docs.godotengine.org/en/latest/classes/class_%s.html)"
+const ARGUMENTS_HEADER_LINK := "#arguments"
+const SLOT_TYPES_LINK := "../the-basics/anatomy-of-a-graph.md#slot-types"
+
 @onready var tree := %Tree
 @onready var sub_viewport: SubViewport = %SubViewport
 @onready var open_folder_button: Button = %OpenFolderButton
@@ -9,14 +21,6 @@ extends Control
 
 var graph_edit: GaeaGraphEdit
 
-const DOC_CLASS_URL: String = "[%s](https://docs.godotengine.org/en/latest/classes/class_%s.html)"
-
-
-enum ExportDirectory {
-	COMMON,
-	IMAGES,
-	MARKDOWN,
-}
 
 
 func _ready() -> void:
@@ -192,7 +196,10 @@ category: {category}
 				name_column = "`%s` (%s)" % [arg_name, display_name]
 
 			var current_row: Array[String] = [
-				GaeaValue.get_type_string(resource.get_argument_type(arg_name)),
+				"[%s](%s)" % [
+					GaeaValue.get_type_string(resource.get_argument_type(arg_name)),
+					SLOT_TYPES_LINK
+				],
 				name_column,
 				resource.get_argument_description(arg_name)
 			]
@@ -228,8 +235,9 @@ category: {category}
 			if not display_name.is_empty():
 				header = "`%s` (%s)" % [output, display_name]
 
-			text += "\n### %s - %s\n" % [
+			text += "\n### [%s](%s) - %s\n" % [
 				GaeaValue.get_type_string(resource.get_output_port_type(output)),
+				SLOT_TYPES_LINK,
 				header,
 			]
 			text += "\n" + resource.get_output_port_description(output)
@@ -270,7 +278,7 @@ func _bbcode_to_markdown(input: String) -> String:
 
 	# Find all [tag] to replace
 	var regex := RegEx.new()
-	regex.compile("\\[(?<name>[^\\]]+)\\]")
+	regex.compile("\\[(?<name>[^\\]]+)\\][^\\(]")
 	var tags: Array[String] = []
 	for result: RegExMatch in regex.search_all(input):
 		var tag: String = result.get_string("name")
@@ -279,11 +287,11 @@ func _bbcode_to_markdown(input: String) -> String:
 	for tag: String in tags:
 		if ClassDB.class_exists(tag):
 			input = input.replace("[%s]" % tag, DOC_CLASS_URL % [tag, tag.to_lower()])
-		else:
+		elif tag.begins_with("Gaea"):
 			input = input.replace("[%s]" % tag, tag)
 	var param_regex := RegEx.new()
 	param_regex.compile("\\[param ([^\\]]+)\\]")
-	input = param_regex.sub(input, "[$1](#arguments)", true)
+	input = param_regex.sub(input, "[$1](%s)" % ARGUMENTS_HEADER_LINK, true)
 
 
 	return input.replace("[code]", "`").replace("[/code]", "`")
