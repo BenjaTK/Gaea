@@ -264,18 +264,20 @@ func _bbcode_to_markdown(input: String) -> String:
 	input = input.replace("[code]", "`").replace("[/code]", "`")
 
 	# Find all [tag] to replace
-	var regex = RegEx.new()
+	var regex := RegEx.new()
 	regex.compile("\\[(?<name>[^\\]]+)\\]")
 	var tags: Array[String] = []
 	for result: RegExMatch in regex.search_all(input):
 		var tag: String = result.get_string("name")
 		if not tags.has(tag):
 			tags.append(tag)
-
 	for tag: String in tags:
 		if ClassDB.class_exists(tag):
 			input = input.replace("[%s]" % tag, DOC_CLASS_URL % [tag, tag.to_lower()])
 
+	var param_regex := RegEx.new()
+	param_regex.compile("\\[param ([^\\]]+)\\]")
+	input = param_regex.sub(input, "[$1](#arguments)", true)
 
 
 	return input.replace("[code]", "`").replace("[/code]", "`")
