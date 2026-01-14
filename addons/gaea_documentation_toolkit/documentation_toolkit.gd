@@ -187,15 +187,15 @@ category: {category}
 				continue
 
 			var display_name: String = resource.get_argument_display_name(arg_name)
+			var name_column: String = "`%s`" % arg_name
+			if not display_name.is_empty():
+				name_column = "`%s` (%s)" % [arg_name, display_name]
 
 			var current_row: Array[String] = [
 				GaeaValue.get_type_string(resource.get_argument_type(arg_name)),
-				display_name if not display_name.is_empty() else arg_name,
+				name_column,
 				resource.get_argument_description(arg_name)
 			]
-
-			if current_row[1].length() > 0:
-				current_row[1] = "`%s`" % current_row[1]
 
 			var default_value: Variant = resource.get_argument_default_value(arg_name)
 			if default_value is GaeaValue.GridType:
@@ -223,9 +223,14 @@ category: {category}
 	if outputs.size() > 0:
 		text += "\n## Outputs\n"
 		for output in outputs:
-			text += "\n### %s [%s]\n" % [
-				resource.get_output_port_display_name(output),
+			var display_name: String = resource.get_output_port_display_name(output)
+			var header: String = "`%s`" % output
+			if not display_name.is_empty():
+				header = "`%s` (%s)" % [output, display_name]
+
+			text += "\n### %s - %s\n" % [
 				GaeaValue.get_type_string(resource.get_output_port_type(output)),
+				header,
 			]
 			text += "\n" + resource.get_output_port_description(output)
 	text += get_extra.call(GaeaNodeResource.DocumentationSection.OUTPUTS)
