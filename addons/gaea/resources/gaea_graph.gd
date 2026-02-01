@@ -9,10 +9,10 @@ extends Resource
 signal layer_count_modified
 ## Emitted when the specified node is added to the graph.
 signal node_added(id: int)
+## Emitted right before the specified node is removed from the graph.
+signal node_removing(id: int)
 ## Emitted when the specified node is removed from the graph.
 signal node_removed(id: int)
-## Emitted right before the specified node is removed from the graph.
-signal node_about_to_be_removed(id: int)
 
 ## Flags used for determining what to log during generation. See [member logging].
 enum Log {
@@ -227,7 +227,7 @@ func add_frame_with_data(data: Dictionary, id: int = get_next_available_id()) ->
 
 ## Removes the specified node.
 func remove_node(id: int) -> void:
-	node_about_to_be_removed.emit(id)
+	node_removing.emit(id)
 	for connection in get_node_connections(id):
 		disconnect_nodes(
 			connection.get("from_node"),
