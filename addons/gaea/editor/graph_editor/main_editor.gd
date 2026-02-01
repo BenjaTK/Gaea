@@ -10,8 +10,6 @@ signal popup_create_node_and_connect_node_request(node: GaeaGraphNode, type: Gae
 
 signal popup_node_context_menu_at_mouse_request(selected_nodes: Array)
 signal popup_link_context_menu_at_mouse_request(connection: Dictionary)
-@warning_ignore("unused_signal")
-signal panel_popout_request()
 
 signal node_selected_for_creation(resource: GaeaNodeResource)
 signal special_node_selected_for_creation(id: StringName)

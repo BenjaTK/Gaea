@@ -26,12 +26,6 @@ var is_loading = false
 ## Reference to the output node
 var _output_node: GaeaOutputGraphNode
 
-## Reference to the window popout separator
-var _window_popout_separator: VSeparator
-
-## Reference to the window popout button
-var _window_popout_button: Button
-
 var _back_icon: Texture2D
 var _forward_icon: Texture2D
 
@@ -184,31 +178,6 @@ func _add_toolbar_buttons() -> void:
 	about_button.icon = EditorInterface.get_base_control().get_theme_icon(&"NodeInfo", &"EditorIcons")
 	about_button.pressed.connect(main_editor.about_popup_request.emit)
 	container.add_child(about_button)
-
-	_window_popout_separator = VSeparator.new()
-	container.add_child(_window_popout_separator)
-
-	_window_popout_button = Button.new()
-	_window_popout_button.theme_type_variation = &"FlatButton"
-	_window_popout_button.icon = EditorInterface.get_base_control().get_theme_icon(&"MakeFloating", &"EditorIcons")
-	_window_popout_button.pressed.connect(main_editor.panel_popout_request.emit)
-	container.add_child(_window_popout_button)
-
-	if not EditorInterface.is_multi_window_enabled():
-		_window_popout_button.disabled = true
-		_window_popout_button.tooltip_text = _get_multiwindow_support_tooltip_text()
-
-
-func _get_multiwindow_support_tooltip_text() -> String:
-	# Adapted from https://github.com/godotengine/godot/blob/a8598cd8e261716fa3addb6f10bb57c03a061be9/editor/editor_node.cpp#L4725-L4737
-	var prefix: String = "Multi-window support is not available because"
-	if EditorInterface.get_editor_settings().get_setting("interface/editor/single_window_mode"):
-		return tr(prefix + " Interface > Editor > Single Window Mode is enabled in the editor settings.")
-	if not EditorInterface.get_editor_settings().get_setting("interface/multi_window/enable"):
-		return tr(prefix + " Interface > Multi Window > Enable is disabled in the editor settings.")
-	if DisplayServer.has_feature(DisplayServer.FEATURE_SUBWINDOWS):
-		return tr(prefix + " the `--single-window` command line argument was used to start the editor.")
-	return tr(prefix + " the current platform doesn't support multiple windows.")
 
 
 func _add_node_button_pressed() -> void:
@@ -780,12 +749,6 @@ func _on_edited_script_changed(script: Script):
 #endregion
 
 #region Utils and misc
-@warning_ignore("shadowed_variable_base_class")
-func set_window_popout_button_visible(visible: bool) -> void:
-	_window_popout_button.visible = visible
-	_window_popout_separator.visible = visible
-
-
 ## This function converts a local position to a grid position based on the current zoom level and scroll offset.
 ## It also applies snapping if enabled in the GraphEdit.
 func local_to_grid(

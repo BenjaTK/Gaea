@@ -5,45 +5,48 @@ extends EditorPlugin
 
 const InspectorPlugin = preload("uid://bpg2cpobusnnl")
 
-var _container: MarginContainer
 var _panel: GaeaPanel
-var _panel_button: Button
+var _dock: EditorDock
 var _editor_selection: EditorSelection
 var _inspector_plugin: EditorInspectorPlugin
 var _custom_project_settings: GaeaProjectSettings
 
 
 func _enter_tree() -> void:
-	if Engine.is_editor_hint():
-		_editor_selection = EditorInterface.get_selection()
-		_editor_selection.selection_changed.connect(_on_selection_changed)
+	_editor_selection = EditorInterface.get_selection()
+	_editor_selection.selection_changed.connect(_on_selection_changed)
 
-		_container = MarginContainer.new()
-		_panel = GaeaPanel.instantiate()
-		_panel.plugin = self
-		_container.add_child(_panel)
-		_panel_button = add_control_to_bottom_panel(_container, "Gaea")
-		_panel_button.show()
+	_panel = GaeaPanel.instantiate()
+	_panel.plugin = self
 
-		_inspector_plugin = InspectorPlugin.new(_panel)
-		add_inspector_plugin(_inspector_plugin)
+	_dock = EditorDock.new()
+	_dock.available_layouts = EditorDock.DOCK_LAYOUT_FLOATING | EditorDock.DOCK_LAYOUT_HORIZONTAL
+	_dock.title = "Gaea"
+	_dock.default_slot = EditorDock.DOCK_SLOT_BOTTOM
+	_dock.add_child(_panel)
+	add_dock(_dock)
 
-		GaeaEditorSettings.new().add_settings()
-		_custom_project_settings = GaeaProjectSettings.new()
-		_custom_project_settings.add_settings()
 
-		resource_saved.connect(_on_resource_saved)
+	_inspector_plugin = InspectorPlugin.new(_panel)
+	add_inspector_plugin(_inspector_plugin)
 
-		EditorInterface.get_file_system_dock().resource_removed.connect(_on_resource_removed)
-		EditorInterface.get_file_system_dock().file_removed.connect(_on_file_removed)
+	GaeaEditorSettings.new().add_settings()
+	_custom_project_settings = GaeaProjectSettings.new()
+	_custom_project_settings.add_settings()
+
+	resource_saved.connect(_on_resource_saved)
+
+	EditorInterface.get_file_system_dock().resource_removed.connect(_on_resource_removed)
+	EditorInterface.get_file_system_dock().file_removed.connect(_on_file_removed)
 
 
 func _exit_tree() -> void:
 	if Engine.is_editor_hint():
 		_panel.graph_edit.unpopulate()
 		remove_inspector_plugin(_inspector_plugin)
-		remove_control_from_bottom_panel(_container)
-		_container.queue_free()
+		remove_dock(_dock)
+		_dock.queue_free()
+		_dock = null
 
 
 func _disable_plugin() -> void:
@@ -90,7 +93,7 @@ func _edit(object: Object) -> void:
 		if object.resource_path.is_empty():
 			return
 
-		make_bottom_panel_item_visible(_container)
+		_dock.make_visible()
 		if _panel.graph_edit.graph == object:
 			return
 
