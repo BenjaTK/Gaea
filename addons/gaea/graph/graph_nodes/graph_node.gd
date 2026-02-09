@@ -10,8 +10,6 @@ signal connections_updated
 signal removed
 signal remove_invalid_connections_requested
 
-const PreviewTexture = preload("uid://dns7s4v8lom4t")
-
 ## The [GaeaNodeResource] this acts as an editor of.
 @export var resource: GaeaNodeResource
 
@@ -23,7 +21,7 @@ var connections: Array[Dictionary]
 ## Reference to the parent GaeaGraphEdit
 var graph_edit: GaeaGraphEdit
 
-var _preview: PreviewTexture
+var _preview: GaeaNodePreview
 var _preview_container: VBoxContainer
 var _finished_loading: bool = false:
 	set = set_finished_loading,
@@ -203,8 +201,7 @@ func _add_output_slot(for_output: StringName) -> GaeaGraphNodeOutput:
 
 		if not is_instance_valid(_preview):
 			_preview_container = VBoxContainer.new()
-			_preview = PreviewTexture.new()
-			_preview.node = self
+			_preview = GaeaNodePreview.new(self)
 		node.get_toggle_preview_button().toggled.connect(_preview.toggle.bind(for_output).unbind(1))
 	return node
 
@@ -292,16 +289,12 @@ func _on_argument_value_changed(
 	if _finished_loading:
 		resource.set_argument_value(arg_name, value)
 		graph_edit.graph.set_node_argument(resource.id, arg_name, value)
-		if is_instance_valid(_preview):
-			_preview.update()
 
 
 func _on_enum_value_changed(option_idx: int, enum_idx: int, button: OptionButton) -> void:
 	var value := button.get_item_id(option_idx)
 	resource.set_enum_value(enum_idx, value)
 	graph_edit.graph.set_node_enum(resource.id, enum_idx, value)
-	if is_instance_valid(_preview):
-		_preview.update()
 
 
 func _on_argument_hint_changed(arg_name: StringName) -> void:

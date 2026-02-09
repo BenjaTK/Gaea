@@ -8,7 +8,7 @@ extends GraphEdit
 ## List of nodes attached to a frame (element, frame)
 var attached_elements: Dictionary[StringName, StringName]
 
-## Currently edited resource
+## Currently edited resource, use [method populate] to change the graph
 var graph: GaeaGraph :
 	set(value):
 		graph = value
@@ -56,6 +56,11 @@ func populate(new_graph: GaeaGraph) -> void:
 		graph.layer_count_modified.connect(_update_output_node)
 	_load_data()
 
+	if is_instance_valid(main_editor):
+		# The Screenshotter don't have the main_editor reference
+		main_editor.set_editor_visible(true)
+		main_editor.preview_panel.reset()
+
 
 func unpopulate() -> void:
 	if is_instance_valid(graph) and graph.layer_count_modified.is_connected(_update_output_node):
@@ -65,6 +70,11 @@ func unpopulate() -> void:
 	for child in get_children():
 		if child is GraphElement:
 			child.queue_free()
+
+	if is_instance_valid(main_editor):
+		# The Screenshotter don't have the main_editor reference
+		main_editor.set_editor_visible(false)
+
 	graph = null
 
 

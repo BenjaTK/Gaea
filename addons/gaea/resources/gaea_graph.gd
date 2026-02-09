@@ -4,9 +4,14 @@ class_name GaeaGraph
 extends Resource
 ## Resource that holds the saved data for a Gaea graph.
 
-
 ## Emitted when the size of [member layers] is changed, or when one of its values is changed.
 signal layer_count_modified
+## Emitted when the specified node is added to the graph.
+signal node_added(id: int)
+## Emitted right before the specified node is removed from the graph.
+signal node_removing(id: int)
+## Emitted when the specified node is removed from the graph.
+signal node_removed(id: int)
 
 ## Flags used for determining what to log during generation. See [member logging].
 enum Log {
@@ -24,6 +29,26 @@ enum NodeType {
 	NONE = -1 ## Returned by [method get_node_type] if no type is found.
 }
 
+## Flag to control how cells are displayed relative to the coordinate system.
+## In Godot: 2D uses Y+ downward, while 3D uses Y+ upward.
+enum PreviewCoordinateFormat {
+	TOP_DOWN_2D_OVERLAY, ## X+ is right, Y+ goes into the screen. Display the layers at the same position.
+	TOP_DOWN_2D_STACKED, ## X+ is right, Y+ goes into the screen. Display the layers on top of each other.
+	SIDE_SCROLL_2D_OVERLAY, ## X+ is right, Y+ is down. Display the layers at the same position.
+	SIDE_SCROLL_2D_STACKED, ## X+ is right, Y+ is down. Display the layers on top of each other.
+	PERSPECTIVE_3D, ## Cells are displayed at their true 3D world positions.
+}
+
+## Flag to auto fill preview_chunk_size and preview_chunk_count
+enum PreviewSizePreset {
+	SINGLE_2D, ## A single chunk for 2D.
+	MULTIPLE_2D, ## Four chunks for 2D.
+	SINGLE_3D, ## A single chunk for 3D.
+	MULTIPLE_3D, ## Four chunks for 3D.
+	MULTIPLE_3D_FULL_HEIGHT, ## chunks for 3D but with a full height
+	CUSTOM, ## Custom defined chunks size and count.
+}
+
 ## Current save version used for [GaeaGraphMigration].
 const CURRENT_SAVE_VERSION := 5
 
@@ -39,9 +64,61 @@ const CURRENT_SAVE_VERSION := 5
 @export_custom(PROPERTY_HINT_GROUP_ENABLE, "feature") var debug_enabled: bool = false
 ## Selection of what to print in the Output console during generation. See [enum Log].
 @export_flags("Execute", "Traverse", "Data", "Arguments", "Threading") var logging: int = Log.NONE
+@export_group("")
+
+@export_group("Preview generation settings", "preview_")
+
+## Control how cells are displayed relative to the coordinate system.
+@export var preview_coordinate_format: PreviewCoordinateFormat = PreviewCoordinateFormat.PERSPECTIVE_3D
+
+## Seed used for generating preview.
+@export var preview_seed: int = randi()
+
+## Preset of chunk size used for generating preview.
+@export var preview_size_preset: PreviewSizePreset = PreviewSizePreset.SINGLE_2D:
+	set(value):
+		preview_size_preset = value
+		if value != PreviewSizePreset.CUSTOM:
+			preview_chunk_size = _property_get_revert(&"preview_chunk_size")
+			preview_world_size = _property_get_revert(&"preview_world_size")
+			preview_chunk_count = _property_get_revert(&"preview_chunk_count")
+	get:
+		return preview_size_preset
+
+
+## Size of the generated world in the preview.
+@export var preview_world_size: Vector3i:
+	set(value):
+		preview_world_size = value
+		if _property_can_revert(&"preview_world_size") and preview_world_size != _property_get_revert(&"preview_world_size"):
+			preview_size_preset = PreviewSizePreset.CUSTOM
+	get:
+		return preview_world_size
+
+
+## Size of the generated area in the preview.
+@export var preview_chunk_size: Vector3i:
+	set(value):
+		preview_chunk_size = value
+		if _property_can_revert(&"preview_chunk_size") and preview_chunk_size != _property_get_revert(&"preview_chunk_size"):
+			preview_size_preset = PreviewSizePreset.CUSTOM
+	get:
+		return preview_chunk_size
+
+
+## How many chunks are generated in the preview.
+@export_range(1, 100, 1) var preview_chunk_count: int = 1:
+	set(value):
+		preview_chunk_count = value
+		if _property_can_revert(&"preview_chunk_count") and preview_chunk_count != _property_get_revert(&"preview_chunk_count"):
+			preview_size_preset = PreviewSizePreset.CUSTOM
+	get:
+		return preview_chunk_count
+@export_group("")
 
 ## The current save version, used for migrating checks.
 @export_storage var save_version: int = -1
+
 ## List of all connections between nodes. They're saved with the format
 ## "from_node-from_port-to_node-to_port" (ex.: 1-0-2-1). That format
 ## can be converted into a connections dictionary using various methods in this class.[br]
@@ -91,6 +168,10 @@ var _output_resource: GaeaNodeOutput
 # Kept for migration
 func _init() -> void:
 	resource_local_to_scene = false
+	if preview_chunk_size.length_squared() == 0:
+		preview_chunk_size = _property_get_revert(&"preview_chunk_size")
+	if preview_world_size.length_squared() == 0:
+		preview_world_size = _property_get_revert(&"preview_world_size")
 
 	# For newly created resources set the latest save version
 	if resource_path.is_empty():
@@ -174,6 +255,83 @@ func _initialize_connections(all_connections: Array[Dictionary]) -> void:
 		resource.connections.append(connection)
 
 
+func _property_can_revert(property: StringName) -> bool:
+	if not Engine.is_editor_hint():
+		return false
+	return property == &'preview_seed' or property == &'preview_chunk_size' or property == &'preview_chunk_count'
+
+
+func _property_get_revert(property: StringName) -> Variant:
+	if not Engine.is_editor_hint():
+		return get(property)
+
+	match property:
+		&'preview_seed':
+			return randi()
+
+		&'preview_chunk_size':
+			if preview_size_preset == PreviewSizePreset.CUSTOM:
+				return get(property)
+			var resolution: int = GaeaEditorSettings.get_preview_resolution()
+			var size: Vector3i = Vector3i(resolution, resolution, resolution)
+
+			if (
+				preview_size_preset == PreviewSizePreset.SINGLE_3D
+				or preview_size_preset == PreviewSizePreset.MULTIPLE_3D
+				or preview_size_preset == PreviewSizePreset.MULTIPLE_3D_FULL_HEIGHT
+			):
+				size *= 0.5
+
+			if (
+				preview_size_preset == PreviewSizePreset.MULTIPLE_2D
+				or preview_size_preset == PreviewSizePreset.MULTIPLE_3D
+				or preview_size_preset == PreviewSizePreset.MULTIPLE_3D_FULL_HEIGHT
+			):
+				size *= 0.5
+
+			if (
+				preview_size_preset == PreviewSizePreset.SINGLE_2D
+				or preview_size_preset == PreviewSizePreset.MULTIPLE_2D
+			):
+				size.z = 1
+
+			if preview_size_preset == PreviewSizePreset.MULTIPLE_3D_FULL_HEIGHT:
+				size.y = preview_world_size.y
+
+			return size
+
+		&'preview_world_size':
+			if preview_size_preset == PreviewSizePreset.CUSTOM:
+				return get(property)
+			var resolution: int = GaeaEditorSettings.get_preview_resolution()
+			var size: Vector3i = Vector3i(resolution, resolution, resolution)
+
+			if (
+				preview_size_preset == PreviewSizePreset.SINGLE_2D
+				or preview_size_preset == PreviewSizePreset.MULTIPLE_2D
+			):
+				size.z = 1
+
+			return size
+
+		&'preview_chunk_count':
+			match preview_size_preset:
+				PreviewSizePreset.SINGLE_2D, PreviewSizePreset.SINGLE_3D:
+					return 1
+				_:
+					var grid_size: Vector3i = preview_world_size / preview_chunk_size
+					return grid_size.x * grid_size.y * grid_size.z
+
+	return get(property)
+
+
+func _validate_property(property: Dictionary) -> void:
+	if Engine.is_editor_hint() and property.name == &"preview_chunk_size":
+		property.type = TYPE_VECTOR3
+		property.hint = property.hint | PROPERTY_HINT_RANGE
+		property.hint_string = "0,%d,1" % GaeaEditorSettings.get_preview_max_simulation_size()
+
+
 ## Log debug text to the output depending of the debug setting.
 func is_log_enabled(category: GaeaGraph.Log) -> bool:
 	if not debug_enabled:
@@ -223,6 +381,7 @@ func add_node(node: GaeaNodeResource, position: Vector2, id: int = get_next_avai
 	}.merged(node.get_custom_saved_data()))
 	node.on_added_to_graph.call_deferred(self)
 	emit_changed.call_deferred()
+	node_added.emit(id)
 	return id
 
 
@@ -245,6 +404,7 @@ func add_frame(position: Vector2, id: int = get_next_available_id()) -> int:
 		&"position": position,
 	})
 	emit_changed()
+	node_added.emit(id)
 	return id
 
 
@@ -257,6 +417,7 @@ func add_frame_with_data(data: Dictionary, id: int = get_next_available_id()) ->
 
 ## Removes the specified node.
 func remove_node(id: int) -> void:
+	node_removing.emit(id)
 	for connection in get_node_connections(id):
 		disconnect_nodes(
 			connection.get("from_node"),
@@ -269,6 +430,7 @@ func remove_node(id: int) -> void:
 
 	_node_data.erase(id)
 	_resources.erase(id)
+	node_removed.emit(id)
 	emit_changed()
 
 

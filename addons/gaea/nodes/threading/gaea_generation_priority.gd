@@ -12,6 +12,8 @@ extends GaeaPriority
 ## [br][br]
 ## Useful for chunk generation.
 
+## Realistic maximum task limit for chunk generation.
+const CHUNK_TASK_MAX: int = 6
 
 ## Origin can have a number of different types, all of which will be
 ## silently converted to a Vector4 (used for maximum compatibility).
@@ -68,6 +70,18 @@ func _get_origin() -> Vector4:
 func _calculate() -> float:
 	var position := Vector.to_vec4(_area.position / _area.size)
 	return _get_origin().distance_squared_to(position)
+
+
+## Returns the recommended task limit based on the number of chunks to generate.
+static func get_recommended_task_limit(chunk_count: int) -> int:
+	# See for reference: https://github.com/gaea-godot/gaea/issues/541#issuecomment-3708194999
+	var cpu_limit: int = OS.get_processor_count()
+	if OS.has_feature("mobile"):
+		cpu_limit = clampi(roundi(cpu_limit * 0.5), 1, 4)
+	else:
+		cpu_limit = clamp(cpu_limit - 2, 2, 8)
+	var chunk_limit: int = maxi(1, ceili(chunk_count * 0.25))
+	return mini(mini(cpu_limit, chunk_limit), CHUNK_TASK_MAX)
 
 
 ## A tool for converting any vector into a [Vector4].

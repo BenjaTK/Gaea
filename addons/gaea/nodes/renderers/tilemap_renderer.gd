@@ -30,20 +30,17 @@ func _render(grid: GaeaGrid) -> void:
 				elif value.type == TileMapGaeaMaterial.Type.TERRAIN:
 					terrains.get_or_add(value, []).append(position_conversion.call(cell))
 				elif value.type == TileMapGaeaMaterial.Type.PATTERN:
-					patterns.get_or_add(value, []).append(position_conversion.call(cell))
+					patterns.get_or_add(value, []).append(position_conversion.call(cell + value.pattern_offset))
 
 		for terrain_material: TileMapGaeaMaterial in terrains:
 			tile_map_layers[layer_idx].set_cells_terrain_connect(
-				terrains.get(terrain_material).map(position_conversion), terrain_material.terrain_set, terrain_material.terrain, false
+				terrains.get(terrain_material), terrain_material.terrain_set, terrain_material.terrain, false
 			)
 
 		for pattern_material: TileMapGaeaMaterial in patterns:
 			var pattern := tile_map_layers[layer_idx].tile_set.get_pattern(pattern_material.pattern_index)
 			for cell in patterns.get(pattern_material):
-				tile_map_layers[layer_idx].set_pattern(
-					position_conversion.call(cell + pattern_material.pattern_offset),
-					pattern
-				)
+				tile_map_layers[layer_idx].set_pattern(cell, pattern)
 
 
 func _erase_area(area: AABB) -> void:

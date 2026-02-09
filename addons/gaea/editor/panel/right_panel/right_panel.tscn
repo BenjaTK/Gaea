@@ -1,0 +1,196 @@
+[gd_scene load_steps=12 format=3 uid="uid://c0hkiofdk5jcx"]
+
+[ext_resource type="Script" uid="uid://cnqfehm5gucpe" path="res://addons/gaea/editor/panel/right_panel/right_panel.gd" id="1_u3ax5"]
+[ext_resource type="Script" uid="uid://butqdpq8xk4bh" path="res://addons/gaea/editor/panel/right_panel/preview_container.gd" id="2_xbrir"]
+[ext_resource type="Material" uid="uid://c5mn0qnqt78fj" path="res://addons/gaea/editor/panel/right_panel/cube_material.tres" id="4_euuae"]
+[ext_resource type="Script" uid="uid://bobcj42guajf3" path="res://addons/gaea/editor/panel/right_panel/camera_3d.gd" id="4_xbrir"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_xbrir"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_euuae"]
+sky_material = SubResource("ProceduralSkyMaterial_xbrir")
+
+[sub_resource type="Environment" id="Environment_5bg8b"]
+background_mode = 2
+sky = SubResource("Sky_euuae")
+tonemap_mode = 2
+ssao_enabled = true
+ssil_enabled = true
+
+[sub_resource type="World3D" id="World3D_s7f1q"]
+environment = SubResource("Environment_5bg8b")
+
+[sub_resource type="BoxMesh" id="BoxMesh_euuae"]
+material = ExtResource("4_euuae")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xbrir"]
+content_margin_left = 3.0
+content_margin_right = 3.0
+bg_color = Color(0.1764706, 0.1764706, 0.1764706, 0.78431374)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_xbrir"]
+
+[node name="RightPanel" type="Control" node_paths=PackedStringArray("preview_container", "bottom_label", "bottom_container", "generate_button", "directional_light_1")]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u3ax5")
+preview_container = NodePath("VBoxContainer/GaeaPreviewContainer")
+bottom_label = NodePath("VBoxContainer/GaeaPreviewContainer/PanelContainer/BottomLabel")
+bottom_container = NodePath("VBoxContainer/BottomContainer")
+generate_button = NodePath("VBoxContainer/BottomContainer/GenerateButton")
+directional_light_1 = NodePath("VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport/DirectionalLight3D1")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GaeaPreviewContainer" type="Control" parent="VBoxContainer" node_paths=PackedStringArray("view_port", "camera", "container", "cube_button", "quad_button", "light_1_button", "checkerboard")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_xbrir")
+target_world_3d = SubResource("World3D_s7f1q")
+view_port = NodePath("SubViewportContainer/SubViewport")
+camera = NodePath("SubViewportContainer/SubViewport/CameraAnchor/Camera3D")
+base_mesh = SubResource("BoxMesh_euuae")
+container = NodePath("SubViewportContainer/SubViewport/Container")
+cube_button = NodePath("Overlay/LeftContainer/CubeButton")
+quad_button = NodePath("Overlay/LeftContainer/QuadButton")
+light_1_button = NodePath("Overlay/RightContainer/Light1")
+checkerboard = NodePath("Checkerboard")
+
+[node name="Checkerboard" type="TextureRect" parent="VBoxContainer/GaeaPreviewContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/GaeaPreviewContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+mouse_target = true
+
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(640, 325)
+render_target_update_mode = 4
+
+[node name="DirectionalLight3D1" type="DirectionalLight3D" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport"]
+transform = Transform3D(0.72537744, 0.5420911, -0.42422274, 0, 0.61628807, 0.7875208, 0.6883514, -0.57124984, 0.44704145, 0, 0, 0)
+light_color = Color(0.7847046, 0.79194546, 0.81179494, 1)
+light_energy = 0.8
+shadow_enabled = true
+sky_mode = 1
+
+[node name="CameraAnchor" type="Node3D" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport"]
+
+[node name="Camera3D" type="Camera3D" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport/CameraAnchor" node_paths=PackedStringArray("_anchor_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
+current = true
+script = ExtResource("4_xbrir")
+_anchor_node = NodePath("..")
+
+[node name="Container" type="Node3D" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport"]
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/GaeaPreviewContainer"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_bottom = -10.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xbrir")
+
+[node name="BottomLabel" type="Label" parent="VBoxContainer/GaeaPreviewContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "200 ms"
+
+[node name="Overlay" type="HBoxContainer" parent="VBoxContainer/GaeaPreviewContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LeftContainer" type="VBoxContainer" parent="VBoxContainer/GaeaPreviewContainer/Overlay"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CubeButton" type="Button" parent="VBoxContainer/GaeaPreviewContainer/Overlay/LeftContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+accessibility_name = "Box"
+theme_type_variation = &"PreviewLightButton"
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_xbrir")
+
+[node name="QuadButton" type="Button" parent="VBoxContainer/GaeaPreviewContainer/Overlay/LeftContainer"]
+visible = false
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+accessibility_name = "Quad"
+theme_type_variation = &"PreviewLightButton"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_xbrir")
+
+[node name="Middle" type="Control" parent="VBoxContainer/GaeaPreviewContainer/Overlay"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="RightContainer" type="VBoxContainer" parent="VBoxContainer/GaeaPreviewContainer/Overlay"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Light1" type="Button" parent="VBoxContainer/GaeaPreviewContainer/Overlay/RightContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+accessibility_name = "First Light"
+theme_type_variation = &"PreviewLightButton"
+toggle_mode = true
+button_pressed = true
+
+[node name="BottomContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GenerateButton" type="Button" parent="VBoxContainer/BottomContainer"]
+layout_mode = 2
+text = "Generate preview"
+
+[connection signal="pressed" from="VBoxContainer/GaeaPreviewContainer/Overlay/LeftContainer/CubeButton" to="VBoxContainer/GaeaPreviewContainer" method="_on_cube_button_pressed"]
+[connection signal="toggled" from="VBoxContainer/GaeaPreviewContainer/Overlay/RightContainer/Light1" to="." method="_on_light_1_toggled"]
+[connection signal="pressed" from="VBoxContainer/BottomContainer/GenerateButton" to="." method="_on_generate_button_pressed"]

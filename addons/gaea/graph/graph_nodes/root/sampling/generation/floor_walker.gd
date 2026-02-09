@@ -113,10 +113,6 @@ func _get_output_port_type(_output_name: StringName) -> GaeaValue.Type:
 	return GaeaValue.Type.SAMPLE
 
 
-func _get_preview_simulation_size() -> SimSize:
-	return SimSize.WORLD
-
-
 func _get_data(_output_port: StringName, graph: GaeaGraph, pouch: GaeaGenerationPouch) -> GaeaValue.Sample:
 	_log_data(_output_port, graph)
 	var axis_type: AxisType = get_enum_selection(0) as AxisType

@@ -1,6 +1,6 @@
 @tool
 class_name GaeaMainEditor
-extends Control
+extends HSplitContainer
 
 ## Emitted when the about popup is requested.
 @warning_ignore("unused_signal")
@@ -18,6 +18,7 @@ signal new_reroute_requested(connection: Dictionary)
 
 @export var gaea_panel: GaeaPanel
 @export var graph_edit: GaeaGraphEdit
+@export var preview_panel: GaeaPreviewPanel
 @export var about_window: AcceptDialog
 @export var create_node_popup: GaeaPopupCreateNode
 @export var node_context_menu: GaeaPopupNodeContextMenu
@@ -67,3 +68,9 @@ static func _clamp_popup_in_rect(popup: Window, window_rect: Rect2i) -> void:
 		popup.position.y = window_rect.position.y
 	elif inner_rect.position.y + inner_rect.size.y > window_rect.position.y + window_rect.size.y:
 		popup.position.y = window_rect.position.y + window_rect.size.y - inner_rect.size.y
+
+
+@warning_ignore("shadowed_variable_base_class")
+func set_editor_visible(visible: bool) -> void:
+	graph_edit.visible = visible
+	preview_panel.visible = visible

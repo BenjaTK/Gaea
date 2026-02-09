@@ -10,11 +10,12 @@
 [ext_resource type="Script" uid="uid://bybvolyg1u0v4" path="res://addons/gaea/editor/graph_editor/node_context_menu.gd" id="4_vtsfx"]
 [ext_resource type="Script" uid="uid://cqd2rkam5cs3d" path="res://addons/gaea/editor/graph_editor/create_node_popup.gd" id="5_nbnm7"]
 [ext_resource type="Script" uid="uid://btt4eqjkp5pyf" path="res://addons/gaea/editor/graph_editor/link_context_menu.gd" id="7_dhpru"]
+[ext_resource type="PackedScene" uid="uid://c0hkiofdk5jcx" path="res://addons/gaea/editor/panel/right_panel/right_panel.tscn" id="7_eht7w"]
 [ext_resource type="PackedScene" uid="uid://dcec3sivqmbjf" path="res://addons/gaea/editor/panel/about_window.tscn" id="9_affj1"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dhpru"]
 
-[node name="GaeaPanel" type="HSplitContainer" unique_id=458114644 node_paths=PackedStringArray("main_editor", "graph_edit", "file_list")]
+[node name="GaeaPanel" type="HSplitContainer" unique_id=458114644 node_paths=PackedStringArray("main_editor", "graph_edit", "file_list", "preview_panel")]
 custom_minimum_size = Vector2(0, 256)
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,6 +26,7 @@ script = ExtResource("1_afcqa")
 main_editor = NodePath("MainEditor")
 graph_edit = NodePath("MainEditor/GraphEdit")
 file_list = NodePath("FileSystemContainer")
+preview_panel = NodePath("MainEditor/PreviewPanel")
 
 [node name="FileSystemContainer" type="VBoxContainer" parent="." unique_id=1774839763 node_paths=PackedStringArray("graph_edit", "main_editor", "menu_bar", "file_list", "context_menu", "file_dialog")]
 clip_contents = true
@@ -63,12 +65,14 @@ size = Vector2i(960, 540)
 mode_overrides_title = false
 filters = PackedStringArray("*.tres;Resource Files")
 
-[node name="MainEditor" type="Control" parent="." unique_id=575557215 node_paths=PackedStringArray("gaea_panel", "graph_edit", "about_window", "create_node_popup", "node_context_menu", "link_context_menu")]
+[node name="MainEditor" type="HSplitContainer" parent="." unique_id=575557215 node_paths=PackedStringArray("gaea_panel", "graph_edit", "preview_panel", "about_window", "create_node_popup", "node_context_menu", "link_context_menu")]
 layout_mode = 2
 size_flags_vertical = 3
+split_offset = 1000000
 script = ExtResource("4_gbl2m")
 gaea_panel = NodePath("..")
 graph_edit = NodePath("GraphEdit")
+preview_panel = NodePath("PreviewPanel")
 about_window = NodePath("AboutWindow")
 create_node_popup = NodePath("CreateNodePopup")
 node_context_menu = NodePath("NodeContextMenu")
@@ -76,12 +80,8 @@ link_context_menu = NodePath("LinkContextMenu")
 
 [node name="GraphEdit" type="GraphEdit" parent="MainEditor" unique_id=1709972799 node_paths=PackedStringArray("main_editor", "bottom_note_label")]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/connection_rim_color = Color(0.0784314, 0.0784314, 0.0784314, 1)
 grid_pattern = 1
@@ -116,6 +116,11 @@ theme_override_styles/fill = SubResource("StyleBoxEmpty_dhpru")
 text = "(0,0)"
 fit_content = true
 metadata/_edit_use_anchors_ = true
+
+[node name="PreviewPanel" parent="MainEditor" node_paths=PackedStringArray("main_editor") instance=ExtResource("7_eht7w")]
+visible = false
+layout_mode = 2
+main_editor = NodePath("..")
 
 [node name="AboutWindow" parent="MainEditor" unique_id=1931820040 node_paths=PackedStringArray("main_editor") instance=ExtResource("9_affj1")]
 visible = false

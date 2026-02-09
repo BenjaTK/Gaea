@@ -35,5 +35,14 @@ func get_layers_count() -> int:
 	return _grid.size()
 
 
+## Get the enabled layers indexes.
+func get_enabled_layers_indexes() -> Array[int]:
+	var indexes: Array[int] = []
+	for key in _grid.keys():
+		if _grid.get(key) != null:
+			indexes.append(key)
+	return indexes
+
+
 func get_grid_data() -> Dictionary[int, GaeaValue.Map]:
 	return _grid

@@ -319,8 +319,13 @@ class GridType extends RefCounted:
 
 
 	## Returns all cells.
-	func get_cells() -> Array:
+	func get_cells() -> Array[Vector3i]:
 		return _grid.keys()
+
+
+	## Returns cell count.
+	func get_cell_count() -> int:
+		return _grid.size()
 
 
 	## Returns [code]true[/code] if the specified cell exists.
