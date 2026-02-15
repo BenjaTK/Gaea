@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dngytsjlmkfg7"]
+[gd_scene format=3 uid="uid://dngytsjlmkfg7"]
 
 [ext_resource type="Script" uid="uid://dpbmowgfmnxe5" path="res://addons/gaea/editor/panel/panel.gd" id="1_afcqa"]
 [ext_resource type="Script" uid="uid://bedt1m4gyyvyv" path="res://addons/gaea/editor/graph_editor/graph_edit.gd" id="2_cdav6"]
@@ -15,7 +15,7 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dhpru"]
 
-[node name="GaeaPanel" type="HSplitContainer" node_paths=PackedStringArray("main_editor", "graph_edit", "file_list", "preview_panel")]
+[node name="GaeaPanel" type="HSplitContainer" unique_id=2064820390 node_paths=PackedStringArray("main_editor", "graph_edit", "file_list", "preview_panel")]
 custom_minimum_size = Vector2(0, 256)
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,7 +28,7 @@ graph_edit = NodePath("MainEditor/GraphEdit")
 file_list = NodePath("FileSystemContainer")
 preview_panel = NodePath("MainEditor/PreviewPanel")
 
-[node name="FileSystemContainer" type="VBoxContainer" parent="." node_paths=PackedStringArray("graph_edit", "main_editor", "menu_bar", "file_list", "context_menu", "file_dialog")]
+[node name="FileSystemContainer" type="VBoxContainer" parent="." unique_id=1256614628 node_paths=PackedStringArray("graph_edit", "main_editor", "menu_bar", "file_list", "context_menu", "file_dialog")]
 clip_contents = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
@@ -40,34 +40,35 @@ file_list = NodePath("FileList")
 context_menu = NodePath("FileList/ContextMenu")
 file_dialog = NodePath("FileDialog")
 
-[node name="MenuBar" type="MenuBar" parent="FileSystemContainer"]
+[node name="MenuBar" type="MenuBar" parent="FileSystemContainer" unique_id=715932684]
 layout_mode = 2
 theme_type_variation = &"FlatButton"
 script = ExtResource("2_ce5k6")
 
-[node name="File" type="PopupMenu" parent="FileSystemContainer/MenuBar"]
+[node name="File" type="PopupMenu" parent="FileSystemContainer/MenuBar" unique_id=1123094324]
 oversampling_override = 1.0
 
-[node name="RecentFiles" type="PopupMenu" parent="FileSystemContainer/MenuBar/File"]
+[node name="RecentFiles" type="PopupMenu" parent="FileSystemContainer/MenuBar/File" unique_id=2123746125]
 
-[node name="FileList" type="ItemList" parent="FileSystemContainer"]
+[node name="FileList" type="ItemList" parent="FileSystemContainer" unique_id=572815294]
 layout_mode = 2
 size_flags_vertical = 3
 allow_reselect = true
 allow_rmb_select = true
 
-[node name="ContextMenu" type="PopupMenu" parent="FileSystemContainer/FileList"]
+[node name="ContextMenu" type="PopupMenu" parent="FileSystemContainer/FileList" unique_id=193406563]
 script = ExtResource("3_gbl2m")
 
-[node name="FileDialog" type="FileDialog" parent="FileSystemContainer"]
+[node name="FileDialog" type="FileDialog" parent="FileSystemContainer" unique_id=64284388]
 title = "Save Graph As..."
 size = Vector2i(960, 540)
 mode_overrides_title = false
 filters = PackedStringArray("*.tres;Resource Files")
 
-[node name="MainEditor" type="HSplitContainer" parent="." node_paths=PackedStringArray("gaea_panel", "graph_edit", "preview_panel", "about_window", "create_node_popup", "node_context_menu", "link_context_menu")]
+[node name="MainEditor" type="HSplitContainer" parent="." unique_id=281306861 node_paths=PackedStringArray("gaea_panel", "graph_edit", "preview_panel", "about_window", "create_node_popup", "node_context_menu", "link_context_menu")]
 layout_mode = 2
 size_flags_vertical = 3
+split_offsets = PackedInt32Array(1000000)
 split_offset = 1000000
 script = ExtResource("4_gbl2m")
 gaea_panel = NodePath("..")
@@ -78,7 +79,7 @@ create_node_popup = NodePath("CreateNodePopup")
 node_context_menu = NodePath("NodeContextMenu")
 link_context_menu = NodePath("LinkContextMenu")
 
-[node name="GraphEdit" type="GraphEdit" parent="MainEditor" node_paths=PackedStringArray("main_editor", "bottom_note_label")]
+[node name="GraphEdit" type="GraphEdit" parent="MainEditor" unique_id=1851286872 node_paths=PackedStringArray("main_editor", "bottom_note_label")]
 visible = false
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -92,7 +93,7 @@ script = ExtResource("2_cdav6")
 main_editor = NodePath("..")
 bottom_note_label = NodePath("Margin/BottomNote")
 
-[node name="Margin" type="MarginContainer" parent="MainEditor/GraphEdit"]
+[node name="Margin" type="MarginContainer" parent="MainEditor/GraphEdit" unique_id=1656500259]
 z_index = 50
 layout_mode = 1
 anchors_preset = 12
@@ -106,7 +107,7 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 12
 theme_override_constants/margin_bottom = 12
 
-[node name="BottomNote" type="RichTextLabel" parent="MainEditor/GraphEdit/Margin"]
+[node name="BottomNote" type="RichTextLabel" parent="MainEditor/GraphEdit/Margin" unique_id=565858195]
 layout_mode = 2
 mouse_filter = 1
 theme_override_styles/normal = SubResource("StyleBoxEmpty_dhpru")
@@ -117,17 +118,17 @@ text = "(0,0)"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
-[node name="PreviewPanel" parent="MainEditor" node_paths=PackedStringArray("main_editor") instance=ExtResource("7_eht7w")]
+[node name="PreviewPanel" parent="MainEditor" unique_id=1696155757 node_paths=PackedStringArray("main_editor") instance=ExtResource("7_eht7w")]
 visible = false
 layout_mode = 2
 main_editor = NodePath("..")
 
-[node name="AboutWindow" parent="MainEditor" node_paths=PackedStringArray("main_editor") instance=ExtResource("9_affj1")]
+[node name="AboutWindow" parent="MainEditor" unique_id=1381481976 node_paths=PackedStringArray("main_editor") instance=ExtResource("9_affj1")]
 visible = false
 exclusive = true
 main_editor = NodePath("..")
 
-[node name="CreateNodePopup" type="Window" parent="MainEditor" node_paths=PackedStringArray("main_editor", "create_node_panel", "search_bar", "tool_button", "tool_popup", "create_node_tree", "description_label", "cancel_button")]
+[node name="CreateNodePopup" type="Window" parent="MainEditor" unique_id=1067088746 node_paths=PackedStringArray("main_editor", "create_node_panel", "search_bar", "tool_button", "tool_popup", "create_node_tree", "description_label", "cancel_button")]
 oversampling_override = 1.0
 title = "Create Node"
 position = Vector2i(0, 36)
@@ -147,7 +148,7 @@ create_node_tree = NodePath("MainContentContainer/VBox/CreateNodeTree")
 description_label = NodePath("MainContentContainer/VBox/PanelContainer/DescriptionLabel")
 cancel_button = NodePath("MainContentContainer/VBox/HBoxContainer/CancelButton")
 
-[node name="BackgroundContainer" type="MarginContainer" parent="MainEditor/CreateNodePopup"]
+[node name="BackgroundContainer" type="MarginContainer" parent="MainEditor/CreateNodePopup" unique_id=209392749]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -158,13 +159,13 @@ theme_override_constants/margin_top = -10
 theme_override_constants/margin_right = -10
 theme_override_constants/margin_bottom = -10
 
-[node name="CreateNodePanel" type="Panel" parent="MainEditor/CreateNodePopup/BackgroundContainer"]
+[node name="CreateNodePanel" type="Panel" parent="MainEditor/CreateNodePopup/BackgroundContainer" unique_id=1055353904]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="MainContentContainer" type="MarginContainer" parent="MainEditor/CreateNodePopup"]
+[node name="MainContentContainer" type="MarginContainer" parent="MainEditor/CreateNodePopup" unique_id=845240805]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -177,26 +178,26 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBox" type="VBoxContainer" parent="MainEditor/CreateNodePopup/MainContentContainer"]
+[node name="VBox" type="VBoxContainer" parent="MainEditor/CreateNodePopup/MainContentContainer" unique_id=997740263]
 layout_mode = 2
 
-[node name="SearchContainer" type="HBoxContainer" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox"]
+[node name="SearchContainer" type="HBoxContainer" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox" unique_id=60564894]
 layout_mode = 2
 
-[node name="SearchBar" type="LineEdit" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox/SearchContainer"]
+[node name="SearchBar" type="LineEdit" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox/SearchContainer" unique_id=1106872869]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "Search (Ctrl+Tab to cycle)"
 clear_button_enabled = true
 
-[node name="ToolButton" type="Button" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox/SearchContainer"]
+[node name="ToolButton" type="Button" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox/SearchContainer" unique_id=645631497]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 focus_mode = 0
 theme_type_variation = &"FlatButton"
 icon_alignment = 1
 
-[node name="ToolPopup" type="PopupMenu" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox/SearchContainer/ToolButton"]
+[node name="ToolPopup" type="PopupMenu" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox/SearchContainer/ToolButton" unique_id=27215874]
 oversampling_override = 1.0
 position = Vector2i(255, 80)
 size = Vector2i(108, 62)
@@ -208,7 +209,7 @@ item_1/id = 1
 item_2/text = "Reload Tree"
 item_2/id = 2
 
-[node name="CreateNodeTree" type="Tree" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox" node_paths=PackedStringArray("main_editor", "description_label")]
+[node name="CreateNodeTree" type="Tree" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox" unique_id=721948596 node_paths=PackedStringArray("main_editor", "description_label")]
 layout_mode = 2
 size_flags_vertical = 3
 hide_root = true
@@ -216,35 +217,35 @@ script = ExtResource("2_vpeaa")
 main_editor = NodePath("../../../..")
 description_label = NodePath("../PanelContainer/DescriptionLabel")
 
-[node name="Label" type="Label" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox"]
+[node name="Label" type="Label" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox" unique_id=843932292]
 layout_mode = 2
 text = "Description"
 
-[node name="PanelContainer" type="PanelContainer" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox"]
+[node name="PanelContainer" type="PanelContainer" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox" unique_id=500361894]
 layout_mode = 2
 
-[node name="DescriptionLabel" type="RichTextLabel" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox/PanelContainer"]
+[node name="DescriptionLabel" type="RichTextLabel" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox/PanelContainer" unique_id=977071873]
 custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 bbcode_enabled = true
 text = "Description of the selected node goes here"
 autowrap_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox" unique_id=1669264921]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="CreateButton" type="Button" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox/HBoxContainer"]
+[node name="CreateButton" type="Button" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox/HBoxContainer" unique_id=1475496811]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Create"
 
-[node name="CancelButton" type="Button" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox/HBoxContainer"]
+[node name="CancelButton" type="Button" parent="MainEditor/CreateNodePopup/MainContentContainer/VBox/HBoxContainer" unique_id=1551973345]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Cancel"
 
-[node name="NodeContextMenu" type="PopupMenu" parent="MainEditor" node_paths=PackedStringArray("main_editor", "graph_edit")]
+[node name="NodeContextMenu" type="PopupMenu" parent="MainEditor" unique_id=802440902 node_paths=PackedStringArray("main_editor", "graph_edit")]
 oversampling_override = 1.0
 size = Vector2i(100, 124)
 item_count = 6
@@ -265,7 +266,7 @@ script = ExtResource("4_vtsfx")
 main_editor = NodePath("..")
 graph_edit = NodePath("../GraphEdit")
 
-[node name="LinkContextMenu" type="PopupMenu" parent="MainEditor" node_paths=PackedStringArray("main_editor")]
+[node name="LinkContextMenu" type="PopupMenu" parent="MainEditor" unique_id=566265106 node_paths=PackedStringArray("main_editor")]
 oversampling_override = 1.0
 size = Vector2i(106, 100)
 item_count = 1

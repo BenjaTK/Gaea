@@ -66,7 +66,7 @@ const CURRENT_SAVE_VERSION := 5
 @export_flags("Execute", "Traverse", "Data", "Arguments", "Threading") var logging: int = Log.NONE
 @export_group("")
 
-@export_group("Preview generation settings", "preview_")
+@export_group("Preview Generation Settings", "preview_")
 
 ## Control how cells are displayed relative to the coordinate system.
 @export var preview_coordinate_format: PreviewCoordinateFormat = PreviewCoordinateFormat.PERSPECTIVE_3D
