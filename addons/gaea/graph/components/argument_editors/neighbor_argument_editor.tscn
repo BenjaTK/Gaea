@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d11yc7l6sneof"]
+[gd_scene format=3 uid="uid://d11yc7l6sneof"]
 
 [ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/argument_editors/argument_editor.tscn" id="1_7clkg"]
 [ext_resource type="Script" uid="uid://ugmago2v1kp4" path="res://addons/gaea/graph/components/argument_editors/neighbor_argument_editor.gd" id="2_7clkg"]
@@ -20,13 +20,13 @@ corner_detail = 6
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_f3jwq"]
 
-[node name="BaseParameter" instance=ExtResource("1_7clkg")]
+[node name="BaseParameter" unique_id=194406039 instance=ExtResource("1_7clkg")]
 script = ExtResource("2_7clkg")
 
-[node name="VBoxContainer" type="HBoxContainer" parent="." index="1"]
+[node name="VBoxContainer" type="HBoxContainer" parent="." index="1" unique_id=390394611]
 layout_mode = 2
 
-[node name="Cells" type="Control" parent="VBoxContainer" index="0" node_paths=PackedStringArray("z_slider")]
+[node name="Cells" type="Control" parent="VBoxContainer" index="0" unique_id=858311156 node_paths=PackedStringArray("z_slider")]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(72, 72)
 layout_mode = 2
@@ -34,7 +34,7 @@ script = ExtResource("3_2g0rj")
 radius = 1
 z_slider = NodePath("../ZSlider")
 
-[node name="ZSlider" type="VSlider" parent="VBoxContainer" index="1"]
+[node name="ZSlider" type="VSlider" parent="VBoxContainer" index="1" unique_id=708172272]
 layout_mode = 2
 size_flags_vertical = 3
 tooltip_text = "The z value of the cells you're currently editing."

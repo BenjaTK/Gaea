@@ -1,22 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://mlwupvg8a886"]
+[gd_scene format=3 uid="uid://mlwupvg8a886"]
 
 [ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/argument_editors/argument_editor.tscn" id="1_22r3d"]
 [ext_resource type="Script" uid="uid://bo1ptrbf2x7kt" path="res://addons/gaea/graph/components/argument_editors/vector_argument_editor.gd" id="2_22r3d"]
 
-[node name="Vector3Parameter" instance=ExtResource("1_22r3d")]
+[node name="Vector3Parameter" unique_id=512197666 instance=ExtResource("1_22r3d")]
 script = ExtResource("2_22r3d")
 
-[node name="XContainer" type="HBoxContainer" parent="." index="1"]
+[node name="XContainer" type="HBoxContainer" parent="." index="1" unique_id=990493025]
 layout_mode = 2
 
-[node name="XLabel" type="Label" parent="XContainer" index="0"]
+[node name="XLabel" type="Label" parent="XContainer" index="0" unique_id=1089987859]
 unique_name_in_owner = true
 layout_mode = 2
 text = " x"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="XSpinBox" type="SpinBox" parent="XContainer" index="1"]
+[node name="XSpinBox" type="SpinBox" parent="XContainer" index="1" unique_id=801446721]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -25,17 +25,17 @@ allow_greater = true
 allow_lesser = true
 select_all_on_focus = true
 
-[node name="YContainer" type="HBoxContainer" parent="." index="2"]
+[node name="YContainer" type="HBoxContainer" parent="." index="2" unique_id=905154769]
 layout_mode = 2
 
-[node name="YLabel" type="Label" parent="YContainer" index="0"]
+[node name="YLabel" type="Label" parent="YContainer" index="0" unique_id=579236371]
 unique_name_in_owner = true
 layout_mode = 2
 text = " y"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="YSpinBox" type="SpinBox" parent="YContainer" index="1"]
+[node name="YSpinBox" type="SpinBox" parent="YContainer" index="1" unique_id=1114247072]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -44,17 +44,17 @@ allow_greater = true
 allow_lesser = true
 select_all_on_focus = true
 
-[node name="ZContainer" type="HBoxContainer" parent="." index="3"]
+[node name="ZContainer" type="HBoxContainer" parent="." index="3" unique_id=283338371]
 layout_mode = 2
 
-[node name="ZLabel" type="Label" parent="ZContainer" index="0"]
+[node name="ZLabel" type="Label" parent="ZContainer" index="0" unique_id=1346076663]
 unique_name_in_owner = true
 layout_mode = 2
 text = " z"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="ZSpinBox" type="SpinBox" parent="ZContainer" index="1"]
+[node name="ZSpinBox" type="SpinBox" parent="ZContainer" index="1" unique_id=1995716825]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3

@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcec3sivqmbjf"]
+[gd_scene format=3 uid="uid://dcec3sivqmbjf"]
 
 [ext_resource type="Script" uid="uid://dk3l1cldanrep" path="res://addons/gaea/editor/panel/about_window.gd" id="1_ls6ih"]
 [ext_resource type="Texture2D" uid="uid://cvk5tco7njoa1" path="res://addons/gaea/assets/logo.svg" id="1_qhqg1"]
 
-[node name="Window" type="AcceptDialog"]
+[node name="Window" type="AcceptDialog" unique_id=1271217135]
 auto_translate_mode = 1
 oversampling_override = 1.0
 title = "Thanks for using Gaea!"
@@ -13,35 +13,35 @@ visible = true
 exclusive = false
 script = ExtResource("1_ls6ih")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1511789296]
 offset_left = 8.0
 offset_top = 8.0
 offset_right = 504.0
 offset_bottom = 508.0
 
-[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer3" type="MarginContainer" parent="VBoxContainer" unique_id=938017411]
 layout_mode = 2
 theme_override_constants/margin_top = 16
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=791322551]
 custom_minimum_size = Vector2(0, 96)
 layout_mode = 2
 size_flags_vertical = 0
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer" unique_id=988588331]
 layout_mode = 2
 texture = ExtResource("1_qhqg1")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=203931075]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/separation = -2
 alignment = 1
 
-[node name="VersionLabel" type="LinkButton" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="VersionLabel" type="LinkButton" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1661404832]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 4
@@ -49,73 +49,73 @@ text = "Gaea v2.0.0-beta2"
 underline = 1
 uri = "https://github.com/gaea-godot/gaea"
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=220321133]
 layout_mode = 2
 text = "by the Gaea community."
 
-[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer"]
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer" unique_id=1515125229]
 layout_mode = 2
 theme_override_constants/margin_top = 16
 
-[node name="ContributorsPanel" type="PanelContainer" parent="VBoxContainer"]
+[node name="ContributorsPanel" type="PanelContainer" parent="VBoxContainer" unique_id=940508996]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 350)
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/ContributorsPanel"]
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/ContributorsPanel" unique_id=1274908692]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MainVBox" type="VBoxContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer"]
+[node name="MainVBox" type="VBoxContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer" unique_id=77313667]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="RichTextLabel" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox"]
+[node name="Label" type="RichTextLabel" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox" unique_id=2127232772]
 layout_mode = 2
 bbcode_enabled = true
 text = "[b]Moderators"
 fit_content = true
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox" unique_id=1921819608]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer" unique_id=1312635972]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer/MarginContainer" unique_id=225000361]
 layout_mode = 2
 
-[node name="BenjaTK" type="Label" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="BenjaTK" type="Label" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer/MarginContainer/VBoxContainer" unique_id=918068578]
 layout_mode = 2
 size_flags_vertical = 0
 text = "BenjaTK"
 
-[node name="Cullumi" type="Label" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Cullumi" type="Label" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer/MarginContainer/VBoxContainer" unique_id=406850511]
 layout_mode = 2
 size_flags_vertical = 0
 text = "cullumi (Ian Cullum)"
 
-[node name="Zehir" type="Label" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Zehir" type="Label" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer/MarginContainer/VBoxContainer" unique_id=897906972]
 layout_mode = 2
 size_flags_vertical = 0
 text = "Zehir"
 
-[node name="Label2" type="RichTextLabel" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox"]
+[node name="Label2" type="RichTextLabel" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox" unique_id=797938832]
 layout_mode = 2
 bbcode_enabled = true
 text = "[b]Contributors"
 fit_content = true
 
-[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox"]
+[node name="PanelContainer2" type="PanelContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox" unique_id=807037254]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer2"]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer2" unique_id=2051028077]
 layout_mode = 2
 theme_override_constants/margin_left = 4
 
-[node name="ContributorsVBox" type="VBoxContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer2/MarginContainer"]
+[node name="ContributorsVBox" type="VBoxContainer" parent="VBoxContainer/ContributorsPanel/ScrollContainer/MainVBox/PanelContainer2/MarginContainer" unique_id=542598455]
 unique_name_in_owner = true
 layout_mode = 2

@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://41l7a46fol5m"]
+[gd_scene format=3 uid="uid://41l7a46fol5m"]
 
-[ext_resource type="Script" path="res://addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.gd" id="1_8yffn"]
+[ext_resource type="Script" uid="uid://fktkhrlsn6kf" path="res://addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.gd" id="1_8yffn"]
 
 [sub_resource type="Image" id="Image_h5sr5"]
 data = {
@@ -50,7 +50,7 @@ data = {
 [sub_resource type="ImageTexture" id="ImageTexture_4h4u1"]
 image = SubResource("Image_rewru")
 
-[node name="Hooks" type="ScrollContainer"]
+[node name="Hooks" type="ScrollContainer" unique_id=922526376]
 custom_minimum_size = Vector2(400, 300)
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,70 +62,71 @@ size_flags_vertical = 3
 script = ExtResource("1_8yffn")
 metadata/_tab_index = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1438731478]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="hooks_content" type="VBoxContainer" parent="HBoxContainer"]
+[node name="hooks_content" type="VBoxContainer" parent="HBoxContainer" unique_id=1606397730]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="hooks_tree" type="Tree" parent="HBoxContainer/hooks_content"]
+[node name="hooks_tree" type="Tree" parent="HBoxContainer/hooks_content" unique_id=2121545153]
 unique_name_in_owner = true
 layout_direction = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+columns = 2
 hide_folding = true
 hide_root = true
 
-[node name="hook_description" type="RichTextLabel" parent="HBoxContainer/hooks_content"]
+[node name="hook_description" type="RichTextLabel" parent="HBoxContainer/hooks_content" unique_id=285227794]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 120)
 layout_mode = 2
 size_flags_vertical = 2
 bbcode_enabled = true
-text = "The test result Html reporting hook."
+text = "The Html test reporting hook."
 scroll_active = false
 
-[node name="hook_actions" type="VBoxContainer" parent="HBoxContainer"]
+[node name="hook_actions" type="VBoxContainer" parent="HBoxContainer" unique_id=1138811367]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 theme_override_constants/separation = 5
 
-[node name="btn_move_up" type="Button" parent="HBoxContainer/hook_actions"]
+[node name="btn_move_up" type="Button" parent="HBoxContainer/hook_actions" unique_id=500847675]
 layout_mode = 2
 tooltip_text = "Move hook up in priority"
 disabled = true
 icon = SubResource("ImageTexture_77fm0")
 icon_alignment = 1
 
-[node name="btn_move_down" type="Button" parent="HBoxContainer/hook_actions"]
+[node name="btn_move_down" type="Button" parent="HBoxContainer/hook_actions" unique_id=55268715]
 layout_mode = 2
 tooltip_text = "Move hook down in priority"
 disabled = true
 icon = SubResource("ImageTexture_rewru")
 icon_alignment = 1
 
-[node name="btn_add_hook" type="Button" parent="HBoxContainer/hook_actions"]
+[node name="btn_add_hook" type="Button" parent="HBoxContainer/hook_actions" unique_id=1008532253]
 layout_mode = 2
 tooltip_text = "Add new hook"
 icon = SubResource("ImageTexture_manhx")
 icon_alignment = 1
 
-[node name="btn_delete_hook" type="Button" parent="HBoxContainer/hook_actions"]
+[node name="btn_delete_hook" type="Button" parent="HBoxContainer/hook_actions" unique_id=227796272]
 layout_mode = 2
 tooltip_text = "Delete selected hook"
 disabled = true
 icon = SubResource("ImageTexture_4h4u1")
 icon_alignment = 1
 
-[node name="select_hook_dlg" type="FileDialog" parent="."]
+[node name="select_hook_dlg" type="FileDialog" parent="." unique_id=943987685]
 unique_name_in_owner = true
 disable_3d = true
 title = "Open a File"
@@ -135,7 +136,7 @@ ok_button_text = "Open"
 file_mode = 0
 filters = PackedStringArray("*.gd")
 
-[node name="error_msg_popup" type="AcceptDialog" parent="."]
+[node name="error_msg_popup" type="AcceptDialog" parent="." unique_id=284054977]
 unique_name_in_owner = true
 initial_position = 3
 current_screen = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b2rceqo8rtr88"]
+[gd_scene format=3 uid="uid://b2rceqo8rtr88"]
 
 [ext_resource type="PackedScene" uid="uid://b7e2d15kxt2im" path="res://addons/gaea/graph/graph_nodes/node.tscn" id="1_0qpbo"]
 [ext_resource type="Script" uid="uid://bs40iof8ipbkq" path="res://addons/gaea/graph/graph_nodes/special/reroute/reroute_node.gd" id="1_52lmj"]
@@ -10,7 +10,7 @@ content_margin_top = 6.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6svu7"]
 
-[node name="BaseNode" instance=ExtResource("1_0qpbo")]
+[node name="BaseNode" unique_id=353465976 instance=ExtResource("1_0qpbo")]
 custom_minimum_size = Vector2(20, 0)
 theme_override_constants/separation = 0
 theme_override_constants/port_h_offset = 16
@@ -31,7 +31,7 @@ slot/0/right_icon = ExtResource("2_6svu7")
 slot/0/draw_stylebox = true
 script = ExtResource("1_52lmj")
 
-[node name="Control" type="Control" parent="." index="1"]
+[node name="Control" type="Control" parent="." index="1" unique_id=190556825]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2

@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dvwpfgoidnak6"]
+[gd_scene format=3 uid="uid://dvwpfgoidnak6"]
 
 [ext_resource type="Script" uid="uid://ck6086e4u1yy6" path="res://addons/gaea/graph/components/argument_editors/three_state_button.gd" id="1_n536q"]
 
-[node name="CheckBox" type="CheckBox"]
+[node name="CheckBox" type="CheckBox" unique_id=270416912]
 offset_right = 24.0
 offset_bottom = 24.0
 tooltip_text = "Left click to set to true, right click to set to false."
@@ -10,7 +10,7 @@ action_mode = 0
 button_mask = 3
 script = ExtResource("1_n536q")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="TextureRect" type="TextureRect" parent="." unique_id=162440559]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

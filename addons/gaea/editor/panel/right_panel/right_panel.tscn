@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0hkiofdk5jcx"]
+[gd_scene format=3 uid="uid://c0hkiofdk5jcx"]
 
 [ext_resource type="Script" uid="uid://cnqfehm5gucpe" path="res://addons/gaea/editor/panel/right_panel/right_panel.gd" id="1_u3ax5"]
 [ext_resource type="Script" uid="uid://butqdpq8xk4bh" path="res://addons/gaea/editor/panel/right_panel/preview_container.gd" id="2_xbrir"]
@@ -36,7 +36,7 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_xbrir"]
 
-[node name="RightPanel" type="Control" node_paths=PackedStringArray("preview_container", "bottom_label", "bottom_container", "generate_button", "directional_light_1")]
+[node name="RightPanel" type="Control" unique_id=1142378280 node_paths=PackedStringArray("preview_container", "bottom_label", "bottom_container", "generate_button", "directional_light_1")]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 3
 anchors_preset = 15
@@ -51,7 +51,7 @@ bottom_container = NodePath("VBoxContainer/BottomContainer")
 generate_button = NodePath("VBoxContainer/BottomContainer/GenerateButton")
 directional_light_1 = NodePath("VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport/DirectionalLight3D1")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=939572018]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,7 +59,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GaeaPreviewContainer" type="Control" parent="VBoxContainer" node_paths=PackedStringArray("view_port", "camera", "container", "cube_button", "quad_button", "light_1_button", "checkerboard")]
+[node name="GaeaPreviewContainer" type="Control" parent="VBoxContainer" unique_id=1879975906 node_paths=PackedStringArray("view_port", "camera", "container", "cube_button", "quad_button", "light_1_button", "checkerboard")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("2_xbrir")
@@ -73,7 +73,7 @@ quad_button = NodePath("Overlay/LeftContainer/QuadButton")
 light_1_button = NodePath("Overlay/RightContainer/Light1")
 checkerboard = NodePath("Checkerboard")
 
-[node name="Checkerboard" type="TextureRect" parent="VBoxContainer/GaeaPreviewContainer"]
+[node name="Checkerboard" type="TextureRect" parent="VBoxContainer/GaeaPreviewContainer" unique_id=1858390861]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,7 +82,7 @@ grow_horizontal = 2
 grow_vertical = 2
 stretch_mode = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/GaeaPreviewContainer"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="VBoxContainer/GaeaPreviewContainer" unique_id=1783140317]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
 anchors_preset = 15
@@ -93,30 +93,30 @@ grow_vertical = 2
 stretch = true
 mouse_target = true
 
-[node name="SubViewport" type="SubViewport" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer"]
+[node name="SubViewport" type="SubViewport" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer" unique_id=1198107891]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(640, 325)
 render_target_update_mode = 4
 
-[node name="DirectionalLight3D1" type="DirectionalLight3D" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport"]
+[node name="DirectionalLight3D1" type="DirectionalLight3D" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport" unique_id=1317374404]
 transform = Transform3D(0.72537744, 0.5420911, -0.42422274, 0, 0.61628807, 0.7875208, 0.6883514, -0.57124984, 0.44704145, 0, 0, 0)
 light_color = Color(0.7847046, 0.79194546, 0.81179494, 1)
 light_energy = 0.8
 shadow_enabled = true
 sky_mode = 1
 
-[node name="CameraAnchor" type="Node3D" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport"]
+[node name="CameraAnchor" type="Node3D" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport" unique_id=243831565]
 
-[node name="Camera3D" type="Camera3D" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport/CameraAnchor" node_paths=PackedStringArray("_anchor_node")]
+[node name="Camera3D" type="Camera3D" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport/CameraAnchor" unique_id=231331334 node_paths=PackedStringArray("_anchor_node")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 5)
 current = true
 script = ExtResource("4_xbrir")
 _anchor_node = NodePath("..")
 
-[node name="Container" type="Node3D" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport"]
+[node name="Container" type="Node3D" parent="VBoxContainer/GaeaPreviewContainer/SubViewportContainer/SubViewport" unique_id=278717855]
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/GaeaPreviewContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/GaeaPreviewContainer" unique_id=1920454366]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -129,13 +129,13 @@ size_flags_vertical = 8
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_xbrir")
 
-[node name="BottomLabel" type="Label" parent="VBoxContainer/GaeaPreviewContainer/PanelContainer"]
+[node name="BottomLabel" type="Label" parent="VBoxContainer/GaeaPreviewContainer/PanelContainer" unique_id=1983503523]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "200 ms"
 
-[node name="Overlay" type="HBoxContainer" parent="VBoxContainer/GaeaPreviewContainer"]
+[node name="Overlay" type="HBoxContainer" parent="VBoxContainer/GaeaPreviewContainer" unique_id=355809637]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -144,11 +144,11 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="LeftContainer" type="VBoxContainer" parent="VBoxContainer/GaeaPreviewContainer/Overlay"]
+[node name="LeftContainer" type="VBoxContainer" parent="VBoxContainer/GaeaPreviewContainer/Overlay" unique_id=1213433267]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="CubeButton" type="Button" parent="VBoxContainer/GaeaPreviewContainer/Overlay/LeftContainer"]
+[node name="CubeButton" type="Button" parent="VBoxContainer/GaeaPreviewContainer/Overlay/LeftContainer" unique_id=990577871]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 accessibility_name = "Box"
@@ -157,7 +157,7 @@ toggle_mode = true
 button_pressed = true
 button_group = SubResource("ButtonGroup_xbrir")
 
-[node name="QuadButton" type="Button" parent="VBoxContainer/GaeaPreviewContainer/Overlay/LeftContainer"]
+[node name="QuadButton" type="Button" parent="VBoxContainer/GaeaPreviewContainer/Overlay/LeftContainer" unique_id=792998229]
 visible = false
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
@@ -166,16 +166,16 @@ theme_type_variation = &"PreviewLightButton"
 toggle_mode = true
 button_group = SubResource("ButtonGroup_xbrir")
 
-[node name="Middle" type="Control" parent="VBoxContainer/GaeaPreviewContainer/Overlay"]
+[node name="Middle" type="Control" parent="VBoxContainer/GaeaPreviewContainer/Overlay" unique_id=458625274]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="RightContainer" type="VBoxContainer" parent="VBoxContainer/GaeaPreviewContainer/Overlay"]
+[node name="RightContainer" type="VBoxContainer" parent="VBoxContainer/GaeaPreviewContainer/Overlay" unique_id=1252713058]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Light1" type="Button" parent="VBoxContainer/GaeaPreviewContainer/Overlay/RightContainer"]
+[node name="Light1" type="Button" parent="VBoxContainer/GaeaPreviewContainer/Overlay/RightContainer" unique_id=1584734501]
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 accessibility_name = "First Light"
@@ -183,11 +183,11 @@ theme_type_variation = &"PreviewLightButton"
 toggle_mode = true
 button_pressed = true
 
-[node name="BottomContainer" type="VBoxContainer" parent="VBoxContainer"]
+[node name="BottomContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=891084686]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="GenerateButton" type="Button" parent="VBoxContainer/BottomContainer"]
+[node name="GenerateButton" type="Button" parent="VBoxContainer/BottomContainer" unique_id=564260324]
 layout_mode = 2
 text = "Generate preview"
 

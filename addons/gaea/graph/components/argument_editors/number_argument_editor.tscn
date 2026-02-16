@@ -1,13 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dp7blnx7abb5e"]
+[gd_scene format=3 uid="uid://dp7blnx7abb5e"]
 
 [ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/graph/components/argument_editors/argument_editor.tscn" id="1_5p7x0"]
 [ext_resource type="Script" uid="uid://bogtvyatwgapj" path="res://addons/gaea/graph/components/argument_editors/number_argument_editor.gd" id="2_xix24"]
 
-[node name="NumberParameter" instance=ExtResource("1_5p7x0")]
+[node name="NumberParameter" unique_id=1284054380 instance=ExtResource("1_5p7x0")]
 size_flags_horizontal = 3
 script = ExtResource("2_xix24")
 
-[node name="SpinBox" type="SpinBox" parent="." index="1"]
+[node name="SpinBox" type="SpinBox" parent="." index="1" unique_id=2044059107]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
@@ -16,7 +16,7 @@ allow_greater = true
 allow_lesser = true
 select_all_on_focus = true
 
-[node name="HSlider" type="HSlider" parent="SpinBox" index="2"]
+[node name="HSlider" type="HSlider" parent="SpinBox" index="2" unique_id=1134135290]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 12

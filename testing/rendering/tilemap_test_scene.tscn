@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://xfcy8wwh3sd7"]
+[gd_scene format=3 uid="uid://xfcy8wwh3sd7"]
 
 [ext_resource type="Script" uid="uid://cpvk61ewx6ejo" path="res://testing/rendering/renderer_test_scene.gd" id="1_d86qw"]
 [ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/nodes/generator.gd" id="2_gi0gd"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/resources/gaea_graph.gd" id="5_kmg7b"]
 [ext_resource type="Script" uid="uid://b4x16tyyfihmb" path="res://addons/gaea/nodes/renderers/tilemap_renderer.gd" id="6_ay818"]
 [ext_resource type="Script" uid="uid://ct2w70ehn4avu" path="res://addons/gaea/resources/gaea_generation_settings.gd" id="6_gi0gd"]
+[ext_resource type="Script" uid="uid://rfsrtakmflly" path="res://addons/gaea/nodes/threading/gaea_task_pool.gd" id="7_frm4e"]
 [ext_resource type="Texture2D" uid="uid://druqwrm3nwuao" path="res://testing/tileset.png" id="7_q3jyc"]
 
 [sub_resource type="Resource" id="Resource_brphb"]
@@ -30,6 +31,9 @@ metadata/_custom_type_script = "uid://3qsmwhn2sk47"
 [sub_resource type="Resource" id="Resource_ohuek"]
 script = ExtResource("5_kmg7b")
 layers = Array[ExtResource("3_frm4e")]([SubResource("Resource_yypbs"), SubResource("Resource_6wvsa")])
+preview_seed = 3925414515
+preview_world_size = Vector3i(64, 64, 1)
+preview_chunk_size = Vector3i(64, 64, 1)
 save_version = 5
 _connections = Array[StringName]([&"1-0-2-0", &"1-0-3-0", &"4-0-2-1", &"5-0-3-1", &"2-0-0-0", &"3-0-0-1"])
 _node_data = Dictionary[int, Dictionary]({
@@ -117,6 +121,9 @@ script = ExtResource("6_gi0gd")
 random_seed_on_generate = false
 seed = 337133513
 
+[sub_resource type="Resource" id="Resource_1kltg"]
+script = ExtResource("7_frm4e")
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ljnpl"]
 texture = ExtResource("7_q3jyc")
 texture_region_size = Vector2i(8, 8)
@@ -127,23 +134,24 @@ texture_region_size = Vector2i(8, 8)
 tile_size = Vector2i(8, 8)
 sources/0 = SubResource("TileSetAtlasSource_ljnpl")
 
-[node name="TilemapTest2" type="Node2D"]
+[node name="TilemapTest2" type="Node2D" unique_id=981068381]
 script = ExtResource("1_d86qw")
 
-[node name="GaeaGenerator" type="Node" parent="."]
+[node name="GaeaGenerator" type="Node" parent="." unique_id=285062835]
 script = ExtResource("2_gi0gd")
 graph = SubResource("Resource_ohuek")
 settings = SubResource("Resource_frm4e")
+task_pool = SubResource("Resource_1kltg")
 metadata/_custom_type_script = "uid://d4feanreabm81"
 
-[node name="Renderer" type="Node" parent="." node_paths=PackedStringArray("tile_map_layers", "generator")]
+[node name="Renderer" type="Node" parent="." unique_id=1804843162 node_paths=PackedStringArray("tile_map_layers", "generator")]
 script = ExtResource("6_ay818")
 tile_map_layers = [NodePath("../TileMapLayer"), NodePath("../TileMapLayer2")]
 generator = NodePath("../GaeaGenerator")
 metadata/_custom_type_script = "uid://b4x16tyyfihmb"
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1122832387]
 tile_set = SubResource("TileSet_aqo21")
 
-[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+[node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=928051075]
 tile_set = SubResource("TileSet_aqo21")

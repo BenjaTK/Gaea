@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://c5mn0qnqt78fj"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://c5mn0qnqt78fj"]
 
 [ext_resource type="Shader" uid="uid://6bf04rd28i71" path="res://addons/gaea/editor/panel/right_panel/cube_shader.gdshader" id="1_ci0if"]
 

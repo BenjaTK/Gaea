@@ -1,10 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://cqpby5jyv71l0"]
+[gd_scene format=3 uid="uid://cqpby5jyv71l0"]
 
 [ext_resource type="Script" uid="uid://dgb4blornaq38" path="res://addons/gaea/graph/components/graph_node_output.gd" id="1_4q754"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dkx48"]
 
-[node name="GraphNodeOutput" type="MarginContainer"]
+[node name="GraphNodeOutput" type="MarginContainer" unique_id=721447554]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 15.0
@@ -15,11 +15,11 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_bottom = 5
 script = ExtResource("1_4q754")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=739681156]
 layout_mode = 2
 size_flags_vertical = 0
 
-[node name="RightLabel" type="RichTextLabel" parent="HBoxContainer"]
+[node name="RightLabel" type="RichTextLabel" parent="HBoxContainer" unique_id=1294948078]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
@@ -34,7 +34,7 @@ autowrap_mode = 0
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="TogglePreviewButton" type="TextureButton" parent="HBoxContainer"]
+[node name="TogglePreviewButton" type="TextureButton" parent="HBoxContainer" unique_id=799556973]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
