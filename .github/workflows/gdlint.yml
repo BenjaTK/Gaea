@@ -29,9 +29,7 @@ jobs:
         run: |
           mkdir -p reports/gdlint/
           gdlint addons/gaea/editor/ | tee reports/gdlint/editor.txt
-          gdlint addons/gaea/graph/ | tee reports/gdlint/graph.txt
-          gdlint addons/gaea/nodes/ | tee reports/gdlint/nodes.txt
-          gdlint addons/gaea/resources/ | tee reports/gdlint/resources.txt
+          gdlint addons/gaea/runtime/ | tee reports/gdlint/runtime.txt
 
       - name: "Upload GDLint Report"
         if: failure()
