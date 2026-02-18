@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://x6n8ylnxoyno"]
+
+[ext_resource type="Script" uid="uid://d350t4jl754oy" path="res://addons/gaea/editor/graph/argument_editors/category.gd" id="1_4eii5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4eii5"]
+
+[node name="Category" type="FoldableContainer" unique_id=854636163]
+offset_right = 54.0
+offset_bottom = 24.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4eii5")
+script = ExtResource("1_4eii5")
+
+[connection signal="folding_changed" from="." to="." method="_on_folding_changed"]
