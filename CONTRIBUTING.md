@@ -1,5 +1,8 @@
 # Contributing to Gaea
 
+> [!important]
+> Absolutely **NO** AI should be used when contributing to Gaea.
+
 Gaea only exists thanks to its contributors. Here's how you can become one:
 
 ## 🐞 Reporting Bugs or Requesting Features
