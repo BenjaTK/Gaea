@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://t4osuglcgg6l"]
+
+[ext_resource type="Script" uid="uid://6jlpafuof6fs" path="res://addons/gaea/editor/graph/argument_editors/range.gd" id="1_xfmar"]
+[ext_resource type="Script" uid="uid://bmc1eienmo8tp" path="res://addons/gaea/editor/custom_controls/h_range_slider.gd" id="3_an6wf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i7tyw"]
+
+[node name="BaseParameter" type="BoxContainer" unique_id=1606796992]
+custom_minimum_size = Vector2(0, 32)
+offset_right = 42.0
+offset_bottom = 32.0
+mouse_filter = 2
+vertical = true
+script = ExtResource("1_xfmar")
+
+[node name="Label" type="RichTextLabel" parent="." unique_id=269812976]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_i7tyw")
+bbcode_enabled = true
+text = "Label"
+fit_content = true
+autowrap_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1008594716]
+layout_mode = 2
+
+[node name="RangeSlider" type="Control" parent="." unique_id=1670251191]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 12)
+layout_mode = 2
+script = ExtResource("3_an6wf")
+end_value = 1.0
+allow_greater = true
+allow_lesser = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2128421695]
+layout_mode = 2
+
+[node name="MinSpinBoxLabel" type="Label" parent="HBoxContainer" unique_id=1991650264]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Min"
+
+[node name="MinSpinBox" type="SpinBox" parent="HBoxContainer" unique_id=1181064211]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+allow_greater = true
+allow_lesser = true
+select_all_on_focus = true
+
+[node name="MaxSpinBoxLabel" type="Label" parent="HBoxContainer" unique_id=1805885311]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Max"
+
+[node name="MaxSpinBox" type="SpinBox" parent="HBoxContainer" unique_id=810123029]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 1.0
+allow_greater = true
+allow_lesser = true
+select_all_on_focus = true
+
+[connection signal="value_changed" from="RangeSlider" to="." method="_on_range_slider_value_changed"]

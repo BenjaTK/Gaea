@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://dy4n2a5hkaxsb"]
+
+[ext_resource type="PackedScene" uid="uid://i2nwlab8rau" path="res://addons/gaea/editor/graph/argument_editors/argument_editor.tscn" id="1_3sl2w"]
+[ext_resource type="Script" uid="uid://dwod0xjb4srbu" path="res://addons/gaea/editor/graph/argument_editors/rules.gd" id="2_rl5k1"]
+[ext_resource type="Script" uid="uid://xdxm3ekx64qi" path="res://addons/gaea/editor/custom_controls/checkeable_cells.gd" id="4_3xcok"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7q6v"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.19, 0.19, 0.19, 0.6)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+corner_detail = 6
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j7q6v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3xcok"]
+
+[node name="RulesParameter" unique_id=1015362442 node_paths=PackedStringArray("cells") instance=ExtResource("1_3sl2w")]
+script = ExtResource("2_rl5k1")
+cells = NodePath("VBoxContainer/Cells")
+
+[node name="VBoxContainer" type="HBoxContainer" parent="." index="1" unique_id=1543612106]
+layout_mode = 2
+
+[node name="Cells" type="Control" parent="VBoxContainer" index="0" unique_id=1693067021 node_paths=PackedStringArray("z_slider")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 120)
+layout_mode = 2
+script = ExtResource("4_3xcok")
+z_slider = NodePath("../ZSlider")
+
+[node name="ZSlider" type="VSlider" parent="VBoxContainer" index="1" unique_id=64354499]
+layout_mode = 2
+tooltip_text = "The z value of the cells you're currently editing."
+mouse_force_pass_scroll_events = false
+theme_override_constants/center_grabber = 1
+theme_override_styles/slider = SubResource("StyleBoxFlat_j7q6v")
+theme_override_styles/grabber_area = SubResource("StyleBoxEmpty_j7q6v")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxEmpty_3xcok")
+min_value = -2.0
+max_value = 2.0
+tick_count = 5
+ticks_on_borders = true
+ticks_position = 3
+
+[connection signal="cell_pressed" from="VBoxContainer/Cells" to="." method="_on_cells_cell_pressed"]
