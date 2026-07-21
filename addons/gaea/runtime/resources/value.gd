@@ -70,7 +70,7 @@ static func is_valid_connection(from: GaeaValue.Type, to: GaeaValue.Type) -> boo
 
 ## Returns whether [param type] can be previewed in the editor.
 static func has_preview(type: Type) -> bool:
-	return type == Type.MAP or type == Type.SAMPLE
+	return type > 0 and type < Type.ANY or type == Type.SAMPLE or type == Type.MAP
 
 
 ## Return the name of the [param type].
