@@ -17,7 +17,6 @@ mono_crash.*.json
 addons/*
 !addons/gaea
 !addons/gaea_documentation_toolkit
-!addons/gaea_gdUnit4
 scenes/test/*
 
 # Editor-specific ignores
