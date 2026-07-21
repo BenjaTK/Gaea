@@ -18,13 +18,13 @@ func _init(parent_node) -> void:
 func _ready() -> void:
 	if is_part_of_edited_scene():
 		return
-	
+
 	texture_rect = TextureRect.new()
 	texture_rect.set_anchors_preset(Control.PRESET_FULL_RECT)
 	add_child(texture_rect)
 	texture_rect.expand_mode = TextureRect.EXPAND_FIT_HEIGHT_PROPORTIONAL
 	texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT
-	
+
 	label = Label.new()
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
@@ -68,8 +68,10 @@ func _ready() -> void:
 	get_parent().add_child(slider_container)
 
 	var preview_resolution: Vector3i = node.graph_edit.graph.preview_chunk_size
-	
-	texture_rect.texture = ImageTexture.create_from_image(Image.create_empty(preview_resolution.x, preview_resolution.y, true, Image.FORMAT_RGBA8))
+
+	texture_rect.texture = ImageTexture.create_from_image(
+		Image.create_empty(preview_resolution.x, preview_resolution.y, true, Image.FORMAT_RGBA8)
+	)
 
 
 func toggle(for_output: StringName) -> void:
@@ -114,10 +116,10 @@ func update() -> void:
 		texture_rect.texture = null
 		if data is float and node.resource.get_output_port_type(selected_output) == GaeaValue.Type.INT:
 			data = int(data)
-		
+
 		label.text = str(data).capitalize()
 
-	
+
 
 
 func create_texture(data: GaeaValue.GridType, sim_size: Vector3, resolution: Vector2i) -> Texture:
