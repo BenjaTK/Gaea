@@ -434,6 +434,7 @@ func start_salt_change(gaea_panel: Control) -> void:
 
 	gaea_panel.add_child(popup)
 	popup.popup()
+	spin_box.get_line_edit().grab_focus()
 
 
 func _salt_change_confirmed(spin_box: SpinBox, popup: PopupPanel) -> void:
