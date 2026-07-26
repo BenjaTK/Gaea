@@ -391,6 +391,7 @@ func _make_custom_tooltip(for_text: String) -> Object:
 	rich_text_label.bbcode_enabled = true
 	rich_text_label.text = GaeaNodeResource.get_formatted_text(for_text)
 	rich_text_label.text += "\n[right][b]ID: %s[/b][/right]" % resource.id
+	rich_text_label.text += "\n[right][b]Salt: %s[/b][/right]" % resource.salt
 	rich_text_label.fit_content = true
 	rich_text_label.custom_minimum_size.x = 256.0
 	return rich_text_label
