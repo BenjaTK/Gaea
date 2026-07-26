@@ -3,14 +3,13 @@ class_name GaeaEditorGraphNode
 extends GraphNode
 ## The in-editor representation of a [GaeaNodeResource] to be used in the Gaea bottom panel.
 
-
-const SLOT_ONLY_ARGUMENT_EDITOR := "uid://i2nwlab8rau"
-
 ## Emitted when connections to this node are updated.
 signal connections_updated
 ## Emitted when this node is removed from the graph.
 signal removed
 signal remove_invalid_connections_requested
+
+const SLOT_ONLY_ARGUMENT_EDITOR := "uid://i2nwlab8rau"
 
 ## The [GaeaNodeResource] this acts as an editor of.
 @export var resource: GaeaNodeResource
