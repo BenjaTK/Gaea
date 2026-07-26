@@ -37,10 +37,13 @@ func _get_enum_default_value(_enum_idx: int) -> int:
 
 
 func _get_arguments_list() -> Array[StringName]:
-	return [&"frequency", &"lacunarity", &"octaves"]
+	return [&"frequency", &"lacunarity", &"octaves", &"offset"]
 
 
 func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	if arg_name == &"offset":
+		return GaeaValue.Type.VECTOR3
+
 	return GaeaValue.Type.INT if arg_name == &"octaves" else GaeaValue.Type.FLOAT
 
 
@@ -71,6 +74,7 @@ func _get_data(_output_port: StringName, pouch: GaeaGenerationPouch) -> GaeaValu
 	noise.frequency = _get_arg(&"frequency", pouch)
 	noise.fractal_octaves = _get_arg(&"octaves", pouch)
 	noise.fractal_lacunarity = _get_arg(&"lacunarity", pouch)
+	noise.offset = _get_arg(&"offset", pouch)
 	var result: GaeaValue.Sample = GaeaValue.Sample.new()
 	for x in _get_axis_range(Vector3i.AXIS_X, pouch.area):
 		for y in _get_axis_range(Vector3i.AXIS_Y, pouch.area):
