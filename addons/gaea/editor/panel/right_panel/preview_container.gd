@@ -78,13 +78,17 @@ func draw_grid(grid: GaeaResult, offset: Vector3i, area: AABB, preview_coordinat
 
 	# Draw grid
 	for layer_idx in grid.get_layers_count():
-		instance_count += grid.get_layer(layer_idx).get_cell_count()
+		if grid.get_layer(layer_idx) is GaeaValue.Map:
+			instance_count += grid.get_layer(layer_idx).get_cell_count()
 	multimesh.instance_count = instance_count
 
 	var convert_method: Callable = _get_convert_method(preview_coordinate_format)
 	var layer_offset = Vector3i.ZERO
 	for layer_idx in grid.get_layers_count():
-		var layer: GaeaValue.Map = grid.get_layer(layer_idx)
+		var layer: Variant = grid.get_layer(layer_idx)
+		if layer is not GaeaValue.Map or not is_instance_valid(layer):
+			continue
+
 		for cell in layer.get_cells():
 			instance_idx += 1
 			multimesh.set_instance_transform(instance_idx, Transform3D(Basis(), layer_offset + convert_method.call(cell, area)))

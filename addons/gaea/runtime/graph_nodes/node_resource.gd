@@ -259,6 +259,10 @@ func get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
 	return _get_argument_hint(arg_name)
 
 
+func has_argument_editor(arg_name: StringName) -> bool:
+	return _has_argument_editor(arg_name)
+
+
 ## Public version of [method _has_input_slot]. Prefer to override that method over this one.
 func has_input_slot(arg_name: StringName) -> bool:
 	return _has_input_slot(arg_name)
@@ -417,6 +421,10 @@ func _get_argument_description(arg_name: StringName) -> String:
 ## Defining this method is [b]optional[/b].
 func _get_argument_hint(_arg_name: StringName) -> Dictionary[String, Variant]:
 	return {}
+
+
+func _has_argument_editor(_arg_name: StringName) -> bool:
+	return true
 
 
 ## Override this method to determine whether or not arguments can be connected to.[br]

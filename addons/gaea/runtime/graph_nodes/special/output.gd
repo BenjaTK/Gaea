@@ -23,8 +23,20 @@ func _get_arguments_list() -> Array[StringName]:
 	return layers
 
 
-func _get_argument_type(_arg_name: StringName) -> GaeaValue.Type:
-	return GaeaValue.Type.MAP
+func _get_argument_type(arg_name: StringName) -> GaeaValue.Type:
+	if not is_instance_valid(graph):
+		return GaeaValue.Type.NULL # Default to NULL just in case.
+
+	var idx: int = int(arg_name)
+	if graph.layers.size() < idx:
+		return GaeaValue.Type.NULL
+
+	var layer: GaeaLayer = graph.layers.get(idx)
+
+	if not is_instance_valid(layer):
+		return GaeaValue.Type.NULL
+
+	return layer.type as GaeaValue.Type
 
 
 func _get_argument_display_name(arg_name: StringName) -> String:
@@ -57,6 +69,10 @@ func _get_argument_connection(arg_name: StringName) -> Dictionary:
 	return {}
 
 
+func _has_argument_editor(_arg_name: StringName) -> bool:
+	return false
+
+
 ## Start generation for [param area], using [param pouch]'s pouch.
 func execute(pouch: GaeaGenerationPouch) -> GaeaResult:
 	var start_time := Time.get_ticks_msec()
@@ -71,8 +87,8 @@ func execute(pouch: GaeaGenerationPouch) -> GaeaResult:
 
 		_log_layer("Start", layer_idx)
 
-		var grid_data: GaeaValue.Map = _get_arg(&"%d" % layer_idx, pouch)
-		grid.add_layer(layer_idx, grid_data, layer_resource)
+		var layer_data: Variant = _get_arg(&"%d" % layer_idx, pouch)
+		grid.add_layer(layer_idx, layer_data, layer_resource)
 		traversed.emit(&"%d" % layer_idx, grid, pouch)
 
 		_log_layer("End", layer_idx)
