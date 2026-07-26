@@ -408,6 +408,40 @@ func _open_node_documentation():
 	script_editor.goto_help("class_name:%s" % resource_class_name)
 
 
+func start_salt_change(gaea_panel: Control) -> void:
+	var popup: PopupPanel = PopupPanel.new()
+	popup.position = gaea_panel.get_global_mouse_position() as Vector2i
+
+	var vbox_container: VBoxContainer = VBoxContainer.new()
+	vbox_container.custom_minimum_size.x = 160
+
+	var spin_box: SpinBox = SpinBox.new()
+	spin_box.step = 1
+	spin_box.allow_greater = true
+	spin_box.allow_lesser = true
+	spin_box.value = resource.salt
+
+	var ok_button: Button = Button.new()
+	ok_button.text = "OK"
+	ok_button.pressed.connect(
+		_salt_change_confirmed.bind(spin_box, popup)
+	)
+
+	vbox_container.add_child(spin_box)
+	vbox_container.add_child(ok_button)
+
+	popup.add_child(vbox_container)
+
+	gaea_panel.add_child(popup)
+	popup.popup()
+
+
+func _salt_change_confirmed(spin_box: SpinBox, popup: PopupPanel) -> void:
+	resource.graph.set_node_salt(resource.id, roundi(spin_box.value))
+	popup.queue_free()
+
+
+
 ## Sets whether or not this node has finished its loading process.
 func set_finished_loading(value: bool) -> void:
 	_finished_loading = value
