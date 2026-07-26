@@ -32,10 +32,16 @@ func populate() -> void:
 	hide_root = true
 	tree_dictionary = _populate_dict_with_files(NODES_FOLDER_PATH, {})
 	tree_dictionary["Special"] = {"Frame": &"frame"}
-	if not GaeaProjectSettings.get_custom_nodes_path().is_empty():
-		tree_dictionary = _populate_dict_with_files(
-			GaeaProjectSettings.get_custom_nodes_path(), tree_dictionary
-		)
+	var custom_nodes_path: String = GaeaProjectSettings.get_custom_nodes_path()
+	if not custom_nodes_path.is_empty():
+		if DirAccess.dir_exists_absolute(custom_nodes_path):
+			tree_dictionary.merge(_populate_dict_with_files(
+				GaeaProjectSettings.get_custom_nodes_path(), tree_dictionary
+			))
+		else:
+			push_error("The path assigned in gaea/nodes/custom_nodes_path is not a valid path.")
+
+
 	_populate_from_dictionary(tree_dictionary, root)
 	root.set_collapsed_recursive(true)
 	root.set_collapsed(false)
