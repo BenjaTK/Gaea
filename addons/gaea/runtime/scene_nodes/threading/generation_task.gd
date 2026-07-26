@@ -8,7 +8,7 @@ extends GaeaTask
 ## The [GaeaGenerationPouch] passed to this task's [GaeaGraph] execution.
 var pouch: GaeaGenerationPouch
 
-var _results_dict: Dictionary[int, GaeaValue.Map]
+var _results_dict: Dictionary[int, Variant]
 
 
 ## Sets [member task] equal to a bound [Callable] created from
