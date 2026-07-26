@@ -218,7 +218,7 @@ func execute(task: GaeaTask) -> void:
 
 
 ## Executes the given [GaeaNodeOutput] on the given [member area].
-## Passes the resulting [GaeaGrid] to [member task]'s [member GaeaGenerationTask.results].
+## Passes the resulting [GaeaResult] to [member task]'s [member GaeaGenerationTask.results].
 func _execute(task: GaeaTask = null) -> void:
 	# Grab task data
 	if task == null:

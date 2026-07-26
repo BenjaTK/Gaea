@@ -8,7 +8,7 @@ extends GaeaRenderer
 @export var tile_map_layers: Array[TileMapLayer] = []
 
 
-func _render(grid: GaeaGrid) -> void:
+func _render(grid: GaeaResult) -> void:
 	if tile_map_layers.size() == 0:
 		push_warning("No tile map layers set in the renderer")
 

@@ -39,7 +39,7 @@ func clear_grid():
 	multi_mesh_instances.clear()
 
 
-func draw_grid(grid: GaeaGrid, offset: Vector3i, area: AABB, preview_coordinate_format: GaeaGraph.PreviewCoordinateFormat):
+func draw_grid(grid: GaeaResult, offset: Vector3i, area: AABB, preview_coordinate_format: GaeaGraph.PreviewCoordinateFormat):
 	var multimesh: MultiMesh
 	if multi_mesh_instances.has(offset):
 		multimesh = multi_mesh_instances.get(offset).multimesh
@@ -61,7 +61,7 @@ func draw_grid(grid: GaeaGrid, offset: Vector3i, area: AABB, preview_coordinate_
 		preview_coordinate_format == GaeaGraph.PreviewCoordinateFormat.TOP_DOWN_2D_OVERLAY
 		|| preview_coordinate_format == GaeaGraph.PreviewCoordinateFormat.SIDE_SCROLL_2D_OVERLAY
 	):
-		var overlaied_grid: GaeaGrid = GaeaGrid.new({})
+		var overlaied_grid: GaeaResult = GaeaResult.new({})
 		var layer_indexes: Array[int] = grid.get_enabled_layers_indexes()
 		if layer_indexes.size() == 0:
 			push_error("Could not generate preview, no enabled layers")

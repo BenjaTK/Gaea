@@ -19,7 +19,7 @@ func _enter_tree() -> void:
 		grid_maps.push_front(gridmap)
 
 
-func _render(grid: GaeaGrid) -> void:
+func _render(grid: GaeaResult) -> void:
 	_reset()
 
 	for layer_idx in grid.get_layers_count():

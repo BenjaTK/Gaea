@@ -39,7 +39,7 @@ func _set_results(value) -> void:
 
 
 func _get_results() -> Variant:
-	return GaeaGrid.new(_results_dict)
+	return GaeaResult.new(_results_dict)
 #endregion
 
 

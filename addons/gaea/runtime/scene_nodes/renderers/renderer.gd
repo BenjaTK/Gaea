@@ -47,7 +47,7 @@ func _connect_signals() -> void:
 
 
 ## Public version of [method _render].
-func render(grid: GaeaGrid) -> void:
+func render(grid: GaeaResult) -> void:
 	_render(grid)
 	render_finished.emit()
 
@@ -66,7 +66,7 @@ func erase_area(area: AABB) -> void:
 
 ## Should be overridden with custom behavior for rendering the [param grid].
 @abstract
-func _render(_grid: GaeaGrid) -> void
+func _render(_grid: GaeaResult) -> void
 
 
 ## Should be overridden with custom behavior for erasing the rendered [param area].

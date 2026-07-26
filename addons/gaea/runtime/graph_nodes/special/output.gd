@@ -6,7 +6,7 @@ extends GaeaNodeResource
 ## All Gaea graphs should lead to this node. When a generation is needed,
 ## [method execute] is called in the corresponding graph's Output node. This method
 ## uses [method traverse] to get the generated grid for each layer, constructs a
-## [GaeaGrid] object with it and finally emits the [signal GaeaGenerator.generation_finished] signal
+## [GaeaResult] object with it and finally emits the [signal GaeaGenerator.generation_finished] signal
 ## to pass that grid to listener nodes.[br][br]
 ## This node can't and shouldn't be deleted.
 
@@ -58,11 +58,11 @@ func _get_argument_connection(arg_name: StringName) -> Dictionary:
 
 
 ## Start generation for [param area], using [param pouch]'s pouch.
-func execute(pouch: GaeaGenerationPouch) -> GaeaGrid:
+func execute(pouch: GaeaGenerationPouch) -> GaeaResult:
 	var start_time := Time.get_ticks_msec()
 	_log_execute("Start", pouch.area)
 
-	var grid: GaeaGrid = GaeaGrid.new()
+	var grid: GaeaResult = GaeaResult.new()
 	for layer_idx in graph.layers.size():
 		var layer_resource: GaeaLayer = graph.layers.get(layer_idx)
 		if not is_instance_valid(layer_resource) or not layer_resource.enabled:

@@ -93,7 +93,7 @@ func _execution_task_finished(task: GaeaTask) -> void:
 	var graph: GaeaGraph = main_view.graph_edit.graph
 	var exec: GaeaGenerationTask = task as GaeaGenerationTask
 	var area = exec.pouch.area
-	var data: GaeaGrid = exec.results
+	var data: GaeaResult = exec.results
 
 	preview_container.draw_grid(data, area.position, area, graph.preview_coordinate_format)
 	generation_in_progress = false

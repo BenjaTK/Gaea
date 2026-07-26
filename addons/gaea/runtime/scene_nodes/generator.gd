@@ -15,7 +15,7 @@ signal generation_started()
 ## Emitted when a [GaeaGenerationTask] is canceled.
 signal generation_cancelled()
 ## Emitted a [GaeaGenerationTask] has finished.
-signal generation_finished(grid: GaeaGrid)
+signal generation_finished(grid: GaeaResult)
 ## Emitted when this generator wants to trigger a reset. See [method GaeaRenderer._reset].
 signal reset_requested
 ## Emitted when an [param area] is erased.
