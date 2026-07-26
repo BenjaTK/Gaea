@@ -258,7 +258,7 @@ func get_argument_description(arg_name: StringName) -> String:
 func get_argument_hint(arg_name: StringName) -> Dictionary[String, Variant]:
 	return _get_argument_hint(arg_name)
 
-
+## Public version of [method _has_argument_editor]. Prefer to override that method over this one.
 func has_argument_editor(arg_name: StringName) -> bool:
 	return _has_argument_editor(arg_name)
 
@@ -423,6 +423,10 @@ func _get_argument_hint(_arg_name: StringName) -> Dictionary[String, Variant]:
 	return {}
 
 
+## Override this method to disable argument editors on input slots.[br]
+## If this returns false for an argument, the node will only show its label
+## instead of also allowing to edit the value. It will only work as an input.[br][br]
+## Defining this method is [b]optional[/b]. If not defined, it'll always be true.
 func _has_argument_editor(_arg_name: StringName) -> bool:
 	return true
 

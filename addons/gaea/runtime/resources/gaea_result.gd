@@ -6,7 +6,7 @@ extends Resource
 
 
 ## Dictionary of the format [code]{int: Dictionary}[/code] where the key is the layer index
-## and the value is a grid of [GaeaMaterial]s.
+## and the value of the layer.
 var _grid: Dictionary[int, Variant]:
 	get = get_grid_data
 
