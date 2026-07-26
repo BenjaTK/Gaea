@@ -12,8 +12,21 @@ extends Resource
 			emit_changed()
 ## The type of the value this layer will hold. [GaeaRenderer]s care only about
 ## [GaeaValue.Map] layers, but [GaeaResult] can hold any type of values.
-@export var type: GaeaValue.WireableType = GaeaValue.WireableType.MAP:
+@export var type: GaeaValue.Type = GaeaValue.Type.MAP:
 	set(new_value):
-		if type != new_value:
+		if type != new_value and GaeaValue.is_wireable(new_value):
 			type = new_value
 			emit_changed()
+
+
+func _validate_property(property: Dictionary) -> void:
+	if property.get("name") != "type":
+		return
+
+	var list: Array[String] = []
+	var type_value: GaeaValue.Type = GaeaValue.Type.NULL
+	for type_name: String in GaeaValue.Type:
+		type_value = GaeaValue.Type.get(type_name)
+		if GaeaValue.is_wireable(type_value):
+			list.append(":".join([type_name.capitalize(), type_value]))
+	property.set("hint_string", ",".join(list))

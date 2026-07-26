@@ -41,23 +41,6 @@ enum Type {
 	VARIABLE_NAME = 305, ## Name for [GaeaNodeParameter]s.
 }
 
-## Filtered enum to only the wireable types for easy access in [GaeaLayer], for example.
-enum WireableType {
-	BOOLEAN = Type.BOOLEAN, ## [code]true[/code] or [code]false[/code]
-	INT = Type.INT, ## An [code]int[/code].
-	FLOAT = Type.FLOAT, ## A [code]float[/code].
-	VECTOR2 = Type.VECTOR2, ## ([code]x[/code],[code]y[/code])
-	VECTOR2I = Type.VECTOR2I, ## Like Vector2, but can only be [code]int[/code]s.
-	VECTOR3 = Type.VECTOR3, ## ([code]x[/code],[code]y[/code], [code]z[/code])
-	VECTOR3I = Type.VECTOR3I, ## Like Vector3, but can only be [code]int[/code]s.
-	ANY = Type.ANY, ## Used to accept any links.
-	RANGE = Type.RANGE,
-	MATERIAL = Type.MATERIAL, ## A [GaeaMaterial].
-	TEXTURE = Type.TEXTURE, ## A [Texture].
-	SAMPLE = Type.SAMPLE, ## A dictionary of the form [code]{Vector3i: float}[/code].
-	MAP = Type.MAP, ## A dictionary of the form [code]{Vector3i: GaeaMaterial}[/code].
-}
-
 enum CoordinateFormat {
 	ALIGNED_3D,
 	ALIGNED_2D,
