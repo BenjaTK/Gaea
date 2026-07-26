@@ -149,7 +149,7 @@ func test_assign_to_generator() -> void:
 	var _runner := scene_runner(scene)
 	scene.gaea_generator.graph = premade_graph
 	await scene.test_generation()
-	assert_dict(scene.last_grid._grid).is_not_empty()
+	assert_dict(scene.last_result._grid).is_not_empty()
 
 
 # Dictionary comparison for use in [method test_duplciate].

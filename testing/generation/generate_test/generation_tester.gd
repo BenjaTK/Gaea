@@ -8,7 +8,7 @@ signal generation_ended
 
 @onready var gaea_generator: GaeaGenerator = $GaeaGenerator
 
-var last_grid: GaeaResult
+var last_result: GaeaResult
 var last_cancelled: GaeaGenerationTask
 var last_discarded: GaeaGenerationTask
 var last_finished: GaeaGenerationTask
@@ -65,7 +65,7 @@ func _on_generation_finished(result):
 
 func _set_last_grid(grid):
 	print("Grid set to %s" % grid)
-	last_grid = grid
+	last_result = grid
 
 
 func _set_last_cancelled(task: GaeaTask):

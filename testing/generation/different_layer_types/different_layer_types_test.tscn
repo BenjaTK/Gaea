@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ci5wsuwfex7hj"]
+
+[ext_resource type="Script" uid="uid://dgbm8nk2w51bw" path="res://testing/generation/generate_test/generation_tester.gd" id="1_ytpv6"]
+[ext_resource type="Script" uid="uid://d4feanreabm81" path="res://addons/gaea/runtime/scene_nodes/generator.gd" id="2_oiqm0"]
+[ext_resource type="Resource" uid="uid://ovgeosu03m6n" path="res://testing/generation/different_layer_types/graph.tres" id="3_5qynn"]
+[ext_resource type="Script" uid="uid://ct2w70ehn4avu" path="res://addons/gaea/runtime/resources/generation_settings.gd" id="4_h4xvm"]
+[ext_resource type="Script" uid="uid://rfsrtakmflly" path="res://addons/gaea/runtime/scene_nodes/threading/task_pool.gd" id="5_o1rrr"]
+
+[sub_resource type="Resource" id="Resource_u1pxj"]
+script = ExtResource("4_h4xvm")
+seed = 2160069099
+world_size = Vector3i(2, 2, 1)
+metadata/_custom_type_script = "uid://ct2w70ehn4avu"
+
+[sub_resource type="Resource" id="Resource_yt4k6"]
+script = ExtResource("5_o1rrr")
+
+[node name="TestScene" type="Node2D" unique_id=1160692623]
+script = ExtResource("1_ytpv6")
+
+[node name="GaeaGenerator" type="Node" parent="." unique_id=1097272463]
+script = ExtResource("2_oiqm0")
+graph = ExtResource("3_5qynn")
+settings = SubResource("Resource_u1pxj")
+task_pool = SubResource("Resource_yt4k6")
+metadata/_custom_type_script = "uid://d4feanreabm81"

@@ -21,7 +21,7 @@ func test_has_generated() -> void:
 	var task_pool := scene.gaea_generator.task_pool
 	assert_int(task_pool._tasks.size()).is_equal(0)
 
-	first_grid = auto_free(scene.last_grid)
+	first_grid = auto_free(scene.last_result)
 	generator_seed = scene.gaea_generator.settings.seed
 	assert_that(first_grid).is_not_null()
 	assert_dict(first_grid._grid).is_not_empty()
@@ -33,7 +33,7 @@ func test_generations_match() -> void:
 	scene.gaea_generator.task_pool.multithreaded = false
 	await scene.test_generation(generator_seed)
 
-	var second_grid: GaeaResult = scene.last_grid
+	var second_grid: GaeaResult = scene.last_result
 	assert_that(generator_seed).is_equal(scene.gaea_generator.settings.seed)
 	assert_that(first_grid).is_not_null()
 	assert_that(second_grid).is_not_null()
@@ -47,7 +47,7 @@ func test_multithreaded_match() -> void:
 	scene.gaea_generator.task_pool.task_limit = 0
 	await scene.test_generation(generator_seed)
 
-	var second_grid: GaeaResult = scene.last_grid
+	var second_grid: GaeaResult = scene.last_result
 	assert_that(scene.gaea_generator.settings.seed).is_equal(generator_seed)
 	assert_that(first_grid).is_not_null()
 	assert_that(second_grid).is_not_null()
@@ -69,7 +69,7 @@ func test_multithreaded_discard_new() -> void:
 	assert_that(discard).is_not_null()
 	assert_bool(discard.cancelled).is_false()
 
-	var second_grid: GaeaResult = scene.last_grid
+	var second_grid: GaeaResult = scene.last_result
 	assert_that(scene.gaea_generator.settings.seed).is_equal(generator_seed)
 	assert_that(first_grid).is_not_null()
 	assert_that(second_grid).is_not_null()
@@ -91,7 +91,7 @@ func test_multithreaded_discard_existing() -> void:
 	var discard = scene.last_discarded
 	assert_that(discard).is_null()
 
-	var second_grid: GaeaResult = scene.last_grid
+	var second_grid: GaeaResult = scene.last_result
 	assert_that(scene.gaea_generator.settings.seed).is_equal(generator_seed)
 	assert_that(first_grid).is_not_null()
 	assert_that(second_grid).is_not_null()
@@ -105,7 +105,7 @@ func test_generations_dont_match() -> void:
 	scene.gaea_generator.task_pool.multithreaded = false
 	await scene.test_generation(5)
 
-	var second_grid: GaeaResult = scene.last_grid
+	var second_grid: GaeaResult = scene.last_result
 	assert_that(generator_seed).is_not_equal(scene.gaea_generator.settings.seed)
 	assert_that(first_grid).is_not_null()
 	assert_that(second_grid).is_not_null()

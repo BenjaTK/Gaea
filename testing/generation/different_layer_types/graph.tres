@@ -1,0 +1,78 @@
+[gd_resource type="Resource" script_class="GaeaGraph" format=3 uid="uid://ovgeosu03m6n"]
+
+[ext_resource type="Script" uid="uid://3qsmwhn2sk47" path="res://addons/gaea/runtime/resources/layer.gd" id="1_iapx6"]
+[ext_resource type="Script" uid="uid://dae6umbqb872e" path="res://addons/gaea/runtime/resources/graph.gd" id="2_jj1xi"]
+
+[sub_resource type="Resource" id="Resource_eqj3q"]
+script = ExtResource("1_iapx6")
+type = 5
+
+[sub_resource type="Resource" id="Resource_iapx6"]
+script = ExtResource("1_iapx6")
+type = 2
+metadata/_custom_type_script = "uid://3qsmwhn2sk47"
+
+[sub_resource type="Resource" id="Resource_jj1xi"]
+script = ExtResource("1_iapx6")
+type = 1
+metadata/_custom_type_script = "uid://3qsmwhn2sk47"
+
+[sub_resource type="Resource" id="Resource_sjj7c"]
+script = ExtResource("1_iapx6")
+type = 100
+metadata/_custom_type_script = "uid://3qsmwhn2sk47"
+
+[sub_resource type="Resource" id="Resource_y51ij"]
+script = ExtResource("1_iapx6")
+type = 3
+metadata/_custom_type_script = "uid://3qsmwhn2sk47"
+
+[sub_resource type="Resource" id="Resource_skm7u"]
+script = ExtResource("1_iapx6")
+type = 99
+metadata/_custom_type_script = "uid://3qsmwhn2sk47"
+
+[resource]
+script = ExtResource("2_jj1xi")
+layers = Array[ExtResource("1_iapx6")]([SubResource("Resource_eqj3q"), SubResource("Resource_iapx6"), SubResource("Resource_jj1xi"), SubResource("Resource_sjj7c"), SubResource("Resource_y51ij"), SubResource("Resource_skm7u")])
+preview_seed = 468471598
+preview_world_size = Vector3i(64, 64, 1)
+preview_chunk_size = Vector3i(64, 64, 1)
+save_version = 5
+_connections = Array[StringName]([&"1-0-0-0", &"2-0-0-1", &"3-0-0-2", &"1-0-0-3", &"2-0-0-4", &"3-0-0-5"])
+_node_data = Dictionary[int, Dictionary]({
+0: {
+&"position": Vector2(0, 0),
+&"salt": 3969174467,
+&"type": 0,
+&"uid": "uid://dol7xviglksx4"
+},
+1: {
+&"arguments": {
+&"x": 1.0,
+&"y": 2.0
+},
+&"position": Vector2(-320, -120),
+&"salt": 3096391620,
+&"type": 0,
+&"uid": "uid://c1koyt7wh4c4v"
+},
+2: {
+&"arguments": {
+&"value": 999.0
+},
+&"position": Vector2(-320, 120),
+&"salt": 104612399,
+&"type": 0,
+&"uid": "uid://c2336gqnb6ym3"
+},
+3: {
+&"arguments": {
+&"value": true
+},
+&"position": Vector2(-320, 260),
+&"salt": 1121132082,
+&"type": 0,
+&"uid": "uid://bq3vxxpkxn5ds"
+}
+})

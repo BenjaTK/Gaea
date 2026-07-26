@@ -84,6 +84,11 @@ static func get_cast_methods() -> Dictionary[GaeaValue.Type, Dictionary]:
 ## produces an error.
 static func cast_value(from_type: GaeaValue.Type, to_type: GaeaValue.Type, value: Variant) -> Variant:
 	if from_type == to_type:
+		if from_type == GaeaValue.Type.INT:
+			return int(value)
+		return value
+
+	if from_type == GaeaValue.Type.ANY or to_type == GaeaValue.Type.ANY:
 		return value
 
 	var cast_method = _casts_methods.get(from_type, {}).get(to_type, null)

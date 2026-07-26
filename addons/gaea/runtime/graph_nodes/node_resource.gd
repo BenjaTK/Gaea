@@ -529,9 +529,6 @@ func _get_arg(arg_name: StringName, pouch: GaeaGenerationPouch) -> Variant:
 			if connected_data.has("type"):
 				connected_type = connected_data.get("type")
 
-			if connected_type == _get_argument_type(arg_name):
-				return connected_value
-
 			return GaeaValueCast.cast_value(
 				connected_type, _get_argument_type(arg_name), connected_value
 			)
