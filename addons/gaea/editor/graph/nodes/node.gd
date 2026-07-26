@@ -4,6 +4,8 @@ extends GraphNode
 ## The in-editor representation of a [GaeaNodeResource] to be used in the Gaea bottom panel.
 
 
+const SLOT_ONLY_ARGUMENT_EDITOR := "uid://i2nwlab8rau"
+
 ## Emitted when connections to this node are updated.
 signal connections_updated
 ## Emitted when this node is removed from the graph.
@@ -150,7 +152,7 @@ func _add_argument_editor(for_arg: StringName) -> GaeaEditorGraphNodeArgument:
 	var type: GaeaValue.Type = resource.get_argument_type(for_arg)
 	var scene: PackedScene
 	if not resource.has_argument_editor(for_arg):
-		scene = preload("uid://i2nwlab8rau")
+		scene = load(SLOT_ONLY_ARGUMENT_EDITOR)
 	else:
 		scene = GaeaValue.get_editor_for_type(type)
 	var node: GaeaEditorGraphNodeArgument = scene.instantiate()
