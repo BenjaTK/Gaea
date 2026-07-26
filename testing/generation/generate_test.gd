@@ -1,7 +1,7 @@
 extends GdUnitTestSuite
 
 
-var first_grid: GaeaGrid
+var first_grid: GaeaResult
 var generator_seed:int
 
 const test_scene = "uid://dh5c2eomfri6n"
@@ -33,7 +33,7 @@ func test_generations_match() -> void:
 	scene.gaea_generator.task_pool.multithreaded = false
 	await scene.test_generation(generator_seed)
 
-	var second_grid: GaeaGrid = scene.last_grid
+	var second_grid: GaeaResult = scene.last_grid
 	assert_that(generator_seed).is_equal(scene.gaea_generator.settings.seed)
 	assert_that(first_grid).is_not_null()
 	assert_that(second_grid).is_not_null()
@@ -47,7 +47,7 @@ func test_multithreaded_match() -> void:
 	scene.gaea_generator.task_pool.task_limit = 0
 	await scene.test_generation(generator_seed)
 
-	var second_grid: GaeaGrid = scene.last_grid
+	var second_grid: GaeaResult = scene.last_grid
 	assert_that(scene.gaea_generator.settings.seed).is_equal(generator_seed)
 	assert_that(first_grid).is_not_null()
 	assert_that(second_grid).is_not_null()
@@ -69,7 +69,7 @@ func test_multithreaded_discard_new() -> void:
 	assert_that(discard).is_not_null()
 	assert_bool(discard.cancelled).is_false()
 
-	var second_grid: GaeaGrid = scene.last_grid
+	var second_grid: GaeaResult = scene.last_grid
 	assert_that(scene.gaea_generator.settings.seed).is_equal(generator_seed)
 	assert_that(first_grid).is_not_null()
 	assert_that(second_grid).is_not_null()
@@ -91,7 +91,7 @@ func test_multithreaded_discard_existing() -> void:
 	var discard = scene.last_discarded
 	assert_that(discard).is_null()
 
-	var second_grid: GaeaGrid = scene.last_grid
+	var second_grid: GaeaResult = scene.last_grid
 	assert_that(scene.gaea_generator.settings.seed).is_equal(generator_seed)
 	assert_that(first_grid).is_not_null()
 	assert_that(second_grid).is_not_null()
@@ -105,7 +105,7 @@ func test_generations_dont_match() -> void:
 	scene.gaea_generator.task_pool.multithreaded = false
 	await scene.test_generation(5)
 
-	var second_grid: GaeaGrid = scene.last_grid
+	var second_grid: GaeaResult = scene.last_grid
 	assert_that(generator_seed).is_not_equal(scene.gaea_generator.settings.seed)
 	assert_that(first_grid).is_not_null()
 	assert_that(second_grid).is_not_null()
@@ -119,15 +119,17 @@ func compare_grids(grid_a, grid_b) -> bool:
 	return true
 
 
-func compare_string(grid_1: GaeaGrid, grid_2: GaeaGrid) -> String:
+func compare_string(grid_1: GaeaResult, grid_2: GaeaResult) -> String:
 	return "\n%s\n%s\n" % [grid_string(grid_1), grid_string(grid_2)]
 
 
-func grid_string(grid: GaeaGrid) -> String:
+func grid_string(grid: GaeaResult) -> String:
 	var string := ""
 	for layer in grid._grid.keys():
 		string += "%s: " % layer
-		var map := grid._grid[layer]
+		var map: Variant = grid._grid[layer]
+		if map is not GaeaValue.Map:
+			continue
 		var cells = map.get_cells()
 		string += "cell count %d" % cells.size()
 		string += ", "

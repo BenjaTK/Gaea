@@ -8,7 +8,7 @@ signal generation_ended
 
 @onready var gaea_generator: GaeaGenerator = $GaeaGenerator
 
-var last_grid: GaeaGrid
+var last_grid: GaeaResult
 var last_cancelled: GaeaGenerationTask
 var last_discarded: GaeaGenerationTask
 var last_finished: GaeaGenerationTask
